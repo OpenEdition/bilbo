@@ -1,0 +1,104 @@
+/****************************************************************************
+** Meta object code from reading C++ file 'instrview.h'
+**
+** Created: Fri May 25 12:02:31 2012
+**      by: The Qt Meta Object Compiler version 63 (Qt 4.8.2)
+**
+** WARNING! All changes made in this file will be lost!
+*****************************************************************************/
+
+#include "../libviews/instrview.h"
+#if !defined(Q_MOC_OUTPUT_REVISION)
+#error "The header file 'instrview.h' doesn't include <QObject>."
+#elif Q_MOC_OUTPUT_REVISION != 63
+#error "This file was generated using the moc from 4.8.2. It"
+#error "cannot be used with the include files from this version of Qt."
+#error "(The moc has changed too much.)"
+#endif
+
+QT_BEGIN_MOC_NAMESPACE
+static const uint qt_meta_data_InstrView[] = {
+
+ // content:
+       6,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       4,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+ // slots: signature, parameters, type, tag, flags
+      11,   10,   10,   10, 0x09,
+      29,   27,   10,   10, 0x09,
+      77,   27,   10,   10, 0x09,
+     113,   10,   10,   10, 0x09,
+
+       0        // eod
+};
+
+static const char qt_meta_stringdata_InstrView[] = {
+    "InstrView\0\0context(QPoint)\0,\0"
+    "selectedSlot(QTreeWidgetItem*,QTreeWidgetItem*)\0"
+    "activatedSlot(QTreeWidgetItem*,int)\0"
+    "headerClicked(int)\0"
+};
+
+void InstrView::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        Q_ASSERT(staticMetaObject.cast(_o));
+        InstrView *_t = static_cast<InstrView *>(_o);
+        switch (_id) {
+        case 0: _t->context((*reinterpret_cast< const QPoint(*)>(_a[1]))); break;
+        case 1: _t->selectedSlot((*reinterpret_cast< QTreeWidgetItem*(*)>(_a[1])),(*reinterpret_cast< QTreeWidgetItem*(*)>(_a[2]))); break;
+        case 2: _t->activatedSlot((*reinterpret_cast< QTreeWidgetItem*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 3: _t->headerClicked((*reinterpret_cast< int(*)>(_a[1]))); break;
+        default: ;
+        }
+    }
+}
+
+const QMetaObjectExtraData InstrView::staticMetaObjectExtraData = {
+    0,  qt_static_metacall 
+};
+
+const QMetaObject InstrView::staticMetaObject = {
+    { &QTreeWidget::staticMetaObject, qt_meta_stringdata_InstrView,
+      qt_meta_data_InstrView, &staticMetaObjectExtraData }
+};
+
+#ifdef Q_NO_DATA_RELOCATION
+const QMetaObject &InstrView::getStaticMetaObject() { return staticMetaObject; }
+#endif //Q_NO_DATA_RELOCATION
+
+const QMetaObject *InstrView::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
+}
+
+void *InstrView::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_InstrView))
+        return static_cast<void*>(const_cast< InstrView*>(this));
+    if (!strcmp(_clname, "TraceItemView"))
+        return static_cast< TraceItemView*>(const_cast< InstrView*>(this));
+    return QTreeWidget::qt_metacast(_clname);
+}
+
+int InstrView::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QTreeWidget::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 4)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 4;
+    }
+    return _id;
+}
+QT_END_MOC_NAMESPACE

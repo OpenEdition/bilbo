@@ -1,0 +1,57 @@
+<!DOCTYPE kpartgui>
+<kpartgui name="kcachegrind" version="4">
+ <MenuBar>
+  <Menu name="file"><text>&amp;File</text>
+   <Action name="file_add" append="open_merge"/>
+   <Action name="reload" append="revert_merge"/>
+   <Action name="dump" append="revert_merge"/>
+   <Action name="export"/>
+  </Menu>
+  <Menu name="view"><text>&amp;View</text>
+   <Action name="view_cost_type"/>
+   <Action name="view_cost_type2"/>
+   <Action name="view_group_type"/>
+   <Separator/>
+   <Menu name="layouts"><text>&amp;Layout</text>
+     <Action name="layout_next"/>
+     <Action name="layout_previous"/>
+     <Action name="layout_duplicate"/>
+     <Action name="layout_remove"/>
+     <Separator/>
+     <Action name="layout_restore"/>
+     <Action name="layout_save"/>
+   </Menu>
+   <Action name="view_split"/>
+   <Action name="view_split_dir"/>
+   <Separator/>
+   <Action name="view_percentage"/>
+   <Action name="view_expanded"/>
+   <Action name="view_cycles"/>
+   <Action name="hide_templates"/>
+  </Menu>
+  <Menu name="settings">
+   <Menu append="show_toolbar_merge"><text>Sidebars</text>
+    <Action name="settings_show_dumpdock"/>
+    <Action name="settings_show_partdock"/>
+    <Action name="settings_show_stackdock"/>
+    <Action name="settings_show_profiledock"/>
+   </Menu>
+  </Menu>
+ </MenuBar>
+
+ <ToolBar name="mainToolBar" noMerge="1"><text>Main Toolbar</text>
+  <Action name="file_open"/>
+  <Separator/>
+  <Action name="go_back"/>
+  <Action name="go_forward"/>
+  <Action name="go_up"/>
+  <Separator/>
+  <Action name="view_percentage"/>
+  <Action name="view_cycles"/>
+  <Action name="view_expanded"/>
+  <Action name="hide_templates"/>
+ </ToolBar>
+ <ToolBar name="stateToolBar" noMerge="1"><text>State Toolbar</text> 
+  <Action name="view_cost_type"/>
+ </ToolBar>
+</kpartgui>

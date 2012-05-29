@@ -1,0 +1,16 @@
+INSTUPmypkg.reference.Corpus
+/Users/jade/Documents/jade/labo/BILBO/bilbo/bilbo/src/mypkg/reference/Corpus.py
+INFOS:&&1|1|2|0&&2|3|2|1&&3|4|2|5&&3|6|2|5&&2|7|2|1&&3|4|2|8&&2|9|2|1&&2|10|2|1&&2|11|2|1&&2|12|2|1&&2|13|2|1
+mypkg.reference.Corpus=2
+fichiers=6
+extractCorpus1=9
+extractCorpus2=10
+repertoire=4
+getListReferences=11
+Corpus=1
+Corpus.getFiles=8
+__init__=3
+nbReference=12
+buildAnnotateFiles=13
+Corpus.__init__=5
+getFiles=7

@@ -1,0 +1,13 @@
+INSTUPmypkg.reference.File
+/Users/jade/Documents/jade/labo/BILBO/bilbo/bilbo/src/mypkg/reference/File.py
+INFOS:&&1|1|2|0&&2|3|2|1&&3|4|2|5&&3|6|2|5&&2|7|2|1&&2|8|2|1&&2|9|2|1&&2|10|2|1
+nbReference=10
+__init__=3
+extractCorpus1=7
+mypkg.reference.File=2
+extractCorpus2=8
+corpus=6
+File.__init__=5
+File=1
+getListReferences=9
+nom=4

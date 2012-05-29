@@ -1,0 +1,26 @@
+K 10
+svn:ignore
+V 271
+CMakeFiles
+DartTestfile.txt
+Makefile
+Makefile.in
+acinclude.m4
+aclocal.m4
+autom4te.cache
+cmake_install.cmake
+config.h
+config.h.in
+config.log
+config.status
+configure
+configure.files
+configure.in
+install_icons.cmake
+kcachegrind.lsm
+kcachegrind.spec
+libtool
+stamp-h*
+subdirs
+
+END

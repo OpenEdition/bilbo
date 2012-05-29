@@ -1,0 +1,11 @@
+eclipse.preferences.version=1
+encoding//src/mypkg/format/Clean.py=utf-8
+encoding//src/mypkg/format/CleanCorpus1.py=utf-8
+encoding//src/mypkg/format/CleanCorpus2.py=utf-8
+encoding//src/mypkg/format/Extract.py=utf-8
+encoding//src/mypkg/format/Rule.py=utf-8
+encoding//src/mypkg/format/note/dataGeneratorC2.py=utf-8
+encoding//src/mypkg/format/note/extractor4SVM.py=utf-8
+encoding//src/mypkg/format/note/featureSelection4SVM.py=utf-8
+encoding//src/mypkg/format/note/preparerSVM.py=utf-8
+encoding//src/mypkg/output/GenerateXml.py=utf-8

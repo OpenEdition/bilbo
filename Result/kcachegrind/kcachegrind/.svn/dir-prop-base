@@ -1,0 +1,18 @@
+K 10
+svn:ignore
+V 147
+*.moc
+*.moc.cpp
+*base.cpp
+*base.h
+.deps
+.libs
+CMakeFiles
+DartTestfile.txt
+Makefile
+Makefile.in
+cmake_install.cmake
+install_icons.cmake
+kcachegrind
+
+END

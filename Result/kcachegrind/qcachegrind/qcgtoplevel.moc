@@ -1,0 +1,322 @@
+/****************************************************************************
+** Meta object code from reading C++ file 'qcgtoplevel.h'
+**
+** Created: Fri May 25 12:02:52 2012
+**      by: The Qt Meta Object Compiler version 63 (Qt 4.8.2)
+**
+** WARNING! All changes made in this file will be lost!
+*****************************************************************************/
+
+#include "qcgtoplevel.h"
+#if !defined(Q_MOC_OUTPUT_REVISION)
+#error "The header file 'qcgtoplevel.h' doesn't include <QObject>."
+#elif Q_MOC_OUTPUT_REVISION != 63
+#error "This file was generated using the moc from 4.8.2. It"
+#error "cannot be used with the include files from this version of Qt."
+#error "(The moc has changed too much.)"
+#endif
+
+QT_BEGIN_MOC_NAMESPACE
+static const uint qt_meta_data_QCGTopLevel[] = {
+
+ // content:
+       6,       // revision
+       0,       // classname
+       1,   14, // classinfo
+      81,   16, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+ // classinfo: key, value
+      31,   12,
+
+ // slots: signature, parameters, type, tag, flags
+      48,   47,   47,   47, 0x0a,
+      78,   60,   47,   47, 0x0a,
+     102,   47,   47,   47, 0x2a,
+     121,   47,   47,   47, 0x0a,
+     132,   47,   47,   47, 0x0a,
+     150,   60,   47,   47, 0x0a,
+     176,   47,   47,   47, 0x2a,
+     197,   47,   47,   47, 0x0a,
+     211,   47,   47,   47, 0x0a,
+     228,  223,   47,   47, 0x0a,
+     247,   47,   47,   47, 0x2a,
+     259,   47,   47,   47, 0x0a,
+     267,   47,   47,   47, 0x0a,
+     285,   47,   47,   47, 0x0a,
+     300,   47,   47,   47, 0x0a,
+     313,   47,   47,   47, 0x0a,
+     330,   47,   47,   47, 0x0a,
+     343,   47,   47,   47, 0x0a,
+     359,   47,   47,   47, 0x0a,
+     381,   47,   47,   47, 0x0a,
+     399,   47,   47,   47, 0x0a,
+     426,   47,   47,   47, 0x0a,
+     454,   47,   47,   47, 0x0a,
+     477,   47,   47,   47, 0x0a,
+     494,   47,   47,   47, 0x0a,
+     517,   47,   47,   47, 0x0a,
+     534,   47,   47,   47, 0x0a,
+     552,   47,   47,   47, 0x0a,
+     573,   47,   47,   47, 0x0a,
+     605,   47,   47,   47, 0x0a,
+     624,   47,   47,   47, 0x0a,
+     644,   47,   47,   47, 0x0a,
+     662,   47,   47,   47, 0x0a,
+     680,   47,   47,   47, 0x0a,
+     702,   47,   47,   47, 0x0a,
+     719,   47,   47,   47, 0x0a,
+     734,   47,   47,   47, 0x0a,
+     763,   47,   47,   47, 0x0a,
+     794,   47,   47,   47, 0x0a,
+     819,   47,   47,   47, 0x0a,
+     840,   47,   47,   47, 0x0a,
+     867,   47,   47,   47, 0x0a,
+     885,   47,   47,   47, 0x0a,
+     909,   47,   47,   47, 0x0a,
+     925,   47,   47,   47, 0x0a,
+     952,   47,  947,   47, 0x0a,
+     977,   47,  947,   47, 0x0a,
+    1003,   47,  947,   47, 0x0a,
+    1025,   47,  947,   47, 0x0a,
+    1048,   47,  947,   47, 0x0a,
+    1071,   47,  947,   47, 0x0a,
+    1095,   47,  947,   47, 0x0a,
+    1130,   47,  947,   47, 0x0a,
+    1152,   47,  947,   47, 0x0a,
+    1177,   47,  947,   47, 0x0a,
+    1195,   47,  947,   47, 0x0a,
+    1223,   47,  947,   47, 0x0a,
+    1249, 1244,   47,   47, 0x0a,
+    1287,   47,   47,   47, 0x0a,
+    1311,   47,   47,   47, 0x0a,
+    1332,   47,   47,   47, 0x0a,
+    1364,   47,   47,   47, 0x0a,
+    1397,   47,   47,   47, 0x0a,
+    1439,   47,   47,   47, 0x0a,
+    1471,   47,   47,   47, 0x0a,
+    1502,   47,   47,   47, 0x0a,
+    1533,   47,   47,   47, 0x0a,
+    1561,   47,   47,   47, 0x0a,
+    1570,   47,   47,   47, 0x0a,
+    1582,   47,   47,   47, 0x0a,
+    1589,   47,   47,   47, 0x0a,
+    1635,   47,   47,   47, 0x0a,
+    1657,   47,   47,   47, 0x0a,
+    1680,   47,   47,   47, 0x0a,
+    1702,   47,   47,   47, 0x0a,
+    1720,   47,   47,   47, 0x0a,
+    1742,   47,   47,   47, 0x0a,
+    1761,   47,   47,   47, 0x0a,
+    1783,   47,   47,   47, 0x0a,
+    1812, 1799,   47,   47, 0x0a,
+    1842, 1836,   47,   47, 0x0a,
+
+       0        // eod
+};
+
+static const char qt_meta_stringdata_QCGTopLevel[] = {
+    "QCGTopLevel\0net.sf.qcachegrind\0"
+    "D-Bus Interface\0\0loadTrace()\0"
+    ",addToRecentFiles\0loadTrace(QString,bool)\0"
+    "loadTrace(QString)\0addTrace()\0"
+    "addTrace(QString)\0loadDelayed(QString,bool)\0"
+    "loadDelayed(QString)\0exportGraph()\0"
+    "newWindow()\0page\0configure(QString)\0"
+    "configure()\0about()\0layoutDuplicate()\0"
+    "layoutRemove()\0layoutNext()\0"
+    "layoutPrevious()\0layoutSave()\0"
+    "layoutRestore()\0updateLayoutActions()\0"
+    "updateStatusBar()\0eventTypeSelected(QString)\0"
+    "eventType2Selected(QString)\0"
+    "groupTypeSelected(int)\0toggleSplitted()\0"
+    "toggleSplitDirection()\0togglePartDock()\0"
+    "toggleStackDock()\0toggleFunctionDock()\0"
+    "functionVisibilityChanged(bool)\0"
+    "togglePercentage()\0setPercentage(bool)\0"
+    "setAbsoluteCost()\0setRelativeCost()\0"
+    "toggleHideTemplates()\0toggleExpanded()\0"
+    "toggleCycles()\0recentFilesMenuAboutToShow()\0"
+    "recentFilesTriggered(QAction*)\0"
+    "sidebarMenuAboutToShow()\0forwardAboutToShow()\0"
+    "forwardTriggered(QAction*)\0backAboutToShow()\0"
+    "backTriggered(QAction*)\0upAboutToShow()\0"
+    "upTriggered(QAction*)\0bool\0"
+    "setEventType(EventType*)\0"
+    "setEventType2(EventType*)\0"
+    "setEventType(QString)\0setEventType2(QString)\0"
+    "setEventType(QAction*)\0setEventType2(QAction*)\0"
+    "setGroupType(ProfileContext::Type)\0"
+    "setGroupType(QString)\0setGroup(TraceCostItem*)\0"
+    "setGroup(QString)\0setFunction(TraceFunction*)\0"
+    "setFunction(QString)\0list\0"
+    "activePartsChangedSlot(TracePartList)\0"
+    "partsHideSelectedSlot()\0partsUnhideAllSlot()\0"
+    "setEventTypeDelayed(EventType*)\0"
+    "setEventType2Delayed(EventType*)\0"
+    "setGroupTypeDelayed(ProfileContext::Type)\0"
+    "setGroupDelayed(TraceCostItem*)\0"
+    "setTraceItemDelayed(CostItem*)\0"
+    "partsHideSelectedSlotDelayed()\0"
+    "partsUnhideAllSlotDelayed()\0goBack()\0"
+    "goForward()\0goUp()\0"
+    "setDirectionDelayed(TraceItemView::Direction)\0"
+    "setEventTypeDelayed()\0setEventType2Delayed()\0"
+    "setGroupTypeDelayed()\0setGroupDelayed()\0"
+    "setTraceItemDelayed()\0loadTraceDelayed()\0"
+    "setDirectionDelayed()\0configChanged()\0"
+    "msg,progress\0showStatus(QString,int)\0"
+    ",msec\0showMessage(QString,int)\0"
+};
+
+void QCGTopLevel::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        Q_ASSERT(staticMetaObject.cast(_o));
+        QCGTopLevel *_t = static_cast<QCGTopLevel *>(_o);
+        switch (_id) {
+        case 0: _t->loadTrace(); break;
+        case 1: _t->loadTrace((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
+        case 2: _t->loadTrace((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 3: _t->addTrace(); break;
+        case 4: _t->addTrace((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 5: _t->loadDelayed((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
+        case 6: _t->loadDelayed((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 7: _t->exportGraph(); break;
+        case 8: _t->newWindow(); break;
+        case 9: _t->configure((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 10: _t->configure(); break;
+        case 11: _t->about(); break;
+        case 12: _t->layoutDuplicate(); break;
+        case 13: _t->layoutRemove(); break;
+        case 14: _t->layoutNext(); break;
+        case 15: _t->layoutPrevious(); break;
+        case 16: _t->layoutSave(); break;
+        case 17: _t->layoutRestore(); break;
+        case 18: _t->updateLayoutActions(); break;
+        case 19: _t->updateStatusBar(); break;
+        case 20: _t->eventTypeSelected((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 21: _t->eventType2Selected((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 22: _t->groupTypeSelected((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 23: _t->toggleSplitted(); break;
+        case 24: _t->toggleSplitDirection(); break;
+        case 25: _t->togglePartDock(); break;
+        case 26: _t->toggleStackDock(); break;
+        case 27: _t->toggleFunctionDock(); break;
+        case 28: _t->functionVisibilityChanged((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 29: _t->togglePercentage(); break;
+        case 30: _t->setPercentage((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 31: _t->setAbsoluteCost(); break;
+        case 32: _t->setRelativeCost(); break;
+        case 33: _t->toggleHideTemplates(); break;
+        case 34: _t->toggleExpanded(); break;
+        case 35: _t->toggleCycles(); break;
+        case 36: _t->recentFilesMenuAboutToShow(); break;
+        case 37: _t->recentFilesTriggered((*reinterpret_cast< QAction*(*)>(_a[1]))); break;
+        case 38: _t->sidebarMenuAboutToShow(); break;
+        case 39: _t->forwardAboutToShow(); break;
+        case 40: _t->forwardTriggered((*reinterpret_cast< QAction*(*)>(_a[1]))); break;
+        case 41: _t->backAboutToShow(); break;
+        case 42: _t->backTriggered((*reinterpret_cast< QAction*(*)>(_a[1]))); break;
+        case 43: _t->upAboutToShow(); break;
+        case 44: _t->upTriggered((*reinterpret_cast< QAction*(*)>(_a[1]))); break;
+        case 45: { bool _r = _t->setEventType((*reinterpret_cast< EventType*(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
+        case 46: { bool _r = _t->setEventType2((*reinterpret_cast< EventType*(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
+        case 47: { bool _r = _t->setEventType((*reinterpret_cast< QString(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
+        case 48: { bool _r = _t->setEventType2((*reinterpret_cast< QString(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
+        case 49: { bool _r = _t->setEventType((*reinterpret_cast< QAction*(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
+        case 50: { bool _r = _t->setEventType2((*reinterpret_cast< QAction*(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
+        case 51: { bool _r = _t->setGroupType((*reinterpret_cast< ProfileContext::Type(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
+        case 52: { bool _r = _t->setGroupType((*reinterpret_cast< QString(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
+        case 53: { bool _r = _t->setGroup((*reinterpret_cast< TraceCostItem*(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
+        case 54: { bool _r = _t->setGroup((*reinterpret_cast< QString(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
+        case 55: { bool _r = _t->setFunction((*reinterpret_cast< TraceFunction*(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
+        case 56: { bool _r = _t->setFunction((*reinterpret_cast< QString(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
+        case 57: _t->activePartsChangedSlot((*reinterpret_cast< const TracePartList(*)>(_a[1]))); break;
+        case 58: _t->partsHideSelectedSlot(); break;
+        case 59: _t->partsUnhideAllSlot(); break;
+        case 60: _t->setEventTypeDelayed((*reinterpret_cast< EventType*(*)>(_a[1]))); break;
+        case 61: _t->setEventType2Delayed((*reinterpret_cast< EventType*(*)>(_a[1]))); break;
+        case 62: _t->setGroupTypeDelayed((*reinterpret_cast< ProfileContext::Type(*)>(_a[1]))); break;
+        case 63: _t->setGroupDelayed((*reinterpret_cast< TraceCostItem*(*)>(_a[1]))); break;
+        case 64: _t->setTraceItemDelayed((*reinterpret_cast< CostItem*(*)>(_a[1]))); break;
+        case 65: _t->partsHideSelectedSlotDelayed(); break;
+        case 66: _t->partsUnhideAllSlotDelayed(); break;
+        case 67: _t->goBack(); break;
+        case 68: _t->goForward(); break;
+        case 69: _t->goUp(); break;
+        case 70: _t->setDirectionDelayed((*reinterpret_cast< TraceItemView::Direction(*)>(_a[1]))); break;
+        case 71: _t->setEventTypeDelayed(); break;
+        case 72: _t->setEventType2Delayed(); break;
+        case 73: _t->setGroupTypeDelayed(); break;
+        case 74: _t->setGroupDelayed(); break;
+        case 75: _t->setTraceItemDelayed(); break;
+        case 76: _t->loadTraceDelayed(); break;
+        case 77: _t->setDirectionDelayed(); break;
+        case 78: _t->configChanged(); break;
+        case 79: _t->showStatus((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 80: _t->showMessage((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        default: ;
+        }
+    }
+}
+
+const QMetaObjectExtraData QCGTopLevel::staticMetaObjectExtraData = {
+    0,  qt_static_metacall 
+};
+
+const QMetaObject QCGTopLevel::staticMetaObject = {
+    { &QMainWindow::staticMetaObject, qt_meta_stringdata_QCGTopLevel,
+      qt_meta_data_QCGTopLevel, &staticMetaObjectExtraData }
+};
+
+#ifdef Q_NO_DATA_RELOCATION
+const QMetaObject &QCGTopLevel::getStaticMetaObject() { return staticMetaObject; }
+#endif //Q_NO_DATA_RELOCATION
+
+const QMetaObject *QCGTopLevel::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
+}
+
+void *QCGTopLevel::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_QCGTopLevel))
+        return static_cast<void*>(const_cast< QCGTopLevel*>(this));
+    if (!strcmp(_clname, "Logger"))
+        return static_cast< Logger*>(const_cast< QCGTopLevel*>(this));
+    if (!strcmp(_clname, "TopLevelBase"))
+        return static_cast< TopLevelBase*>(const_cast< QCGTopLevel*>(this));
+    return QMainWindow::qt_metacast(_clname);
+}
+
+int QCGTopLevel::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QMainWindow::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 81)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 81;
+    }
+    return _id;
+}
+QT_END_MOC_NAMESPACE

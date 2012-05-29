@@ -1,0 +1,10 @@
+INSTUPmypkg.reference.Balise
+/Users/jade/Documents/jade/labo/BILBO/bilbo/bilbo/src/mypkg/reference/Balise.py
+INFOS:&&1|1|2|0&&2|3|2|1&&3|4|2|5&&2|6|2|1&&2|7|2|1
+__init__=3
+affiche=6
+mypkg.reference.Balise=2
+Balise=1
+nameIs=7
+Balise.__init__=5
+nom=4

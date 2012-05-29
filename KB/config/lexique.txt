@@ -1,0 +1,10 @@
+# editor nonimpcap posseditor
+ed
+eds
+ed.
+eds.
+# page posspage
+pp
+pp.
+p
+p.
