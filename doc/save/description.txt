@@ -1,0 +1,668 @@
+
+----------------------------------------------
+ April 2 2012, by Young-Min KIM					
+ Short description of prototype codes			
+ Current : sequential processing of functions	
+ Goal : OOP, use of class, modularization		
+----------------------------------------------
+
+
+==============================================
+ formatting
+==============================================
+
+------------------------
+ dataGenerator.py
+------------------------
+ 
+ def processing (fname)
+ 
+	From a file, read lines then make an instance of BeautifulSoup.
+	- elimination (tmp_str) : string cleaning
+	- loop for <bibl>
+		- extract all tags
+		- iterate per content (in BeautifulSoup, separated by tags, unwrapped string becomes a content)
+			if content has no tags, provide 'nolabel'
+			if has, call extract_tags(c_tag) 
+		- a problem for applying BeautifulSoup : another <bibl> in a <bibl> is not correctly captured
+			inner <bibl> is always after <relateditem> <- indicator
+			so artificially count the iterator, then re-process as above.
+
+
+ def extract_tags(current_tag)
+ 
+ 	From current string including tags and contents, extract tokens, labels and attributes.
+ 	- cleaning of string, elimination of enter character, meaningless whitespace etc.
+ 	- arrangeData(n, txts, tags, attrs, top_tag, top_att) : extract data in a tree structure
+ 		
+
+ def arrangeData(n, txts, tags, attrs, top_tag, top_att)
+
+	Flatten the tree.
+	As input, 	n:currnet_tag string, txts: txt string, tags:including tags, attrs:including attrs,
+				top_tag: can be attached to current string without other tag
+				top_att: can be attached to current string
+				for the child elements, top_tag and top_att are continuously added.
+
+
+ def elimination (tmp_str)
+ 
+ 	elimination of the obstructive <h> tags
+ 
+				
+ *comments* 
+ Think about replacing BeautifulSoup as ElementTree.
+ Try to consider a more generalized case for the elimination.
+ 
+	 
+ 	
+ 	
+------------------------ 
+ puncOrganizer.py
+------------------------
+
+ def reorganizing(fname)
+ 	
+ 	Read line by line the result obtained from dataGenerator.py
+ 	When the input token is valid, continue to process.
+ 	
+ 	- It allows the extraction of basic features 
+ 	
+ 	#posseditor check
+ 	retrn_str = editorCheck(input_str)
+ 	#initial check
+ 	retrn_str = initCheck(input_str)
+ 	#posspage check
+ 	retrn_str = pageCheck(input_str)
+ 	#http, www check
+ 	retrn_str = refCheck(input_str)
+ 	
+ 	#tokenization
+ 	Separation of tokens, consideration of special characters (French characters): special.has_key(new_str)
+ 	When at least a punctuation mark is in the string, separate them. 
+ 		Printing line directly (to be modified)
+ 	
+ 	When punctuation marks are not detected (or one of the above feature check is valid), add features.
+ 	Special character check is also included
+ 		Printing line directly (to be modified)
+ 		
+ 	- During the above processing, basic feature extraction: feat_str = featureCheck(new_str)
+ 	
+ *comments* 	
+ Pure sequential line processing. If we want an OOP, just need to move these functions in the classes.	
+ 	
+ 	
+ 	
+------------------------ 
+ extractor.py
+------------------------
+
+ def extNumDocs (filename)
+ 	Extract the number of documents separated with blocks
+ 	
+ 
+ def randomgen(numb)	
+ 	Generate the indicators for the training and test documents	
+ 	
+ 
+ def extractor (filename, ndocs, tr, extr) 
+ 
+ 	Extract the training and test data : now read a file
+ 	Now separated for the training, test, and new data : need to integrate them
+ 	- tr indicator check, it gives the valid instance indices 
+ 	- extraction type check, if it is for new data, if we need rich data etc.
+ 		- too separated, need to arrange
+ 		
+ 	- relatedItem check, to differentiate title types
+ 	- the closest tag is selected as label of token
+ 		- there are exceptions, label in {nonLabels} is replaced by its parent tag
+ 		- if there are no valid labels till top, give <nolabel>
+ 			- but there exist <abbr>, <ref> take them as label.
+ 			!! too detailed exceptions.... if we want to modify them ? need an official channel
+ 	- <nonbibl> is special, if a token has <nonbibl>, regardless of other tags, its label is <nonbibl>
+ 	- title treatment is complicated cause we consider both type of annotated title and its location
+ 		<title> vs. <booktitle>
+ 	- incorporation of some similar tags
+ 	
+ 	- attribute extraction
+ 	- <bookindicator>
+ 	- we can add attributes <- to be considered as a function, now #punctuation check
+ 	- small functions to treat exceptions <- to be rearranged
+ 		- def extract_attrs(attstr) : input is line, need to extract attributes <- to be modified 
+ 		- def check_att(attstr, attrname) : see if the attribute is in the string <- would be useful
+ 
+ 	- according to tr, different printing <- to be modified 
+ 	- proper noun lists check, <- to be detached as a function
+ 	- printing
+ 	
+ 	
+def printdata(All_bibls)
+	final printing
+
+
+def addlayout(All_bibls)
+	layout features
+
+
+def printmorefeatures(All_bibls, extr) 
+	extract rich features for SVM note classification
+
+
+def extract_attrs(attstr)
+	tokenize attributes	
+
+
+def check_att(attstr, attrname)
+	see if the attribute is in the string
+
+
+def extract_title(attstr, relatItm, titleCK, titleAttr)
+	title tag arrangement
+
+
+------------------------ 
+ nameProcess.py
+------------------------
+
+To ch
+
+chercher les nom propre dans une liste et si il sont prŽsent il ajoute un feature surname list
+
+
+
+
+
+------------------------ 
+ preparerCRF.py
+------------------------
+
+ Call the codes to prepare learning/test data for CRF
+ Problem : input and output are discontinuous, execute sequentially the python codes
+ 			<- to be handled
+ 			
+
+------------------------ 
+ repreparerCRF.py
+------------------------
+
+ For the new data extraction, need to be integrated into the above code
+ 
+ 
+ 
+ 
+ 
+==============================================
+ Machine Learning
+==============================================
+
+
+
+
+
+
+
+----------------------------------------------
+ April 2 2012, by Young-Min KIM					
+ Short description of prototype codes			
+ Current : sequential processing of functions	
+ Goal : OOP, use of class, modularization		
+----------------------------------------------
+
+
+==============================================
+ formatting
+==============================================
+
+------------------------
+ dataGenerator.py
+------------------------
+ 
+ def processing (fname)
+ 
+	From a file, read lines then make an instance of BeautifulSoup.
+	- elimination (tmp_str) : string cleaning
+	- loop for <bibl>
+		- extract all tags
+		- iterate per content (in BeautifulSoup, separated by tags, unwrapped string becomes a content)
+			if content has no tags, provide 'nolabel'
+			if has, call extract_tags(c_tag) 
+		- a problem for applying BeautifulSoup : another <bibl> in a <bibl> is not correctly captured
+			inner <bibl> is always after <relateditem> <- indicator
+			so artificially count the iterator, then re-process as above.
+
+
+ def extract_tags(current_tag)
+ 
+ 	From current string including tags and contents, extract tokens, labels and attributes.
+ 	- cleaning of string, elimination of enter character, meaningless whitespace etc.
+ 	- arrangeData(n, txts, tags, attrs, top_tag, top_att) : extract data in a tree structure
+ 		
+
+ def arrangeData(n, txts, tags, attrs, top_tag, top_att)
+
+	Flatten the tree.
+	As input, 	n:currnet_tag string, txts: txt string, tags:including tags, attrs:including attrs,
+				top_tag: can be attached to current string without other tag
+				top_att: can be attached to current string
+				for the child elements, top_tag and top_att are continuously added.
+
+
+ def elimination (tmp_str)
+ 
+ 	elimination of the obstructive <h> tags
+ 
+				
+ *comments* 
+ Think about replacing BeautifulSoup as ElementTree.
+ Try to consider a more generalized case for the elimination.
+ 
+	 
+ 	
+ 	
+------------------------ 
+ puncOrganizer.py
+------------------------
+
+ def reorganizing(fname)
+ 	
+ 	Read line by line the result obtained from dataGenerator.py
+ 	When the input token is valid, continue to process.
+ 	
+ 	- It allows the extraction of basic features 
+ 	
+ 	#posseditor check
+ 	retrn_str = editorCheck(input_str)
+ 	#initial check
+ 	retrn_str = initCheck(input_str)
+ 	#posspage check
+ 	retrn_str = pageCheck(input_str)
+ 	#http, www check
+ 	retrn_str = refCheck(input_str)
+ 	
+ 	#tokenization
+ 	Separation of tokens, consideration of special characters (French characters): special.has_key(new_str)
+ 	When at least a punctuation mark is in the string, separate them. 
+ 		Printing line directly (to be modified)
+ 	
+ 	When punctuation marks are not detected (or one of the above feature check is valid), add features.
+ 	Special character check is also included
+ 		Printing line directly (to be modified)
+ 		
+ 	- During the above processing, basic feature extraction: feat_str = featureCheck(new_str)
+ 	
+ *comments* 	
+ Pure sequential line processing. If we want an OOP, just need to move these functions in the classes.	
+ 	
+ 	
+ 	
+------------------------ 
+ extractor.py
+------------------------
+
+ def extNumDocs (filename)
+ 	Extract the number of documents separated with blocks
+ 	
+ 
+ def randomgen(numb)	
+ 	Generate the indicators for the training and test documents	
+ 	
+ 
+ def extractor (filename, ndocs, tr, extr) 
+ 
+ 	Extract the training and test data : now read a file
+ 	Now separated for the training, test, and new data : need to integrate them
+ 	- tr indicator check, it gives the valid instance indices 
+ 	- extraction type check, if it is for new data, if we need rich data etc.
+ 		- too separated, need to arrange
+ 		
+ 	- relatedItem check, to differentiate title types
+ 	- the closest tag is selected as label of token
+ 		- there are exceptions, label in {nonLabels} is replaced by its parent tag
+ 		- if there are no valid labels till top, give <nolabel>
+ 			- but there exist <abbr>, <ref> take them as label.
+ 			!! too detailed exceptions.... if we want to modify them ? need an official channel
+ 	- <nonbibl> is special, if a token has <nonbibl>, regardless of other tags, its label is <nonbibl>
+ 	- title treatment is complicated cause we consider both type of annotated title and its location
+ 		<title> vs. <booktitle>
+ 	- incorporation of some similar tags
+ 	
+ 	- attribute extraction
+ 	- <bookindicator>
+ 	- we can add attributes <- to be considered as a function, now #punctuation check
+ 	- small functions to treat exceptions <- to be rearranged
+ 		- def extract_attrs(attstr) : input is line, need to extract attributes <- to be modified 
+ 		- def check_att(attstr, attrname) : see if the attribute is in the string <- would be useful
+ 
+ 	- according to tr, different printing <- to be modified 
+ 	- proper noun lists check, <- to be detached as a function
+ 	- printing
+ 	
+ 	
+def printdata(All_bibls)
+	final printing
+
+
+def addlayout(All_bibls)
+	layout features
+
+
+def printmorefeatures(All_bibls, extr) 
+	extract rich features for SVM note classification
+
+
+def extract_attrs(attstr)
+	tokenize attributes	
+
+
+def check_att(attstr, attrname)
+	see if the attribute is in the string
+
+
+def extract_title(attstr, relatItm, titleCK, titleAttr)
+	title tag arrangement
+
+
+------------------------ 
+ nameProcess.py
+------------------------
+
+To search proper nouns in the proper noun lists.
+If you want to modify the function with new format, just replace [tmp_bibl] with appropriate variables.
+
+NOW, we have two surname list, a forename list, and a place list. 
+Actually used namelist is 
+namelist = {'0000': {'000': 0}}		(surname list)
+multi_namelist = {'0000': {'0000': 0}} 	(when surname is more than a word)
+forenamelist = {'0000': 0}			(forename list)
+placelist = {'0000': 0}				(place list)
+properlist = {'0000': 0} 			(other list) but it is used as place list now.. To be modified
+m_properlist = {'0000': {'0000': 0}}	(when proper noun is more than a word)
+
+
+
+Input - tmp_bibl
+[['Perrichet', 'FIRSTCAP', 'surname'], [',', 'c'], ['Marc', 'FIRSTCAP', 'forename'], ['1959', 'ALLNUMBERS', 'date'], ['.', 'c'] ÉÉ]
+
+
+def load_name(fname)
+	load a name list 
+	surname can be composed by two tokens : multi_namelist = {'first_token_of_surname': {'full_surname': 1}}
+
+
+def load_place(fname) :
+	load a place list
+	just consider a token
+
+
+def load_properlist(fname, listname) :
+	a generalized proper noun list loading
+	Now the problem is the name of proper noun list is already fixed, dynamic generation is needed
+
+
+def searchName(tmp_bibl, tr) :
+	Search that if a pair of tokens are in the name list. We separately check the surname and forename. 
+
+
+
+def has_initial(tmp) :
+	Check if the tmp list has 'INITIAL' feature. It is called in the function searchName(tmp_bibl, tr).
+
+	
+TODO
+generalization
+
+
+
+
+------------------------ 
+ preparerCRF.py
+------------------------
+
+ Call the codes to prepare learning/test data for CRF
+ Problem : input and output are discontinuous, execute sequentially the python codes
+ 			<- to be handled
+ 			
+
+------------------------ 
+ repreparerCRF.py
+------------------------
+
+ For the new data extraction, need to be integrated into the above code
+ 
+ 
+ 
+ 
+
+==============================================
+ formatting - Notes
+==============================================
+
+------------------------
+ noteExtractor.py
+------------------------
+
+Extraction of notes to avoid possible errors.
+Search "<note place=" then "</note>" <- extract a note.
+
+
+
+------------------------
+ dataGeneratorC2.py
+------------------------
+
+Useless functions
+	def load_sign(fname, sign)
+	def posssign(line, sign)
+
+Useless variables
+	refSign = []
+	precitSign = []
+
+
+Compared to the corpus 1, two functions are different.
+
+	def processing (fname)
+	def extract_tags(current_tag, lens) if lens > 0, the note have <bibl> part in it.
+
+	For processing, it's better to keep separately two versions (for note, reference).
+	
+	For extract_tags, you can merge two versions because the difference is only the
+		printing of "nonbibl" for note (and "lens" argument in the function) at the end.
+
+
+
+------------------------
+ extractor4SVM.py
+------------------------
+
+The first level of feature extraction for SVM note classification.
+Since it is based on extractor.py, there are several common functions.
+
+Important variables :
+	bibls[i] - indicator showing if the note is bibliographic reference or not
+	data_list = []	List of input lines
+	all_data = [] 	Three dimensional list of notes
+	
+Output example (two notes):
+	1 The Economist , February 23 , 1993 . 
+	FIRSTCAP FIRSTCAP PUNC FIRSTCAP ALLNUMBERS PUNC ALLNUMBERS PUNC 
+	-1 Egyedi , 1 . 
+	FIRSTCAP PUNC ALLNUMBERS PUNC 
+
+
+- Same functions
+	def extNumDocs (filename)
+	def extract_attrs(attstr)
+	def check_att(attstr, attrname)
+	def extract_title(attstr, relatItm, titleCK, titleAttr)
+
+- Common, but not same
+	def extractor (filename, ndocs, outtype)
+
+	Difference with extractor functions (c1, c2).
+	c1 has an argument "tr" with which it differently prints out the result (training/test data).
+	c2 doesn't have "tr" argument because printing is same for training/test.
+		So, if you want to make similar c2 to c1, call extractor as if new references are entered.
+		There is no difference at the level of extracted FEATURES, but output layout is different.
+		*AN IMPORTANT DIFFERENCE is that we check nonbibl tokens to finally say that the current 
+		 note is <bibl> or <nonbibl>. <----- but if you use classes, maybe we can count it at the
+		 moment of dataGeneratorC2.py TO SEE !!! ****
+	
+- Only here
+	def print_alldata(all_data)
+		Print output as in extractor.py, just for check, this function is not used now. But keep it.
+		
+	def print_parallel(all_data, bibls, outtype)
+		Print output as the above examples. 
+		If outtype=2, all features.
+		If outtype=1, eliminate words appearing just one time in the corpus.
+	
+	def count_bibls(bibls) <--------- We don't use it now.... 	
+	
+	
+- Not here, only in extractor
+	def randomgen(numb)
+	def printdata(All_bibls)
+	def addlayout(All_bibls)
+	def printmorefeatures(All_bibls, extr)
+	
+
+
+------------------------
+ featureSelection4SVM.py
+------------------------
+
+ After extracting useful data with extractor4SVM, we arrage data and select features.
+ See the use of this file in preparerSVM.py
+ 
+ 
+ Important variables :
+ 	token_data = []	# TOTAL DATA for tokens, token_data[i] = i_th document DICT containing token ids and token counts
+	feature_data = [] # TOTAL DATA for features, feature_data[i] = i_th document DICT containing feature ids and feature counts
+	bibls = range(int(ndocs*1.0)) - indicator showing if the note is bibliographic reference or not
+ 
+ Global variables :
+ 	tokens = []		# tokens[k] : TOKEN STRING with token id 'k'
+	idf = []		# idf[k] : documnet frequency of token id 'k'
+	features = []	# features[k] : FEATURE STRING with feature id 'k'
+	doc_tokens = {'0000':0}		# tmp document represented by token strings and thier counts
+	doc_features = {'0000':0}	# tmp document represented by feature strings and thier counts
+	valid_features = {'nopunc':0, 'onepunc':0, 'nonumbers':0, 'noinitial':0, 'startinitial':0, 'posspage':0, 'weblink':0, 'posseditor':0, 'italic':0}
+ 	
+
+ def extNumDocs (filename) 
+ 	Count number of notes. With classes, you probably don't need to use it.
+
+ def randomgen(numb)
+ 	Generate the indicators for the training and test documents.
+ 
+ def selector (filename, ndocs, tr, filename_ori) 
+ 	From an indicator file "all_indices_C2_train.txt", read training/test indices.
+ 	Call other functions.
+ 		* fill_data(line, input, data)
+ 		* insert_lineFeatures(feature_data)
+		* print_output(token_data, feature_data, bibls, tr, indices)
+		* load_original(filename_ori, indices)
+ 
+ def fill_data(line, input, data) 	
+ 	Fill token_data or feature_data
+ 	e.g. input arguments (line[1:], tokens, token_data) or (line, features, feature_data)
+ 
+ def insert_lineFeatures(feature_data, tr)
+ 	Add global features.
+ 	First, extend the variable 'features' to give id of global features (for new document don't need).
+ 	new_features = [] # list for newly added features for the corresponding document
+ 	Check and fill new_features, then at the end, append 'feature_data'.
+ 
+ def print_output(token_data, feature_data, bibls, tr, indices)
+ 	printing SVM training/test data. each line is a digitalized note data. 
+ 	e.g. -1 4:1 9:1 10:2 11:1 12:1 10004:1 10016:1 10017:1 10018:1
+ 
+ 
+ def adding_fId(tokens_len, feature_data)
+ 	To give a difference between input and global features.
+ 
+ def load_original(filename_ori, indices)
+ 	create files having original text form for the verification
+ 
+ def save_ID()
+ 	#save input(token) id list and feature id list for new data
+ 
+ def load_ID()
+ 	#load input(token) id list and feature id list for new data
+ 
+
+
+------------------------
+ preparerSVM.py
+------------------------
+
+ Call noteExtractorC2, dataGeneratorC2, puncOrganizer, extractor4SVM, featureSelection4SVM
+ to generate training/test data for SVM classification
+ 
+ output : "trainingdata.txt" or "testdata.txt" or "newdata.txt" 
+ 
+
+
+------------------------
+ runSVM.py
+------------------------
+ 1. Learn a svm model with SVM light.
+ 2. Call positive_indices.py to re-generate learning indices after classification
+ 3. Then same as corpus 1, call extractor.py to generate training/test data
+
+
+** If you finish till runSVM.py, run runCRF.py
+
+
+------------------------
+ positive_indices.py
+------------------------
+
+From all_indices_C2_train.txt, svm_revues_predition(test data), svm_revues_predition2(training data),
+train_indices.txt (CRF indices without classification)extract positive_indices.txt, which includes 
+all positive note indices estimated SVM classifier. 
+
+
+
+
+ 
+==============================================
+ Machine Learning
+==============================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -74,3 +74,45 @@ class Reference(object):
 			ref += " "+word.nom
 		return ref
 	
+	def buildReference(self):
+		ref = ""
+		flagItem = 0
+		balise = ""
+		
+		for word in self.word:
+			'if il y a une sous reference'
+			if word.item == 1 and flagItem == 0:
+				flagItem = 1
+				ref += "<relatedItem type=\"in\">"
+				ref += " "+word.nom
+					
+			'verifie si le mot doit etre ignore ou non: ignore = considere comme balise nonLabel a ajouter au fichier final'
+			if word.ignoreWord == 0: 
+				if balise == word.getTagIndice(0).nom:
+					ref += word.nom
+				elif balise == "":
+					if word.getTagIndice(0).nom != "c":
+						ref += "<"+word.getTagIndice(0).nom+">"+word.nom
+					else:
+						ref += word.nom
+					balise = word.getTagIndice(0).nom
+				else:
+					if balise != "c" and word.getTagIndice(0).nom != "c":
+						ref += "</"+balise+">"+"<"+word.getTagIndice(0).nom+">"+word.nom
+					elif balise == "c" and word.getTagIndice(0).nom != "c":
+						ref += "<"+word.getTagIndice(0).nom+">"+word.nom
+					elif balise != "c" and word.getTagIndice(0).nom == "c":
+						ref += "</"+balise+">"+word.nom
+					else:
+						ref += word.nom
+					balise = word.getTagIndice(0).nom
+			else:
+				ref += word.nom
+		if balise != "c":	
+			ref += "</"+balise+">"
+		'if il y a une sous reference on ajoute la balise de fin'
+		if flagItem == 1:
+			ref += "</relatedItem>"
+			
+		return ref
+	

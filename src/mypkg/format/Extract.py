@@ -13,20 +13,14 @@ from mypkg.extra.Place import Place
 from mypkg.extra.Properlist import Properlist
 
 class Extract(object):
-	'''
-	classdocs
-	'''
-
 
 	def __init__(self):
-		'''
-		Constructor
-		'''
 		self.cooccurs = {'0000': 0}
 		self.link = {':':0, '=':0, '_':0, '|':0, '~':0, '-':0, '–':0}
 		self.nonLabels = {}
 		self.features = {}
 		self.regles = {}
+		
 		'''
 		charge les nonLabels et les features se trouvant dans le fichier features
 		'''
@@ -71,61 +65,25 @@ class Extract(object):
 		self.placeObj = Place("KB/config/externalList/list_pays.txt")
 		self.properObj = Properlist("KB/config/externalList/LargeCities.txt", "PLACELIST")
 		
-	'extract the number of reference separated with blocks'
-	'''def extNumDocs (self) :
-		return self.listRef.nbReference()'''
-	
 	
 	'''
-	generate the indicators for the training and test documents
-	 num : number of references
-	indice : 1 regenerer les indices, 0: charger les indices en fonction du fichier
+	randomgengenerate the indicators for the training and test documents
+		 num : number of references
+		indice : 1 regenerer les indices, 0: charger les indices en fonction du fichier
 	'''
-	def randomgen(self, numb, fichier, indice, listRef) :
-		if indice == 1:
-			
-			numbers = range(numb)
-			for i in range(numb) :
-				numbers[i] = i+1
-			random.shuffle(numbers)
-			
-			# count of training data 
-			num_train = int(numb*0.7) #for example, int(716*0.7) = 501
-			index_train = numbers[0:num_train]
-			index_test = numbers[num_train:numb]
-			
-			index_train.sort()
-			index_test.sort()
-			
-			indices = range(numb)
-			for i in range(numb) :
-				indices[i] = 0
-			
-			for c in index_train :
-				indices[int(c-1)] = 1
-		else:
-			indices = self.loadIndices(fichier)
-			
-		# a line corresponds to a document 
-		# printed value is 1 : training data
-		# printed value is 0 : test data
-		fich = open(fichier, "w")
-		cpt = 0
-		for c in indices :
-			if c == 0:
-				fich.write("0\n")
-				listRef.modifyTestIndiceRef(cpt)
-			else:
-				fich.write("1\n")
-				listRef.modifyTrainIndiceRef(cpt)
-			cpt += 1
+	def randomgen(self, listRef, tr) :
+		nbRef = listRef.nbReference()
 		
-		fich.close()
+		for i in range(nbRef) :
+			if tr == 1 : 
+				listRef.modifyTrainIndiceRef(i)
+			else : 
+				listRef.modifyTestIndiceRef(i)
 
 		return
 	
 	'''
-	loadIndices: perùet de charger les indices qui se trouvent dans le fichier
+	loadIndices: permet de charger les indices qui se trouvent dans le fichier
 	'''
 	def loadIndices(self, fichier):
 		indices = []
@@ -134,8 +92,9 @@ class Extract(object):
 			indices.append(line)
 			
 		return indices
+	
 	'''
-	extract training and test data
+	extractor : extract training and test data
 		ndocs : number of references
 		typeCorpus : 1, 2 ou 3
 		tr : indicator check, it gives the valid instance indices 
@@ -147,28 +106,25 @@ class Extract(object):
 		self.titleAttr = ''
 		self.relatItm = 0
 			
-		
-		for i in range(ndocs) :
-			if tr == 1 : 
-				listRef.modifyTrainIndiceRef(i)
-			else : 
-				listRef.modifyTestIndiceRef(i)
-
 		i = 0
-	
 		check = -5
 		nonbiblck = 1
 		
 		listReferences = listRef.getReferences()
-
+		tmp_nonbiblck = 0
 		for reference in listReferences:
+			
 			for mot in reference.getWord():
 				if mot.ignoreWord == 0:
 					if mot.item == 1: self.relatItm = 1
+					
 					if tr == 1 : check = 1
 					else : check = 0
 					
-					if listRef.getTrainIndiceRef(i) == check:
+					if reference.train == -1:
+						mot.delAllTag()
+						mot.addTag("nonbibl")
+					elif reference.train == check:
 												
 						# finding just a label which is not in the nonLabels list
 						self._checkNonLabels(mot)
@@ -179,32 +135,35 @@ class Extract(object):
 						#nobibl check,
 						tmp_nonbiblck = 0
 						for tmp in mot.getAllTag() :
-							if tmp == 'nonbibl' :
+							if tmp.nom == 'nonbibl' :
 								tmp_nonbiblck = 1
-						
+							elif tmp.nom == 'c':
+								if nonbiblck == 1:
+									tmp_nonbiblck = 1
+
 							
 						if tr == 0 :
 							mot.delAllTag()
 					
-					'del toutes ls caracteristique qui ne sont pas presente dans le tableau features'
-					supp = []
-					'si c est de la ponctuation on enleve toutes les caracteristiques'
-					balise = mot.getLastTag()
-					if balise != -1:
-						if balise.nom == "c":
-							mot.delAllFeature()
-							mot.addFeature("PUNC")
-							'sinon on enleve que celle non presente dans les features'
-							
-					
-					for carac in mot.getAllFeature():
-						if not self.features.has_key(carac.nom.lower()):
-							supp.append(carac.nom)
-							
-					for nomMot in supp:
-						mot.delFeature(nomMot)
+						'del toutes ls caracteristique qui ne sont pas presente dans le tableau features'
+						supp = []
+						'si c est de la ponctuation on enleve toutes les caracteristiques'
+						balise = mot.getLastTag()
+						if balise != -1:
+							if balise.nom == "c":
+								mot.delAllFeature()
+								mot.addFeature("PUNC")
+								'sinon on enleve que celle non presente dans les features'
+								
 						
-					if tmp_nonbiblck == 0 : nonbiblck = 0
+						for carac in mot.getAllFeature():
+							if not self.features.has_key(carac.nom.lower()):
+								supp.append(carac.nom)
+								
+						for nomMot in supp:
+							mot.delFeature(nomMot)
+							
+						if tmp_nonbiblck == 0 : nonbiblck = 0
 				
 				
 			i += 1
@@ -235,15 +194,15 @@ class Extract(object):
 			self._printmoreFeatures(extr)
 		
 		if typeCorpus == 2:
-			if tr ==1:
+			'''if tr == 1:
 				self._print_alldata(fichierRes, listRef)
-			else :
-				self._print_parallel(fichierRes, listRef)
+			else :'''
+			self._print_parallel(fichierRes, listRef)
 				
 		return
 
 	'''
-	printdata: permet de creer un fichier avec les mots, balises ... pour le crf
+	_printdata: permet de creer un fichier avec les mots, balises ... pour le crf
 	'''
 	def _printdata(self, fichier, listRef, tr) :
 		fich = codecs.open(fichier, "w", encoding="utf-8")
@@ -273,7 +232,7 @@ class Extract(object):
 		return
 	
 	'''
-	printonlyLabel: permet de creer un fichier avec les mots, balises ... pour le crf
+	_printonlyLabel: permet de creer un fichier avec les mots, balises ... pour le crf
 	'''
 	def _printOnlyLabel(self, fichier, listRef) :
 		fich = codecs.open(fichier, "w", encoding="utf-8")
@@ -292,7 +251,11 @@ class Extract(object):
 		fich = codecs.open(fichier, "w", encoding="utf-8")
 		for reference in listRef.getReferences():
 			for mot in reference.getWord():
-				fich.write(unicode(mot.nom,"utf-8"))
+				try:
+					fich.write(unicode(mot.nom,"utf-8"))
+				except TypeError:
+					fich.write(mot.nom)
+
 			fich.write("\n")
 				
 		fich.close()

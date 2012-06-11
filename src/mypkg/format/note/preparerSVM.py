@@ -48,7 +48,7 @@ import subprocess
 
 
 def run(codedirname, dirname, indicator) :
- 
+	print os.getcwd()
 	process = subprocess.Popen('ls '+dirname+' > tmp.txt', shell=True, stdout=subprocess.PIPE)
 	process.wait()
 	
@@ -127,17 +127,19 @@ def run(codedirname, dirname, indicator) :
 
 
 def main() :
-
-	if len(sys.argv) != 4 :
-		print '** Extraction of training/test data files for SVM from the annotated xml files **'
-		print 'python preparerSVM.py (dirname including codes) (dirname including xml files) (1:training, 0:test, 10:both, 2:new data)'
-		sys.exit(1)
-		
-	codedirname = str(sys.argv[1])
-	dirname = str(sys.argv[2])
-	indicator = int(sys.argv[3])
-		
-	run(codedirname, dirname, indicator)
+	if sys.argv[1] == "1":
+		run("src/mypkg/format/note/", "KB/data/corpus2/alldata_added/", 1)
+	else:
+		if len(sys.argv) != 4 :
+			print '** Extraction of training/test data files for SVM from the annotated xml files **'
+			print 'python preparerSVM.py (dirname including codes) (dirname including xml files) (1:training, 0:test, 10:both, 2:new data)'
+			sys.exit(1)
+			
+		codedirname = str(sys.argv[1])
+		dirname = str(sys.argv[2])
+		indicator = int(sys.argv[3])
+			
+		run(codedirname, dirname, indicator)
 
 
 if __name__ == '__main__':

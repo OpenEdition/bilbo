@@ -31,8 +31,9 @@ import re
 import string
 import random
 
-sys.path.append("/Users/young-minkim/Codes/Lib")
-from BeautifulSoup import BeautifulSoup
+
+from mypkg.ressources.BeautifulSoup import BeautifulSoup
+from mypkg.ressources.BeautifulSoup import Tag
 
 
 nonLabels = {'hi':0, 'abbr':1, 'lb':0, 'pb':0, 'ptr':0, 'emph':0}

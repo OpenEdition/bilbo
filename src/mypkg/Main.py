@@ -6,7 +6,6 @@ Created on 19 avr. 2012
 	argv[2] => repertory where build result file (initial : Result)
 
 '''
-#from __future__ import absolute_import
 import sys
 import os
 

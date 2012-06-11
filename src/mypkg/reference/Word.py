@@ -38,11 +38,7 @@ class Word(object):
 			feature.rstrip()
 			if feature != "" and self.getFeature(feature) == -1:
 				self.feature.append(Feature(feature))
-			
-	'met en forme pour le crf : mot carac carac tag'
-	def formatCrf(self):
-		
-		return
+
 	
 	def affiche(self):
 		print "\nmot : ",self.nom
@@ -215,3 +211,11 @@ class Word(object):
 	
 	def __getattr__(self, nom):
 		print("Alerte ! Il n'y a pas d'attribut {0} ici !".format(nom))
+		
+	'''
+	buildReference :  permet de construire la reference final
+	'''
+	'''def buildReference(self):
+		self.nom = self.nom.replace('&amp;', '&')
+		ref = "<"+self.getLastTag().nom+">"+self.nom+"</"+self.getLastTag().nom+">"
+		return ref'''

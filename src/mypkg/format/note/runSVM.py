@@ -149,18 +149,20 @@ def run(svmdirname, crfdirname, crfcodedir, indicator) :
 
 
 def main() :
-
-	if len(sys.argv) != 5 :
-		print '** SVM learning and CRF data extraction (training/test) **'
-		print 'python runSVM.py (dirname including SVM training and/or test data) (dirname for CRF output) (dirname for CRF codes) (10:svm train/test both, 20:all data including rich data, 2:new data, 4:all new data including rich data)'
-		sys.exit(1)
-		
-	svmdirname = str(sys.argv[1])
-	crfdirname = str(sys.argv[2])
-	crfcodedir = str(sys.argv[3])	
-	indicator = int(sys.argv[4])
-		
-	run(svmdirname, crfdirname, crfcodedir, indicator)
+	if sys.argv[1] == "1":
+		run("src/mypkg/format/note/", "./", "src/mypkg/format/note/", 1)
+	else:
+		if len(sys.argv) != 5 :
+			print '** SVM learning and CRF data extraction (training/test) **'
+			print 'python runSVM.py (dirname including SVM training and/or test data) (dirname for CRF output) (dirname for CRF codes) (10:svm train/test both, 20:all data including rich data, 2:new data, 4:all new data including rich data)'
+			sys.exit(1)
+			
+		svmdirname = str(sys.argv[1])
+		crfdirname = str(sys.argv[2])
+		crfcodedir = str(sys.argv[3])	
+		indicator = int(sys.argv[4])
+			
+		run(svmdirname, crfdirname, crfcodedir, indicator)
 
 
 if __name__ == '__main__':

@@ -7,10 +7,6 @@ import re
 import string
 
 class Name(object):
-	'''
-	classdocs
-	'''
-
 
 	def __init__(self, fname):
 		'''

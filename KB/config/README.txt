@@ -11,7 +11,7 @@ Ce sont les fichiers permettant d'ameliorer l'annotation des lieu, nom et prenom
 Ce sont par exemple des listes de nom et prenom repandu dans le monde.
 
 EN:
-Thiits is a file that improve the annotation of place, name or forename
+It is file that improve the annotation of place, name or forename
 for exemple one list of forename and surname known around the world
 ------------------------
  balise

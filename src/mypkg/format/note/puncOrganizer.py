@@ -38,8 +38,8 @@ import re
 import string
 import codecs
 
-sys.path.append("/Users/young-minkim/Codes/Lib")
-from BeautifulSoup import BeautifulSoup
+from mypkg.ressources.BeautifulSoup import BeautifulSoup
+from mypkg.ressources.BeautifulSoup import Tag
 
 special =  {'«':0, '»':0, '“':0, '”':0, '–':0}
 

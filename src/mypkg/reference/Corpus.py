@@ -5,6 +5,7 @@ Created on 25 avr. 2012
 '''
 import subprocess
 import os.path
+import commands
 from mypkg.reference.File import File
 from mypkg.ressources.BeautifulSoup import BeautifulSoup, Tag
 
@@ -27,11 +28,13 @@ class Corpus(object):
 	def getFiles(self):
 		'regarde si c est un repertoire ou un fichier seul'
 		if os.path.isdir(self.repertoire):
-			process = subprocess.Popen('ls '+self.repertoire, shell=True, stdout=subprocess.PIPE)
+			lsOut = commands.getoutput('ls '+self.repertoire)
+			listFichiers = lsOut.split("\n")
+			'''process = subprocess.Popen('ls '+self.repertoire, shell=True, stdout=subprocess.PIPE)
 			process.wait()
 			fichiers = process.stdout.read()
 			listFichiers = fichiers.split("\n")
-			del(listFichiers[len(listFichiers)-1])
+			del(listFichiers[len(listFichiers)-1])'''
 		else:
 			nomSplit = self.repertoire.split("/")
 			listFichiers = []
@@ -43,9 +46,9 @@ class Corpus(object):
 	'''
 	extractCorpus1 pour chaque fichier les references du corpus 1
 	'''
-	def extractCorpus1(self):
-
-		nomFichiers = self.getFiles()
+	def extractCorpus1(self, nomFichiers=""):
+		if nomFichiers == "":
+			nomFichiers = self.getFiles()
 		for nomFichier in nomFichiers:
 			fichObj = File(self.repertoire+"/"+nomFichier)
 			fichObj.extractCorpus1()
@@ -83,10 +86,10 @@ class Corpus(object):
 		
 		return nb
 
-	def buildAnnotateFiles(self):
+	'''def buildAnnotateFiles(self):
 		for fichier in self.fichiers:
-			fichier.buildAnnotateFile(1, "bibl")
-		return
+			fichier.builReferences(1, "bibl", "listbibl")
+		return'''
 	
 	def addTagReferences(self, fileRes):
 		tmp_str = ""
@@ -110,5 +113,9 @@ class Corpus(object):
 					break
 				cptRef += 1
 
-			fichier.addTagReferences(reference)
+			#fichier.addTagReferences(reference)
+			fichier.buildReferences(reference, "bibl", "listbibl")
 		return
+	
+	def deleteAllFiles(self):
+		self.fichiers[:] = []

@@ -19,75 +19,45 @@ import string
 import random
 
 
-def extractor(ind_trainfile, svmprediction_testfile, svmprediction_trainfile, ind_trainCRFfile):
+def extractorIndices(svmprediction_trainfile, listRef):
+	nbRef = listRef.nbReference()
 	
-	indices_tr = []
-	for line in open (ind_trainfile, 'r') :
-		line = line.split()
-		indices_tr.append(int(line[0]))
-		
-	svm_test = []
-	for line in open (svmprediction_testfile, 'r') :
-		line = line.split()
-		svm_test.append(float(line[0]))
-		
 	svm_train = []
 	for line in open (svmprediction_trainfile, 'r') :
 		line = line.split()
 		svm_train.append(float(line[0]))	
 
-	ind_trainCRF = [] 
-	for line in open (ind_trainCRFfile, 'r') :# file to be modified, in general, train_indices.txt
-		line = line.split()
-		ind_trainCRF.append(float(line[0]))	
-		
-	
-	positive_indices = range(len(indices_tr))
+	positive_indices = range(nbRef)
 	
 	n=0 #for all
-	i=0	#for test
 	j=0	#for train
-
-	for n in range(len(indices_tr)) :
-		if indices_tr[n] == 0 : # test data ?
-			if svm_test[i] > 0 :
-				positive_indices[n] = 1
-			else :
-				positive_indices[n] = 0
-			i += 1
-		else : # train datat
-			if svm_train[j] > 0 :
-				positive_indices[n] = 1
-			else :
-				positive_indices[n] = 0
-			j += 1
+	for n in range(nbRef) :
+		if svm_train[j] > 0 :
+			positive_indices[n] = 1
+		else :
+			positive_indices[n] = 0
+		j += 1
 	
 	
-	final_CRFindices = range(len(indices_tr))
 	n=0
-	for n in range(len(positive_indices)) :
-		if positive_indices[n] > 0 : # instance OK for bibliographical reference
-			if ind_trainCRF[n] == 1 :
-				final_CRFindices[n] = 1
-			else :
-				final_CRFindices[n] = 0
-		else : # instance NOT OK
-			final_CRFindices[n] = -1 
-			
-	for fcrf in final_CRFindices :
-		print fcrf	
+	for ref in listRef.getReferences() :
+		if positive_indices[n] == 0 : # instance NOT OK donc attribut train = -1
+			ref.train =  -1 
+		n += 1
 	
 	return
 	
 	
-def extractor4new(svmprediction_newfile):
+def extractor4new(svmprediction_newfile, listRef):
+	i = 0
+	
 	for line in open (svmprediction_newfile, 'r') :
 		line = line.split()
 		if float(line[0]) > 0 :
-			print 0
+			listRef.getReferencesIndice(i).train = 0
 		else :
-			print -1
-	
+			listRef.getReferencesIndice(i).train = -1
+		i += 1
 	return
 
 
@@ -100,7 +70,7 @@ def main():
 		sys.exit (1)
 
 	if len (sys.argv) == 5 :
-		extractor(str(sys.argv[1]), str(sys.argv[2]), str(sys.argv[3]), str(sys.argv[4]))
+		extractorIndices(str(sys.argv[1]), str(sys.argv[2]), str(sys.argv[3]), str(sys.argv[4]))
 	elif len (sys.argv) == 2 :
 		extractor4new(str(sys.argv[1]))
 

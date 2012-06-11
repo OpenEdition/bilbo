@@ -15,7 +15,7 @@ Ce sont les fichiers permettant d'ameliorer l'annotation des lieu, nom et prenom
 Ce sont par exemple des listes de nom et prenom repandu dans le monde.
 
 EN:
-Thiits is a file that improve the annotation of place, name or forename
+it is a file that improve the annotation of place, name or forename
 for exemple one list of forename and surname known around the world
 ------------------------
  balise
@@ -150,7 +150,7 @@ Class qui regoupe les mots d'une reference
 Attributs :
 num : numero de la reference
 mots : list des mots contenu dans la reference : objet Mots
-train : permet de savoir si cette reference doit etre utilisé pour l'apprentissage ou le test (1 : apprentissage, 0 : test)
+train : permet de savoir si cette reference doit etre utilisé pour l'apprentissage ou le test (1 : apprentissage, 0 : test, -1 : nonBibl)
 
 methodes :
 

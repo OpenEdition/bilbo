@@ -13,17 +13,11 @@ import string
 import re
 
 class Clean(object):
-	'''
-	classdocs
-	'''
-
 
 	def __init__(self):
-		'''
-		Constructor
-		'''
 		self.tagAttDict = {'0000': 0}
 		self.nonLabels = {}
+		
 		'''
 		charge les nonLabels et les features se trouvant dans le fichier features
 		'''
@@ -46,7 +40,9 @@ class Clean(object):
 			pass
 			print "le fichier features est introuvable : config/features.txt \n"
 		
-	
+	'''
+	posssign : 
+	'''
 	def posssign(self, line, sign) :
 
 		for s in sign :
@@ -54,18 +50,16 @@ class Clean(object):
 			#nline = line
 			if nline != line :
 				line = nline
-				#print s[0], s[1]
-				#print line 
-				#raw_input("Press Enter to Exit")
 		
 		return line
 	
 	
-
+	'''
+	_extract_tags : 
+	'''
 	def _extract_tags(self,current_tag, lens) :
 	
 		words = []
-	
 		txts = []
 		tokens = []
 		tags = []
@@ -79,11 +73,12 @@ class Clean(object):
 		
 		'si la balise appartient au non label'
 		if self.nonLabels.has_key(top_tag):
-			baliseN = "<"+top_tag
-			for attribut in n.attrs:
-				baliseN += " "+attribut[0]+"="+"\""+attribut[1]+"\""
-			baliseN += ">"
-			words.append({"nom":baliseN, "caracteristique":"", "balise":["noLabel"]})
+			if self.nonLabels[top_tag] != "1":
+				baliseN = "<"+top_tag
+				for attribut in n.attrs:
+					baliseN += " "+attribut[0]+"="+"\""+attribut[1]+"\""
+				baliseN += ">"
+				words.append({"nom":baliseN, "caracteristique":"", "balise":["noLabel"]})
 			
 		#read attributes 
 		if len(n.attrs) > 0 :					# if attributes exist
@@ -149,12 +144,15 @@ class Clean(object):
 		
 		'si la balise appartient au non label'
 		if self.nonLabels.has_key(top_tag):
-			baliseN = "</"+top_tag+">"
-			words.append({"nom":baliseN, "caracteristique":"", "balise":["noLabel"]})
+			if self.nonLabels[top_tag] != "1":
+				baliseN = "</"+top_tag+">"
+				words.append({"nom":baliseN, "caracteristique":"", "balise":["noLabel"]})
 			
 		return words
 	
-	
+	'''
+	_arrangeData
+	'''
 	def _arrangeData(self, n, txts, tags, attrs, top_tag, top_att) :
 		for con in n.contents :
 			txt = con.string
@@ -194,7 +192,9 @@ class Clean(object):
 				self._arrangeData(con, txts, tags, attrs, temp_str, top_att)
 		return
 	
-	
+	'''
+	_elimination
+	'''
 	def _elimination (self, tmp_str) :
 		
 		targer_tag_st = "<hi font-variant=\"small-caps\">"
@@ -215,8 +215,8 @@ class Clean(object):
 		return new_str
 		
 	'''
-	permet d'instancier des words avec balise et caracteristique
-	dicWord : dictionnaire des words : [word, caracteristique] & [word, balise]
+	_buildWords : permet d'instancier des words avec balise et caracteristique
+		dicWord : dictionnaire des words : [word, caracteristique] & [word, balise]
 	'''
 	def _buildWords(self, dicWords):
 		words = []

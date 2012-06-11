@@ -16,7 +16,6 @@ import re
 import string
 import random
 
-sys.path.append("/Users/young-minkim/Codes/Lib")
 from mypkg.ressources.BeautifulSoup import *
 
 tokens = []		# tokens[k] : TOKEN STRING with token id 'k'
@@ -71,19 +70,21 @@ def randomgen(numb) :
 	return
 	
 #extract training and test data
-def selector (filename, ndocs, tr, filename_ori) :
+def selector (filename, ndocs, tr, filename_ori, file_out) :
 	
 	i = 0
 	indices = range(ndocs)
 	flagEndRef = 0
 	
-	'''if tr != 2 :
-		for line in open("./all_indices_C2_train.txt", 'r') :
+	if tr != 2 :
+		for i in range(len(indices)) :
+			indices[i] = 1
+		'''for line in open("./all_indices_C2_train.txt", 'r') :
 			indices[i] = int(line.split()[0])
-			i += 1
-	else : ###### when extracting new data,  '''
-	for i in range(len(indices)) :
-		indices[i] = 2
+			i += 1'''
+	else : ###### when extracting new data,  
+		for i in range(len(indices)) :
+			indices[i] = 2
 	
 	token_data = []		# TOTAL DATA for tokens, token_data[i] = i_th document DICT containing token ids and token counts
 	feature_data = []	# TOTAL DATA for features, feature_data[i] = i_th document DICT containing feature ids and feature counts
@@ -99,17 +100,7 @@ def selector (filename, ndocs, tr, filename_ori) :
 		if len(line) != 0:
 			
 			if line[0] == '1' or line[0] == '-1' : #input tokens
-				
-				if i == 500:
-					pass
 				fill_data(line[1:], tokens, token_data)
-				print i
-				
-				print "  "
-				print len(bibls)
-				print line
-				print "\n"
-				
 				bibls[i] = line[0]
 				
 			else :	# local features
@@ -122,11 +113,13 @@ def selector (filename, ndocs, tr, filename_ori) :
 				i += 1
 				flagEndRef = 0
 			else:
-				fill_data(line, features, feature_data)
+				features.append({})
+				feature_data.append({})
+				#fill_data(line, features, feature_data)
 				flagEndRef += 1
 	
 	insert_lineFeatures(feature_data)
-	print_output(token_data, feature_data, bibls, tr, indices)
+	print_output(token_data, feature_data, bibls, tr, indices, file_out)
 	load_original(filename_ori, indices)
 	
 	return
@@ -182,26 +175,30 @@ def insert_lineFeatures(feature_data) :
 			puncnt == 0
 			new_features.append('nopunc')
 
-		#'numbers', 'allnumbers', 'initial' check 
-		if not feature_data[i].has_key(features.index('numbers')) and not feature_data[i].has_key(features.index('allnumbers')) :
-			new_features.append('nonumbers')
-		if not feature_data[i].has_key(features.index('initial')) : 
-			new_features.append('noinitial')
-		
-		#we can also append some important featues to the new_features list for weighting them 
-		new_features.append('startinitial')
-		
-		#now update features representation of the document with previously found features
-		for nf in new_features :
-			id = features.index(nf)
-			feature_data[i][id] = 1#*len(feature_data[i]) # !!!!!!! VALIDE CONSIDERATION OF VECTOR SIZE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
+		try:
+			#'numbers', 'allnumbers', 'initial' check 
+			if not feature_data[i].has_key(features.index('numbers')) and not feature_data[i].has_key(features.index('allnumbers')) :
+				new_features.append('nonumbers')
+			if not feature_data[i].has_key(features.index('initial')) : 
+				new_features.append('noinitial')
 
+		
+			#we can also append some important featues to the new_features list for weighting them 
+			new_features.append('startinitial')
+			
+			#now update features representation of the document with previously found features
+			for nf in new_features :
+				id = features.index(nf)
+				feature_data[i][id] = 1#*len(feature_data[i]) # !!!!!!! VALIDE CONSIDERATION OF VECTOR SIZE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
+		except ValueError:
+			pass
 		#if indices[i] == tr : print feature_data[i]
 		
 
 
-def print_output(token_data, feature_data, bibls, tr, indices) :
-
+def print_output(token_data, feature_data, bibls, tr, indices, fileOut) :
+	fich = codecs.open(fileOut, "w", encoding="utf-8")
+	
 	i = 0
 	adding = adding_fId(len(tokens), feature_data)
 	#adding = len(tokens) + 1
@@ -211,11 +208,11 @@ def print_output(token_data, feature_data, bibls, tr, indices) :
 		keylist.sort()
 		
 		if indices[i] == tr :
-			print bibls[i],
+			fich.write( bibls[i]+" ")
 
 		for key in keylist:
 			if indices[i] == tr :
-				print str(key+1)+':'+str(token_data[i][key]),
+				fich.write( str(key+1)+':'+str(token_data[i][key])+" ")
 		
 		if len(feature_data) > 0 :
 			keylist = feature_data[i].keys()
@@ -225,10 +222,10 @@ def print_output(token_data, feature_data, bibls, tr, indices) :
 				##################
 					if valid_features.has_key(features[key]) :
 						#print str(key+adding+1)+':'+str(feature_data[i][key]),
-						print str(key+adding+1)+':1',
+						fich.write( str(key+adding+1)+':1'+" ")
 		
 		if indices[i] == tr :
-			print
+			fich.write("\n")
 
 	return
 	
@@ -244,9 +241,9 @@ def adding_fId(tokens_len, feature_data) :
 
 #create files having original text form for the varification
 def load_original(filename_ori, indices) :
-	
-	fouttr = open("original_train.txt", "w")
-	fouttst = open("original_test.txt", "w")
+	flagEndRef = 0
+	fouttr = open("Result/original_train.txt", "w")
+	fouttst = open("Result/original_test.txt", "w")
 	
 	i = 0
 	j=0
@@ -256,12 +253,16 @@ def load_original(filename_ori, indices) :
 				if j == 0 : fouttr.write(line.split('\n')[0])
 				else : fouttr.write(line)
 			else :
+				flagEndRef += 1
 				if j == 0 : fouttst.write(line.split('\n')[0])
 				else : fouttst.write(line)
 			j += 1
 		else : 
-			i += 1
-			j=0
+			if flagEndRef == 1:
+				i += 1
+				j=0
+			else:
+				flagEndRef = 0
 	
 	fouttr.close()
 	fouttst.close()
@@ -305,7 +306,7 @@ def load_ID() :
 	return
 
 
-'''
+
 def main() :
 
 	if len (sys.argv) != 4 :
@@ -323,5 +324,5 @@ def main() :
 if __name__ == '__main__':
 	main()
 	
-	'''
+	
 

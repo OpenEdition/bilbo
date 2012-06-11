@@ -14,23 +14,16 @@ import string
 import re
 
 class CleanCorpus1(Clean):
-	'''
-	classdocs
-	'''
-
 
 	def __init__(self):
-		'''
-		Constructor
-		'''
 		Clean.__init__(self)
 		self.tagAttDict = {'0000': 0}
 		
 	
 	'''
 	processingCorpus1 : 
-	fname : nom du fichier
-	typeCorpus : balise de depart de la reference
+		fname : nom du fichier
+		typeCorpus : balise de depart de la reference
 	'''
 	def processing (self,fname, typeCorpus) :
 		try :
@@ -50,7 +43,12 @@ class CleanCorpus1(Clean):
 
 				
 			i = 0
-			s = soup.findAll (typeCorpus)	
+			s = soup.findAll (typeCorpus)
+			if len(s) > 15000:
+				print "Attention : il y a plus de 15 000 références dans le meme fichier cela prends trop de memoire (disperser les references dans plusieur fichier)"	
+				return
+			
+			
 			while i < len(s) :
 				words = []
 				b = s[i]	#each bibl 

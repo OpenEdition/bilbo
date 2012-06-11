@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 '''
 Created on 25 avr. 2012
 
@@ -9,6 +10,7 @@ from mypkg.format.Rule import Rule
 from mypkg.reference.ListReferences import ListReferences
 from mypkg.ressources.BeautifulSoup import *
 import re
+import sys
 
 class File(object):
 	'''
@@ -41,7 +43,7 @@ class File(object):
 	'''
 	def extractCorpus2(self):
 		clean = CleanCorpus2()
-		references = clean.processing(self.nom, "note")#, "bibl")
+		references = clean.processing(self.nom, "note")
 		if len(references) >= 1:
 			self.corpus[2] = ListReferences(references, 2)
 			
@@ -67,179 +69,8 @@ class File(object):
 			return self.corpus[typeCorpus].nbReference()
 			
 		except :
-			return 0
+			return 0		
 	
-	'''
-	construit le fichier entier annote
-	'''	
-	def buildAnnotateFile(self, typeCorus, tagTypeCorpus):#, dirOut):
-		tmp_str_ori = ""
-		tmp_str = ""
-		ref_item = ""
-		nbItem = 0
-		
-		for line in open (self.nom, 'r') :
-			tmp_str_ori = tmp_str_ori + ' ' + line
-			line = line.replace('&amp;', '&')
-			tmp_str = tmp_str + ' ' + line
-				
-		tmp_str = tmp_str.decode('utf8')
-		tmp_str = self._html2unicode(tmp_str)
-		soup = BeautifulSoup (tmp_str)
-		soup_ori = BeautifulSoup (tmp_str_ori)
-		
-		
-		s = soup.findAll (tagTypeCorpus)
-		s_ori = soup.findAll (tagTypeCorpus)
-		
-		i = 0
-		for ref_ori in s_ori:
-			if i == 642:
-				pass
-			try:
-				if i < len(s_ori):
-					if ref_ori["type"] != "head":
-						ref = s[i]
-						
-						ref_annote = self.getListReferences(typeCorus).getReferences()[i-nbItem]
-						if ref.find('relateditem') :
-							i += 1
-							nbItem += 1
-							
-						self.modifTagInRef(ref, ref_annote, soup)
-					i += 1
-			except KeyError:
-				ref = s[i]
-				
-				ref_annote = self.getListReferences(typeCorus).getReferences()[i-nbItem]
-				
-				if ref.find('relateditem') :
-					i += 1
-					nbItem += 1
-				
-				self.modifTagInRef(ref, ref_annote, soup)
-				i += 1
-		
-		fich = open("Result/res.xml", "w")
-		fich.write(soup.prettify())
-	'''
-	modiftagInRef : ajoute au fichier final les balises pour chaque mots
-	'''		
-	def modifTagInRef(self, ref, ref_annote, soup):
-		ref_annote_end = ""
-		ref.contents = []
-		flagItem = 0
-		
-		balise = ""
-		chaine = ""
-
-		cptWord = 0
-		cptTag = 0
-		for word in ref_annote.getWord():
-			'if il y a une sous reference'
-			if word.item == 1:
-				flagItem = 1
-				ref.append("<relatedItem type=\"in\">")
-			'if le mot ne fait pas partie d une balise du fichier original'
-			if ref_annote.getWordIndice(cptWord).ignoreWord == 0:
-				if balise == ref_annote.getWordIndice(cptWord).getTagIndice(0).nom:
-					chaine += " "+word.nom
-				elif balise == "":
-					balise = ref_annote.getWordIndice(cptWord).getTagIndice(0).nom
-					chaine = word.nom
-					cptTag += 1
-				else:
-					refTag = Tag(soup, balise)
-					chaine = chaine.replace('&amp;', '&')
-					text = NavigableString(chaine)
-					refTag.insert(0,text)
-					ref.append(refTag)
-					
-					balise = ref_annote.getWordIndice(cptWord).getTagIndice(0).nom
-					chaine = word.nom
-					cptTag += 1
-					#ref.contents.newTag(balise, chaine)
-			else:
-				if balise != "":
-					refTag = Tag(soup, balise)
-					chaine = chaine.replace('&amp;', '&')
-					text = NavigableString(chaine)
-					refTag.insert(0,text)
-					ref.append(refTag)
-					
-					balise = ""
-					chaine = ""
-					cptTag += 1
-					
-					ref.append(word.nom)
-				else:
-					ref.append(word.nom)	
-			cptWord += 1
-			
-		'ajoute la derniere balise et chaine '
-		if chaine != "":
-			refTag = Tag(soup, balise)
-			chaine = chaine.replace('&amp;', '&')
-			text = NavigableString(chaine)
-			refTag.insert(0,text)
-			ref.append(refTag)	
-			
-		if flagItem == 1:
-			ref.append("</relatedItem>")
-		'''
-		balise = ""
-		chaine = ""
-		cptWord = 0
-		'verifier si il y a un item'
-		if ref_item != "":
-			ref.append("<relatedItem type=\"in\">")
-			for word in ref_annote.getWord():
-				'if le mot ne fait pas partie d une balise du fichier original'
-				if ref_annote.getWordIndice(cptWord).ignoreWord == 0:
-					if balise == ref_annote.getWordIndice(cptWord).getTagIndice(0).nom:
-						chaine += " "+word.nom
-					elif balise == "":
-						balise = ref_annote.getWordIndice(cptWord).getTagIndice(0).nom
-						chaine = word.nom
-						cptTag += 1
-					else:
-						refTag = Tag(soup, balise)
-						chaine = chaine.replace('&amp;', '&')
-						text = NavigableString(chaine)
-						refTag.insert(0,text)
-						ref.append(refTag)
-						
-						balise = ref_annote.getWordIndice(cptWord).getTagIndice(0).nom
-						chaine = word.nom
-						cptTag += 1
-						#ref.contents.newTag(balise, chaine)
-				else:
-					if balise != "":
-						refTag = Tag(soup, balise)
-						chaine = chaine.replace('&amp;', '&')
-						text = NavigableString(chaine)
-						refTag.insert(0,text)
-						ref.append(refTag)
-						
-						balise = ""
-						chaine = ""
-						cptTag += 1
-						
-						ref.append(word.nom)
-					else:
-						ref.append(word.nom)	
-				cptWord += 1
-			
-			'ajoute la derniere balise et chaine '
-			if chaine != "":
-				refTag = Tag(soup, balise)
-				chaine = chaine.replace('&amp;', '&')
-				text = NavigableString(chaine)
-				refTag.insert(0,text)
-				ref.append(refTag)	
-			ref.append("</relatedItem>")
-		'''
-					
 	def _html2unicode(self, tmp_str) :
 		#for numerical codes
 		matches = re.findall("&#\d+;", tmp_str)
@@ -269,13 +100,40 @@ class File(object):
 		
 		return tmp_str
 
+	
 	'''
-	addTagReferences : ajoute aux objets reference les balises trouve par Bilbo
+	buildReferences : construit le fichier final
+		references : reference annote par mallet
+		tagTypeCorpus : balise qui entour la reference : corpus 1 = bibl
+		tagTypeList : balise qui entoure les references : corpus 1 = listbibl
 	'''
-	def addTagReferences(self, references):
+	def buildReferences(self, references, tagTypeCorpus, tagTypeList):
 		cptWord = 0
 		cptRef = 0
+		cptItem = 0
+		tmp_str = ""
+		flagItem = 0
+		balise = ""
+		baliseBefore = ""
+		ref_finale = ""
+		flagNonLabel = 0
+		
+		'lit le fichier resultat de mallet'
+		for line in open (self.nom, 'r') :
+			tmp_str = tmp_str + ' ' + line
+				
+		soup = BeautifulSoup (tmp_str)
+		
+		s = soup.findAll (tagTypeCorpus)
+		
+		'reconstruit les references avec les mot ignores ex: balise hi'
 		for ref in references:
+			balise = ""
+			baliseBefore = ""
+			flagItem = 0
+			ref_finale = ""
+			ref_ori = s[cptRef]
+			ref_ori.contents = []
 			cptWord = 0
 			allTag = ref.findAll(True)
 			
@@ -284,16 +142,113 @@ class File(object):
 				words = re.split("\s", content[0])
 				for word in words:
 					if word != "":
-						while self.corpus[1].getReferencesIndice(cptRef).getWordIndice(cptWord).ignoreWord == 1:
-							cptWord += 1
-						self.corpus[1].getReferencesIndice(cptRef).getWordIndice(cptWord).addTag(tag.name)
-						cptWord += 1
+						wordInRef = self.corpus[1].getReferencesIndice(cptRef).getWordIndice(cptWord)
 						
+						'transforme en unicode'
+						wordInRef.nom = self.convertToUnicode(wordInRef.nom)
+						tag.name = self.convertToUnicode(tag.name)
+						
+						'verifie si le mot doit etre ignore ou non: ignore = considere comme balise nonLabel a ajouter au fichier final'
+						while wordInRef.ignoreWord == 1:
+							if baliseBefore != "":
+								ref_finale += "</"+baliseBefore+">"
+								baliseBefore = ""
+							if balise != "c" and balise != "":
+								ref_finale += "</"+balise+">"
+								balise = ""
+							ref_finale += wordInRef.nom
+							cptWord += 1
+							wordInRef = self.corpus[1].getReferencesIndice(cptRef).getWordIndice(cptWord)
+							balise = ""
+							wordInRef.nom = self.convertToUnicode(wordInRef.nom)
+							
+							
+						'if il y a une sous reference'
+						if wordInRef.item == 1 and flagItem == 0:
+							flagItem = 1
+							if baliseBefore != "":
+								ref_finale += "</"+baliseBefore+">"
+								baliseBefore = ""
+							if balise != "c" and balise != "":
+								ref_finale += "</"+balise+">"
+								balise = ""
+							ref_finale += "<relatedItem type=\"in\">"
+							balise = ""								
+
+						if balise == tag.name:
+							ref_finale += " "+wordInRef.nom
+						elif balise == "":
+							if tag.name != "c":
+								ref_finale += "<"+tag.name+">"+wordInRef.nom
+							else:
+								ref_finale += wordInRef.nom
+							balise = tag.name
+						else:
+							if balise != "c" and tag.name != "c":
+								ref_finale += "</"+balise+">"+"<"+tag.name+">"+wordInRef.nom
+							elif balise == "c" and tag.name != "c":
+								if baliseBefore == tag.name:
+									ref_finale += wordInRef.nom
+								else:
+									if baliseBefore != "":
+										ref_finale += "</"+baliseBefore+">"+"<"+tag.name+">"+wordInRef.nom
+									else:
+										ref_finale += "<"+tag.name+">"+wordInRef.nom
+									baliseBefore = ""
+							elif balise != "c" and tag.name == "c":
+								ref_finale += wordInRef.nom
+								baliseBefore = balise
+							else:
+								ref_finale += wordInRef.nom
+							balise = tag.name
+
+						cptWord += 1
+
+			if balise != "c":	
+				ref_finale += "</"+balise+">"
+				
+			'if il y a une sous reference on ajoute la balise de fin'
+			if flagItem == 1:
+				cptItem += 1
+				if baliseBefore != "":
+					ref_finale += "</"+baliseBefore+">"
+					baliseBefore = ""
+				else:
+					ref_finale += "</"+balise+">"
+				ref_finale += "</relatedItem>"	
 			cptRef += 1	
+			ref_ori.append(ref_finale)
 			
+		'supprime les dernieres references considere comme items..'
+		while cptItem > 0:
+			s.pop()
+			cptItem -= 1
+			
+		listBibl = soup.find(tagTypeList)
+		listBibl.contents = []
+		listBibl.contents = s
+		
+		fich = open("Result/"+self._getName(), "w")
+		fich.write(soup.prettify())
+		fich.close()
 		return
+	
 	'''
 	getName : retourne le nom du fichier sns le chemin complte
 	'''
-	'''def _getName(self):
-		'''
+	def _getName(self):
+		chemin = self.nom.split("/")
+		return chemin.pop()
+	
+	'''
+	convertToUnicode : converti une chaine en unicode
+	'''
+	def convertToUnicode(self, chaine):
+		try:
+			if isinstance(chaine, str):
+				chaine = unicode(chaine, sys.stdin.encoding)
+		except:
+			chaine = unicode(chaine, 'ascii')
+		return chaine
+
+	

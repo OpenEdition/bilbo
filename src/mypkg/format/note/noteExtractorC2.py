@@ -27,8 +27,9 @@ import os
 import re
 import string
 
-sys.path.append("/Users/young-minkim/Codes/Lib")
-from BeautifulSoup import BeautifulSoup
+
+from mypkg.ressources.BeautifulSoup import BeautifulSoup
+from mypkg.ressources.BeautifulSoup import Tag
 
 tagAttDict = {'0000': 0}
 
