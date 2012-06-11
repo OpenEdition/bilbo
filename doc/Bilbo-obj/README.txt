@@ -26,8 +26,8 @@ $ sudo python setup.py install
 ==============================================
 
 command:
-$ cd bibo/src/mypkg
-$ Main.py <arg 1> <arg 2> <arg 3>
+$ cd bilbo
+$ python src/mypkg/Main.py <arg 1> <arg 2> <arg 3>
 
 	<arg 1> : integer
 		 1 => annotate reference corpus 1, 
