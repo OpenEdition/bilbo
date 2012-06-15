@@ -2,7 +2,7 @@
 '''
 Created on 19 avr. 2012
 
-@author: jade
+@author: Young-min Kim, Jade Tavernier
 '''
 import re
 from mypkg.reference.Word import Word
@@ -154,7 +154,7 @@ class Rule(object):
 	
 	
 	def _initCheck(self, input_str) :
-		init1 = re.compile('^[A-Z]?[a-z]?\.-?[A-Z]?[a-z]?\.?')
+		init1 = re.compile('^[A-Z]?[a-z]\.-?[A-Z]?[a-z]?\.?')
 		init2 = re.compile('^[A-Z]?[a-z]?-[A-Z]?[a-z]?\.?')
 		p1 = init1.findall(input_str)
 		p2 = init2.findall(input_str)

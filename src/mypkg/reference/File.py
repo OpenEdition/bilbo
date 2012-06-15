@@ -2,7 +2,7 @@
 '''
 Created on 25 avr. 2012
 
-@author: jade
+@author: Young-min Kim, Jade Tavernier
 '''
 from mypkg.format.CleanCorpus1 import CleanCorpus1
 from mypkg.format.CleanCorpus2 import CleanCorpus2
@@ -224,9 +224,12 @@ class File(object):
 			s.pop()
 			cptItem -= 1
 			
-		listBibl = soup.find(tagTypeList)
-		listBibl.contents = []
-		listBibl.contents = s
+		try:
+			listBibl = soup.find(tagTypeList)
+			listBibl.contents = []
+			listBibl.contents = s
+		except :
+			pass
 		
 		fich = open("Result/"+self._getName(), "w")
 		fich.write(soup.prettify())

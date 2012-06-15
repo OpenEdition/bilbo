@@ -1,10 +1,10 @@
 '''
 Created on 4 juin 2012
 
-@author: jade
+@author: Young-min Kim, Jade Tavernier
 '''
 import subprocess
-from mypkg.format.note.featureSelection4SVM import *
+from mypkg.format.Extract_svm import Extract_svm
 
 class SVM(object):
     '''
@@ -23,16 +23,18 @@ class SVM(object):
     '''
     def prepareTrain(self, corpus):
         nbRef = corpus.nbReference(2)
+        extractor = Extract_svm()
         
-        selector(self.repResult+"data04SVM_ori.txt", nbRef, 1, self.repResult+"data04SVM_ori.txt", self.repResult+"trainingdata_SVM.txt")
+        extractor.extractor(self.repResult+"data04SVM_ori.txt", nbRef, 1, self.repResult+"data04SVM_ori.txt", self.repResult+"trainingdata_SVM.txt")
       
     '''
     prepareTest : prepare les fichier pour SVM
     '''
     def prepareTest(self, corpus):
         nbRef = corpus.nbReference(2)
+        extractor = Extract_svm()
         
-        selector(self.repResult+"data04SVM_ori.txt", nbRef, 2, self.repResult+"data04SVM_ori.txt", self.repResult+"newdata.txt")
+        extractor.extractor(self.repResult+"data04SVM_ori.txt", nbRef, 2, self.repResult+"data04SVM_ori.txt", self.repResult+"newdata.txt")
          
             
     '''

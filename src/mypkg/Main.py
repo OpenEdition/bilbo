@@ -1,7 +1,7 @@
 '''
 Created on 19 avr. 2012
 
-@author: jade
+@author: Young-min Kim, Jade Tavernier
 	argv[1] => repertory with file to annotate 
 	argv[2] => repertory where build result file (initial : Result)
 

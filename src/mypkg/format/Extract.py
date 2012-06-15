@@ -2,7 +2,7 @@
 '''
 Created on 19 avr. 2012
 
-@author: jade
+@author: Young-min Kim, Jade Tavernier
 '''
 
 import random
@@ -67,6 +67,12 @@ class Extract(object):
 		
 	
 	'''
+	extractor definir ds la classe fille
+	'''	
+	def extractor(self):
+		return
+
+	'''
 	randomgengenerate the indicators for the training and test documents
 		 num : number of references
 		indice : 1 regenerer les indices, 0: charger les indices en fonction du fichier
@@ -93,113 +99,6 @@ class Extract(object):
 			
 		return indices
 	
-	'''
-	extractor : extract training and test data
-		ndocs : number of references
-		typeCorpus : 1, 2 ou 3
-		tr : indicator check, it gives the valid instance indices 
-		extr : 
-		fichierRes = nom du fichier sortie du resultat
-	'''
-	def extractor (self, typeCorpus, ndocs, fichierRes, listRef, tr=-1, extr=-1) :
-		self.titleCK = 0
-		self.titleAttr = ''
-		self.relatItm = 0
-			
-		i = 0
-		check = -5
-		nonbiblck = 1
-		
-		listReferences = listRef.getReferences()
-		tmp_nonbiblck = 0
-		for reference in listReferences:
-			
-			for mot in reference.getWord():
-				if mot.ignoreWord == 0:
-					if mot.item == 1: self.relatItm = 1
-					
-					if tr == 1 : check = 1
-					else : check = 0
-					
-					if reference.train == -1:
-						mot.delAllTag()
-						mot.addTag("nonbibl")
-					elif reference.train == check:
-												
-						# finding just a label which is not in the nonLabels list
-						self._checkNonLabels(mot)
-						
-						#label check
-						self._updateTag(mot)
-						
-						#nobibl check,
-						tmp_nonbiblck = 0
-						for tmp in mot.getAllTag() :
-							if tmp.nom == 'nonbibl' :
-								tmp_nonbiblck = 1
-							elif tmp.nom == 'c':
-								if nonbiblck == 1:
-									tmp_nonbiblck = 1
-
-							
-						if tr == 0 :
-							mot.delAllTag()
-					
-						'del toutes ls caracteristique qui ne sont pas presente dans le tableau features'
-						supp = []
-						'si c est de la ponctuation on enleve toutes les caracteristiques'
-						balise = mot.getLastTag()
-						if balise != -1:
-							if balise.nom == "c":
-								mot.delAllFeature()
-								mot.addFeature("PUNC")
-								'sinon on enleve que celle non presente dans les features'
-								
-						
-						for carac in mot.getAllFeature():
-							if not self.features.has_key(carac.nom.lower()):
-								supp.append(carac.nom)
-								
-						for nomMot in supp:
-							mot.delFeature(nomMot)
-							
-						if tmp_nonbiblck == 0 : nonbiblck = 0
-				
-				
-			i += 1
-			self.titleCK = 0
-			self.titleAttr = ''
-			self.relatItm = 0
-			
-			if nonbiblck == 1 :
-				reference.bibl = -1
-			else : 
-				reference.bibl = 1
-			nonbiblck = 1
-			
-		
-		if tr != -2 :
-			self.nameObj.searchName(listRef, tr)
-			self.placeObj.searchPlace(listRef, tr)
-			self.properObj.searchProper(listRef, tr, 'place')
-		
-		if extr == 1 or extr == 2 :
-			if tr != -2 :
-				self._addlayout(listRef)					####### add layout features ### 2012-02-01 ###
-				self._printdata(fichierRes, listRef, tr)
-			else:
-				self._printOnlyLabel(fichierRes, listRef)
-			
-		elif extr == 3 or extr == 4 or extr == 5 or extr == 6:
-			self._printmoreFeatures(extr)
-		
-		if typeCorpus == 2:
-			'''if tr == 1:
-				self._print_alldata(fichierRes, listRef)
-			else :'''
-			self._print_parallel(fichierRes, listRef)
-				
-		return
 
 	'''
 	_printdata: permet de creer un fichier avec les mots, balises ... pour le crf
@@ -432,20 +331,56 @@ class Extract(object):
 				if flag == 0:
 					mot.delAllTag()
 					mot.addTag('nolabel')
-				'''
-				for jj in reversed(range(j+1)) :
-					for nonLabel in self.nonLabels:
-						if self.nonLabels[nonLabel] == 1:
-							if mot.getTagIndice(jj).nom == nonLabel:
-								mot.delAllTag()
-								mot.addTag(nonLabel)
-								flag = 1
-					if flag == 0:
-						mot.delAllTag()
-						mot.addTag('nolabel')'''
+
 
 		else:
 			saveNom = mot.getLastTag().nom
 			mot.delAllTag()
 			mot.addTag(saveNom)	
+			
+			
+	'''
+	extractorIndices : 
+	'''
+	def extractorIndices(self, svmprediction_trainfile, listRef):
+		nbRef = listRef.nbReference()
 		
+		svm_train = []
+		for line in open (svmprediction_trainfile, 'r') :
+			line = line.split()
+			svm_train.append(float(line[0]))	
+	
+		positive_indices = range(nbRef)
+		
+		n=0 #for all
+		j=0	#for train
+		for n in range(nbRef) :
+			if svm_train[j] > 0 :
+				positive_indices[n] = 1
+			else :
+				positive_indices[n] = 0
+			j += 1
+		
+		
+		n=0
+		for ref in listRef.getReferences() :
+			if positive_indices[n] == 0 : # instance NOT OK donc attribut train = -1
+				ref.train =  -1 
+			n += 1
+		
+		return
+	
+	'''
+	extractorIndices4new : 
+	'''
+	def extractorIndices4new(self, svmprediction_newfile, listRef):
+		i = 0
+		
+		for line in open (svmprediction_newfile, 'r') :
+			line = line.split()
+			if float(line[0]) > 0 :
+				listRef.getReferencesIndice(i).train = 0
+			else :
+				listRef.getReferencesIndice(i).train = -1
+			i += 1
+		return

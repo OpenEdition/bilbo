@@ -1,7 +1,7 @@
 '''
 Created on 30 mai 2012
 
-@author: jade
+@author: Young-min Kim, Jade Tavernier
 '''
 import os
 

@@ -1,7 +1,7 @@
 '''
 Created on 25 avr. 2012
 
-@author: jade
+@author: Young-min Kim, Jade Tavernier
 '''
 
 class Properlist(object):

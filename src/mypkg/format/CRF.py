@@ -1,15 +1,14 @@
 '''
 Created on 18 avr. 2012
 
-@author: jade
+@author: Young-min Kim, Jade Tavernier
 '''
 
 import subprocess
 
-from mypkg.format.Extract import Extract 
+from mypkg.format.Extract_crf import Extract_crf
 from mypkg.reference.ListReferences import ListReferences 
 from mypkg.output.GenerateXml import GenerateXml
-from mypkg.format.note.positive_indices import *
 
 
 class CRF(object):
@@ -30,7 +29,7 @@ class CRF(object):
 	def prepareTrain(self, corpus, numCorpus, fichierRes, tr=-1, extr=-1, indices=""):
 		listReferences = corpus.getListReferences(numCorpus)
 		newListReferences = ListReferences(listReferences, numCorpus)
-		extractor = Extract()
+		extractor = Extract_crf()
 		nbRef = corpus.nbReference(numCorpus)
 
 		'generation des indices'
@@ -39,7 +38,7 @@ class CRF(object):
 		'fichier pour le crf'
 		if numCorpus == 2 and extr == 1:
 			'modifie les indice pour indiquer les reference nonbibl'
-			extractorIndices("model/corpus2/svm_revues_predictions_training", newListReferences) 
+			extractor.extractorIndices("model/corpus2/svm_revues_predictions_training", newListReferences) 
 			extractor.extractor(1, nbRef, self.repResult+fichierRes, newListReferences, tr, extr)
 		else:
 			extractor.extractor(numCorpus, nbRef, self.repResult+fichierRes, newListReferences, tr, extr)
@@ -57,7 +56,7 @@ class CRF(object):
 		listReferences = corpus.getListReferences(numCorpus)
 		listReferencesObj = ListReferences(listReferences, numCorpus)
 		
-		extractor = Extract()
+		extractor = Extract_crf()
 		nbRef = corpus.nbReference(numCorpus)
 		
 		'fichier genere les indices'
@@ -68,7 +67,7 @@ class CRF(object):
 		else:
 			'fichier pour le crf'
 			if numCorpus == 2:
-				extractor4new("model/corpus2/svm_revues_predictions_new", ListReferences(listReferencesObj.getReferences(),numCorpus))
+				extractor.extractorIndices4new("model/corpus2/svm_revues_predictions_new", ListReferences(listReferencesObj.getReferences(),numCorpus))
 			
 			extractor.extractor(1, nbRef, self.repResult+"testdatawithlabel_CRF.txt",ListReferences(listReferencesObj.getReferences(),numCorpus), -1, 1)
 			extractor.extractor(1, nbRef, self.repResult+"testdataonlylabel_CRF.txt",ListReferences(listReferencesObj.getReferences(),numCorpus), -2, 1)

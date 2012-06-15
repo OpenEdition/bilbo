@@ -11,7 +11,7 @@ python src/mypkg/Main.py
  externalList
 ------------------------
 FR:
-Ce sont les fichiers permettant d'ameliorer l'annotation des lieu, nom et prenom.
+Ce sont les fichiers permettant d'ameliorer l'annotation des lieux, nom et prenom.
 Ce sont par exemple des listes de nom et prenom repandu dans le monde.
 
 EN:

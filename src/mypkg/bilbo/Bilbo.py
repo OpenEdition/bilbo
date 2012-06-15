@@ -1,7 +1,22 @@
 '''
+-----------------------------------------------------------------------------------------------------------------------
+BILBO : Automatic annotation of bibliographic reference
+
+(C) Copyright 2012 by Young-Min Kim (youngminn.kim@gmail.com) and Jade Tavernier
+(ton mail). This is initially written by Young-Min Kim for the prototype and modified by
+Jade Tavernier for code reorganization in an object oriented design.
+ 
+BILBO is an open source software for automatic annotation of bibliographic reference.
+It provides the segmentation and tagging of input string. It is principally based on
+Conditional Random Fields (CRFs), machine learning technique to segment and label
+sequence data. As external softwares, Mallet is used for CRF learning and inference
+and SVMlight is used for sequence classification. BILBO is licensed under a Creative
+Commons Attribution-NonCommercial-ShareAlike 2.5 Generic License (CC BY-NC-SA 2.5).
+---------------------------------------------------------------------------------------------------------------------------
+
 Created on 18 avr. 2012
 
-@author: jade
+@author: Young-min Kim, Jade Tavernier
 '''
 
 from mypkg.format.CRF import CRF

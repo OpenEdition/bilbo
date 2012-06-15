@@ -1,7 +1,7 @@
 '''
 Created on 18 avr. 2012
 
-@author: jade
+@author: Young-min Kim, Jade Tavernier
 '''
 
 class ListReferences(object):
