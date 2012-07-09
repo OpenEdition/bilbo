@@ -33,7 +33,10 @@ if __name__ == '__main__':
 	
 
 	if len(sys.argv) < 2:
-		print "argument:\n1 : 1 => annote corpus 1, 2 => annote corpus 2, 11 => train corpus 1, 22 => train corpus 2,\n2 : repertory with file to annotate,\n3 : repertory where build result file (initial : Result)\n"
+		print "$ python src/mypkg/Main.py <arg 1> <arg 2> <arg 3>"
+		print " <arg 1> : integer \n\t 11 => train corpus 1, \n\t 22 => train corpus 2, \n\t 1 => annotate reference corpus 1, \n\t 2 => annotate reference corpus 2."
+		print " <arg 2> : string \n\t input directory where the data files are (training or test)"
+		print " <arg 3> : string \n\t output directory where the built result files are saved (initially \"Result/\" directory)"
 	else:	
 		if len(sys.argv) < 4:
 			bilbo = Bilbo()
