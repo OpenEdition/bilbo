@@ -2,8 +2,9 @@
 Created on 19 avr. 2012
 
 @author: Young-min Kim, Jade Tavernier
-	argv[1] => repertory with file to annotate 
-	argv[2] => repertory where build result file (initial : Result)
+	argv[1] => 1 => annote corpus 1, 2 => annote corpus 2, 11 => train corpus 1, 22 => train corpus 2
+	argv[2] => repertory with file to annotate 
+	argv[3] => repertory where build result file (initial : Result)
 
 '''
 import sys
@@ -28,13 +29,11 @@ import hotshot
 
 if __name__ == '__main__':
 	pass
-	prof = hotshot.Profile('Result/perf.prof')
-	prof.start()
-	
+
 
 	if len(sys.argv) < 2:
 		print "argument:\n1 : 1 => annote corpus 1, 2 => annote corpus 2, 11 => train corpus 1, 22 => train corpus 2,\n2 : repertory with file to annotate,\n3 : repertory where build result file (initial : Result)\n"
-	else:	
+	else:
 		if len(sys.argv) < 4:
 			bilbo = Bilbo()
 		else:
@@ -48,8 +47,7 @@ if __name__ == '__main__':
 			bilbo.apprentissage("KB/data/corpus1/XML_annotated2")
 		elif int(sys.argv[1]) == 22:
 			bilbo.apprentissageCorpus2("KB/data/corpus2/alldata_added")
-	prof.stop()
-	prof.close()
+
 	#	bilbo.annoter("/Users/jade/Documents/jade/labo/comparaison_bilbo/analyse/repertoire/Niveau1/originaux/etnografica-869.xml")
 		#corpus = Corpus("/Applications/XAMPP/xamppfiles/htdocs/annotationSave/XML_annotated2")
 		#corpus.extraireCorpus1()

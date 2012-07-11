@@ -44,10 +44,8 @@ class Extract_svm(Extract):
         
         i = 0
         start = 0
-    
         for line in open (filename, 'r') :
             line = line.split()
-            
             
             if len(line) != 0:
                 
@@ -69,11 +67,10 @@ class Extract_svm(Extract):
                     feature_data.append({})
                     #fill_data(line, features, feature_data)
                     flagEndRef += 1
-        
+
         self.insert_lineFeatures(feature_data)
         self.print_output(token_data, feature_data, bibls, tr, indices, file_out)
-        self.load_original(filename_ori, indices)
-    
+        #self.load_original(filename_ori, indices)
         return
     
     def fill_data(self, line, input, data) : # line[1:], tokens, token_data / line, features, feature_data
@@ -105,11 +102,7 @@ class Extract_svm(Extract):
     
     #insert new FEATURES related with total text characters / NOPUNC, ONEPUNC, NONUMBERS, NOINITIAL, 
     def insert_lineFeatures(self, feature_data) :
-    
-        #existing features = ['allcap', 'initial', 'startinitial', 'firstcap', 'allsmall',
-        #                      'punc', 'nonimpcap', 'italic', 'allnumbers', 'posspage',
-        #                      'numbers', 'dash', 'posseditor', 'weblink']
-    
+        puncnt = 0
         #extended featues
         self.features.extend(['nopunc', 'onepunc', 'nonumbers', 'noinitial'])
         
@@ -118,15 +111,16 @@ class Extract_svm(Extract):
             new_features = [] # list for newly added features for the corresponding document
             
             #puncutation marks check
-            id = self.features.index('punc')
-            if id in feature_data[i] :
-                puncnt = feature_data[i][id]
-                if puncnt == 1 : new_features.append('onepunc')
-            else : 
-                puncnt == 0
-                new_features.append('nopunc')
-    
             try:
+                id = self.features.index('punc')
+                if id in feature_data[i] :
+                    puncnt = feature_data[i][id]
+                if puncnt == 1 : new_features.append('onepunc')
+                else : 
+                    puncnt == 0
+                    new_features.append('nopunc')
+
+
                 #'numbers', 'allnumbers', 'initial' check 
                 if not feature_data[i].has_key(self.features.index('numbers')) and not feature_data[i].has_key(self.features.index('allnumbers')) :
                     new_features.append('nonumbers')
@@ -146,7 +140,7 @@ class Extract_svm(Extract):
             
     def print_output(self, token_data, feature_data, bibls, tr, indices, fileOut) :
         fich = codecs.open(fileOut, "w", encoding="utf-8")
-        
+
         i = 0
         adding = self.adding_fId(len(self.tokens), feature_data)
         #adding = len(tokens) + 1
@@ -169,7 +163,7 @@ class Extract_svm(Extract):
                     if indices[i] == tr :
                     ##################
                         if self.valid_features.has_key(self.features[key]) :
-                            #print str(key+adding+1)+':'+str(feature_data[i][key]),
+                            print str(key+adding+1)+':'
                             fich.write( str(key+adding+1)+':1'+" ")
             
             if indices[i] == tr :

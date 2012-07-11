@@ -30,11 +30,7 @@ class Corpus(object):
 		if os.path.isdir(self.repertoire):
 			lsOut = commands.getoutput('ls '+self.repertoire)
 			listFichiers = lsOut.split("\n")
-			'''process = subprocess.Popen('ls '+self.repertoire, shell=True, stdout=subprocess.PIPE)
-			process.wait()
-			fichiers = process.stdout.read()
-			listFichiers = fichiers.split("\n")
-			del(listFichiers[len(listFichiers)-1])'''
+
 		else:
 			nomSplit = self.repertoire.split("/")
 			listFichiers = []
@@ -57,9 +53,9 @@ class Corpus(object):
 	'''
 	extractCorpus2 pour chaque fichier les references du corpus 1
 	'''
-	def extractCorpus2(self):
-
-		nomFichiers = self.getFiles()
+	def extractCorpus2(self, nomFichiers=""):
+		if nomFichiers == "":
+			nomFichiers = self.getFiles()
 		for nomFichier in nomFichiers:
 			fichObj = File(self.repertoire+"/"+nomFichier)
 			fichObj.extractCorpus2()
@@ -86,10 +82,6 @@ class Corpus(object):
 		
 		return nb
 
-	'''def buildAnnotateFiles(self):
-		for fichier in self.fichiers:
-			fichier.builReferences(1, "bibl", "listbibl")
-		return'''
 	
 	def addTagReferences(self, fileRes):
 		tmp_str = ""

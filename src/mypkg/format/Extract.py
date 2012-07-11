@@ -11,6 +11,7 @@ import codecs
 from mypkg.extra.Name import Name
 from mypkg.extra.Place import Place
 from mypkg.extra.Properlist import Properlist
+import sys
 
 class Extract(object):
 
@@ -171,20 +172,31 @@ class Extract(object):
 		for reference in listRef.getReferences():
 			cpt=0
 			for mot in reference.getWord():
+				
 				for feat in mot.listNomFeature():
+
 					feature += feat.upper()+" "
 					if cpt == 0 and (feat.lower() == "initial"):
 						feature += "STARTINITIAL "
-					
+
 				if re.search("NUMBERS", feature) != 0 and re.search("ALLNUMBERS", feature) != 0:	
-					phrase += " "+mot.nom
-				
+					try:
+						phrase += " "+unicode(mot.nom,"utf-8")
+					except:
+						phrase += " "+mot.nom
 				cpt+=1
-			
-			fich.write(str(reference.bibl))
-			fich.write(phrase+"\n")
-			fich.write(feature+"\n")
-			fich.write("\n")
+
+				print fich.write(str(reference.bibl))
+			try:
+				print fich.write(unicode(phrase,"utf-8")+"\n")
+			except:
+				print fich.write(phrase+"\n")
+
+			try:
+				print fich.write(unicode(feature,"utf-8")+"\n")
+			except:
+				print fich.write(feature+"\n")
+				fich.write("\n")
 			
 			feature = ""
 			phrase = ""
@@ -384,3 +396,17 @@ class Extract(object):
 				listRef.getReferencesIndice(i).train = -1
 			i += 1
 		return
+
+	'''
+	convertToUnicode : converti une chaine en unicode
+	'''
+	def convertToUnicode(self, chaine):
+		try:
+			if isinstance(chaine, str):
+				chaine = unicode(chaine, sys.stdin.encoding)
+		except:
+			try:
+				chaine = unicode(chaine, 'ascii')
+			except:
+				pass
+		return chaine
