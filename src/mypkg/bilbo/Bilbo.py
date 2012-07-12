@@ -49,6 +49,7 @@ class Bilbo(object):
 	'''
 	apprentissageCorpus2 : apprentissage reference corpus 2
 		repCorpus : repertoire ou se trouve le corpus d'apprentissage 
+		
 	'''	
 	def apprentissageCorpus2(self, repCorpus):
 		print os.getcwd()
@@ -124,8 +125,9 @@ class Bilbo(object):
 	'''
 	annoterCorpus2 : annote les references du type corpus 2
 		repCorpus : repertoire ou se trouve les fichiers a annoter
+		externe : si donnée externe = 1
 	'''
-	def annoterCorpus2(self, repCorpus):
+	def annoterCorpus2(self, repCorpus, externe=0):
 		corpus = Corpus(repCorpus)
 		fichiers = corpus.getFiles()
 		fichiersTab = self._list_split(fichiers, 50)
@@ -133,12 +135,15 @@ class Bilbo(object):
 		for fichierTab in fichiersTab:
 			corpus.extractCorpus2()
 		
-			self.crf.preparerTest(corpus, 2, -1)
+			if externe == 0:
+				self.crf.preparerTest(corpus, 2, -1)
+				
+				self.svm.prepareTest(corpus)
+				self.svm.runTest("model/corpus2/")
 			
-			self.svm.prepareTest(corpus)
-			self.svm.runTest("model/corpus2/")
-			
-			self.crf.preparerTest(corpus, 2)
+				self.crf.preparerTest(corpus, 2)
+			else:
+				self.crf.preparerTest(corpus, 2, 2)
 			self.crf.runTest("model/corpus2/", 'testdata_CRF.txt')
 
 			corpus.addTagReferences(self.repResult+"testEstCRF.xml", "note", 2)

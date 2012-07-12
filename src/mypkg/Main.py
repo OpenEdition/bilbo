@@ -34,14 +34,16 @@ if __name__ == '__main__':
 	if len(sys.argv) < 2:
 
 		print "$ python src/mypkg/Main.py <arg 1> <arg 2> <arg 3>"
-		print " <arg 1> : integer \n\t 11 => train corpus 1, \n\t 22 => train corpus 2, \n\t 1 => annotate reference corpus 1, \n\t 2 => annotate reference corpus 2."
+		print " <arg 1> : integer \n\t 11 => train corpus 1, \n\t 22 => train corpus 2, \n\t 1 => annotate reference corpus 1, \n\t 2 => annotate reference corpus 2, \n\t 21 => annotate corpus 2 with external data."
 		print " <arg 2> : string \n\t input directory where the data files are (training or test)"
 		print " <arg 3> : string \n\t output directory where the built result files are saved (initially \"Result/\" directory)"
+
 	else:	
 		if len(sys.argv) < 4:
 			bilbo = Bilbo()
 		else:
 			bilbo = Bilbo(str(sys.argv[3]))
+
 		
 		if int(sys.argv[1]) == 1:
 			bilbo.annoter(str(sys.argv[2]))
@@ -51,6 +53,9 @@ if __name__ == '__main__':
 			bilbo.apprentissage("KB/data/corpus1/XML_annotated2")
 		elif int(sys.argv[1]) == 22:
 			bilbo.apprentissageCorpus2("KB/data/corpus2/alldata_added")
+		elif int(sys.argv[1]) == 21:
+			bilbo.annoterCorpus2(str(sys.argv[2]), 1)
+			
 
 	#	bilbo.annoter("/Users/jade/Documents/jade/labo/comparaison_bilbo/analyse/repertoire/Niveau1/originaux/etnografica-869.xml")
 		#corpus = Corpus("/Applications/XAMPP/xamppfiles/htdocs/annotationSave/XML_annotated2")

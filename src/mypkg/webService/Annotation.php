@@ -3,6 +3,7 @@
     
     $dossier_fichier_bilbo = "../fichierRes/";
     $dossier_fichier = "code/fichierRes/";
+    $dossier_code = "/Users/jade/Documents/jade/labo/BILBO/bilbo";
 
     
 /************************************ SERVICE ****************************************/
@@ -28,7 +29,7 @@
         #lance BILBO
         $saveRep = getcwd();
         
-        chdir("code/bilbo");
+        chdir($dossier_code);
         $newRep = getcwd();
         
         /*recupere les chemin sans bilbo*/
@@ -71,7 +72,7 @@
         #lance BILBO
         $saveRep = getcwd();
         
-        chdir("code/bilbo");
+        chdir($dossier_code);
         $newRep = getcwd();
         
         /*recupere les chemin sans bilbo*/
@@ -145,7 +146,7 @@
         #lance BILBO
         $saveRep = getcwd();
         
-        chdir("code/bilbo");
+        chdir($dossier_code);
         $newRep = getcwd();
         
         /*recupere les chemin sans bilbo*/
@@ -185,7 +186,7 @@
         #lance BILBO
         $saveRep = getcwd();
         
-        chdir("code/bilbo");
+        chdir($dossier_code);
         $newRep = getcwd();
         
         /*recupere les chemin sans bilbo*/
@@ -223,7 +224,7 @@
         #lance BILBO
         $saveRep = getcwd();
         
-        chdir("code/bilbo");
+        chdir($dossier_code);
         $newRep = getcwd();
         
         /*recupere les chemin sans bilbo*/

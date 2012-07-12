@@ -201,7 +201,7 @@ class Extract(object):
 						phrase += " "+mot.nom
 				cpt+=1
 
-				print fich.write(str(reference.bibl))
+			print fich.write(str(reference.bibl))
 			try:
 				print fich.write(unicode(phrase,"utf-8")+"\n")
 			except:
@@ -211,7 +211,8 @@ class Extract(object):
 				print fich.write(unicode(feature,"utf-8")+"\n")
 			except:
 				print fich.write(feature+"\n")
-				fich.write("\n")
+			
+			fich.write("\n")
 			
 			feature = ""
 			phrase = ""

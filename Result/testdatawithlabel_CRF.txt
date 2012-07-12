@@ -1,22 +1,22 @@
-. BIBL_START PUNC c
+. BIBL_START PUNC nonbibl
 Fouilles BIBL_START FIRSTCAP nonbibl
 J.-J. BIBL_IN INITIAL ALLCAP nonbibl
 Dufraigne BIBL_IN FIRSTCAP nonbibl
-( BIBL_IN PUNC c
-AFAN BIBL_END PUNC c
-) BIBL_END PUNC c
-. BIBL_END PUNC c
+( BIBL_IN PUNC nonbibl
+AFAN BIBL_END PUNC nonbibl
+) BIBL_END PUNC nonbibl
+. BIBL_END PUNC nonbibl
 
-. BIBL_START PUNC c
+. BIBL_START PUNC nonbibl
 Fouilles BIBL_START FIRSTCAP nonbibl
 P. BIBL_IN POSSPAGE ALLCAP FORENAMELIST nonbibl
 Arcelin BIBL_IN FIRSTCAP SURNAMELIST nonbibl
-( BIBL_IN PUNC c
-CNRS BIBL_END PUNC c
-) BIBL_END PUNC c
-. BIBL_END PUNC c
+( BIBL_IN PUNC nonbibl
+CNRS BIBL_END PUNC nonbibl
+) BIBL_END PUNC nonbibl
+. BIBL_END PUNC nonbibl
 
-. BIBL_START PUNC c
+. BIBL_START PUNC nonbibl
 Ces BIBL_START FIRSTCAP nonbibl
 analyses BIBL_START ALLSMALL nonbibl
 ont BIBL_START ALLSMALL nonbibl
@@ -30,24 +30,24 @@ Projet BIBL_START FIRSTCAP nonbibl
 Commun BIBL_START FIRSTCAP nonbibl
 de BIBL_START ALLSMALL nonbibl
 Recherches BIBL_START FIRSTCAP nonbibl
-( BIBL_START PUNC c
-PCR BIBL_START PUNC c
-) BIBL_START PUNC c
+( BIBL_START PUNC nonbibl
+PCR BIBL_START PUNC nonbibl
+) BIBL_START PUNC nonbibl
 dirigé BIBL_START ALLSMALL nonbibl
 par BIBL_START ALLSMALL nonbibl
 P. BIBL_START POSSPAGE ALLCAP FORENAMELIST nonbibl
 Arcelin BIBL_START FIRSTCAP SURNAMELIST nonbibl
-( BIBL_START PUNC c
+( BIBL_START PUNC nonbibl
 UMR BIBL_START ALLCAP nonbibl
 6573 BIBL_START ALLNUMBERS nonbibl
-) BIBL_START PUNC c
+) BIBL_START PUNC nonbibl
 et BIBL_START ALLSMALL nonbibl
 G. BIBL_START INITIAL ALLCAP FORENAMELIST nonbibl
 Congès BIBL_START FIRSTCAP SURNAMELIST nonbibl
-( BIBL_START PUNC c
-DRAC-PACA BIBL_START PUNC c
-) BIBL_START PUNC c
-. BIBL_IN PUNC c
+( BIBL_START PUNC nonbibl
+DRAC-PACA BIBL_START PUNC nonbibl
+) BIBL_START PUNC nonbibl
+. BIBL_IN PUNC nonbibl
 L’étude BIBL_IN FIRSTCAP nonbibl
 du BIBL_IN ALLSMALL nonbibl
 petit BIBL_IN ALLSMALL nonbibl
@@ -59,35 +59,35 @@ direction BIBL_IN ALLSMALL nonbibl
 de BIBL_IN ALLSMALL nonbibl
 J.-P. BIBL_IN INITIAL ALLCAP FORENAMELIST nonbibl
 Guillaumet BIBL_IN FIRSTCAP SURNAMELIST nonbibl
-( BIBL_IN PUNC c
+( BIBL_IN PUNC nonbibl
 UMR BIBL_IN ALLCAP nonbibl
 5594 BIBL_IN ALLNUMBERS nonbibl
-) BIBL_IN PUNC c
-. BIBL_IN PUNC c
+) BIBL_IN PUNC nonbibl
+. BIBL_IN PUNC nonbibl
 Le BIBL_IN FIRSTCAP nonbibl
 mobilier BIBL_IN ALLSMALL nonbibl
 métallique BIBL_IN ALLSMALL nonbibl
-, BIBL_IN PUNC c
+, BIBL_IN PUNC nonbibl
 autre BIBL_IN ALLSMALL nonbibl
 que BIBL_IN ALLSMALL nonbibl
 sidérurgique BIBL_IN ALLSMALL nonbibl
-, BIBL_IN PUNC c
+, BIBL_IN PUNC nonbibl
 est BIBL_IN ALLSMALL nonbibl
 étudié BIBL_IN FIRSTCAP nonbibl
 par BIBL_IN ALLSMALL nonbibl
 Benjamin BIBL_IN FIRSTCAP FORENAMELIST nonbibl
 Girard BIBL_IN FIRSTCAP SURNAMELIST nonbibl
-( BIBL_IN PUNC c
+( BIBL_IN PUNC nonbibl
 doctorant BIBL_END ALLSMALL nonbibl
 UMR BIBL_END ALLCAP nonbibl
 5594 BIBL_END ALLNUMBERS nonbibl
-) BIBL_END PUNC c
+) BIBL_END PUNC nonbibl
 dans BIBL_END ALLSMALL nonbibl
 le BIBL_END ALLSMALL nonbibl
 cadre BIBL_END ALLSMALL nonbibl
 d’une BIBL_END ALLSMALL nonbibl
 thèse BIBL_END ALLSMALL nonbibl
-: BIBL_END PUNC c
+: BIBL_END PUNC nonbibl
 Le BIBL_END FIRSTCAP nonbibl
 mobilier BIBL_END ALLSMALL nonbibl
 métallique BIBL_END ALLSMALL nonbibl
@@ -98,7 +98,7 @@ du BIBL_END ALLSMALL nonbibl
 Fer BIBL_END FIRSTCAP nonbibl
 en BIBL_END ALLSMALL nonbibl
 Provence BIBL_END FIRSTCAP nonbibl
-. BIBL_END PUNC c
+. BIBL_END PUNC nonbibl
 Sous BIBL_END FIRSTCAP nonbibl
 la BIBL_END ALLSMALL nonbibl
 direction BIBL_END ALLSMALL nonbibl
@@ -108,9 +108,9 @@ Guillaumet BIBL_END FIRSTCAP SURNAMELIST nonbibl
 et BIBL_END ALLSMALL nonbibl
 D. BIBL_END INITIAL ALLCAP FORENAMELIST nonbibl
 Garcia BIBL_END FIRSTCAP SURNAMELIST nonbibl
-. BIBL_END PUNC c
+. BIBL_END PUNC nonbibl
 
-. BIBL_START PUNC c
+. BIBL_START PUNC nonbibl
 Le BIBL_START FIRSTCAP nonbibl
 calcul BIBL_START ALLSMALL nonbibl
 se BIBL_START ALLSMALL nonbibl
@@ -132,21 +132,21 @@ de BIBL_START ALLSMALL nonbibl
 fragments BIBL_START ALLSMALL nonbibl
 de BIBL_START ALLSMALL nonbibl
 scorie BIBL_START ALLSMALL nonbibl
-( BIBL_START PUNC c
+( BIBL_START PUNC nonbibl
 poids BIBL_START ALLSMALL nonbibl
 de BIBL_START ALLSMALL nonbibl
 moyenne BIBL_START ALLSMALL nonbibl
-/ BIBL_START PUNC c
+/ BIBL_START PUNC nonbibl
 poids BIBL_IN ALLSMALL nonbibl
 de BIBL_IN ALLSMALL nonbibl
 culots BIBL_IN ALLSMALL nonbibl
-= BIBL_IN PUNC c
+= BIBL_IN PUNC nonbibl
 nombre BIBL_IN ALLSMALL nonbibl
 estimé BIBL_IN ALLSMALL nonbibl
 de BIBL_IN ALLSMALL nonbibl
 culots BIBL_IN ALLSMALL nonbibl
-) BIBL_IN PUNC c
-. BIBL_IN PUNC c
+) BIBL_IN PUNC nonbibl
+. BIBL_IN PUNC nonbibl
 Seuls BIBL_IN FIRSTCAP nonbibl
 les BIBL_IN ALLSMALL nonbibl
 fragments BIBL_IN ALLSMALL nonbibl
@@ -161,7 +161,7 @@ ont BIBL_IN ALLSMALL nonbibl
 pris BIBL_IN ALLSMALL nonbibl
 en BIBL_IN ALLSMALL nonbibl
 compte BIBL_IN ALLSMALL nonbibl
-, BIBL_IN PUNC c
+, BIBL_IN PUNC nonbibl
 nous BIBL_IN ALLSMALL nonbibl
 avons BIBL_IN ALLSMALL nonbibl
 considéré BIBL_END ALLSMALL nonbibl
@@ -183,14 +183,14 @@ des BIBL_END ALLSMALL nonbibl
 fragments BIBL_END ALLSMALL nonbibl
 de BIBL_END ALLSMALL nonbibl
 culots BIBL_END ALLSMALL nonbibl
-, BIBL_END PUNC c
+, BIBL_END PUNC nonbibl
 qu’à BIBL_END ALLSMALL nonbibl
 des BIBL_END ALLSMALL nonbibl
 fragments BIBL_END ALLSMALL nonbibl
 de BIBL_END ALLSMALL nonbibl
 scories BIBL_END ALLSMALL nonbibl
 informes BIBL_END ALLSMALL nonbibl
-. BIBL_END PUNC c
+. BIBL_END PUNC nonbibl
 
 . BIBL_START PUNC c
 Cf BIBL_START FIRSTCAP nonbibl
@@ -201,23 +201,23 @@ B. BIBL_END INITIAL ALLCAP FORENAMELIST nonbibl
 Girard BIBL_END FIRSTCAP SURNAMELIST nonbibl
 . BIBL_END PUNC c
 
-. BIBL_START PUNC c
+. BIBL_START PUNC nonbibl
 Fouilles BIBL_START FIRSTCAP nonbibl
 A. BIBL_IN INITIAL ALLCAP FORENAMELIST nonbibl
 Roth-Congès BIBL_IN FIRSTCAP SURNAMELIST nonbibl
-( BIBL_IN PUNC c
-CNRS BIBL_END PUNC c
-) BIBL_END PUNC c
-. BIBL_END PUNC c
+( BIBL_IN PUNC nonbibl
+CNRS BIBL_END PUNC nonbibl
+) BIBL_END PUNC nonbibl
+. BIBL_END PUNC nonbibl
 
-. BIBL_START PUNC c
+. BIBL_START PUNC nonbibl
 Fouilles BIBL_START FIRSTCAP nonbibl
 P. BIBL_IN POSSPAGE ALLCAP FORENAMELIST nonbibl
 Boissinot BIBL_IN FIRSTCAP SURNAMELIST nonbibl
-( BIBL_IN PUNC c
-EHESS BIBL_END PUNC c
-) BIBL_END PUNC c
-. BIBL_END PUNC c
+( BIBL_IN PUNC nonbibl
+EHESS BIBL_END PUNC nonbibl
+) BIBL_END PUNC nonbibl
+. BIBL_END PUNC nonbibl
 
 École BIBL_START FIRSTCAP nonbibl
 accueillant BIBL_START ALLSMALL nonbibl
@@ -229,55 +229,55 @@ du BIBL_IN ALLSMALL nonbibl
 port BIBL_IN ALLSMALL nonbibl
 de BIBL_IN ALLSMALL nonbibl
 Gennevilliers BIBL_IN FIRSTCAP nonbibl
-, BIBL_IN PUNC c
+, BIBL_IN PUNC nonbibl
 en BIBL_END ALLSMALL nonbibl
 quasi BIBL_END ALLSMALL nonbibl
 totalité BIBL_END ALLSMALL nonbibl
 travailleurs BIBL_END ALLSMALL nonbibl
 immigrés BIBL_END ALLSMALL nonbibl
-. BIBL_END PUNC c
+. BIBL_END PUNC nonbibl
 
-Perotti BIBL_START FIRSTCAP surname
-A. BIBL_START INITIAL ALLCAP forename
-, BIBL_START PUNC c
-« BIBL_START PUNC c
-La BIBL_START FIRSTCAP title
-scolarisation BIBL_START ALLSMALL title
-des BIBL_IN ALLSMALL title
-enfants BIBL_IN ALLSMALL title
-des BIBL_IN ALLSMALL title
-travailleurs BIBL_IN ALLSMALL title
-immigrés BIBL_IN ALLSMALL title
-. BIBL_IN PUNC c
-Les BIBL_END FIRSTCAP title
-diverses BIBL_END ALLSMALL title
-approches BIBL_END ALLSMALL title
-pédagogiques BIBL_END ALLSMALL title
-: BIBL_END PUNC c
-1970-1983 BIBL_END NUMBERS DASH title
-» BIBL_END PUNC c
+Perotti BIBL_START FIRSTCAP nonbibl
+A. BIBL_START INITIAL ALLCAP nonbibl
+, BIBL_START PUNC nonbibl
+« BIBL_START PUNC nonbibl
+La BIBL_START FIRSTCAP nonbibl
+scolarisation BIBL_START ALLSMALL nonbibl
+des BIBL_IN ALLSMALL nonbibl
+enfants BIBL_IN ALLSMALL nonbibl
+des BIBL_IN ALLSMALL nonbibl
+travailleurs BIBL_IN ALLSMALL nonbibl
+immigrés BIBL_IN ALLSMALL nonbibl
+. BIBL_IN PUNC nonbibl
+Les BIBL_END FIRSTCAP nonbibl
+diverses BIBL_END ALLSMALL nonbibl
+approches BIBL_END ALLSMALL nonbibl
+pédagogiques BIBL_END ALLSMALL nonbibl
+: BIBL_END PUNC nonbibl
+1970-1983 BIBL_END NUMBERS DASH nonbibl
+» BIBL_END PUNC nonbibl
 
-Boulot BIBL_START FIRSTCAP SURNAMELIST surname
-S. BIBL_START INITIAL ALLCAP FORENAMELIST forename
-et BIBL_IN ALLSMALL nolabel
-Boyzon-Fradet BIBL_IN FIRSTCAP surname
-D. BIBL_END INITIAL ALLCAP forename
-, BIBL_END PUNC c
+Boulot BIBL_START FIRSTCAP SURNAMELIST nonbibl
+S. BIBL_START INITIAL ALLCAP FORENAMELIST nonbibl
+et BIBL_IN ALLSMALL nonbibl
+Boyzon-Fradet BIBL_IN FIRSTCAP nonbibl
+D. BIBL_END INITIAL ALLCAP nonbibl
+, BIBL_END PUNC nonbibl
 
-Bachelet BIBL_START FIRSTCAP SURNAMELIST surname
-Prisca BIBL_START FIRSTCAP FORENAMELIST forename
-et BIBL_START ALLSMALL nolabel
-Zaidman BIBL_START FIRSTCAP SURNAMELIST surname
-Claude BIBL_IN FIRSTCAP FORENAMELIST forename
-, BIBL_IN PUNC c
-« BIBL_IN PUNC c
-École BIBL_IN FIRSTCAP title
-et BIBL_IN ALLSMALL title
-migrants BIBL_END ALLSMALL title
-, BIBL_END PUNC c
-Eléments BIBL_END FIRSTCAP title
-d’analyse BIBL_END ALLSMALL title
-» BIBL_END PUNC c
+Bachelet BIBL_START FIRSTCAP SURNAMELIST nonbibl
+Prisca BIBL_START FIRSTCAP FORENAMELIST nonbibl
+et BIBL_START ALLSMALL nonbibl
+Zaidman BIBL_START FIRSTCAP SURNAMELIST nonbibl
+Claude BIBL_IN FIRSTCAP FORENAMELIST nonbibl
+, BIBL_IN PUNC nonbibl
+« BIBL_IN PUNC nonbibl
+École BIBL_IN FIRSTCAP nonbibl
+et BIBL_IN ALLSMALL nonbibl
+migrants BIBL_END ALLSMALL nonbibl
+, BIBL_END PUNC nonbibl
+Eléments BIBL_END FIRSTCAP nonbibl
+d’analyse BIBL_END ALLSMALL nonbibl
+» BIBL_END PUNC nonbibl
 
 Henry-Lorcerie BIBL_START FIRSTCAP surname
 Françoise BIBL_START FIRSTCAP forename
@@ -293,54 +293,54 @@ au BIBL_END ALLSMALL title
 défi BIBL_END ALLSMALL title
 » BIBL_END PUNC c
 
-Gauchet BIBL_START FIRSTCAP SURNAMELIST surname
-Marcel BIBL_START FIRSTCAP FORENAMELIST forename
-, BIBL_START PUNC c
-« BIBL_START PUNC c
-L’école BIBL_START FIRSTCAP title
-à BIBL_IN ALLCAP title
-l’école BIBL_IN ALLSMALL title
-d’elle-même BIBL_IN ALLSMALL title
-. BIBL_IN PUNC c
-Contraintes BIBL_IN FIRSTCAP title
-et BIBL_END ALLSMALL title
-contradictions BIBL_END ALLSMALL title
-de BIBL_END ALLSMALL title
-l’individualisme BIBL_END ALLSMALL title
-» BIBL_END PUNC c
-, BIBL_END PUNC c
+Gauchet BIBL_START FIRSTCAP SURNAMELIST nonbibl
+Marcel BIBL_START FIRSTCAP FORENAMELIST nonbibl
+, BIBL_START PUNC nonbibl
+« BIBL_START PUNC nonbibl
+L’école BIBL_START FIRSTCAP nonbibl
+à BIBL_IN ALLCAP nonbibl
+l’école BIBL_IN ALLSMALL nonbibl
+d’elle-même BIBL_IN ALLSMALL nonbibl
+. BIBL_IN PUNC nonbibl
+Contraintes BIBL_IN FIRSTCAP nonbibl
+et BIBL_END ALLSMALL nonbibl
+contradictions BIBL_END ALLSMALL nonbibl
+de BIBL_END ALLSMALL nonbibl
+l’individualisme BIBL_END ALLSMALL nonbibl
+» BIBL_END PUNC nonbibl
+, BIBL_END PUNC nonbibl
 
-Payet BIBL_START FIRSTCAP SURNAMELIST surname
-Jean-Paul BIBL_START FIRSTCAP FORENAMELIST forename
-, BIBL_START PUNC c
-« BIBL_START PUNC c
-La BIBL_START FIRSTCAP title
-scolarisation BIBL_START ALLSMALL title
-des BIBL_START ALLSMALL title
-enfants BIBL_START ALLSMALL title
-et BIBL_IN ALLSMALL title
-des BIBL_IN ALLSMALL title
-jeunes BIBL_IN ALLSMALL title
-issus BIBL_IN ALLSMALL title
-de BIBL_IN ALLSMALL title
-l’immigration BIBL_IN ALLSMALL title
-en BIBL_IN ALLSMALL title
-France BIBL_IN FIRSTCAP PLACELIST title
-: BIBL_END PUNC c
-une BIBL_END ALLSMALL title
-revue BIBL_END ALLSMALL title
-de BIBL_END ALLSMALL title
-la BIBL_END ALLSMALL title
-littérature BIBL_END ALLSMALL title
-française BIBL_END ALLSMALL title
-» BIBL_END PUNC c
+Payet BIBL_START FIRSTCAP SURNAMELIST nonbibl
+Jean-Paul BIBL_START FIRSTCAP FORENAMELIST nonbibl
+, BIBL_START PUNC nonbibl
+« BIBL_START PUNC nonbibl
+La BIBL_START FIRSTCAP nonbibl
+scolarisation BIBL_START ALLSMALL nonbibl
+des BIBL_START ALLSMALL nonbibl
+enfants BIBL_START ALLSMALL nonbibl
+et BIBL_IN ALLSMALL nonbibl
+des BIBL_IN ALLSMALL nonbibl
+jeunes BIBL_IN ALLSMALL nonbibl
+issus BIBL_IN ALLSMALL nonbibl
+de BIBL_IN ALLSMALL nonbibl
+l’immigration BIBL_IN ALLSMALL nonbibl
+en BIBL_IN ALLSMALL nonbibl
+France BIBL_IN FIRSTCAP PLACELIST nonbibl
+: BIBL_END PUNC nonbibl
+une BIBL_END ALLSMALL nonbibl
+revue BIBL_END ALLSMALL nonbibl
+de BIBL_END ALLSMALL nonbibl
+la BIBL_END ALLSMALL nonbibl
+littérature BIBL_END ALLSMALL nonbibl
+française BIBL_END ALLSMALL nonbibl
+» BIBL_END PUNC nonbibl
 
-Bachelet BIBL_START FIRSTCAP SURNAMELIST surname
-Prisca BIBL_START FIRSTCAP FORENAMELIST forename
-et BIBL_IN ALLSMALL nolabel
-Zaidman BIBL_IN FIRSTCAP SURNAMELIST surname
-Claude BIBL_END FIRSTCAP FORENAMELIST forename
-, BIBL_END PUNC c
+Bachelet BIBL_START FIRSTCAP SURNAMELIST nonbibl
+Prisca BIBL_START FIRSTCAP FORENAMELIST nonbibl
+et BIBL_IN ALLSMALL nonbibl
+Zaidman BIBL_IN FIRSTCAP SURNAMELIST nonbibl
+Claude BIBL_END FIRSTCAP FORENAMELIST nonbibl
+, BIBL_END PUNC nonbibl
 
 Un BIBL_START FIRSTCAP nonbibl
 article BIBL_START ALLSMALL nonbibl
@@ -381,25 +381,25 @@ Headscarf BIBL_END FIRSTCAP title
 , BIBL_END PUNC c
 in BIBL_END ALLSMALL bookindicator
 
-Lorcerie BIBL_START FIRSTCAP SURNAMELIST surname
-Françoise BIBL_START FIRSTCAP FORENAMELIST forename
-, BIBL_START PUNC c
-« BIBL_START PUNC c
-Scolarisation BIBL_START FIRSTCAP title
-des BIBL_START ALLSMALL title
-enfants BIBL_IN ALLSMALL title
-immigrés BIBL_IN ALLSMALL title
-: BIBL_IN PUNC c
-état BIBL_IN FIRSTCAP title
-des BIBL_IN ALLSMALL title
-lieux BIBL_IN ALLSMALL title
-et BIBL_END ALLSMALL title
-état BIBL_END FIRSTCAP title
-des BIBL_END ALLSMALL title
-questions BIBL_END ALLSMALL title
-en BIBL_END ALLSMALL title
-France BIBL_END FIRSTCAP PLACELIST title
-» BIBL_END PUNC c
+Lorcerie BIBL_START FIRSTCAP SURNAMELIST nonbibl
+Françoise BIBL_START FIRSTCAP FORENAMELIST nonbibl
+, BIBL_START PUNC nonbibl
+« BIBL_START PUNC nonbibl
+Scolarisation BIBL_START FIRSTCAP nonbibl
+des BIBL_START ALLSMALL nonbibl
+enfants BIBL_IN ALLSMALL nonbibl
+immigrés BIBL_IN ALLSMALL nonbibl
+: BIBL_IN PUNC nonbibl
+état BIBL_IN FIRSTCAP nonbibl
+des BIBL_IN ALLSMALL nonbibl
+lieux BIBL_IN ALLSMALL nonbibl
+et BIBL_END ALLSMALL nonbibl
+état BIBL_END FIRSTCAP nonbibl
+des BIBL_END ALLSMALL nonbibl
+questions BIBL_END ALLSMALL nonbibl
+en BIBL_END ALLSMALL nonbibl
+France BIBL_END FIRSTCAP PLACELIST nonbibl
+» BIBL_END PUNC nonbibl
 
 Chérifi BIBL_START FIRSTCAP surname
 Hanifa BIBL_START FIRSTCAP forename
@@ -423,27 +423,27 @@ question BIBL_START ALLSMALL nonbibl
 des BIBL_START ALLSMALL nonbibl
 pratiques BIBL_START ALLSMALL nonbibl
 langagières BIBL_START ALLSMALL nonbibl
-, BIBL_START PUNC c
+, BIBL_START PUNC nonbibl
 voir BIBL_START ALLSMALL nonbibl
-Varro BIBL_START FIRSTCAP SURNAMELIST surname
-Gabrielle BIBL_IN FIRSTCAP FORENAMELIST forename
-, BIBL_IN PUNC c
-« BIBL_IN PUNC c
-« BIBL_IN PUNC c
-Les BIBL_IN FIRSTCAP title
-enfants BIBL_IN ALLSMALL title
-étrangers BIBL_IN FIRSTCAP title
-» BIBL_IN PUNC c
-dans BIBL_IN ALLSMALL title
-le BIBL_END ALLSMALL title
-discours BIBL_END ALLSMALL title
-des BIBL_END ALLSMALL title
-institutions BIBL_END ALLSMALL title
-et BIBL_END ALLSMALL title
-des BIBL_END ALLSMALL title
-instituteurs BIBL_END ALLSMALL title
-» BIBL_END PUNC c
-, BIBL_END PUNC c
+Varro BIBL_START FIRSTCAP SURNAMELIST nonbibl
+Gabrielle BIBL_IN FIRSTCAP FORENAMELIST nonbibl
+, BIBL_IN PUNC nonbibl
+« BIBL_IN PUNC nonbibl
+« BIBL_IN PUNC nonbibl
+Les BIBL_IN FIRSTCAP nonbibl
+enfants BIBL_IN ALLSMALL nonbibl
+étrangers BIBL_IN FIRSTCAP nonbibl
+» BIBL_IN PUNC nonbibl
+dans BIBL_IN ALLSMALL nonbibl
+le BIBL_END ALLSMALL nonbibl
+discours BIBL_END ALLSMALL nonbibl
+des BIBL_END ALLSMALL nonbibl
+institutions BIBL_END ALLSMALL nonbibl
+et BIBL_END ALLSMALL nonbibl
+des BIBL_END ALLSMALL nonbibl
+instituteurs BIBL_END ALLSMALL nonbibl
+» BIBL_END PUNC nonbibl
+, BIBL_END PUNC nonbibl
 
 « BIBL_START PUNC c
 Les BIBL_START FIRSTCAP title
@@ -454,20 +454,20 @@ migrants BIBL_END ALLSMALL title
 » BIBL_END PUNC c
 , BIBL_END PUNC c
 
-« BIBL_START PUNC c
+« BIBL_START PUNC nonbibl
 Faute BIBL_START FIRSTCAP nonbibl
 d’un BIBL_START ALLSMALL nonbibl
 vocabulaire BIBL_START ALLSMALL nonbibl
 plus BIBL_START ALLSMALL nonbibl
 approprié BIBL_START ALLSMALL nonbibl
-« BIBL_START PUNC c
+« BIBL_START PUNC nonbibl
 élèves BIBL_START FIRSTCAP nonbibl
 étrangers BIBL_START FIRSTCAP nonbibl
 ou BIBL_START ALLSMALL nonbibl
 issus BIBL_START ALLSMALL nonbibl
 de BIBL_START ALLSMALL nonbibl
 l’immigration BIBL_START ALLSMALL nonbibl
-» BIBL_START PUNC c
+» BIBL_START PUNC nonbibl
 dans BIBL_START ALLSMALL nonbibl
 la BIBL_START ALLSMALL nonbibl
 mesure BIBL_START ALLSMALL nonbibl
@@ -486,7 +486,7 @@ population BIBL_IN ALLSMALL nonbibl
 des BIBL_IN ALLSMALL nonbibl
 élèves BIBL_IN FIRSTCAP nonbibl
 immigrés BIBL_IN ALLSMALL nonbibl
-– BIBL_IN PUNC c
+– BIBL_IN PUNC nonbibl
 c’est-à-dire BIBL_IN ALLSMALL nonbibl
 nés BIBL_IN ALLSMALL nonbibl
 étrangers BIBL_IN FIRSTCAP nonbibl
@@ -497,7 +497,7 @@ résidant BIBL_IN ALLSMALL nonbibl
 aujourd’hui BIBL_IN ALLSMALL nonbibl
 en BIBL_IN ALLSMALL nonbibl
 France BIBL_IN FIRSTCAP PLACELIST nonbibl
-– BIBL_IN PUNC c
+– BIBL_IN PUNC nonbibl
 ou BIBL_IN ALLSMALL nonbibl
 nés BIBL_IN ALLSMALL nonbibl
 en BIBL_IN ALLSMALL nonbibl
@@ -505,30 +505,30 @@ France BIBL_IN FIRSTCAP PLACELIST nonbibl
 de BIBL_IN ALLSMALL nonbibl
 parents BIBL_IN ALLSMALL nonbibl
 immigrés BIBL_END ALLSMALL nonbibl
-. BIBL_END PUNC c
-» BIBL_END PUNC c
-Vallet BIBL_END FIRSTCAP SURNAMELIST surname
-Louis-André BIBL_END FIRSTCAP FORENAMELIST forename
-, BIBL_END PUNC c
-Caille BIBL_END FIRSTCAP surname
-Jean-Paul BIBL_END FIRSTCAP forename
-, BIBL_END PUNC c
-« BIBL_END PUNC c
-Les BIBL_END FIRSTCAP title
-élèves BIBL_END FIRSTCAP title
-étrangers BIBL_END FIRSTCAP title
-ou BIBL_END ALLSMALL title
-issus BIBL_END ALLSMALL title
-de BIBL_END ALLSMALL title
-l’immigration BIBL_END ALLSMALL title
-dans BIBL_END ALLSMALL title
-l’école BIBL_END ALLSMALL title
-et BIBL_END ALLSMALL title
-le BIBL_END ALLSMALL title
-collège BIBL_END ALLSMALL title
-français BIBL_END ALLSMALL title
-» BIBL_END PUNC c
-, BIBL_END PUNC c
+. BIBL_END PUNC nonbibl
+» BIBL_END PUNC nonbibl
+Vallet BIBL_END FIRSTCAP SURNAMELIST nonbibl
+Louis-André BIBL_END FIRSTCAP FORENAMELIST nonbibl
+, BIBL_END PUNC nonbibl
+Caille BIBL_END FIRSTCAP nonbibl
+Jean-Paul BIBL_END FIRSTCAP nonbibl
+, BIBL_END PUNC nonbibl
+« BIBL_END PUNC nonbibl
+Les BIBL_END FIRSTCAP nonbibl
+élèves BIBL_END FIRSTCAP nonbibl
+étrangers BIBL_END FIRSTCAP nonbibl
+ou BIBL_END ALLSMALL nonbibl
+issus BIBL_END ALLSMALL nonbibl
+de BIBL_END ALLSMALL nonbibl
+l’immigration BIBL_END ALLSMALL nonbibl
+dans BIBL_END ALLSMALL nonbibl
+l’école BIBL_END ALLSMALL nonbibl
+et BIBL_END ALLSMALL nonbibl
+le BIBL_END ALLSMALL nonbibl
+collège BIBL_END ALLSMALL nonbibl
+français BIBL_END ALLSMALL nonbibl
+» BIBL_END PUNC nonbibl
+, BIBL_END PUNC nonbibl
 
 S’agissant BIBL_START FIRSTCAP nonbibl
 des BIBL_START ALLSMALL nonbibl
@@ -539,97 +539,97 @@ France BIBL_START FIRSTCAP PLACELIST nonbibl
 de BIBL_START ALLSMALL nonbibl
 parents BIBL_START ALLSMALL nonbibl
 immigrés BIBL_START ALLSMALL nonbibl
-, BIBL_START PUNC c
+, BIBL_START PUNC nonbibl
 presque BIBL_START ALLSMALL nonbibl
 tous BIBL_START ALLSMALL nonbibl
 français BIBL_IN ALLSMALL nonbibl
 lorsqu’ils BIBL_IN ALLSMALL nonbibl
 sont BIBL_IN ALLSMALL nonbibl
 adultes BIBL_IN ALLSMALL nonbibl
-, BIBL_IN PUNC c
+, BIBL_IN PUNC nonbibl
 la BIBL_IN ALLSMALL nonbibl
 notion BIBL_IN ALLSMALL nonbibl
 d’étranger BIBL_IN ALLSMALL nonbibl
 n’est BIBL_IN ALLSMALL nonbibl
 d’aucun BIBL_IN ALLSMALL nonbibl
 secours BIBL_IN ALLSMALL nonbibl
-: BIBL_IN PUNC c
+: BIBL_IN PUNC nonbibl
 ces BIBL_IN ALLSMALL nonbibl
 enfants BIBL_END ALLSMALL nonbibl
 d’immigrés BIBL_END ALLSMALL nonbibl
 seront BIBL_END ALLSMALL nonbibl
 dénommés BIBL_END ALLSMALL nonbibl
-« BIBL_END PUNC c
+« BIBL_END PUNC nonbibl
 personnes BIBL_END ALLSMALL nonbibl
 d’origine BIBL_END ALLSMALL nonbibl
 étrangère BIBL_END FIRSTCAP nonbibl
-» BIBL_END PUNC c
-, BIBL_END PUNC c
-Tribalat BIBL_END FIRSTCAP SURNAMELIST surname
-Michèle BIBL_END FIRSTCAP FORENAMELIST forename
-, BIBL_END PUNC c
+» BIBL_END PUNC nonbibl
+, BIBL_END PUNC nonbibl
+Tribalat BIBL_END FIRSTCAP SURNAMELIST nonbibl
+Michèle BIBL_END FIRSTCAP FORENAMELIST nonbibl
+, BIBL_END PUNC nonbibl
 
-Le BIBL_START FIRSTCAP FORENAMELIST namelink
-Bras BIBL_IN FIRSTCAP SURNAMELIST surname
-Hervé BIBL_END FIRSTCAP FORENAMELIST forename
+Le BIBL_START FIRSTCAP FORENAMELIST nonbibl
+Bras BIBL_IN FIRSTCAP SURNAMELIST nonbibl
+Hervé BIBL_END FIRSTCAP FORENAMELIST nonbibl
 
 Notamment BIBL_START FIRSTCAP nonbibl
-Léger BIBL_START FIRSTCAP SURNAMELIST surname
-Alain BIBL_START FIRSTCAP FORENAMELIST forename
-, BIBL_START PUNC c
-« BIBL_START PUNC c
-Usage BIBL_START FIRSTCAP title
-des BIBL_IN ALLSMALL title
-statistiques BIBL_IN ALLSMALL title
-de BIBL_IN ALLSMALL title
-la BIBL_IN ALLSMALL title
-DEP BIBL_IN ALLCAP title
-concernant BIBL_IN ALLSMALL title
-les BIBL_END ALLSMALL title
-enfants BIBL_END ALLSMALL title
-de BIBL_END ALLSMALL title
-migrants BIBL_END ALLSMALL title
-» BIBL_END PUNC c
-, BIBL_END PUNC c
-in BIBL_END ALLSMALL bookindicator
+Léger BIBL_START FIRSTCAP SURNAMELIST nonbibl
+Alain BIBL_START FIRSTCAP FORENAMELIST nonbibl
+, BIBL_START PUNC nonbibl
+« BIBL_START PUNC nonbibl
+Usage BIBL_START FIRSTCAP nonbibl
+des BIBL_IN ALLSMALL nonbibl
+statistiques BIBL_IN ALLSMALL nonbibl
+de BIBL_IN ALLSMALL nonbibl
+la BIBL_IN ALLSMALL nonbibl
+DEP BIBL_IN ALLCAP nonbibl
+concernant BIBL_IN ALLSMALL nonbibl
+les BIBL_END ALLSMALL nonbibl
+enfants BIBL_END ALLSMALL nonbibl
+de BIBL_END ALLSMALL nonbibl
+migrants BIBL_END ALLSMALL nonbibl
+» BIBL_END PUNC nonbibl
+, BIBL_END PUNC nonbibl
+in BIBL_END ALLSMALL nonbibl
 
 Définition BIBL_START FIRSTCAP nonbibl
 donnée BIBL_START ALLSMALL nonbibl
 par BIBL_START ALLSMALL nonbibl
-Sayad BIBL_START FIRSTCAP forename
-Abdelmalek BIBL_START FIRSTCAP surname
-, BIBL_START PUNC c
-« BIBL_IN PUNC c
-Le BIBL_IN FIRSTCAP title
-mode BIBL_IN ALLSMALL title
-de BIBL_IN ALLSMALL title
-génération BIBL_IN ALLSMALL title
-des BIBL_IN ALLSMALL title
-générations BIBL_END ALLSMALL title
-“ BIBL_END PUNC c
-immigrées BIBL_END ALLSMALL title
-” BIBL_END PUNC c
-» BIBL_END PUNC c
-, BIBL_END PUNC c
+Sayad BIBL_START FIRSTCAP nonbibl
+Abdelmalek BIBL_START FIRSTCAP nonbibl
+, BIBL_START PUNC nonbibl
+« BIBL_IN PUNC nonbibl
+Le BIBL_IN FIRSTCAP nonbibl
+mode BIBL_IN ALLSMALL nonbibl
+de BIBL_IN ALLSMALL nonbibl
+génération BIBL_IN ALLSMALL nonbibl
+des BIBL_IN ALLSMALL nonbibl
+générations BIBL_END ALLSMALL nonbibl
+“ BIBL_END PUNC nonbibl
+immigrées BIBL_END ALLSMALL nonbibl
+” BIBL_END PUNC nonbibl
+» BIBL_END PUNC nonbibl
+, BIBL_END PUNC nonbibl
 
-Goldberg-Salinas BIBL_START FIRSTCAP SURNAMELIST surname
-Anette BIBL_START FIRSTCAP FORENAMELIST forename
-et BIBL_IN ALLSMALL nolabel
-Zaidman BIBL_IN FIRSTCAP SURNAMELIST surname
-Claude BIBL_END FIRSTCAP FORENAMELIST forename
-, BIBL_END PUNC c
+Goldberg-Salinas BIBL_START FIRSTCAP SURNAMELIST nonbibl
+Anette BIBL_START FIRSTCAP FORENAMELIST nonbibl
+et BIBL_IN ALLSMALL nonbibl
+Zaidman BIBL_IN FIRSTCAP SURNAMELIST nonbibl
+Claude BIBL_END FIRSTCAP FORENAMELIST nonbibl
+, BIBL_END PUNC nonbibl
 
 Voir BIBL_START FIRSTCAP nonbibl
-Baudoux BIBL_START FIRSTCAP SURNAMELIST surname
-Claudine BIBL_START FIRSTCAP FORENAMELIST forename
-, BIBL_IN PUNC c
-Zaidman BIBL_IN FIRSTCAP SURNAMELIST forename
-Claude BIBL_IN FIRSTCAP FORENAMELIST surname
-( BIBL_IN PUNC c
-dir BIBL_END ALLSMALL abbr
-. BIBL_END PUNC c
-) BIBL_END PUNC c
-, BIBL_END PUNC c
+Baudoux BIBL_START FIRSTCAP SURNAMELIST nonbibl
+Claudine BIBL_START FIRSTCAP FORENAMELIST nonbibl
+, BIBL_IN PUNC nonbibl
+Zaidman BIBL_IN FIRSTCAP SURNAMELIST nonbibl
+Claude BIBL_IN FIRSTCAP FORENAMELIST nonbibl
+( BIBL_IN PUNC nonbibl
+dir BIBL_END ALLSMALL nonbibl
+. BIBL_END PUNC nonbibl
+) BIBL_END PUNC nonbibl
+, BIBL_END PUNC nonbibl
 
 Je BIBL_START FIRSTCAP nonbibl
 reprends BIBL_START ALLSMALL nonbibl
@@ -637,15 +637,15 @@ ici BIBL_START ALLSMALL nonbibl
 la BIBL_START ALLSMALL nonbibl
 définition BIBL_START ALLSMALL nonbibl
 des BIBL_START ALLSMALL nonbibl
-« BIBL_START PUNC c
+« BIBL_START PUNC nonbibl
 minorités BIBL_START ALLSMALL nonbibl
-» BIBL_START PUNC c
+» BIBL_START PUNC nonbibl
 proposée BIBL_START ALLSMALL nonbibl
 par BIBL_START ALLSMALL nonbibl
 Colette BIBL_START FIRSTCAP FORENAMELIST nonbibl
 Guillaumin BIBL_START FIRSTCAP SURNAMELIST nonbibl
-: BIBL_IN PUNC c
-« BIBL_IN PUNC c
+: BIBL_IN PUNC nonbibl
+« BIBL_IN PUNC nonbibl
 on BIBL_IN ALLSMALL nonbibl
 entendra BIBL_IN ALLSMALL nonbibl
 ici BIBL_IN ALLSMALL nonbibl
@@ -671,36 +671,36 @@ en BIBL_END ALLSMALL nonbibl
 état BIBL_END FIRSTCAP nonbibl
 de BIBL_END ALLSMALL nonbibl
 
-Mathieu BIBL_START FIRSTCAP SURNAMELIST surname
-Nicole-Claude BIBL_START FIRSTCAP FORENAMELIST forename
-, BIBL_START PUNC c
-« BIBL_START PUNC c
-Notes BIBL_START FIRSTCAP title
-pour BIBL_START ALLSMALL title
-une BIBL_IN ALLSMALL title
-définition BIBL_IN ALLSMALL title
-des BIBL_IN ALLSMALL title
-catégories BIBL_IN ALLSMALL title
-de BIBL_IN ALLSMALL title
-sexe BIBL_IN ALLSMALL title
-» BIBL_END PUNC c
-, BIBL_END PUNC c
-1970 BIBL_END ALLNUMBERS date
-, BIBL_END PUNC c
-repris BIBL_END ALLSMALL nolabel
-dans BIBL_END ALLSMALL bookindicator
+Mathieu BIBL_START FIRSTCAP SURNAMELIST nonbibl
+Nicole-Claude BIBL_START FIRSTCAP FORENAMELIST nonbibl
+, BIBL_START PUNC nonbibl
+« BIBL_START PUNC nonbibl
+Notes BIBL_START FIRSTCAP nonbibl
+pour BIBL_START ALLSMALL nonbibl
+une BIBL_IN ALLSMALL nonbibl
+définition BIBL_IN ALLSMALL nonbibl
+des BIBL_IN ALLSMALL nonbibl
+catégories BIBL_IN ALLSMALL nonbibl
+de BIBL_IN ALLSMALL nonbibl
+sexe BIBL_IN ALLSMALL nonbibl
+» BIBL_END PUNC nonbibl
+, BIBL_END PUNC nonbibl
+1970 BIBL_END ALLNUMBERS nonbibl
+, BIBL_END PUNC nonbibl
+repris BIBL_END ALLSMALL nonbibl
+dans BIBL_END ALLSMALL nonbibl
 
-Joan BIBL_START FIRSTCAP FORENAMELIST forename
-Scott BIBL_START FIRSTCAP SURNAMELIST surname
-a BIBL_IN ALLSMALL nolabel
-développé BIBL_IN ALLSMALL nolabel
-ce BIBL_END ALLSMALL nolabel
-concept BIBL_END ALLSMALL nolabel
-dans BIBL_END ALLSMALL bookindicator
+Joan BIBL_START FIRSTCAP FORENAMELIST nonbibl
+Scott BIBL_START FIRSTCAP SURNAMELIST nonbibl
+a BIBL_IN ALLSMALL nonbibl
+développé BIBL_IN ALLSMALL nonbibl
+ce BIBL_END ALLSMALL nonbibl
+concept BIBL_END ALLSMALL nonbibl
+dans BIBL_END ALLSMALL nonbibl
 
-Guillaumin BIBL_START FIRSTCAP SURNAMELIST surname
-Colette BIBL_IN FIRSTCAP FORENAMELIST forename
-, BIBL_END PUNC c
+Guillaumin BIBL_START FIRSTCAP SURNAMELIST nonbibl
+Colette BIBL_IN FIRSTCAP FORENAMELIST nonbibl
+, BIBL_END PUNC nonbibl
 
 Je BIBL_START FIRSTCAP nonbibl
 reprends BIBL_START ALLSMALL nonbibl
@@ -719,7 +719,7 @@ Thalmann BIBL_IN FIRSTCAP SURNAMELIST nonbibl
 et BIBL_IN ALLSMALL nonbibl
 du BIBL_IN ALLSMALL nonbibl
 CERIC BIBL_IN ALLCAP nonbibl
-( BIBL_IN PUNC c
+( BIBL_IN PUNC nonbibl
 Centre BIBL_END FIRSTCAP nonbibl
 d’études BIBL_END ALLSMALL nonbibl
 et BIBL_END ALLSMALL nonbibl
@@ -727,23 +727,23 @@ de BIBL_END ALLSMALL nonbibl
 recherches BIBL_END ALLSMALL nonbibl
 intereuropéennes BIBL_END ALLSMALL nonbibl
 contemporaines BIBL_END ALLSMALL nonbibl
-) BIBL_END PUNC c
-. BIBL_END PUNC c
+) BIBL_END PUNC nonbibl
+. BIBL_END PUNC nonbibl
 
-« BIBL_START PUNC c
-Femmes BIBL_START FIRSTCAP title
-, BIBL_START PUNC c
-féminisme BIBL_START ALLSMALL title
-, BIBL_IN PUNC c
-recherches BIBL_IN ALLSMALL title
-» BIBL_IN PUNC c
-, BIBL_IN PUNC c
-AFFER BIBL_IN ALLCAP publisher
-, BIBL_END PUNC c
-Toulouse BIBL_END FIRSTCAP PLACELIST place
-, BIBL_END PUNC c
-1984 BIBL_END ALLNUMBERS date
-. BIBL_END PUNC c
+« BIBL_START PUNC nonbibl
+Femmes BIBL_START FIRSTCAP nonbibl
+, BIBL_START PUNC nonbibl
+féminisme BIBL_START ALLSMALL nonbibl
+, BIBL_IN PUNC nonbibl
+recherches BIBL_IN ALLSMALL nonbibl
+» BIBL_IN PUNC nonbibl
+, BIBL_IN PUNC nonbibl
+AFFER BIBL_IN ALLCAP nonbibl
+, BIBL_END PUNC nonbibl
+Toulouse BIBL_END FIRSTCAP PLACELIST nonbibl
+, BIBL_END PUNC nonbibl
+1984 BIBL_END ALLNUMBERS nonbibl
+. BIBL_END PUNC nonbibl
 
 
 Par BIBL_START FIRSTCAP nonbibl
@@ -767,95 +767,95 @@ immigrées BIBL_END ALLSMALL title
 » BIBL_END PUNC c
 , BIBL_END PUNC c
 
-« BIBL_START PUNC c
-Approches BIBL_START FIRSTCAP title
-ethnographiques BIBL_START ALLSMALL title
-en BIBL_START ALLSMALL title
-sociologie BIBL_START ALLSMALL title
-de BIBL_START ALLSMALL title
-l’éducation BIBL_IN ALLSMALL title
-: BIBL_IN PUNC c
-l’école BIBL_IN ALLSMALL title
-et BIBL_IN ALLSMALL title
-la BIBL_IN ALLSMALL title
-communauté BIBL_IN ALLSMALL title
-, BIBL_END PUNC c
-l’établissement BIBL_END ALLSMALL title
-scolaire BIBL_END ALLSMALL title
-, BIBL_END PUNC c
-la BIBL_END ALLSMALL title
-classe BIBL_END ALLSMALL title
-» BIBL_END PUNC c
+« BIBL_START PUNC nonbibl
+Approches BIBL_START FIRSTCAP nonbibl
+ethnographiques BIBL_START ALLSMALL nonbibl
+en BIBL_START ALLSMALL nonbibl
+sociologie BIBL_START ALLSMALL nonbibl
+de BIBL_START ALLSMALL nonbibl
+l’éducation BIBL_IN ALLSMALL nonbibl
+: BIBL_IN PUNC nonbibl
+l’école BIBL_IN ALLSMALL nonbibl
+et BIBL_IN ALLSMALL nonbibl
+la BIBL_IN ALLSMALL nonbibl
+communauté BIBL_IN ALLSMALL nonbibl
+, BIBL_END PUNC nonbibl
+l’établissement BIBL_END ALLSMALL nonbibl
+scolaire BIBL_END ALLSMALL nonbibl
+, BIBL_END PUNC nonbibl
+la BIBL_END ALLSMALL nonbibl
+classe BIBL_END ALLSMALL nonbibl
+» BIBL_END PUNC nonbibl
 
-Van BIBL_START FIRSTCAP PLACELIST surname
-Zanten BIBL_START FIRSTCAP SURNAMELIST surname
-Agnès BIBL_START FIRSTCAP FORENAMELIST forename
-et BIBL_START ALLSMALL nolabel
-Anderson-Levitt BIBL_START FIRSTCAP surname
-Kathryn BIBL_START FIRSTCAP forename
-, BIBL_START PUNC c
-« BIBL_START PUNC c
-L’anthropologie BIBL_IN FIRSTCAP title
-de BIBL_IN ALLSMALL title
-l’éducation BIBL_IN ALLSMALL title
-aux BIBL_IN ALLSMALL title
-États-Unis BIBL_IN FIRSTCAP title
-: BIBL_IN PUNC c
-méthodes BIBL_IN ALLSMALL title
-, BIBL_IN PUNC c
-théories BIBL_END ALLSMALL title
-et BIBL_END ALLSMALL title
-applications BIBL_END ALLSMALL title
-d’une BIBL_END ALLSMALL title
-discipline BIBL_END ALLSMALL title
-en BIBL_END ALLSMALL title
-évolution BIBL_END FIRSTCAP title
-» BIBL_END PUNC c
-, BIBL_END PUNC c
+Van BIBL_START FIRSTCAP PLACELIST nonbibl
+Zanten BIBL_START FIRSTCAP SURNAMELIST nonbibl
+Agnès BIBL_START FIRSTCAP FORENAMELIST nonbibl
+et BIBL_START ALLSMALL nonbibl
+Anderson-Levitt BIBL_START FIRSTCAP nonbibl
+Kathryn BIBL_START FIRSTCAP nonbibl
+, BIBL_START PUNC nonbibl
+« BIBL_START PUNC nonbibl
+L’anthropologie BIBL_IN FIRSTCAP nonbibl
+de BIBL_IN ALLSMALL nonbibl
+l’éducation BIBL_IN ALLSMALL nonbibl
+aux BIBL_IN ALLSMALL nonbibl
+États-Unis BIBL_IN FIRSTCAP nonbibl
+: BIBL_IN PUNC nonbibl
+méthodes BIBL_IN ALLSMALL nonbibl
+, BIBL_IN PUNC nonbibl
+théories BIBL_END ALLSMALL nonbibl
+et BIBL_END ALLSMALL nonbibl
+applications BIBL_END ALLSMALL nonbibl
+d’une BIBL_END ALLSMALL nonbibl
+discipline BIBL_END ALLSMALL nonbibl
+en BIBL_END ALLSMALL nonbibl
+évolution BIBL_END FIRSTCAP nonbibl
+» BIBL_END PUNC nonbibl
+, BIBL_END PUNC nonbibl
 
-Vasquez BIBL_START FIRSTCAP SURNAMELIST surname
-Ana BIBL_START FIRSTCAP FORENAMELIST forename
-, BIBL_START PUNC c
-« BIBL_START PUNC c
-Études BIBL_START FIRSTCAP title
-ethnographiques BIBL_START ALLSMALL title
-des BIBL_START ALLSMALL title
-enfants BIBL_START ALLSMALL title
-d’étrangers BIBL_START ALLSMALL title
-à BIBL_START ALLCAP title
-l’école BIBL_START ALLSMALL title
-française BIBL_START ALLSMALL title
-» BIBL_IN PUNC c
-; BIBL_IN PUNC c
-Payet BIBL_IN FIRSTCAP SURNAMELIST surname
-Jean-Paul BIBL_IN FIRSTCAP FORENAMELIST forename
-, BIBL_IN PUNC c
-« BIBL_IN PUNC c
-Civilités BIBL_IN FIRSTCAP title
-et BIBL_IN ALLSMALL title
-ethnicité BIBL_IN ALLSMALL title
-dans BIBL_IN ALLSMALL title
-les BIBL_IN ALLSMALL title
-collèges BIBL_IN ALLSMALL title
-de BIBL_IN ALLSMALL title
-banlieue BIBL_END ALLSMALL title
-: BIBL_END PUNC c
-enjeux BIBL_END ALLSMALL title
-, BIBL_END PUNC c
-résistances BIBL_END ALLSMALL title
-et BIBL_END ALLSMALL title
-dérives BIBL_END ALLSMALL title
-d’une BIBL_END ALLSMALL title
-action BIBL_END ALLSMALL title
-scolaire BIBL_END ALLSMALL title
-territorialisée BIBL_END ALLSMALL title
-» BIBL_END PUNC c
-, BIBL_END PUNC c
+Vasquez BIBL_START FIRSTCAP SURNAMELIST nonbibl
+Ana BIBL_START FIRSTCAP FORENAMELIST nonbibl
+, BIBL_START PUNC nonbibl
+« BIBL_START PUNC nonbibl
+Études BIBL_START FIRSTCAP nonbibl
+ethnographiques BIBL_START ALLSMALL nonbibl
+des BIBL_START ALLSMALL nonbibl
+enfants BIBL_START ALLSMALL nonbibl
+d’étrangers BIBL_START ALLSMALL nonbibl
+à BIBL_START ALLCAP nonbibl
+l’école BIBL_START ALLSMALL nonbibl
+française BIBL_START ALLSMALL nonbibl
+» BIBL_IN PUNC nonbibl
+; BIBL_IN PUNC nonbibl
+Payet BIBL_IN FIRSTCAP SURNAMELIST nonbibl
+Jean-Paul BIBL_IN FIRSTCAP FORENAMELIST nonbibl
+, BIBL_IN PUNC nonbibl
+« BIBL_IN PUNC nonbibl
+Civilités BIBL_IN FIRSTCAP nonbibl
+et BIBL_IN ALLSMALL nonbibl
+ethnicité BIBL_IN ALLSMALL nonbibl
+dans BIBL_IN ALLSMALL nonbibl
+les BIBL_IN ALLSMALL nonbibl
+collèges BIBL_IN ALLSMALL nonbibl
+de BIBL_IN ALLSMALL nonbibl
+banlieue BIBL_END ALLSMALL nonbibl
+: BIBL_END PUNC nonbibl
+enjeux BIBL_END ALLSMALL nonbibl
+, BIBL_END PUNC nonbibl
+résistances BIBL_END ALLSMALL nonbibl
+et BIBL_END ALLSMALL nonbibl
+dérives BIBL_END ALLSMALL nonbibl
+d’une BIBL_END ALLSMALL nonbibl
+action BIBL_END ALLSMALL nonbibl
+scolaire BIBL_END ALLSMALL nonbibl
+territorialisée BIBL_END ALLSMALL nonbibl
+» BIBL_END PUNC nonbibl
+, BIBL_END PUNC nonbibl
 
 Voir BIBL_START FIRSTCAP nonbibl
-Zaidman BIBL_IN FIRSTCAP SURNAMELIST surname
-Claude BIBL_END FIRSTCAP FORENAMELIST forename
-, BIBL_END PUNC c
+Zaidman BIBL_IN FIRSTCAP SURNAMELIST nonbibl
+Claude BIBL_END FIRSTCAP FORENAMELIST nonbibl
+, BIBL_END PUNC nonbibl
 
 Signalons BIBL_START FIRSTCAP nonbibl
 toutefois BIBL_START ALLSMALL nonbibl
@@ -867,7 +867,7 @@ Revue BIBL_START FIRSTCAP nonbibl
 française BIBL_START ALLSMALL nonbibl
 de BIBL_START ALLSMALL nonbibl
 pédagogie BIBL_START ALLSMALL nonbibl
-, BIBL_START PUNC c
+, BIBL_START PUNC nonbibl
 on BIBL_START ALLSMALL nonbibl
 trouve BIBL_START ALLSMALL nonbibl
 dès BIBL_START ALLSMALL nonbibl
@@ -877,8 +877,8 @@ article BIBL_START ALLSMALL nonbibl
 de BIBL_START ALLSMALL nonbibl
 N. BIBL_START INITIAL ALLCAP FORENAMELIST nonbibl
 Mosconi BIBL_START FIRSTCAP SURNAMELIST nonbibl
-, BIBL_START PUNC c
-« BIBL_START PUNC c
+, BIBL_START PUNC nonbibl
+« BIBL_START PUNC nonbibl
 Des BIBL_START FIRSTCAP nonbibl
 rapports BIBL_START ALLSMALL nonbibl
 entre BIBL_START ALLSMALL nonbibl
@@ -893,8 +893,8 @@ chances BIBL_IN ALLSMALL nonbibl
 entre BIBL_IN ALLSMALL nonbibl
 les BIBL_IN ALLSMALL nonbibl
 sexes BIBL_IN ALLSMALL nonbibl
-» BIBL_IN PUNC c
-, BIBL_IN PUNC c
+» BIBL_IN PUNC nonbibl
+, BIBL_IN PUNC nonbibl
 et BIBL_IN ALLSMALL nonbibl
 un BIBL_IN ALLSMALL nonbibl
 autre BIBL_IN ALLSMALL nonbibl
@@ -904,8 +904,8 @@ même BIBL_IN ALLSMALL nonbibl
 auteur BIBL_IN ALLSMALL nonbibl
 en BIBL_IN ALLSMALL nonbibl
 1987 BIBL_IN ALLNUMBERS nonbibl
-, BIBL_IN PUNC c
-« BIBL_IN PUNC c
+, BIBL_IN PUNC nonbibl
+« BIBL_IN PUNC nonbibl
 La BIBL_IN FIRSTCAP nonbibl
 mixité BIBL_IN ALLSMALL nonbibl
 dans BIBL_IN ALLSMALL nonbibl
@@ -917,7 +917,7 @@ l’impossible BIBL_END ALLSMALL nonbibl
 reconnaissance BIBL_END ALLSMALL nonbibl
 de BIBL_END ALLSMALL nonbibl
 l’autre BIBL_END ALLSMALL nonbibl
-» BIBL_END PUNC c
+» BIBL_END PUNC nonbibl
 qui BIBL_END ALLSMALL nonbibl
 sont BIBL_END ALLSMALL nonbibl
 des BIBL_END ALLSMALL nonbibl
@@ -941,25 +941,25 @@ en BIBL_END ALLSMALL nonbibl
 termes BIBL_END ALLSMALL nonbibl
 de BIBL_END ALLSMALL nonbibl
 mixité BIBL_END ALLSMALL nonbibl
-. BIBL_END PUNC c
+. BIBL_END PUNC nonbibl
 
-Payet BIBL_START FIRSTCAP SURNAMELIST surname
-Jean-Paul BIBL_START FIRSTCAP FORENAMELIST forename
-et BIBL_START ALLSMALL nolabel
-Zanten BIBL_START FIRSTCAP surname
-Van BIBL_IN FIRSTCAP PLACELIST namelink
-Agnès BIBL_IN FIRSTCAP forename
-, BIBL_IN PUNC c
-« BIBL_IN PUNC c
-École BIBL_END FIRSTCAP title
-et BIBL_END ALLSMALL title
-immigration BIBL_END ALLSMALL title
-» BIBL_END PUNC c
-, BIBL_END PUNC c
+Payet BIBL_START FIRSTCAP SURNAMELIST nonbibl
+Jean-Paul BIBL_START FIRSTCAP FORENAMELIST nonbibl
+et BIBL_START ALLSMALL nonbibl
+Zanten BIBL_START FIRSTCAP nonbibl
+Van BIBL_IN FIRSTCAP PLACELIST nonbibl
+Agnès BIBL_IN FIRSTCAP nonbibl
+, BIBL_IN PUNC nonbibl
+« BIBL_IN PUNC nonbibl
+École BIBL_END FIRSTCAP nonbibl
+et BIBL_END ALLSMALL nonbibl
+immigration BIBL_END ALLSMALL nonbibl
+» BIBL_END PUNC nonbibl
+, BIBL_END PUNC nonbibl
 
-Raissiguier BIBL_START FIRSTCAP surname
-Catherine BIBL_IN FIRSTCAP forename
-, BIBL_END PUNC c
+Raissiguier BIBL_START FIRSTCAP nonbibl
+Catherine BIBL_IN FIRSTCAP nonbibl
+, BIBL_END PUNC nonbibl
 
 Voir BIBL_START FIRSTCAP nonbibl
 le BIBL_START ALLSMALL nonbibl
@@ -968,47 +968,47 @@ de BIBL_START ALLSMALL nonbibl
 recherche BIBL_START ALLSMALL nonbibl
 déjà BIBL_START ALLSMALL nonbibl
 cité BIBL_START ALLSMALL nonbibl
-Goldberg-Salinas BIBL_START FIRSTCAP SURNAMELIST surname
-Anette BIBL_START FIRSTCAP FORENAMELIST forename
-et BIBL_IN ALLSMALL nolabel
-Zaidman BIBL_IN FIRSTCAP SURNAMELIST surname
-Claude BIBL_IN FIRSTCAP FORENAMELIST forename
-, BIBL_IN PUNC c
-« BIBL_IN PUNC c
-Parcours BIBL_IN FIRSTCAP title
-scolaires BIBL_IN ALLSMALL title
-des BIBL_IN ALLSMALL title
-filles BIBL_IN ALLSMALL title
-et BIBL_END ALLSMALL title
-des BIBL_END ALLSMALL title
-garçons BIBL_END ALLSMALL title
-de BIBL_END ALLSMALL title
-parents BIBL_END ALLSMALL title
-migrants BIBL_END ALLSMALL title
-» BIBL_END PUNC c
-, BIBL_END PUNC c
-1997 BIBL_END ALLNUMBERS date
-. BIBL_END PUNC c
+Goldberg-Salinas BIBL_START FIRSTCAP SURNAMELIST nonbibl
+Anette BIBL_START FIRSTCAP FORENAMELIST nonbibl
+et BIBL_IN ALLSMALL nonbibl
+Zaidman BIBL_IN FIRSTCAP SURNAMELIST nonbibl
+Claude BIBL_IN FIRSTCAP FORENAMELIST nonbibl
+, BIBL_IN PUNC nonbibl
+« BIBL_IN PUNC nonbibl
+Parcours BIBL_IN FIRSTCAP nonbibl
+scolaires BIBL_IN ALLSMALL nonbibl
+des BIBL_IN ALLSMALL nonbibl
+filles BIBL_IN ALLSMALL nonbibl
+et BIBL_END ALLSMALL nonbibl
+des BIBL_END ALLSMALL nonbibl
+garçons BIBL_END ALLSMALL nonbibl
+de BIBL_END ALLSMALL nonbibl
+parents BIBL_END ALLSMALL nonbibl
+migrants BIBL_END ALLSMALL nonbibl
+» BIBL_END PUNC nonbibl
+, BIBL_END PUNC nonbibl
+1997 BIBL_END ALLNUMBERS nonbibl
+. BIBL_END PUNC nonbibl
 
-Balibar BIBL_START FIRSTCAP SURNAMELIST surname
-Etienne BIBL_START FIRSTCAP FORENAMELIST forename
-et BIBL_START ALLSMALL nolabel
-Wallerstein BIBL_START FIRSTCAP surname
-Immanuel BIBL_START FIRSTCAP forename
-, BIBL_START PUNC c
-Race BIBL_IN ITALIC FIRSTCAP title
-, BIBL_IN PUNC c
-nation BIBL_IN ITALIC ALLSMALL title
-, BIBL_IN PUNC c
-classe BIBL_IN ITALIC ALLSMALL title
-, BIBL_IN PUNC c
-les BIBL_IN ITALIC ALLSMALL title
-identités BIBL_IN ITALIC ALLSMALL title
-ambiguës BIBL_END ITALIC ALLSMALL title
-, BIBL_END PUNC c
-La BIBL_END FIRSTCAP publisher
-Découverte BIBL_END FIRSTCAP publisher
-, BIBL_END PUNC c
-1988 BIBL_END ALLNUMBERS date
-. BIBL_END PUNC c
+Balibar BIBL_START FIRSTCAP SURNAMELIST nonbibl
+Etienne BIBL_START FIRSTCAP FORENAMELIST nonbibl
+et BIBL_START ALLSMALL nonbibl
+Wallerstein BIBL_START FIRSTCAP nonbibl
+Immanuel BIBL_START FIRSTCAP nonbibl
+, BIBL_START PUNC nonbibl
+Race BIBL_IN ITALIC FIRSTCAP nonbibl
+, BIBL_IN PUNC nonbibl
+nation BIBL_IN ITALIC ALLSMALL nonbibl
+, BIBL_IN PUNC nonbibl
+classe BIBL_IN ITALIC ALLSMALL nonbibl
+, BIBL_IN PUNC nonbibl
+les BIBL_IN ITALIC ALLSMALL nonbibl
+identités BIBL_IN ITALIC ALLSMALL nonbibl
+ambiguës BIBL_END ITALIC ALLSMALL nonbibl
+, BIBL_END PUNC nonbibl
+La BIBL_END FIRSTCAP nonbibl
+Découverte BIBL_END FIRSTCAP nonbibl
+, BIBL_END PUNC nonbibl
+1988 BIBL_END ALLNUMBERS nonbibl
+. BIBL_END PUNC nonbibl
 

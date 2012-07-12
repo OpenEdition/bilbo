@@ -26,6 +26,7 @@ class CRF(object):
 		tr : indicator check, it gives the valid instance indices 
 		extr :  
 		indices : si l'on veut utiliser le meme fichier indice_trainning le passer en parametre
+		
 	'''
 	def prepareTrain(self, corpus, numCorpus, fichierRes, tr=-1, extr=-1, indices=""):
 		listReferences = corpus.getListReferences(numCorpus)
@@ -39,8 +40,10 @@ class CRF(object):
 		'fichier pour le crf'
 		if numCorpus == 2 and extr == 1:
 			'modifie les indice pour indiquer les reference nonbibl'
+			
 			extractor.extractorIndices("model/corpus2/svm_revues_predictions_training", newListReferences) 
 			extractor.extractor(1, nbRef, self.repResult+fichierRes, newListReferences, tr, extr)
+			
 		else:
 			extractor.extractor(numCorpus, nbRef, self.repResult+fichierRes, newListReferences, tr, extr)
 		
@@ -50,7 +53,7 @@ class CRF(object):
 	preparerTest
 		corpus : objet Corpus
 		numCorpus : int :type de corpus 1, 2 ou 3
-		indiceSvm : 0 normale, -1: data04SVM
+		indiceSvm : 0 normale, -1: data04SVM, 2 : external data => svm isn't call
 		indices : fichier save indice
 	'''
 	def preparerTest(self, corpus, numCorpus, indiceSvm = 0, indices=""):
@@ -67,7 +70,7 @@ class CRF(object):
 			extractor.extractor(numCorpus, nbRef, self.repResult+"data04SVM_ori.txt", ListReferences(listReferencesObj.getReferences(),numCorpus))
 		else:
 			'fichier pour le crf'
-			if numCorpus == 2:
+			if numCorpus == 2 and indiceSvm != 2 :
 				extractor.extractorIndices4new("model/corpus2/svm_revues_predictions_new", ListReferences(listReferencesObj.getReferences(),numCorpus))
 			
 			extractor.extractor(1, nbRef, self.repResult+"testdatawithlabel_CRF.txt",ListReferences(listReferencesObj.getReferences(),numCorpus), -1, 1)
