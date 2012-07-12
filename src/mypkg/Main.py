@@ -2,8 +2,9 @@
 Created on 19 avr. 2012
 
 @author: Young-min Kim, Jade Tavernier
-	argv[1] => repertory with file to annotate 
-	argv[2] => repertory where build result file (initial : Result)
+	argv[1] => 1 => annote corpus 1, 2 => annote corpus 2, 11 => train corpus 1, 22 => train corpus 2
+	argv[2] => repertory with file to annotate 
+	argv[3] => repertory where build result file (initial : Result)
 
 '''
 import sys

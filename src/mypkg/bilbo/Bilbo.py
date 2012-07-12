@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 '''
 -----------------------------------------------------------------------------------------------------------------------
 BILBO : Automatic annotation of bibliographic reference
@@ -31,6 +32,7 @@ class Bilbo(object):
 	def __init__(self, repResult="Result/"):
 		self.crf = CRF(repResult)
 		self.svm = SVM(repResult)
+		self.repResult = repResult
 		
 	'''
 	apprentissage : apprentissage reference corpus 1
@@ -99,7 +101,7 @@ class Bilbo(object):
 			print self.rss()
 			print self.vsz()
 
-			corpus.addTagReferences("Result/testEstCRF.xml")
+			corpus.addTagReferences(self.repResult+"testEstCRF.xml", "bibl", 1)
 			dtime = time.time()
 			difftime = dtime - ctime
 			difftupleA = time.gmtime(difftime)
@@ -123,16 +125,22 @@ class Bilbo(object):
 	'''
 	def annoterCorpus2(self, repCorpus):
 		corpus = Corpus(repCorpus)
-		corpus.extractCorpus2()
+		fichiers = corpus.getFiles()
+		fichiersTab = self._list_split(fichiers, 50)
 		
-		self.crf.preparerTest(corpus, 2, -1)
-		#self.crf.runTrain("model/corpus2/", "data04SVM_ori.txt")
+		for fichierTab in fichiersTab:
+			corpus.extractCorpus2()
 		
-		self.svm.prepareTest(corpus)
-		self.svm.runTest("model/corpus2/")
-		
-		self.crf.preparerTest(corpus, 2)
-		self.crf.runTest("model/corpus2/", 'testdata_CRF.txt')
+			self.crf.preparerTest(corpus, 2, -1)
+			
+			self.svm.prepareTest(corpus)
+			self.svm.runTest("model/corpus2/")
+			
+			self.crf.preparerTest(corpus, 2)
+			self.crf.runTest("model/corpus2/", 'testdata_CRF.txt')
+			
+			
+			corpus.addTagReferences(self.repResult+"testEstCRF.xml", "note", 2)
 		
 		return
 	

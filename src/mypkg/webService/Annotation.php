@@ -1,15 +1,9 @@
 <?php
     
     
-    #dossier_code dossier ou se trouve le code
-    #dossier_fichier dossier ou l'on met les fichiers generés par le programme
-    $dossier_code_bibl = "code/bibliographie/";
-    $dossier_code_note = "code/note/";
-    $dossier_code_langue = "code/langue/";
+    $dossier_fichier_bilbo = "../fichierRes/";
     $dossier_fichier = "code/fichierRes/";
-    
-    #cles isbn
-    $key = "XUDKA8L5";
+
     
 /************************************ SERVICE ****************************************/
     /*
@@ -19,7 +13,7 @@
      * @return $resultat  article annoté
      */
     function getAnnotationArticle($dossier,$article) {
-        global $dossier_code_bibl,$dossier_code_note, $dossier_fichier;
+        global $dossier_fichier, $dossier_fichier_bilbo;
         $resultat = "test";
         
         
@@ -30,18 +24,29 @@
         $fich = fopen($dossier_fichier.$article, "w"); 
         fwrite($fich, $dossier); 
         fclose($fich);
-                
-        lancerAnnotationBibliographie($dossier_code_bibl, $dossier_fichier, $article);
-        #lancerAnnotationNote($dossier_code_note, $dossier_fichier, $article);
+          
+        #lance BILBO
+        $saveRep = getcwd();
         
-        # faire quelque chose pour modifier si erreur d'annotation
-       
-        #lit le fichier et le met dans resultat
-        $fichier = $dossier_fichier."testEstCRF2.xml";
+        chdir("code/bilbo");
+        $newRep = getcwd();
+        
+        /*recupere les chemin sans bilbo*/
+        $splitRep = split("/", $newRep);
+        array_pop($splitRep);
+        $newRepRes = join("/", $splitRep);
+        $newRepRes .= "/fichierRes/";
+        
+        $res = exec("python ".$newRep."/src/mypkg/Main.py 1 ".$newRepRes." ".$newRepRes,$out,$error);
+        $test = getcwd();
+        chdir($saveRep);
+        
+        $fichier = $newRepRes."testEstCRF.xml";
         $resultat = file_get_contents($fichier);
-
+        
         
         return $resultat;
+
     } 
     
     /*
@@ -51,7 +56,7 @@
      * @return $resultat  article annoté
      */
     function getAnnotationNoteArticle($dossier,$article) {
-        global $dossier_code_bibl,$dossier_code_note, $dossier_fichier;
+        global $dossier_fichier, $dossier_fichier_bilbo;
         $resultat = "test";
         
         
@@ -63,19 +68,28 @@
         fwrite($fich, $dossier); 
         fclose($fich);
         
-        #lancerAnnotationBibliographie($dossier_code_bibl, $dossier_fichier, $article);
-        lancerAnnotationNote($dossier_code_note, $dossier_fichier, $article);
+        #lance BILBO
+        $saveRep = getcwd();
         
-        # faire quelque chose pour modifier si erreur d'annotation
+        chdir("code/bilbo");
+        $newRep = getcwd();
         
-
+        /*recupere les chemin sans bilbo*/
+        $splitRep = split("/", $newRep);
+        array_pop($splitRep);
+        $newRepRes = join("/", $splitRep);
+        $newRepRes .= "/fichierRes/";
         
-        #lit le fichier et le met dans resultat
-        $fichier = $dossier_fichier."testEstCRF2.xml";
+        $res = exec("python ".$newRep."/src/mypkg/Main.py 2 ".$newRepRes." ".$newRepRes,$out,$error);
+        $test = getcwd();
+        chdir($saveRep);
+        
+        $fichier = $newRepRes."testEstCRF.xml";
         $resultat = file_get_contents($fichier);
         
         
         return $resultat;
+
     } 
     
     /*
@@ -84,7 +98,7 @@
      * @return $resultat  article annoté
      */
     function getAnnotationUrl($url) {
-        global $dossier_code_bibl,$dossier_code_note, $dossier_fichier;
+        global $dossier_fichier, $dossier_fichier_bilbo;
         $resultat = "";
         
         #supprime les fichiers du dossier buffer
@@ -128,21 +142,28 @@
         fwrite($fich2, $contents); 
         fclose($fich2);
         
-        #transforme le fichier html en xml
-        #exec("perl ".$dossier_code_bibl."transformeHtmlEnXml.pl ".$dossier_fichier."fichier_a_annoter.txt ".$dossier_fichier."fichier_a_annoter.xml");
+        #lance BILBO
+        $saveRep = getcwd();
         
+        chdir("code/bilbo");
+        $newRep = getcwd();
         
-        lancerAnnotationBibliographie($dossier_code_bibl, $dossier_fichier, "fichier_a_annoter.xml");
+        /*recupere les chemin sans bilbo*/
+        $splitRep = split("/", $newRep);
+        array_pop($splitRep);
+        $newRepRes = join("/", $splitRep);
+        $newRepRes .= "/fichierRes/";
         
-        # faire quelque chose pour modifier si erreur d'annotation
+        $res = exec("python ".$newRep."/src/mypkg/Main.py 1 ".$newRepRes." ".$newRepRes,$out,$error);
+        $test = getcwd();
+        chdir($saveRep);
         
-        $fichier = $dossier_fichier."testEstCRF2.xml";
+        $fichier = $newRepRes."testEstCRF.xml";
         $resultat = file_get_contents($fichier);
-
-       
         
         
         return $resultat;
+
     } 
 
     
@@ -152,8 +173,7 @@
      * @return $result  article annoté
      */
     function getAnnotationBibliographieTexte($reference) {
-        global $dossier_code_bibl,$dossier_code_note, $dossier_fichier;
-        $resultat = "tet#";
+        global $dossier_fichier_bilbo, $dossier_fichier;
         
         #supprime les fichiers du dossier buffer
         system("rm ".$dossier_fichier."*");
@@ -162,13 +182,26 @@
         $resultat = transformeXml($reference, $dossier_fichier, "fichier_a_annoter.xml", "bibl");
         
         
-        lancerAnnotationBibliographie($dossier_code_bibl, $dossier_fichier, "fichier_a_annoter.xml");
+        #lance BILBO
+        $saveRep = getcwd();
         
-        # faire quelque chose pour modifier si erreur d'annotation
+        chdir("code/bilbo");
+        $newRep = getcwd();
         
-        $fichier = $dossier_fichier."testEstCRF2.xml";
+        /*recupere les chemin sans bilbo*/
+        $splitRep = split("/", $newRep);
+        array_pop($splitRep);
+        $newRepRes = join("/", $splitRep);
+        $newRepRes .= "/fichierRes/";
+
+        $res = exec("python ".$newRep."/src/mypkg/Main.py 1 ".$newRepRes." ".$newRepRes,$out,$error);
+        $test = getcwd();
+        chdir($saveRep);
+        
+        $fichier = $newRepRes."testEstCRF.xml";
         $resultat = file_get_contents($fichier);
-        
+       
+
         return $resultat;
     } 
     
@@ -178,10 +211,8 @@
      * @return $result  article annoté
      */
     function getAnnotationNoteTexte($reference) {
-        global $dossier_code_bibl,$dossier_code_note, $dossier_fichier;
-        $resultat = "tet#";
+        global $dossier_fichier_bilbo, $dossier_fichier;
         
-    
         #supprime les fichiers du dossier buffer
         system("rm ".$dossier_fichier."*");
         
@@ -189,20 +220,29 @@
         $resultat = transformeXml($reference, $dossier_fichier, "fichier_a_annoter.xml", "note");
         
         
-        lancerAnnotationNote($dossier_code_note, $dossier_fichier, "fichier_a_annoter.xml");
+        #lance BILBO
+        $saveRep = getcwd();
         
-        # faire quelque chose pour modifier si erreur d'annotation
+        chdir("code/bilbo");
+        $newRep = getcwd();
         
-        $fichier = $dossier_fichier."testEstCRF2.xml";
+        /*recupere les chemin sans bilbo*/
+        $splitRep = split("/", $newRep);
+        array_pop($splitRep);
+        $newRepRes = join("/", $splitRep);
+        $newRepRes .= "/fichierRes/";
+        
+        $res = exec("python ".$newRep."/src/mypkg/Main.py 2 ".$newRepRes." ".$newRepRes, $out, $error);
+        $test = getcwd();
+        chdir($saveRep);
+        
+        $fichier = $newRepRes."testEstCRF.xml";
         $resultat = file_get_contents($fichier);
-        
         
         return $resultat;
     } 
     
-
-
-        
+            
 /************************************ FONCTION COMPLEMENTAIRE *************************/
     /*/Applications/XAMPP/xamppfiles/htdocs/annotation/code
      * Fonction transformeXml permet de generer le fichier xml de la reference 
@@ -212,6 +252,13 @@
      * @return $resultat
      */
     function transformeXml($reference, $dossier, $nomFichier, $balise) {
+        $saveRep = getcwd();
+        
+        /*$splitRep = split("/", $saveRep);
+        array_pop($splitRep);
+        $rep = join("/", $splitRep);
+        $rep .= "/fichierRes/";*/
+        
         $resultat = $dossier.$nomFichier;
         
         $handle = fopen($dossier.$nomFichier, "w"); 
@@ -225,62 +272,6 @@
         return $resultat;
     } 
     
-    /*
-     * Fonction lancerAnnotationBibliographie permet de lancer le programme d'annotation sur les bibliographies
-     * @param $dossier_code  dossier ou se trouve le code
-     * @param $dossier  dossier ou se trouve le fichier a annoter
-     * @param $fichier  nom du fichier a annoter
-     * @return $resultat
-     */
-    function lancerAnnotationBibliographie($dossier_code, $dossier, $fichier) {
-       
-        #lancer le programme de young min puis afficher les references initial et le resultat        
-       
-        $fichier = preg_replace("/ /i","\ ",$fichier);#permet de proteger les espaces
-
-        exec("python ".$dossier_code."repreparerCRF_modifier.py ".$dossier_code." ".$dossier." ".$fichier." 0");
-        exec("python ".$dossier_code."runCRF_modifier.py ".$dossier."testdata_CRF2.txt"." 2");
-        
-        #doi reference
-        exec("python ".$dossier_code."identifier.py ".$dossier."testEstCRF2.xml > ".$dossier."doi.txt");
-        
-    } 
-
-    /*
-     * Fonction lancerAnnotationNote permet de lancer le programme d'annotation sur les notes
-     * @param $dossier_code  dossier ou se trouve le code
-     * @param $dossier  dossier ou se trouve le fichier a annoter
-     * @param $fichier  nom du fichier a annoter
-     * @return $resultat
-     */
-    function lancerAnnotationNote($dossier_code, $dossier, $fichier) {
-
-    } 
-
-    
-    /*
-     * Fonction verifierPublisher permet de retrouver le bon livre par rapport au publisher
-     * @param $publisher  publisher d'origine
-     * @param $livres  tableau liste des livres
-     * @return livreOk le livre correspondant
-     */
-    function verifierPublisher($publisher, $livres){
-        $buf = 0;
-        
-        foreach($livres as $livre){
-            $res = similar_text(strtolower($publisher), strtolower($livre["PublisherText"]));
-            
-            if($res == 100){
-                return $livre;
-            }elseif($buf < $res){
-                $buf = $res;
-                $livreOk = $livre;
-            }
-        }
-        return $livreOk;
-        
-    }
-    
     
 /***************************** mise en place du service *****************************/
     // Désactivation du cache WSDL
@@ -289,7 +280,7 @@
     // Catch l'erreur si l'instanciation la classe Serveur
     // échoue, on retourne l'erreur
     try {
-        $server = new SoapServer('..KB/config/config_wsdl.wsdl');
+        $server = new SoapServer('config_wsdl2.wsdl');
         // On ajoute la méthode "getResult" que le serveur va gérer
         #  $server->setClass("Annotation");
         $server->addFunction("getAnnotationArticle");
@@ -297,8 +288,6 @@
         $server->addFunction("getAnnotationBibliographieTexte");
         $server->addFunction("getAnnotationUrl");
         $server->addFunction("getAnnotationNoteTexte");
-
-        
 
     } catch (Exception $e) {
         echo 'erreur'.$e;

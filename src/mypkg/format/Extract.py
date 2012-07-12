@@ -11,6 +11,7 @@ import codecs
 from mypkg.extra.Name import Name
 from mypkg.extra.Place import Place
 from mypkg.extra.Properlist import Properlist
+import sys
 
 class Extract(object):
 
@@ -171,6 +172,8 @@ class Extract(object):
 		for reference in listRef.getReferences():
 			cpt=0
 			for mot in reference.getWord():
+				#mot.nom = self.convertToUnicode(mot.nom)
+				
 				for feat in mot.listNomFeature():
 					feature += feat.upper()+" "
 					if cpt == 0 and (feat.lower() == "initial"):
@@ -384,3 +387,14 @@ class Extract(object):
 				listRef.getReferencesIndice(i).train = -1
 			i += 1
 		return
+	
+	'''
+	convertToUnicode : converti une chaine en unicode
+	'''
+	def convertToUnicode(self, chaine):
+		try:
+			if isinstance(chaine, str):
+				chaine = unicode(chaine, sys.stdin.encoding)
+		except:
+			chaine = unicode(chaine, 'ascii')
+		return chaine

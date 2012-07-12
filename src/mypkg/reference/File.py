@@ -107,7 +107,7 @@ class File(object):
 		tagTypeCorpus : balise qui entour la reference : corpus 1 = bibl
 		tagTypeList : balise qui entoure les references : corpus 1 = listbibl
 	'''
-	def buildReferences(self, references, tagTypeCorpus, tagTypeList):
+	def buildReferences(self, references, tagTypeCorpus, typeCorpus):
 		cptWord = 0
 		cptRef = 0
 		cptItem = 0
@@ -117,8 +117,9 @@ class File(object):
 		baliseBefore = ""
 		ref_finale = ""
 		flagNonLabel = 0
+		ref_ori = []
 		
-		'lit le fichier resultat de mallet'
+		'lit le fichier initial'
 		for line in open (self.nom, 'r') :
 			tmp_str = tmp_str + ' ' + line
 				
@@ -132,8 +133,7 @@ class File(object):
 			baliseBefore = ""
 			flagItem = 0
 			ref_finale = ""
-			ref_ori = s[cptRef]
-			ref_ori.contents = []
+			
 			cptWord = 0
 			allTag = ref.findAll(True)
 			
@@ -142,7 +142,7 @@ class File(object):
 				words = re.split("\s", content[0])
 				for word in words:
 					if word != "":
-						wordInRef = self.corpus[1].getReferencesIndice(cptRef).getWordIndice(cptWord)
+						wordInRef = self.corpus[typeCorpus].getReferencesIndice(cptRef).getWordIndice(cptWord)
 						
 						'transforme en unicode'
 						wordInRef.nom = self.convertToUnicode(wordInRef.nom)
@@ -158,7 +158,7 @@ class File(object):
 								balise = ""
 							ref_finale += wordInRef.nom
 							cptWord += 1
-							wordInRef = self.corpus[1].getReferencesIndice(cptRef).getWordIndice(cptWord)
+							wordInRef = self.corpus[typeCorpus].getReferencesIndice(cptRef).getWordIndice(cptWord)
 							balise = ""
 							wordInRef.nom = self.convertToUnicode(wordInRef.nom)
 							
@@ -225,9 +225,13 @@ class File(object):
 			cptItem -= 1
 			
 		try:
-			listBibl = soup.find(tagTypeList)
-			listBibl.contents = []
-			listBibl.contents = s
+			cpt = 0
+			listRef = soup.findAll(tagTypeCorpus)
+			for ref in listRef:
+				ref.contents = []
+				texte = ref_ori[cpt]
+				ref.contents.append(texte)
+				cpt += 1
 		except :
 			pass
 		

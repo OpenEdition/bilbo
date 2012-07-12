@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 '''
 Created on 11 juin 2012
 
@@ -72,7 +73,7 @@ class Extract_svm(Extract):
         
         self.insert_lineFeatures(feature_data)
         self.print_output(token_data, feature_data, bibls, tr, indices, file_out)
-        self.load_original(filename_ori, indices)
+        #self.load_original(filename_ori, indices)
     
         return
     

@@ -38,7 +38,7 @@ class Rule(object):
 					self.regles[lineSplit[1]]["caracteristique"] = []
 					self.regles[lineSplit[1]]["regle"] = []
 					
-					'adde les caracteristique de cette regle'
+					'add les caracteristique de cette regle'
 					cpt = 2
 					while cpt < (len(lineSplit)):
 						self.regles[lineSplit[1]]["caracteristique"].append(lineSplit[cpt])
@@ -61,7 +61,10 @@ class Rule(object):
 
 		for reference in listReference.getReferences() :
 			cpt = 0
-
+			flagAjoutWord = 0 	#'flag pour savoir le nombre de mot adde'
+			flagPoncDebut = 0 	#'flag pour savoir si il y a une ponctuation en premiere position'
+			cptIgnoreWord = 0
+			
 			for mot in reference.word :
 				if mot.ignoreWord == 0:
 					flagPoncDebut = 0
@@ -71,8 +74,8 @@ class Rule(object):
 								
 								input_str = mot.nom.split()[0]
 								
-								new_str = self._checkLexique(mot, input_str)
-								if new_str != '': input_str = ''
+								[new_str, input_str] = self._checkLexique(mot, input_str)
+								#if new_str != '': input_str = ''
 								
 								#tokenization
 								for c in input_str :
@@ -139,6 +142,7 @@ class Rule(object):
 										if flagPoncDebut == 1:
 											nomTag = mot.listNomTag()
 											refWord = Word(new_str,nomTag, feat_str.split(" "))
+											refWord.delTag("c")
 											reference.addWord(cpt+1+flagAjoutWord+cptIgnoreWord,refWord)
 											flagAjoutWord += 1
 										else:
@@ -154,10 +158,12 @@ class Rule(object):
 	
 	
 	def _initCheck(self, input_str) :
-		init1 = re.compile('^[A-Z]?[a-z]\.-?[A-Z]?[a-z]?\.?')
-		init2 = re.compile('^[A-Z]?[a-z]?-[A-Z]?[a-z]?\.?')
+		init1 = re.compile('^[A-Z][a-z]?\.-?[A-Z]?[a-z]?\.?')
+		init2 = re.compile('^[A-Z][a-z]?-[A-Z]?[a-z]?\.?')
+		init3 = re.compile('^[A-Z]?[a-z]\.-?[A-Z]?[a-z]?\.?')
 		p1 = init1.findall(input_str)
 		p2 = init2.findall(input_str)
+		p3 = init3.findall(input_str)
 		
 		retrn_str = ''
 		if p1 : 
@@ -166,6 +172,9 @@ class Rule(object):
 		elif p2 : 
 			#print '################',p2[0]
 			retrn_str = p2[len(p1)-1]
+		elif p3 : 
+			#print '################',p2[0]
+			retrn_str = p3[len(p1)-1]
 			
 		return retrn_str
 	
@@ -257,10 +266,12 @@ class Rule(object):
 						mot.addFeature(self.regles[regle]["caracteristique"])
 						retrn_str = input_str
 						new_str = input_str
+						input_str = ''
 					if regle == "page":
 						mot.addFeature(self.regles[regle]["caracteristique"])
 						retrn_str = input_str
 						new_str = input_str
+						input_str = ''
 									
 		if retrn_str == '':
 			retrn_str = self._initCheck(input_str)
@@ -276,7 +287,7 @@ class Rule(object):
 			input_str = ''
 			mot.addFeature('weblink')
 
-		return new_str
+		return [new_str, input_str]
 				
 				
 				
