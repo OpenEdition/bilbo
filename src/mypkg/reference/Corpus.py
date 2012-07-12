@@ -90,6 +90,7 @@ class Corpus(object):
 	'''
 	def addTagReferences(self, fileRes, tagDelimRef, typeCorpus):
 		tmp_str = ""
+		reference = []
 		for line in open (fileRes, 'r') :
 			tmp_str = tmp_str + ' ' + line
 				
@@ -100,15 +101,16 @@ class Corpus(object):
 	
 		for fichier in self.fichiers:
 			nbRefFile = fichier.nbReference(typeCorpus)
-			reference = []
-			cptRef = cpt
+			reference[:] = []
+			cptRef = 0
 			
 			for ref in s:
 				if cptRef < nbRefFile:
-					reference.append(ref)
+					reference.append(s[cpt])
 				else:
 					break
 				cptRef += 1
+				cpt += 1
 
 			#fichier.addTagReferences(reference)
 			fichier.buildReferences(reference, tagDelimRef, typeCorpus)

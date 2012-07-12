@@ -117,14 +117,24 @@ class Extract(object):
 					cpt = 0
 					if nbCarac > 0:
 						caracteristique = mot.getFeatureIndice(nbCarac-1)
-						fich.write(" "+caracteristique.nom.upper())
+						try:
+							fich.write(" "+unicode(caracteristique.nom.upper(), "utf-8"))
+						except TypeError:
+							fich.write(" "+caracteristique.nom.upper())
+						
 						while cpt < nbCarac-1:
 							caracteristique = mot.getFeatureIndice(cpt)
-							fich.write(" "+caracteristique.nom.upper())
+							try:
+								fich.write(" "+caracteristique.nom.upper())
+							except:
+								fich.write(" "+unicode(caracteristique.nom.upper(), "utf-8"))
 							cpt += 1
 					if tr != 0:
 						for balise in mot.getAllTag():
-							fich.write(" "+balise.nom)
+							try:
+								fich.write(" "+unicode(balise.nom, "utf-8"))
+							except:
+								fich.write(" "+balise.nom)
 					fich.write("\n")
 			fich.write("\n")
 				
@@ -140,7 +150,10 @@ class Extract(object):
 			for mot in reference.getWord():
 
 				for balise in mot.getAllTag():
-					fich.write(balise.nom)
+					try:
+						fich.write(unicode(balise.nom, "utf-8"))
+					except:
+						fich.write(balise.nom)
 				fich.write("\n")
 			fich.write("\n")
 				

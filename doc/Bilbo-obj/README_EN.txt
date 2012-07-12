@@ -53,11 +53,11 @@ $ python src/mypkg/Main.py <arg 1> <arg 2> <arg 3>
 		 2 => annotate reference corpus 2.
 		 
 	<arg 2> : string
-		data file (training or test)
+		input directory where the data files are (training or test)
 		
 	<arg 3> : string
 		output directory where the build result files are saved
-		(initial : Result Directory ???)
+		(initial : "Result" directory)
 		
 ==============================================
  Structure of directory
@@ -198,182 +198,171 @@ dans
 ------------------------
  Corpus
 ------------------------
-class qui correspond a un repertoire contenant un corpus
+This class corresponds to a directory containing a corpus.
 
-attributs :
-repertoire : chemin du repertoire
-fichiers : liste des noms de fichier du corpus
+Attributes :
+repertoire : directory path
+fichiers : list of filenames in a corpus
 
-methodes :
-
-
-------------------------
- Fichier
-------------------------
-Class qui correspond à un fichier du corpus.
-
-Attributs :
-nom : nom du fichier
-referencesCorpus1 : liste des references corpus 1 presentes dans ce fichier (objet listReference)
-
-methodes :
-
+Methods :
 
 ------------------------
- listReference
+ File
 ------------------------
-Class qui regoupe les references
+This class corresponds to a file in a corpus.
 
-Attributs :
-listReferences : liste d'objet Reference
-corpus : determine a quel corpus appartient cette liste de reference
+Attributes :
+nom : name of the file 
+referencesCorpus1 : list of level 1 references included in the file (listReference object)
 
-methodes :
-
-------------------------
- reference
-------------------------
-Class qui regoupe les mots d'une reference
-
-Attributs :
-num : numero de la reference
-mots : list des mots contenu dans la reference : objet Mots
-train : permet de savoir si cette reference doit etre utilisé pour l'apprentissage ou le test (1 : apprentissage, 0 : test, -1 : nonBibl)
-
-methodes :
+Methods :
 
 ------------------------
- Mots
+ ListReference
 ------------------------
-Class qui regoupe les balises et les caracteristiques de chaque mot
+This class contains references.
 
-Attributs :
-balise : liste d'objet Balise
-caracteristique : liste d'objet Caracteristique
-nom : mot
-item : indique si le mot fait partie d'une sous reference (0 : non, 1 : oui)
+Attributes :
+listReferences : Reference object list
+corpus : an indicator determine a quel corpus appartient cette liste de reference ????? level
 
-methodes :
+Methods :
 
 ------------------------
- Caracteristique et Balise
+ Reference
 ------------------------
-Class qui contient le nom des balises ou caracteristique
+This class contains words in a reference
 
-Attributs :
-nom : nom de la balise (ou caracteristique)
+Attributes :
+num : reference number 
+word : word list included in the reference - Word object
+train : an indicator if this reference should be used for training or test (1 : learning, 0 : test, -1 : nonBibl)
 
-methodes :
+Methods :
+
+------------------------
+ Word
+------------------------
+This class contains tags and each word's features.
+
+Attributes :
+tag : Balise object list
+feature : Feature object list
+nom : word name
+item : indicator of sub-reference (0 : no, 1 : yes)
+
+Methods :
+
+------------------------
+ Feature and Balise
+------------------------
+These classes contain feature name or tag name.
+
+Attributes :
+nom : Feature (or tag) name
+
+Methods :
 
 =========
 ------------------------
- Nettoyer
+ Clean
 ------------------------
-Class qui permet de nettoyer les références
+This class cleans input references
 
-Attributs :
+Attributes :
 
-methodes :
+Methods :
 ####
-processing : cette methode nettoie les références et parcourt le xml pour créer les objets Balise, Mot, Réference... il retourne donc un objet Listreference
-	parametre :
-		fname : chemin et nom du fichier
-		typeCorpus : c'est la balise de depart des références en fonction du type de corpus
+processing : this method cleans references and reads the xml files to extract Balise, Word, Reference objects etc. at the end it returns a ListReferences object.
+	parameter :
+		fname : path and file name
+		typeCorpus : corpus type indicator coming from references
 
 ####
-_construireMot : permet de construire les objet Mots, Balise...
-	parametre : 
-		dicMots : tableau des mots qui contient leurs caracteritiques et leurs balises
+__buildWords : this method constructs Word, Balise objects etc.
+	parameter : 
+		dicWord : word dictionaries containing their features and tags: [word, caracteristique] & [word, balise]
 
 ------------------------
- Regle
+ Rule
 ------------------------
-Class qui permet de modifier les caracteristique des mots en fonction des regles statique et des régles se trouvant dans le fichier de configuration : lexique.txt
 
-Attributs :
+This class extracts word features using some static rules and other rules written in a configuration file : lexique.txt
 
-methodes :
+Attributes :
+
+Methods :
 ####
-reorganizing : cette methode separe la ponctuation et ajoute les caracteristique en fonction des regles
-	parametre :
-		listReference : objet ListReference
+reorganizing : this method tokenizes input words by separating punctuation and extract features from rules.
+	parameter :
+		listReference : ListReference object
 
 ------------------------
  Extract
 ------------------------
-Class qui permet de modifier les balises des mots en fonction des regles statique et des régles se trouvant dans le fichier configuration : features.txt
+This class modifies tags and features using some detailed static rules and other rules written in a configuration file : features.txt
 
-Attributs :
+Attributes :
 
-methodes :
+Methods :
 ####
-extractor : cette methode ajoute les balises en fonction des regles
-
+extractor : this method add tags with given rules
 	
 ------------------------
  Name
 ------------------------
-Class qui permet de verifier si le nom ou le prenom correspond a un nom connu ou non en fonction des fichier se trouvant dans externalList
+This class verifies if a given word corresponds to a surname or a forename in a name list in the "externalList" directory.
 
-Attributs :
+Attributes :
 
-methodes :
+Methods :
 ####
-searchName : cette methode regarde si le mot est present dans les listes, si oui alors elle ajoute les caracteristique correspondant : Namelist ou Surnamelist
-	
+searchName : this method checks if the entered word is found in the name list and if yes, it adds a feature : SURNAMELIST or FORENAMELIST
+
 ------------------------
  Place
 ------------------------
-Class qui permet de verifier si le mot correspond a un lieu connu ou non en fonction des fichier se trouvant dans externalList
+This class verifies if a given word corresponds to a place in a list in the "externalList" directory.
 
-Attributs :
+Attributes :
 
-methodes :
+Methods :
 ####
-searchPlace : cette methode regarde si le mot est present dans les listes, si oui alors elle ajoute les caracteristique correspondant : Placelist
-	
+searchPlace : this method checks if the entered word is found in the place list and if yes, it adds a feature : PLACELIST
 	
 ------------------------
  ProperList
 ------------------------
-Class qui permet de verifier si le mot correspond a a une liste present dans le  connu ou non en fonction des fichier se trouvant dans externalList
+This class verifies if a given word corresponds to a proper noun in a list in the "externalList" directory.
 
-Attributs :
+Attributes :
 
-methodes :
+Methods :
 ####
-searchPlace : cette methode regarde si le mot est present dans les listes, si oui alors elle ajoute les caracteristique correspondant : Placelist
-	
+searchPlace : this method checks if the entered word is found in the place (for the moment) list and if yes, it adds a feature : PLACELIST (for the moment)
+
 ------------------------
  CRF
 ------------------------
-Class qui permet de 
-Attributs :
+This class 
 
-methodes :
+Attributes :
+
+Methods :
 ####
-extractor : cette methode ajoute les balises en fonction des regles
+extractor : this method add tags with given rules ...
 	
 ------------------------
  Bilbo
 ------------------------
-Class qui permet de 
+This class 
 
-Attributs :
+Attributes :
 
-methodes :
+Methods :
 ####
-extractor : cette methode ajoute les balises en fonction des regles
+extractor : this method add tags with given rules ...
 	
-
-
-
-
-
-
-
-
-
 
 
 

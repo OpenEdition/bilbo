@@ -152,8 +152,10 @@ class Extract_svm(Extract):
             keylist.sort()
             
             if indices[i] == tr :
-                fich.write( bibls[i]+" ")
-    
+                try:
+                    fich.write( unicode(bibls[i], "utf-8")+" ")
+                except:
+                    fich.write( str(bibls[i])+" ")
             for key in keylist:
                 if indices[i] == tr :
                     fich.write( str(key+1)+':'+str(token_data[i][key])+" ")

@@ -229,8 +229,8 @@ class File(object):
 			listRef = soup.findAll(tagTypeCorpus)
 			for ref in listRef:
 				ref.contents = []
-				texte = ref_ori[cpt]
-				ref.contents.append(texte)
+				texte = NavigableString(ref_ori[cpt])
+				ref.insert(0,texte)
 				cpt += 1
 		except :
 			pass
