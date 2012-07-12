@@ -17,10 +17,13 @@ encoding//src/mypkg/ml/digitalizer.py=utf-8
 encoding//src/mypkg/output/GenerateXml.py=utf-8
 encoding//src/mypkg/output/htmlGenerator.py=utf-8
 encoding//src/mypkg/output/identifier.py=utf-8
+<<<<<<< HEAD
 encoding//src/mypkg/output/xmlEditor.py=utf-8
 encoding//src/mypkg/reference/Balise.py=utf-8
 encoding//src/mypkg/reference/Corpus.py=utf-8
 encoding//src/mypkg/reference/Feature.py=utf-8
+=======
+>>>>>>> 25c2f11f78a4c3dbd506b69ddd36c353ed59c328
 encoding//src/mypkg/reference/File.py=utf-8
 encoding//src/mypkg/reference/ListReferences.py=utf-8
 encoding//src/mypkg/reference/Reference.py=utf-8

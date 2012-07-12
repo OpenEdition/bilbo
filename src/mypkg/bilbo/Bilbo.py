@@ -33,6 +33,7 @@ class Bilbo(object):
 		self.crf = CRF(repResult)
 		self.svm = SVM(repResult)
 		self.repResult = repResult
+
 		
 	'''
 	apprentissage : apprentissage reference corpus 1
@@ -102,6 +103,7 @@ class Bilbo(object):
 			print self.vsz()
 
 			corpus.addTagReferences(self.repResult+"testEstCRF.xml", "bibl", 1)
+
 			dtime = time.time()
 			difftime = dtime - ctime
 			difftupleA = time.gmtime(difftime)
@@ -138,9 +140,9 @@ class Bilbo(object):
 			
 			self.crf.preparerTest(corpus, 2)
 			self.crf.runTest("model/corpus2/", 'testdata_CRF.txt')
-			
-			
+
 			corpus.addTagReferences(self.repResult+"testEstCRF.xml", "note", 2)
+
 		
 		return
 	

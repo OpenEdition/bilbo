@@ -118,6 +118,7 @@ class Extract_crf(Extract):
             '''if tr == 1:
                 self._print_alldata(fichierRes, listRef)
             else :'''
+            
             self._print_parallel(fichierRes, listRef)
                 
         return

@@ -84,6 +84,7 @@ class Corpus(object):
 		
 		return nb
 
+
 	'''
 	addTagReferences : ajoute les balises ignorees du fichier initial
 	'''
