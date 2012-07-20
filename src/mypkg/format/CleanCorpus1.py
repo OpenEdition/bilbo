@@ -37,7 +37,10 @@ class CleanCorpus1(Clean):
 				tmp_str = tmp_str + ' ' + line
 			
 			tmp_str = self._elimination (tmp_str)
-			tmp_str = tmp_str.decode('utf8')
+			try:
+				tmp_str = tmp_str.decode('utf8')
+			except:
+				tmp_str = str(tmp_str)
 			tmp_str = self._html2unicode(tmp_str)
 			soup = BeautifulSoup (tmp_str)		
 
