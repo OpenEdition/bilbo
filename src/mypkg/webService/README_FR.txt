@@ -1,6 +1,6 @@
 ##########################
 
-installer outil :
+installer outils externe :
 
 fpconst:
 $ cd src/dependencies/fpconst-0.7.2
@@ -16,6 +16,14 @@ $ python setup.py install
 
 more information:
 http://diveintopython.adrahon.org/soap_web_services/install.html#d0e29990
+
+###############################
+Mise en marche
+
+modifier les chemins présents dans le fichier WebService.py :
+	dossier_fichier_out = # dossier sortie : resultat
+	dossier_fichier_in =  # dossier ou l'on crée le fichier à annoter (ce dossier doit contenir que les fichier a annoter)
+	dossier_code = 		  # dossier ou l'on retrouve le code objet python de BILBO:  dossier bilbo
 
 
 ###############################
