@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.tei-c.org/ns/1.0 http://www.tei-c.org/release/xml/tei/custom/schema/xsd/tei_all.xsd">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title>Les migrations au secours de l’Afrique noire ?</title>
+        <author>
+          <name>Marc-Antoine Pérouse de Montclos</name>
+          <affiliation>Chargé de recherche, docteur en sciences politiquesInstitut de recherche pour le développement (IRD)</affiliation>
+        <forename>Marc-Antoine</forename><surname>Pérouse de Montclos</surname></author>
+      </titleStmt>
+      <publicationStmt>
+        <authority>revues.org</authority>
+        <idno type="url"/>
+        <idno type="DOI"/>
+      <date when="2010-03-18">2010-03-18</date></publicationStmt>
+      <seriesStmt>
+        <title/>
+        <idno type="EISSN"/>
+      </seriesStmt>
+      <notesStmt>
+        <note type="bibl">Pérouse de Montclos, M-A., 2008. Les migrations au secours de l’Afrique noire ?. In <hi rend="italic">Annuaire suisse de politique de développement : Migration et développement ; un mariage arrangé</hi>. Dir. D. Efionayi-Mäder, A. Monsutti, G. Perroulaz, et C. Schümperli Younossian. Institut de hautes études internationales et du développement. Vol. 27, no 2, pp. 43-51.</note>
+      </notesStmt>
+      <sourceDesc>
+        <biblStruct>
+          <analytic>
+            <title>Les migrations au secours de l’Afrique noire ?</title>
+            <author>
+              <name>Marc-Antoine Pérouse de Montclos</name>
+            </author>
+          </analytic>
+          <monogr>
+            <imprint>
+              <publisher/>
+            <date when="2008-12-18">2008-12-18</date><biblScope type="pp">43-51</biblScope></imprint>
+          </monogr>
+          <series>
+            <title/>
+            <biblScope type="ISSN"/>
+          </series>
+        </biblStruct>
+      </sourceDesc>
+    </fileDesc>
+    <encodingDesc>
+      <appInfo>
+        <application version="2.3" ident="servoo2">
+          <label>ServOO2 - CLEO / revues.org</label>
+          <desc>TEI P5 ; Written by OpenOffice; adapted from teioo package openoffice export filter</desc>
+        </application>
+      </appInfo>
+    </encodingDesc>
+    <profileDesc>
+      <langUsage>
+        <language ident="fr">fr</language>
+      </langUsage>
+      <textClass/>
+    </profileDesc>
+    <revisionDesc>
+      <change/>
+    </revisionDesc>
+  </teiHeader>
+  <text>
+    <front/>
+    <body>
+      <p>A en croire une idée largement répandue au sein des pays de l’Organisation de coopération et de développement économiques (OCDE), la coopération au développement et la lutte contre la pauvreté permettent de contenir, voire de réduire les flux de population du Sud vers le Nord. Pour le directeur général de l’Agence française de développement (AFD), Jean-Michel Severino, l’aide contribue ainsi « à réguler les mouvements migratoires, tant entre pays pauvres qu’entre ceux-ci et les membres de l’OCDE, en participant à la réduction de la pauvreté et à l’accélération de la croissance économique, particulièrement en Afrique subsaharienne et en Méditerranée »<note place="foot" n="1"><hi rend="italic">Le Monde Economie</hi>, 22 mai 2007, p. <hi font-variant="small-caps">v</hi>.</note>. Une telle assertion résiste cependant mal à l’analyse. Outre qu’elle assigne aux procédures d’assistance internationale une fonction de dissuasion et de contrôle des flux de population, elle repose en effet sur des liens très discutés entre l’aide et le développement, d’une part, et entre le développement et la réduction des facteurs qui poussent à l’émigration, d’autre part. Surtout, les discours convenus sur les mérites de la coopération tendent souvent à occulter le rôle positif que les communautés migrantes peuvent elles-mêmes jouer en matière de croissance économique, de progrès social et d’ouverture politique.</p>
+      <p>Penser l’aide sans la migration n’a plus grand sens à cet égard. On peut en effet retourner le problème en se demandant si les migrants participent de façon constructive au développement de leur pays d’origine. Concernant plus précisément l’Afrique noire, il importe notamment d’appréhender le rôle politique et économique de « nouvelles » diasporas qui se déclinent désormais au pluriel, à la différence de la « vieille » diaspora noire née de la traite des esclaves. Les transferts de fonds des migrants constituent indéniablement un apport important pour des économies en développement. Pour autant, ces diasporas « financières » et « transnationales » ne disposent pas des outils et des conditionnalités de l’aide internationale : bien souvent, leurs investissements s’avèrent aussi dispersés qu’orientés vers des stratégies d’assistanat et de survie à court terme ; très fongibles, ils se dirigent surtout vers des activités non productives et confortent le capital social des <pb/>donateurs en créant des modèles de réussite qui encouragent l’émigration. Pour les praticiens du développement, il convient ainsi de prendre en compte les aspects tout à la fois positifs et négatifs des communautés migrantes vis-à-vis de leur pays d’origine.</p>
+      <p rend="heading1">Aide, migration et pauvreté : les chaînons manquants</p>
+      <p>De fait, envisager l’aide comme un moyen de lutter contre l’émigration est pour le moins réducteur. Le problème ne vient pas seulement des nombreuses controverses que suscite une coopération transformée en instrument de chantage ou d’échange pour négocier avec les pays du Sud le rapatriement de leurs ressortissants sans papiers lorsqu’ils sont reconduits à la frontière. Il tient également à l’efficacité douteuse d’un procédé dont l’impact sur les comportements migratoires n’est absolument pas évident. Pour réduire les flux du Sud vers le Nord, il faudrait non seulement que l’aide internationale contribue de façon décisive au développement, ce qui reste à démontrer, mais aussi que la pauvreté absolue et relative constitue un déterminant majeur de la propension à la migration. Or, on le sait depuis longtemps, ce ne sont pas forcément les plus pauvres qui partent, ainsi qu’en témoignent le cas de l’Egypte ou celui du Ghana<note place="foot" n="2">Pour une étude récente sur un sujet déjà abondamment traité, voir Rachel Sabates-Wheeler, Ricardo Sabates and Adriana Castaldo, <hi rend="italic">Tackling Poverty-Migration Linkages : Evidence from Ghana and Egypt</hi>, Brighton, University of Sussex, Development Research Centre on Migration, Globalisation and Poverty, 2005, 48 p.</note>. D’autres facteurs que le revenu ou les différentiels de développement contribuent à alimenter les flux migratoires, parmi lesquels l’âge, le sexe, le statut marital, le capital social, l’insertion dans des réseaux transnationaux, ceci sans parler d’éléments non quantifiables comme la frustration personnelle, l’identification ethnique ou le rejet de l’autorité des Anciens. Concrètement, les candidats au départ ont sûrement plus de facilités à voyager lorsqu’ils disposent déjà d’un bagage éducatif, parlent une langue « mondiale » et ont des connexions familiales à l’étranger. A l’inverse, le coût du déplacement constitue un frein pour les membres les plus démunis d’une communauté. L’émigration forcée des indigents ne relève pas d’un choix volontaire et contribue parfois à les enfoncer dans la misère la plus complète, à l’instar de certains réfugiés arrachés à leur pays par la guerre ou les catastrophes naturelles.</p>
+      <p>Il y a donc lieu de s’interroger sur l’impact de schémas migratoires qui, loin d’atténuer la pauvreté, peuvent contribuer à aggraver les inégalités sociales. Les situations dans les pays du Sud sont trop diverses pour que l’on puisse tirer des conclusions catégoriques à partir de quelques cas d’étude. Les spécialistes montrent qu’en réalité, la migration est tout à la fois une conséquence et une cause de la pauvreté<note place="foot" n="3">Ronald Skeldon, « Migration and Poverty », <hi rend="italic">Asia-Pacific Population Journal</hi>, vol. 17, nº 4, December 2002, pp. 67-82.</note>. Une conséquence, parce que les crises humanitaires ou les dégradations de niveaux de vie poussent au départ ; et une cause, parce que la migration attire les plus entreprenants en laissant sur place les populations les plus vulnérables. Aussi convient-il de ne pas généraliser indûment. Autant il serait abusif de nier en bloc tout lien entre migration et pauvreté relative, autant il serait présomptueux d’affirmer d’emblée que l’aide internationale est susceptible d’influencer la propension au départ des individus en réussissant à réduire les niveaux de pauvreté.</p>
+      <p><pb/>En effet, l’impact positif de la coopération au développement reste un sujet fort controversé. Des économistes montrent par exemple que, dans 97 pays bénéficiaires étudiés sur une période de vingt ans, l’aide n’a pas eu d’incidence sur la diminution de la pauvreté, les taux de mortalité, la scolarisation ou l’augmentation de l’espérance de vie<note place="foot" n="4">Peter Boone, « Politics and the Effectiveness of Aid », <hi rend="italic">European Economic Review</hi>, vol. 40, nº 2, February 1996, pp. 289-329.</note>. Alors que certains, comme la Chine, ont réussi à s’engager sur la voie de la croissance économique sans bénéficier d’une assistance extérieure, d’autres ont sombré malgré un soutien conséquent de la communauté internationale. L’Afrique subsaharienne, qui a reçu 568 milliards de dollars d’aide entre 1960 et 2003, présente un cas d’école en la matière<note place="foot" n="5">William Easterly, « The Utopian Nightmare », <hi rend="italic">Foreign Policy</hi>, nº 150, September 2005, p. 61.</note>. Région la plus assistée du monde par tête d’habitant, elle a vu le nombre de pauvres passer de 164 millions à 316 millions de 1981 à 2001. A en croire les analyses statistiques qui mettent en évidence une corrélation inverse avec la hausse de la richesse en Afrique subsaharienne, l’aide s’est révélée particulièrement peu efficace sur le continent noir : plus l’assistance des pays de l’OCDE a été importante, plus le produit national brut est resté bas, et inversement<note place="foot" n="6">Fredrik Erixon, <hi rend="italic">Aid and Development : Will It Work This Time ?</hi>, London, International Policy Network, 2005, p. 3.</note>.</p>
+      <p>Pire, l’aide a aussi pu contribuer à perpétuer les problèmes en maintenant les populations dans un syndrome de dépendance, en renforçant des dictatures corrompues, en relançant la consommation de biens importés, en décourageant l’investissement privé et en fournissant des crédits avantageux mais peu rationnels sur le plan économique. Les détournements ont toujours été importants. Il y a une quinzaine d’années, déjà, des études citées par le magazine Science et Vie – Economie de janvier 1992 estimaient qu’environ un quart de l’aide française à l’Afrique se perdait en commissions destinées aux décideurs locaux. Aujourd’hui, la proportion n’a pas fondamentalement changé. Dans Le Monde du 16 janvier 2008, le secrétaire d’Etat français à la Coopération, Jean-Marie Bockel, admettait que « sur 100 milliards de dollars annuels d’aide pour l’Afrique, 30 milliards s’évaporent ». Certes, il n’y a pas lieu de revenir ici sur des dysfonctionnements bien connus, qui ont nourri une abondante littérature académique. Notons seulement que, quand bien même des pays parviennent à sortir du cercle vicieux de la misère généralisée, leur croissance économique ne constitue pas forcément un frein à l’émigration. Au contraire, le développement tend souvent à exacerber les inégalités sociales et les frustrations qui poussent au départ.</p>
+      <p rend="heading1">Les « diasporas », acteurs à part entière du développement</p>
+      <p>De ce point de vue, il convient d’aborder autrement les flux migratoires. En effet, les transferts financiers des migrants vers leurs régions d’origine ont pris une importance capitale. Au cours des années 1990, déjà, ils correspondaient à 117 % de l’aide au développement et 44 % des investissements directs étrangers dans les pays en développement<note place="foot" n="7">Hein de Haas, <hi rend="italic">International Migration, Remittances and Development : Myths and Fact</hi>, Global Migration Perspectives, nº 30, Geneva, Global Commission on International Migration, 2005, p. 9.</note>. Encore ne s’agissait-il que des flux officiels et dûment enregistrés, soit une partie seulement des transferts de fonds des migrants originaires <pb/>du Sud. Le phénomène s’avère avoir une tout autre ampleur si l’on inclut les envois de marchandises et les transferts non comptabilisés dans les comptes nationaux et les systèmes bancaires. Dans le cas de la Somalie, par exemple, les estimations du montant des transferts de fonds des migrants allaient de 700 millions à 1 milliard de dollars par an en 2004, dont 360 millions de dollars servaient à subvenir aux besoins essentiels des familles restées sur place : un chiffre à comparer aux 170 millions de dollars reçus par le pays au titre de l’aide internationale en 2002<note place="foot" n="8">Kevin Savage and Paul Harvey (eds.), <hi rend="italic">Remittances during Crises : Implications for Humanitarian Response</hi>, London, Overseas Development Institute, 2007, p. 32.</note>. Le décalage est tout aussi impressionnant en ce qui concerne les Comores. Ce petit pays compte près d’un ressortissant sur trois à l’étranger et, d’après la Banque mondiale, son économie est la deuxième du continent, après l’Erythrée, à dépendre autant des transferts de sa diaspora. Avec les importations de marchandises, les transferts de fonds des migrants comoriens dépassaient déjà les 40 millions de dollars par an à la fin des années 1990, soit l’équivalent du budget de l’Etat et de la capacité d’épargne de la population dans les banques locales. En 2005, elles atteignaient 72 millions d’euros (ou 24 % du produit intérieur brut) et représentaient 346 % d’une aide internationale qui s’élevait à environ 21 millions d’euros<note place="foot" n="9">Mohamed Bourenane <hi rend="italic">et al.</hi>, <hi rend="italic">Les transferts de fonds des migrants, un enjeu de développement : les Comores, Mali, Maroc, Sénégal</hi>, Tunis, Banque africaine de développement, 2007, p. 9.</note>.</p>
+      <p>Les échecs de la coopération et les nouveaux défis que pose la circulation des hommes dans un monde globalisé invitent ainsi à considérer les « diasporas » comme des acteurs économiques à part entière, mais avec des limites qu’il importe de prendre en compte si on veut les intégrer dans des politiques de développement conçues à une échelle transnationale. Historiquement, les parcours migratoires en provenance d’Afrique subsaharienne ont beaucoup évolué au cours des siècles. Autrefois, la « diaspora noire » issue de la traite des esclaves s’écrivait au singulier et reposait sur une « communauté de souffrance », bien plutôt que sur la notion fort controversée de « race ». Aujourd’hui, les « diasporas africaines » se déclinent au pluriel, en fonction de références nationales ou ethniques, et le déracinement du migrant contemporain ne peut se comparer à la déportation « économique » du captif d’hier, qui avait délibérément été coupé de ses origines<note place="foot" n="10">Pour une tentative de définition, voir Marc-Antoine Pérouse de Montclos, « Des diasporas africaines en construction : le cas du Nigeria », <hi rend="italic">Anthropologie et Sociétés</hi>, vol. 30, nº 3, 2006, pp. 183-199.</note>. Dans un monde global, il est plus facile à présent de garder des liens avec le pays des ancêtres. Des quelque 3 millions de personnes qui ont fui la crise économique au Zimbabwe depuis 2000, par exemple, 96 % maintiennent des contacts réguliers avec les membres de la famille restés sur place et 74 % disent leur envoyer des fonds<note place="foot" n="11">Alice Bloch, <hi rend="italic">The Development Potential of Zimbabweans in the Diaspora</hi>, Geneva, International Organization for Migration, 2005, 9 p.</note>.</p>
+      <p>Aussi ne peut-on ignorer le potentiel que représentent la capacité d’épargne, le pouvoir d’achat et l’influence symbolique des migrants vis-à-vis de leur pays d’origine. Constituées de strates plus ou moins anciennes, les diasporas africaines contribuent notamment à la survie et à la reconstruction de pays ravagés par la guerre, de la Somalie à la République démocratique du Congo. Au quotidien, leurs envois de fonds jouent un rôle de sécurité sociale pour les parents restés au pays. S’ils visent généralement les citadins les plus aisés, en contact avec une modernité globale, ils peuvent également, par capillarité, bénéficier aux paysans les plus <pb/>pauvres par le biais du jeu des solidarités lignagères<note place="foot" n="12">Anna Lindley, <hi rend="italic">Migrant Remittances in the Context of Crisis in Somali Society : A Case Study of Hargeisa</hi>, London, Overseas Development Institute, 2006, p. 17.</note>. Des études à propos des Nigérians établis aux Etats-Unis montrent par exemple que les migrants d’origine rurale épargnent davantage et ciblent plus facilement les campagnes, où leur investissement s’avère somme toute moins onéreux en dépit du surcoût dû aux difficultés d’accès à des régions mal desservies<note place="foot" n="13">Una Okonkwo Osili, « Remittances and Savings from International Migration : Theory and Evidence Using a Matched Sample », <hi rend="italic">Journal of Development Economics</hi>, vol. 83, nº 2, July 2007, pp. 446-465.</note>. Le constat n’est pas anodin quand on sait que le Nigeria est le pays le plus peuplé du continent et qu’il alimente près d’un cinquième des flux migratoires en provenance d’Afrique noire, et ce de façon récurrente à travers les siècles depuis la traite des esclaves !</p>
+      <p>Au-delà des questions purement économiques, les diasporas d’aujourd’hui jouent par ailleurs un rôle social et politique qui n’est pas négligeable. Les émigrés africains fournissent en effet des modèles de réussite qui influencent les modes de représentation, alimentent les aspirations au progrès et offrent parfois de nouvelles opportunités pour redistribuer le pouvoir et les ressources de manière plus équitable, même si leur impact sur les processus de démocratisation reste difficile à prouver<note place="foot" n="14">Marc-Antoine Pérouse de Montclos, <hi rend="italic">Diasporas, Remittances, and Africa South of the Sahara : A Strategic Assessment</hi>, ISS Monograph Series, nº 112, Johannesburg, Institute for Security Studies, March 2005, 66 p., accessible sur Internet : <ptr target="http://www.iss.co.za/pubs/Monographs/No112/Contents.htm"/>.</note>. Dans certains cas, les migrations liées à des situations de crise contribuent ainsi à émanciper les femmes qui ont décidé de s’en aller ou qui se retrouvent à gérer leurs foyers seules parce que les hommes sont morts ou partis ailleurs. Pour douloureux qu’ils soient, les défis du déracinement permettent par exemple d’échapper aux traditions les plus rétrogrades : dans l’exil, on assiste souvent à une baisse des pratiques d’infibulation et d’excision, à l’instar de la diaspora somalienne. Pour les femmes d’origine paysanne, notamment, les tragédies de l’exode peuvent en l’occurrence s’accompagner d’un meilleur accès à l’éducation et d’un accroissement de responsabilités afin de subvenir aux besoins de la famille, quitte à se lancer dans le commerce et à prendre quelques libertés avec les pratiques de réclusion d’inspiration islamique. Dans les camps de réfugiés, on a parfois observé que les femmes participaient désormais aux débats publics, s’affranchissaient de la protection des hommes, voulaient davantage choisir leur mari, rejetaient le carcan du lévirat et réclamaient avec plus de vivacité leur part d’héritage lorsqu’elles étaient veuves. Les interviews réalisées par l’auteur auprès de communautés somali à Toronto et à Hargeisa (Somaliland) invitent cependant à nuancer le bilan. Confrontées à une multitude de problèmes qui les ont obligées à s’investir dans la vie publique, les femmes restées en Somalie, a-t-on fait remarquer, se sont davantage émancipées que leurs collègues d’infortune en Occident, qui étaient plus enclines à se replier sur des valeurs traditionnelles pour affirmer leur identité culturelle dans un environnement foncièrement étranger.</p>
+      <p rend="heading1">Un apport malgré tout limité</p>
+      <p>De fait, il ne faut pas se leurrer sur l’apport positif des migrants en matière de développement. Les diasporas qui financent la reconstruction de régions autrefois en guerre sont les mêmes qui alimentent les conflits et fournissent les combattants en <pb/>armes. Si les migrants peuvent offrir des canaux de médiation en faveur de la paix, comme en pays acholi dans le nord de l’Ouganda aujourd’hui, ils tendent aussi à reproduire les divisions claniques, religieuses ou ethniques qui déchirent leur pays d’origine et qui déterminent leur positionnement spatial et politique dans l’exil. De Sydney à Helsinki en passant par Minneapolis, Toronto ou Johannesburg, les Somali ont ainsi eu tendance à se regrouper par affinités lignagères et régionales<note place="foot" n="15">Abdi Kusow and Stephanie Bjork (eds.), <hi rend="italic">From Mogadishu to Dixon : The Somali Diaspora in a Global Context</hi>, Lawrenceville (NJ), Red Sea Press, 2007, 335 p. Munzoul Assal, « Somalis and Sudanesein Norway : Religion, Ethnicity/Clan and Politics in the Diaspora », <hi rend="italic">in</hi> Leif Manger and Munzoul Assal (eds.), <hi rend="italic">Diasporas within and without Africa : Dynamism, Heterogeneity, Variation</hi>, Uppsala, Nordic Africa Institute, 2006, pp. 165-196.</note>. A la différence des diasporas juive, irlandaise ou arménienne, unies autour de la défense d’un Etat, ils ont éprouvé les plus grandes difficultés à se retrouver autour d’un projet commun de construction nationale. Seuls les Isaaq de la région nord-ouest de l’ancienne République de Somalie ont véritablement réussi à transcender leurs différends et à dégager un consensus pour se mobiliser en faveur d’un Etat du Somaliland qui a proclamé son indépendance en 1991 et renoué avec la paix depuis 1994.</p>
+      <p>Autre difficulté, la fermeture des frontières du monde industrialisé précipite les immigrés et les demandeurs d’asile dans une précarité économique et juridique qui criminalise leurs statuts de résidence et réduit d’autant leur capacité d’influence. En France, l’introduction en 1995 d’un visa pour les Comoriens a ainsi poussé à la clandestinité une population qui pratiquait des cycles migratoires sur une base saisonnière et qui a dû s’enraciner dans le pays d’accueil en vue de régulariser son séjour. En Grande-Bretagne, les Somaliens ont été confrontés à des problèmes similaires lorsque, à partir de 1973, ils ont dû demander un visa, étendu en 2003 aux ressortissants en transit sur le territoire britannique. Concrètement, ils en ont été réduits à détourner les procédures de réunification familiale, à demander un asile humanitaire, à faire appel à des passeurs et à utiliser de faux papiers, sachant que l’ambassade de Somalie à Londres n’est plus opérationnelle depuis l’effondrement de la dictature de Siad Barre à Mogadiscio en 1991. Résultat, la communauté somalienne compte aujourd’hui une forte proportion de femmes et d’enfants seuls qui ne sont guère en mesure d’aider les membres de la famille restés dans la Corne de l’Afrique. Les Somaliens représentaient près d’un quart des enfants réfugiés comptabilisés en Grande-Bretagne en 2002 et les variations sur leur nombre total, qui vont du simple au double, laissent apparaître une proportion importante de sans-papiers<note place="foot" n="16">Entre 1988 et 2003, 58 630 Somaliens ont demandé l’asile en Grande-Bretagne mais le recensement de 2001 n’a comptabilisé que 43 532 résidents d’origine somalienne, concentrés aux trois quarts sur Londres, tandis que d’autres estimations allaient jusqu’à 90 000 personnes. Cf. Jill Rutter, <hi rend="italic">Refugee Children in the UK</hi>, Maidenhead, Open University Press, 2006, 236 p. Hermione Harris, <hi rend="italic">The Somali Community in the UK</hi>, London, Information Centre about Asylum and Refugees in the UK (ICAR), 2004, 79 p. Gail Hopkins, « Somali Community Organizations in London and Toronto : Collaboration and Effectiveness », <hi rend="italic">Journal of Refugee Studies</hi>, vol. 19, nº 3, 2006, pp. 361-380.</note>.</p>
+      <p>D’une manière générale, il n’est pas évident que les transferts financiers des migrants contribuent efficacement au développement de pays en crise. Bien souvent, ils servent à fournir une aide d’urgence dans le cadre de stratégies de survie qui ne débouchent pas sur des investissements productifs. Parfois, ils alimentent également <pb/>des dépenses ostentatoires et symboliques dont l’utilité strictement économique paraît bien lointaine : les Somaliens qui vivent de la générosité de leur diaspora sont connus pour s’acheter du qat, un stimulant prisé dans toute la Corne de l’Afrique ; les Comoriens de retour au pays se paient quant à eux les cérémonies fort onéreuses du mariage traditionnel appelé anda, auquel ils consacrent plus de la moitié de leurs transferts de fonds. Ainsi, à en croire une récente étude de la Banque africaine de développement, l’argent des migrants est d’abord utilisé pour assurer des dépenses de consommation dans l’alimentation, la santé et l’éducation. Les investissements immobiliers et productifs, eux, arrivent loin derrière et sont essentiellement financés par les immigrés les plus qualifiés, âgés de plus de 40 ans<note place="foot" n="17">Mohamed Bourenane <hi rend="italic">et al.</hi>, <hi rend="italic">op. cit.</hi></note>.</p>
+      <p>Une telle problématique renvoie en l’occurrence aux cultures de rente et à la façon dont le profit s’évapore dans les réseaux lignagers de sociétés traditionnelles à l’épreuve de la modernité, sans parler de la corruption institutionnalisée au niveau de certains Etats comme le Nigeria. Les migrants n’échappent évidemment pas à la pression de leurs pairs restés au pays. Ils ont somme toute peu d’influence sur la façon dont leurs transferts de fonds sont utilisés. Et ils risquent toujours de maintenir les bénéficiaires de leurs libéralités dans des situations de dépendance qui n’incitent guère les populations concernées à prendre en charge leur développement – critique que l’on retrouve d’ailleurs à propos de l’aide internationale.</p>
+      <p>Autre travers, il arrive que les diasporas fournissent des relais commodes à des groupes criminels organisés qui sévissent à l’échelle planétaire. Appelés du nom de l’article du code pénal qui condamne les escroqueries financières dans leur pays, les « 419 » nigérians se sont par exemple répandus comme une traînée de poudre sur Internet, réussissant à détourner jusqu’à 520 millions de dollars en Grande-Bretagne et 720 millions de dollars aux Etats-Unis en 2005 grâce à des propositions commerciales douteuses mais alléchantes<note place="foot" n="18">Michael Peel, <hi rend="italic">Nigeria-Related Financial Crime and Its Links with Britain, </hi>London, Chatham House (The Royal Institute of International Affairs), 2006, p. 6.</note>. Les transferts des diasporas peuvent ainsi alimenter l’économie transnationale de la criminalité organisée en recoupant partiellement les réseaux des trafiquants d’armes, de drogues, de devises ou d’être humains. Aux confins de la légalité, les migrants recourent en effet à des procédures informelles qui évitent les systèmes bancaires classiques et transitent fréquemment par les mêmes canaux que les circuits de blanchiment d’argent. On assiste alors à des formes de « noircissement » de l’argent propre des immigrés, qui passe dans les « machines à salir » de la criminalité internationale pour contourner les législations nationales sur les exportations de devises et les contrôles des changes.</p>
+      <p>Qu’il s’agisse de financer des groupes terroristes, des mouvements de lutte armée ou des entreprises mafieuses, le risque est bien réel, même s’il ne concerne vraisemblablement qu’une toute petite partie des transferts de migrants. Plusieurs cas de figure existent. A l’instar des Kurdes ou des Tamouls, certains migrants africains sont soumis à l’impôt révolutionnaire ou au racket de protection des groupes qui combattent en leur nom dans le pays d’origine. D’autres contribuent volontairement à la cause et tiennent des discours encore plus belliqueux que les opposants restés sur place, qui se sentent moins protégés par une impression d’invulnérabilité due à la distance. De la Somalie au Liberia en passant par le Rwanda ou le Burundi, de nombreux mouvements de guérilla sont ainsi nés dans l’exil : soit dans des pays voisins, soit outre-mer dans les villes où se retrouvent les <pb/>élites réprimées par un régime honni. Dans les années 1980 et 1990, les camps de réfugiés en Ethiopie ou en Sierra Leone ont par exemple vu l’émergence d’organisations de lutte armée comme le Somali National Movement (SNM) ou le United Liberation Movement of Liberia for Democracy (ULIMO).</p>
+      <p rend="heading1">Des transferts sans conditionnalité : un problème pratique</p>
+      <p>La contribution économique des migrants au développement de leurs régions d’origine se heurte ainsi à quatre principaux risques que l’on peut énoncer de la façon suivante :</p>
+      <list type="ordered">
+        <item>
+          <p rend="item">la criminalisation de leurs transferts, souvent de pair avec la précarisation du statut des résidents du Sud dans les pays riches ;</p>
+        </item>
+        <item>
+          <p rend="item">l’emploi de l’argent des diasporas dans des dépenses ostentatoires qui, en assurant le prestige de l’exilé, poussent les jeunes au départ et ne permettent pas ou peu de relancer l’économie locale, exception faite de quelques secteurs comme le bâtiment pour les migrants qui se construisent une maison une fois de retour chez eux, généralement à l’âge de la retraite ;</p>
+        </item>
+        <item>
+          <p rend="item">le maintien d’un syndrome de dépendance qui n’incite pas les bénéficiaires à s’investir dans des activités productives, problématique que l’on retrouve d’ailleurs à propos de l’aide publique au développement ;</p>
+        </item>
+        <item>
+          <p rend="item">la fongibilité des intrants et l’utilisation des transferts de fonds à des fins politiques ou militaires, phénomène qui, là encore, affecte également la coopération internationale. De fait, les migrants peuvent tout à la fois financer des mouvements de lutte armée et des projets de développement comme au Somaliland, reconstruit grâce aux investissements de sa diaspora dans l’immobilier, les universités ou les hôpitaux.</p>
+        </item>
+      </list>
+      <p>En pratique, les acteurs de l’aide n’ont sûrement pas les moyens de remédier à tous ces problèmes. Pour l’instant, les expériences mises en place visent à faciliter plutôt qu’à orienter les transferts de fonds. Les coopérations britannique puis française, par exemple, ont cherché à réduire le coût de l’acheminement de l’argent des diasporas. Dorénavant, des sites Internet comme <ref target="http://sendmoneyhome.org/">sendmoneyhome.org</ref> ou <ref target="http://envoidargent.fr/">envoidargent.fr</ref> permettent de comparer les trafics pratiqués d’une agence à l’autre, sachant que les commissions vont de 5 % à 20 % pour chaque transfert. En France, le secteur bancaire s’est également mis de la partie et vient de créer un compte spécial et exonéré d’impôts à hauteur de 25 % si les sommes épargnées sont investies dans des projets de développement dans le pays d’origine des travailleurs immigrés. Pour les acteurs privés, l’objectif est d’attirer une manne considérable et largement informelle. Pour les pouvoirs publics, il est aussi de légaliser et de suivre à la trace des transferts qui échappent à leur contrôle.</p>
+      <p>Il n’en demeure pas moins que les acteurs de la coopération ont très peu de prise sur l’utilisation de ces transferts de fonds. En effet, les migrants rencontrent eux-mêmes de grandes difficultés pour vérifier la façon dont est employé leur argent. Vraisemblablement, leur capacité à imposer des conditions aux bénéficiaires est encore moindre que celle des grands bailleurs de l’aide au développement. Certes, les Bambara de la diaspora malienne ont investi dans des coopératives qui délivrent des coupons alimentaires afin d’encadrer les dépenses des destinataires de leur argent. Mais ces initiatives privées restent rares. Dans bien des cas, la pression sociale et lignagère interdit tout simplement aux migrants de suspendre leurs versements afin d’en contrôler l’emploi. Quant aux pouvoirs publics, l’Etat du Cap-Vert est un des seuls d’Afrique subsaharienne à avoir vraiment cherché à tirer officiellement parti de sa diaspora avec une institution (l’Instituto das Comunidades) destinée à faciliter les transferts de fonds en devises et le retour au pays des <pb/>ressortissants établis outre-mer en les invitant à investir dans des zones franches, voire en leur accordant des terres. Entamée au milieu des années 1980, l’expérience a en l’occurrence fait ses preuves et s’avère riche d’enseignements. Elle souligne notamment qu’une politique d’aide à l’investissement des migrants ne peut se concevoir sans le soutien de l’Etat d’origine.</p>
+      <p>De ce point de vue, il y a lieu de s’interroger sur les programmes individuels ou communautaires des organisations non gouvernementales (ONG) qui, depuis l’Europe, soutiennent les tentatives de développement des émigrés africains sans trop se préoccuper des pouvoirs publics sur le continent noir. Gageons que l’un ne peut pas fonctionner sans l’autre. Qu’il s’agisse des transferts des migrants ou de la coopération internationale, la stratégie de « contournement » de l’Etat a déjà montré ses limites. Le développement passe aussi par des préalables politiques indispensables, qui vont de l’amélioration de la gouvernance à la construction d’un appareil administratif en passant par le renforcement des services publics. Les diasporas africaines ont certainement là un rôle à jouer. Il convient à cet égard de les intégrer comme des acteurs à part entière du développement, tout en reconnaissant leurs limites.</p>
+    </body>
+    <back>
+      <div type="bibliogr">
+        <listBibl>
+          <bibl><author><surname>Bloch</surname>, <forename>Alice</forename></author><c type="comma"
+              >,</c>
+            <hi rend="italic"><title level="m">The Development Potential of Zimbabweans in the
+                Diaspora</title></hi><c type="comma">,</c>
+            <pubPlace>Geneva</pubPlace><c type="comma">,</c>
+            <publisher>International Organization for Migration</publisher><c type="comma">,</c>
+            <edition><date>2005</date></edition><c type="comma">,</c>
+            <extent>9</extent> <abbr type="contraction">p.</abbr></bibl>
+          <bibl><author><surname>Bourenane</surname>, <forename full="yes"
+              >Mohamed</forename></author>
+            <hi rend="italic"><abbr type="contraction">et al.</abbr></hi><c type="comma">,</c>
+            <hi rend="italic"><title level="m">Les transferts de fonds des migrants, un enjeu de
+                développement : les Comores, Mali, Maroc, Sénégal</title></hi><c type="comma">,</c>
+            <pubPlace>Tunis</pubPlace><c type="comma">,</c>
+            <publisher>Banque africaine de développement</publisher><c type="comma">,</c>
+            <edition><date>2007</date></edition><c type="comma">,</c>
+            <extent>75</extent> <abbr type="contraction">p.</abbr></bibl>
+          <bibl><author><surname>Haas</surname> (<nameLink>de</nameLink>),
+              <forename>Hein</forename></author><c type="comma">,</c>
+            <hi rend="italic"><title level="a">International Migration, Remittances and
+                Development : Myths and Fact</title></hi><c type="comma">,</c>
+            <title level="j">Global Migration Perspectives</title><c type="comma">,</c>
+            <abbr type="contraction">nº</abbr> <biblScope type="issue">30</biblScope><c type="comma"
+              >,</c>
+            <pubPlace>Geneva</pubPlace><c type="comma">,</c>
+            <distributor>Global Commission on International Migration</distributor><c type="comma"
+              >,</c>
+            <edition><date>2005</date></edition><c type="comma">,</c>
+            <extent>19</extent> <abbr type="contraction">p.</abbr></bibl>
+          <bibl><author><surname>Lindley</surname>, <forename full="yes">Anna</forename></author><c
+              type="comma">,</c>
+            <hi rend="italic"><title level="m">Migrant Remittances in the Context of Crisis in
+                Somali Society : A Case Study of Hargeisa</title></hi><c type="comma">,</c>
+            <pubPlace>London</pubPlace><c type="comma">,</c>
+            <distributor>Overseas Development Institute</distributor><c type="comma">,</c>
+            <edition><date>2006</date></edition><c type="comma">,</c>
+            <extent>22</extent> <abbr type="contraction">p.</abbr></bibl>
+          <bibl><author><surname>Osili</surname>, <forename full="yes">Una
+              Okonkwo</forename></author><c type="comma">,</c>
+            <c type="guillemot_left">«</c> <title level="a">Remittances and Savings from
+              International Migration : Theory and Evidence Using a Matched Sample</title> <c
+              type="guillemot_right">»</c><c type="comma">,</c>
+            <hi rend="italic"><title level="j">Journal of Development Economics</title></hi><c
+              type="comma">,</c>
+            <abbr type="contraction">vol.</abbr> <biblScope type="vol">83</biblScope><c type="comma"
+              >,</c>
+            <abbr type="contraction">nº</abbr> <biblScope type="issue">2</biblScope><c type="comma"
+              >,</c>
+            <edition><date when="2007-07">July 2007</date></edition><c type="comma">,</c>
+            <abbr type="contraction">pp.</abbr> <biblScope type="pp">446-465</biblScope><c
+              type="point">.</c></bibl>
+          <bibl><author><surname>Pérouse de Montclos</surname>,
+              <forename>Marc-Antoine</forename></author><c type="comma">,</c>
+            <c type="guillemot_left">«</c> <title level="a">Des diasporas africaines en
+              construction : le cas du Nigeria</title> <c type="guillemot_right">»</c><c
+              type="comma">,</c>
+            <hi rend="italic"><title level="j">Anthropologie et Sociétés</title></hi><c type="comma"
+              >,</c>
+            <abbr type="contraction">vol.</abbr> <biblScope type="vol">30</biblScope><c type="comma"
+              >,</c>
+            <abbr type="contraction">nº</abbr> <biblScope type="issue">3</biblScope><c type="comma"
+              >,</c>
+            <edition><date>2006</date></edition><c type="comma">,</c>
+            <abbr type="contraction">pp.</abbr> <biblScope type="pp">183-199</biblScope><c
+              type="point">.</c></bibl>
+          <bibl><author><surname>Pérouse de Montclos</surname>,
+              <forename>Marc-Antoine</forename></author><c type="comma">,</c>
+            <hi rend="italic"><title level="a">Diasporas, Remittances, and Africa South of the
+                Sahara : A Strategic Assessment</title></hi><c type="comma">,</c>
+            <title level="s">ISS Monograph Series</title><c>,</c>
+            <abbr type="contraction">nº</abbr> <biblScope type="issue">112</biblScope><c
+              type="comma">,</c>
+            <pubPlace>Johannesburg</pubPlace><c type="comma">,</c>
+            <publisher>Institute for Security Studies</publisher><c type="comma">,</c>
+            <edition><date when="2005-03">March 2005</date></edition><c type="comma">,</c>
+            <extent>66</extent> <abbr type="contraction">p.</abbr>, accessible sur Internet : <ptr
+              target="http://www.iss.co.za/pubs/Monographs/No112/Contents.htm"/><c type="point"
+              >.</c></bibl>
+          <bibl><author><surname>Savage</surname>, <forename>Kevin</forename></author> and
+                <author><surname>Paul</surname>
+              <forename>Harvey</forename></author>
+            <c type="parenthesis_left">(</c><abbr type="contraction">eds.</abbr><c
+              type="parenthesis_right">)</c><c type="comma">,</c>
+            <hi rend="italic"><title level="m">Remittances during Crises : Implications for
+                Humanitarian Response</title></hi><c type="comma">,</c>
+            <pubPlace>London</pubPlace><c type="comma">,</c>
+            <publisher>Overseas Development Institute</publisher><c type="comma">,</c>
+            <edition><date>2007</date></edition><c type="comma">,</c>
+            <extent>46</extent> <abbr type="contraction">p.</abbr></bibl>
+          <bibl><author><surname>Skeldon</surname>, <forename>Ronald</forename></author><c
+              type="comma">,</c>
+            <c type="guillemot_left">«</c> <title level="a">Migration and Poverty</title> <c
+              type="guillemot_right">»</c><c type="comma">,</c>
+            <hi rend="italic"><title level="j">Asia-Pacific Population Journal</title></hi><c
+              type="comma">,</c>
+            <abbr type="contraction">vol.</abbr> <biblScope type="vol">17</biblScope><c type="comma"
+              >,</c>
+            <abbr type="contraction">nº</abbr> <biblScope type="issue">4</biblScope><c type="comma"
+              >,</c>
+            <edition><date when="2002-12">December 2002</date></edition><c type="comma">,</c>
+            <abbr type="contraction">pp.</abbr> <biblScope type="pp">67-82</biblScope><c
+              type="point">.</c></bibl>
+        </listBibl>
+      </div>
+    </back>
+  </text>
+</TEI>

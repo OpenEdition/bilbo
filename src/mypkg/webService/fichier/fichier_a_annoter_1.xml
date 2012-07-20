@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.tei-c.org/ns/1.0 http://www.tei-c.org/release/xml/tei/custom/schema/xsd/tei_all.xsd">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title>Conceptualiser et (re)problématiser la géopolitique sans faire de théorie.</title>
+        <author>
+          <name>Gérard DUSSOUY</name>
+          <affiliation>Professeur de Géopolitique et de Relations internationales (CNU 23) <lb/>Université Montesquieu Bordeaux 4 <lb/><ref target="mailto:gerard.dussouy@wanadoo.fr">gerard.dussouy@wanadoo.fr</ref></affiliation>
+        <forename>Gérard</forename><surname>DUSSOUY</surname></author>
+      </titleStmt>
+      <publicationStmt>
+        <authority>revues.org</authority>
+        <idno type="url"/>
+        <idno type="DOI">doi:10.4000/espacepolitique.1712</idno>
+      <date when="2011-02-11">2011-02-11</date></publicationStmt>
+      <seriesStmt>
+        <title/>
+        <idno type="EISSN"/>
+      </seriesStmt>
+      <notesStmt/>
+      <sourceDesc>
+        <biblStruct>
+          <analytic>
+            <title>Conceptualiser et (re)problématiser la géopolitique sans faire de théorie.</title>
+            <author>
+              <name>Gérard DUSSOUY</name>
+            </author>
+          </analytic>
+          <monogr>
+            <imprint>
+              <publisher/>
+            </imprint>
+          </monogr>
+          <series>
+            <title/>
+            <biblScope type="ISSN"/>
+          </series>
+        </biblStruct>
+      </sourceDesc>
+    </fileDesc>
+    <encodingDesc>
+      <appInfo>
+        <application version="2.3" ident="servoo2">
+          <label>ServOO2 - CLEO / revues.org</label>
+          <desc>TEI P5 ; Written by OpenOffice; adapted from teioo package openoffice export filter</desc>
+        </application>
+      </appInfo>
+    </encodingDesc>
+    <profileDesc>
+      <langUsage>
+        <language ident="fr">fr</language>
+      </langUsage>
+      <textClass/>
+    </profileDesc>
+    <revisionDesc>
+      <change/>
+    </revisionDesc>
+  </teiHeader>
+  <text>
+    <front/>
+    <body>
+      <p>Malgré la popularité acquise désormais par la géopolitique, malgré l’usage devenu courant, et parfois de manière inconsidérée, du vocable, et en dépit de la prolifération des articles, revues, livres et atlas excipant d’elle, le doute n’est toujours pas vraiment levé quant à son existence comme discipline authentique ; c’est à dire dotée d’un objet propre, de concepts et de méthodes d’investigation et d’exposition appropriés. Ni parmi les universitaires, ni dans le grand public, la géopolitique n’impose complètement la stature d’un cadre d’expertise. La faute de tout cela incombe à une sémantique dispersée et imprécise, à une approximation terminologique qui altère sa propre définition, à l’empirisme des travaux qui se revendiquent d’elle et qui ne démontrent rien. Certes, il ne faut pas trop noircir le tableau parce que la conscience de ces insuffisances existe, et qu’au gré des publications, on trouve heureusement de nombreuses analyses factuelles pertinentes et fortement instructives. Par ailleurs, il faut se dire que la géopolitique ne sera jamais une science pure, et cela pas plus et pas moins que n’importe laquelle des autres « sciences sociales » qui ont toutes montré leurs limites. Cette terminologie, rappelons le, faisait frémir Claude Lévi-Strauss parce qu’il voyait en elle une imposture. </p>
+      <p>Toutefois, afin de clarifier et d’unifier autant que faire ce peut le discours géopolitique, afin de regrouper les bonnes volontés et pour leur permettre de concilier leurs recherches, il paraît de plus en plus nécessaire de disposer d’un certain nombre de « concepts fédérateurs », de notions quasi unanimement acceptées. A l’instar, par exemple, des économistes quand ils parlent du « marché »,de « l’offre »,des « externalités» ou d’une « dévaluation compétitive ». C’est dans cet esprit qu’a été conçu ce numéro. Il n’est pas tout à fait un début parce qu’il se situe dans la ligne du <hi rend="italic">Dictionnaire de l’espace politique</hi>, publié récemment sous la direction de Stéphane Rosière (Rosière et <hi rend="italic">Alli</hi>, 2008) et qui, parce qu’il est exclusivement voué à la définition de notions et de concepts, est destiné à combler un certain nombre de lacunes. Ce numéro n’est donc pas une fin en soi, même s’il n’a pas été facile à réunir. </p>
+      <p>Bien au contraire, les articles proposés ici sont autant de prolégomènes susceptibles non pas de fonder une <hi rend="italic">Grande théorie </hi>géopolitique des territoires et des sociétés, au risque sinon de retomber dans des vieux travers territorialistes ou, à l’inverse, de sombrer dans l’évolutionnisme et l’eschatologie de la société-monde. Mais, plus modestement, ils entendent inférer des approches conceptuelles et méthodologiques allant vers le but fixé plus haut. Ils s’enquièrent aussi du renouvellement des problématiques de la géopolitique engendré par le désenclavement complet de l’espace mondial. Leurs auteurs n’ont pas d’autre objectif que de faire avancer les choses en suggérant des moyens, toujours réfutables ou perfectibles, de faciliter la communication entre ceux qui se reconnaissent en tant que géopolitologues en rendant les discussions plus positives et plus agréables parce que plus cohérentes. </p>
+      <p rend="heading1">L’APPROFONDISSEMENT CONCEPTUEL ET METHODOLOGIQUE </p>
+      <p>La première étape, dans cette perspective, est de rassembler les éléments existants sur lesquels peut déjà s’appuyer la pensée théorique en matière de géopolitique. Or, dans un contexte global qui s’avère très empiriste et très analytique, on ne dispose d’aucune véritable synthèse allant dans ce sens. Les contributions de Pascal Venier et de David Criekemans <pb/>permettent ici d’y pallier, au moins en partie. Le premier, tout en retraçant succinctement les différentes phases de la pensée géopolitique, fait ressortir les travaux et les notions qui, selon lui, sont les plus à mêmes de procurer une base théorique à la réflexion géopolitique, et particulièrement au raisonnement géostratégique auquel il accorde une attention particulière. Quant au second, qui a déjà publié sur les écoles de pensée (Criekemans, 2009), il revient, pour ce numéro, sur deux d’entre elles, parmi les plus récentes et les moins connues en France (<hi rend="italic">Cognitive Geopolitics </hi>et <hi rend="italic">Critical Geopolitics</hi>), et qu’il tient pour théoriquement productives, avant de proposer une récapitulation originale.</p>
+      <p>Les deux courants mis en relief par David Criekemans se détachent clairement, et s’opposent au positivisme qui est la tendance largement dominante en géopolitique. Ce dernier qui fut quasiment exclusif dans sa version <hi rend="italic">classique</hi>, jusqu’à la « révolution béhavioriste » de la <hi rend="italic">Cognitive Geopolitics </hi>dans les années soixante, demeure nettement majoritaire dans la littérature contemporaine. A partir de la matérialité des faits, il s’attache à décrire et à répertorier les facteurs géographiques qui influencent les relations politiques, principalement au niveau international. Et depuis que l’on parle de « géopolitique interne », il analyse les types de conditionnement des constructions sociales et politiques, ou bien les potentialités géographiques qui créent des situations de conflit ou de coopération. Au contraire, depuis que l’on a admis, grâce au behaviorisme qui, le premier, a mis en valeur le rôle déterminant que tiennent les représentations dans le comportement des acteurs et dans leurs approches de l’espace, il en va différemment. En géopolitique des relations internationales, on ne peut ignorer les travaux de Robert Jervis et de l’école de la perception qui en sont les continuateurs (Jervis, 1970, 1976, 1997). Désormais, le positivisme est contrecarré par le constructivisme qui insiste derechef sur les idées que les hommes se font de la société et du monde. Et, surtout, qui mise sur la dimension intersubjective de leurs rapports, laquelle, d’après lui, peut changer leurs propres identités et leurs perceptions de leur environnement social et naturel. Soit, la réalité elle-même. C’est à ce titre, d’ailleurs, que la <hi rend="italic">Critical Geopolitics</hi> dénonce le conservatisme de la géopolitique, dans la mesure où elle n’aurait que trop tendance à tenir le même discours immuable sur le territoire, sans prendre en compte ses mises en cause, et à servir d’alibi aux politiques de domination. Néanmoins, ce faisant, elle s’avère elle-même plus déconstructiviste que constructive. Elle n’offre pas de méthode de substitution, et elle ne peut trancher les nœuds gordiens qui rattachent la géopolitique au pouvoir (ou à la puissance), à la domination ou au territoire. </p>
+      <p>Or, il va de soi que toutes les problématiques qui se posent à l’analyse géopolitique (celles qui se découvrent comme les anciennes qui se renouvellent) nécessitent un effort de méthode. Des propositions sont donc attendues dans ce sens, telle celle de Martin Müller qui croit possible un perfectionnement de la géopolitique critique (<hi rend="italic">Critical Geopolitics</hi>), grâce à l’apport des travaux de Laclau et Mouffle. De même, d’un point de vue épistémologique, il est intéressant de revenir sur le rapport que certains géographes français ont entretenu avec Michel Foucault, très influent chez les postmodernes anglo-saxons. C’est ce que fait Marc Dumont en trois temps, c’est à dire en analysant ce que le philosophe français a pu transmettre à trois d’entre eux pour lesquels il a été, à un moment ou à un autre, une référence : Yves Lacoste (et l’équipe éditoriale d<hi rend="italic">’Hérodote)</hi>,<hi rend="italic"> </hi>Claude Raffestin et Michel Lussault. Si dans le premier cas la mésentente a prévalu, et l’échange est resté sans lendemain, explique Marc Dumont, les deux autres contacts sont riches d’efforts de compréhension de la relation entre l’espace et le pouvoir, et de définition de nouvelles notions susceptibles de contribuer à l’appareillage conceptuel de la géopolitique. Par exemple, avance-t-il, le « système territorial » de Raffestin ou le « dispositif spatial » de Lussault.</p>
+      <p>Au stade actuel de la réflexion, et compte tenu des démarches en présence, il conviendrait, en premier lieu, de s’accorder sur une <hi rend="italic">attitude épistémologique et méthodologique </hi>qui dépasse l’alternative entre le positivisme et le constructivisme, afin de ne pas réduire (à sa seule <pb/>matérialité) la réalité, ni de la normativiser (en lui fixant un devant-être). La réponse à ce préalable réside, selon Gérard Dussouy et pour un certain nombre de géographes anglo-saxons dans un retour au <hi rend="italic">pragmatisme </hi>; ce courant de pensée philosophique né à la fin du 19° siècle aux Etats-Unis dont les racines remontent au <hi rend="italic">nominalisme </hi>médiéval de Guillaume d’Occam. Il s’agit avec lui de ne plus séparer les faits et les valeurs, parce que les deux catégories interagissent en permanence et qu’il n’existe rien d’éternel ni d’universel; de considérer que tout est contextuel, autrement dit <hi rend="italic">en situation</hi>, et que l’on parle toujours <hi rend="italic">depuis quelque part </hi>; enfin d’en déduire qu’il n’y a pas lieu de rechercher des lois parce que les sciences sociales ne pourront jamais s’aligner sur les sciences de la nature. La force des préjugés des observateurs faisant qu’un véritable consensus scientifique demeurera toujours introuvable, le pragmatisme préfère à sa recherche le « débat inter-ethnocentrique », ou interparadigmatique, basé sur la confrontation d’hypothèses et de modèles réfutables et révisables. Etant étendu que c’est l’expérience qui a toujours le dernier mot. En second lieu, et au-delà de tout idéal méthodologique, il faut préciser que l’épistémologie pragmatiste est particulièrement en phase avec les problèmes de la géographie dans le sens où elle ne cesse de souligner l’intimité de l’espace et du pouvoir. Or, de façon irréfragable, c’est leur rapport qui est au cœur de toutes les questions qui se posent en géopolitique.</p>
+      <p rend="heading1">LE RENOUVELLEMENT DES PROBLEMATIQUES.</p>
+      <p>A l’heure où le pouvoir apparaît des plus diffus, tel que le percevait justement Foucault, et où l’évocation de la démocratie et de la gouvernance emplit tous les discours, au plan interne comme au plan international, faut-il, comme il le faisait lui-même, s’interroger toujours sur le phénomène de la domination? Et plus encore, est-il pertinent d’envisager une géopolitique des classes, comme s’y emploie Stéphane Rosière ? Parce que le clivage entre dominants et dominés s’il n’est plus celui de l’ancienne société industrielle n’a pas disparu. Si l’on en croit Jeff Faux «  la globalisation n’a pas seulement produit un marché sans frontières, mais aussi le système de classes qui va avec lui » (Faux, 2006). Néanmoins, la notion de classe dans le monde d’aujourd’hui pose des problèmes de définition, de sémantique et de congruence avec le réel que Rosière s’efforce de cerner. Il est difficile de voir les relations internationales comme une extension de la lutte interne des classes (Lider, 1986). Mais le concept de « superclasse globale » proposé et analysé par David Rothkopf (Rothkopf, 2008) justifie à lui seul une investigation dans cette direction. La question sociale n’est pas épuisée. Surtout que dans le contexte de la mondialisation, tout cela prend une véritable dimension géopolitique dans la mesure où, d’après Rothkopf, avec la dégradation des conditions de vie des peuples, une opposition de plus en plus nette se dessine entre l’oligarchie mondialiste, d’une part, et les multiples mouvements populistes à venir, d’autre part (Rothkopf, 2008, p.145-189). </p>
+      <p>Dans ce même ordre d’idée qui est celui de la mutation des problématiques géopolitiques, celle du territoire se renouvelle sans cesse, sans disparaître. Ainsi, les vicissitudes que connaît aujourd’hui l’Etat territorial ne témoignent pas d’une fin des frontières, comme on aurait tendance à le croire, mais, comme le montre Gertjan Dijkink, de leur réaménagement et de leur relocalisation à l’échelle du monde, et souvent à l’intérieur de celles qui existent, sous l’effet des forces du marché ou des forces ethnoculturelles et spirituelles en plein renouveau. Le géographe néerlandais explique qu’il existe une histoire de la territorialité marquée par les heurts entre la reterritorialisation agissante à une époque donnée et l’ancien ordre territorial. Depuis l’ordre impérial médiéval jusqu’à la revendication actuelle d’une déterritorialisation totale au nom des allégeances spirituelles, en particulier religieuses, en passant par l’ordre westphalien (celui des Etats), c’est toujours de la géographie du pouvoir qu’il s’agit.</p>
+      <p>L’article de Dijkink, comme ceux qui le précédent, montre d’après nous que la géopolitique est avant tout une réflexion, à la fois historique et contemporaine, et pourquoi pas prospective, sur l’organisation spatiale du monde, sur les <hi rend="italic">formes </hi>(au sens de Georg <pb/>Simmel) spatiales que créent les hommes en fonction de leurs intérêts et de leurs croyances principalement. Son objet est donc tout sauf fixe et immuable. </p>
+      <p>Ainsi, les dynamiques de la globalisation qui animent l’espace mondial imposent aux Etats et aux autres institutions humaines des stratégies qui obéissent à de nouvelles logiques spatiales. C’est ce qui conduit Kattalin Gabriel-Oyhamburu à distinguer une <hi rend="italic">géopolitique objectale</hi>, qui a pour but l’appropriation indispensable des ressources de toutes natures situées n’importe où dans l’espace mondial, d’une <hi rend="italic">géopolitique zonale </hi>considérée par elle comme en partie dépassée parce que son ressort principal est l’acquisition impérative de lieux ou de positions perçus comme privilégiés. L’une ne chasse pas forcément l’autre, comme on pourrait le croire, mais il faut savoir que, selon l’Agence Internationale de l’Energie, la demande globale d’énergie pourrait augmenter de 50% d’ici à 2035. La course aux matières premières a, d’ores et déjà, commencé et certains Etats, tel que le Canada, et selon les termes de son Premier ministre, se perçoivent comme des « superpuissances énergétiques ».Le retour en force de la géopolitique des ressources implique, néanmoins, dans un contexte d’interdépendance économique, de nouvelles stratégies d’acquisition qui excluent le recours au pouvoir de coercition. Mais des conflits sont prévisibles si la gouvernance multilatérale, que Kattalin Gabriel-Oyhamburu appelle de ses vœux, ne se mettait pas en place afin d’écarter les dérives d’une quête effrénée du pouvoir en ressources, base, selon elle, de la puissance dans la dernière phase de la mondialisation.</p>
+      <p>La géopolitique a été conçue dès le départ pour penser le monde, et principalement son ordre spatial, son <hi rend="italic">nomos</hi>. Cela n’a pu se faire sans une dose d’ethnocentrisme et sans dérapage idéologique. Sauf à s’en tenir à des lectures purement empiriques ou analytiques des réalités territoriales et des phénomènes spatiaux. Pourtant, et plus que jamais, sa raison d’être en impose à toutes les disciplines qui s’intéressent aux faits sociaux et politiques, comme on peut le constater au plan éditorial comme au plan médiatique. En particulier au niveau global, parce qu’on attend de l’analyse géopolitique qu’elle renseigne sur le triple changement qui, d’après nous (Dussouy, 2010, 2009), bouleverse aujourd’hui le pouvoir mondial : sa transition, c’est à dire l’émergence d’une nouvelle hiérarchie des puissances<note place="foot" n="1">Cette problématique est l’objet central, depuis plusieurs années, de l’école néoréaliste de « la transition de la puissance ». </note>, avec les risques que cela comporte (Organski, 1958, Kugler/Tamen, 2005) ; sa transformation, soit l’ascendant de ses formes <hi rend="italic">soft </hi>(économie, culture, normes, corruption) sur sa forme <hi rend="italic">hard </hi>; sa translation, à savoir son décentrement vers l’Asie orientale. Or, il va de soi que la pertinence des réponses apportées dépendra de l’approfondissement de l’appareil conceptuel et méthodologique de la géopolitique.</p>
+    </body>
+    <back>
+      <div type="bibliogr">
+        <listBibl>
+          <bibl><author><surname>CRIEKEMANS</surname>, <forename>David</forename></author><c
+              type="comma">,</c>
+            <edition><date>2009</date></edition><c type="comma">,</c>
+            <hi rend="italic"><title level="m">Geopolitical Schools of Thought: a Concise Overview
+                Since 1890 till 2015 and Beyond</title></hi><c type="comma">,</c>
+            <pubPlace>Genève</pubPlace><c type="comma">,</c>
+            <publisher>Editions de Penthes</publisher> et<publisher> International Centre for
+              Geopolitical Studies</publisher><c type="point">.</c></bibl>
+          <bibl xml:id="Dussouy_Gérard"><author><surname>DUSSOUY</surname>,
+                <forename>Gérard</forename></author><c type="comma">,</c>
+            <edition><date>2010</date></edition><c type="comma">,</c>
+            <hi rend="italic"><title level="m">Quelle géopolitique au 21° siècle ?</title><c
+                type="comma">,</c>
+            </hi><ref>www.classiques.ucaq.ca</ref><c type="semi-colon">;</c>
+            <edition><date>2009</date></edition><c type="comma">,</c>
+            <title level="m"><hi rend="italic">Les théories de la mondialité. </hi></title><hi
+              rend="italic"><title>Traité de Relations internationales, tome 3</title><c
+                type="comma">,</c>
+            </hi><pubPlace>Paris</pubPlace><c type="comma">,</c>
+            <publisher>L’Harmattan</publisher><c type="point">.</c></bibl>
+          <bibl><author><surname>FAUX</surname>, <forename full="init">Jeff</forename></author><c
+              type="comma">,</c>
+            <edition><date>2006</date></edition><c type="comma">,</c>
+            <hi rend="italic"><title level="m">The Global Class War</title><c type="comma">,</c>
+            </hi><pubPlace>New York</pubPlace><c type="comma">,</c>
+            <publisher>John Wiley</publisher><c type="point">.</c></bibl>
+          <bibl xml:id="Jervis_Robert"><author><surname>JERVIS</surname>, <forename full="init"
+                >Robert</forename></author><c type="comma">,</c>
+            <edition><date>1970</date></edition><c type="comma">,</c>
+            <hi rend="italic"><title level="m">The Logic of Images in International
+                Relations</title><c type="comma">,</c>
+            </hi><pubPlace>Princeton</pubPlace><c type="comma">,</c>
+            <publisher>Princeton University Press</publisher><c type="semi-colon">;</c>
+            <edition><date>1976</date></edition><c type="comma">,</c>
+            <hi rend="italic"><title level="m">Perception and Misperception in International
+                relations</title><c type="comma">,</c></hi>
+            <pubPlace>Princeton</pubPlace><c type="point">,</c>
+            <publisher>Princeton University Press</publisher><c type="semi-colon">;</c>
+            <edition><date>1997</date></edition><c type="comma">,</c>
+            <hi rend="italic"><title level="m">System Effects. Complexity in Political and Social
+                Life</title><c type="comma">,</c>
+            </hi><pubPlace>Princeton</pubPlace><c type="comma">,</c>
+            <publisher>Princeton University Press</publisher><c type="point">.</c></bibl>
+          <bibl><author><surname>KUGLER</surname>
+              <forename full="yes">Jacek</forename></author> &amp; <author><surname>TAMEN</surname>
+              <forename>Ronald</forename></author><c type="comma">,</c>
+            <edition><date>2005</date></edition><c type="comma">,</c>
+            <c type="quote_left">“</c><title level="a">Regional challenge: China’s Rise to
+              Power</title><c type="quote_right">”</c><c type="right">,</c>
+            <edition>www.apcss.org/Publications</edition></bibl>
+          <bibl><author><surname>LIDER</surname>, <forename>John</forename></author><c type="comma"
+              >,</c>
+            <edition><date>1986</date></edition><c type="comma">,</c>
+            <hi rend="italic"><title level="m">Correlations of forces</title><c type="comma">,</c>
+            </hi><pubPlace>Londres</pubPlace><c type="comma">,</c>
+            <publisher>Gower</publisher><c type="point">.</c>
+          </bibl>
+          <bibl><author><surname>ORGANSKI</surname>
+              <forename full="init">Kenneth</forename></author><c type="comma">,</c>
+            <edition><date>1958</date></edition><c type="comma">,</c>
+            <hi rend="italic"><title level="m">World Politics</title></hi><c type="comma">,</c>
+            <pubPlace>New York</pubPlace><c type="comma">,</c>
+            <publisher>Knopf</publisher><c type="point">.</c></bibl>
+          <bibl><author><surname><pb/>ROSIERE</surname>, <forename>Stéphane</forename></author> et
+              <hi rend="italic">Alli, </hi><edition><date>2008</date></edition><c type="comma">,</c>
+            <hi rend="italic"><title level="m">Dictionnaire de l’espace politique. Géographie
+                politique et géopolitique</title><c type="comma">,</c>
+            </hi><pubPlace>Paris</pubPlace><c type="comma">,</c>
+            <publisher>Armand Colin</publisher><c type="point">.</c></bibl>
+          <bibl><author><surname>ROTHKOPF</surname>, <forename>David</forename></author><c
+              type="comma">,</c>
+            <edition><date>2008</date></edition><c type="comma">,</c>
+            <title level="m"><hi rend="italic"><title>Superclass</title>. </hi></title><hi
+              rend="italic"><title>The Global Power Elite and the World They are Making</title><c
+                type="comma">,</c>
+            </hi><pubPlace>Londres</pubPlace><c type="comma">,</c>
+            <publisher>Little Brown</publisher><c type="point">.</c></bibl>
+        </listBibl>
+      </div>
+    </back>
+  </text>
+</TEI>
