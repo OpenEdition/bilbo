@@ -46,15 +46,15 @@ if __name__ == '__main__':
 
 		
 		if int(sys.argv[1]) == 1:
-			bilbo.annoter(str(sys.argv[2]))
+			bilbo.annotate(str(sys.argv[2]), "model/corpus1/", 1)
 		elif int(sys.argv[1]) == 2:
-			bilbo.annoterCorpus2(str(sys.argv[2]))
+			bilbo.annotate(str(sys.argv[2]), "model/corpus2/", 2)
 		elif int(sys.argv[1]) == 11:
-			bilbo.apprentissage("KB/data/corpus1/XML_annotated2")
+			bilbo.train("KB/data/corpus1/XML_annotated2", "model/corpus1/", 1)
 		elif int(sys.argv[1]) == 22:
-			bilbo.apprentissageCorpus2("KB/data/corpus2/alldata_added")
+			bilbo.train("KB/data/corpus2/alldata_added", "model/corpus2/", 2)
 		elif int(sys.argv[1]) == 21:
-			bilbo.annoterCorpus2(str(sys.argv[2]), 1)
+			bilbo.annotate(str(sys.argv[2]), "model/corpus2/", 2, 1)
 			
 
 	#	bilbo.annoter("/Users/jade/Documents/jade/labo/comparaison_bilbo/analyse/repertoire/Niveau1/originaux/etnografica-869.xml")

@@ -167,7 +167,6 @@ class Extract_svm(Extract):
                     if indices[i] == tr :
                     ##################
                         if self.valid_features.has_key(self.features[key]) :
-                            print str(key+adding+1)+':'
                             fich.write( str(key+adding+1)+':1'+" ")
             
             if indices[i] == tr :

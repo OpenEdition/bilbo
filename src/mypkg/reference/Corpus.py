@@ -40,28 +40,24 @@ class Corpus(object):
 			self.repertoire = "/".join(nomSplit)
 		return listFichiers
 	
+	
 	'''
-	extractCorpus1 pour chaque fichier les references du corpus 1
+	extract pour chaque fichier les references 
+	argument :
+		type :			type de corpus : 1 = corpus1, 2 = corpus 2 ...
+		tag :			balise delimitant les references : corpus 1 = bibl...
+		nomFichier :	nom du fichier que l'on doit annoter
 	'''
-	def extractCorpus1(self, nomFichiers=""):
+	def extract(self, type, tag, nomFichiers=""):
 		if nomFichiers == "":
 			nomFichiers = self.getFiles()
+			
 		for nomFichier in nomFichiers:
 			fichObj = File(self.repertoire+"/"+nomFichier)
-			fichObj.extractCorpus1()
+			fichObj.extract(type, tag)
 			self.fichiers.append(fichObj)
-		
-	'''
-	extractCorpus2 pour chaque fichier les references du corpus 1
-	'''
-	def extractCorpus2(self, nomFichiers=""):
-		if nomFichiers == "":
-			nomFichiers = self.getFiles()
-		for nomFichier in nomFichiers:
-			fichObj = File(self.repertoire+"/"+nomFichier)
-			fichObj.extractCorpus2()
-			self.fichiers.append(fichObj)
-				
+			
+	
 	'''
 	getListReferences : permet de recuperer la liste entiere des references du corpus 1
 	'''

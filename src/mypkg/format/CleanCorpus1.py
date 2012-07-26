@@ -21,7 +21,7 @@ class CleanCorpus1(Clean):
 		
 	
 	'''
-	processingCorpus1 : 
+	processing : 
 		fname : nom du fichier
 		typeCorpus : balise de depart de la reference
 	'''

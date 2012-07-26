@@ -23,7 +23,6 @@ Created on 18 avr. 2012
 from mypkg.format.CRF import CRF
 from mypkg.format.SVM import SVM
 from mypkg.reference.Corpus import Corpus
-from mypkg.extra.Memory import Memory
 import os
 import time
 
@@ -36,120 +35,93 @@ class Bilbo(object):
 
 		
 	'''
-	apprentissage : apprentissage reference corpus 1
+	train : apprentissage reference corpus 1
 		repCorpus : repertoire ou se trouve le corpus d'apprentissage 
+		repModel : 		repertoire ou se trouve le model correspondant au corpus
+		type : integer 1 : corpus 1, 2 : corpus 2...
 	'''
-	def apprentissage(self, repCorpus):
+	def train(self, repCorpus, repModel, type):
 		corpus = Corpus(repCorpus)
-		corpus.extractCorpus1()
 		
-		self.crf.prepareTrain(corpus, 1, "trainingdata_CRF_C1.txt", 1, 1)
-		self.crf.runTrain("model/corpus1/", "trainingdata_CRF_C1.txt")
+		if type == 1:
+			corpus.extractCorpus1()
+			self.crf.prepareTrain(corpus, 1, "trainingdata_CRF_C1.txt", 1, 1)
+			self.crf.runTrain(repModel, "trainingdata_CRF_C1.txt")
+		elif type == 2:
+			corpus.extractCorpus2()
+			self.crf.prepareTrain(corpus, 2, "data04SVM_ori.txt", 1)
+			
+			self.svm.prepareTrain(corpus)
+			self.svm.runTrain(repModel)
+			
+			self.crf.prepareTrain(corpus, 2, "trainingdata_CRF_C2.txt", 1, 1)
+			self.crf.runTrain(repModel, "trainingdata_CRF_C2.txt")
+		
+	
 	
 	'''
-	apprentissageCorpus2 : apprentissage reference corpus 2
-		repCorpus : repertoire ou se trouve le corpus d'apprentissage 
-		
-	'''	
-	def apprentissageCorpus2(self, repCorpus):
-		print os.getcwd()
-		corpus = Corpus(repCorpus)
-		corpus.extractCorpus2()
-		
-		self.crf.prepareTrain(corpus, 2, "data04SVM_ori.txt", 1)
-		#self.crf.runTrain("model/corpus2/", "data04SVM_ori.txt")
-		
-		self.svm.prepareTrain(corpus)
-		self.svm.runTrain("model/corpus2/")
-		
-		self.crf.prepareTrain(corpus, 2, "trainingdata_CRF_C2.txt", 1, 1)
-		self.crf.runTrain("model/corpus2/", "trainingdata_CRF_C2.txt")
+	annotate : annote les references du type corpus 1
+		repCorpus : 	repertoire ou se trouve les fichiers a annoter
+		repModel : 		repertoire ou se trouve le model correspondant au corpus
+		type :			integer :1 si coprus 1, 2 si corpus 2...
+		externe : 		si ce sont des donnée externe = 1 (autre que le cleo), 0 sinon
 		
 	'''
-	annoter : annote les references du type corpus 1
-		repCorpus : repertoire ou se trouve les fichiers a annoter
-	'''
-	def annoter(self, repCorpus):
-		btime = 0
-		ctime = 0
-		dtime = 0
-		
+	def annotate(self, repCorpus, repModel, type, externe=0):
 		nbRef = 0
 		corpus = Corpus(repCorpus)
 		fichiers = corpus.getFiles()
 		fichiersTab = self._list_split(fichiers, 50)
 		for fichierTab in fichiersTab:
-			atime = time.time()
-			corpus.extractCorpus1(fichierTab)
-			
-			nbRef += corpus.nbReference(1)
-			print nbRef
-			
-			btime = time.time()
-			difftime = btime - atime
-			difftuple = time.gmtime(difftime)
-	
-			print( "temps ecoule pour l'extraction des references : %i heures %i minutes %i secondes" % ( difftuple.tm_hour, difftuple.tm_min, difftuple.tm_sec) )
-			print self.rss()
-			print self.vsz()
-			
-			self.crf.preparerTest(corpus, 1)
-			self.crf.runTest("model/corpus1/", 'testdata_CRF.txt')
-			ctime = time.time()
-			difftime = ctime - btime
-			difftuple = time.gmtime(difftime)
-	
-			print( "temps ecoule  pour l'annotation via mallet : %i heures %i minutes %i secondes" % ( difftuple.tm_hour, difftuple.tm_min, difftuple.tm_sec) )
-			print self.rss()
-			print self.vsz()
-
-			corpus.addTagReferences(self.repResult+"testEstCRF.xml", "bibl", 1)
-
-			dtime = time.time()
-			difftime = dtime - ctime
-			difftupleA = time.gmtime(difftime)
-			'''corpus.buildAnnotateFiles()
-			etime = time.time()
-			difftime = etime - dtime
-			difftuple = time.gmtime(difftime)'''
-
-			print( "temps ecoule  pour generation du fichier final A : %i heures %i minutes %i secondes" % ( difftupleA.tm_hour, difftupleA.tm_min, difftupleA.tm_sec) )
-			#print( "temps ecoule  pour generation du fichier final B : %i heures %i minutes %i secondes" % ( difftuple.tm_hour, difftuple.tm_min, difftuple.tm_sec) )
-			corpus.deleteAllFiles()
-			print self.rss()
-			print self.vsz()
-
-		#corpusAnnote = Corpus("Result/testEstCRF.xml")
-		#corpusAnnote.buildAnnotateFiles()
-		
-	'''
-	annoterCorpus2 : annote les references du type corpus 2
-		repCorpus : repertoire ou se trouve les fichiers a annoter
-		externe : si donnée externe = 1
-	'''
-	def annoterCorpus2(self, repCorpus, externe=0):
-		corpus = Corpus(repCorpus)
-		fichiers = corpus.getFiles()
-		fichiersTab = self._list_split(fichiers, 50)
-		
-		for fichierTab in fichiersTab:
-			corpus.extractCorpus2()
-		
-			if externe == 0:
-				self.crf.preparerTest(corpus, 2, -1)
+			if type == 1:
+				corpus = self.annotateCorpus1(repModel, corpus, fichierTab)
+			elif type == 2:
+				corpus = self.annotateCorpus2(repModel, corpus, fichierTab, externe)
 				
-				self.svm.prepareTest(corpus)
-				self.svm.runTest("model/corpus2/")
-			
-				self.crf.preparerTest(corpus, 2)
-			else:
-				self.crf.preparerTest(corpus, 2, 2)
-			self.crf.runTest("model/corpus2/", 'testdata_CRF.txt')
+			corpus.deleteAllFiles()
 
-			corpus.addTagReferences(self.repResult+"testEstCRF.xml", "note", 2)
+
+	'''
+	annotateCorpus1 : annote les references du type corpus 2
+		repModel : 		repertoire ou se trouve le model correspondant au corpus
+		corpus : 		objet Corpus correspondant au corpus que l'on souhaite annoter
+		fichier :		fichier a annoter
+		
+	'''
+	def annotateCorpus1(self, repModel, corpus, fichier):
+		corpus.extract(1, "bibl", fichier)
+		self.crf.preparerTest(corpus, 1)
+		self.crf.runTest(repModel, 'testdata_CRF.txt')
+
+		corpus.addTagReferences(self.repResult+"testEstCRF.xml", "bibl", 1)
+		return corpus
+	
+	'''
+	annotateCorpus2 : annote les references du type corpus 2
+		repModel : 		repertoire ou se trouve le model correspondant au corpus
+		corpus : 		objet Corpus correspondant au corpus que l'on souhaite annoter
+		fichier :		fichier a annoter
+		externe : 		si donnée externe = 1
+	'''
+	def annotateCorpus2(self, repModel, corpus, fichier, externe=0):
+
+		corpus.extract(2, "note", fichier)
+	
+		if externe == 0:
+			self.crf.preparerTest(corpus, 2, -1)
+			
+			self.svm.prepareTest(corpus)
+			self.svm.runTest(repModel)
+		
+			self.crf.preparerTest(corpus, 2)
+		else:
+			self.crf.preparerTest(corpus, 2, 2)
+			
+		self.crf.runTest(repModel, 'testdata_CRF.txt')
+		corpus.addTagReferences(self.repResult+"testEstCRF.xml", "note", 2)
 
 		
-		return
+		return corpus
 	
 	'''
 	_list_split : decoupe une liste en plusieur liste

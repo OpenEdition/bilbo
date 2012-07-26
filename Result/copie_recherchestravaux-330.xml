@@ -1,0 +1,2077 @@
+<?xml version='1.0' encoding='utf-8'?>
+<tei xmlns="http://www.tei-c.org/ns/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemalocation="http://www.tei-c.org/ns/1.0 http://www.tei-c.org/release/xml/tei/custom/schema/xsd/tei_all.xsd">
+ <teiheader>
+  <filedesc>
+   <titlestmt>
+    <title>
+     Rédiger, s’exprimer, produire. Écrire à l’école primaire dans les années 1990
+    </title>
+    <author>
+     <name>
+      François Quet
+     </name>
+     <affiliation>
+      IUFM de Lyon - Lyon 1, INRP, Traverses 19-21 (CEDILIT)
+     </affiliation>
+     <forename>
+      François
+     </forename>
+     <surname>
+      Quet
+     </surname>
+    </author>
+   </titlestmt>
+   <publicationstmt>
+    <authority>
+     revues.org
+    </authority>
+    <idno type="url">
+    </idno>
+    <idno type="DOI">
+     <date when="2010-06-15">
+      2010-06-15
+     </date>
+    </idno>
+   </publicationstmt>
+   <seriesstmt>
+    <title>
+     <idno type="EISSN">
+     </idno>
+    </title>
+   </seriesstmt>
+   <notesstmt>
+    <sourcedesc>
+     <biblstruct>
+      <analytic>
+       <title>
+        Rédiger, s’exprimer, produire. Écrire à l’école primaire dans les années 1990
+       </title>
+       <author>
+        <name>
+         François Quet
+        </name>
+       </author>
+      </analytic>
+      <monogr>
+       <imprint>
+        <publisher>
+         <date when="2008-12-15">
+          2008-12-15
+         </date>
+         <biblscope type="pp">
+          105-121
+         </biblscope>
+        </publisher>
+       </imprint>
+      </monogr>
+      <series>
+       <title>
+        <biblscope type="ISSN">
+        </biblscope>
+       </title>
+      </series>
+     </biblstruct>
+    </sourcedesc>
+   </notesstmt>
+  </filedesc>
+  <encodingdesc>
+   <appinfo>
+    <application version="2.3" ident="servoo2">
+     <label>
+      ServOO2 - CLEO / revues.org
+     </label>
+     <desc>
+      TEI P5 ; Written by OpenOffice; adapted from teioo package openoffice export filter
+     </desc>
+    </application>
+   </appinfo>
+  </encodingdesc>
+  <profiledesc>
+   <langusage>
+    <language ident="fr">
+     fr
+    </language>
+   </langusage>
+   <textclass>
+   </textclass>
+  </profiledesc>
+  <revisiondesc>
+   <change>
+   </change>
+  </revisiondesc>
+ </teiheader>
+ <text>
+  <front>
+   <body>
+    <p>
+     Parmi les éléments avancés pour expliquer la place prise par l’écriture d’invention dans les programmes, André Petitjean et Alain Viala
+     <hi rend="sup">
+      <note place="foot" n="1">
+       <forename>A.</forename><surname>Petitjean</surname><nolabel>et</nolabel><forename>A.</forename><surname>Viala,</surname><nonbibl>¬´Les nouveaux programmes de fran√ßais au lyc√©e¬ª , Pratiques , n¬∞107-108 , CRESEF , Metz , d√©cembre 2000 , p.7‚Äë33.
+      </note>
+     </hi>
+     insistent sur le rôle des innovations pédagogiques dans les années 1970. Développées en marge du système, étayées par les recherches sur l’apprentissage de l’écriture, elles ont apporté « la preuve que
+     <hi rend="italic">
+      savoir écrire
+     </hi>
+     est une compétence qui peut faire l’objet d’un apprentissage et d’un enseignement et que l’
+     <hi rend="italic">
+      invention
+     </hi>
+     se travaille » (p. 27). Ainsi située « en référence à la poétique des genres […] et dans le prolongement des recherches sur la didactique de l’écriture » (p. 28),
+     <hi rend="italic">
+      l’écriture d’invention
+     </hi>
+     se définit « essentiellement » en relation avec la réécriture de textes sources : transposition, imitations, travestissements et variations de toutes sortes feront porter l’attention du scripteur-lecteur sur l’intention communicationnelle, le registre, le genre, le thème et les valeurs, la langue, les modalités énonciatives. La relation étroite entre le nouvel exercice et les théories des apprentissages se manifeste à plusieurs reprises dans cet article : il est question de « placer les élèves dans des rapports actifs à la langue, à la littérature et à son histoire » et la résolution de « problèmes d’écriture » est liée à des projets de socialisation des écrits : concours d’écriture, atelier théâtre, journal, etc. (p. 28).
+    </p>
+    <p>
+     Les difficultés rencontrées par les enseignants de lycée pour enseigner l’écriture d’invention ont été rapidement repérées et sont en partie justifiées par les hésitations de l’institution et les flottements des programmes
+     <hi rend="sup">
+      <note place="foot" n="2">
+       <nonbibl>Voir en particulier</nonbibl>
+      </note>
+     </hi>
+     <hi rend="italic">
+      Pratiques
+     </hi>
+     , n° 127-128, CRESEF, Metz, décembre 2005, les articles d’Y. Reuter, B. Daunay et N. Denizot.
+     . L’enquête conduite par François Le Goff
+     <hi rend="sup">
+      <note place="foot" n="3">
+       <forename>Fr.</forename><namelink>Le</namelink><surname>Goff, ¬´</surname><title>L‚Äô√©criture d‚Äôinvention au lyc√©e:ce que disent les professeurs de leurs pratiques¬ª ,
+      </note>
+     </hi>
+     <hi rend="italic">
+      <title level="j">
+       Pratiques
+      </title>
+     </hi>
+     <c type="comma">
+      ,
+     </c>
+     <abbr>
+      n°
+     </abbr>
+      
+     <biblscope type="issue">
+      127-128
+     </biblscope>
+     <c type="comma">
+      ,
+     </c>
+     <edition>
+      numéro cité
+     </edition>
+     <c type="comma">
+      ,
+     </c>
+     <abbr>
+      p.
+     </abbr>
+      
+     <biblscope type="pp">
+      60-74
+     </biblscope>
+     <c type="point">
+      .
+     </c>
+     invite à d’autres conclusions : le peu de temps accordé par les enseignants à la réécriture et à la verbalisation des procédures, la place même de l’activité d’écriture en fin de séquence montrent assez nettement, selon lui, l’écart entre les pratiques et les principes théoriques qui sous-tendent les programmes. L’auteur conclut qu’en faisant de l’écriture d’invention un exercice comme les autres, proposé aux enseignants « sans véritable temps de formation », on est passé à côté des enjeux véritables : l’enseignement de l’écriture au lycée.
+    </p>
+    <p>
+     On voudrait dans la suite de cet article proposer un double retour en arrière : retour d’abord vers ces théories de référence qui, à force d’être sous-entendues, ont peut-être condamné l’écriture d’invention à manquer son objet, retour aussi sur l’application de ces modèles à l’école élémentaire où elles ont rencontré assez rapidement, du côté de l’institution, dans les mouvements pédagogiques, et dans les recherche-actions, un accueil plus favorable et une diffusion plus large
+     <hi rend="sup">
+      <note place="foot" n="4">
+       <nonbibl>Il ne s‚Äôagit cependant pas de pr√©tendre que la didactique de l‚Äô√©criture a r√©ussi √† influer sur toutes les pratiques de classe √† l‚Äô√©cole primaire . L‚Äôimpact des programmes ou des formations est , on le sait , toujours difficilement mesurable.
+      </note>
+     </hi>
+     .
+    </p>
+    <p rend="heading1">
+     Rédaction, expression écrite, production d’écrit
+    </p>
+    <p>
+     La rénovation engagée depuis une trentaine d’années s’appuie sur une analyse et une critique des pratiques traditionnelles de l’écriture scolaire. Ces usages n’ont évidemment pas tous disparu et ils ne sont pas spécifiques de l’école primaire. Sylvie Plane
+     <hi rend="sup">
+      <note place="foot" n="5">
+       <forename>S.</forename><surname>Plane,
+      </note>
+     </hi>
+     <hi rend="italic">
+      <title level="m">
+       Écrire au collège
+      </title>
+     </hi>
+     <c type="comma">
+      ,
+     </c>
+     <publisher>
+      Nathan
+     </publisher>
+     <c type="comma">
+      ,
+     </c>
+     <date>
+      1994
+     </date>
+     <c type="point">
+      .
+     </c>
+     en dresse un rapide inventaire pour le collège en 1994 : référence à un modèle implicite hors de portée des élèves, recours au modèle de l’œuvre littéraire, sans que l’articulation entre la lecture et l’écriture soit véritablement assurée, importance accordée à la seule notation, qui dispense d’une réflexion sur l’évaluation, conviction que l’écriture est un don inné qu’il faut cultiver, mais qui ne peut s’acquérir, recours à des exercices
+     <pb>
+      stéréotypés, importance excessive accordée à la copie qui rend non fonctionnel l’usage du brouillon (p. 18).
+     </pb>
+    </p>
+    <p rend="paragraphesansretrait">
+     Qu’en est-il à l’école primaire ?
+    </p>
+    <p>
+     Pendant longtemps son ambition en matière d’écriture était très limitée
+     <hi rend="sup">
+      <note place="foot" n="6">
+       <nonbibl>Voir</nonbibl><forename>A.-M.</forename><surname>Chartier,</surname><forename>C.</forename><surname>Clesse,</surname><forename>J.</forename><surname>H√©brad,
+      </note>
+     </hi>
+     <hi rend="italic">
+      <title level="m">
+       Lire Écrire
+      </title>
+     </hi>
+     <c type="comma">
+      ,
+     </c>
+     <abbr>
+      t.
+     </abbr>
+      
+     <biblscope type="vol">
+      2
+     </biblscope>
+     <c type="comma">
+      ,
+     </c>
+     <hi rend="italic">
+      <title type="voume_title">
+       Produire des textes
+      </title>
+     </hi>
+     <c type="comma">
+      ,
+     </c>
+     <publisher>
+      Hatier
+     </publisher>
+     <c type="comma">
+      ,
+     </c>
+     <date>
+      1998
+     </date>
+     <c type="point">
+      .
+     </c>
+      : exercices de copies ou d’imitations conduisent peu à peu vers la rédaction autonome. Les jeunes élèves découvrent ainsi « ce sur quoi on peut écrire et comment il faut l’écrire » : la calligraphie est une fin en soi attendue des parents et des inspecteurs (
+     <hi rend="italic">
+      op. cit.
+     </hi>
+     , p. 15). Le modèle étant le texte littéraire, « [l]’éventail des types demandés […] est donc fort peu ouvert […] et la liste des sujets de rédaction possibles parfaitement close ». La « rédaction » pratiquée seulement au cours des dernières années de l’école primaire présente toutefois des sujets de réflexion, des dialogues, des lettres, des narrations, des descriptions. Si les conseils donnés aux enfants concernent la recherche des idées, l’observation, la sollicitation des sens, la récapitulation d’un inventaire lexical, « [c]’est au niveau de la mise en mots […] que les manuels sont assez indigents
+     <hi rend="sup">
+      <note place="foot" n="7">
+       <forename>A.</forename><surname>Petitjean, ¬´</surname><title>Variations historiques:l‚Äôexemple de la r√©daction¬ª</title><bookindicator>dans</bookindicator>
+      </note>
+     </hi>
+     <hi rend="italic">
+      <title level="m">
+       Didactique du français, Fondements d’une discipline
+      </title>
+     </hi>
+     <c type="comma">
+      ,
+     </c>
+     <hi rend="italic">
+      <w>
+       op. cit.
+      </w>
+     </hi>
+     <c type="comma">
+      ,
+     </c>
+     <abbr>
+      p.
+     </abbr>
+      
+     <biblscope type="pp">
+      151-168
+     </biblscope>
+     <c type="point">
+      .
+     </c>
+      ». Pour les rédactions descriptives étudiées par Françoise Revaz
+     <hi rend="sup">
+      <note place="foot" n="8">
+       <nonbibl>¬´ Par un soir d‚Äôhiver,tandis que vous vous chauffez devant la grille de votre chemin√©e , il vous semble tout-√†-coup qu‚Äôune voix s‚Äô√©l√®ve des charbons embras√©s : c‚Äôest la houille qui raconte son histoire . Elle dit sa formation , sa venue au jour , et elle rappelle les services qu‚Äôelle rend aux hommes ¬ª , cit√© par</nonbibl><forename>F.</forename><surname>Revaz,
+      </note>
+     </hi>
+     <hi rend="italic">
+      <title level="m">
+       Les Textes d’action
+      </title>
+     </hi>
+     ,
+     <publisher>
+      université de Metz
+     </publisher>
+     <c type="comma">
+      ,
+     </c>
+     <date>
+      1997
+     </date>
+     <c type="comma">
+      ,
+     </c>
+     <abbr>
+      p.
+     </abbr>
+      
+     <biblscope type="pp">
+      84
+     </biblscope>
+     <c type="point">
+      .
+     </c>
+     , les exigences stylistiques concernent le respect de la norme, voire de la surnorme (la chasse aux répétitions, on dit « nous » et pas « on », remplacer « il y a » par un autre verbe, etc.) mais les productions « ne sont jamais insérées dans une globalité narrative qui donne sens et fonctionnalité aux descriptions à écrire ». Bref, l’analyse des sujets comme celle des textes officiels de 1923 et 1938 met en évidence :
+    </p>
+    <list type="unordered">
+     <item>
+      <p rend="item">
+       la conception naturaliste de l’écriture qui les sous-tend : apprendre à écrire, c’est auparavant apprendre à observer et à penser, l’expression, la langue étant considérée comme « une représentation fidèle de la pensée » ;
+      </p>
+     </item>
+     <item>
+      <p rend="item">
+       le maigre « outillage » mis à la disposition des enfants pour écrire des
+       <hi rend="italic">
+        textes
+       </hi>
+        : un enrichissement lexical semble pouvoir suffire à l’apprentissage de la composition française ;
+      </p>
+     </item>
+     <item>
+      <p rend="item">
+       enfin, la non-prise en compte des enjeux pragmatiques de l’écriture : la rédaction est un exercice qui semble le plus souvent coupé des préoccupations des enfants, d’enjeux véritables, de contextes scripturaux qui pourraient lui donner une orientation.
+      </p>
+     </item>
+    </list>
+    <p>
+     Un texte comme celui qui suit peut donc être proposé à des candidats à l’écrit du CRPE au milieu des années 1990, comme un anti-modèle permettant de mettre en valeur des thèses plus contemporaines :
+    </p>
+    <p rend="citation">
+     Notre procédé consiste à fournir aux élèves les idées classées d’un devoir et à ne leur laisser que le soin de les exprimer convenablement en les reliant par des transitions habilement ménagées. Cette tâche nous paraît suffisante au début pour les enfants des cours moyen et supérieur. Cette manière de faire a l’avantage d’être très pratique. En général, les élèves écrivent en mauvais français ; grâce à notre procédé, ils auront mieux le loisir de donner à leur travail une forme correcte et élégante puisqu’ils ne seront pas préoccupés par la recherche et la disposition des idées
+     <hi rend="sup">
+      <note place="foot" n="9">
+       <nonbibl>Extrait d‚Äôun manuel de r√©daction paru dans les ann√©es 1920 , Dum√©ry,
+      </note>
+     </hi>
+     <hi rend="italic">
+      Rédigeons
+     </hi>
+     .
+     .
+    </p>
+    <p>
+     Introduite en 1977
+     <hi rend="sup">
+      <note place="foot" n="10">
+       <forename>A.</forename><surname>Chervel,</surname><nolabel>cit√© par</nolabel><relatedItem type="in"><surname>Chartier,Clesse,H√©brard,</surname></relatedItem>
+      </note>
+     </hi>
+     <hi rend="italic">
+      <w>
+       op. cit.
+      </w>
+     </hi>
+     <link target="Chartier_Clesse_Hebrard1998" />
+     <c type="comma">
+      ,
+     </c>
+     <abbr>
+      p.
+     </abbr>
+      
+     <biblscope type="pp">
+      17
+     </biblscope>
+     <c type="point">
+      .
+     </c>
+     Au printemps 2007, les nouveaux programmes de l’école élémentaire rétablissent la « 
+     <hi font-variant="small-caps">
+      rédaction
+     </hi>
+      » qui devient le terme générique désignant toutes les activités d’écriture à l’école. Ce choix va à l’encontre de 30 années de recherche sur l’enseignement du français à l’école. Il est encore trop tôt pour dire s’il s’agit seulement d’un geste symbolique pour rassurer les plus nostalgiques ou d’une volonté réelle d’infléchir les pratiques et de nier les apports de la recherche.
+     pour se substituer à la « rédaction », l’« expression écrite » ne résout pas tous les problèmes. Si la nouvelle formulation traduit une volonté d’intégrer davantage les centres d’intérêt des enfants, leur expérience ou leur imagination, il ne suffit cependant pas, comme l’écrivent Anne-Marie Chartier et ses coéquipiers, « d’avoir de quoi dire pour écrire ». D’où, à partir de la fin des années 1980, la substitution de la « production écrite » à l’« expression écrite » dans les publications didactiques.
+    </p>
+    <p rend="heading1">
+     Déglobaliser l’écrit
+    </p>
+    <p>
+     Le projet de cet article n’est pas de faire une histoire de la didactique de l’écriture à l’école, de ses acteurs et de ses étapes charnières (numéros de revues, colloques). Je préfère, pour le lecteur peu informé, signaler quelques concepts qui ont changé profondément les façons de voir et d’enseigner. Ainsi, la critique des fondements naturalistes de la
+     <hi rend="italic">
+      description
+     </hi>
+     tout comme de l’
+     <hi rend="italic">
+      expression
+     </hi>
+     conduit à une dénaturalisation de l’écriture et de l’acte d’écrire, une « déglobalisation de la notion de
+     <hi rend="italic">
+      savoir écrire
+     </hi>
+     et de l’enseignement/apprentissage de la production d’écrits à l’école
+     <pb>
+      primaire
+      <hi rend="sup">
+       <note place="foot" n="11">
+        <forename>J.-P.</forename><surname>Jaffr√©</surname><nolabel>et</nolabel><forename>H.</forename><surname>Romian, ¬´</surname><title>Vers une d√©globalisation de apprentissage/de la production d‚Äô√©crits¬ª ,
+       </note>
+      </hi>
+      <hi rend="italic">
+       <title level="j">
+        Repères
+       </title>
+      </hi>
+      <c type="comma">
+       ,
+      </c>
+      <abbr>
+       n°
+      </abbr>
+       
+      <biblscope type="issue">
+       4
+      </biblscope>
+      <c type="comma">
+       ,
+      </c>
+      <publisher>
+       INRP
+      </publisher>
+      <c type="comma">
+       ,
+      </c>
+      <date>
+       1991
+      </date>
+      <c type="comma">
+       ,
+      </c>
+      <abbr>
+       p.
+      </abbr>
+       
+      <biblscope type="pp">
+       3-8
+      </biblscope>
+      <c type="point">
+       .
+      </c>
+       ». Tel est le titre donné par Jean-Pierre Jaffré et Hélène Romian au texte de présentation du numéro 4 de la nouvelle série de
+      <hi rend="italic">
+       Repères
+      </hi>
+      , la revue de « recherches en didactique du français langue maternelle » de l’INRP. Avec ce numéro fondateur et avec un ouvrage qui fera date,
+      <hi rend="italic">
+       Évaluer les écrits à l’école primaire
+      </hi>
+      (Hachette-Éducation), publié aussi à la rentrée 1991, le groupe « Évaluer les écrits » (ÉVA) de l’INRP invite à une transformation radicale des pratiques d’écriture à l’école : l’ouvrage se présente en effet comme un ensemble de « fiches pour faire la classe », mais le choix éditorial très pratique est doublé d’un commentaire « scientifique » qui renvoie d’une part à des travaux de linguistique ou de sciences de l’éducation et d’autre part à des expérimentations sur le terrain conduites pendant plusieurs années par les équipes soutenues par l’INRP.
+      <hi rend="italic">
+       Repères
+      </hi>
+      n° 4 expose les travaux de plusieurs membres de l’équipe ÉVA mais aussi les contributions d’universitaires qui représentent d’autres institutions : Jean-Pierre Jaffré, Michel Dabène, Claudine Fabre, Dominique-Guy Brassart, Jean-Yves Roussey et Annie Piolat. La déglobalisation est une préoccupation commune et elle concerne tous les aspects de l’écrit : le matériau textuel lui-même, mais aussi sa mise en œuvre, « les activités rédactionnelles », et sa pédagogie
+      <hi rend="sup">
+       <note place="foot" n="12">
+        <nonbibl>Voir</nonbibl>
+       </note>
+      </hi>
+      <hi rend="italic">
+       Pratiques
+      </hi>
+      , n° 49,
+      <hi rend="italic">
+       Les Activités rédactionnelles
+      </hi>
+      , Metz, CRESEF, 1986, et plus précisément l’article de Cl. Garcia-Debanc, « Processus rédactionnels et pédagogie de l’écriture », p. 23-49.
+      . Michel Dabène
+      <hi rend="sup">
+       <note place="foot" n="13">
+        <forename>M.</forename><surname>Dab√®ne, ¬´</surname><title>Un mod√®le didactique de la comp√©tence scripturale¬ª ,
+       </note>
+      </hi>
+      <hi rend="italic">
+       <title level="j">
+        Repères
+       </title>
+      </hi>
+      <c type="comma">
+       ,
+      </c>
+      <abbr>
+       n°
+      </abbr>
+       
+      <biblscope type="issue">
+       4
+      </biblscope>
+      <c type="comma">
+       ,
+      </c>
+      <publisher>
+       INRP
+      </publisher>
+      <c type="comma">
+       ,
+      </c>
+      <biblscope type="publicationDate">
+       1991
+      </biblscope>
+      <c type="comma">
+       ,
+      </c>
+      <abbr>
+       p.
+      </abbr>
+       
+      <biblscope type="pp">
+       9-22
+      </biblscope>
+      <c type="point">
+       .
+      </c>
+      énumère ainsi les savoirs nécessaires pour la construction d’une « compétence scripturale » : savoirs linguistique, sémiotique, socio-pragmatique associés à de multiples savoir-faire opérationnels et il relève les multiples lacunes de l’enseignement traditionnel sur chacun de ces plans (absence de réflexion sur les différences entre langue orale et écrite, sur les « aspects communicatifs » de tel ou tel type de texte, sur la dimension sémiotique de « l’aire scripturale », typographie comprise » (p. 16-17). La distinction entre les savoirs notionnels et les savoir faire concernant les opérations à mettre en œuvre pour écrire est au centre de l’article de Maurice Mas
+      <hi rend="sup">
+       <note place="foot" n="14">
+        <forename>M.</forename><surname>Mas, ¬´</surname><title>Savoir √©crire,c‚Äôest tout un syst√®me¬ª ,
+       </note>
+      </hi>
+      <hi rend="italic">
+       <title level="j">
+        Repères
+       </title>
+      </hi>
+      <c type="comma">
+       ,
+      </c>
+      <abbr>
+       n°
+      </abbr>
+       
+      <biblscope type="issue">
+       4
+      </biblscope>
+      <c type="comma">
+       ,
+      </c>
+      <date>
+       1991
+      </date>
+      <c type="comma">
+       ,
+      </c>
+      <abbr>
+       p.
+      </abbr>
+       
+      <biblscope type="pp">
+       23-34
+      </biblscope>
+      <c type="point">
+       .
+      </c>
+      qui propose une « analyse didactique du
+      <hi rend="italic">
+       savoir écrire
+      </hi>
+       ». Son tableau établit des correspondances entre des « problèmes d’écriture » et des opérations elles-mêmes classées en fonction du pôle de la communication écrite sur lequel elles permettent d’intervenir (pragmatique, sémantique, morphosyntaxique, etc.). Il s’agit bien d’aboutir à « une approche pluri-dimensionnelle du savoir-écrire » (Maurice Mas). Cette fragmentation (isoler des parties pour mieux comprendre le tout) est flottante, toujours en mouvement, en constante élaboration à travers les articles et les publications. Elle donne lieu à de multiples modélisations dont la plus fameuse est sans doute le CLID (
+      <hi rend="italic">
+       Classement des lieux d’intervention didactique
+      </hi>
+      ), tableau élaboré par Gilbert Turco et l’équipe ÉVA de Rennes : cette synthèse fait jouer trois niveaux d’analyses (la phrase, les liaisons interphrastiques, le texte dans son ensemble) et trois points de vue (les plans pragmatique, sémantique, et morphosyntaxique). L’intérêt est double : le tableau permet d’une part de classer les erreurs relevées par l’enseignant, de voir à quoi il est lui-même le plus attentif et dans quel domaine chaque élève réussit mieux, et d’autre part, le tableau fournit une grille générale qui couvre tous les aspects de la textualité et permet donc d’organiser une progression annuelle
+      <hi rend="sup">
+       <note place="foot" n="15">
+        <nonbibl>Une ligne suppl√©mentaire sera bient√¥t ajout√©e au tableau pour tenir compte de la dimension graphique ou plastique de l‚Äô√©crit : calligraphie,bien s√ªr , mais aussi occupation de la page , organisation visuelle , etc . Cette pr√©occupation peut para√Ætre mineure pour l‚Äôenseignant habitu√© √† √©valuer des productions √©crites sur papier quadrill√© ; il s‚Äôagit pourtant de tenir compte d‚Äôune dimension importante de l‚Äôorganisation des √©crits sociaux : la mise en page de la lettre et de l‚Äôenveloppe pour des tout petits , la lisibilit√© d‚Äôun mode d‚Äôemploi , l‚Äôutilisation de la typographie dans un document explicatif , la mise en espace d‚Äôune affiche , etc.
+       </note>
+      </hi>
+      .
+     </pb>
+    </p>
+    <p>
+     Dans le second ouvrage signé du groupe ÉVA
+     <hi rend="sup">
+      <note place="foot" n="16">
+       <orgname>Groupe √âVA,
+      </note>
+     </hi>
+     <hi rend="italic">
+      <title level="m">
+       De l’évaluation à la réécriture
+      </title>
+     </hi>
+     <c type="comma">
+      ,
+     </c>
+     <publisher>
+      Hachette-Éducation
+     </publisher>
+     <c type="comma">
+      ,
+     </c>
+     <date>
+      1996
+     </date>
+     <c type="comma">
+      ,
+     </c>
+     <abbr>
+      p.
+     </abbr>
+      
+     <biblscope type="pp">
+      9-27
+     </biblscope>
+     <c type="point">
+      .
+     </c>
+     , Maurice Mas propose une schématisation de
+     <hi rend="italic">
+      la révision des textes
+     </hi>
+     , cette fois-ci selon un ensemble de compétences qui définissent à leur tour des actions pédagogiques. Leur déclinaison détermine d’ailleurs le plan de l’ouvrage : un ensemble de
+     <hi rend="italic">
+      savoirs sur
+     </hi>
+     (les textes, les ressources de la langue, le monde des écrits et leurs enjeux sociaux…) est associé à des
+     <hi rend="italic">
+      savoir-faire
+     </hi>
+     (analyser la tâche, se relire, évaluer…), le tout encadré par des
+     <hi rend="italic">
+      représentations
+     </hi>
+     concernant les apprentissages, la relation lecture-écriture, l’activité d’écriture elle-même, etc.
+    </p>
+    <p>
+     Curieusement, ce chapitre accorde une large place au concept de représentation dont il est dit : « Les contenus et les utilisations des savoir-faire et savoirs sont déterminés par des représentations qui agissent sur les modes de pensée et d’action des élèves et des enseignants » (p. 26). Un encadré a beau éclairer leur rôle et leur accorder une place déterminante en proposant des activités susceptibles de les modifier, les « représentations » apparaissent cependant comme l’impensé du dispositif d’explicitation mis en œuvre par le groupe de recherche. Les recherches sur la
+     <pb>
+      grammaire de texte, les typologies ou les connaissances procédurales ont permis d’envisager autrement l’enseignement de l’écriture, mais la réflexion sur les représentations de l’écrit, les connaissances liées aux « fonctions sociales de l’écrit » nécessaires pour faire évoluer les représentations des élèves n’apparaissent qu’à la marge de cette entreprise de rationalisation de l’apprentissage de l’écriture.
+     </pb>
+    </p>
+    <p rend="heading1">
+     Objectiver, expliciter…
+    </p>
+    <p>
+     L’influence réelle du groupe ÉVA sur les programmes ou sur la formation a sans doute tenu à une volonté plus largement établie d’introduire dans l’école une culture évaluative issue de l’entreprise mais elle est aussi liée pour une autre part à la volonté de lutter contre l’échec scolaire des enfants les moins favorisés socialement. De nombreuses analyses montrent en effet que leurs difficultés tiennent à la forte part d’implicite qui régit les codes scolaires, y compris les codes et les canons de l’écriture scolaire. Voici par exemple ce que recommande Bernard Lahire en conclusion d’un essai sur la sociologie de « l’échec scolaire » à l’école primaire
+     <hi rend="sup">
+      <note place="foot" n="17">
+       <forename>B.</forename><surname>Lahire,
+      </note>
+     </hi>
+     <hi rend="italic">
+      <title level="m">
+       Culture écrite et inégalités scolaires, Sociologie de « l’échec scolaire » à l’école primaire
+      </title>
+     </hi>
+     <c type="comma">
+      ,
+     </c>
+     <pubplace>
+      Lyon
+     </pubplace>
+     <c type="comma">
+      ,
+     </c>
+     <publisher>
+      PUL
+     </publisher>
+     <c type="comma">
+      ,
+     </c>
+     <date>
+      1993
+     </date>
+     <c type="point">
+      .
+     </c>
+      :
+    </p>
+    <p rend="citation">
+     […] c’est en évitant d’être victime de l’amnésie de la sociogénèse des pratiques scolaires, c’est-à-dire en insistant sur les technologies du travail intellectuel (supposant des pratiques langagières spécifiques) plus que sur les résultats codifiés des savoirs, plus sur les modalités concrètes, infimes de l’appropriation des savoirs que sur l’apprentissage mécanique de ces savoirs que l’école peut (dans les limites de son possible) réduire les inégalités face à l’école. (p. 52)
+    </p>
+    <p>
+     L’analyse de la tâche (et de l’objet à produire) n’est donc pas une étape nécessaire seulement pour l’enseignant, elle constitue une part importante du travail pédagogique :
+    </p>
+    <p rend="citation">
+     […] face à une situation d’écriture, les élèves et le maître explicitent les composantes de la tâche, ses enjeux, ses contraintes, repèrent et analysent des problèmes, élaborent des stratégies pour les résoudre
+     <hi rend="sup">
+      <note place="foot" n="18">
+       <orgname>Groupe √âVA,
+      </note>
+     </hi>
+     <hi rend="italic">
+      <title level="m">
+       Évaluer les écrits à l’école primaire
+      </title>
+     </hi>
+     <c type="comma">
+      ,
+     </c>
+     <publisher>
+      Hachette-Éducation
+     </publisher>
+     <c type="comma">
+      ,
+     </c>
+     <date>
+      1991
+     </date>
+     <c type="comma">
+      ,
+     </c>
+     <abbr>
+      p.
+     </abbr>
+      
+     <biblscope type="pp">
+      14
+     </biblscope>
+     <c type="point">
+      .
+     </c>
+     .
+    </p>
+    <p>
+     Pour le modèle proposé par ÉVA, la réussite ou l’échec d’un texte doivent pouvoir être objectivés et verbalisés dans l’échange linguistique entre l’enseignant et les élèves mais aussi entre les élèves. Faire la liste de ce qui fonctionne et de ce qui ne fonctionne pas dans un texte permet d’une part de mieux évaluer et d’autre part d’anticiper sur de nouvelles productions. En effet, l’évaluation, conduite en interaction, permet de distinguer les erreurs qui auraient pu être évitées puisqu’elles concernent des modalités déjà abordées et exigées par la consigne (
+     <hi rend="italic">
+      on a déjà vu
+     </hi>
+      : les règles constitutives de tel type de texte, la conjugaison de tel temps verbal, etc.) et celles qui relèvent d’un affinement des connaissances concernant l’objet à produire (
+     <hi rend="italic">
+      on croyait avoir tout dit mais on n’avait pas prévu qu’il faudrait aussi
+     </hi>
+     …). C’est donc à une évolution permanente du cahier de charge que conduit la production et son évaluation : on a respecté toutes les règles formulées au préalable et pourtant le texte produit ne ressemble toujours pas à un conte. Ce « cahier de charge » n’est pas une figure de style : l’examen des productions, la confrontation avec des textes d’experts ou des écrits sociaux conduit à l’élaboration collective (et en principe jamais interrompue) de « critères » qui définissent les règles à respecter pour la réussite du texte, et par contrecoup celles de sa « notation ». Dès les années 1990, de nombreuses publications de CDDP
+     <hi rend="sup">
+      <note place="foot" n="19">
+       <nonbibl>Voir par exemple IUFM / de Cr√©teil,
+      </note>
+     </hi>
+     <hi rend="italic">
+      <title level="m">
+       Écrire à l’école, Une démarche des apprentissages
+      </title>
+     </hi>
+     <c type="comma">
+      ,
+     </c>
+     <publisher>
+      CDDP
+     </publisher>
+     <biblscope type="issue">
+      77
+     </biblscope>
+     <c type="comma">
+      ,
+     </c>
+     <date>
+      1996
+     </date>
+     , ou
+     <bibl>
+      <author>
+       <forename full="init">
+        M.-H.
+       </forename>
+        
+       <surname>
+        Leloup
+       </surname>
+      </author>
+      <c type="comma">
+       ,
+      </c>
+      <hi rend="italic">
+       <title level="m">
+        Évaluation formative, Vers la maîtrise de l’écriture des textes
+       </title>
+      </hi>
+      <c type="comma">
+       ,
+      </c>
+      <publisher>
+       CDDP de la Marne
+      </publisher>
+      <c type="comma">
+       ,
+      </c>
+      <date>
+       1991
+      </date>
+     </bibl>
+     ou encore
+     <bibl xml:id="OEcrire1986">
+      <hi rend="italic">
+       <title level="m">
+        Objectif Écrire
+       </title>
+      </hi>
+      <c type="comma">
+       ,
+      </c>
+      <publisher>
+       CDDP de la Lozère
+      </publisher>
+      <c type="comma">
+       ,
+      </c>
+      <date>
+       1986
+      </date>
+      <c type="point">
+       .
+      </c>
+     </bibl>
+     puis des manuels de français donneront des exemples de ces fiches d’évaluation critériée. Ces listes de critères, produites en théorie par la classe, deviennent rapidement de commodes outils pédagogiques – c’est évident dans le cas des manuels – soumis aux élèves après deux ou trois tours de prestidigitation ! Reste que le souci d’objectivation de l’évaluation a permis la banalisation de deux notions désormais très répandues :
+    </p>
+    <list type="unordered">
+     <item>
+      <p rend="item">
+       l’évaluation d’un écrit se conduit sur des
+       <hi rend="italic">
+        critères
+       </hi>
+       communicables et qui peuvent être anticipés par un travail préalable. Si le glossaire d’
+       <hi rend="italic">
+        Évaluer les écrits à l’école primaire
+       </hi>
+       définit le critère essentiellement du côté de l’évaluateur, et en prenant soin de le distinguer des indicateurs présents dans le texte, la « liste de critères » constitue l’
+       <hi rend="italic">
+        outil
+       </hi>
+       le plus courant mis à disposition des élèves en situation de production comme en situation de révision ;
+      </p>
+     </item>
+     <item>
+      <p rend="item">
+       la notion d’
+       <hi rend="italic">
+        outil
+       </hi>
+       (d’aide à l’évaluation ou à l’écriture) est un autre élément fondamental de la pédagogie de l’écrit initiée au cours des années 1990 :
+      </p>
+     </item>
+    </list>
+    <p rend="citation">
+     [il s’agit d’un] objet matériel facilitant la production ou la révision d’un texte. Il peut être de formes diverses : panneau synthétisant les observations faites à partir de textes lus en classe, questionnaire, croquis rendant compte du schéma narratif… Il aide à résoudre un problème d’écriture. Fabriqué par les élèves avec l’aide de l’enseignant, il est provisoire et évolutif
+     <hi rend="sup">
+      <note place="foot" n="20">
+       </>
+      </note>
+     </hi>
+     <hi rend="italic">
+      <title level="m">
+       Objectif Écrire
+      </title>
+     </hi>
+     <c type="comma">
+      ,
+     </c>
+     <hi rend="italic">
+      <w>
+       op. cit.
+      </w>
+     </hi>
+     <link target="OEcrire1986" />
+     <c type="comma">
+      ,
+     </c>
+     <abbr>
+      p.
+     </abbr>
+      
+     <biblscope type="pp">
+      192
+     </biblscope>
+     <c type="point">
+      .
+     </c>
+     .
+    </p>
+    <p>
+     Le deuxième pari de la didactique après celui de l’analyse de la tâche d’écriture est donc celui du partage de ces
+     <pb>
+      analyses avec les élèves, appuyé sur le double présupposé que la tâche est objectivable et que l’explicitation des difficultés comme des solutions représente une aide significative pour guider les élèves vers la réussite.
+     </pb>
+    </p>
+    <p rend="heading1">
+     L’attention à l’erreur
+    </p>
+    <p>
+     Le projet du groupe ÉVA développe un autre présupposé. L’écriture en classe y est constamment située dans la durée, dans les tâtonnements ou les recommencements : la réécriture occupe une place centrale dans le dispositif
+     <hi rend="sup">
+      <note place="foot" n="21">
+       <nonbibl>Une fois achev√©e la recherche sur l‚Äô√©valuation , les m√™mes auteurs ont conduit une recherche sur la ¬´ R√©vision des √©crits en classe ¬ª ( √âquipe REV , INRP) .
+      </note>
+     </hi>
+     . Plus que le rapport constant à des modèles ou à des outils de référence, on retiendra une attention nouvelle portée non plus à l’objet fini (la « rédaction ») mais au processus d’écriture. L’analyse des textes d’élèves occupe une place importante dans toutes les productions du groupe : à chaque fois, il s’agit de déceler des glissements, des déplacements, mais aussi de proposer une interprétation des erreurs ou des dysfonctionnements. Cet intérêt pour une description des processus rédactionnels, on le retrouve dans un ouvrage dirigé par Claudine Fabre-Cols,
+     <hi rend="italic">
+      Apprendre à lire les textes d’enfants
+     </hi>
+     <hi rend="sup">
+      <note place="foot" n="22">
+       <nonbibl>Cl. Fabre(</nonbibl><abbr>dir. ) ,
+      </note>
+     </hi>
+     <hi rend="italic">
+      <title level="m">
+       Apprendre à lire des textes d’enfants
+      </title>
+     </hi>
+     <c type="comma">
+      ,
+     </c>
+     <publisher>
+      De Boeck
+     </publisher>
+     <c type="comma">
+      ,
+     </c>
+     <date>
+      2000
+     </date>
+     <c type="point">
+      .
+     </c>
+     . En « apprenant à voir naître le sujet écrivant dans le texte qu’il écrit », il s’agit de montrer à de jeunes enseignants comment et pourquoi les écritures inventées ou « tâtonnées » des tout petits, mais aussi les fantaisies orthographiques, les erreurs de composition ou de découpages syntaxiques, les récits à première vue incohérents sont riches d’enseignements sur la façon dont les élèves voient la langue et dont ils se voient eux-mêmes dans leur rapport à la langue. En modifiant le « pacte de lecture » entre l’enseignant et l’élève, ce qui est visé, ce n’est pas un inventaire de dysfonctionnements mais la description « de moments-clés de l’acquisition et de l’invention, par le biais des essais manqués, des ratures, des erreurs » (Claudine Fabre-Cols), description à partir de laquelle l’enseignant peut aider à trouver ce qui a été tenté.
+    </p>
+    <p>
+     Commentant un travail d’écriture littéraire en classe, Bernadette Gromer et Marie-Louise Scheidhauer
+     <hi rend="sup">
+      <note place="foot" n="23">
+       <nonbibl>Dans</nonbibl>
+      </note>
+     </hi>
+     <hi rend="italic">
+      <title level="m">
+       De l’évaluation à la réécriture
+      </title>
+     </hi>
+     <c type="comma">
+      ,
+     </c>
+     <hi rend="italic">
+      <w>
+       op. cit.
+      </w>
+     </hi>
+     <link target="Eva1996" />
+     <c type="comma">
+      ,
+     </c>
+     <abbr>
+      p.
+     </abbr>
+      
+     <biblscope type="pp">
+      30-52
+     </biblscope>
+     <c type="point">
+      .
+     </c>
+     notent que le travail de l’enseignant ne se situe « ni tout à fait avant » (en proposant des outils de régulation de la production écrite), « ni seulement après » (au moment de la correction), mais « dans l’élaboration de la proposition » (p. 51). « L’écriture, notent-elles, s’expérimente » (p. 52) à travers les différents jets mais aussi grâce à un certain nombre de confrontations et de discussions qui aident les enfants « à développer un
+     <hi rend="italic">
+      regard
+     </hi>
+     sur leurs écrits » (p. 41). Ces phases intermédiaires de lectures commentées de textes d’auteurs et de leurs propres textes conduisent de très jeunes élèves à mieux mesurer leur « maîtrise de la situation », à découvrir de nouveaux moyens d’expression, à découvrir certains aspects de l’écriture littéraire : « Mon troisième haïku me plaît, écrit cet élève de CM1 au cours d’une dernière séance, car j’ai réussi à créer un climat et je n’ai plus décrit. De plus il y a une transformation que l’on vit de l’intérieur. »
+    </p>
+    <p>
+     Dans ce domaine aussi, l’inscription de l’écriture dans une durée et l’attention à son évolution n’est pas seulement l’affaire de l’enseignant mais aussi celle des élèves qui, par la comparaison ou la verbalisation, sont invités à construire une distance dans l’interrogation de leur travail de brouillon. Dans cette dernière acception, on voit bien que l’objectivation n’est plus aussi linéaire que dans l’élaboration de critères mais qu’elle renvoie plutôt à la construction d’une posture et à la restauration d’une autre forme de « globalité ».
+    </p>
+    <p rend="heading1">
+     Écrire en projet
+    </p>
+    <p>
+     Dernière hypothèse de travail dont il faut faire grand cas : on doit abandonner, on l’a vu, l’usage stéréotypé de la « rédaction » parce que « la vie d’une classe est suffisamment riche de situations qui se prêtent à la production d’écrits divers » et parce que « les enfants n’aiment pas écrire à vide
+     <note place="foot" n="24">
+      <hi rend="italic"><title>√âvaluer les √©crits √† l‚Äô√©cole primaire</title></hi>,<hi rend="italic"><w>op.cit.</w></hi>,<abbr>p.</abbr><biblscope>19.
+     </note>
+      ». Le vide, c’est avant tout le vide énonciatif qui accompagne cet exercice ritualisé : pour qui écrit-on et pourquoi ? De ce point de vue, le groupe ÉVA n’est en rien précurseur : le numéro 36 de
+     <hi rend="italic">
+      Pratiques
+     </hi>
+     (1982),
+     <hi rend="italic">
+      Travailler en projet
+     </hi>
+     , en réfléchissant à une articulation plus étroite des « savoirs sociaux » et des « savoirs scolaires » présentait l’écriture d’un roman historique en 5
+     <hi rend="sup">
+      e
+     </hi>
+      : un projet pluridisciplinaire d’écriture longue
+     <hi rend="sup">
+      <note place="foot" n="25">
+       <forename>J.-Fr.</forename><surname>Halt√©, ¬´</surname><title>Travailler en projet¬ª ,
+      </note>
+     </hi>
+     <hi rend="italic">
+      <title level="j">
+       Pratiques
+      </title>
+     </hi>
+     <c type="comma">
+      ,
+     </c>
+     <abbr>
+      n°
+     </abbr>
+      
+     <biblscope type="issue">
+      36
+     </biblscope>
+     <c type="comma">
+      ,
+     </c>
+     <pubplace>
+      Metz
+     </pubplace>
+     <c type="comma">
+      ,
+     </c>
+     <publisher>
+      CRESEF
+     </publisher>
+     <c type="comma">
+      ,
+     </c>
+     <date>
+      1982
+     </date>
+     <c type="comma">
+      ,
+     </c>
+     <abbr>
+      p.
+     </abbr>
+      
+     <biblscope type="pp">
+      38-77
+     </biblscope>
+     <c type="point">
+      .
+     </c>
+     . Dans la même période, les publications dirigées par Josette Jolibert
+     <hi rend="sup">
+      <note place="foot" n="26">
+       <orgname>Groupe d‚ÄôECOUEN,
+      </note>
+     </hi>
+     <hi rend="italic">
+      <title level="m">
+       Former des enfants producteurs de textes
+      </title>
+     </hi>
+     <c type="comma">
+      ,
+     </c>
+     <publisher>
+      Hachette
+     </publisher>
+     <c type="comma">
+      ,
+     </c>
+     <date>
+      1988
+     </date>
+     <c type="point">
+      .
+     </c>
+     puis les
+     <pb>
+      travaux de Bernard Devanne
+      <hi rend="sup">
+       <note place="foot" n="27">
+        <forename>B.</forename><surname>Devanne,
+       </note>
+      </hi>
+      <hi rend="italic">
+       <title level="m">
+        Lire et écrire : des apprentissages culturels
+       </title>
+      </hi>
+      <c type="comma">
+       ,
+      </c>
+      <abbr>
+       t.
+      </abbr>
+       
+      <biblscope type="vol">
+       1
+      </biblscope>
+      et
+      <biblscope type="vol">
+       2
+      </biblscope>
+      <c type="comma">
+       ,
+      </c>
+      <publisher>
+       Armand Colin
+      </publisher>
+      <c type="comma">
+       ,
+      </c>
+      <date>
+       1992
+      </date>
+      <c type="point">
+       .
+      </c>
+      défendent une conception de l’écriture orientée vers un destinataire et un but très explicites (qui ne sont ni l’enseignant, ni l’obtention d’une note). Les situations d’écriture fonctionnelle (écrire à des correspondants, fabriquer un règlement intérieur, rédiger une recette pour la faire réaliser par une autre classe) même si elles ont souvent été prises pour exemple et si elles permettent de caricaturer aisément les ancrages énonciatifs revendiqués, ne constituent qu’une partie des écrits en projet défendus par les didacticiens du français au cours de ces deux décennies : écriture de poésie ou de fiction, l’écriture longue orientée vers une publication, c’est-à-dire vers une socialisation des écrits produits, est une autre constante dont on trouverait de nombreux exemples dans la bibliographie. Dès les premières pages d’
+      <hi rend="italic">
+       Objectif Écrire
+      </hi>
+      <hi rend="sup">
+       <note place="foot" n="28">
+        <nonbibl>Cet ouvrage collectif coordonn√© par Cl. Garcia-Debanc publi√© une premi√®re fois en 1986 conna√Ætra de tr√®s nombreuses r√©√©ditions . Il s‚Äôagit d‚Äôune ¬´ brochure ¬ª publi√© par le CDDP de la Loz√®re et mise au point au cours d‚Äôun stage d‚Äôune semaine √† l‚Äô√âcole normale de Mende . L‚Äôouvrage pr√©sente la synth√®se d‚Äôune ¬´ recherche-action ¬ª qui a d√©but√© en 1982 . La r√©f√©rence au Groupe fran√ßais d‚Äô√âducation nouvelle d‚Äôune part et √† l‚ÄôINRP d‚Äôautre part indique assez clairement les liens avec un militantisme p√©dagogique en cours d‚Äôinstitutionnalisation.
+       </note>
+      </hi>
+      , le projet d’écriture est donné comme « un moyen pédagogique d’atteindre des objectifs ». Le projet fait l’objet d’une « décision commune du groupe classe » et s’appuie sur « un contrat de travail ». Une citation de Jean-François Halté donne la mesure de l’ambition de la pédagogie du projet d’écriture : « Au lieu d’apprendre pour faire ensuite, on pose que l’on apprend parce que l’on fait et par ce que l’on fait. » L’exemple proposé est celui d’une histoire radiophonique à épisodes. Les auteurs insistent sur quelques-unes des caractéristiques de cette production : il s’agit d’un écrit destiné à un public et d’une écriture longue, dont le développement nécessitera un véritable travail d’équipe.
+     </pb>
+    </p>
+    <p>
+     Les deux livres publiés par Bernard Devanne au début des années 1990 multiplient les exemples, de la maternelle au CM. Défini comme un « apprentissage de la complexité », l’enseignement de l’écriture y est présenté comme indissociable d’une culture de l’écrit (qui va des productions les plus ordinaires aux objets esthétiques les plus élaborés) et d’un projet personnel de l’élève qui motive son implication :
+    </p>
+    <p rend="citation">
+     Il importe de ne jamais perdre de vue que toute production de texte est un « complexe de savoir-faire » : les compétences linguistiques qu’elle suppose n’ont de sens qu’inscrites dans une représentation précise du texte à produire, de l’intention de communication et du destinataire. De ce fait, il n’est pas possible d’induire des « programmes d’enseignement » des activités pour la classe : il s’agit, en tout premier lieu, que les enfants ressentent la nécessité de savoir et de fixer un savoir. Ou, pour le dire autrement, il s’agit de traiter la « matière des programmes » non comme des savoirs formels à acquérir, mais comme des données culturelles (au même titre que d’autres) mobilisables à chaque moment de l’expérience de l’écriture. (
+     <hi rend="italic">
+      Op. cit.
+     </hi>
+     , t. 2, p. 25)
+    </p>
+    <p>
+     Alors que l’équipe ÉVA (Claudine Garcia-Debanc et Maurice Mas en particulier) travaille à une schématisation toujours plus précise du projet d’écriture identifiant les aller-retour entre écriture, textes référents, (re)lecture et réécriture en passant par des activités « décrochées » susceptibles d’apporter les connaissances nécessaires à la relecture de l’ensemble (les « formes » du dialogue, la conjugaison du plus-que-parfait…), les livres de Bernard Devanne (et de son équipe) se distinguent assez nettement du grand courant de métalecture ou de métaécriture qui caractérise les années 1990. Au contraire, l’apprentissage de la complexité y est présenté comme un compagnonnage nécessaire avec des acquisitions implicites. C’est, semble-t-il, toute l’ambition de ce qu’il nomme « apprentissages culturels » :
+    </p>
+    <p rend="citation">
+     La gestion [des] multiples aspects d’une production narrative suppose des formes complexes de prises de conscience de ce qu’est le texte […] ; dire prise de conscience ne signifie ni explicitation, ni même capacité d’explicitation à tel moment : ce que l’enfant sait manipuler supposera, pour être explicité, d’être abordé de façon analytique, c’est-à-dire en disjoignant des plans perçus jusqu’ici de façon plus globale, donc interactive et complexe.
+    </p>
+    <p>
+     L’écriture en projet est au cœur même de la question du rapport à l’explicite dans les apprentissages. Si elle est un « moyen d’atteindre des objectifs », il est clair que ceux-ci ne peuvent être connus des élèves au moment où s’engage le processus ; en revanche, l’objectivation incessante des problèmes, des connaissances ou des savoir-faire en jeu guide peu à peu les élèves du désir de dire ou d’écrire vers des apprentissages qu’il s’agit de rendre moins austères. En distinguant ce qui relève de la pédagogie (la motivation) et ce qui relève du cognitif (la conscience d’accomplir un acte social précis qui s’incarne dans le respect de certaines règles textuelles) les auteurs de
+     <hi rend="italic">
+      De l’évaluation à la réécriture
+     </hi>
+     <hi rend="sup">
+      <note place="foot" n="29">
+       </>
+      </note>
+     </hi>
+     <hi rend="italic">
+      <w>
+       Op. cit.
+      </w>
+     </hi>
+     <link target="OEcrire1986" />
+     <c type="comma">
+      ,
+     </c>
+     <abbr>
+      p.
+     </abbr>
+      
+     <biblscope type="pp">
+      22
+     </biblscope>
+     <c type="point">
+      .
+     </c>
+     s’efforcent de théoriser ce passage de l’implicite à l’objectivation. Mais cette distinction est-elle bien nécessaire ? On peut aussi poser les choses autrement. C’est ce que fait Bernard Devanne pour qui il s’agit de créer, avec les projets d’écriture en classe, une véritable culture de lecture-écriture et de développer une maîtrise symbolique effective des formes et de l’expression, sans passer par les processus de rationalisation qui nécessitent de difficiles
+     <pb>
+      conceptualisations et d’improbables applications. La construction graduelle d’une culture propre à la classe au contraire semble vouloir éviter les « ruptures vis-à-vis du sens pratique » ou encore « un rapport négatif à la mémoire pratique de l’habitus »
+      <hi rend="sup">
+       <note place="foot" n="30">
+        <forename>B.</forename><surname>Lahire, ¬´</surname><title>Pratiques d‚Äô√©criture et sens pratique¬ª ,</title><bookindicator>dans</bookindicator><relatedItem type="in"><forename>M.</forename><surname>Chaudron</surname><nolabel>et</nolabel><forename>Fr.</forename><namelink>de</namelink><surname>Singly(</surname><abbr>dir. ) ,</abbr></relatedItem>
+       </note>
+      </hi>
+      <hi rend="italic">
+       <title level="m">
+        Identité, Lecture, Écriture
+       </title>
+      </hi>
+      <c type="comma">
+       ,
+      </c>
+      <publisher>
+       BPI - Centre G. Pompidou
+      </publisher>
+      <c type="comma">
+       ,
+      </c>
+      <date>
+       1993
+      </date>
+      <c type="comma">
+       ,
+      </c>
+      <abbr>
+       p.
+      </abbr>
+       
+      <biblscope type="pp">
+       116
+      </biblscope>
+      <c type="point">
+       .
+      </c>
+      .
+     </pb>
+    </p>
+    <p rend="heading1">
+     Genres et types
+    </p>
+    <p>
+     Le tableau ne serait pas complet si l’on négligeait de préciser à quel point la collaboration est importante à la fin des années 1980 entre les didacticiens, les linguistes et les psychologues cognitivistes : « L’impact des travaux sur la production d’écrit s’est traduit par une volonté affichée de l’articuler à l’étude de la langue et des discours
+     <hi rend="sup">
+      <note place="foot" n="31">
+       <forename>J.</forename><surname>David,
+      </note>
+     </hi>
+     <hi rend="italic">
+      <title level="a">
+       Positions actuelles et évolutions institutionnelles et éditoriales
+      </title>
+     </hi>
+     <c type="comma">
+      ,
+     </c>
+     dans
+     <relateditem type="in">
+      <bibl type="book">
+       <hi rend="italic">
+        <title level="m">
+         Didactique du français, Fondements d’une discipline
+        </title>
+       </hi>
+       <c type="comma">
+        ,
+       </c>
+       <hi rend="italic">
+        <w>
+         op. cit.
+        </w>
+       </hi>
+       <c type="comma">
+        ,
+       </c>
+       <abbr>
+        p.
+       </abbr>
+        
+       <biblscope type="pp">
+        187
+       </biblscope>
+       <c type="point">
+        .
+       </c>
+      </bibl>
+     </relateditem>
+     Il faudrait bien entendu signaler l’apport déterminant du psycholinguiste M. Fayol dont la thèse sur la construction du récit chez l’enfant (voir
+     <bibl>
+      <author>
+       <forename full="init">
+        M.
+       </forename>
+        
+       <surname>
+        Fayol
+       </surname>
+      </author>
+      <c type="comma">
+       ,
+      </c>
+      <hi rend="italic">
+       <title level="m">
+        Le récit et sa construction, une approche de psychologie cognitive
+       </title>
+      </hi>
+      <c type="comma">
+       ,
+      </c>
+      <pubplace>
+       Neufchâtel
+      </pubplace>
+      <c type="comma">
+       ,
+      </c>
+      <pubplace>
+       Paris
+      </pubplace>
+      <c type="comma">
+       ,
+      </c>
+      <publisher>
+       Delachaux &amp; Niestlé
+      </publisher>
+      <c type="comma">
+       ,
+      </c>
+      <date>
+       1985
+      </date>
+     </bibl>
+     ) vient sérieusement contrarier la transposition didactique des analyses structurales, et qui, par ses contributions à
+     <hi rend="italic">
+      Pratiques
+     </hi>
+     et à
+     <hi rend="italic">
+      Repère
+     </hi>
+     s ou par son compagnonnage scientifique avec l’INRP, va peser très fortement sur l’évolution de la didactique de l’écrit au cours des années 1990.
+     . » Le modèle de Hayes et Flowers présenté par Claudine Garcia-Debanc
+     <hi rend="sup">
+      <note place="foot" n="32">
+       <forename>Cl.</forename><surname>Garcia-Debanc, ¬´</surname><title>Int√©r√™t des mod√®les du processus r√©dactionnel pour une p√©dagogie de l‚Äô√©criture¬ª ,
+      </note>
+     </hi>
+     <hi rend="italic">
+      <title level="j">
+       Pratiques
+      </title>
+     </hi>
+     <c type="comma">
+      ,
+     </c>
+     <abbr>
+      n°
+     </abbr>
+      
+     <biblscope type="issue">
+      49
+     </biblscope>
+     <c type="comma">
+      ,
+     </c>
+     <pubplace>
+      Metz
+     </pubplace>
+     <c type="comma">
+      ,
+     </c>
+     <publisher>
+      CRESEF
+     </publisher>
+     <c type="comma">
+      ,
+     </c>
+     <date>
+      1986
+     </date>
+     <c type="point">
+      .
+     </c>
+     devient par exemple un outil privilégié de la formation des enseignants et, à ce titre, il figure dans la plupart des ouvrages préparant les candidats au CRPE. La description des opérations nécessaires à la réalisation d’une tâche d’écriture (dont la
+     <hi rend="italic">
+      planification
+     </hi>
+     comme la
+     <hi rend="italic">
+      mise au point
+     </hi>
+     suppose une
+     <hi rend="italic">
+      conception
+     </hi>
+     assez juste des buts et de la forme du texte à produire) s’adapte assez bien au contexte scolaire (et aux exercices canoniques très formatés) et aux écrits fonctionnels (dont la structuration peut être assez facilement décrite : dépliant publicitaire, lettre au père Noël, ou recette de gâteau). La pratique de la rédaction est condamnée parce qu’elle « ne permet guère que l’apprentissage d’un genre scolaire ne recouvrant aucun des enjeux sociaux de l’écriture
+     <hi rend="sup">
+      <note place="foot" n="33">
+       </>
+      </note>
+     </hi>
+     <hi rend="italic">
+      <title level="m">
+       Évaluer les écrits à l’école primaire
+      </title>
+     </hi>
+     <c type="comma">
+      ,
+     </c>
+     <hi rend="italic">
+      <w>
+       op. cit.
+      </w>
+     </hi>
+     <link target="Eva1991" />
+     <c type="comma">
+      ,
+     </c>
+     <abbr>
+      p.
+     </abbr>
+      
+     <biblscope type="pp">
+      12
+     </biblscope>
+     <c type="point">
+      .
+     </c>
+      » et c’est donc au nom d’une initiation aux enjeux pragmatiques de l’écriture qu’il convient de s’intéresser aux formes scripturales (y compris littéraires) effectivement utilisées ou utilisables. Orienté sur des objectifs explicites et des critères communicables, l’enseignement de l’écriture conduit à « travailler les textes toujours en tant qu’exemplaires de genres
+     <hi rend="sup">
+      <note place="foot" n="34">
+       <nonbibl>B. Schneuwly tirant les conclusions d‚Äôun colloque √† l‚ÄôINRP sur¬´</nonbibl><title>L‚Äô√©criture et son apprentissage.</title><nonbibl>Questions pour la didactique,apports de la didactique¬ª (</nonbibl><date>mars 2002) .</date><nonbibl>Voir</nonbibl><forename>B.</forename><surname>Schneuwly, ¬´</surname><title>L‚Äô√©criture et son apprentissage:le point de vue de la didactique,√âl√©ments de synth√®se¬ª ,</title><bookindicator>dans</bookindicator>
+      </note>
+     </hi>
+     <hi rend="italic">
+      <title level="j">
+       Repères
+      </title>
+     </hi>
+     <c type="comma">
+      ,
+     </c>
+     <abbr>
+      n°
+     </abbr>
+      
+     <biblscope type="issue">
+      26-27
+     </biblscope>
+     <c type="comma">
+      ,
+     </c>
+     <date notafter="2003" notbefore="2002">
+      2002-2003
+     </date>
+     <c type="comma">
+      ,
+     </c>
+     <pubplace>
+      Lyon
+     </pubplace>
+     <c type="comma">
+      ,
+     </c>
+     <publisher>
+      INRP
+     </publisher>
+     <c type="comma">
+      ,
+     </c>
+     <abbr>
+      p.
+     </abbr>
+      
+     <biblscope type="pp">
+      319
+     </biblscope>
+     <c type="point">
+      .
+     </c>
+      ».
+    </p>
+    <p>
+     D’où un double engouement, d’une part pour la théorisation récente des types de textes, et d’autre part pour les modèles littéraires génériques. Les types de textes donnent à la grammaire l’extension dont elle a besoin pour modéliser l’écrit au-delà de la phrase et ils fournissent le chaînon manquant en amont de la grammaire narrative : l’apprentissage de la structuration des écrits longs ou de longueur moyenne passe par la maîtrise des principes organisateurs de chaque type de texte. La distribution du littéraire sur les types textuels (narratif, descriptif, argumentatif, etc.) n’est que moyennement satisfaisante, en revanche l’étude des genres permet la mise en œuvre de nombreux projets d’écriture : récits de science-fiction, romans policiers ou historiques, nouvelles fantastiques peuvent être aisément formatées avec le secours de Boileau-Narcejac, de Todorov ou de quelques autres. L’écriture poétique
+     <hi rend="italic">
+      à la manière de
+     </hi>
+     fournit d’autres matrices à partir desquelles il est possible de fournir des outils et une aide réelle pour surmonter les difficultés de production de certains élèves.
+    </p>
+    <p>
+     L’explicitation des critères d’évaluation (et donc de réussite) invite à réduire toujours davantage la part de subjectivité ou d’intuition qui réside dans l’appréciation des textes comme dans leur production. Les avantages sont en principe évidents : transparence de la notation certes, mais surtout balayage exhaustif des conditions de réussite d’une production écrite. Les inconvénients paraissent aujourd’hui tout aussi évidents : sans abonder dans le sens d’une mystique des œuvres, la rationalisation du regard sur les textes risque aussi de susciter une représentation de l’écrit dont l’archétype serait la recette de cuisine ou le bulletin météo. On limite la variété des textes approchés (plus volontiers fonctionnels que fictionnels, plus volontiers normés par la mécanique des genres qu’ouverts à une créativité imprévisible). La technicisation de l’approche, si elle offre des aides précieuses, dénature aussi l’écriture en jeu. Et le mot
+     <hi rend="italic">
+      production
+     </hi>
+     n’est pas le moins problématique de la nouvelle vulgate.
+    </p>
+    <p rend="heading1">
+     <pb>
+      Un bilan, des perspectives
+     </pb>
+    </p>
+    <p>
+     En juin 1999, Claudine Garcia-Debanc dresse un premier bilan des transformations induites par les recherches du groupe ÉVA et leur très large diffusion dans l’institution
+     <hi rend="italic">
+      via
+     </hi>
+     la formation et les instructions officielles
+     <hi rend="sup">
+      <note place="foot" n="35">
+       <nonbibl>Plusieurs des membres de l‚Äô√©quipe ont √©t√© associ√©s √† la r√©daction de textes officiels comme</nonbibl>
+      </note>
+     </hi>
+     <hi rend="italic">
+      <title level="m">
+       La Maîtrise de la langue à l’école
+      </title>
+     </hi>
+     <c type="comma">
+      ,
+     </c>
+     <publisher>
+      CNDP
+     </publisher>
+     <c type="comma">
+      ,
+     </c>
+     <date>
+      1992
+     </date>
+     <c type="point">
+      .
+     </c>
+      : les classes écrivent davantage qu’il y a dix ans mais c’est parfois le fonctionnel qui prime, les recherches ont produit des contenus académiques mais leur valeur heuristique s’est perdue en cours de route, les outils d’évaluation existent presque partout mais au détriment du plaisir et de l’intérêt de l’écriture, les maîtres ont appris à objectiver les critères d’évaluation mais peu de classes procèdent à une réelle élaboration de ces critères
+     <hi rend="sup">
+      <note place="foot" n="36">
+       <nonbibl>Je reprends ici presque mot pour mot les intertitres d‚Äôun article m√©lancoliquement intitul√© ¬´ Que reste-t-il de nos crit√®res ?¬ª ,</nonbibl><bookindicator>dans</bookindicator>
+      </note>
+     </hi>
+     <hi rend="italic">
+      <title level="m">
+       Formation d’enseignants et didactique de l’écrit, Mélanges offerts à Maurice Mas
+      </title>
+     </hi>
+     <c type="comma">
+      ,
+     </c>
+     <publisher>
+      IUFM de Grenoble
+     </publisher>
+     <c type="comma">
+      ,
+     </c>
+     <date>
+      1999
+     </date>
+     <c type="point">
+      .
+     </c>
+     . Comment expliquer les raisons de cette désillusion ? Il serait trop long d’envisager et de mesurer toutes les hypothèses mais on peut en avancer quelques-unes : la complexité des solutions proposées et la charge de travail qu’elles nécessitent, la modification des représentations qu’elles supposent, la résistance ou l’inertie opposées à tout changement de pratique, les insuffisances de la formation et en particulier de la formation continue, ou encore l’inévitable pétrification par le système de toute proposition innovante, dans ses formes plus caricaturales…
+    </p>
+    <p>
+     Peut-être aussi, la théorie de référence ne manquait-elle pas de défaillances ou, en tout cas, les modélisations et les propositions élaborées par ÉVA n’avaient-elles pas tiré toutes les conséquences de champs théoriques trop neufs pour les intégrer autrement que dans le discours et les positions de principe. Ainsi quand Jean-Louis Chiss
+     <hi rend="sup">
+      <note place="foot" n="37">
+       <forename>J.-L.</forename><surname>Chiss, ¬´</surname><title>Sciences du langage:le retour¬ª ,</title><bookindicator>dans</bookindicator>
+      </note>
+     </hi>
+     <hi rend="italic">
+      Didactique du français, Fondements d’une discipline
+     </hi>
+     <c type="comma">
+      ,
+     </c>
+     <hi rend="italic">
+      <w>
+       op. cit.
+      </w>
+     </hi>
+     <c type="comma">
+      ,
+     </c>
+     <abbr>
+      p.
+     </abbr>
+      
+     <biblscope type="pp">
+      82
+     </biblscope>
+     <c type="point">
+      .
+     </c>
+     note que « la rénovation de l’enseignement du français a été placée en partie, dès avant les années 1970, sous la bannière des fonctions expressive et communicative de l’écrit », et que c’est seulement plus récemment que « s’est introduite chez les didacticiens l’idée du rôle cognitif de l’écrit, du lien de la culture écrite à la structuration de la pensée, de l’écriture comme possibilité de l’invention de nouveaux objets intellectuels », il fait un constat vis-à-vis duquel il n’est pas facile de situer le travail d’ÉVA, car si l’affichage théorique du groupe a toujours pris en compte la fonction heuristique de l’écrit
+     <hi rend="sup">
+      <note place="foot" n="38">
+       <nonbibl>¬´ Croire que l‚Äô√©crit est toujours la mise en mots d‚Äôune pens√©e pr√©existante et achev√©e conduit √† exclure qu‚Äôun travail sur le texte puisse favoriser l‚Äô√©mergence d‚Äôid√©es nouvelles , coh√©rentes par rapport aux premi√®res¬ª ,</nonbibl><forename>M.</forename><surname>Mas,</surname><bookindicator>dans</bookindicator>
+      </note>
+     </hi>
+     <hi rend="italic">
+      <title level="m">
+       De l’évaluation à la réécriture
+      </title>
+     </hi>
+     <c type="comma">
+      ,
+     </c>
+     <hi rend="italic">
+      <w>
+       op. cit.
+      </w>
+     </hi>
+     <link target="Eva1996" />
+     <c type="comma">
+      ,
+     </c>
+     <abbr>
+      p.
+     </abbr>
+      
+     <biblscope type="pp">
+      26
+     </biblscope>
+     <c type="point">
+      .
+     </c>
+     , il n’en va pas de même des propositions concrètes qui bien souvent ne sont pas très éloignées des modèles « anciens ou nouveaux » qui font de l’écriture « la planification et la mise en forme d’un vouloir dire préalables »
+     <hi rend="sup">
+      <note place="foot" n="39">
+       </>
+      </note>
+     </hi>
+     <hi rend="italic">
+      <w>
+       Ibid.
+      </w>
+     </hi>
+     <link target="Eva1996" />
+     <c type="comma">
+      ,
+     </c>
+     <abbr>
+      p.
+     </abbr>
+      
+     <biblscope type="pp">
+      83
+     </biblscope>
+     <c type="point">
+      .
+     </c>
+     .
+    </p>
+    <p>
+     En intégrant tous les aspects de l’écrit dans la classe et pas seulement les textes produits au cours d’exercices canoniques ou par référence à des grands modèles culturels (récits, poèmes), mais tous les écrits instruments de la pensée, formés par les savoirs et formateurs de savoirs, l’équipe animée par Jean-Charles Chabanne et Dominique Bucheton, invente la notion d’écrit « intermédiaire » loin des critères et du formatage. En déplaçant l’objet d’étude des formes finies de la rédaction ou du projet de production vers des objets transitoires, fragments de pensée en mouvement, c’est cette fois-ci l’écriture singulière (et non le texte) qui est prise en compte par la didactique, dans sa dynamique, son « épaississement », en relation avec une appréhension globale du sujet écrivant dont on ne peut plus ignorer ni les pratiques extrascolaires
+     <hi rend="sup">
+      <note place="foot" n="40">
+       <forename>M.-Cl.</forename><surname>Penloup,
+      </note>
+     </hi>
+     <hi rend="italic">
+      <title level="m">
+       La tentation du littéraire, Essai sur le rapport à l’écriture littéraire du scripteur « ordinaire »
+      </title>
+     </hi>
+     <c type="comma">
+      ,
+     </c>
+     <publisher>
+      Didier
+     </publisher>
+     <c type="comma">
+      ,
+     </c>
+     <date>
+      2000
+     </date>
+      ;
+     <bibl>
+      <forename full="init">
+       M.-Cl.
+      </forename>
+       
+      <surname>
+       Penloup
+      </surname>
+      <c type="comma">
+       ,
+      </c>
+      <hi rend="italic">
+       <title level="m">
+        L’écriture extrascolaire des collégiens, des constats aux perspectives didactiques
+       </title>
+      </hi>
+      <c type="comma">
+       ,
+      </c>
+      <publisher>
+       ESF
+      </publisher>
+      <c type="comma">
+       ,
+      </c>
+      <date>
+       1999
+      </date>
+      <c type="point">
+       .
+      </c>
+     </bibl>
+     , ni la relation que lui-même ou sa famille ou son milieu entretient avec l’écrit, forme particulière du savoir. Les difficultés des élèves, pour ces auteurs, tiennent davantage à la « résistance [de certains élèves] à l’activité d’écriture », à leurs « postures d’écriture » qu’à un déficit d’« apprentissages techniques »
+     <hi rend="sup">
+      <note place="foot" n="41">
+       <forename>D.</forename><surname>Bucheton</surname><nolabel>et</nolabel><forename>J.-Cl.</forename><surname>Chabanne, ¬´</surname><title>Un autre regard sur les √©crits des √©l√®ves:√©valuer autrement¬ª ,</title><bookindicator>dans</bookindicator>
+      </note>
+     </hi>
+     <hi rend="italic">
+      <title level="j">
+       Repères
+      </title>
+     </hi>
+     <c type="comma">
+      ,
+     </c>
+     <abbr>
+      n°
+     </abbr>
+      
+     <biblscope type="issue">
+      26/27
+     </biblscope>
+     <c type="comma">
+      ,
+     </c>
+     <pubplace>
+      Lyon
+     </pubplace>
+     <c type="comma">
+      ,
+     </c>
+     <publisher>
+      INRP
+     </publisher>
+     <c type="comma">
+      ,
+     </c>
+     <date>
+      2002-2003
+     </date>
+     <c type="comma">
+      ,
+     </c>
+     <abbr>
+      p.
+     </abbr>
+      
+     <biblscope type="pp">
+      123-148
+     </biblscope>
+     <c type="point">
+      .
+     </c>
+     (p. 127). Le tableau qu’ils dressent de l’élève en échec devant l’écriture emprunte la plupart de ses caractéristiques aux descriptions proposées par les sociologues de l’éducation
+     <hi rend="sup">
+      <note place="foot" n="42">
+       <forename>√â.</forename><surname>Bautier</surname><nolabel>et</nolabel><forename>B.</forename><surname>Charlot, ¬´</surname><title>Rapport au savoir,rapport au langage¬ª ,
+      </note>
+     </hi>
+     <hi rend="italic">
+      <title level="j">
+       Le Français aujourd’hui
+      </title>
+     </hi>
+     <c type="comma">
+      ,
+     </c>
+     <abbr>
+      n°
+     </abbr>
+      
+     <biblscope type="issue">
+      99
+     </biblscope>
+     <c type="comma">
+      ,
+     </c>
+     <publisher>
+      AFEF
+     </publisher>
+     et
+     <publisher>
+      Armand Colin
+     </publisher>
+     <c type="comma">
+      ,
+     </c>
+     <date>
+      1992
+     </date>
+      ;
+     <bibl>
+      <author>
+       <forename full="init">
+        É.
+       </forename>
+        
+       <surname>
+        Bautier
+       </surname>
+      </author>
+      <c type="comma">
+       ,
+      </c>
+      <c type="guillemot_left">
+       «
+      </c>
+       
+      <title level="a">
+       Pratiques langagières et scolarisation
+      </title>
+       
+      <c type="guillemot_right">
+       »
+      </c>
+      <c type="comma">
+       ,
+      </c>
+      <hi rend="italic">
+       <title level="j">
+        Revue française de pédagogie
+       </title>
+      </hi>
+      <c type="comma">
+       ,
+      </c>
+      <abbr>
+       n°
+      </abbr>
+       
+      <biblscope type="issue">
+       137
+      </biblscope>
+      <c type="comma">
+       ,
+      </c>
+      <pubplace>
+       Lyon
+      </pubplace>
+      <c type="comma">
+       ,
+      </c>
+      <publisher>
+       INRP
+      </publisher>
+      <c type="comma">
+       ,
+      </c>
+      <date>
+       2001
+      </date>
+     </bibl>
+      ;
+     <bibl>
+      <author>
+       <forename full="init">
+        B.
+       </forename>
+        
+       <surname>
+        Charlot
+       </surname>
+      </author>
+      <c type="comma">
+       ,
+      </c>
+      <hi rend="italic">
+       <title level="m">
+        Du Rapport au Savoir. Éléments pour une théorie
+       </title>
+      </hi>
+      <c type="comma">
+       ,
+      </c>
+      <publisher>
+       Anthropos
+      </publisher>
+      <c type="comma">
+       ,
+      </c>
+      <date>
+       1997
+      </date>
+     </bibl>
+      ;
+     <bibl>
+      <author>
+       <forename full="init">
+        B.
+       </forename>
+        
+       <surname>
+        Charlot
+       </surname>
+      </author>
+      <c type="comma">
+       ,
+      </c>
+      <author>
+       <forename full="init">
+        É.
+       </forename>
+        
+       <surname>
+        Bautier
+       </surname>
+      </author>
+      <c type="comma">
+       ,
+      </c>
+      <author>
+       <forename full="init">
+        J.-Y.
+       </forename>
+        
+       <surname>
+        Rochex
+       </surname>
+      </author>
+      <c type="comma">
+       ,
+      </c>
+      <hi rend="italic">
+       <title level="m">
+        École et savoir dans les banlieues et ailleurs
+       </title>
+      </hi>
+      <c type="comma">
+       ,
+      </c>
+      <publisher>
+       Armand Colin
+      </publisher>
+      <c type="comma">
+       ,
+      </c>
+      <date>
+       1992
+      </date>
+      <c type="point">
+       .
+      </c>
+     </bibl>
+      : extérieur aux normes de l’écrit (et de l’écrit scolaire en particulier), celui-ci consent à la rigueur à faire des « exercices » (ritualisés et dont il ne tirera aucun profit) mais ne se
+     <pb>
+      sent pas concerné par des tâches de fond. Sur ces élèves-là, écrivent encore Dominique Bucheton et Jean-Claude Chabanne, « les savoirs techniques, ceux qui sont visés par les modèles textuels, n’accrochent pas » (
+      <hi rend="italic">
+       id.
+      </hi>
+      ). Les solutions avancées par l’équipe de Montpellier assument une part de l’héritage d’ÉVA mais remettent en cause ce qui en constitue la trame la plus stable en posant deux questions à mon sens fondamentales et que j’ai déjà suggérées dans les lignes précédentes :
+      <lb>
+           1. En matière d’écriture, les acquisitions se font-elles nécessairement par un passage à l’explicite : « [L]e savoir d’action est-il utilement explicitable, et la description rationnelle doit-elle toujours accompagner l’apprentissage ? » (p. 126)
+      </lb>
+      <lb>
+           2. Présentée par les maîtres comme un enchaînement d’activités juxtaposées ou linéairement organisées (l’éparpillement dans le « pluridimensionnel »), la tâche d’écriture ne risque-t-elle pas d’enfermer les enfants dans une représentation inexacte et « inefficace » (
+       <hi rend="italic">
+        id.
+       </hi>
+       ) de l’écriture et de renforcer ainsi le caractère démotivant de l’activité ?
+      </lb>
+     </pb>
+    </p>
+    <p>
+     Le tableau que je viens d’esquisser rapidement est certes incomplet. J’ai sans doute accordé une place privilégiée au groupe ÉVA et je n’ai rien dit du rôle des ateliers d’écriture qui ont certainement pesé, à l’école primaire aussi, sur les façons de concevoir ou de présenter les tâches d’écriture. Il est difficile de mesurer la pénétration des propositions d’ÉVA, tant l’appropriation des idées par les enseignants échappe aux observateurs occasionnels comme à l’analyse du matériel pédagogique. Je n’ai pas non plus cherché à valoriser les conflits qui ont opposé parfois très vivement aux novateurs les critiques du technicisme ou aux « littéraires » les partisans d’une approche très instrumentale de la langue écrite. Il me semble que les questions que s’est posées la didactique au cours de ces trente dernières années dans l’enseignement primaire sont des questions nécessaires sans lesquelles il n’y a pas d’écriture à l’école. Peu importe si les réponses ont été parfois caricaturales ou caricaturées.
+     <hi rend="italic">
+      L’écriture d’invention
+     </hi>
+     au lycée gagnerait à son tour à se les poser : comment inscrire l’écriture dans le temps pédagogique ? quels échanges écrits et oraux développer autour de l’écriture ? comment et jusqu’où expliciter les opérations en jeu dans la tâche d’écriture ? quelles sont les connaissances qui font défaut ? comment articuler l’écriture ordinaire et l’écriture normée des exercices canoniques ? comment penser le rapport dans l’écriture entre inscription identitaire et adoption de modèles ? Il n’y a pas et il ne peut pas y avoir de problème de
+     <hi rend="italic">
+      l’écriture d’invention
+     </hi>
+     qui ne soit aussi le problème, plus vaste, plus inquiétant, mais aussi beaucoup plus passionnant, de l’écriture.
+    </p>
+   </body>
+   <back>
+    <div type="bibliogr">
+     <listbibl>
+      <bibl>
+       Bibliographie complémentaire
+      </bibl>
+      <bibl>
+       <hi font-variant="small-caps">
+        Barré de Miniac
+       </hi>
+       Ch.,
+       <hi rend="italic">
+        Le Rapport à l’écriture, aspects théoriques et didactiques
+       </hi>
+       , Villeneuve d’Ascq, Septentrion, 2000.
+      </bibl>
+      <bibl>
+       <hi font-variant="small-caps">
+        Bucheton
+       </hi>
+       D.,
+       <hi rend="italic">
+        Écrire pour penser, apprendre et se construire de l’école au collège
+       </hi>
+       , CRDP de Versailles/Delagrave, 2002.
+      </bibl>
+      <bibl>
+       —, « Aider l’élève à devenir un sujet écrivant ou de quelques ingrédients à bien mélanger »,
+       <hi rend="italic">
+        Recherches
+       </hi>
+       , n° 23, 1995, INRP, p. 107-116.
+      </bibl>
+      <bibl>
+       <hi font-variant="small-caps">
+        Chabanne
+       </hi>
+       J.-Cl. et
+       <hi font-variant="small-caps">
+        Bucheton
+       </hi>
+       D. (dir.),
+       <hi rend="italic">
+        Parler et écrire pour penser, apprendre et se construire : l’écrit et l’oral réflexifs
+       </hi>
+       , PUF, « L’Éducateur », 2002.
+      </bibl>
+      <bibl>
+       <hi font-variant="small-caps">
+        David
+       </hi>
+       J. et
+       <hi font-variant="small-caps">
+        Plane
+       </hi>
+       S.,
+       <hi rend="italic">
+        L’apprentissage de l’écriture de l’école au collège
+       </hi>
+       , PUF, 1996.
+      </bibl>
+      <bibl>
+       <hi font-variant="small-caps">
+        Lafont-Terranova
+       </hi>
+       J. et
+       <hi font-variant="small-caps">
+        Colin
+       </hi>
+       D.,
+       <hi rend="italic">
+        Didactique de l’écrit, La construction des savoirs et le sujet-écrivant
+       </hi>
+       , Presses universitaires de Namur, 2006.
+      </bibl>
+      <bibl>
+       <hi font-variant="small-caps">
+        Observatoire national de la lecture
+       </hi>
+       ,
+       <hi rend="italic">
+        Écrire des textes, l’apprentissage et le plaisir. Les journées de l’observatoire
+       </hi>
+       , ONL, 2007.
+      </bibl>
+      <bibl>
+       <hi font-variant="small-caps">
+        Reuter
+       </hi>
+       Y.,
+       <hi rend="italic">
+        Enseigner et apprendre à écrire
+       </hi>
+       , ESF, 1996.
+      </bibl>
+     </listbibl>
+    </div>
+   </back>
+  </front>
+ </text>
+</tei>

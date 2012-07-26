@@ -26,30 +26,24 @@ class File(object):
 		self.corpus = {}
 	
 	'''
-	extraireCorpus1 : extrait les references du fichier correspondant au corpus 1
+	axtract : extrait les references du fichier correspondant 
+		type : integer : 1 = corpus 1, 2 = corpus 2 ...
+		tag : balise delimitant les references : bibl = corpus 1...
 	'''
-	def extractCorpus1(self):
-		clean = CleanCorpus1()
-		references = clean.processing(self.nom, "bibl")
+	def extract(self, type, tag):
+		if type == 1:
+			clean = CleanCorpus1()
+		elif type == 2:
+			clean = CleanCorpus2()
+			
+		references = clean.processing(self.nom, tag)
 		if len(references) >= 1:
-			self.corpus[1] = ListReferences(references, 1)
+			self.corpus[type] = ListReferences(references, type)
 			
 			rule = Rule()
-			rule.reorganizing(self.corpus[1])
-		
-		
-	'''
-	extraireCorpus2 : extrait les references du fichier correspondant au corpus 1
-	'''
-	def extractCorpus2(self):
-		clean = CleanCorpus2()
-		references = clean.processing(self.nom, "note")
-		if len(references) >= 1:
-			self.corpus[2] = ListReferences(references, 2)
+			rule.reorganizing(self.corpus[type])
 			
-			rule = Rule()
-			rule.reorganizing(self.corpus[2])
-		
+			
 	'''
 	getListReferences : permet de recuperer la liste entiere des references du corpus 1
 	typeCorpus : int numero du corpus
