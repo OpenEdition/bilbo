@@ -44,11 +44,11 @@ class Bilbo(object):
 		corpus = Corpus(repCorpus)
 		
 		if type == 1:
-			corpus.extractCorpus1()
+			corpus.extract(1, "bibl")
 			self.crf.prepareTrain(corpus, 1, "trainingdata_CRF_C1.txt", 1, 1)
 			self.crf.runTrain(repModel, "trainingdata_CRF_C1.txt")
 		elif type == 2:
-			corpus.extractCorpus2()
+			corpus.extract(2, "note")
 			self.crf.prepareTrain(corpus, 2, "data04SVM_ori.txt", 1)
 			
 			self.svm.prepareTrain(corpus)
