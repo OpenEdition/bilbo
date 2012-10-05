@@ -73,9 +73,18 @@ class CRF(object):
 			if numCorpus == 2 and indiceSvm != 2 :
 				extractor.extractorIndices4new("model/corpus2/svm_revues_predictions_new", ListReferences(listReferencesObj.getReferences(),numCorpus))
 			
-			extractor.extractor(1, nbRef, self.repResult+"testdatawithlabel_CRF.txt",ListReferences(listReferencesObj.getReferences(),numCorpus), -1, 1)
-			extractor.extractor(1, nbRef, self.repResult+"testdataonlylabel_CRF.txt",ListReferences(listReferencesObj.getReferences(),numCorpus), -2, 1)
-			
+			'''
+			*BUG REPORT*
+			Oct. 5, 2012 Currently we have a problem. Label extracting is not working well for several notes. 
+						 No problem when we just annotate them with Bilbo but if we want to evaluate the result
+						 using already annotated test data, it's problematic. I didn't find the reason yet 
+						 but by extracting test data just as training data with (1,1) for the last arguments,
+						 instead of (-1,1), I temporarily fixed the problem. Need to check 'extractor' in 
+						 Extract_crf.py. TO BE FIXED............................................................
+			'''
+			extractor.extractor(1, nbRef, self.repResult+"testdatawithlabel_CRF.txt",ListReferences(listReferencesObj.getReferences(),numCorpus), 1, 1)
+			#extractor.extractor(1, nbRef, self.repResult+"testdataonlylabel_CRF.txt",ListReferences(listReferencesObj.getReferences(),numCorpus), -2, 1)
+
 			extractor.extractor(1, nbRef, self.repResult+"testdata_CRF.txt",ListReferences(listReferencesObj.getReferences(),numCorpus), 0, 1)
 
 
