@@ -46,6 +46,8 @@ class Extract_svm(Extract):
         i = 0
         start = 0
         for line in open (filename, 'r') :
+            line = line.replace('<hi rend=\"italic\">','') #delete tags !!!!! Because of it Classification didn't work
+            line = line.replace('</hi>','')
             line = line.split()
             
             if len(line) != 0:

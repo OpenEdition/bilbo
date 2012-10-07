@@ -18,7 +18,7 @@ class Reference(object):
 	def __init__(self, word, num):
 		self.word = word
 		self.num = num
-		self.train = 0
+		self.train = 0 # 1:train, 0:test, -1:classified as negative for SVM note classification
 		self.bibl = 0
 		
 	def affiche(self):

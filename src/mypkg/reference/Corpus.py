@@ -16,36 +16,36 @@ class Corpus(object):
 	'''
 
 
-	def __init__(self, repertoire):
+	def __init__(self, directory):
 		'''
 		Constructor
 		'''
-		self.repertoire = repertoire
+		self.directory = directory
 		self.fichiers = []
 		
 	'''
-	 : recupere le nom de tous les fichiers present dans le repertoire
+	 : Extract file names in the directory
 	'''
 	def getFiles(self):
-		'regarde si c est un repertoire ou un fichier seul'
-		if os.path.isdir(self.repertoire):
-			lsOut = commands.getoutput('ls '+self.repertoire)
+		'Verify if it is a directory or a single file'
+		if os.path.isdir(self.directory):
+			lsOut = commands.getoutput('ls '+self.directory)
 			listFichiers = lsOut.split("\n")
 
 		else:
-			nomSplit = self.repertoire.split("/")
+			nomSplit = self.directory.split("/")
 			listFichiers = []
 			listFichiers.append(nomSplit[len(nomSplit)-1])
 			del nomSplit[len(nomSplit)-1]
-			self.repertoire = "/".join(nomSplit)
+			self.directory = "/".join(nomSplit)
 		return listFichiers
 	
 	
 	'''
-	extract pour chaque fichier les references 
+	Extract the references for each file 
 	argument :
-		type :			type de corpus : 1 = corpus1, 2 = corpus 2 ...
-		tag :			balise delimitant les references : corpus 1 = bibl...
+		type :			corpus type : 1 = corpus1, 2 = corpus 2 ...
+		tag :			tag name defining the reference types : corpus 1 = bibl...
 		nomFichier :	nom du fichier que l'on doit annoter
 	'''
 	def extract(self, type, tag, nomFichiers=""):
@@ -53,7 +53,7 @@ class Corpus(object):
 			nomFichiers = self.getFiles()
 			
 		for nomFichier in nomFichiers:
-			fichObj = File(self.repertoire+"/"+nomFichier)
+			fichObj = File(self.directory+"/"+nomFichier)
 			fichObj.extract(type, tag)
 			self.fichiers.append(fichObj)
 			

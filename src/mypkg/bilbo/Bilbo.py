@@ -36,8 +36,8 @@ class Bilbo(object):
 		
 	'''
 	train : apprentissage reference corpus 1
-		repCorpus : repertoire ou se trouve le corpus d'apprentissage 
-		repModel : 		repertoire ou se trouve le model correspondant au corpus
+		repCorpus : directory ou se trouve le corpus d'apprentissage 
+		repModel : 		directory ou se trouve le model correspondant au corpus
 		type : integer 1 : corpus 1, 2 : corpus 2...
 	'''
 	def train(self, repCorpus, repModel, type):
@@ -61,8 +61,8 @@ class Bilbo(object):
 	
 	'''
 	annotate : annote les references du type corpus 1
-		repCorpus : 	repertoire ou se trouve les fichiers a annoter
-		repModel : 		repertoire ou se trouve le model correspondant au corpus
+		repCorpus : 	directory ou se trouve les fichiers a annoter
+		repModel : 		directory ou se trouve le model correspondant au corpus
 		type :			integer :1 si coprus 1, 2 si corpus 2...
 		externe : 		si ce sont des donnée externe = 1 (autre que le cleo), 0 sinon
 		
@@ -83,7 +83,7 @@ class Bilbo(object):
 
 	'''
 	annotateCorpus1 : annote les references du type corpus 2
-		repModel : 		repertoire ou se trouve le model correspondant au corpus
+		repModel : 		directory ou se trouve le model correspondant au corpus
 		corpus : 		objet Corpus correspondant au corpus que l'on souhaite annoter
 		fichier :		fichier a annoter
 		
@@ -98,7 +98,7 @@ class Bilbo(object):
 	
 	'''
 	annotateCorpus2 : annote les references du type corpus 2
-		repModel : 		repertoire ou se trouve le model correspondant au corpus
+		repModel : 		directory ou se trouve le model correspondant au corpus
 		corpus : 		objet Corpus correspondant au corpus que l'on souhaite annoter
 		fichier :		fichier a annoter
 		externe : 		si donnée externe = 1

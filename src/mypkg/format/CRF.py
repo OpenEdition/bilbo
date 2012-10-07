@@ -53,7 +53,7 @@ class CRF(object):
 	preparerTest
 		corpus : objet Corpus
 		numCorpus : int :type de corpus 1, 2 ou 3
-		indiceSvm : 0 normale, -1: data04SVM, 2 : external data => svm isn't call
+		indiceSvm : 0 normale(corpus 1), -1: data04SVM (corpus2), 2 : external data => svm isn't call
 		indices : fichier save indice
 	'''
 	def preparerTest(self, corpus, numCorpus, indiceSvm = 0, indices=""):
@@ -68,23 +68,19 @@ class CRF(object):
 		
 		if indiceSvm == -1:
 			extractor.extractor(numCorpus, nbRef, self.repResult+"data04SVM_ori.txt", ListReferences(listReferencesObj.getReferences(),numCorpus))
-		else:
+		else: 
 			'fichier pour le crf'
 			if numCorpus == 2 and indiceSvm != 2 :
 				extractor.extractorIndices4new("model/corpus2/svm_revues_predictions_new", ListReferences(listReferencesObj.getReferences(),numCorpus))
 			
 			'''
-			*BUG REPORT*
-			Oct. 5, 2012 Currently we have a problem. Label extracting is not working well for several notes. 
-						 No problem when we just annotate them with Bilbo but if we want to evaluate the result
-						 using already annotated test data, it's problematic. I didn't find the reason yet 
-						 but by extracting test data just as training data with (1,1) for the last arguments,
-						 instead of (-1,1), I temporarily fixed the problem. Need to check 'extractor' in 
-						 Extract_crf.py. TO BE FIXED............................................................
+			Oct. 7, 2012 Currently we have a problem for processing corpus2. References should be eliminated when they
+						are classified as non-bibliographic references but now label them as <nonbibl>. 
+						Anyway no problem for the processing corpus 1...
 			'''
-			extractor.extractor(1, nbRef, self.repResult+"testdatawithlabel_CRF.txt",ListReferences(listReferencesObj.getReferences(),numCorpus), 1, 1)
-			#extractor.extractor(1, nbRef, self.repResult+"testdataonlylabel_CRF.txt",ListReferences(listReferencesObj.getReferences(),numCorpus), -2, 1)
-
+			extractor.extractor(1, nbRef, self.repResult+"testdatawithlabel_CRF.txt",ListReferences(listReferencesObj.getReferences(),numCorpus), -1, 1)
+			extractor.extractor(1, nbRef, self.repResult+"testdataonlylabel_CRF.txt",ListReferences(listReferencesObj.getReferences(),numCorpus), -2, 1)
+			
 			extractor.extractor(1, nbRef, self.repResult+"testdata_CRF.txt",ListReferences(listReferencesObj.getReferences(),numCorpus), 0, 1)
 
 
@@ -94,12 +90,12 @@ class CRF(object):
 		
 	'''
 	runTrain : lance le crf mallet pour l'apprentissage
-		repertoire : repertoire u l'on veut sauvegarder le model 
+		directory : directory u l'on veut sauvegarder le model 
 		fichier : fichier genere par preparTrain en l'occurence trainingdata_CRF_C2.txt
 	'''
-	def runTrain(self, repertoire, fichier) :
+	def runTrain(self, directory, fichier) :
 		#training
-		command = 'java -cp  \"dependencies/mallet/class:dependencies/mallet/lib/mallet-deps.jar\" cc.mallet.fst.SimpleTagger  --train true --model-file '+repertoire+'revuescrf '+self.repResult+fichier+' >> '+repertoire+'log_mallet.txt'
+		command = 'java -cp  \"dependencies/mallet/class:dependencies/mallet/lib/mallet-deps.jar\" cc.mallet.fst.SimpleTagger  --train true --model-file '+directory+'revuescrf '+self.repResult+fichier+' >> '+directory+'log_mallet.txt'
 		process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
 		process.wait()	
 
@@ -109,8 +105,8 @@ class CRF(object):
 	'''
 	runTest : lance le crf mallet pour annoter de nouvelles donnees
 	'''
-	def runTest(self, repertoire, fichier) :
-		command = 'java -cp  \"dependencies/mallet/class:dependencies/mallet/lib/mallet-deps.jar\" cc.mallet.fst.SimpleTagger  --model-file '+repertoire+'revuescrf '+self.repResult+fichier+' > '+self.repResult+'testEstCRF.txt '
+	def runTest(self, directory, fichier) :
+		command = 'java -cp  \"dependencies/mallet/class:dependencies/mallet/lib/mallet-deps.jar\" cc.mallet.fst.SimpleTagger  --model-file '+directory+'revuescrf '+self.repResult+fichier+' > '+self.repResult+'testEstCRF.txt '
 		process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
 		process.wait()
 	

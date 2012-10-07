@@ -35,6 +35,10 @@ class Extract_crf(Extract):
         tmp_nonbiblck = 0
         for reference in listReferences:
             
+            if reference.train == -1 :
+                pass # HERE You should eliminate reference....
+            
+            
             for mot in reference.getWord():
                 if mot.ignoreWord == 0:
                     if mot.item == 1: self.relatItm = 1
@@ -42,9 +46,14 @@ class Extract_crf(Extract):
                     if tr == 1 : check = 1
                     else : check = 0
                     
+                    '''
+                    A PROBLEM !!!!!!!!!! IF train == -1 we should delete the reference in training. In test also....
+                    But here change the tag (NOT CORRECT)
+                    '''
                     if reference.train == -1:
                         mot.delAllTag()
                         mot.addTag("nonbibl")
+                       
                     elif reference.train == check:
                                                 
                         # finding just a label which is not in the nonLabels list
@@ -62,7 +71,7 @@ class Extract_crf(Extract):
                                 if nonbiblck == 1:
                                     tmp_nonbiblck = 1
 
-                            
+    
                         if tr == 0 :
                             mot.delAllTag()
                     

@@ -41,16 +41,16 @@ class SVM(object):
     '''
     runTrain : lance SVM pour l'apprentissage
     '''
-    def runTrain(self, repertoireModel):
-        command = 'dependencies/svm_light/svm_learn '+self.repResult+'trainingdata_SVM.txt '+repertoireModel+'svm_revues_model'
+    def runTrain(self, directoryModel):
+        command = 'dependencies/svm_light/svm_learn '+self.repResult+'trainingdata_SVM.txt '+directoryModel+'svm_revues_model'
         process = subprocess.Popen(command , shell=True, stdout=subprocess.PIPE)
         process.wait()
         
-        command = 'dependencies/svm_light/svm_classify '+self.repResult+'trainingdata_SVM.txt '+repertoireModel+'svm_revues_model '+repertoireModel+'svm_revues_predictions_training'
+        command = 'dependencies/svm_light/svm_classify '+self.repResult+'trainingdata_SVM.txt '+directoryModel+'svm_revues_model '+directoryModel+'svm_revues_predictions_training'
         process = subprocess.Popen(command , shell=True, stdout=subprocess.PIPE)
         process.wait()
         
-    def runTest(self, repertoireModel):
-        command = 'dependencies/svm_light/svm_classify '+self.repResult+'newdata.txt '+repertoireModel+'svm_revues_model '+repertoireModel+'svm_revues_predictions_new'
+    def runTest(self, directoryModel):
+        command = 'dependencies/svm_light/svm_classify '+self.repResult+'newdata.txt '+directoryModel+'svm_revues_model '+directoryModel+'svm_revues_predictions_new'
         process = subprocess.Popen(command , shell=True, stdout=subprocess.PIPE)
         process.wait()
