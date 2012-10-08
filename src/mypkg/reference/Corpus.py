@@ -2,7 +2,7 @@
 '''
 Created on 25 avr. 2012
 
-@author: Young-min Kim, Jade Tavernier
+@author: Young-Min Kim, Jade Tavernier
 '''
 import subprocess
 import os.path

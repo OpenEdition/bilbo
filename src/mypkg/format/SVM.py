@@ -2,7 +2,7 @@
 '''
 Created on 4 juin 2012
 
-@author: Young-min Kim, Jade Tavernier
+@author: Young-Min Kim, Jade Tavernier
 '''
 import subprocess
 from mypkg.format.Extract_svm import Extract_svm
@@ -13,44 +13,44 @@ class SVM(object):
     '''
 
 
-    def __init__(self, repResult):
+    def __init__(self, dirResult):
         '''
         Constructor
         '''
-        self.repResult = repResult
+        self.dirResult = dirResult
        
     '''
     prepareTrain : prepare les fichier pour SVM
     '''
     def prepareTrain(self, corpus):
-        nbRef = corpus.nbReference(2)
+        nbRef = corpus.nbReference(2) #corpus type = 2
         extractor = Extract_svm()
         
-        extractor.extractor(self.repResult+"data04SVM_ori.txt", nbRef, 1, self.repResult+"data04SVM_ori.txt", self.repResult+"trainingdata_SVM.txt")
+        extractor.extractor(self.dirResult+"data04SVM_ori.txt", nbRef, 1, self.dirResult+"data04SVM_ori.txt", self.dirResult+"trainingdata_SVM.txt")
       
     '''
     prepareTest : prepare les fichier pour SVM
     '''
     def prepareTest(self, corpus):
-        nbRef = corpus.nbReference(2)
+        nbRef = corpus.nbReference(2) #corpus type = 2
         extractor = Extract_svm()
         
-        extractor.extractor(self.repResult+"data04SVM_ori.txt", nbRef, 2, self.repResult+"data04SVM_ori.txt", self.repResult+"newdata.txt")
-         
+        extractor.extractor(self.dirResult+"data04SVM_ori.txt", nbRef, 0, self.dirResult+"data04SVM_ori.txt", self.dirResult+"newdata.txt")
+        
             
     '''
     runTrain : lance SVM pour l'apprentissage
     '''
     def runTrain(self, directoryModel):
-        command = 'dependencies/svm_light/svm_learn '+self.repResult+'trainingdata_SVM.txt '+directoryModel+'svm_revues_model'
+        command = 'dependencies/svm_light/svm_learn '+self.dirResult+'trainingdata_SVM.txt '+directoryModel+'svm_revues_model'
         process = subprocess.Popen(command , shell=True, stdout=subprocess.PIPE)
         process.wait()
         
-        command = 'dependencies/svm_light/svm_classify '+self.repResult+'trainingdata_SVM.txt '+directoryModel+'svm_revues_model '+directoryModel+'svm_revues_predictions_training'
+        command = 'dependencies/svm_light/svm_classify '+self.dirResult+'trainingdata_SVM.txt '+directoryModel+'svm_revues_model '+directoryModel+'svm_revues_predictions_training'
         process = subprocess.Popen(command , shell=True, stdout=subprocess.PIPE)
         process.wait()
         
     def runTest(self, directoryModel):
-        command = 'dependencies/svm_light/svm_classify '+self.repResult+'newdata.txt '+directoryModel+'svm_revues_model '+directoryModel+'svm_revues_predictions_new'
+        command = 'dependencies/svm_light/svm_classify '+self.dirResult+'newdata.txt '+directoryModel+'svm_revues_model '+directoryModel+'svm_revues_predictions_new'
         process = subprocess.Popen(command , shell=True, stdout=subprocess.PIPE)
         process.wait()

@@ -15,29 +15,28 @@ class Extract_svm(Extract):
     def __init__(self):
         Extract.__init__(self)
         self.tokens = []        # tokens[k] : TOKEN STRING with token id 'k'
-        self.idf = []        # idf[k] : documnet frequency of token id 'k'
+        self.idf = []        # idf[k] : document frequency of token id 'k'
         self.features = []    # features[k] : FEATURE STRING with feature id 'k'
-        self.doc_tokens = {'0000':0}        # tmp document represented by token strings and thier counts
-        self.doc_features = {'0000':0}    # tmp document represented by feature strings and thier counts
+        self.doc_tokens = {'0000':0}        # tmp document represented by token strings and their counts
+        self.doc_features = {'0000':0}    # tmp document represented by feature strings and their counts
 
         self.valid_features = {'nopunc':0, 'onepunc':0, 'nonumbers':0, 'noinitial':0, 'startinitial':0, 'posspage':0, 'weblink':0, 'posseditor':0, 'italic':0}
         
     #extract training and test data
-    def extractor (self, filename, ndocs, tr, filename_ori, file_out) :
+    def extractor (self, filename, ndocs, tr, filename_ori, file_out) : # tr=1 : training, tr=0 : test
         
         i = 0
         indices = range(ndocs)
-        flagEndRef = 0
+        flagEndRef = 0 ## WHAT IS IT ????????
         
-        if tr != 2 :
+        # IN FACT WE DON'T NEED IT ANY MORE BUT FOR THE MODIFICATION WE KEEP IT
+        if tr == 1 : # Now we don't split data into learning/test data. So for test, we need load features and tokens
             for i in range(len(indices)) :
                 indices[i] = 1
-            '''for line in open("./all_indices_C2_train.txt", 'r') :
-                indices[i] = int(line.split()[0])
-                i += 1'''
-        else : ###### when extracting new data,  
+        else : # when extracting new data
             for i in range(len(indices)) :
-                indices[i] = 2
+                indices[i] = tr
+            self.load_ID(self.tokens, self.features)
         
         token_data = []        # TOTAL DATA for tokens, token_data[i] = i_th document DICT containing token ids and token counts
         feature_data = []    # TOTAL DATA for features, feature_data[i] = i_th document DICT containing feature ids and feature counts
@@ -74,7 +73,8 @@ class Extract_svm(Extract):
         self.insert_lineFeatures(feature_data)
         self.print_output(token_data, feature_data, bibls, tr, indices, file_out)
         #self.load_original(filename_ori, indices)
-
+        if tr == 1 : self.save_ID(self.tokens, self.features)
+        
         return
     
     def fill_data(self, line, input, data) : # line[1:], tokens, token_data / line, features, feature_data
@@ -215,4 +215,34 @@ class Extract_svm(Extract):
         fouttst.close()
     
         return
-            
+
+   
+    #save input(token) id list and feature id list for new data
+    def save_ID(self, tokens, features) :
+        f = open("model/corpus2/inputID.txt", 'w')
+        for k in tokens :
+            f.write(str(k))
+            f.write('\n')
+        f.close()
+        
+        f = open("model/corpus2/featureID.txt", 'w')
+        for k in features :
+            f.write(str(k))
+            f.write('\n')
+        f.close()
+        return
+
+
+    #load input(token) id list and feature id list for new data
+    def load_ID(self, tokens, features) :
+        #load input(token) id list for new data
+        del tokens[:]
+        for line in open("model/corpus2/inputID.txt", 'r') :
+            n = line.split('\n')
+            tokens.append(n[0])
+        #load feature id list for new data
+        del features[:]
+        for line in open("model/corpus2/featureID.txt", 'r') :
+            n = line.split('\n')
+            features.append(n[0])
+        return

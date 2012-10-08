@@ -4,8 +4,8 @@
 BILBO : Automatic annotation of bibliographic reference
 
 (C) Copyright 2012 by Young-Min Kim (youngminn.kim@gmail.com) and Jade Tavernier
-(ton mail). This is initially written by Young-Min Kim for the prototype and modified by
-Jade Tavernier for code reorganization in an object oriented design.
+(jade.tavernier@gmail.com). This is initially written by Young-Min Kim for the prototype 
+and modified by Jade Tavernier for code reorganization in an object oriented design.
  
 BILBO is an open source software for automatic annotation of bibliographic reference.
 It provides the segmentation and tagging of input string. It is principally based on
@@ -17,7 +17,7 @@ Commons Attribution-NonCommercial-ShareAlike 2.5 Generic License (CC BY-NC-SA 2.
 
 Created on 18 avr. 2012
 
-@author: Young-min Kim, Jade Tavernier
+@author: Young-Min Kim, Jade Tavernier
 '''
 
 from mypkg.format.CRF import CRF
@@ -28,112 +28,113 @@ import time
 
 class Bilbo(object):
 
-	def __init__(self, repResult="Result/"):
-		self.crf = CRF(repResult)
-		self.svm = SVM(repResult)
-		self.repResult = repResult
+	def __init__(self, dirResult="Result/"): #Set the default result directory
+		self.crf = CRF(dirResult)
+		self.svm = SVM(dirResult)
+		self.dirResult = dirResult
 
 		
 	'''
-	train : apprentissage reference corpus 1
-		repCorpus : directory ou se trouve le corpus d'apprentissage 
-		repModel : 		directory ou se trouve le model correspondant au corpus
-		type : integer 1 : corpus 1, 2 : corpus 2...
+	train : CRF model learning
+		dirCorpus : directory where the training references are
+		dirModel : 	directory where the CRF and SVM models are saved
+		type : integer, 1 : corpus 1, 2 : corpus 2...
 	'''
-	def train(self, repCorpus, repModel, type):
-		corpus = Corpus(repCorpus)
+	def train(self, dirCorpus, dirModel, type):
+		corpus = Corpus(dirCorpus)
 		
 		if type == 1:
 			corpus.extract(1, "bibl")
-			self.crf.prepareTrain(corpus, 1, "trainingdata_CRF_C1.txt", 1, 1)
-			self.crf.runTrain(repModel, "trainingdata_CRF_C1.txt")
+			self.crf.prepareTrain(corpus, 1, "trainingdata_CRF_C1.txt", 1, 1)	#CRF training data extraction
+			self.crf.runTrain(dirModel, "trainingdata_CRF_C1.txt")				#CRF model learning
 		elif type == 2:
 			corpus.extract(2, "note")
-			self.crf.prepareTrain(corpus, 2, "data04SVM_ori.txt", 1)
+			self.crf.prepareTrain(corpus, 2, "data04SVM_ori.txt", 1) #Source data extraction for SVM note classification
 			
-			self.svm.prepareTrain(corpus)
-			self.svm.runTrain(repModel)
+			self.svm.prepareTrain(corpus)	#Training data extraction for SVM note classification
+			self.svm.runTrain(dirModel)		#SVM model learning
 			
-			self.crf.prepareTrain(corpus, 2, "trainingdata_CRF_C2.txt", 1, 1)
-			self.crf.runTrain(repModel, "trainingdata_CRF_C2.txt")
+			self.crf.prepareTrain(corpus, 2, "trainingdata_CRF_C2.txt", 1, 1)	#CRF training data extraction
+			self.crf.runTrain(dirModel, "trainingdata_CRF_C2.txt") #CRF model learning
 		
 	
 	
 	'''
-	annotate : annote les references du type corpus 1
-		repCorpus : 	directory ou se trouve les fichiers a annoter
-		repModel : 		directory ou se trouve le model correspondant au corpus
-		type :			integer :1 si coprus 1, 2 si corpus 2...
-		externe : 		si ce sont des donnée externe = 1 (autre que le cleo), 0 sinon
+	annotate : automatic annotation of references 
+		dirCorpus : 		directory where the references to be annotated are
+		dirModel : 			directory where the learned CRF model and SVM model have been saved
+		type : integer, 	1 : for corpus level 1, 2 : for corpus level 2...
+		external : integer, 1 : if the references are external data except CLEO, 0 : if that of CLEO
+							it's used to decide whether Bilbo learn call a SVM classification or not.
 		
 	'''
-	def annotate(self, repCorpus, repModel, type, externe=0):
-		nbRef = 0
-		corpus = Corpus(repCorpus)
-		fichiers = corpus.getFiles()
-		fichiersTab = self._list_split(fichiers, 50)
-		for fichierTab in fichiersTab:
+	def annotate(self, dirCorpus, dirModel, type, external=0):
+		nbRef = 0					#Number of references
+		corpus = Corpus(dirCorpus)	#
+		files = corpus.getFiles()
+		filesTab = self._list_split(files, 50)
+		for fname in filesTab:
 			if type == 1:
-				corpus = self.annotateCorpus1(repModel, corpus, fichierTab)
+				corpus = self.annotateCorpus1(dirModel, corpus, fname)
 			elif type == 2:
-				corpus = self.annotateCorpus2(repModel, corpus, fichierTab, externe)
+				corpus = self.annotateCorpus2(dirModel, corpus, fname, external)
 				
 			corpus.deleteAllFiles()
 
 
 	'''
-	annotateCorpus1 : annote les references du type corpus 2
-		repModel : 		directory ou se trouve le model correspondant au corpus
-		corpus : 		objet Corpus correspondant au corpus que l'on souhaite annoter
-		fichier :		fichier a annoter
+	annotateCorpus1 : automatic annotation of references level 1
+		dirModel : 		directory where the learned CRF model has been saved
+		corpus : 		set of references that we want to annotate
+		fname :			name of file to be annotated
 		
 	'''
-	def annotateCorpus1(self, repModel, corpus, fichier):
-		corpus.extract(1, "bibl", fichier)
-		self.crf.preparerTest(corpus, 1)
-		self.crf.runTest(repModel, 'testdata_CRF.txt')
+	def annotateCorpus1(self, dirModel, corpus, fname):
+		corpus.extract(1, "bibl", fname)
+		self.crf.prepareTest(corpus, 1)
+		self.crf.runTest(dirModel, 'testdata_CRF.txt')
 
-		corpus.addTagReferences(self.repResult+"testEstCRF.xml", "bibl", 1)
+		corpus.addTagReferences(self.dirResult+"testEstCRF.xml", "bibl", 1)
 		return corpus
 	
 	'''
-	annotateCorpus2 : annote les references du type corpus 2
-		repModel : 		directory ou se trouve le model correspondant au corpus
-		corpus : 		objet Corpus correspondant au corpus que l'on souhaite annoter
-		fichier :		fichier a annoter
-		externe : 		si donnée externe = 1
+	annotateCorpus2 : aautomatic annotation of references level 2
+		dirModel : 		directory where the learned CRF model and SVM model have been saved
+		corpus : 		set of notes that we want to annotate
+		fname :			name of file to be annotated
+		external : 		1 : if external data, 0 : if CLEO data
 	'''
-	def annotateCorpus2(self, repModel, corpus, fichier, externe=0):
+	def annotateCorpus2(self, dirModel, corpus, fname, external=0):
 
-		corpus.extract(2, "note", fichier)
+		corpus.extract(2, "note", fname)
 	
-		if externe == 0:
-			self.crf.preparerTest(corpus, 2, -1)
+		if external == 0:
+			self.crf.prepareTest(corpus, 2, -1) 	#last argument:int, -1:prepare source data for SVM learning, default:0
 			
 			self.svm.prepareTest(corpus)
-			self.svm.runTest(repModel)
+			self.svm.runTest(dirModel)
 		
-			self.crf.preparerTest(corpus, 2)
+			self.crf.prepareTest(corpus, 2)
 		else:
-			self.crf.preparerTest(corpus, 2, 2)
+			self.crf.prepareTest(corpus, 2, 2)
 			
-		self.crf.runTest(repModel, 'testdata_CRF.txt')
-		corpus.addTagReferences(self.repResult+"testEstCRF.xml", "note", 2)
+		self.crf.runTest(dirModel, 'testdata_CRF.txt')
+		corpus.addTagReferences(self.dirResult+"testEstCRF.xml", "note", 2)
 
 		
 		return corpus
 	
 	'''
-	_list_split : decoupe une liste en plusieur liste
-		list : liste a decouper
-		size : taille des nouvelles listes
-		return : liste des nouvelles listes
+	_list_split : split a filelist
+		flist : list to be split
+		size : new file list size
+		result : new file list
 	'''
-	def _list_split(self, list, size):
+	def _list_split(self, flist, size):
 		result = [[]]
-		while len(list) > 0:
+		while len(flist) > 0:
 			if len(result[-1]) >= size: result.append([])
-			result[-1].append(list.pop(0))
+			result[-1].append(flist.pop(0))
 		return result
 	
 	

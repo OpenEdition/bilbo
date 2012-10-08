@@ -2,7 +2,7 @@
 '''
 Created on 18 avr. 2012
 
-@author: Young-min Kim, Jade Tavernier
+@author: Young-Min Kim, Jade Tavernier
 '''
 
 import subprocess
@@ -14,74 +14,75 @@ from mypkg.output.GenerateXml import GenerateXml
 
 class CRF(object):
 
-	def __init__(self, repResult):
+	def __init__(self, dirResult):
 		self.generateXml = GenerateXml()
-		self.repResult = repResult
+		self.dirResult = dirResult
 		
 	'''
 	prepareTrain
-		corpus : objet Corpus
-		numCorpus : int :type de corpus 1, 2 ou 3
-		fichierRes : nom du fichier de sortie
-		tr : indicator check, it gives the valid instance indices 
-		extr :  
-		indices : si l'on veut utiliser le meme fichier indice_trainning le passer en parametre
-		
+		corpus : Corpus object
+		typeCorpus : int : corpus type 1, 2 or 3
+		fileRes : output result file name
+		tr : check if training or test data, : -2(test), -1(test), 0(test), 1(train), 
+		extOption : check if the data is internal data then we'll use a modified index for corpus type 2
+		indices : valid reference index file after SVM classification (corpus 2)
 	'''
-	def prepareTrain(self, corpus, numCorpus, fichierRes, tr=-1, extr=-1, indices=""):
-		listReferences = corpus.getListReferences(numCorpus)
-		newListReferences = ListReferences(listReferences, numCorpus)
+	def prepareTrain(self, corpus, typeCorpus, fileRes, tr=-1, extOption=-1, indices=""):
+		listReferences = corpus.getListReferences(typeCorpus)
+		newListReferences = ListReferences(listReferences, typeCorpus)
 		extractor = Extract_crf()
-		nbRef = corpus.nbReference(numCorpus)
+		nbRef = corpus.nbReference(typeCorpus)
 
-		'generation des indices'
+		'generation of training index for each reference'
 		extractor.randomgen(newListReferences, 1)
 				
-		'fichier pour le crf'
-		if numCorpus == 2 and extr == 1:
-			'modifie les indice pour indiquer les reference nonbibl'
+		'if corpus type 2 and extOption=1, we use a modified index list'
+		if typeCorpus == 2 and extOption == 1:
+			'!!! modifie les indice pour indiquer les reference nonbibl <- This is not correct'
+			'!!! modify the indices to eliminate the reference (or not print the reference) classified as non-bibl'
 			
 			extractor.extractorIndices("model/corpus2/svm_revues_predictions_training", newListReferences) 
-			extractor.extractor(1, nbRef, self.repResult+fichierRes, newListReferences, tr, extr)
+			extractor.extractor(1, nbRef, self.dirResult+fileRes, newListReferences, tr, extOption)
 			
-		else:
-			extractor.extractor(numCorpus, nbRef, self.repResult+fichierRes, newListReferences, tr, extr)
+		else: # typeCorpus == 1 or (typeCorpus == 2 and isFrstExt == -1)
+			########## SOURCE DATA EXTRACTION FOR SVM OR CORPUS 1 (BUT THESE ARE DIFFERENT !!!!!!!!!!!!!!!!!!!!!)
+			extractor.extractor(typeCorpus, nbRef, self.dirResult+fileRes, newListReferences, tr, extOption)
 		
 		return newListReferences
 	
 	'''
-	preparerTest
-		corpus : objet Corpus
-		numCorpus : int :type de corpus 1, 2 ou 3
-		indiceSvm : 0 normale(corpus 1), -1: data04SVM (corpus2), 2 : external data => svm isn't call
-		indices : fichier save indice
+	prepareTest
+		corpus : Corpus object
+		typeCorpus : int : corpus type 1, 2 or 3
+		indiceSvm : 0 normal(corpus 1), -1: data04SVM (corpus2), 2 : external data => svm isn't called
+		indices : valid reference index file after SVM classification (corpus 2)
 	'''
-	def preparerTest(self, corpus, numCorpus, indiceSvm = 0, indices=""):
-		listReferences = corpus.getListReferences(numCorpus)
-		listReferencesObj = ListReferences(listReferences, numCorpus)
+	def prepareTest(self, corpus, typeCorpus, indiceSvm = 0, indices=""):
+		listReferences = corpus.getListReferences(typeCorpus)
+		listReferencesObj = ListReferences(listReferences, typeCorpus)
 		
 		extractor = Extract_crf()
-		nbRef = corpus.nbReference(numCorpus)
+		nbRef = corpus.nbReference(typeCorpus)
 		
-		'fichier genere les indices'
-		extractor.randomgen(ListReferences(listReferencesObj.getReferences(),numCorpus), 0)
+		'generation of test index for each reference'
+		extractor.randomgen(ListReferences(listReferencesObj.getReferences(),typeCorpus), 0)
 		
 		if indiceSvm == -1:
-			extractor.extractor(numCorpus, nbRef, self.repResult+"data04SVM_ori.txt", ListReferences(listReferencesObj.getReferences(),numCorpus))
+			extractor.extractor(typeCorpus, nbRef, self.dirResult+"data04SVM_ori.txt", ListReferences(listReferencesObj.getReferences(),typeCorpus))
 		else: 
 			'fichier pour le crf'
-			if numCorpus == 2 and indiceSvm != 2 :
-				extractor.extractorIndices4new("model/corpus2/svm_revues_predictions_new", ListReferences(listReferencesObj.getReferences(),numCorpus))
+			if typeCorpus == 2 and indiceSvm != 2 :
+				extractor.extractorIndices4new("model/corpus2/svm_revues_predictions_new", ListReferences(listReferencesObj.getReferences(),typeCorpus))
 			
 			'''
 			Oct. 7, 2012 Currently we have a problem for processing corpus2. References should be eliminated when they
 						are classified as non-bibliographic references but now label them as <nonbibl>. 
 						Anyway no problem for the processing corpus 1...
 			'''
-			extractor.extractor(1, nbRef, self.repResult+"testdatawithlabel_CRF.txt",ListReferences(listReferencesObj.getReferences(),numCorpus), -1, 1)
-			extractor.extractor(1, nbRef, self.repResult+"testdataonlylabel_CRF.txt",ListReferences(listReferencesObj.getReferences(),numCorpus), -2, 1)
+			extractor.extractor(1, nbRef, self.dirResult+"testdatawithlabel_CRF.txt",ListReferences(listReferencesObj.getReferences(),typeCorpus), -1, 1)
+			extractor.extractor(1, nbRef, self.dirResult+"testdataonlylabel_CRF.txt",ListReferences(listReferencesObj.getReferences(),typeCorpus), -2, 1)
 			
-			extractor.extractor(1, nbRef, self.repResult+"testdata_CRF.txt",ListReferences(listReferencesObj.getReferences(),numCorpus), 0, 1)
+			extractor.extractor(1, nbRef, self.dirResult+"testdata_CRF.txt",ListReferences(listReferencesObj.getReferences(),typeCorpus), 0, 1)
 
 
 		
@@ -95,7 +96,7 @@ class CRF(object):
 	'''
 	def runTrain(self, directory, fichier) :
 		#training
-		command = 'java -cp  \"dependencies/mallet/class:dependencies/mallet/lib/mallet-deps.jar\" cc.mallet.fst.SimpleTagger  --train true --model-file '+directory+'revuescrf '+self.repResult+fichier+' >> '+directory+'log_mallet.txt'
+		command = 'java -cp  \"dependencies/mallet/class:dependencies/mallet/lib/mallet-deps.jar\" cc.mallet.fst.SimpleTagger  --train true --model-file '+directory+'revuescrf '+self.dirResult+fichier+' >> '+directory+'log_mallet.txt'
 		process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
 		process.wait()	
 
@@ -106,10 +107,10 @@ class CRF(object):
 	runTest : lance le crf mallet pour annoter de nouvelles donnees
 	'''
 	def runTest(self, directory, fichier) :
-		command = 'java -cp  \"dependencies/mallet/class:dependencies/mallet/lib/mallet-deps.jar\" cc.mallet.fst.SimpleTagger  --model-file '+directory+'revuescrf '+self.repResult+fichier+' > '+self.repResult+'testEstCRF.txt '
+		command = 'java -cp  \"dependencies/mallet/class:dependencies/mallet/lib/mallet-deps.jar\" cc.mallet.fst.SimpleTagger  --model-file '+directory+'revuescrf '+self.dirResult+fichier+' > '+self.dirResult+'testEstCRF.txt '
 		process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
 		process.wait()
 	
-		self.generateXml.simpleComp(self.repResult+"testdata_CRF.txt", self.repResult+'testEstCRF.txt', 2, self.repResult+'testEstCRF.xml')	
+		self.generateXml.simpleComp(self.dirResult+"testdata_CRF.txt", self.dirResult+'testEstCRF.txt', 2, self.dirResult+'testEstCRF.xml')	
 		return
 	

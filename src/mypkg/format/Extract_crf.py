@@ -20,9 +20,9 @@ class Extract_crf(Extract):
         typeCorpus : 1, 2 ou 3
         tr : indicator check, it gives the valid instance indices 
         extr : 
-        fichierRes = nom du fichier sortie du resultat
+        fileRes = nom du fichier sortie du resultat
     '''
-    def extractor (self, typeCorpus, ndocs, fichierRes, listRef, tr=-1, extr=-1) :
+    def extractor (self, typeCorpus, ndocs, fileRes, listRef, tr=-1, extOption=-1) :
         self.titleCK = 0
         self.titleAttr = ''
         self.relatItm = 0
@@ -67,10 +67,14 @@ class Extract_crf(Extract):
                         for tmp in mot.getAllTag() :
                             if tmp.nom == 'nonbibl' :
                                 tmp_nonbiblck = 1
-                            elif tmp.nom == 'c':
+                            elif tmp.nom == 'c' and typeCorpus == 2 and extOption==-1 :
                                 if nonbiblck == 1:
                                     tmp_nonbiblck = 1
-
+                                    
+                        if tmp_nonbiblck == 1 : 
+                            if (typeCorpus != 2 or extOption==-1) :
+                                mot.delAllTag()
+                                mot.addTag("nonbibl")
     
                         if tr == 0 :
                             mot.delAllTag()
@@ -80,10 +84,13 @@ class Extract_crf(Extract):
                         'si c est de la ponctuation on enleve toutes les caracteristiques'
                         balise = mot.getLastTag()
                         if balise != -1:
-                            if balise.nom == "c":
-                                mot.delAllFeature()
-                                mot.addFeature("PUNC")
-                                'sinon on enleve que celle non presente dans les features'
+                            if balise.nom == "c" :
+                                if typeCorpus == 2 and extOption==-1 :
+                                    mot.delAllFeature()
+                                    mot.addFeature("PUNC")
+                                    'sinon on enleve que celle non presente dans les features'
+                                else :
+                                    mot.delAllFeature()
                                 
                         
                         for carac in mot.getAllFeature():
@@ -113,21 +120,21 @@ class Extract_crf(Extract):
             self.placeObj.searchPlace(listRef, tr)
             self.properObj.searchProper(listRef, tr, 'place')
         
-        if extr == 1 or extr == 2 :
+        if extOption == 1 or extOption == 2 :
             if tr != -2 :
                 self._addlayout(listRef)                    ####### add layout features ### 2012-02-01 ###
-                self._printdata(fichierRes, listRef, tr)
+                self._printdata(fileRes, listRef, tr)
             else:
-                self._printOnlyLabel(fichierRes, listRef)
+                self._printOnlyLabel(fileRes, listRef)
             
-        elif extr == 3 or extr == 4 or extr == 5 or extr == 6:
-            self._printmoreFeatures(extr)
+        elif extOption == 3 or extOption == 4 or extOption == 5 or extOption == 6:
+            self._printmoreFeatures(extOption)
         
         if typeCorpus == 2:
             '''if tr == 1:
-                self._print_alldata(fichierRes, listRef)
+                self._print_alldata(fileRes, listRef)
             else :'''
             
-            self._print_parallel(fichierRes, listRef)
+            self._print_parallel(fileRes, listRef)
                 
         return
