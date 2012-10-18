@@ -7,6 +7,10 @@ Created on 18 avr. 2012
 
 from mypkg.ressources.BeautifulSoup import BeautifulSoup
 from mypkg.ressources.BeautifulSoup import Tag
+
+#from mypkg.ressources.beautifulsoup4_412.bs4 import BeautifulSoup
+#from mypkg.ressources.BeautifulSoup import Tag
+
 from mypkg.reference.Word import Word
 from mypkg.reference.Reference import Reference
 import string
@@ -71,6 +75,7 @@ class Clean(object):
 		top_tag = n.name
 		top_att = ''
 		
+		
 		'si la balise appartient au non label'
 		if self.nonLabels.has_key(top_tag):
 			if self.nonLabels[top_tag] != "1":
@@ -124,7 +129,7 @@ class Clean(object):
 		for j in range(0,len(txts)) :
 			balise = []
 			caract = []
-			if str(txts[j]) != 'None' or str(txts[j]) != '\n':
+			if str(txts[j]) != 'None' and str(txts[j]) != '\n':
 				st = string.split(str(txts[j]))
 				for s in st :
 					balise = []
@@ -140,6 +145,7 @@ class Clean(object):
 						balise.append("nonbibl")
 					#print
 					words.append({"nom":s, "caracteristique":caract, "balise":balise})
+				
 					
 		
 		'si la balise appartient au non label'

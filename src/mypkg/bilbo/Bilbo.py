@@ -42,7 +42,6 @@ class Bilbo(object):
 	'''
 	def train(self, dirCorpus, dirModel, type):
 		corpus = Corpus(dirCorpus)
-		
 		if type == 1:
 			corpus.extract(1, "bibl")
 			self.crf.prepareTrain(corpus, 1, "trainingdata_CRF_C1.txt", 1, 1)	#CRF training data extraction
@@ -105,23 +104,29 @@ class Bilbo(object):
 		external : 		1 : if external data, 0 : if CLEO data
 	'''
 	def annotateCorpus2(self, dirModel, corpus, fname, external=0):
-
-		corpus.extract(2, "note", fname)
-	
+		'''
+		Oct. 18, 2012 	SVM classification problem is fixed
+						Check the classification result of reference (reference.train) in 'addTagReferences' method
+						of 'Corpus' class that is called in 'annotateCorpus2' method of 'Bilbo' class.
+		'''
+		corpus.extract(2, "note", fname, external)
+		
 		if external == 0:
 			self.crf.prepareTest(corpus, 2, -1) 	#last argument:int, -1:prepare source data for SVM learning, default:0
 			
 			self.svm.prepareTest(corpus)
 			self.svm.runTest(dirModel)
 		
-			self.crf.prepareTest(corpus, 2)
-		else:
-			self.crf.prepareTest(corpus, 2, 2)
+			#(self, fileRes, tagDelimRef, typeCorpus, listRef)
+			newlistReferences = self.crf.prepareTest(corpus, 2)
+			self.crf.runTest(dirModel, 'testdata_CRF.txt')
+			corpus.addTagReferences(self.dirResult+"testEstCRF.xml", "note", 2, newlistReferences.getReferences())
 			
-		self.crf.runTest(dirModel, 'testdata_CRF.txt')
-		corpus.addTagReferences(self.dirResult+"testEstCRF.xml", "note", 2)
+		else:										#if external data : external=1, we do not call a SVM model
+			self.crf.prepareTest(corpus, 2, 2)		#indiceSvm=2 at prepareTest(self, corpus, typeCorpus, indiceSvm = 0, indices="")
+			self.crf.runTest(dirModel, 'testdata_CRF.txt')
+			corpus.addTagReferences(self.dirResult+"testEstCRF.xml", "note", 2)
 
-		
 		return corpus
 	
 	'''

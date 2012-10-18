@@ -6,12 +6,10 @@ Created on 18 avr. 2012
 '''
 
 from mypkg.ressources.BeautifulSoup import BeautifulSoup
-from mypkg.ressources.BeautifulSoup import Tag
 from mypkg.reference.Word import Word
 from mypkg.reference.Reference import Reference
 from mypkg.format.Clean import Clean
 import string
-import re
 
 class CleanCorpus1(Clean):
 
@@ -25,7 +23,7 @@ class CleanCorpus1(Clean):
 		fname : nom du fichier
 		typeCorpus : balise de depart de la reference
 	'''
-	def processing (self,fname, typeCorpus) :
+	def processing (self,fname, typeCorpus, external) :
 		try :
 			references = []
 			tmp_str = ''
@@ -58,7 +56,9 @@ class CleanCorpus1(Clean):
 				if i == 639:
 					pass
 				allTags = b.findAll(True)					#extract all tags in the current bibl
-				if len(allTags) >= 0 : ######################## !!!!!!!!!!!!! WHEN IT IS FOR EXTRACTION of NEW REFERENCE insert '>=' IF NOT '>'
+				limit = 1
+				if external == 1 : limit = 0 
+				if len(allTags) >= limit : ######################## !!!!!!!!!!!!! WHEN IT IS FOR EXTRACTION of NEW REFERENCE insert '>=' IF NOT '>'
 					for c_tag in b.contents :
 						if len(c_tag) > 0  and str(c_tag) != "\n" and c_tag != " ":
 							

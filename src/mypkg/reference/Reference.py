@@ -73,7 +73,7 @@ class Reference(object):
 		ref = ""
 		for word in self.word:
 			ref += " "+word.nom
-		return ref
+		return ref 
 	
 	def buildReference(self):
 		ref = ""

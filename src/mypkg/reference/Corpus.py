@@ -4,11 +4,13 @@ Created on 25 avr. 2012
 
 @author: Young-Min Kim, Jade Tavernier
 '''
-import subprocess
+
 import os.path
 import commands
 from mypkg.reference.File import File
 from mypkg.ressources.BeautifulSoup import BeautifulSoup, Tag
+
+
 
 class Corpus(object):
 	'''
@@ -22,6 +24,7 @@ class Corpus(object):
 		'''
 		self.directory = directory
 		self.fichiers = []
+		
 		
 	'''
 	 : Extract file names in the directory
@@ -48,13 +51,13 @@ class Corpus(object):
 		tag :			tag name defining the reference types : corpus 1 = bibl...
 		nomFichier :	nom du fichier que l'on doit annoter
 	'''
-	def extract(self, type, tag, nomFichiers=""):
+	def extract(self, type, tag, nomFichiers="", external=0):
 		if nomFichiers == "":
 			nomFichiers = self.getFiles()
 			
 		for nomFichier in nomFichiers:
 			fichObj = File(self.directory+"/"+nomFichier)
-			fichObj.extract(type, tag)
+			fichObj.extract(type, tag, external)
 			self.fichiers.append(fichObj)
 			
 	
@@ -82,35 +85,58 @@ class Corpus(object):
 
 
 	'''
-	addTagReferences : ajoute les balises ignorees du fichier initial
+	addTagReferences :	Add ignored tags from initial file
+						Check the SVM classification result of reference to give <nonbibl> tag at the final construction
+						Call 'buildReferences' method of 'File' class for these modifications and punctuation management.
+												
 	'''
-	def addTagReferences(self, fileRes, tagDelimRef, typeCorpus):
+	def addTagReferences(self, fileRes, tagDelimRef, typeCorpus, refsAfterSVM=[]): #get "listRef" to check deleted notes
 		tmp_str = ""
 		reference = []
 		for line in open (fileRes, 'r') :
 			tmp_str = tmp_str + ' ' + line
 				
-		soup = BeautifulSoup (tmp_str)		
+		soup = BeautifulSoup (tmp_str)
 		s = soup.findAll ("bibl")
 		
 		cpt = 0
-	
-		for fichier in self.fichiers:
+		for fichier in self.fichiers: # Original data
 			nbRefFile = fichier.nbReference(typeCorpus)
 			reference[:] = []
 			cptRef = 0
 			
+			#VALID_TAGS = ['bibl']
+			VALID_TAGS = []
+						
 			for ref in s:
 				if cptRef < nbRefFile:
-					reference.append(s[cpt])
+					
+					if len(refsAfterSVM) > 0 and refsAfterSVM[cpt].train == -1 :	#if the note (now tagged as <bibl>) is classified non-bibl
+
+							for tag in (s[cpt]).findAll(True) :
+								if tag.name not in VALID_TAGS :
+									tag.replaceWith(tag.renderContents())
+
+							s2 = BeautifulSoup()	#prepare tag sets <bibl><nonbibl></nonbibl></bibl>
+							tag1 = Tag(s2, "bibl")
+							tag2 = Tag(s2, "nonbibl")
+							s2.insert(0, tag1)
+							tag1.insert(0, tag2)
+							tag2.insert(0, s[cpt].renderContents()) #put the unwrapped contents in the middle of above tag sets
+
+							reference.append(s2.find("bibl")) #make s2 have found bibl
+							
+					else :
+						reference.append(s[cpt])
 				else:
 					break
 				cptRef += 1
 				cpt += 1
 
-			#fichier.addTagReferences(reference)
-			fichier.buildReferences(reference, tagDelimRef, typeCorpus)
+			fichier.buildReferences(reference, tagDelimRef, typeCorpus) #new result printing
 		return
+	
 	
 	def deleteAllFiles(self):
 		self.fichiers[:] = []
+		

@@ -23,8 +23,13 @@ class CRF(object):
 		corpus : Corpus object
 		typeCorpus : int : corpus type 1, 2 or 3
 		fileRes : output result file name
-		tr : check if training or test data, : -2(test), -1(test), 0(test), 1(train), 
-		extOption : check if the data is internal data then we'll use a modified index for corpus type 2
+		tr : check if training or test data, : -2(test only label), -1(test with label), 0(test without label), 1(train), 
+		extOption : extra option for crf training/test data format
+					-1 : data format for SVM
+					1 : data format for normal CRF training/test data 
+					2 : 
+					3-5 :  
+		check if the data is internal data then we'll use a modified index for corpus type 2
 		indices : valid reference index file after SVM classification (corpus 2)
 	'''
 	def prepareTrain(self, corpus, typeCorpus, fileRes, tr=-1, extOption=-1, indices=""):
@@ -74,19 +79,13 @@ class CRF(object):
 			if typeCorpus == 2 and indiceSvm != 2 :
 				extractor.extractorIndices4new("model/corpus2/svm_revues_predictions_new", ListReferences(listReferencesObj.getReferences(),typeCorpus))
 			
-			'''
-			Oct. 7, 2012 Currently we have a problem for processing corpus2. References should be eliminated when they
-						are classified as non-bibliographic references but now label them as <nonbibl>. 
-						Anyway no problem for the processing corpus 1...
-			'''
+			
 			extractor.extractor(1, nbRef, self.dirResult+"testdatawithlabel_CRF.txt",ListReferences(listReferencesObj.getReferences(),typeCorpus), -1, 1)
 			extractor.extractor(1, nbRef, self.dirResult+"testdataonlylabel_CRF.txt",ListReferences(listReferencesObj.getReferences(),typeCorpus), -2, 1)
 			
 			extractor.extractor(1, nbRef, self.dirResult+"testdata_CRF.txt",ListReferences(listReferencesObj.getReferences(),typeCorpus), 0, 1)
 
-
-		
-		return 
+		return ListReferences(listReferencesObj.getReferences(),typeCorpus)
 		
 		
 	'''

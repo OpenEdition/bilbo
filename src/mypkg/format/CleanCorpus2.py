@@ -2,7 +2,7 @@
 '''
 Created on 18 avr. 2012
 
-@author: Young-min Kim, Jade Tavernier
+@author: Young-Min Kim, Jade Tavernier
 '''
 
 from mypkg.ressources.BeautifulSoup import  BeautifulSoup
@@ -22,7 +22,7 @@ class CleanCorpus2(Clean):
 	
 
 	
-	def processing (self, fname, typeCorpus) :
+	def processing (self, fname, typeCorpus, external) :
 		tagAttDict = {'0000': 0}
 		refSign = []
 		precitSign = []
@@ -89,7 +89,9 @@ class CleanCorpus2(Clean):
 		
 					if b != b.string :
 						allTags = b.findAll(True)					#extract all tags in the current bibl
-						if len(allTags) >= 0 : ######################## !!!!!!!!!!!!! WHEN IT IS FOR EXTRACTION of NEW REFERENCE insert '>=' IF NOT '>'
+						limit = 1
+						if external == 1 : limit = 0 
+						if len(allTags) >= limit : ######################## !!!!!!!!!!!!! WHEN IT IS FOR EXTRACTION of NEW REFERENCE insert '>=' IF NOT '>'
 							for c_tag in b.contents :
 								if len(c_tag) > 0  and str(c_tag) != "\n" and c_tag != " ":
 									

@@ -2,10 +2,9 @@
 '''
 Created on 19 avr. 2012
 
-@author: Young-min Kim, Jade Tavernier
+@author: Young-Min Kim, Jade Tavernier
 '''
 
-import random
 import re
 import codecs
 from mypkg.extra.Name import Name
@@ -23,7 +22,7 @@ class Extract(object):
 		self.regles = {}
 		
 		'''
-		charge les nonLabels et les features se trouvant dans le fichier features
+		Fill "nonLabels" and "features" that are in the file "feature.txt"
 		'''
 		try:
 			'flag = 1 : features, flag = 2 : nonLabels, flag = 3 : bookindicator'
@@ -104,45 +103,47 @@ class Extract(object):
 	'''
 	_printdata: permet de creer un fichier avec les mots, balises ... pour le crf
 	'''
-	def _printdata(self, fichier, listRef, tr) :
+	def _printdata(self, fichier, listRef, tr, opt="saveNegatives") : #default value of 'opt' is "saveNegatives"
 		fich = codecs.open(fichier, "w", encoding="utf-8")
 		for reference in listRef.getReferences():
-			for mot in reference.getWord():
-				if mot.ignoreWord == 0:
-					try:
-						fich.write(unicode(mot.nom,"utf-8"))
-					except TypeError:
-						fich.write(mot.nom)
-					nbCarac = mot.nbFeatures()
-					cpt = 0
-					if nbCarac > 0:
-						caracteristique = mot.getFeatureIndice(nbCarac-1)
+			if not (opt=="deleteNegatives" and reference.train == -1) :
+			
+				for mot in reference.getWord():
+					if mot.ignoreWord == 0:
 						try:
-							fich.write(" "+unicode(caracteristique.nom.upper(), "utf-8"))
+							fich.write(unicode(mot.nom,"utf-8"))
 						except TypeError:
-							fich.write(" "+caracteristique.nom.upper())
-						
-						while cpt < nbCarac-1:
-							caracteristique = mot.getFeatureIndice(cpt)
+							fich.write(mot.nom)
+						nbCarac = mot.nbFeatures()
+						cpt = 0
+						if nbCarac > 0:
+							caracteristique = mot.getFeatureIndice(nbCarac-1)
 							try:
-								fich.write(" "+caracteristique.nom.upper())
-							except:
 								fich.write(" "+unicode(caracteristique.nom.upper(), "utf-8"))
-							cpt += 1
-					if tr != 0:
-						for balise in mot.getAllTag():
-							try:
-								fich.write(" "+unicode(balise.nom, "utf-8"))
-							except:
-								fich.write(" "+balise.nom)
-					fich.write("\n")
-			fich.write("\n")
-				
+							except TypeError:
+								fich.write(" "+caracteristique.nom.upper())
+						
+							while cpt < nbCarac-1:
+								caracteristique = mot.getFeatureIndice(cpt)
+								try:
+									fich.write(" "+caracteristique.nom.upper())
+								except:
+									fich.write(" "+unicode(caracteristique.nom.upper(), "utf-8"))
+								cpt += 1
+						if tr != 0:
+							for balise in mot.getAllTag():
+								try:
+									fich.write(" "+unicode(balise.nom, "utf-8"))
+								except:
+									fich.write(" "+balise.nom)
+						fich.write("\n")
+				fich.write("\n")
+			#--------
 		fich.close()
 		return
 	
 	'''
-	_printonlyLabel: permet de creer un fichier avec les mots, balises ... pour le crf
+	_printonlyLabel: permet de creer un fichier avec les balises ... pour le crf
 	'''
 	def _printOnlyLabel(self, fichier, listRef) :
 		fich = codecs.open(fichier, "w", encoding="utf-8")
@@ -297,6 +298,7 @@ class Extract(object):
 		for balise in balises:
 			if self.configTag.has_key(balise.nom):
 				balise.nom = self.configTag[balise.nom]
+		return
 		
 	'''
 	updateTag permet de modifyier le nom des balise en fonction des fichier de configurations et des regles

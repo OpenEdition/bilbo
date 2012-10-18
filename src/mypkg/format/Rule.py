@@ -2,7 +2,7 @@
 '''
 Created on 19 avr. 2012
 
-@author: Young-min Kim, Jade Tavernier
+@author: Young-Min Kim, Jade Tavernier
 '''
 import re
 from mypkg.reference.Word import Word
@@ -31,12 +31,15 @@ class Rule(object):
 			fichier.close()
 			
 			'creation du dictionnaire du lexique'
+			#regles - {"000":{"000":[]}}, eg) regles["editor"]["caracteristique"][0] : nonimpcap
+			#								  regles["editor"]["caracteristique"][1] : posseditor
+			#								  regles["editor"]["regle"][0] : page
 			for line in lines:
 				if re.match(expression, line):
 					lineSplit = line.split()
-					self.regles[lineSplit[1]] = {}
-					self.regles[lineSplit[1]]["caracteristique"] = []
-					self.regles[lineSplit[1]]["regle"] = []
+					self.regles[lineSplit[1]] = {}	#Label name
+					self.regles[lineSplit[1]]["caracteristique"] = []	#essential features
+					self.regles[lineSplit[1]]["regle"] = []	#when matching that chars add label
 					
 					'add les caracteristique de cette regle'
 					cpt = 2
@@ -46,7 +49,7 @@ class Rule(object):
 				else:
 					self.regles[lineSplit[1]]["regle"].append(line.split())
 		except:
-			print "erreur ouverture fichier lxique.txt Rule.py"
+			print "cannot open file lexique.txt"
 		
 		
 			
@@ -108,6 +111,7 @@ class Rule(object):
 											nomTag = mot.listNomTag()
 											nomTag.append("c")
 											refWord = Word(c,nomTag)
+											#print mot.nom, c, nomTag, cpt, flagAjoutWord, cptIgnoreWord
 											reference.addWord(cpt+1+flagAjoutWord+cptIgnoreWord,refWord)
 											flagAjoutWord += 1
 										else:
@@ -154,6 +158,8 @@ class Rule(object):
 					cpt += 1
 				else:
 					cptIgnoreWord += 1
+					
+			#print reference.affiche()
 		return
 	
 	
@@ -262,7 +268,7 @@ class Rule(object):
 			for chaine in self.regles[regle]["regle"]:
 				if chaine[0] == input_str.lower():
 					if regle == "editor":
-						mot.delAllFeature()
+						#mot.delAllFeature() #??????????
 						mot.addFeature(self.regles[regle]["caracteristique"])
 						retrn_str = input_str
 						new_str = input_str

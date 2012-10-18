@@ -12,6 +12,9 @@ from mypkg.ressources.BeautifulSoup import *
 import re
 import sys
 
+prePunc =  {'.':0, ',':0, ')':0, ':':0, ';':0, '-':0, '”':0, '}':0, ']':0, '!':0, '?':0, '/':0}
+postPunc = {'(':0, '-':0, '“':0, '{':0, '[':0, '/':0}
+
 class File(object):
 	'''
 	classdocs
@@ -26,27 +29,27 @@ class File(object):
 		self.corpus = {}
 	
 	'''
-	axtract : extrait les references du fichier correspondant 
-		type : integer : 1 = corpus 1, 2 = corpus 2 ...
-		tag : balise delimitant les references : bibl = corpus 1...
+	extract : extract references in the File object 
+		typeCorpus : integer, 1 = corpus 1, 2 = corpus 2 ...
+		tag : string, tag name that delimits references, bibl = corpus 1, note = corpus 2...
 	'''
-	def extract(self, type, tag):
-		if type == 1:
+	def extract(self, typeCorpus, tag, external):
+		if typeCorpus == 1:
 			clean = CleanCorpus1()
-		elif type == 2:
+		elif typeCorpus == 2:
 			clean = CleanCorpus2()
 			
-		references = clean.processing(self.nom, tag)
+		references = clean.processing(self.nom, tag, external)
 		if len(references) >= 1:
-			self.corpus[type] = ListReferences(references, type)
+			self.corpus[typeCorpus] = ListReferences(references, typeCorpus)
 			
 			rule = Rule()
-			rule.reorganizing(self.corpus[type])
+			rule.reorganizing(self.corpus[typeCorpus])
 			
 			
 	'''
-	getListReferences : permet de recuperer la liste entiere des references du corpus 1
-	typeCorpus : int numero du corpus
+	getListReferences : get the list of references
+		typeCorpus : integer, 1 = corpus 1, 2 = corpus 2 ...
 	'''
 	def getListReferences(self, typeCorpus):
 		try:
@@ -56,7 +59,7 @@ class File(object):
 			return -1
 		
 	'''
-	calcul le nombre de reference
+	count the number of references
 	'''
 	def nbReference(self, typeCorpus):
 		try:
@@ -96,15 +99,19 @@ class File(object):
 
 	
 	'''
-	buildReferences : construit le fichier final
-		references : reference annote par mallet
-		tagTypeCorpus : balise qui entour la reference : corpus 1 = bibl
-		tagTypeList : balise qui entoure les references : corpus 1 = listbibl
+	buildReferences : construct final xml output file, called from addTagReferences in Corpus
+		check if there are some ignored tags in the original file and if yes, put them in a new result
+		also eliminate <c> tags for punctuation marks and attach the marks to their previous or next token
+		
+		references : automatically annotated references by system
+		tagTypeCorpus : string, tag name that delimits references, bibl = corpus 1, note = corpus 2...
+		typeCorpus : int, 1 = corpus 1, 2 = corpus 2 ...
+		tagTypeList : string, tag name that wraps all references : listbibl
 	'''
 	def buildReferences(self, references, tagTypeCorpus, typeCorpus):
-		cptWord = 0
-		cptRef = 0
-		cptItem = 0
+		cptWord = 0		#word counter
+		cptRef = 0		#reference counter
+		cptItem = 0		
 		tmp_str = ""
 		flagItem = 0
 		balise = ""
@@ -113,7 +120,7 @@ class File(object):
 		flagNonLabel = 0
 		ref_ori = []
 		
-		'lit le fichier initial'
+		'Read the source file to check the initial contents of references'
 		for line in open (self.nom, 'r') :
 			tmp_str = tmp_str + ' ' + line
 				
@@ -121,31 +128,34 @@ class File(object):
 		
 		s = soup.findAll (tagTypeCorpus)
 		
-		'reconstruit les references avec les mot ignores ex: balise hi'
+		'Reconstruct references with the ignored tags, ex) tag hi'
 		for ref in references:
 			balise = ""
 			baliseBefore = ""
 			flagItem = 0
 			ref_finale = ""
-			
-			cptWord = 0
+			ref_tmp = ""
+			cptWord = 0	#word counter
 			allTag = ref.findAll(True)
-			
+			wordInRefBeforenom = ""
+
 			for tag in allTag:
 				content = tag.contents
 				words = re.split("\s", content[0])
 				for word in words:
 					if word != "":
 						wordInRef = self.corpus[typeCorpus].getReferencesIndice(cptRef).getWordIndice(cptWord)
+						if cptWord > 0 : 
+							wordInRefBefore = self.corpus[typeCorpus].getReferencesIndice(cptRef).getWordIndice(cptWord-1)
+							wordInRefBeforenom = wordInRefBefore.nom
 						
-						'transforme en unicode'
+						'convert to unicode'
 						wordInRef.nom = self.convertToUnicode(wordInRef.nom)
 						tag.name = self.convertToUnicode(tag.name)
 						
-						'verifie si le mot doit etre ignore ou non: ignore = considere comme balise nonLabel a ajouter au fichier final'
+						'Check if the word should be ignored or not : ignored = considered as having nonLabel tag for the final xml file'
 						while wordInRef.ignoreWord == 1:
-							if baliseBefore != "":
-								ref_finale += "</"+baliseBefore+">"
+							if baliseBefore != "" and balise != "c":
 								baliseBefore = ""
 							if balise != "c" and balise != "":
 								ref_finale += "</"+balise+">"
@@ -157,10 +167,10 @@ class File(object):
 							wordInRef.nom = self.convertToUnicode(wordInRef.nom)
 							
 							
-						'if il y a une sous reference'
+						'If there is a sub reference '
 						if wordInRef.item == 1 and flagItem == 0:
 							flagItem = 1
-							if baliseBefore != "":
+							if baliseBefore != "" and balise != "c":
 								ref_finale += "</"+baliseBefore+">"
 								baliseBefore = ""
 							if balise != "c" and balise != "":
@@ -169,28 +179,43 @@ class File(object):
 							ref_finale += "<relatedItem type=\"in\">"
 							balise = ""								
 
-						if balise == tag.name:
-							ref_finale += " "+wordInRef.nom
+
+						if balise == tag.name: #balise : until now, that is the previous tag
+							if (tag.name == 'c' or tag.name == 'nonbibl') and prePunc.has_key(wordInRef.nom) :
+								ref_finale += wordInRef.nom
+							elif (balise == 'c' or balise == 'nonbibl') and postPunc.has_key(wordInRefBeforenom) :
+								ref_finale += wordInRef.nom
+							else :
+								ref_finale += " "+wordInRef.nom
+								
 						elif balise == "":
 							if tag.name != "c":
-								ref_finale += "<"+tag.name+">"+wordInRef.nom
-							else:
+								ref_finale += " <"+tag.name+">"+wordInRef.nom
+							else: #if tag.name == "c"
 								ref_finale += wordInRef.nom
 							balise = tag.name
 						else:
 							if balise != "c" and tag.name != "c":
-								ref_finale += "</"+balise+">"+"<"+tag.name+">"+wordInRef.nom
+								ref_finale += "</"+balise+">"+" <"+tag.name+">"+wordInRef.nom
 							elif balise == "c" and tag.name != "c":
-								if baliseBefore == tag.name:
-									ref_finale += wordInRef.nom
-								else:
-									if baliseBefore != "":
-										ref_finale += "</"+baliseBefore+">"+"<"+tag.name+">"+wordInRef.nom
-									else:
+								if baliseBefore == tag.name: # before before of current
+									ref_finale = ref_tmp
+									if (postPunc.has_key(wordInRef.nom)) : ref_finale += wordInRef.nom
+									else : ref_finale += ' '+wordInRef.nom
+								else: # before before of current tag is different
+									if (postPunc.has_key(wordInRefBeforenom)):
 										ref_finale += "<"+tag.name+">"+wordInRef.nom
+									else:
+										ref_finale += " <"+tag.name+">"+wordInRef.nom
 									baliseBefore = ""
 							elif balise != "c" and tag.name == "c":
-								ref_finale += wordInRef.nom
+								ref_tmp = ""
+								if (postPunc.has_key(wordInRef.nom)) : 
+									ref_tmp = ref_finale + ' '+wordInRef.nom
+									ref_finale += "</"+balise+"> "+wordInRef.nom
+								else : 
+									ref_tmp = ref_finale + wordInRef.nom
+									ref_finale += "</"+balise+">"+wordInRef.nom
 								baliseBefore = balise
 							else:
 								ref_finale += wordInRef.nom
@@ -201,7 +226,7 @@ class File(object):
 			if balise != "c":	
 				ref_finale += "</"+balise+">"
 				
-			'if il y a une sous reference on ajoute la balise de fin'
+			'If there is a sub reference, we add a closing tag'
 			if flagItem == 1:
 				cptItem += 1
 				if baliseBefore != "":
@@ -213,7 +238,7 @@ class File(object):
 			cptRef += 1	
 			ref_ori.append(ref_finale)
 			
-		'supprime les dernieres references considere comme items..'
+		'delete final references that were considered as items'
 		while cptItem > 0:
 			s.pop()
 			cptItem -= 1
@@ -235,14 +260,14 @@ class File(object):
 		return
 	
 	'''
-	getName : retourne le nom du fichier sns le chemin complte
+	getName : return the file name without the complete path
 	'''
 	def _getName(self):
 		chemin = self.nom.split("/")
 		return chemin.pop()
 	
 	'''
-	convertToUnicode : converti une chaine en unicode
+	convertToUnicode : convert a string to unicode
 	'''
 	def convertToUnicode(self, chaine):
 		try:
