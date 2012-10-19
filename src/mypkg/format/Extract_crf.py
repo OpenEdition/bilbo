@@ -17,7 +17,7 @@ class Extract_crf(Extract):
 	'''
 	extractor : extract training and test data
 		ndocs : number of references
-		typeCorpus : 1, 2 ou 3
+		typeCorpus : 1, 2 or 3
 		tr : indicator check, it gives the valid instance indices 
 		extr : 
 		fileRes = nom du fichier sortie du resultat
@@ -129,9 +129,11 @@ class Extract_crf(Extract):
 		if extOption == 1 or extOption == 2 :
 			if tr != -2 :
 				self._addlayout(listRef)					####### add layout features ### 2012-02-01 ###
-				self._printdata(fileRes, listRef, tr)
-				#self._printdata(fileRes+"Original", listRef, tr)
-				#self._printdata(fileRes, listRef, tr, "deleteNegatives")
+				if tr != 1 :
+					self._printdata(fileRes, listRef, tr)
+				else :
+					self._printdata(fileRes+"Original", listRef, tr)
+					self._printdata(fileRes, listRef, tr, "deleteNegatives")
 			else:
 				self._printOnlyLabel(fileRes, listRef)
 			
