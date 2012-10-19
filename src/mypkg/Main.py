@@ -36,9 +36,11 @@ if __name__ == '__main__':
 	if len(sys.argv) < 2:
 
 		print "$ python src/mypkg/Main.py <arg 1> <arg 2> <arg 3>"
-		print " <arg 1> : integer \n\t 11 => train corpus 1, \n\t 22 => train corpus 2, \n\t 1 => annotate reference corpus 1, \n\t 2 => annotate reference corpus 2, \n\t 21 => annotate corpus 2 with external data."
+		print " <arg 1> : integer \n\t 11 => train corpus 1 (references), \n\t 22 => train corpus 2 (notes), \n\t 1 => annotate reference corpus 1, \n\t 2 => annotate reference corpus 2, \n\t 21 => annotate corpus 2 with external data."
 		print " <arg 2> : string \n\t input directory where the data files are (training or test)"
 		print " <arg 3> : string \n\t output directory where the result files are saved (initially \"Result/\" directory)"
+		print " !! In case of extracting empty notes (corpus 2) because of less arranged tags, use at first :"
+		print " \t $ python src/mypkg/format/noteExtractor.py <arg 1> \n\t <arg 1> is input directory where the data files are \n\t then use the printed result instead of the original files \n"
 
 	else:	
 		if len(sys.argv) < 4:
