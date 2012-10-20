@@ -52,11 +52,12 @@ class CleanCorpus1(Clean):
 			
 			while i < len(s) :
 				words = []
-				b = s[i]	#each bibl 
+				b = s[i]	#each bibl
+				#print b 
 				if i == 639:
 					pass
 				allTags = b.findAll(True)					#extract all tags in the current bibl
-				limit = 1
+				limit = 0
 				if external == 1 : limit = 0 
 				if len(allTags) >= limit : ######################## !!!!!!!!!!!!! WHEN IT IS FOR EXTRACTION of NEW REFERENCE insert '>=' IF NOT '>'
 					for c_tag in b.contents :
@@ -74,6 +75,7 @@ class CleanCorpus1(Clean):
 										words.append(Word(ss.encode('utf8'), ["nolabel"]))
 	
 					if b.find('relateditem') :					# related item
+						#print b
 						i += 1
 						br =  s[i]
 	
