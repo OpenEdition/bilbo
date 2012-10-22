@@ -122,7 +122,7 @@ class File(object):
 		
 		'Read the source file to check the initial contents of references'
 		for line in open (self.nom, 'r') :
-			tmp_str = tmp_str + ' ' + line
+			tmp_str = tmp_str + line
 				
 		soup = BeautifulSoup (tmp_str)
 		
@@ -266,7 +266,7 @@ class File(object):
 			pass
 		
 		fich = open(dirResult+self._getName(), "w")
-		fich.write(soup.prettify())
+		fich.write(str(soup))
 		fich.close()
 		return
 	
