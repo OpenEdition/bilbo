@@ -93,7 +93,7 @@ class Bilbo(object):
 		self.crf.prepareTest(corpus, 1)
 		self.crf.runTest(dirModel, 'testdata_CRF.txt')
 
-		corpus.addTagReferences(self.dirResult+"testEstCRF.xml", "bibl", 1)
+		corpus.addTagReferences(self.dirResult, "testEstCRF.xml", "bibl", 1)
 		return corpus
 	
 	'''
@@ -120,12 +120,12 @@ class Bilbo(object):
 			#(self, fileRes, tagDelimRef, typeCorpus, listRef)
 			newlistReferences = self.crf.prepareTest(corpus, 2)
 			self.crf.runTest(dirModel, 'testdata_CRF.txt')
-			corpus.addTagReferences(self.dirResult+"testEstCRF.xml", "note", 2, newlistReferences.getReferences())
+			corpus.addTagReferences(self.dirResult, "testEstCRF.xml", "note", 2, newlistReferences.getReferences())
 			
 		else:										#if external data : external=1, we do not call a SVM model
 			self.crf.prepareTest(corpus, 2, 2)		#indiceSvm=2 at prepareTest(self, corpus, typeCorpus, indiceSvm = 0, indices="")
 			self.crf.runTest(dirModel, 'testdata_CRF.txt')
-			corpus.addTagReferences(self.dirResult+"testEstCRF.xml", "note", 2)
+			corpus.addTagReferences(self.dirResult, "testEstCRF.xml", "note", 2)
 
 		return corpus
 	

@@ -90,9 +90,10 @@ class Corpus(object):
 						Call 'buildReferences' method of 'File' class for these modifications and punctuation management.
 												
 	'''
-	def addTagReferences(self, fileRes, tagDelimRef, typeCorpus, refsAfterSVM=[]): #get "listRef" to check deleted notes
+	def addTagReferences(self, dirResult, fname, tagDelimRef, typeCorpus, refsAfterSVM=[]): #get "listRef" to check deleted notes
 		tmp_str = ""
 		reference = []
+		fileRes = dirResult+fname
 		for line in open (fileRes, 'r') :
 			tmp_str = tmp_str + ' ' + line
 				
@@ -133,7 +134,7 @@ class Corpus(object):
 				cptRef += 1
 				cpt += 1
 
-			fichier.buildReferences(reference, tagDelimRef, typeCorpus) #new result printing
+			fichier.buildReferences(reference, tagDelimRef, typeCorpus, dirResult) #new result printing
 		return
 	
 	

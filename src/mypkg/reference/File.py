@@ -13,7 +13,7 @@ import re
 import sys
 
 prePunc =  {'.':0, ',':0, ')':0, ':':0, ';':0, '-':0, '”':0, '}':0, ']':0, '!':0, '?':0, '/':0}
-postPunc = {'(':0, '-':0, '“':0, '{':0, '[':0, '/':0}
+postPunc = {'(':0, '-':0, '“':0, '{':0, '[':0}
 
 class File(object):
 	'''
@@ -108,7 +108,7 @@ class File(object):
 		typeCorpus : int, 1 = corpus 1, 2 = corpus 2 ...
 		tagTypeList : string, tag name that wraps all references : listbibl
 	'''
-	def buildReferences(self, references, tagTypeCorpus, typeCorpus):
+	def buildReferences(self, references, tagTypeCorpus, typeCorpus, dirResult):
 		cptWord = 0		#word counter
 		cptRef = 0		#reference counter
 		cptItem = 0		
@@ -126,7 +126,18 @@ class File(object):
 				
 		soup = BeautifulSoup (tmp_str)
 		
-		s = soup.findAll (tagTypeCorpus)
+		'!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
+		'!!! NOW, PROBLEM IN PROCESSING RELATED ITEMS'
+		'!!! When note annotation, anyway it is okay because the <bibl>s are found in a note'
+		'!!! But when related item appears more than once, we do not extract well the whole <bibl>'
+		'!!! In this case already we have a problem'
+		'!!! And moreover, in this new building we do not consider the existance of related item'
+		'!!! when extract the original references again'
+		'!!! SO TO BE MODIFIED'
+		'!!! In case of new documents having no annotation, it is okay because they do not have <bibl> in <bibl>'
+		s = soup.findAll (tagTypeCorpus) #!!!!!!!!!!!!
+	
+		
 		
 		'Reconstruct references with the ignored tags, ex) tag hi'
 		for ref in references:
@@ -238,7 +249,7 @@ class File(object):
 			cptRef += 1	
 			ref_ori.append(ref_finale)
 			
-		'delete final references that were considered as items'
+		'delete final references that were considered as items <------ WHY??'
 		while cptItem > 0:
 			s.pop()
 			cptItem -= 1
@@ -254,7 +265,7 @@ class File(object):
 		except :
 			pass
 		
-		fich = open("Result/"+self._getName(), "w")
+		fich = open(dirResult+self._getName(), "w")
 		fich.write(soup.prettify())
 		fich.close()
 		return
