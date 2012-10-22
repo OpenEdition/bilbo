@@ -51,7 +51,7 @@ $ python src/mypkg/Main.py <arg 1> <arg 2> <arg 3>
 		 22 => train corpus 2,
 		 1 => test reference corpus 1, 
 		 2 => test reference corpus 2.
-		21 => test corpus 2 with external data.
+		 21 => test corpus 2 with external data (If data is not from CLEO).
 		 
 	<arg 2> : string
 		input directory where the data files are (training or test)
