@@ -8,21 +8,38 @@ from mypkg.format.Extract import Extract
 
 class Extract_crf(Extract):
 	'''
-	classdocs
+	A class to extract training and test data for CRF
+	Sub class of Extract
 	'''
 
 	def __init__(self):
 		Extract.__init__(self)
 		
-	'''
-	extractor : extract training and test data
-		ndocs : number of references
-		typeCorpus : 1, 2 or 3
-		tr : indicator check, it gives the valid instance indices 
-		extr : 
-		fileRes = nom du fichier sortie du resultat
-	'''
+
 	def extractor (self, typeCorpus, ndocs, fileRes, listRef, tr=-1, extOption=-1) :
+		'''
+		Extract training and test data
+
+		Parameters
+		----------	
+		typeCorpus : int, {1, 2, 3}
+			type of corpus
+			1 : corpus 1, 2 : corpus 2...
+		ndocs : int 
+			number of references
+		fileRes : string
+			output file name
+		listRef : listReferences
+			reference list
+		tr : int, {1, 0, -1, -2}
+			check if training or test data
+		extOption : int, {-1, 1, ...} (default -1)
+			extra option for crf training/test data format
+			check if data is internal data, if yes we'll use a modified index for corpus type 2
+			-1 : data format for SVM 
+			1 : data format for normal CRF training/test data 
+			2-5 : (not yet provided)
+		'''	
 		self.titleCK = 0
 		self.titleAttr = ''
 		self.relatItm = 0
@@ -35,7 +52,6 @@ class Extract_crf(Extract):
 		tmp_nonbiblck = 0
 		
 		for reference in listReferences:
-		
 			#This is an indicator if the reference has been classified in the negative class by SVM
 			if reference.train == -1 : 
 				pass # HERE You should eliminate reference.... or Eliminate at the printing moment
@@ -52,10 +68,8 @@ class Extract_crf(Extract):
 					
 					
 					'''
-					A PROBLEM !!!!!!!!!! IF train == -1 we should delete the reference in training. In test also....
-					ANYWAY we need to CHANGE TAG for XML construction
+					reference.train is a note indicator to see if it is classified nonbibl from SVM classification
 					'''
-					
 					if reference.train == -1:
 						mot.delAllTag()
 						mot.addTag("nonbibl")
@@ -90,10 +104,9 @@ class Extract_crf(Extract):
 						balise = mot.getLastTag()
 						if balise != -1:
 							if balise.nom == "c" :
-								if typeCorpus == 2 and extOption==-1 :
+								if typeCorpus == 2 and extOption==-1 : # in case of SVM data, add PUNC
 									mot.delAllFeature()
 									mot.addFeature("PUNC")
-									'sinon on enleve que celle non presente dans les features'
 								else :
 									mot.delAllFeature()
 						

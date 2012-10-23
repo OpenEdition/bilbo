@@ -14,22 +14,28 @@ from mypkg.ressources.BeautifulSoup import BeautifulSoup, Tag
 
 class Corpus(object):
 	'''
-	classdocs
+	A corpus containing a set of training (or test) references.
+	Creation of File objects
 	'''
-
 
 	def __init__(self, directory):
 		'''
-		Constructor
+		Attributes
+		----------
+		directory : string
+			directory where the corpus data is (xml files)
+		fichiers : list
+			list of File objects containing corpus data
 		'''
 		self.directory = directory
 		self.fichiers = []
 		
 		
-	'''
-	 : Extract file names in the directory
-	'''
+
 	def getFiles(self):
+		'''
+		Extract file names from the directory
+		'''
 		'Verify if it is a directory or a single file'
 		if os.path.isdir(self.directory):
 			lsOut = commands.getoutput('ls '+self.directory)
@@ -44,14 +50,22 @@ class Corpus(object):
 		return listFichiers
 	
 	
-	'''
-	Extract the references for each file 
-	argument :
-		type :			corpus type : 1 = corpus1, 2 = corpus 2 ...
-		tag :			tag name defining the reference types : corpus 1 = bibl...
-		nomFichier :	nom du fichier que l'on doit annoter
-	'''
+
 	def extract(self, type, tag, nomFichiers="", external=0):
+		'''
+		Extract references for each file 
+		
+		Parameters
+		----------
+		typeCorpus : int, {1, 2, 3}
+			type of corpus
+			1 : corpus 1, 2 : corpus 2...
+		tag : string, {"bibl", "note"}
+			tag name defining reference types
+			"bibl" : corpus 1, "note" : corpus 2
+		nomFichier : string
+			target file name for extraction
+		'''
 		if nomFichiers == "":
 			nomFichiers = self.getFiles()
 			
@@ -61,21 +75,31 @@ class Corpus(object):
 			self.fichiers.append(fichObj)
 			
 	
-	'''
-	getListReferences : permet de recuperer la liste entiere des references du corpus 1
-	'''
+
 	def getListReferences(self, typeCorpus):
-			allReferences = []
+		'''
+		Return reference list in the corpus
+		
+		Parameters
+		----------
+		typeCorpus : int, {1, 2, 3}
+			type of corpus
+			1 : corpus 1, 2 : corpus 2...
+		'''
+		allReferences = []
 			
-			for fichier in self.fichiers:
-				listRef = fichier.getListReferences(typeCorpus)
+		for fichier in self.fichiers:
+			listRef = fichier.getListReferences(typeCorpus)
 					
-				if listRef != -1:
-					allReferences.extend(listRef.getReferences())
-			return allReferences
+			if listRef != -1:
+				allReferences.extend(listRef.getReferences())
+		return allReferences
 		
 	
 	def nbReference(self, typeCorpus):
+		'''
+		Return number of references in the corpus
+		'''
 		nb = 0
 		
 		for fichier in self.fichiers:
@@ -84,13 +108,25 @@ class Corpus(object):
 		return nb
 
 
-	'''
-	addTagReferences :	Add ignored tags from initial file
-						Check the SVM classification result of reference to give <nonbibl> tag at the final construction
-						Call 'buildReferences' method of 'File' class for these modifications and punctuation management.
-												
-	'''
+
 	def addTagReferences(self, dirResult, fname, tagDelimRef, typeCorpus, refsAfterSVM=[]): #get "listRef" to check deleted notes
+		'''
+		Add ignored tags from initial file
+		Check the SVM classification result of reference to give <nonbibl> tag at the final construction
+		Call File::buildReferences for the modification and punctuation management then print the result
+		
+		Parameters
+		----------
+		dirResult : string
+			directory for output files
+		fname : string
+			output filename
+		tagDelimRef : 
+		typeCorpus : int, {1, 2, 3}
+			type of corpus
+			1 : corpus 1, 2 : corpus 2...
+		refsAfterSVM : list
+		'''
 		tmp_str = ""
 		reference = []
 		fileRes = dirResult+fname
@@ -139,5 +175,8 @@ class Corpus(object):
 	
 	
 	def deleteAllFiles(self):
+		'''
+		delete all files in File object
+		'''
 		self.fichiers[:] = []
 		

@@ -200,27 +200,49 @@ dans
  Class
 ========================
 
+
+------------------------
+ Bilbo
+------------------------
+A machine Bilbo that trains a CRF (and a SVM) model and automatically annotates new references.
+Created in Main.py
+Description in doc/documentation/Bilbo.html
+
+------------------------
+ CRF
+------------------------
+CRF object is created in a Bilbo object
+CRF model learning and test
+Description in doc/documentation/CRF.html
+
 ------------------------
  Corpus
 ------------------------
-This class corresponds to a directory containing a corpus.
-
-Attributes :
-repertoire : directory path
-fichiers : list of filenames in a corpus
-
-Methods :
+A corpus containing a set of training (or test) references.
+Description in doc/documentation/CRF.html
 
 ------------------------
  File
 ------------------------
-This class corresponds to a file in a corpus.
+A file calss containing all references in a file
+Description in doc/documentation/File.html
 
-Attributes :
-nom : name of the file 
-referencesCorpus1 : list of level 1 references included in the file (listReference object)
 
-Methods :
+------------------------
+ Extract
+------------------------
+A class to extract training and test data according to a set of predefined criteria
+Base class of Extract_crf and Extract_svm
+Description in doc/documentation/Extract.html
+
+------------------------
+ Extract_crf
+------------------------
+A class to extract training and test data for CRF
+Sub class of Extract
+Description in doc/documentation/Extract_crf.html
+
+
 
 ------------------------
  ListReference
@@ -302,16 +324,7 @@ reorganizing : this method tokenizes input words by separating punctuation and e
 	parameter :
 		listReference : ListReference object
 
-------------------------
- Extract
-------------------------
-This class modifies tags and features using some detailed static rules and other rules written in a configuration file : features.txt
 
-Attributes :
-
-Methods :
-####
-extractor : this method add tags with given rules
 	
 ------------------------
  Name
@@ -346,28 +359,7 @@ Methods :
 ####
 searchPlace : this method checks if the entered word is found in the place (for the moment) list and if yes, it adds a feature : PLACELIST (for the moment)
 
-------------------------
- CRF
-------------------------
-This class 
 
-Attributes :
-
-Methods :
-####
-extractor : this method add tags with given rules ...
-	
-------------------------
- Bilbo
-------------------------
-This class 
-
-Attributes :
-
-Methods :
-####
-extractor : this method add tags with given rules ...
-	
 
 
 

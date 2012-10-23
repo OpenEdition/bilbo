@@ -59,17 +59,11 @@ if __name__ == '__main__':
 		elif int(sys.argv[1]) == 2:
 			bilbo.annotate(str(sys.argv[2]), "model/corpus2/", 2)
 		elif int(sys.argv[1]) == 11:
-			#bilbo.train("KB/data/corpus1/XML_annotated2", "model/corpus1/", 1)
 			bilbo.train(str(sys.argv[2]), "model/corpus1/", 1)
 		elif int(sys.argv[1]) == 22:
-			#bilbo.train("KB/data/corpus2/alldata_added", "model/corpus2/", 2)
 			bilbo.train(str(sys.argv[2]), "model/corpus2/", 2)
 		elif int(sys.argv[1]) == 21:
 			bilbo.annotate(str(sys.argv[2]), "model/corpus2/", 2, 1)
 			
 
-	#	bilbo.annoter("/Users/jade/Documents/jade/labo/comparaison_bilbo/analyse/repertoire/Niveau1/originaux/etnografica-869.xml")
-		#corpus = Corpus("/Applications/XAMPP/xamppfiles/htdocs/annotationSave/XML_annotated2")
-		#corpus.extraireCorpus1()
-		#fichier = Corpus("/Applications/XAMPP/xamppfiles/htdocs/WebService/code/fichierRes/fichier_a_annoter.xml")
 		

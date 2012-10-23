@@ -1,0 +1,117 @@
+
+<!doctype html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module CRF</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>CRF</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/young-minkim/Documents/workspace/bilbo/src/mypkg/format/CRF.py">/Users/young-minkim/Documents/workspace/bilbo/src/mypkg/format/CRF.py</a></font></td></tr></table>
+    <p><tt>Created&nbsp;on&nbsp;18&nbsp;avr.&nbsp;2012<br>
+&nbsp;<br>
+@author:&nbsp;Young-Min&nbsp;Kim,&nbsp;Jade&nbsp;Tavernier</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="subprocess.html">subprocess</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="__builtin__.html#object">__builtin__.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="CRF.html#CRF">CRF</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="CRF">class <strong>CRF</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#CRF">CRF</a>&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;is&nbsp;created&nbsp;in&nbsp;a&nbsp;Bilbo&nbsp;<a href="__builtin__.html#object">object</a><br>
+<a href="#CRF">CRF</a>&nbsp;model&nbsp;learning&nbsp;and&nbsp;test<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="CRF-__init__"><strong>__init__</strong></a>(self, dirResult)</dt><dd><tt>Attributes<br>
+----------<br>
+generateXml&nbsp;:&nbsp;GenerateXml<br>
+dirResult&nbsp;:&nbsp;string<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;directory&nbsp;for&nbsp;result&nbsp;files</tt></dd></dl>
+
+<dl><dt><a name="CRF-prepareTest"><strong>prepareTest</strong></a>(self, corpus, typeCorpus, indiceSvm<font color="#909090">=0</font>, indices<font color="#909090">=''</font>)</dt><dd><tt>Prepare&nbsp;<a href="#CRF">CRF</a>&nbsp;test&nbsp;data<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+corpus&nbsp;:&nbsp;Corpus<br>
+typeCorpus&nbsp;:&nbsp;int,&nbsp;{1,&nbsp;2,&nbsp;3}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;:&nbsp;corpus&nbsp;1,&nbsp;2&nbsp;:&nbsp;corpus&nbsp;2...<br>
+indiceSvm&nbsp;:&nbsp;int,&nbsp;{0,&nbsp;-1,&nbsp;2}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0&nbsp;:&nbsp;normal(corpus&nbsp;1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1&nbsp;:&nbsp;data04SVM&nbsp;(corpus2),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;:&nbsp;external&nbsp;data&nbsp;=&gt;&nbsp;svm&nbsp;isn't&nbsp;called<br>
+indices&nbsp;:&nbsp;int&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;valid&nbsp;reference&nbsp;index&nbsp;file&nbsp;after&nbsp;SVM&nbsp;classification&nbsp;(corpus&nbsp;2)</tt></dd></dl>
+
+<dl><dt><a name="CRF-prepareTrain"><strong>prepareTrain</strong></a>(self, corpus, typeCorpus, fileRes, tr<font color="#909090">=-1</font>, extOption<font color="#909090">=-1</font>, indices<font color="#909090">=''</font>)</dt><dd><tt>Prepare&nbsp;<a href="#CRF">CRF</a>&nbsp;training&nbsp;data<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+corpus&nbsp;:&nbsp;Corpus<br>
+typeCorpus&nbsp;:&nbsp;int,&nbsp;{1,&nbsp;2,&nbsp;3}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;:&nbsp;corpus&nbsp;1,&nbsp;2&nbsp;:&nbsp;corpus&nbsp;2...<br>
+fileRes&nbsp;:&nbsp;string<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;output&nbsp;file&nbsp;name<br>
+tr&nbsp;:&nbsp;int,&nbsp;{1,&nbsp;0,&nbsp;-1,&nbsp;-2}&nbsp;(default&nbsp;-1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;check&nbsp;if&nbsp;training&nbsp;or&nbsp;test&nbsp;data<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;:&nbsp;train,&nbsp;0&nbsp;:&nbsp;test&nbsp;without&nbsp;label,&nbsp;-1&nbsp;:&nbsp;test&nbsp;with&nbsp;label,&nbsp;-2&nbsp;:&nbsp;test&nbsp;only&nbsp;label&nbsp;<br>
+extOption&nbsp;:&nbsp;int,&nbsp;{-1,&nbsp;1,&nbsp;...}&nbsp;(default&nbsp;-1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extra&nbsp;option&nbsp;for&nbsp;crf&nbsp;training/test&nbsp;data&nbsp;format<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;check&nbsp;if&nbsp;data&nbsp;is&nbsp;internal&nbsp;data,&nbsp;if&nbsp;yes&nbsp;we'll&nbsp;use&nbsp;a&nbsp;modified&nbsp;index&nbsp;for&nbsp;corpus&nbsp;type&nbsp;2<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1&nbsp;:&nbsp;data&nbsp;format&nbsp;for&nbsp;SVM&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;:&nbsp;data&nbsp;format&nbsp;for&nbsp;normal&nbsp;<a href="#CRF">CRF</a>&nbsp;training/test&nbsp;data&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2-5&nbsp;:&nbsp;(not&nbsp;yet&nbsp;provided)<br>
+indices&nbsp;:&nbsp;string<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;valid&nbsp;reference&nbsp;index&nbsp;file&nbsp;after&nbsp;SVM&nbsp;classification&nbsp;(for&nbsp;corpus&nbsp;2)</tt></dd></dl>
+
+<dl><dt><a name="CRF-runTest"><strong>runTest</strong></a>(self, directory, fichier)</dt><dd><tt>Run&nbsp;<a href="#CRF">CRF</a>&nbsp;test&nbsp;module&nbsp;from&nbsp;Mallet&nbsp;software&nbsp;to&nbsp;annotate&nbsp;new&nbsp;data<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+directory&nbsp;:&nbsp;string&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;directory&nbsp;where&nbsp;we&nbsp;save&nbsp;the&nbsp;model<br>
+fichier&nbsp;:&nbsp;string<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;filename&nbsp;that&nbsp;has&nbsp;been&nbsp;generated&nbsp;by&nbsp;preprareTrain</tt></dd></dl>
+
+<dl><dt><a name="CRF-runTrain"><strong>runTrain</strong></a>(self, directory, fichier)</dt><dd><tt>Run&nbsp;<a href="#CRF">CRF</a>&nbsp;training&nbsp;module&nbsp;from&nbsp;Mallet&nbsp;software<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+directory&nbsp;:&nbsp;string&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;directory&nbsp;where&nbsp;we&nbsp;save&nbsp;the&nbsp;model<br>
+fichier&nbsp;:&nbsp;string<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;filename&nbsp;that&nbsp;has&nbsp;been&nbsp;generated&nbsp;by&nbsp;preprareTrain</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table>
+</body></html>

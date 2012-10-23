@@ -17,23 +17,39 @@ postPunc = {'(':0, '-':0, '“':0, '{':0, '[':0}
 
 class File(object):
 	'''
-	classdocs
+	A file class containing all references in a file
 	'''
-
 
 	def __init__(self, fname):
 		'''
-		Constructor
+		Attributes
+		----------
+		nom : string
+			target file name
+		corpus : dictionary of reference list
+			 references in the file
 		'''
 		self.nom = fname
 		self.corpus = {}
 	
-	'''
-	extract : extract references in the File object 
-		typeCorpus : integer, 1 = corpus 1, 2 = corpus 2 ...
-		tag : string, tag name that delimits references, bibl = corpus 1, note = corpus 2...
-	'''
+
+
 	def extract(self, typeCorpus, tag, external):
+		'''
+		Extract references
+		
+		Parameters
+		----------
+		typeCorpus : int, {1, 2, 3}
+			type of corpus
+			1 : corpus 1, 2 : corpus 2...
+		tag : string, {"bibl", "note"}
+			tag name defining reference types
+			"bibl" : corpus 1, "note" : corpus 2
+		external : int, {1, 0}
+			1 : if the references are external data except CLEO, 0 : if that of CLEO
+			it is used to decide whether Bilbo learn call a SVM classification or not.			
+		'''	
 		if typeCorpus == 1:
 			clean = CleanCorpus1()
 		elif typeCorpus == 2:
@@ -47,21 +63,27 @@ class File(object):
 			rule.reorganizing(self.corpus[typeCorpus])
 			
 			
-	'''
-	getListReferences : get the list of references
-		typeCorpus : integer, 1 = corpus 1, 2 = corpus 2 ...
-	'''
+
 	def getListReferences(self, typeCorpus):
+		'''
+		Return reference list
+		
+		Parameters
+		----------
+		typeCorpus : int, {1, 2, 3}
+			type of corpus
+			1 : corpus 1, 2 : corpus 2...
+		'''
 		try:
 			return self.corpus[typeCorpus]
-			
 		except :
 			return -1
 		
-	'''
-	count the number of references
-	'''
+
 	def nbReference(self, typeCorpus):
+		'''
+		count the number of references
+		'''
 		try:
 			return self.corpus[typeCorpus].nbReference()
 			
@@ -98,17 +120,26 @@ class File(object):
 		return tmp_str
 
 	
-	'''
-	buildReferences : construct final xml output file, called from addTagReferences in Corpus
-		check if there are some ignored tags in the original file and if yes, put them in a new result
-		also eliminate <c> tags for punctuation marks and attach the marks to their previous or next token
-		
-		references : automatically annotated references by system
-		tagTypeCorpus : string, tag name that delimits references, bibl = corpus 1, note = corpus 2...
-		typeCorpus : int, 1 = corpus 1, 2 = corpus 2 ...
-		tagTypeList : string, tag name that wraps all references : listbibl
-	'''
+
 	def buildReferences(self, references, tagTypeCorpus, typeCorpus, dirResult):
+		'''
+		Construct final xml output file, called from Corpus::addTagReferences
+		Check if there are some ignored tags in the original file and if yes, put them in a new result
+		Also eliminate <c> tags for punctuation marks and attach the marks to their previous or next token
+		
+		Parameters
+		----------
+		references : list 
+			automatically annotated references by system
+		tagTypeCorpus : string, {"bibl", "note"}
+			tag name defining reference types
+			"bibl" : corpus 1, "note" : corpus 2
+				typeCorpus : int, {1, 2, 3}
+		type of corpus
+			1 : corpus 1, 2 : corpus 2...
+		tagTypeList : string, "listbibl"
+			tag name wrapping all references
+		'''
 		cptWord = 0		#word counter
 		cptRef = 0		#reference counter
 		cptItem = 0		
@@ -128,17 +159,16 @@ class File(object):
 		
 		'!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
 		'!!! NOW, PROBLEM IN PROCESSING RELATED ITEMS'
-		'!!! When note annotation, anyway it is okay because the <bibl>s are found in a note'
+		'!!! In case of new data having no manual annotation, it is OKAY because they do not have <bibl> in <bibl>'
+		'!!! When note annotation, anyway it is OKAY because the <bibl>s are found in a note'
 		'!!! But when related item appears more than once, we do not extract well the whole <bibl>'
 		'!!! In this case already we have a problem'
 		'!!! And moreover, in this new building we do not consider the existance of related item'
 		'!!! when extract the original references again'
 		'!!! SO TO BE MODIFIED'
-		'!!! In case of new documents having no annotation, it is okay because they do not have <bibl> in <bibl>'
 		s = soup.findAll (tagTypeCorpus) #!!!!!!!!!!!!
 	
-		
-		
+	
 		'Reconstruct references with the ignored tags, ex) tag hi'
 		for ref in references:
 			balise = ""
@@ -270,17 +300,20 @@ class File(object):
 		fich.close()
 		return
 	
-	'''
-	getName : return the file name without the complete path
-	'''
+
+
 	def _getName(self):
+		'''
+		Return the file name without the complete path
+		'''
 		chemin = self.nom.split("/")
 		return chemin.pop()
 	
-	'''
-	convertToUnicode : convert a string to unicode
-	'''
+
 	def convertToUnicode(self, chaine):
+		'''
+		Convert a string to unicode
+		'''
 		try:
 			if isinstance(chaine, str):
 				chaine = unicode(chaine, sys.stdin.encoding)

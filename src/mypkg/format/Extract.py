@@ -13,8 +13,27 @@ from mypkg.extra.Properlist import Properlist
 import sys
 
 class Extract(object):
+	'''
+	A class to extract training and test data according to a set of predefined criteria
+	Base class of Extract_crf and Extract_svm
+	'''
 
 	def __init__(self):
+		'''
+		Attributes
+		----------
+		nonLabels : dict
+			tags that should be ignored
+		features : dict
+			features that should be taken finally
+		regles : dict
+			several rules to be considered
+		configTag : dict
+			tag matching rules
+		nameObj : Name
+		placeObj : Place
+		properObj :	Properlist
+		'''
 		self.cooccurs = {'0000': 0}
 		self.link = {':':0, '=':0, '_':0, '|':0, '~':0, '-':0, '–':0}
 		self.nonLabels = {}
@@ -46,10 +65,10 @@ class Extract(object):
 					self.regles[nameRegle][lineSplit[0]] = 0
 		except:
 			pass
-			print "le fichier features est introuvable : config/features.txt \n"
+			print "Cannot open the file \"KB/config/features.txt\" \n"
 		
 		
-		'charge la correspondance des balises fichier balise.txt'
+		'Load the tag matching rules in "balise.txt"'
 		self.configTag = {}
 		
 		try:
@@ -58,32 +77,39 @@ class Extract(object):
 				self.configTag[lineSplit[0]] = lineSplit[1].split("\n")[0]
 		except:
 			pass
-			print "le fichier balise.txt est introuvable : config.txt \n"
+			print "Cannot open the file \"KB/config/balise.txt\" \n"
 			
-		'load lexique name et place'
+		'Load people name and place'
 		self.nameObj = Name("KB/config/externalList/auteurs_revuesorg2.txt")
 		self.placeObj = Place("KB/config/externalList/list_pays.txt")
 		self.properObj = Properlist("KB/config/externalList/LargeCities.txt", "PLACELIST")
 		
 	
-	'''
-	extractor definir ds la classe fille
-	'''	
+	
 	def extractor(self):
+		'''
+		To be defined in a sub class
+		'''	
 		return
 
-	'''
-	randomgengenerate the indicators for the training and test documents
-		 num : number of references
-		indice : 1 regenerer les indices, 0: charger les indices en fonction du fichier
-	'''
+
+
 	def randomgen(self, listRef, tr) :
+		'''
+		Generate indicators for the training and test documents
+		
+		Parameters
+		----------
+		listRef : listReferences
+		tr : int, {1, 0, -1, -2}
+			check if training or test data
+		'''
 		nbRef = listRef.nbReference()
 		
 		for i in range(nbRef) :
-			if tr == 1 : 
+			if tr == 1 : #if training data indicator for training (1)
 				listRef.modifyTrainIndiceRef(i)
-			else : 
+			else : #if not, indicator for test (0)
 				listRef.modifyTestIndiceRef(i)
 
 		return
@@ -100,10 +126,11 @@ class Extract(object):
 		return indices
 	
 
-	'''
-	_printdata: permet de creer un fichier avec les mots, balises ... pour le crf
-	'''
+
 	def _printdata(self, fichier, listRef, tr, opt="saveNegatives") : #default value of 'opt' is "saveNegatives"
+		'''
+		Print training or test data for CRF
+		'''
 		fich = codecs.open(fichier, "w", encoding="utf-8")
 		for reference in listRef.getReferences():
 			if not (opt=="deleteNegatives" and reference.train == -1) :
@@ -142,10 +169,12 @@ class Extract(object):
 		fich.close()
 		return
 	
-	'''
-	_printonlyLabel: permet de creer un fichier avec les balises ... pour le crf
-	'''
+
+
 	def _printOnlyLabel(self, fichier, listRef) :
+		'''
+		Print training or test data for CRF (only labels)
+		'''
 		fich = codecs.open(fichier, "w", encoding="utf-8")
 		for reference in listRef.getReferences():
 			for mot in reference.getWord():
@@ -161,7 +190,11 @@ class Extract(object):
 		fich.close()
 		return
 		
+		
 	def _print_alldata(self, fichier, listRef) :
+		'''
+		Print all data for SVM
+		'''
 		fich = codecs.open(fichier, "w", encoding="utf-8")
 		for reference in listRef.getReferences():
 			for mot in reference.getWord():
@@ -176,8 +209,10 @@ class Extract(object):
 		return
 
 	
-	#printing result in parallel lines
 	def _print_parallel(self, fichier, listRef) :
+		'''
+		Print result in parallel lines for SVM
+		'''
 		phrase = ""
 		feature = ""
 		cpt = 0;
@@ -223,11 +258,11 @@ class Extract(object):
 		return
 	
 	
-	'''
-	addLayout : permet d'adder les caracteristiques : BIBL_START..
-	'''
+
 	def _addlayout(self, listRef) :
-		
+		'''
+		Add layout features
+		'''	
 		for reference in listRef.getReferences():
 			i = 0
 			tmp_length = float(reference.nbWord())
@@ -253,6 +288,19 @@ class Extract(object):
 			
 
 	def _extract_title(self, mot, relatItm, titleCK, titleAttr) :
+		'''
+		Title tag rearrangement. by checking the attribute, re-tag the word as "title" or "booktitle"
+		
+		Parameters
+		----------
+		mot : Word
+			current word
+		relatItm : int
+		titleCK : int
+			indicates if there is another title string before this
+		titleAttr : char
+			attribute
+		'''	
 		flagU = 0
 		
 		for caracteristique in mot.getAllFeature():
@@ -289,10 +337,11 @@ class Extract(object):
 				
 		return titleAttr
 		
-	'''
-	verifTag permet de modifyier les balises en fonction du fichier de configurations balise.txt
-	'''
+
 	def _checkTag(self, mot):
+		'''
+		Modify tags according to the configuration in the file "balise.txt"
+		'''	
 		balises = mot.getAllTag()
 		
 		for balise in balises:
@@ -300,10 +349,11 @@ class Extract(object):
 				balise.nom = self.configTag[balise.nom]
 		return
 		
-	'''
-	updateTag permet de modifyier le nom des balise en fonction des fichier de configurations et des regles
-	'''
+
 	def _updateTag(self, mot):
+		'''
+		Modify tags according to the configuration and rules
+		'''
 		balise = mot.getLastTag()
 		if balise != -1:
 			nameTag = balise.nom
@@ -313,7 +363,8 @@ class Extract(object):
 				self.titleAttr = self._extract_title(mot, self.relatItm, self.titleCK, self.titleAttr)
 				if mot.getLastTag().nom == 'title' : self.titleCK = 1
 	
-			'si la balise est noLabel et que le mot est dans le lexique un des lexiques alors on adde la balise correspondante'
+			#bookindicator
+			'if the tag is one of noLabel and the word is one of regles, add the corresponding nameRegle tag(bookindicator)'
 			for nameRegle in self.regles:
 				if nameTag == 'nolabel' and  (self.regles[nameRegle].has_key(mot.nom.lower())) :
 					mot.delAllTag()
@@ -325,25 +376,26 @@ class Extract(object):
 					mot.delAllTag()
 					mot.addTag('date')
 				
-	'''
-	verifNonLabels : permt de garder la meilleur balise du mot et verifier si elle appartient ou non au tableau nonLabels
-	'''
+
 	def _checkNonLabels(self, mot):
+		'''
+		Keep the best tag of the word and verify if it appears in nonLabels
+		'''
 		j = mot.nbTag() - 2
 		if mot.getLastTag() == -1:
 			return
 		
-		'if : si la balise appartient aux tableau nonLabels'
+		'if a tag appears in nonLabels'
 		if self.nonLabels.has_key(mot.getLastTag().nom) :
 			try :
-				'on parcourt tant que les balise se trouve dans nonLabels st = a la premiere balise qui n est pas dans nonLabel'
+				'we repeat while the tags are in nonLabels and extract upper tag if it is not in nonLabels'
 				while self.nonLabels.has_key(mot.getTagIndice(j).nom) :
 					j -= 1
 				saveNom = mot.getTagIndice(j).nom
 				mot.delAllTag()
 				mot.addTag(saveNom)
 
-				'except: si toutes les balises du mot appartienne a nonLabels'
+				'if all tags are in a nonLabels'
 			except :
 				pass
 				flag = 0 # if all the labels are one of nonLabels, check if there is abbr and take it as label
@@ -369,10 +421,18 @@ class Extract(object):
 			mot.addTag(saveNom)	
 			
 			
-	'''
-	extractorIndices : 
-	'''
+
 	def extractorIndices(self, svmprediction_trainfile, listRef):
+		'''
+		Extract the indices for nonbibls from SVM classification result
+		
+		Parameters
+		----------
+		svmprediction_trainfile : string
+			SVM classification result for training data
+		listRef : list
+			reference list
+		'''
 		nbRef = listRef.nbReference()
 		
 		svm_train = []
@@ -400,10 +460,18 @@ class Extract(object):
 		
 		return
 	
-	'''
-	extractorIndices4new : 
-	'''
+
 	def extractorIndices4new(self, svmprediction_newfile, listRef):
+		'''
+		Extract the indices for nonbibls from SVM classification result
+		
+		Parameters
+		----------
+		svmprediction_newfile : string
+			SVM classification result for test data
+		listRef : list
+			reference list
+		'''
 		i = 0
 		
 		for line in open (svmprediction_newfile, 'r') :
@@ -415,10 +483,11 @@ class Extract(object):
 			i += 1
 		return
 
-	'''
-	convertToUnicode : converti une chaine en unicode
-	'''
+
 	def convertToUnicode(self, chaine):
+		'''
+		Convert a string to unicode
+		'''
 		try:
 			if isinstance(chaine, str):
 				chaine = unicode(chaine, sys.stdin.encoding)

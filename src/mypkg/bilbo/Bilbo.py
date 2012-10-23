@@ -27,20 +27,39 @@ import os
 import time
 
 class Bilbo(object):
+	'''
+	A machine Bilbo that trains a CRF (and a SVM) model and automatically annotates new references.
+	'''
 
 	def __init__(self, dirResult="Result/"): #Set the default result directory
+		'''
+		Attributes
+		----------
+		crf : CRF
+		svm : SVM
+		dirResult : string
+			directory for output files
+		'''
 		self.crf = CRF(dirResult)
 		self.svm = SVM(dirResult)
 		self.dirResult = dirResult
 
 		
-	'''
-	train : CRF model learning
-		dirCorpus : directory where the training references are
-		dirModel : 	directory where the CRF and SVM models are saved
-		type : integer, 1 : corpus 1, 2 : corpus 2...
-	'''
 	def train(self, dirCorpus, dirModel, type):
+		'''
+		CRF model learning (corpus 1 and 2), SVM model learning (corpus 2)
+		Corpus object declaration
+		
+		Parameters
+		----------
+		dirCorpus : string
+			directory where training references (notes) are
+		dirModel : string
+			directory where CRF and SVM models are saved
+		typeCorpus : int, {1, 2, 3}
+			type of corpus
+			1 : corpus 1, 2 : corpus 2...
+		'''
 		corpus = Corpus(dirCorpus)
 		if type == 1:
 			corpus.extract(1, "bibl")
@@ -58,16 +77,22 @@ class Bilbo(object):
 		
 	
 	
-	'''
-	annotate : automatic annotation of references 
-		dirCorpus : 		directory where the references to be annotated are
-		dirModel : 			directory where the learned CRF model and SVM model have been saved
-		type : integer, 	1 : for corpus level 1, 2 : for corpus level 2...
-		external : integer, 1 : if the references are external data except CLEO, 0 : if that of CLEO
-							it's used to decide whether Bilbo learn call a SVM classification or not.
+	def annotate(self, dirCorpus, dirModel, type, external=0):		
+		'''
+		Automatic annotation of references 
 		
-	'''
-	def annotate(self, dirCorpus, dirModel, type, external=0):
+		Parameters
+		----------
+		dirCorpus : string
+			directory where the references to be annotated are
+		dirModel : string
+			directory where the learned CRF model and SVM model have been saved
+		typeCorpus : int, {1, 2, 3}
+			1 : corpus 1, 2 : corpus 2...
+		external : int, {1, 0}
+			1 : if the references are external data except CLEO, 0 : if that of CLEO
+			it is used to decide whether Bilbo learn call a SVM classification or not.
+		'''
 		nbRef = 0					#Number of references
 		corpus = Corpus(dirCorpus)	#
 		files = corpus.getFiles()
@@ -81,14 +106,20 @@ class Bilbo(object):
 			corpus.deleteAllFiles()
 
 
-	'''
-	annotateCorpus1 : automatic annotation of references level 1
-		dirModel : 		directory where the learned CRF model has been saved
-		corpus : 		set of references that we want to annotate
-		fname :			name of file to be annotated
-		
-	'''
+
 	def annotateCorpus1(self, dirModel, corpus, fname):
+		'''
+		Automatic annotation of reference type 1 (reference)
+		
+		Parameters
+		----------
+		dirModel : string
+			directory where the learned CRF model has been saved
+		corpus : Corpus
+			set of references that we want to annotate
+		fname :	string
+			name of file to be annotated
+		'''
 		corpus.extract(1, "bibl", fname)
 		self.crf.prepareTest(corpus, 1)
 		self.crf.runTest(dirModel, 'testdata_CRF.txt')
@@ -96,15 +127,25 @@ class Bilbo(object):
 		corpus.addTagReferences(self.dirResult, "testEstCRF.xml", "bibl", 1)
 		return corpus
 	
-	'''
-	annotateCorpus2 : aautomatic annotation of references level 2
-		dirModel : 		directory where the learned CRF model and SVM model have been saved
-		corpus : 		set of notes that we want to annotate
-		fname :			name of file to be annotated
-		external : 		1 : if external data, 0 : if CLEO data
-	'''
+
+
 	def annotateCorpus2(self, dirModel, corpus, fname, external=0):
 		'''
+		Automatic annotation of reference type 2 (note)
+		
+		Parameters
+		----------
+		dirModel : string
+			directory where learned CRF model and SVM model have been saved
+		corpus : Corpus
+			set of notes that we want to annotate
+		fname :	string
+			name of file to be annotated
+		external : int, {1, 0}
+			1 : if external data, 0 : if CLEO data
+
+		See also
+		--------
 		Oct. 18, 2012 	SVM classification problem is fixed
 						Check the classification result of reference (reference.train) in 'addTagReferences' method
 						of 'Corpus' class that is called in 'annotateCorpus2' method of 'Bilbo' class.
@@ -129,13 +170,20 @@ class Bilbo(object):
 
 		return corpus
 	
-	'''
-	_list_split : split a filelist
-		flist : list to be split
-		size : new file list size
-		result : new file list
-	'''
+
 	def _list_split(self, flist, size):
+		'''
+		Split a filelist
+		
+		Parameters
+		----------
+		flist : list
+			list to be split
+		size : int
+			new file list size
+		result : list
+			new file list
+		'''	
 		result = [[]]
 		while len(flist) > 0:
 			if len(result[-1]) >= size: result.append([])
