@@ -7,6 +7,7 @@ Created on 25 avr. 2012
 
 import os.path
 import commands
+import codecs
 from mypkg.reference.File import File
 from mypkg.ressources.BeautifulSoup import BeautifulSoup, Tag
 
@@ -162,15 +163,16 @@ class Corpus(object):
 							tag2.insert(0, s[cpt].renderContents()) #put the unwrapped contents in the middle of above tag sets
 
 							reference.append(s2.find("bibl")) #make s2 have found bibl
-							
 					else :
 						reference.append(s[cpt])
 				else:
 					break
 				cptRef += 1
 				cpt += 1
-
+			
 			fichier.buildReferences(reference, tagDelimRef, typeCorpus, dirResult) #new result printing
+		
+		
 		return
 	
 	

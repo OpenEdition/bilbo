@@ -115,7 +115,7 @@ class CRF(object):
 
 		return ListReferences(listReferencesObj.getReferences(),typeCorpus)
 		
-		
+
 
 	def runTrain(self, directory, fichier) :
 		'''
@@ -155,3 +155,31 @@ class CRF(object):
 		self.generateXml.simpleComp(self.dirResult+"testdata_CRF.txt", self.dirResult+'testEstCRF.txt', 2, self.dirResult+'testEstCRF.xml')	
 		return
 	
+	
+	
+	def postProcessTest(self, fnameCRFresult, fnameCRFtoAdd, refsAfterSVM):
+		
+		
+		fbefore = open(self.dirResult+fnameCRFresult, 'r')
+		fafter = open(self.dirResult+fnameCRFtoAdd, 'w')
+		
+		for reference in refsAfterSVM :
+			if reference.train != -1 :
+				#print 'train is bibl'
+				line = fbefore.readline()
+				while (len(line.split()) > 0) :
+					fafter.write(str(line))
+					line = fbefore.readline()
+				fafter.write("\n")
+			else : 
+				#print 'train is nonbibl'
+				line = fbefore.readline()
+				while (len(line.split()) > 0) :
+					fafter.write("nonbibl \n")
+					line = fbefore.readline()
+				fafter.write("\n")
+		fafter.close()
+		fbefore.close()
+		
+		return
+

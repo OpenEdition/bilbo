@@ -19,7 +19,9 @@ class Extract_svm(Extract):
 		self.doc_tokens = {'0000':0}		# tmp document represented by token strings and their counts
 		self.doc_features = {'0000':0}	# tmp document represented by feature strings and their counts
 
-		self.valid_features = {'nopunc':0, 'onepunc':0, 'nonumbers':0, 'noinitial':0, 'startinitial':0, 'posspage':0, 'weblink':0, 'posseditor':0, 'italic':0}
+		self.valid_features = {'punc':0, 'nopunc':0, 'onepunc':0, 'numbers':0, 'allnumbers':0, 'nonumbers':0, 
+								'noinitial':0, 'startinitial':0, 'posspage':0, 'weblink':0, 'posseditor':0, 'italic':0}
+		
 		
 	#extract training and test data
 	def extractor (self, filename, ndocs, tr, filename_ori, file_out) : # tr=1 : training, tr=0 : test
@@ -56,7 +58,7 @@ class Extract_svm(Extract):
 					
 				else :	# local features
 					flagEndRef += 1
-					self.fill_data(line, self.features, feature_data)
+					self.fill_data(line, self.features, feature_data, "feature")
 					pass
 	
 			else : # end of a block, a note		
@@ -64,7 +66,7 @@ class Extract_svm(Extract):
 					i += 1
 					flagEndRef = 0
 				else:
-					self.features.append({})
+					####self.features.append({}) #### done by JADE, don't need it
 					feature_data.append({})
 					#fill_data(line, features, feature_data)
 					flagEndRef += 1
@@ -76,22 +78,26 @@ class Extract_svm(Extract):
 		
 		return
 	
-	def fill_data(self, line, input, data) : # line[1:], tokens, token_data / line, features, feature_data
+	def fill_data(self, line, input, data, isFeature="noFeature") : # line[1:], tokens, token_data / line, features, feature_data
 
 		self.doc_tokens.clear()
 		for n in line :
+			ck = 0
+			if (isFeature == "noFeature") or self.valid_features.has_key(n.lower()) : 
+				ck = 1
 			#attribute token id, compute the base of idf
-			if input.count(n.lower()) == 0 :
-				input.append(n.lower())
-				#idf.append(1)
-				self.doc_tokens[n.lower()] = 1
-			else :
-				id = input.index(n.lower())
-				if not self.doc_tokens.has_key(n.lower()) :
-					#idf[id] += 1
+			if ck == 1 :
+				if input.count(n.lower()) == 0 : 
+					input.append(n.lower())
+					#idf.append(1)
 					self.doc_tokens[n.lower()] = 1
 				else :
-					self.doc_tokens[n.lower()] += 1
+					id = input.index(n.lower())
+					if not self.doc_tokens.has_key(n.lower()) :
+						#idf[id] += 1
+						self.doc_tokens[n.lower()] = 1
+					else :
+						self.doc_tokens[n.lower()] += 1
 					
 		data.append([])
 		data[len(data)-1] = {-1:-1}

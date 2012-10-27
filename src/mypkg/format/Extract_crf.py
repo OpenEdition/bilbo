@@ -145,7 +145,8 @@ class Extract_crf(Extract):
 				if tr != 1 :
 					self._printdata(fileRes, listRef, tr)
 				else :
-					self._printdata(fileRes+"Original", listRef, tr)
+					fileResOri = fileRes.replace(".", "_Origianl.")
+					self._printdata(fileResOri, listRef, tr)
 					self._printdata(fileRes, listRef, tr, "deleteNegatives")
 			else:
 				self._printOnlyLabel(fileRes, listRef)

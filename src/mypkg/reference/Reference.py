@@ -5,7 +5,6 @@ Created on 18 avr. 2012
 @author: Young-min Kim, Jade Tavernier
 '''
 
-
 class Reference(object):
 	'''
 	classdocs
@@ -116,4 +115,7 @@ class Reference(object):
 			ref += "</relatedItem>"
 			
 		return ref
+	
+
+		
 	

@@ -36,7 +36,6 @@ class SVM(object):
         extractor = Extract_svm()
         
         extractor.extractor(self.dirResult+"data04SVM_ori.txt", nbRef, 0, self.dirResult+"data04SVM_ori.txt", self.dirResult+"newdata.txt")
-        
             
     '''
     runTrain : lance SVM pour l'apprentissage

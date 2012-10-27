@@ -161,6 +161,7 @@ class Bilbo(object):
 			#(self, fileRes, tagDelimRef, typeCorpus, listRef)
 			newlistReferences = self.crf.prepareTest(corpus, 2)
 			self.crf.runTest(dirModel, 'testdata_CRF.txt')
+			self.crf.postProcessTest("testEstCRF.txt", "testEstCLNblCRF.txt", newlistReferences.getReferences())
 			corpus.addTagReferences(self.dirResult, "testEstCRF.xml", "note", 2, newlistReferences.getReferences())
 			
 		else:										#if external data : external=1, we do not call a SVM model
