@@ -53,12 +53,12 @@ class Extract_svm(Extract):
 			if len(line) != 0:
 				
 				if line[0] == '1' or line[0] == '-1' : #input tokens
-					self.fill_data(line[1:], self.tokens, token_data)
+					self.fill_data(line[1:], self.tokens, token_data, tr)
 					bibls[i] = line[0]
 					
 				else :	# local features
 					flagEndRef += 1
-					self.fill_data(line, self.features, feature_data, "feature")
+					self.fill_data(line, self.features, feature_data, tr, "feature")
 					pass
 	
 			else : # end of a block, a note		
@@ -78,7 +78,7 @@ class Extract_svm(Extract):
 		
 		return
 	
-	def fill_data(self, line, input, data, isFeature="noFeature") : # line[1:], tokens, token_data / line, features, feature_data
+	def fill_data(self, line, input, data, tr, isFeature="noFeature") : # line[1:], tokens, token_data / line, features, feature_data
 
 		self.doc_tokens.clear()
 		for n in line :
@@ -86,11 +86,12 @@ class Extract_svm(Extract):
 			if (isFeature == "noFeature") or self.valid_features.has_key(n.lower()) : 
 				ck = 1
 			#attribute token id, compute the base of idf
-			if ck == 1 :
-				if input.count(n.lower()) == 0 : 
-					input.append(n.lower())
-					#idf.append(1)
-					self.doc_tokens[n.lower()] = 1
+			if ck == 1 :  
+				if input.count(n.lower()) == 0 :
+					if tr == 1 : ##### added 291012
+						input.append(n.lower())
+						#idf.append(1)
+						self.doc_tokens[n.lower()] = 1
 				else :
 					id = input.index(n.lower())
 					if not self.doc_tokens.has_key(n.lower()) :
