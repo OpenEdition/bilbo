@@ -68,9 +68,10 @@ class Extract_crf(Extract):
 					
 					
 					'''
-					reference.train is a note indicator to see if it is classified nonbibl from SVM classification
+					reference.train is a note indicator to see if it has been classified nonbibl from SVM classification
+					But to print original tags of test data, we should not change tags as "nonbibl"
 					'''
-					if reference.train == -1:
+					if reference.train == -1 and tr == 1:
 						mot.delAllTag()
 						mot.addTag("nonbibl")
 						pass
@@ -100,7 +101,7 @@ class Extract_crf(Extract):
 					
 						'delete all features out of the "features" list'
 						supp = []
-						'si c est de la ponctuation on enleve toutes les caracteristiques'
+						
 						balise = mot.getLastTag()
 						if balise != -1:
 							if balise.nom == "c" :
@@ -145,7 +146,7 @@ class Extract_crf(Extract):
 				if tr != 1 :
 					self._printdata(fileRes, listRef, tr)
 				else :
-					fileResOri = fileRes.replace(".", "_Origianl.")
+					fileResOri = fileRes.replace(".", "_Original.")
 					self._printdata(fileResOri, listRef, tr)
 					self._printdata(fileRes, listRef, tr, "deleteNegatives")
 			else:
