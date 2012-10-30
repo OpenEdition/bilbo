@@ -1,11 +1,11 @@
-italic
-allnumbers
-posspage
 punc
-startinitial
+allnumbers
 numbers
-posseditor
 weblink
+posspage
+startinitial
+italic
+posseditor
 nopunc
 onepunc
 nonumbers
