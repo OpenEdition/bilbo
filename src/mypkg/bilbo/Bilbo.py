@@ -158,7 +158,6 @@ class Bilbo(object):
 			self.svm.prepareTest(corpus)
 			self.svm.runTest(dirModel)
 		
-			#(self, fileRes, tagDelimRef, typeCorpus, listRef)
 			newlistReferences = self.crf.prepareTest(corpus, 2)
 			self.crf.runTest(dirModel, 'testdata_CRF.txt')
 			self.crf.postProcessTest("testEstCRF.txt", "testEstCLNblCRF.txt", newlistReferences.getReferences())

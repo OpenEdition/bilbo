@@ -285,13 +285,30 @@ class File(object):
 			cptItem -= 1
 			
 		try:
+			
 			cpt = 0
+			
 			listRef = soup.findAll(tagTypeCorpus)
+			
 			for ref in listRef:
-				ref.contents = []
-				texte = NavigableString(ref_ori[cpt])
-				ref.insert(0,texte)
+				contentString ="" # TO CHECK IF THE REFERENCE or NOTE HAS NO CONTENTS
+				
+				for rf in ref.contents :
+					if rf == rf.string : contentString += rf
+						
+				for tag in ref.findAll(True) :
+						if len(tag.findAll(True)) == 0 and len(tag.contents) > 0 :
+							for con in tag.contents :
+								contentString += con
+				#print contentString
+				#print len(contentString.split())
+
+				if len(contentString.split()) > 0 :	
+					ref.contents = []
+					texte = NavigableString(ref_ori[cpt])
+					ref.insert(0,texte)
 				cpt += 1
+			
 		except :
 			pass
 		

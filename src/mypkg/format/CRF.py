@@ -159,19 +159,18 @@ class CRF(object):
 	
 	def postProcessTest(self, fnameCRFresult, fnameCRFtoAdd, refsAfterSVM):
 		
-		
 		fbefore = open(self.dirResult+fnameCRFresult, 'r')
 		fafter = open(self.dirResult+fnameCRFtoAdd, 'w')
 		
 		for reference in refsAfterSVM :
 			if reference.train != -1 :
-				#print 'train is bibl'
+				#print (reference.getWord())[0].nom
 				line = fbefore.readline()
 				while (len(line.split()) > 0) :
 					fafter.write(str(line))
 					line = fbefore.readline()
 				fafter.write("\n")
-			else : 
+			elif len(reference.getWord()) > 0 : # if there is no word in the reference, it was already ignored in printing before
 				#print 'train is nonbibl'
 				line = fbefore.readline()
 				while (len(line.split()) > 0) :
