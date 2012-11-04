@@ -10,6 +10,7 @@ from mypkg.reference.Word import Word
 from mypkg.reference.Reference import Reference
 from mypkg.format.Clean import Clean
 import string
+import re
 
 class CleanCorpus1(Clean):
 
@@ -29,6 +30,7 @@ class CleanCorpus1(Clean):
 			tmp_str = ''
 
 			for line in open (fname, 'r') :
+				line = re.sub(' ', ' ', line)	# !!! eliminate this character representing a kind of SPACE but not a WHITESPACE
 				line = line.replace('“', '“ ')			# !!! sparate the special characters '“', '”'
 				line = line.replace('”', ' ”')			# !!! sparate the special characters '“', '”'
 				line = line.replace('&amp;', '&')
