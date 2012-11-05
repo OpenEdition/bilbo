@@ -7,6 +7,7 @@ Created on 11 juin 2012
 
 from mypkg.format.Extract import Extract
 import codecs
+import numpy
 
 class Extract_svm(Extract):
 
@@ -19,8 +20,9 @@ class Extract_svm(Extract):
 		self.doc_tokens = {'0000':0}		# tmp document represented by token strings and their counts
 		self.doc_features = {'0000':0}	# tmp document represented by feature strings and their counts
 
-		self.valid_features = {'punc':0, 'nopunc':0, 'onepunc':0, 'numbers':0, 'allnumbers':0, 'nonumbers':0, 
-								'noinitial':0, 'startinitial':0, 'posspage':0, 'weblink':0, 'posseditor':0, 'italic':0}
+
+		self.valid_features = {'punc':0, 'nopunc':0, 'onepunc':0, 'nonumbers':0, 'dash':0,
+						'noinitial':0, 'startinitial':0, 'posspage':0, 'weblink':0, 'posseditor':0, 'italic':0}
 		
 		
 	#extract training and test data
@@ -58,7 +60,7 @@ class Extract_svm(Extract):
 					
 				else :	# local features
 					flagEndRef += 1
-					self.fill_data(line, self.features, feature_data, tr, "feature")
+					self.fill_data(line, self.features, feature_data, tr)
 					pass
 	
 			else : # end of a block, a note		
@@ -68,37 +70,31 @@ class Extract_svm(Extract):
 				else:
 					####self.features.append({}) #### done by JADE, don't need it
 					feature_data.append({})
-					#fill_data(line, features, feature_data)
 					flagEndRef += 1
 
-		self.insert_lineFeatures(feature_data)
+		self.insert_lineFeatures(feature_data, tr)
 		self.print_output(token_data, feature_data, bibls, tr, indices, file_out)
 		#self.load_original(filename_ori, indices)
 		if tr == 1 : self.save_ID(self.tokens, self.features)
 		
 		return
 	
-	def fill_data(self, line, input, data, tr, isFeature="noFeature") : # line[1:], tokens, token_data / line, features, feature_data
+	def fill_data(self, line, input, data, tr) : # line[1:], tokens, token_data / line, features, feature_data
 
 		self.doc_tokens.clear()
 		for n in line :
-			ck = 0
-			if (isFeature == "noFeature") or self.valid_features.has_key(n.lower()) : 
-				ck = 1
-			#attribute token id, compute the base of idf
-			if ck == 1 :  
-				if input.count(n.lower()) == 0 :
-					if tr == 1 : ##### added 291012
-						input.append(n.lower())
-						#idf.append(1)
-						self.doc_tokens[n.lower()] = 1
+			if input.count(n.lower()) == 0 :
+				if tr == 1 : ##### added 291012
+					input.append(n.lower())
+					self.idf.append(1)
+					self.doc_tokens[n.lower()] = 1
+			else :
+				id = input.index(n.lower())
+				if not self.doc_tokens.has_key(n.lower()) :
+					self.idf[id] += 1
+					self.doc_tokens[n.lower()] = 1
 				else :
-					id = input.index(n.lower())
-					if not self.doc_tokens.has_key(n.lower()) :
-						#idf[id] += 1
-						self.doc_tokens[n.lower()] = 1
-					else :
-						self.doc_tokens[n.lower()] += 1
+					self.doc_tokens[n.lower()] += 1
 					
 		data.append([])
 		data[len(data)-1] = {-1:-1}
@@ -111,10 +107,11 @@ class Extract_svm(Extract):
 	
 	
 	#insert new FEATURES related with total text characters / NOPUNC, ONEPUNC, NONUMBERS, NOINITIAL, 
-	def insert_lineFeatures(self, feature_data) :
+	def insert_lineFeatures(self, feature_data, tr) :
 		puncnt = 0
 		#extended featues
-		self.features.extend(['nopunc', 'onepunc', 'nonumbers', 'noinitial'])
+		if tr == 1 :
+			self.features.extend(['nopunc', 'onepunc', 'nonumbers', 'noinitial'])
 		
 		
 		for i in range(len(feature_data)) :
@@ -125,7 +122,7 @@ class Extract_svm(Extract):
 				id = self.features.index('punc')
 				if id in feature_data[i] :
 					puncnt = feature_data[i][id]
-				if puncnt == 1 : new_features.append('onepunc')
+					if puncnt == 1 : new_features.append('onepunc')
 				else : 
 					puncnt == 0
 					new_features.append('nopunc')
@@ -137,9 +134,8 @@ class Extract_svm(Extract):
 				if not feature_data[i].has_key(self.features.index('initial')) : 
 					new_features.append('noinitial')
 	
-			
 				#we can also append some important featues to the new_features list for weighting them 
-				new_features.append('startinitial')
+				if feature_data[i].has_key(self.features.index('startinitial')) : new_features.append('startinitial')
 				
 				#now update features representation of the document with previously found features
 				for nf in new_features :
@@ -147,6 +143,10 @@ class Extract_svm(Extract):
 					feature_data[i][id] = 1#*len(feature_data[i]) # !!!!!!! VALIDE CONSIDERATION OF VECTOR SIZE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
 			except ValueError:
 				pass
+		
+
+
+
 			
 	def print_output(self, token_data, feature_data, bibls, tr, indices, fileOut) :
 		fich = codecs.open(fileOut, "w", encoding="utf-8")
@@ -154,6 +154,7 @@ class Extract_svm(Extract):
 		i = 0
 		adding = self.adding_fId(len(self.tokens), feature_data)
 		#adding = len(tokens) + 1
+		
 		
 		for i in range(len(token_data)) :
 			keylist = token_data[i].keys()
@@ -164,9 +165,12 @@ class Extract_svm(Extract):
 					fich.write( unicode(bibls[i], "utf-8")+" ")
 				except:
 					fich.write( str(bibls[i])+" ")
+
+				
 			for key in keylist:
 				if indices[i] == tr :
 					fich.write( str(key+1)+':'+str(token_data[i][key])+" ")
+			
 			
 			if len(feature_data) > 0 :
 				keylist = feature_data[i].keys()
@@ -176,7 +180,7 @@ class Extract_svm(Extract):
 					##################
 						if self.valid_features.has_key(self.features[key]) :
 							fich.write( str(key+adding+1)+':1'+" ")
-			
+							
 			if indices[i] == tr :
 				fich.write("\n")
 	
@@ -251,4 +255,7 @@ class Extract_svm(Extract):
 		for line in open("model/corpus2/featureID.txt", 'r') :
 			n = line.split('\n')
 			features.append(n[0])
+		del self.idf[:]
+		self.idf = numpy.zeros(len(tokens))
+		
 		return

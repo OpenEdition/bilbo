@@ -6,6 +6,9 @@ Created on 11 juin 2012
 '''
 from mypkg.format.Extract import Extract
 
+chPunc =  {'.':0, ',':0, ')':0,'”':0, '}':0, ']':0, 
+		'(':0, '“':0, '{':0, '[':0, '«':0, '»':0, '“':0, '”':0, '"':0}
+
 class Extract_crf(Extract):
 	'''
 	A class to extract training and test data for CRF
@@ -104,7 +107,7 @@ class Extract_crf(Extract):
 						
 						balise = mot.getLastTag()
 						if balise != -1:
-							if balise.nom == "c" :
+							if chPunc.has_key(mot.nom) : #Instead of checking tag, check directly word for new document
 								if typeCorpus == 2 and extOption==-1 : # in case of SVM data, add PUNC
 									mot.delAllFeature()
 									mot.addFeature("PUNC")
@@ -138,7 +141,7 @@ class Extract_crf(Extract):
 		if tr != -2 :
 			self.nameObj.searchName(listRef, tr)
 			self.placeObj.searchPlace(listRef, tr)
-			self.properObj.searchProper(listRef, tr, 'place')
+			self.properObj.searchProper(listRef, tr, "place")
 		
 		if extOption == 1 or extOption == 2 :
 			if tr != -2 :
