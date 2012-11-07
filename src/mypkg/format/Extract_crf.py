@@ -56,8 +56,8 @@ class Extract_crf(Extract):
 		
 		for reference in listReferences:
 			#This is an indicator if the reference has been classified in the negative class by SVM
-			if reference.train == -1 : 
-				pass # HERE You should eliminate reference.... or Eliminate at the printing moment
+			if reference.train == -1 : # -1 : classified as nonbibl, 1 : normal training data, 0 : normal test data
+				pass # HERE You should eliminate reference.... or Eliminate at printing moment
 			
 			
 			for mot in reference.getWord():
@@ -73,58 +73,55 @@ class Extract_crf(Extract):
 					'''
 					reference.train is a note indicator to see if it has been classified nonbibl from SVM classification
 					But to print original tags of test data, we should not change tags as "nonbibl"
+					Notes classified as nonbibl will be eliminated at printing
 					'''
-					if reference.train == -1 and tr == 1:
+					#if reference.train == -1 :
+						#mot.delAllTag()
+						#mot.addTag("nonbibl")
+					
+					#label check
+					self._updateTag(mot)
+						
+					#nobibl check,
+					tmp_nonbiblck = 0
+					for tmp in mot.getAllTag() :
+
+						if tmp.nom == "nonbibl" :
+							tmp_nonbiblck = 1
+						elif tmp.nom == 'c' and typeCorpus == 2 and extOption==-1 :
+							if nonbiblck == 1:
+								tmp_nonbiblck = 1
+									
+					if tmp_nonbiblck == 1 : 
+						#if (extOption!=-1) :
 						mot.delAllTag()
 						mot.addTag("nonbibl")
-						pass
-					
-					elif reference.train == check:
-
-						#label check
-						self._updateTag(mot)
-						
-						#nobibl check,
-						tmp_nonbiblck = 0
-						for tmp in mot.getAllTag() :
-
-							if tmp.nom == "nonbibl" :
-								tmp_nonbiblck = 1
-							elif tmp.nom == 'c' and typeCorpus == 2 and extOption==-1 :
-								if nonbiblck == 1:
-									tmp_nonbiblck = 1
-									
-						if tmp_nonbiblck == 1 : 
-							#if (extOption!=-1) :
-							mot.delAllTag()
-							mot.addTag("nonbibl")
 	
-						if tr == 0 :
-							mot.delAllTag() # It is not really necessary because in Printing, we check the 'tr'
+					if tr == 0 :
+						mot.delAllTag() # It is not really necessary because in Printing, we check the 'tr'
 					
-						'delete all features out of the "features" list'
-						supp = []
+					'delete all features out of the "features" list'
+					supp = []
 						
-						balise = mot.getLastTag()
-						if balise != -1:
-							if chPunc.has_key(mot.nom) : #Instead of checking tag, check directly word for new document
-								if typeCorpus == 2 and extOption==-1 : # in case of SVM data, add PUNC
-									mot.delAllFeature()
-									mot.addFeature("PUNC")
-								else :
-									mot.delAllFeature()
-						
-						for carac in mot.getAllFeature():
-							if not self.features.has_key(carac.nom.lower()):
-								supp.append(carac.nom)
+					#balise = mot.getLastTag()
+					#if balise != -1:
+					if chPunc.has_key(mot.nom) : #Instead of checking tag, check directly word for new document
+						mot.delAllFeature()
+						if typeCorpus == 2 and extOption==-1 : # in case of SVM data, add PUNC
+							mot.delAllFeature()
+							mot.addFeature("PUNC")
 								
-						for nomMot in supp:
-							mot.delFeature(nomMot)
+					for carac in mot.getAllFeature():
+						if not self.features.has_key(carac.nom.lower()):
+							supp.append(carac.nom)
+								
+					for nomMot in supp:
+						mot.delFeature(nomMot)
 							
-						if tmp_nonbiblck == 0 : nonbiblck = 0
+					if tmp_nonbiblck == 0 : nonbiblck = 0
 				
-						# finding just a label which is not in the nonLabels list
-						self._checkNonLabels(mot)
+					# finding just a label which is not in the nonLabels list
+					self._checkNonLabels(mot)
 				
 			i += 1
 			self.titleCK = 0
@@ -159,10 +156,7 @@ class Extract_crf(Extract):
 			self._printmoreFeatures(extOption) # !!!!! not yet coded !!!!!
 		
 		if typeCorpus == 2:
-			'''if tr == 1:
-				self._print_alldata(fileRes, listRef)
-			else :'''
-			
 			self._print_parallel(fileRes, listRef)
 				
 		return
+	
