@@ -19,12 +19,10 @@ Created on 18 avr. 2012
 
 @author: Young-Min Kim, Jade Tavernier
 '''
-
 from mypkg.format.CRF import CRF
 from mypkg.format.SVM import SVM
 from mypkg.reference.Corpus import Corpus
 import os
-import time
 
 class Bilbo(object):
 	'''
@@ -45,7 +43,7 @@ class Bilbo(object):
 		self.dirResult = dirResult
 
 		
-	def train(self, dirCorpus, dirModel, type):
+	def train(self, dirCorpus, dirModel, typeCorpus):
 		'''
 		CRF model learning (corpus 1 and 2), SVM model learning (corpus 2)
 		Corpus object declaration
@@ -61,11 +59,11 @@ class Bilbo(object):
 			1 : corpus 1, 2 : corpus 2...
 		'''
 		corpus = Corpus(dirCorpus)
-		if type == 1:
+		if typeCorpus == 1:
 			corpus.extract(1, "bibl")
 			self.crf.prepareTrain(corpus, 1, "trainingdata_CRF_C1.txt", 1, 1)	#CRF training data extraction
 			self.crf.runTrain(dirModel, "trainingdata_CRF_C1.txt")				#CRF model learning
-		elif type == 2:
+		elif typeCorpus == 2:
 			corpus.extract(2, "note")
 			self.crf.prepareTrain(corpus, 2, "data04SVM_ori.txt", 1) #Source data extraction for SVM note classification
 			
@@ -77,7 +75,7 @@ class Bilbo(object):
 		
 	
 	
-	def annotate(self, dirCorpus, dirModel, type, external=0):		
+	def annotate(self, dirCorpus, dirModel, typeCorpus, external=0):		
 		'''
 		Automatic annotation of references 
 		
@@ -93,14 +91,13 @@ class Bilbo(object):
 			1 : if the references are external data except CLEO, 0 : if that of CLEO
 			it is used to decide whether Bilbo learn call a SVM classification or not.
 		'''
-		nbRef = 0					#Number of references
 		corpus = Corpus(dirCorpus)	#
 		files = corpus.getFiles()
 		filesTab = self._list_split(files, 50)
 		for fname in filesTab:
-			if type == 1:
+			if typeCorpus == 1:
 				corpus = self.annotateCorpus1(dirModel, corpus, fname)
-			elif type == 2:
+			elif typeCorpus == 2:
 				corpus = self.annotateCorpus2(dirModel, corpus, fname, external)
 				
 			corpus.deleteAllFiles()

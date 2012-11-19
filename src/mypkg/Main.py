@@ -27,7 +27,6 @@ else:
 	
 
 from mypkg.bilbo.Bilbo import Bilbo
-import hotshot
 
 if __name__ == '__main__':
 	pass

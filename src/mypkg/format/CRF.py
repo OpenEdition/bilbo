@@ -4,13 +4,10 @@ Created on 18 avr. 2012
 
 @author: Young-Min Kim, Jade Tavernier
 '''
-
-import subprocess
-
 from mypkg.format.Extract_crf import Extract_crf
 from mypkg.reference.ListReferences import ListReferences 
 from mypkg.output.GenerateXml import GenerateXml
-
+import subprocess
 
 class CRF(object):
 	'''
@@ -171,7 +168,6 @@ class CRF(object):
 					line = fbefore.readline()
 				fafter.write("\n")
 			elif len(reference.getWord()) > 0 : # if there is no word in the reference, it was already ignored in printing before
-				#print 'train is nonbibl'
 				line = fbefore.readline()
 				while (len(line.split()) > 0) :
 					fafter.write("nonbibl \n")

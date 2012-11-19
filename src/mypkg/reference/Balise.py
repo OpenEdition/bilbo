@@ -2,7 +2,7 @@
 '''
 Created on 18 avr. 2012
 
-@author: Young-min Kim, Jade Tavernier
+@author: Young-Min Kim, Jade Tavernier
 '''
 
 class Balise(object):
@@ -20,10 +20,12 @@ class Balise(object):
 	def affiche(self):
 		print "\t\t",self.nom
 		
-	'''
-	verifie si le nom est celui passe en parametre
-	'''
+
 	def nameIs(self, nom):
+		'''
+		Check the tag name
+		'''
 		if nom == self.nom:
 			return 1
 		return -1
+	

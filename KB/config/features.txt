@@ -20,6 +20,8 @@ pb 0
 ptr 0
 emph 0
 ref 1
+bibl 0
+relateditem 0
 # bookindicator
 in
 in 

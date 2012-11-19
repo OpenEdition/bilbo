@@ -4,14 +4,10 @@ Created on 25 avr. 2012
 
 @author: Young-Min Kim, Jade Tavernier
 '''
-
+from mypkg.reference.File import File
+from bs4 import BeautifulSoup
 import os.path
 import commands
-import codecs
-from mypkg.reference.File import File
-from mypkg.ressources.BeautifulSoup import BeautifulSoup, Tag
-
-
 
 class Corpus(object):
 	'''
@@ -142,26 +138,20 @@ class Corpus(object):
 			nbRefFile = fichier.nbReference(typeCorpus)
 			reference[:] = []
 			cptRef = 0
-			
-			#VALID_TAGS = ['bibl']
-			VALID_TAGS = []
 						
 			for ref in s:
 				if cptRef < nbRefFile:
 					
 					if len(refsAfterSVM) > 0 and refsAfterSVM[cpt].train == -1 :	#if the note (now tagged as <bibl>) is classified non-bibl
-
 							for tag in (s[cpt]).findAll(True) :
-								if tag.name not in VALID_TAGS :
-									tag.replaceWith(tag.renderContents())
+								tag.replaceWith(tag.renderContents())
 
 							s2 = BeautifulSoup()	#prepare tag sets <bibl><nonbibl></nonbibl></bibl>
-							tag1 = Tag(s2, "bibl")
-							tag2 = Tag(s2, "nonbibl")
+							tag1 = s2.new_tag("bibl")
+							tag2 = s2.new_tag("nonbibl")
 							s2.insert(0, tag1)
 							tag1.insert(0, tag2)
 							tag2.insert(0, s[cpt].renderContents()) #put the unwrapped contents in the middle of above tag sets
-
 							reference.append(s2.find("bibl")) #make s2 have found bibl
 					else :
 						reference.append(s[cpt])

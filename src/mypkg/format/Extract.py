@@ -4,13 +4,12 @@ Created on 19 avr. 2012
 
 @author: Young-Min Kim, Jade Tavernier
 '''
-
-import re
-import codecs
 from mypkg.extra.Name import Name
 from mypkg.extra.Place import Place
 from mypkg.extra.Properlist import Properlist
 import sys
+import re
+import codecs
 
 class Extract(object):
 	'''
@@ -114,12 +113,13 @@ class Extract(object):
 
 		return
 	
-	'''
-	loadIndices: permet de charger les indices qui se trouvent dans le fichier
-	'''
+
+
 	def loadIndices(self, fichier):
+		'''
+		Load the indices of the File object
+		'''
 		indices = []
-		
 		for line in open(fichier):
 			indices.append(line)
 			
@@ -414,7 +414,6 @@ class Extract(object):
 					mot.delAllTag()
 					mot.addTag('nolabel')
 
-
 		else:
 			saveNom = mot.getLastTag().nom
 			mot.delAllTag()
@@ -424,7 +423,8 @@ class Extract(object):
 
 	def extractorIndices(self, svmprediction_trainfile, listRef):
 		'''
-		Extract the indices for nonbibls from SVM classification result
+		Extract indices for nonbibls from SVM classification result
+		then modify 'train' attribute of each reference
 		
 		Parameters
 		----------
@@ -454,7 +454,7 @@ class Extract(object):
 		
 		n=0
 		for ref in listRef.getReferences() :
-			if positive_indices[n] == 0 : # instance NOT OK donc attribut train = -1
+			if positive_indices[n] == 0 : # instance NOT OK so attribute train = -1
 				ref.train =  -1 
 			n += 1
 		
@@ -463,7 +463,8 @@ class Extract(object):
 
 	def extractorIndices4new(self, svmprediction_newfile, listRef):
 		'''
-		Extract the indices for nonbibls from SVM classification result
+		Extract indices for nonbibls from SVM classification result
+		then modify 'train' attribute of each reference
 		
 		Parameters
 		----------
@@ -492,7 +493,6 @@ class Extract(object):
 			if isinstance(chaine, str):
 				chaine = unicode(chaine, sys.stdin.encoding)
 		except:
-
 			try:
 				chaine = unicode(chaine, 'ascii')
 			except:

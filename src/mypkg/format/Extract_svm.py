@@ -14,14 +14,14 @@ class Extract_svm(Extract):
 
 	def __init__(self):
 		Extract.__init__(self)
-		self.tokens = []		# tokens[k] : TOKEN STRING with token id 'k'
+		self.tokens = []	# tokens[k] : TOKEN STRING with token id 'k'
 		self.idf = []		# idf[k] : document frequency of token id 'k'
 		self.features = []	# features[k] : FEATURE STRING with feature id 'k'
-		self.doc_tokens = {'0000':0}		# tmp document represented by token strings and their counts
+		self.doc_tokens = {'0000':0}	# tmp document represented by token strings and their counts
 		self.doc_features = {'0000':0}	# tmp document represented by feature strings and their counts
 
 
-		self.valid_features = {'punc':0, 'nopunc':0, 'onepunc':0, 'nonumbers':0, 'dash':0,
+		self.valid_features = {'punc':0, 'nopunc':0, 'onepunc':0, 'twopunc':0, 'nonumbers':0, 'dash':0,
 						'noinitial':0, 'startinitial':0, 'posspage':0, 'weblink':0, 'posseditor':0, 'italic':0}
 		
 		
@@ -30,10 +30,10 @@ class Extract_svm(Extract):
 		
 		i = 0
 		indices = range(ndocs)
-		flagEndRef = 0 ## WHAT IS IT ????????
+		flagEndRef = 0
 		
 		# IN FACT WE DON'T NEED IT ANY MORE BUT FOR THE MODIFICATION WE KEEP IT
-		if tr == 1 : # Now we don't split data into learning/test data. So for test, we need load features and tokens
+		if tr == 1 : # Now we don't split data into learning/test data. So for test, we need to load features and tokens
 			for i in range(len(indices)) :
 				indices[i] = 1
 		else : # when extracting new data
@@ -53,28 +53,23 @@ class Extract_svm(Extract):
 			line = line.split()
 			
 			if len(line) != 0:
-				
 				if line[0] == '1' or line[0] == '-1' : #input tokens
 					self.fill_data(line[1:], self.tokens, token_data, tr)
 					bibls[i] = line[0]
-					
 				else :	# local features
 					flagEndRef += 1
 					self.fill_data(line, self.features, feature_data, tr)
-					pass
 	
 			else : # end of a block, a note		
 				if flagEndRef == 1:
 					i += 1
 					flagEndRef = 0
 				else:
-					####self.features.append({}) #### done by JADE, don't need it
 					feature_data.append({})
 					flagEndRef += 1
 
 		self.insert_lineFeatures(feature_data, tr)
 		self.print_output(token_data, feature_data, bibls, tr, indices, file_out)
-		#self.load_original(filename_ori, indices)
 		if tr == 1 : self.save_ID(self.tokens, self.features)
 		
 		return
@@ -111,7 +106,7 @@ class Extract_svm(Extract):
 		puncnt = 0
 		#extended featues
 		if tr == 1 :
-			self.features.extend(['nopunc', 'onepunc', 'nonumbers', 'noinitial'])
+			self.features.extend(['nopunc', 'onepunc', 'twopunc', 'nonumbers', 'noinitial'])
 		
 		
 		for i in range(len(feature_data)) :
@@ -123,10 +118,18 @@ class Extract_svm(Extract):
 				if id in feature_data[i] :
 					puncnt = feature_data[i][id]
 					if puncnt == 1 : new_features.append('onepunc')
+					elif puncnt == 2 : new_features.append('twopunc')
 				else : 
 					puncnt == 0
 					new_features.append('nopunc')
-
+					
+				#All data count
+				'''
+				allcnt = 0.
+				keylist = feature_data[i].keys()
+				for key in keylist:
+					allcnt += feature_data[i][key]
+				'''
 
 				#'numbers', 'allnumbers', 'initial' check 
 				if not feature_data[i].has_key(self.features.index('numbers')) and not feature_data[i].has_key(self.features.index('allnumbers')) :
@@ -140,7 +143,7 @@ class Extract_svm(Extract):
 				#now update features representation of the document with previously found features
 				for nf in new_features :
 					id = self.features.index(nf)
-					feature_data[i][id] = 1#*len(feature_data[i]) # !!!!!!! VALIDE CONSIDERATION OF VECTOR SIZE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
+					feature_data[i][id] = 1#*len(feature_data[i]) # !!!!!!! VALIDE CONSIDERATION OF VECTOR SIZE !				
 			except ValueError:
 				pass
 		
@@ -171,13 +174,11 @@ class Extract_svm(Extract):
 				if indices[i] == tr :
 					fich.write( str(key+1)+':'+str(token_data[i][key])+" ")
 			
-			
 			if len(feature_data) > 0 :
 				keylist = feature_data[i].keys()
 				keylist.sort()
 				for key in keylist:
 					if indices[i] == tr :
-					##################
 						if self.valid_features.has_key(self.features[key]) :
 							fich.write( str(key+adding+1)+':1'+" ")
 							

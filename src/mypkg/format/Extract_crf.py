@@ -48,17 +48,14 @@ class Extract_crf(Extract):
 		self.relatItm = 0
 			
 		i = 0
-		check = -5
 		nonbiblck = 1
-		
 		listReferences = listRef.getReferences()
 		tmp_nonbiblck = 0
 		
 		for reference in listReferences:
-			#This is an indicator if the reference has been classified in the negative class by SVM
+			'This is an indicator if the reference has been classified in the negative class by SVM'
 			if reference.train == -1 : # -1 : classified as nonbibl, 1 : normal training data, 0 : normal test data
-				pass # HERE You should eliminate reference.... or Eliminate at printing moment
-			
+				pass
 			
 			for mot in reference.getWord():
 
@@ -66,26 +63,17 @@ class Extract_crf(Extract):
 				if mot.ignoreWord == 0:
 					if mot.item == 1: self.relatItm = 1
 					
-					if tr == 1 : check = 1
-					else : check = 0
-					
-					
 					'''
 					reference.train is a note indicator to see if it has been classified nonbibl from SVM classification
 					But to print original tags of test data, we should not change tags as "nonbibl"
 					Notes classified as nonbibl will be eliminated at printing
 					'''
-					#if reference.train == -1 :
-						#mot.delAllTag()
-						#mot.addTag("nonbibl")
-					
 					#label check
 					self._updateTag(mot)
 						
 					#nobibl check,
 					tmp_nonbiblck = 0
 					for tmp in mot.getAllTag() :
-
 						if tmp.nom == "nonbibl" :
 							tmp_nonbiblck = 1
 						elif tmp.nom == 'c' and typeCorpus == 2 and extOption==-1 :
@@ -93,7 +81,6 @@ class Extract_crf(Extract):
 								tmp_nonbiblck = 1
 									
 					if tmp_nonbiblck == 1 : 
-						#if (extOption!=-1) :
 						mot.delAllTag()
 						mot.addTag("nonbibl")
 	
@@ -102,12 +89,10 @@ class Extract_crf(Extract):
 					
 					'delete all features out of the "features" list'
 					supp = []
-						
-					#balise = mot.getLastTag()
-					#if balise != -1:
+					
 					if chPunc.has_key(mot.nom) : #Instead of checking tag, check directly word for new document
 						mot.delAllFeature()
-						if typeCorpus == 2 and extOption==-1 : # in case of SVM data, add PUNC
+						if typeCorpus == 2 and extOption==-1 : #in case of SVM data, add PUNC feature
 							mot.delAllFeature()
 							mot.addFeature("PUNC")
 								
@@ -142,7 +127,7 @@ class Extract_crf(Extract):
 		
 		if extOption == 1 or extOption == 2 :
 			if tr != -2 :
-				self._addlayout(listRef)					####### add layout features ### 2012-02-01 ###
+				self._addlayout(listRef)	#Layout feature added
 				if tr != 1 :
 					self._printdata(fileRes, listRef, tr)
 				else :

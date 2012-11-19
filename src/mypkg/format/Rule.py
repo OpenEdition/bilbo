@@ -4,8 +4,8 @@ Created on 19 avr. 2012
 
 @author: Young-Min Kim, Jade Tavernier
 '''
-import re
 from mypkg.reference.Word import Word
+import re
 
 class Rule(object):
 	'''
@@ -20,20 +20,19 @@ class Rule(object):
 		self.paren = {'(':0, '{':0, '[':0, ')':0, '}':0, ']':0, '«':0, '“':0, '»':0, '”':0}
 		self.link = {':':0, '=':0, '_':0, '|':0, '~':0, '-':0, '–':0}
 		
-		'charge le lexique'
+		'Load the lexicon file'
 		self.regles = {}
 		expression = "^#"
-			
-		'lis toutes les lignes du fichier'
+		
 		try:
 			fichier = open("KB/config/lexique.txt", "r")
 			lines = fichier.readlines()
 			fichier.close()
 			
-			'creation du dictionnaire du lexique'
+			'Lexicon dictionary creation'
 			#regles - {"000":{"000":[]}}, eg) regles["editor"]["caracteristique"][0] : nonimpcap
 			#								  regles["editor"]["caracteristique"][1] : posseditor
-			#								  regles["editor"]["regle"][0] : page
+			#								  regles["editor"]["regle"][0] : ed
 			for line in lines:
 				if re.match(expression, line):
 					lineSplit = line.split()
@@ -52,20 +51,24 @@ class Rule(object):
 			print "cannot open file lexique.txt"
 		
 		
-			
-	'''
-	reorganizing separe la ponctuation adde des balises ou des caracteristiques en fonction des regles
-	'''			
+				
 	def reorganizing(self, listReference) :
+		'''
+		Separate punctuation marks and add tags or attributes according to predefined rules
+		If there is a newly detached token, create a new 'Word' object and append it in the reference
+		
+		Parameters
+		----------
+		'''
 		cpt = 0
-		flagAjoutWord = 0 	#'flag pour savoir le nombre de mot adde'
-		flagPoncDebut = 0 	#'flag pour savoir si il y a une ponctuation en premiere position'
+		flagAjoutWord = 0 	#Flag to check the number of added words
+		flagPoncDebut = 0 	#Flag to check if a punctuation mark is at the first position
 		cptIgnoreWord = 0
 
 		for reference in listReference.getReferences() :
 			cpt = 0
-			flagAjoutWord = 0 	#'flag pour savoir le nombre de mot adde'
-			flagPoncDebut = 0 	#'flag pour savoir si il y a une ponctuation en premiere position'
+			flagAjoutWord = 0 	#Flag to check the number of added words
+			flagPoncDebut = 0 	#Flag to check if a punctuation mark is at the first position
 			cptIgnoreWord = 0
 			
 			for mot in reference.word :
@@ -75,10 +78,9 @@ class Rule(object):
 						if mot.nom.split() != 0 :
 							if mot.nom.split()[0] != '!NONE!':
 								
+								'input_str is a string to be handled, new_str is a string to be saved'
 								input_str = mot.nom.split()[0]
-								
-								[new_str, input_str] = self._checkLexique(mot, input_str)
-								#if new_str != '': input_str = ''
+								[new_str, input_str] = self._checkLexique(mot, input_str)								
 								
 								#tokenization
 								for c in input_str :
@@ -87,9 +89,8 @@ class Rule(object):
 											feat_str = ''
 											feat_str = self._featureCheck(new_str)
 											if mot.getFeature("initial") != -1: feat_str = ''
-											#special char check added 
 											
-											if self.special.has_key(new_str) :#####added 190911
+											if self.special.has_key(new_str) :
 												if flagAjoutWord != 0  or flagPoncDebut == 1:
 													nomTag = mot.listNomTag()
 													refWord = Word(c,nomTag)
@@ -99,10 +100,11 @@ class Rule(object):
 													mot.nom = new_str
 													mot.addTag("c")
 													mot.delAllFeature()
-											else :####added 190911
+											else :
 												if flagAjoutWord != 0 or flagPoncDebut == 1:
 													nomTag = mot.listNomTag()
 													refWord = Word(new_str,nomTag, feat_str.split(" "))
+													refWord.delTag("c")
 													reference.addWord(cpt+1+flagAjoutWord+cptIgnoreWord,refWord)
 													flagAjoutWord += 1
 												else:
@@ -132,7 +134,6 @@ class Rule(object):
 								if not new_str == '' :
 									feat_str = ''
 									feat_str = self._featureCheck(new_str)
-									
 									if self.special.has_key(new_str) :
 										if flagPoncDebut == 1:
 													refWord = Word(new_str,"c")
@@ -173,13 +174,10 @@ class Rule(object):
 		
 		retrn_str = ''
 		if p1 : 
-			#print '################',p1[0]
 			retrn_str = p1[len(p1)-1]
 		elif p2 : 
-			#print '################',p2[0]
 			retrn_str = p2[len(p1)-1]
 		elif p3 : 
-			#print '################',p2[0]
 			retrn_str = p3[len(p1)-1]
 			
 		return retrn_str
@@ -192,7 +190,6 @@ class Rule(object):
 		p1 = ref1.findall(input_str)
 		p2 = ref2.findall(input_str)
 		p3 = ref3.findall(input_str)
-		
 		retrn_str = ''
 		if p1 or p2 or p3 :
 			retrn_str = 'positive'
@@ -200,7 +197,6 @@ class Rule(object):
 		return retrn_str
 	
 	def _featureCheck(self, new_str) :
-	
 		retrn_str = ''
 	
 		#number
@@ -244,26 +240,27 @@ class Rule(object):
 				else : retrn_str = retrn_str+' nonimpcap'
 				
 		#guillemot check
-		if new_str.find('«') >= 0 : retrn_str = ' guillemot_left'		# eliminate previously detected features
+		if new_str.find('«') >= 0 : retrn_str = ' guillemot_left'	# eliminate previously detected features
 		if new_str.find('»') >= 0 : retrn_str = ' guillemot_right'
 		
 		#quote check
 		if new_str.find('“') >= 0 : retrn_str = ' quote_left'
 		if new_str.find('”') >= 0 : retrn_str = ' quote_right'
 	
-		
 		return retrn_str
 
 			
-	'''
-	_checkLexique permet de add des caracteristiques si on retrouve les regles presentes dans le fichier regle
-	'''
+
 	def _checkLexique(self, mot, input_str):
+		'''
+		_checkLexique
+		Add attributes according to predefined rules in a lexicon file
+		'''
 		new_str = '' 
 		retrn_str = ''
 		
 		
-		'regarde si les regles sont presentes dans la chaine'
+		'check if rules are matched in the sting'
 		for regle in self.regles:
 			for chaine in self.regles[regle]["regle"]:
 				if chaine[0] == input_str.lower():
@@ -286,7 +283,7 @@ class Rule(object):
 				input_str = re.sub(retrn_str, '', input_str)
 				mot.addFeature('initial')
 				
-		'verifie les references html'
+		'check html links'
 		retrn_str = self._refCheck(input_str)
 		if not retrn_str == '' :
 			new_str = input_str

@@ -2,18 +2,21 @@
 '''
 Created on 25 avr. 2012
 
-@author: Young-min Kim, Jade Tavernier
+@author: Young-Min Kim, Jade Tavernier
 '''
+from bs4 import BeautifulSoup, NavigableString
+from mypkg.format.Clean import Clean
 from mypkg.format.CleanCorpus1 import CleanCorpus1
 from mypkg.format.CleanCorpus2 import CleanCorpus2
 from mypkg.format.Rule import Rule
 from mypkg.reference.ListReferences import ListReferences
-from mypkg.ressources.BeautifulSoup import *
+from mypkg.output.identifier import *
 import re
 import sys
 
 prePunc =  {'.':0, ',':0, ')':0, ':':0, ';':0, '-':0, '”':0, '}':0, ']':0, '!':0, '?':0, '/':0}
 postPunc = {'(':0, '-':0, '“':0, '{':0, '[':0}
+
 
 class File(object):
 	'''
@@ -50,6 +53,7 @@ class File(object):
 			1 : if the references are external data except CLEO, 0 : if that of CLEO
 			it is used to decide whether Bilbo learn call a SVM classification or not.			
 		'''	
+		clean = Clean()
 		if typeCorpus == 1:
 			clean = CleanCorpus1()
 		elif typeCorpus == 2:
@@ -283,16 +287,13 @@ class File(object):
 		while cptItem > 0:
 			s.pop()
 			cptItem -= 1
-			
+		
+		
 		try:
-			
 			cpt = 0
-			
 			listRef = soup.findAll(tagTypeCorpus)
-			
 			for ref in listRef:
 				contentString ="" # TO CHECK IF THE REFERENCE or NOTE HAS NO CONTENTS
-				
 				for rf in ref.contents :
 					if rf == rf.string : contentString += rf
 						
@@ -302,18 +303,22 @@ class File(object):
 								contentString += con
 				#print contentString
 				#print len(contentString.split())
-
 				if len(contentString.split()) > 0 :	
 					ref.contents = []
 					texte = NavigableString(ref_ori[cpt])
+					#ref.insert(0,texte)
+					text4doi = "<bibl>"+texte+"</bibl>"
+					doistring = extractId(text4doi)
+					if doistring != '' : texte += "<doi>"+doistring+"</doi>"
 					ref.insert(0,texte)
+
 				cpt += 1
 			
 		except :
 			pass
 		
 		fich = open(dirResult+self._getName(), "w")
-		fich.write(str(soup))
+		fich.write(str(soup.encode(formatter=None)))
 		fich.close()
 		return
 	
