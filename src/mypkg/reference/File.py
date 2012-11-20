@@ -167,7 +167,7 @@ class File(object):
 		'!!! When note annotation, anyway it is OKAY because the <bibl>s are found in a note'
 		'!!! But when related item appears more than once, we do not extract well the whole <bibl>'
 		'!!! In this case already we have a problem'
-		'!!! And moreover, in this new building we do not consider the existance of related item'
+		'!!! And moreover, in this new building we do not consider the existence of related item'
 		'!!! when extract the original references again'
 		'!!! SO TO BE MODIFIED'
 		s = soup.findAll (tagTypeCorpus) #!!!!!!!!!!!!
@@ -306,9 +306,8 @@ class File(object):
 				if len(contentString.split()) > 0 :	
 					ref.contents = []
 					texte = NavigableString(ref_ori[cpt])
-					#ref.insert(0,texte)
 					text4doi = "<bibl>"+texte+"</bibl>"
-					doistring = extractId(text4doi)
+					doistring = extractId(text4doi) #UNDO here if you don't want to extract a DOI
 					if doistring != '' : texte += "<doi>"+doistring+"</doi>"
 					ref.insert(0,texte)
 
