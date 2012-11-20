@@ -27,6 +27,11 @@ http://mallet.cs.umass.edu/
 http://svmlight.joachims.org/
 
 ------------------------
+ lxml for BeautifulSoup
+------------------------
+http://www.crummy.com/software/BeautifulSoup/bs4/doc/#installing-a-parser
+
+------------------------
  SOAPpy
 ------------------------
 $ cd dependencies/SOAP
@@ -163,7 +168,7 @@ eds
 ed.
 eds.
 -> if a word 'ed' is a input token, 'nonimpact' and 'posseditor' features are added.
-??? how about capitalized characters?
+
 
 ------------------------
  features.txt
