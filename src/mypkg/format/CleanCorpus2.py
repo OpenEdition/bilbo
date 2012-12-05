@@ -46,6 +46,7 @@ class CleanCorpus2(Clean):
 			for line in open (fname, 'r') :
 				line = re.sub(' ', ' ', line)	# !!! eliminate this character representing a kind of SPACE but not a WHITESPACE
 				line = re.sub("<hi rend=\"sup\">", ' ',line)
+				line = line.replace('<!-- <pb/> -->', '')
 				line = line.replace('“', '“ ')			# !!! sparate the special characters '“', '”'
 				line = line.replace('”', ' ”')			# !!! sparate the special characters '“', '”'
 				line = line.replace('&amp;', '&')	

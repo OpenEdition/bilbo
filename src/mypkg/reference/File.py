@@ -323,6 +323,145 @@ class File(object):
 	
 
 
+	def buildReferencesV2(self, references, tagTypeCorpus, typeCorpus, dirResult):
+		'''
+		Construct final xml output file, called from Corpus::addTagReferences
+		Unlike the first version, compare token by token, replace the token by automatically tagged token. 
+		That's why we keep perfectly the original data format
+		
+		Parameters
+		----------
+		references : list 
+			automatically annotated references by system
+		tagTypeCorpus : string, {"bibl", "note"}
+			tag name defining reference types
+			"bibl" : corpus 1, "note" : corpus 2
+				typeCorpus : int, {1, 2, 3}
+		type of corpus
+			1 : corpus 1, 2 : corpus 2...
+		tagTypeList : string, "listbibl"
+			tag name wrapping all references
+		'''
+		cptRef = 0		#reference counter
+		tmp_str = ""
+		ref_ori = []
+		
+		'Read the source file to check the initial contents of references'
+		for line in open (self.nom, 'r') :
+			tmp_str = tmp_str + line
+				
+		soup = BeautifulSoup (tmp_str)
+		s = soup.findAll (tagTypeCorpus)
+
+		'Reconstruct references with the ignored tags, ex) tag hi'
+		for ref in references:
+			#print s[cptRef]
+			parsed_soup = ''.join(s[cptRef].findAll(text = True))
+			#print parsed_soup # String only
+
+			ptr = 0
+			while (ptr == 0) : #if empty <bibl>, pass it
+				oriRef = (str(s[cptRef]))
+				for r in ref.contents :
+					try :
+						if not r.name == "c" :
+							for token in r.string.split() :
+								token = token.encode('utf8')
+								ptr = oriRef.find(token, ptr)
+								
+								#EXCEPTION
+								if (ptr < 0) : 
+									#print "PROBLEME, CANNOT FIND THE TOKEN", token
+									pass
+								elif (oriRef.find(">", ptr) < oriRef.find("<", ptr)) : # the token is in a tag
+									ptr = oriRef.find(token, ptr+1)
+								
+								nstr = "<"+r.name+">"+token+"</"+r.name+">"
+								oriRef = oriRef[:ptr] + nstr + oriRef[ptr+len(token):]
+								ptr += len(nstr)
+								#print r.name
+								#print token
+					except : 
+						pass
+			#print oriRef
+			
+			'check continuously annotated tags to eliminate tags per each token'
+			ptag = ""
+			continuousTags = []
+			newsoup = BeautifulSoup(oriRef)
+			for ns in newsoup.find_all() :
+				if ptag == ns.name :
+					continuousTags.append(ns.name)
+				if ns.name != "hi" :
+					ptag = ns.name
+			
+			ptr = 0
+			for tmptag in continuousTags :
+				
+				ptr1 = oriRef.find("</"+tmptag+">", ptr)
+				ptr2 = oriRef.find("<"+tmptag+">", ptr1)
+				if oriRef.find(">", ptr1+len("</"+tmptag+">"), ptr2) < 0 :
+					token = "</"+tmptag+">"
+					ptr = oriRef.find(token, ptr)
+					oriRef = oriRef[:ptr] + oriRef[ptr+len(token):]
+					token = "<"+tmptag+">"
+					ptr = oriRef.find(token, ptr)
+					oriRef = oriRef[:ptr] + oriRef[ptr+len(token):]
+				else :
+					ptr = ptr2
+			#print oriRef
+			
+			ref_ori.append(oriRef)
+			cptRef += 1
+			
+		
+		try:
+			cpt = 0
+			listRef = soup.findAll(tagTypeCorpus)
+			for ref in listRef:
+				contentString ="" # TO CHECK IF THE REFERENCE or NOTE HAS NO CONTENTS
+				for rf in ref.contents :
+					if rf == rf.string : contentString += rf
+						
+				for tag in ref.findAll(True) :
+						if len(tag.findAll(True)) == 0 and len(tag.contents) > 0 :
+							for con in tag.contents :
+								contentString += con
+				#print contentString
+				#print len(contentString.split())
+				if len(contentString.split()) > 0 :	
+					ref.contents = []
+					'Elimination of <bibl> or <note> cause they are doubled'
+					if tagTypeCorpus == "bibl" :
+						ref_ori[cpt] = ref_ori[cpt].replace("<bibl>", "")
+						ref_ori[cpt] = ref_ori[cpt].replace("</bibl>", "")
+					elif tagTypeCorpus == "note" :
+						ptr1 = ref_ori[cpt].find("<note")
+						ptr2 = ref_ori[cpt].find(">", ptr1)
+						ref_ori[cpt] = ref_ori[cpt][:ptr1] + ref_ori[cpt][ptr2+1:]
+						ref_ori[cpt] = ref_ori[cpt].replace("</note>", "")
+						
+					texte = NavigableString(ref_ori[cpt] )
+					
+					text4doi = "<bibl>"+texte+"</bibl>"
+					doistring = ''
+					doistring = extractId(text4doi) #UNDO here if you don't want to extract a DOI
+					if doistring != '' : texte += " <doi>"+doistring+"</doi>"
+					ref.insert(0,texte)
+				cpt += 1
+			
+		except :
+			pass
+		
+			
+		fich = open(dirResult+self._getName(), "w")
+		fich.write(str(soup.encode(formatter=None)))
+		fich.close()
+		
+		return
+
+	
+
 	def _getName(self):
 		'''
 		Return the file name without the complete path

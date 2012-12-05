@@ -160,7 +160,7 @@ class Corpus(object):
 				cptRef += 1
 				cpt += 1
 			
-			fichier.buildReferences(reference, tagDelimRef, typeCorpus, dirResult) #new result printing
+			fichier.buildReferencesV2(reference, tagDelimRef, typeCorpus, dirResult) #new result printing
 		
 		
 		return
