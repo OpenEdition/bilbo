@@ -358,9 +358,8 @@ class File(object):
 			#print s[cptRef]
 			parsed_soup = ''.join(s[cptRef].findAll(text = True))
 			#print parsed_soup # String only
-
 			ptr = 0
-			while (ptr == 0) : #if empty <bibl>, pass it
+			if (len(parsed_soup.split()) > 0) : #if empty <bibl>, pass it
 				oriRef = (str(s[cptRef]))
 				for r in ref.contents :
 					try :
@@ -368,52 +367,45 @@ class File(object):
 							for token in r.string.split() :
 								token = token.encode('utf8')
 								ptr = oriRef.find(token, ptr)
-								
 								#EXCEPTION
 								if (ptr < 0) : 
 									#print "PROBLEME, CANNOT FIND THE TOKEN", token
 									pass
 								elif (oriRef.find(">", ptr) < oriRef.find("<", ptr)) : # the token is in a tag
 									ptr = oriRef.find(token, ptr+1)
-								
 								nstr = "<"+r.name+">"+token+"</"+r.name+">"
 								oriRef = oriRef[:ptr] + nstr + oriRef[ptr+len(token):]
 								ptr += len(nstr)
-								#print r.name
-								#print token
 					except : 
 						pass
-			#print oriRef
+				#print oriRef
+				'check continuously annotated tags to eliminate tags per each token'
+				ptag = ""
+				continuousTags = []
+				newsoup = BeautifulSoup(oriRef)
+				for ns in newsoup.find_all() :
+					if ptag == ns.name :
+						continuousTags.append(ns.name)
+					if ns.name != "hi" :
+						ptag = ns.name
 			
-			'check continuously annotated tags to eliminate tags per each token'
-			ptag = ""
-			continuousTags = []
-			newsoup = BeautifulSoup(oriRef)
-			for ns in newsoup.find_all() :
-				if ptag == ns.name :
-					continuousTags.append(ns.name)
-				if ns.name != "hi" :
-					ptag = ns.name
-			
-			ptr = 0
-			for tmptag in continuousTags :
-				
-				ptr1 = oriRef.find("</"+tmptag+">", ptr)
-				ptr2 = oriRef.find("<"+tmptag+">", ptr1)
-				if oriRef.find(">", ptr1+len("</"+tmptag+">"), ptr2) < 0 :
-					token = "</"+tmptag+">"
-					ptr = oriRef.find(token, ptr)
-					oriRef = oriRef[:ptr] + oriRef[ptr+len(token):]
-					token = "<"+tmptag+">"
-					ptr = oriRef.find(token, ptr)
-					oriRef = oriRef[:ptr] + oriRef[ptr+len(token):]
-				else :
-					ptr = ptr2
-			#print oriRef
-			
-			ref_ori.append(oriRef)
+				ptr = 0
+				for tmptag in continuousTags :
+					ptr1 = oriRef.find("</"+tmptag+">", ptr)
+					ptr2 = oriRef.find("<"+tmptag+">", ptr1)
+					if oriRef.find(">", ptr1+len("</"+tmptag+">"), ptr2) < 0 :
+						token = "</"+tmptag+">"
+						ptr = oriRef.find(token, ptr)
+						oriRef = oriRef[:ptr] + oriRef[ptr+len(token):]
+						token = "<"+tmptag+">"
+						ptr = oriRef.find(token, ptr)
+						oriRef = oriRef[:ptr] + oriRef[ptr+len(token):]
+					else :
+						ptr = ptr2
+				#print oriRef
+				ref_ori.append(oriRef)
+	
 			cptRef += 1
-			
 		
 		try:
 			cpt = 0
@@ -452,8 +444,7 @@ class File(object):
 			
 		except :
 			pass
-		
-			
+
 		fich = open(dirResult+self._getName(), "w")
 		fich.write(str(soup.encode(formatter=None)))
 		fich.close()
