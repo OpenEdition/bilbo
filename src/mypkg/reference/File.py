@@ -362,23 +362,54 @@ class File(object):
 			if (len(parsed_soup.split()) > 0) : #if empty <bibl>, pass it
 				oriRef = (str(s[cptRef]))
 				for r in ref.contents :
-					try :
-						if not r.name == "c" :
-							for token in r.string.split() :
-								token = token.encode('utf8')
-								ptr = oriRef.find(token, ptr)
-								#EXCEPTION
-								if (ptr < 0) : 
-									#print "PROBLEME, CANNOT FIND THE TOKEN", token
-									pass
-								elif (oriRef.find(">", ptr) < oriRef.find("<", ptr)) : # the token is in a tag
+					ck = 0
+					try : r.name
+					except : ck = 1
+						
+					if ck == 0 and not r.name == "c" :
+						for token in r.string.split() :
+							token = token.encode('utf8')
+							pre_ptr = ptr
+							ptr = oriRef.find(token, ptr)
+							inner_string = ""
+							if ptr >= 0 :
+								tmp_str2 = oriRef[pre_ptr:ptr]
+								soup2 = BeautifulSoup (tmp_str2)
+								for s2 in soup2 :
+									inner_string = ''.join(s2.findAll(text = True))
+									inner_string = inner_string.encode('utf8')
+							#EXCEPTION
+							if (ptr < 0) or inner_string.find(token) >= 0 : 
+								'''
+								try again by eliminating tags
+								'''
+								c = token[0]
+								ptr = oriRef.find(c, pre_ptr) 
+								while (oriRef.find(">", ptr) < oriRef.find("<", ptr)) : # the token is in a tag
+									ptr = oriRef.find(c, ptr+1)
+								ptr_start = ptr
+								tag_start_l = oriRef.find("<",ptr_start)
+								tag_start_r = oriRef.find(">",tag_start_l)
+								tag_end_l = oriRef.find("<",tag_start_r)
+								tag_end_r = oriRef.find(">",tag_end_l)
+								newtoken = oriRef[ptr_start:tag_start_l]+oriRef[tag_start_r+1:tag_end_l]
+								#print newtoken, token
+								if newtoken == token : 
+									token = oriRef[ptr_start:tag_end_r+1]
+									ptr = ptr_start
+								else :
+									print "PROBLEM, CANNOT FIND THE TOKEN", token, s[cptRef]
+							else :
+								while (oriRef.find(">", ptr) < oriRef.find("<", ptr)) : # the token is in a tag
 									ptr = oriRef.find(token, ptr+1)
+							if (ptr >= 0) :
 								nstr = "<"+r.name+">"+token+"</"+r.name+">"
 								oriRef = oriRef[:ptr] + nstr + oriRef[ptr+len(token):]
 								ptr += len(nstr)
-					except : 
-						pass
-				#print oriRef
+								#print oriRef[ptr], "HERE"
+							else :
+								ptr = pre_ptr
+
 				'check continuously annotated tags to eliminate tags per each token'
 				ptag = ""
 				continuousTags = []
@@ -433,11 +464,11 @@ class File(object):
 						ref_ori[cpt] = ref_ori[cpt][:ptr1] + ref_ori[cpt][ptr2+1:]
 						ref_ori[cpt] = ref_ori[cpt].replace("</note>", "")
 						
-					texte = NavigableString(ref_ori[cpt] )
+					texte = NavigableString(ref_ori[cpt])
 					
 					text4doi = "<bibl>"+texte+"</bibl>"
 					doistring = ''
-					doistring = extractId(text4doi) #UNDO here if you don't want to extract a DOI
+					#doistring = extractId(text4doi) #UNDO here if you don't want to extract a DOI
 					if doistring != '' : texte += " <doi>"+doistring+"</doi>"
 					ref.insert(0,texte)
 				cpt += 1
