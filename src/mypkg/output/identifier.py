@@ -32,8 +32,7 @@ def extractId(input_str) :
 		sname = ''
 		title = ''
 		refString = ''
-		try :
-		
+		try :		
 			a = s.find('surname')
 			if a :
 				try : sname =  str(s.surname.string)
