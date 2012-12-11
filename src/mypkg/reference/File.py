@@ -468,7 +468,7 @@ class File(object):
 					
 					text4doi = "<bibl>"+texte+"</bibl>"
 					doistring = ''
-					#doistring = extractId(text4doi) #UNDO here if you don't want to extract a DOI
+					doistring = extractId(text4doi) #UNDO here if you don't want to extract a DOI
 					if doistring != '' : texte += " <doi>"+doistring+"</doi>"
 					ref.insert(0,texte)
 				cpt += 1
