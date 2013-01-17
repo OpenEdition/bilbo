@@ -1,12 +1,12 @@
 # editor nonimpcap posseditor
-ed
-eds
-ed.
-eds.
-仕
-仕s
 仕.
 仕s.
+ed.
+eds.
+ed
+eds
+仕
+仕s
 # page posspage
 pp
 pp.

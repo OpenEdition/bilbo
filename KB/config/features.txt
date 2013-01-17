@@ -22,6 +22,10 @@ emph 0
 ref 1
 bibl 0
 relateditem 0
+p 0
+body 0
+time 0
+num 0
 # bookindicator
 in
 in 

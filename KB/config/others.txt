@@ -1,0 +1,37 @@
+[crossref]
+usrname = youngminn.kim@gmail.com
+
+[tei]
+nonbibl = NONE
+nolabel = NONE
+bookindicator = NONE
+#surname = 
+#forename =
+#publisher = 
+#abbr
+#date
+title_m = title level="m"
+title_a = title type="a"
+title_j = title type="j"
+title_t = title type="t"
+title_u = title type="u"
+title_s = title type="s"
+biblscope_pp = biblScope type="pp"
+biblscope_i = biblScope type="issue"
+biblscope_v = biblScope type="vol"
+biblscope_pa = biblScope type="part"
+biblscope_c = biblScope type="chap"
+#biblscope
+#w 
+#edition 
+#bookindicator
+#meeting
+#title
+#extent
+#editor
+#name
+place = placeName 
+orgname = orgName
+rolename = roleName
+namelink = nameLink
+genname = genName
