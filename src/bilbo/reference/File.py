@@ -235,7 +235,6 @@ class File(object):
 								nstr = "<"+r.name+">"+token+"</"+r.name+">"
 								oriRef = oriRef[:ptr] + nstr + oriRef[ptr+len(token):]
 								ptr += len(nstr)
-								#print oriRef[ptr]
 							else :
 								ptr = pre_ptr
 				
@@ -363,23 +362,34 @@ class File(object):
 		ptr2 = 0
 		ptr1 = 0
 		found = {}
+		preparentname = ""
+		print oriRef
 		for ns in newsoup.find_all() :
-			if preTag == ns.name and not preTag in noncontinuousck:
+			if preTag == ns.name and preparentname == ns.parent.name and not preTag in noncontinuousck:
 				ptr1 = oriRef.find("</"+preTag+">", ptr2)
 				ptr2 = oriRef.find("<"+preTag+">", ptr1)
-				if oriRef.find(">", ptr1+len("</"+preTag+">"), ptr2) < 0 :
+				if ptr2 > ptr1 and oriRef.find(">", ptr1+len("</"+preTag+">"), ptr2) < 0 :
 					token = "</"+preTag+">"
 					oriRef = oriRef[:ptr1] + oriRef[ptr1+len(token):]
 					token = "<"+preTag+">"
 					ptr = oriRef.find(token, ptr1)
 					oriRef = oriRef[:ptr] + oriRef[ptr+len(token):]
-					found[ns.name] = ptr1
+					found[ns.name] = 0 #there is no other continuous tag after this tag 
+					for k in found.keys():
+						if k == ns.name : found[k] = 0
+						else : found[k] = 1
 				ptr2 = ptr1+1
 			else :
-				if found.has_key(ns.name) :
+				if found.has_key(ns.name) and found[ns.name] == 0 :
 					ptr1 = oriRef.find("</"+ns.name+">", ptr2)
 					ptr2 = oriRef.find("<"+ns.name+">", ptr1)
+					if ptr2 < 0 : ptr2 = ptr1+1
+					for k in found.keys():
+						if k == ns.name : found[k] = 0
+						else : found[k] = 1
+				print 
 			preTag = ns.name
+			preparentname = ns.parent.name
 		
 		return oriRef
 

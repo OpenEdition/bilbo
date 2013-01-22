@@ -83,9 +83,11 @@ class Extract(object):
 				print "Cannot open the file \"KB/config/balise.txt\" \n"
 			
 		'Load people name and place'
-		self.nameObj = Name("KB/config/externalList/auteurs_revuesorg2.txt")
-		self.placeObj = Place("KB/config/externalList/list_pays.txt")
-		self.properObj = Properlist("KB/config/externalList/LargeCities.txt", "PLACELIST")
+		self.nameObj = Name("KB/config/externalList/auteurs_revuesorg2.txt") #SURNAMELIST, FORENAMELIST
+		self.placeObj = Place("KB/config/externalList/list_pays.txt") #PLACELIST
+		self.cityObj = Properlist("KB/config/externalList/LargeCities.txt", "PLACELIST") #PLCAELIST
+		self.journalObj = Properlist("KB/config/externalList/journalAll.txt", "JOURNALLIST") #PLCAELIST
+		
 		
 	
 	def extractor(self):
@@ -185,7 +187,10 @@ class Extract(object):
 					['ITALIC'],		#7
 					['POSSEDITOR'],	#8
 					['POSSPAGE'],	#9
-					['SURNAMELIST', 'FORENAMELIST', 'PLACELIST']]	#10
+					['SURNAMELIST'],	#10
+					['FORENAMELIST'],	#11
+					['PLACELIST']]		#12
+					#['JOURNALLIST']]	#13
 				
 		fich = codecs.open(fichier, "w", encoding="utf-8")
 		for reference in listRef.getReferences():
@@ -193,7 +198,8 @@ class Extract(object):
 			
 				for mot in reference.getWord():
 					tmp_features = ['NONUMBERS', 'NODASH', 'NONIMPCAP', 'NULL', 'NOINITIAL',
-									'NOWEBLINK', 'NOITALIC', 'NOEDITOR', 'NOPAGE', 'NOLIST']
+									'NOWEBLINK', 'NOITALIC', 'NOEDITOR', 'NOPAGE', 'NOSURLIST',
+									'NOFORELIST', 'NOPLACELIST']#, 'NOJOURLIST']
 					if mot.ignoreWord == 0:
 						try:
 							fich.write(unicode(mot.nom,"utf-8"))

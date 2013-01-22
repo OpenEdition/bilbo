@@ -124,26 +124,27 @@ class Extract_crf(Extract):
 		if tr != -2 :
 			self.nameObj.searchName(listRef, tr)
 			self.placeObj.searchPlace(listRef, tr)
-			self.properObj.searchProper(listRef, tr, "place")
+			self.cityObj.searchProper(listRef, tr)
+			#self.journalObj.searchProper(listRef, tr)
 		
 		if extOption == 1 or extOption == 2 :
 			if tr != -2 :
 				self._addlayout(listRef)	#Layout feature added
-				if tr != 1 :
+				if tr != 1 or not self.options.s:
 					self._printdata(fileRes, listRef, tr)
 					fileResWapiti = fileRes.replace(".", "_Wapiti.")
 					self._printdataWapiti(fileResWapiti, listRef, tr)
 				else :
-					fileResOri = fileRes.replace(".", "_Original.")
-					self._printdata(fileResOri, listRef, tr)
-					fileResWapiti = fileRes.replace(".", "_OriginalWapiti.")
-					self._printdataWapiti(fileResWapiti, listRef, tr)
-					fileResWapiti = fileRes.replace(".", "_Wapiti.")
-					self._printdataWapiti(fileResWapiti, listRef, tr, "deleteNegatives")
-					self._printdata(fileRes, listRef, tr, "deleteNegatives")
-					#fileResWapiti = fileRes.replace(".", "_nega_Wapiti.")
-					#self._printdataWapiti(fileResWapiti, listRef, tr, "deletePositives")
-					
+					if self.options.s : #if svm classification on
+						fileResOri = fileRes.replace(".", "_Original.")
+						self._printdata(fileResOri, listRef, tr)
+						fileResWapiti = fileRes.replace(".", "_OriginalWapiti.")
+						self._printdataWapiti(fileResWapiti, listRef, tr)
+						fileResWapiti = fileRes.replace(".", "_Wapiti.")
+						self._printdataWapiti(fileResWapiti, listRef, tr, "deleteNegatives")
+						self._printdata(fileRes, listRef, tr, "deleteNegatives")
+						#fileResWapiti = fileRes.replace(".", "_nega_Wapiti.")
+						#self._printdataWapiti(fileResWapiti, listRef, tr, "deletePositives")	
 			else:
 				self._printOnlyLabel(fileRes, listRef)
 			
