@@ -363,7 +363,6 @@ class File(object):
 		ptr1 = 0
 		found = {}
 		preparentname = ""
-		print oriRef
 		for ns in newsoup.find_all() :
 			if preTag == ns.name and preparentname == ns.parent.name and not preTag in noncontinuousck:
 				ptr1 = oriRef.find("</"+preTag+">", ptr2)
@@ -387,7 +386,6 @@ class File(object):
 					for k in found.keys():
 						if k == ns.name : found[k] = 0
 						else : found[k] = 1
-				print 
 			preTag = ns.name
 			preparentname = ns.parent.name
 		
