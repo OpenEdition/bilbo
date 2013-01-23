@@ -288,73 +288,7 @@ class File(object):
 		
 		return
 
-	
-	def continuousTags0(self, basicTag, includedLabels, oriRef):
-		ptag = ""
-		continuousTags = []	#continuously annotated tag array
-		noncontinuousck = ["surname", "forename"]
-		newsoup = BeautifulSoup(oriRef)
-		#print oriRef
-		for ns in newsoup.find_all() :
-			if ptag == ns.name :
-				if ns.name not in noncontinuousck : continuousTags.append(ns.name)
-			elif not basicTag.has_key(ns.name) and (len(continuousTags) > 0 and continuousTags[len(continuousTags)-1] != 'NOTAG') :
-				continuousTags.append('NOTAG')
-			if not basicTag.has_key(ns.name) : ptag = ns.name
-			
-		ptr = 0
-		pretag = ''
-		for tmptag in continuousTags :
-			if tmptag != 'NOTAG' :
-				ptr1 = oriRef.find("</"+tmptag+">", ptr)
-				ptr2 = oriRef.find("<"+tmptag+">", ptr1)
-				ck = 0
-				if oriRef.find(">", ptr1+len("</"+tmptag+">"), ptr2) >= 0 :
-					tmpsoup = BeautifulSoup( oriRef[ptr1+len("</"+tmptag+">"):ptr2] )
-					#print oriRef[ptr1+len("</"+tmptag+">"):ptr2]
-					for ttmp in tmpsoup.find_all() : 
-						if ttmp.name in includedLabels : 
-							ck = 1
-				if ck == 0 :
-					token = "</"+tmptag+">"
-					oriRef = oriRef[:ptr1] + oriRef[ptr1+len(token):]
-					token = "<"+tmptag+">"
-					ptr = oriRef.find(token, ptr1)
-					
-					oriRef = oriRef[:ptr] + oriRef[ptr+len(token):]
-				else :
-					ptr = ptr2
-				pretag = tmptag
-			else :
-				token = "</"+pretag+">"
-				ptr = oriRef.find(token, ptr) + len(token)
-				if ptr < 0 : print "PROBLEM OF NONVALID TAGS" #Maybe problem of non-valid tags
-	
-		return oriRef, continuousTags
-	
-	
-	def wrappedPairs(self, basicTag, includedLabels, oriRef):
-		ptr = 0
-		newsoup = BeautifulSoup(oriRef)
-		for ns in newsoup.find_all() :
-			if ns.name in basicTag :
-				print ns.name
-				ck = 0
-				while (ck == 0 and ptr >= 0) :
-					ptr = oriRef.find("<"+ns.name, ptr)
-					if oriRef[ptr+len("<"+ns.name)] == ' ' or oriRef[ptr+len("<"+ns.name)] == '>' :
-						ck = 1
-					else : ptr += len("<"+ns.name)
-				
-				if len(ns.contents) == 1 :
-					print oriRef[ptr:ptr+60]
-					print ns.name, len(ns.contents), ns.contents, ns.string, 
-					try : print ns.contents[0].name
-					except : pass
-					
-		return
-	
-	
+		
 	def continuousTags(self, basicTag, includedLabels, oriRef):
 		preTag = ""
 		noncontinuousck = ["surname", "forename"]
@@ -379,13 +313,14 @@ class File(object):
 						else : found[k] = 1
 				ptr2 = ptr1+1
 			else :
-				if found.has_key(ns.name) and found[ns.name] == 0 :
+				if (found.has_key(ns.name) and found[ns.name] == 0) or (preTag == ns.name and preparentname != ns.parent.name and not preTag in noncontinuousck) :
 					ptr1 = oriRef.find("</"+ns.name+">", ptr2)
 					ptr2 = oriRef.find("<"+ns.name+">", ptr1)
 					if ptr2 < 0 : ptr2 = ptr1+1
 					for k in found.keys():
 						if k == ns.name : found[k] = 0
 						else : found[k] = 1
+				found[ns.name] = 0
 			preTag = ns.name
 			preparentname = ns.parent.name
 		
