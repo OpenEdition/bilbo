@@ -327,38 +327,6 @@ class File(object):
 		return oriRef
 
 	
-	def mismatchedTags(self, oriRef, continuousTags):
-		ptr2 = 0
-		preTag = ''
-		for tmpTag in continuousTags :
-			if tmpTag == 'NOTAG' :
-				ptr1 = oriRef.find("<"+preTag+">", ptr2)
-				ptr2 = oriRef.find("</"+preTag+">", ptr1)
-				endck1 = oriRef.find("</", ptr1, ptr2)
-				endck2 = oriRef.find(">", endck1, ptr2)
-				if endck1 > 0 and endck2 > 0 : #when finding an ending tag in the contents
-					ckTag = oriRef[endck1+len("</"):endck2]
-					if oriRef.find("<"+ckTag, ptr1, endck1) < 0 :  #when not finding a corresponding starting tag in the contents
-						startck1 = (oriRef[ptr1::-1]).find(">", 0)
-						startck2 = (oriRef[ptr1::-1]).find("<", startck1)
-						if oriRef[ptr1-startck2:ptr1-startck1+1].find("<"+ckTag) == 0 : #find location and exchange tags
-							oriRef = oriRef[:ptr1-startck2] + "<"+preTag+">" + oriRef[ptr1-startck2:ptr1-startck1+1] + oriRef[ptr1+len("<"+preTag+">"):]
-				ptr1 = ptr1+len("<"+preTag+">")
-				ptr2 = oriRef.find("</"+preTag+">", ptr1)
-				startck1 = oriRef.rfind("<", ptr1, ptr2)
-				startck2 = oriRef.rfind(">", ptr1, ptr2)
-				if startck1 >= 0 and startck2 >= 0 and oriRef.rfind("</", startck1, startck2) < 0:  #when finding a starting tag in the contents and no ending tag
-					ckTag = ((oriRef[startck1:startck2]).split(">")[0]).split()[0]
-					ckTag = ckTag[1:]
-					endck1 = oriRef.find("</"+ckTag+">", ptr2+len("</"+preTag+">"))
-					endck2 = oriRef.find(">", endck1)
-					if oriRef.find("<", ptr2+len("</"+preTag+">"), endck1) < 0 : #find location and exchange tag if there is no other tags in the contents
-						oriRef = oriRef[:ptr2] + oriRef[ptr2+len("</"+preTag+">"):endck2+1] + "</"+preTag+">" + oriRef[endck2+1:]	
-			preTag = tmpTag
-		
-		return oriRef
-	
-	
 	def _getName(self):
 		'''
 		Return the file name without the complete path
