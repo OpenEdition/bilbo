@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>CRF</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/young-minkim/Documents/workspace/bilbo/src/mypkg/format/CRF.py">/Users/young-minkim/Documents/workspace/bilbo/src/mypkg/format/CRF.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/young-minkim/Documents/workspace/bilbo/src/bilbo/format/CRF.py">/Users/young-minkim/Documents/workspace/bilbo/src/bilbo/format/CRF.py</a></font></td></tr></table>
     <p><tt>Created&nbsp;on&nbsp;18&nbsp;avr.&nbsp;2012<br>
 &nbsp;<br>
 @author:&nbsp;Young-Min&nbsp;Kim,&nbsp;Jade&nbsp;Tavernier</tt></p>
@@ -46,13 +46,15 @@
 <a href="#CRF">CRF</a>&nbsp;model&nbsp;learning&nbsp;and&nbsp;test<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%">Methods defined here:<br>
-<dl><dt><a name="CRF-__init__"><strong>__init__</strong></a>(self, dirResult)</dt><dd><tt>Attributes<br>
+<dl><dt><a name="CRF-__init__"><strong>__init__</strong></a>(self, dirResult, options<font color="#909090">={}</font>)</dt><dd><tt>Attributes<br>
 ----------<br>
 generateXml&nbsp;:&nbsp;GenerateXml<br>
 dirResult&nbsp;:&nbsp;string<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;directory&nbsp;for&nbsp;result&nbsp;files</tt></dd></dl>
 
-<dl><dt><a name="CRF-prepareTest"><strong>prepareTest</strong></a>(self, corpus, typeCorpus, indiceSvm<font color="#909090">=0</font>, indices<font color="#909090">=''</font>)</dt><dd><tt>Prepare&nbsp;<a href="#CRF">CRF</a>&nbsp;test&nbsp;data<br>
+<dl><dt><a name="CRF-postProcessTest"><strong>postProcessTest</strong></a>(self, fnameCRFresult, fnameCRFtoAdd, refsAfterSVM)</dt></dl>
+
+<dl><dt><a name="CRF-prepareTest"><strong>prepareTest</strong></a>(self, corpus, typeCorpus, indiceSvm<font color="#909090">=0</font>)</dt><dd><tt>Prepare&nbsp;<a href="#CRF">CRF</a>&nbsp;test&nbsp;data<br>
 &nbsp;<br>
 Parameters<br>
 ----------<br>
@@ -62,11 +64,9 @@ typeCorpus&nbsp;:&nbsp;int,&nbsp;{1,&nbsp;2,&nbsp;3}<br>
 indiceSvm&nbsp;:&nbsp;int,&nbsp;{0,&nbsp;-1,&nbsp;2}<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0&nbsp;:&nbsp;normal(corpus&nbsp;1)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1&nbsp;:&nbsp;data04SVM&nbsp;(corpus2),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;:&nbsp;external&nbsp;data&nbsp;=&gt;&nbsp;svm&nbsp;isn't&nbsp;called<br>
-indices&nbsp;:&nbsp;int&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;valid&nbsp;reference&nbsp;index&nbsp;file&nbsp;after&nbsp;SVM&nbsp;classification&nbsp;(corpus&nbsp;2)</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;:&nbsp;external&nbsp;data&nbsp;=&gt;&nbsp;svm&nbsp;isn't&nbsp;called</tt></dd></dl>
 
-<dl><dt><a name="CRF-prepareTrain"><strong>prepareTrain</strong></a>(self, corpus, typeCorpus, fileRes, tr<font color="#909090">=-1</font>, extOption<font color="#909090">=-1</font>, indices<font color="#909090">=''</font>)</dt><dd><tt>Prepare&nbsp;<a href="#CRF">CRF</a>&nbsp;training&nbsp;data<br>
+<dl><dt><a name="CRF-prepareTrain"><strong>prepareTrain</strong></a>(self, corpus, typeCorpus, fileRes, tr<font color="#909090">=-1</font>, extOption<font color="#909090">=-1</font>, optsvm<font color="#909090">=True</font>)</dt><dd><tt>Prepare&nbsp;<a href="#CRF">CRF</a>&nbsp;training&nbsp;data<br>
 &nbsp;<br>
 Parameters<br>
 ----------<br>
@@ -83,11 +83,18 @@ extOption&nbsp;:&nbsp;int,&nbsp;{-1,&nbsp;1,&nbsp;...}&nbsp;(default&nbsp;-1)<br
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;check&nbsp;if&nbsp;data&nbsp;is&nbsp;internal&nbsp;data,&nbsp;if&nbsp;yes&nbsp;we'll&nbsp;use&nbsp;a&nbsp;modified&nbsp;index&nbsp;for&nbsp;corpus&nbsp;type&nbsp;2<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1&nbsp;:&nbsp;data&nbsp;format&nbsp;for&nbsp;SVM&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;:&nbsp;data&nbsp;format&nbsp;for&nbsp;normal&nbsp;<a href="#CRF">CRF</a>&nbsp;training/test&nbsp;data&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2-5&nbsp;:&nbsp;(not&nbsp;yet&nbsp;provided)<br>
-indices&nbsp;:&nbsp;string<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;valid&nbsp;reference&nbsp;index&nbsp;file&nbsp;after&nbsp;SVM&nbsp;classification&nbsp;(for&nbsp;corpus&nbsp;2)</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2-5&nbsp;:&nbsp;(not&nbsp;yet&nbsp;provided)</tt></dd></dl>
 
-<dl><dt><a name="CRF-runTest"><strong>runTest</strong></a>(self, directory, fichier)</dt><dd><tt>Run&nbsp;<a href="#CRF">CRF</a>&nbsp;test&nbsp;module&nbsp;from&nbsp;Mallet&nbsp;software&nbsp;to&nbsp;annotate&nbsp;new&nbsp;data<br>
+<dl><dt><a name="CRF-runTest"><strong>runTest</strong></a>(self, directory, fichier, modelname, addStr<font color="#909090">=''</font>)</dt><dd><tt>Run&nbsp;<a href="#CRF">CRF</a>&nbsp;test&nbsp;module&nbsp;from&nbsp;Wapiti&nbsp;software&nbsp;to&nbsp;label&nbsp;new&nbsp;data<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+directory&nbsp;:&nbsp;string&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;directory&nbsp;where&nbsp;we&nbsp;save&nbsp;the&nbsp;model<br>
+fichier&nbsp;:&nbsp;string<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;filename&nbsp;that&nbsp;has&nbsp;been&nbsp;generated&nbsp;by&nbsp;preprareTest</tt></dd></dl>
+
+<dl><dt><a name="CRF-runTrain"><strong>runTrain</strong></a>(self, directory, fichier, modelname, penalty<font color="#909090">=1.0000000000000001e-05</font>)</dt><dd><tt>Run&nbsp;<a href="#CRF">CRF</a>&nbsp;training&nbsp;module&nbsp;from&nbsp;Wapiti&nbsp;software<br>
 &nbsp;<br>
 Parameters<br>
 ----------<br>
@@ -96,14 +103,7 @@ directory&nbsp;:&nbsp;string&nbsp;<br>
 fichier&nbsp;:&nbsp;string<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;filename&nbsp;that&nbsp;has&nbsp;been&nbsp;generated&nbsp;by&nbsp;preprareTrain</tt></dd></dl>
 
-<dl><dt><a name="CRF-runTrain"><strong>runTrain</strong></a>(self, directory, fichier)</dt><dd><tt>Run&nbsp;<a href="#CRF">CRF</a>&nbsp;training&nbsp;module&nbsp;from&nbsp;Mallet&nbsp;software<br>
-&nbsp;<br>
-Parameters<br>
-----------<br>
-directory&nbsp;:&nbsp;string&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;directory&nbsp;where&nbsp;we&nbsp;save&nbsp;the&nbsp;model<br>
-fichier&nbsp;:&nbsp;string<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;filename&nbsp;that&nbsp;has&nbsp;been&nbsp;generated&nbsp;by&nbsp;preprareTrain</tt></dd></dl>
+<dl><dt><a name="CRF-setDirModel"><strong>setDirModel</strong></a>(self, dirModel)</dt></dl>
 
 <hr>
 Data descriptors defined here:<br>

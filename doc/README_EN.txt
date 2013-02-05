@@ -7,7 +7,7 @@ written by Young-Min Kim, modified by Jade Tavernier.
 BILBO is an open source software for automatic annotation of bibliographic reference.
 It provides the segmentation and tagging of input string. It is principally based on
 Conditional Random Fields (CRFs), machine learning technique to segment and label
-sequence data. As external softwares, Mallet is used for CRF learning and inference
+sequence data. As external softwares, Wapiti is used for CRF learning and inference
 and SVMlight is used for sequence classification. BILBO is licensed under a Creative
 Commons Attribution-NonCommercial-ShareAlike 2.5 Generic License (CC BY-NC-SA 2.5).
 
@@ -241,6 +241,13 @@ own tags to TEI is necessary. It is used in the functions of identifier.py calle
 File::buildReferences.
 
 
+------------------------
+ pattern_ref
+------------------------
+Wapiti pattern configuration for feature extraction
+
+
+
 
 ========================
  Class
@@ -270,9 +277,8 @@ Description in doc/documentation/CRF.html
 ------------------------
  File
 ------------------------
-A file calss containing all references in a file
+A file class containing all references in a file
 Description in doc/documentation/File.html
-
 
 ------------------------
  Extract
@@ -287,6 +293,12 @@ Description in doc/documentation/Extract.html
 A class to extract training and test data for CRF
 Sub class of Extract
 Description in doc/documentation/Extract_crf.html
+
+------------------------
+ Extract_svm
+------------------------
+
+
 
 
 
