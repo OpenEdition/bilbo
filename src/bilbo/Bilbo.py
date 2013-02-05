@@ -192,7 +192,9 @@ class Bilbo(object):
 	def deleteTmpFiles(self):
 		dirResultRoot = os.path.abspath(os.path.join(self.dirResult, os.path.pardir))+'/'
 		toKeep = []
-		if self.options.k == 'primary' : toKeep = ['testEstCRF.xml', 'testEstCRF.xml', 'trainingdata_CRF_OriginalWapiti.txt', 'trainingdata_CRF_Wapiti.txt']
+		if self.options.k == 'primary' : 
+			#toKeep = ['testEstCRF.xml', 'testEstCRF.xml', 'trainingdata_CRF_OriginalWapiti.txt', 'trainingdata_CRF_Wapiti.txt']
+			toKeep = ['testEstCRF.xml', 'testEstCRF.txt', 'testdatawithlabel_CRF.txt']
 		if self.options.k != 'all' :
 			for dir_name, sub_dirs, files in os.walk(self.dirResult):
 				for f in files :

@@ -176,7 +176,7 @@ class File(object):
 					ck = 0
 					try : r.name
 					except : ck = 1
-					if ck == 0 and not r.name == "c" :
+					if ck == 0 and not r.name == "c" and r.string:
 						for token in r.string.split() :
 							if token == "&" : token = "&amp;"
 							token = token.encode('utf8')

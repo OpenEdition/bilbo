@@ -34,7 +34,6 @@ class Extract(object):
 		properObj :	Properlist
 		'''
 		self.options = options
-		self.cooccurs = {'0000': 0}
 		self.link = {':':0, '=':0, '_':0, '|':0, '~':0, '-':0, '–':0}
 		self.nonLabels = {}
 		self.features = {}
@@ -90,7 +89,7 @@ class Extract(object):
 		
 		
 	
-	def extractor(self):
+	def extract(self):
 		'''
 		To be defined in a sub class
 		'''	
@@ -579,7 +578,7 @@ class Extract(object):
 			mot.addTag(saveNom)	
 			
 
-	def extractorIndices(self, svmprediction_trainfile, listRef):
+	def extractIndices(self, svmprediction_trainfile, listRef):
 		'''
 		Extract indices for nonbibls from SVM classification result
 		then modify 'train' attribute of each reference
@@ -609,7 +608,6 @@ class Extract(object):
 				positive_indices[n] = 0
 			j += 1
 		
-		
 		n=0
 		for ref in listRef.getReferences() :
 			if positive_indices[n] == 0 : # instance NOT OK so attribute train = -1
@@ -619,7 +617,7 @@ class Extract(object):
 		return
 	
 
-	def extractorIndices4new(self, svmprediction_newfile, listRef):
+	def extractIndices4new(self, svmprediction_newfile, listRef):
 		'''
 		Extract indices for nonbibls from SVM classification result
 		then modify 'train' attribute of each reference

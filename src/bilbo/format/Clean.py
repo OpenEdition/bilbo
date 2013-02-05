@@ -42,7 +42,6 @@ class Clean(object):
 			print "Feature file not found : config/features.txt \n"
 		
 
-
 	def posssign(self, line, sign) :
 		'''
 		posssign : 
@@ -56,7 +55,6 @@ class Clean(object):
 		return line
 	
 	
-
 	def _extract_tags(self,current_tag, lens) :
 		'''
 		Extract tags and attributes for each token by navigating xml tree
@@ -153,7 +151,6 @@ class Clean(object):
 		return words
 
 
-
 	def _arrangeData(self, n, txts, tags, attrs, top_tag, top_att) :
 		'''
 		Unwrap the entered string(n) until the string has no tags in it. A recursive method.
@@ -210,7 +207,6 @@ class Clean(object):
 		return
 	
 
-
 	def _elimination (self, tmp_str) :
 		'''
 		Eliminate unnecessary tags
@@ -232,7 +228,6 @@ class Clean(object):
 		return new_str
 		
 		
-
 	def _buildWords(self, dicWords):
 		'''
 		Make 'Word' objects with words in dicWords
@@ -248,7 +243,6 @@ class Clean(object):
 			
 			words.append(instanceWord)
 		return words
-
 
 
 	def _html2unicode(self, tmp_str) :
@@ -284,7 +278,6 @@ class Clean(object):
 		return tmp_str
 		
 		
-	
 	def _checkUTF8(self, tmp_str) :
 		'''
 		In BeatifulSoup 4, string matching error when there are accents only

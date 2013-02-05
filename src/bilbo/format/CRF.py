@@ -34,7 +34,7 @@ class CRF(object):
 		self.dirModel = dirModel
 		
 		
-	def prepareTrain(self, corpus, typeCorpus, fileRes, tr=-1, extOption=-1, optsvm='True'):
+	def prepareTrain(self, corpus, typeCorpus, fileRes, tr=-1, extOption=-1, optsvm=True):
 		'''
 		Prepare CRF training data
 		
@@ -66,13 +66,13 @@ class CRF(object):
 		'if corpus type 2 and extOption=1, we use a modified index list' #!!!!!!!!!!
 		if typeCorpus == 2 and extOption == 1:
 			'modify the indices to eliminate the reference (or not print the reference) classified as non-bibl BY SVM'
-			if optsvm == True : #if not do not modify
-				extractor.extractorIndices(self.dirResult+"svm_predictions_training", newListReferences)
-			extractor.extractor(typeCorpus, nbRef, self.dirResult+fileRes, newListReferences, tr, extOption)
+			if optsvm == True : #if not, do not modify
+				extractor.extractIndices(self.dirResult+"svm_predictions_training", newListReferences)
+			extractor.extract(typeCorpus, nbRef, self.dirResult+fileRes, newListReferences, tr, extOption)
 			
 		else: # typeCorpus == 1 or (typeCorpus == 2 and isFrstExt == -1)
 			########## SOURCE DATA EXTRACTION FOR SVM OR CORPUS 1 (BUT THESE ARE DIFFERENT !!!)
-			extractor.extractor(typeCorpus, nbRef, self.dirResult+fileRes, newListReferences, tr, extOption)
+			extractor.extract(typeCorpus, nbRef, self.dirResult+fileRes, newListReferences, tr, extOption)
 		
 		#return newListReferences
 	
@@ -101,14 +101,14 @@ class CRF(object):
 		extractor.randomgen(ListReferences(listReferencesObj.getReferences(),typeCorpus), 0)
 		
 		if indiceSvm == -1:
-			extractor.extractor(typeCorpus, nbRef, self.dirResult+"data04SVM_ori.txt", ListReferences(listReferencesObj.getReferences(),typeCorpus))
+			extractor.extract(typeCorpus, nbRef, self.dirResult+"data04SVM_ori.txt", ListReferences(listReferencesObj.getReferences(),typeCorpus))
 		else: 
 			'file for CRF training'
 			if typeCorpus == 2 and indiceSvm != 2 :
-				extractor.extractorIndices4new(self.dirResult+"svm_predictions_new", ListReferences(listReferencesObj.getReferences(),typeCorpus))
+				extractor.extractIndices4new(self.dirResult+"svm_predictions_new", ListReferences(listReferencesObj.getReferences(),typeCorpus))
 			
-			extractor.extractor(typeCorpus, nbRef, self.dirResult+"testdatawithlabel_CRF.txt",ListReferences(listReferencesObj.getReferences(),typeCorpus), -1, 1)			
-			extractor.extractor(typeCorpus, nbRef, self.dirResult+"testdata_CRF.txt",ListReferences(listReferencesObj.getReferences(),typeCorpus), 0, 1)
+			extractor.extract(typeCorpus, nbRef, self.dirResult+"testdatawithlabel_CRF.txt",ListReferences(listReferencesObj.getReferences(),typeCorpus), -1, 1)			
+			extractor.extract(typeCorpus, nbRef, self.dirResult+"testdata_CRF.txt",ListReferences(listReferencesObj.getReferences(),typeCorpus), 0, 1)
 
 		return ListReferences(listReferencesObj.getReferences(),typeCorpus)
 		

@@ -26,7 +26,7 @@ class SVM(object):
         nbRef = corpus.nbReference(2) #corpus type = 2
         extractor = Extract_svm(self.options)
         
-        extractor.extractor(self.dirResult+"data04SVM_ori.txt", nbRef, 1, self.dirResult+"data04SVM_ori.txt", self.dirResult+"trainingdata_SVM.txt")
+        extractor.extract(self.dirResult+"data04SVM_ori.txt", nbRef, 1, self.dirResult+"data04SVM_ori.txt", self.dirResult+"trainingdata_SVM.txt")
       
     '''
     prepareTest : prepare les fichier pour SVM
@@ -35,7 +35,7 @@ class SVM(object):
         nbRef = corpus.nbReference(2) #corpus type = 2
         extractor = Extract_svm(self.options)
         
-        extractor.extractor(self.dirResult+"data04SVM_ori.txt", nbRef, 0, self.dirResult+"data04SVM_ori.txt", self.dirResult+"newdata.txt")
+        extractor.extract(self.dirResult+"data04SVM_ori.txt", nbRef, 0, self.dirResult+"data04SVM_ori.txt", self.dirResult+"newdata.txt")
             
     '''
     runTrain : lance SVM pour l'apprentissage

@@ -11,12 +11,12 @@ class ListReferences(object):
 	'''
 
 
-	def __init__(self, references, corpus):
+	def __init__(self, references, typeCorpus):
 		'''
 		Constructor
 		'''
 		self.listReferences = references
-		self.corpus = corpus
+		self.typeCorpus = typeCorpus
 
 	'''
 	affiche permet d'afficher le detail des references : mots, balises, caracteristiques

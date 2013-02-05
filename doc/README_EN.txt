@@ -67,7 +67,7 @@ Options
 	  impl => implicit citations
   -i : --informat <string>
 	 Input reference format
-	  tei => xml following tei guidelines including manual annotation (defalut)
+	  tei => xml following tei guidelines including manual annotation (default)
 	  xml => simple xml without tree in manual annotation
 	  plain => plain text (for labeling only)
   -m : --model <string>
@@ -87,8 +87,8 @@ Options
 (labeling)
   -o : --outformat <string>
 	 Output data format
-	  tei => xml following tei guidelines
-	  xml => simple xml (default)
+	  tei => xml following tei guidelines (default)
+	  xml => simple xml 
   -d : --doi
 	 Digital object identifier (doi) extraction via crossref site, default='False'
   -e : --exterdata
@@ -232,6 +232,16 @@ dans
 ...
 
 
+------------------------
+ others.txt
+------------------------
+This file contains other configurations about TEI extraction (username of crossref site)
+and TEI output format. As Bilbo label reference with its own tags, a change rule from
+own tags to TEI is necessary. It is used in the functions of identifier.py called from
+File::buildReferences.
+
+
+
 ========================
  Class
 ========================
@@ -240,7 +250,7 @@ dans
 ------------------------
  Bilbo
 ------------------------
-A machine Bilbo that trains a CRF (and a SVM) model and automatically annotates new references.
+A machine Bilbo that trains a CRF (and a SVM) model and automatically labels new references.
 Created in Main.py
 Description in doc/documentation/Bilbo.html
 
@@ -287,7 +297,7 @@ This class contains references.
 
 Attributes :
 listReferences : Reference object list
-corpus : an indicator determine a quel corpus appartient cette liste de reference ????? level
+corpus : data type indicator
 
 Methods :
 

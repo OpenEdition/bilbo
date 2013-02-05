@@ -27,7 +27,7 @@ class Extract_svm(Extract):
 		
 		
 	#extract training and test data
-	def extractor (self, filename, ndocs, tr, filename_ori, file_out) : # tr=1 : training, tr=0 : test
+	def extract (self, filename, ndocs, tr, filename_ori, file_out) : # tr=1 : training, tr=0 : test
 		
 		i = 0
 		indices = range(ndocs)

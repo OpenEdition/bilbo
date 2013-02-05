@@ -20,7 +20,7 @@ class Extract_crf(Extract):
 		Extract.__init__(self, options)
 		
 
-	def extractor (self, typeCorpus, ndocs, fileRes, listRef, tr=-1, extOption=-1) :
+	def extract (self, typeCorpus, ndocs, fileRes, listRef, tr=-1, extOption=-1) :
 		'''
 		Extract training and test data
 

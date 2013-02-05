@@ -55,14 +55,14 @@ if __name__ == '__main__':
 		parser, 'Labeling options',
 		'These options are for labeling only'				
 		)	
-	label_opts.add_option('-o', '--outformat', dest="o", default="xml", action="store", type='choice', choices=['tei', 'xml'], help="Output reference format")
+	label_opts.add_option('-o', '--outformat', dest="o", default="tei", action="store", type='choice', choices=['tei', 'xml'], help="Output reference format")
 	label_opts.add_option('-d', '--doi', dest="d", default=False, action="store_true", help="DOI extraction via crossref site")
 	label_opts.add_option('-e', '--exterdata', dest="e", default=False, action="store_true", help="Labeling data different from training set")	
 	parser.add_option_group(label_opts)
 	
 	options, args = parser.parse_args(sys.argv[1:])
 	
-	bilbo = Bilbo()
+	#bilbo = Bilbo()
 	
 	if len(args) < 2 or ((not options.T) and (not options.L)) :
 		print "--------------------------------------"
@@ -112,8 +112,8 @@ if __name__ == '__main__':
 		print "(labeling)"		
 		print "  -o : --outformat <string>"
 		print "\t Output data format"
-		print "\t  tei => xml following tei guidelines"
-		print "\t  xml => simple xml (default)"
+		print "\t  tei => xml following tei guidelines (default)"
+		print "\t  xml => simple xml"
 		print "  -d : --doi"
 		print "\t Digital object identifier (doi) extraction via crossref site, default='False'"
 		print "  -e : --exterdata"
