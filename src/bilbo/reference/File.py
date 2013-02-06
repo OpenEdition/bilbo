@@ -141,6 +141,10 @@ class File(object):
 			1 : corpus 1, 2 : corpus 2...
 		tagTypeList : string, "listbibl"
 			tag name wrapping all references
+		
+		Attributes
+		----------
+		
 		'''
 		cptRef = 0		#reference counter
 		tmp_str = ""
@@ -241,6 +245,9 @@ class File(object):
 				'check continuously annotated tags to eliminate tags per each token'
 				oriRef = self.continuousTags(basicTag, includedLabels, oriRef)
 				
+				'add author tags'
+				oriRef = self.findAuthor(includedLabels, oriRef)
+				
 				if self.options.o == 'tei' :
 					oriRef = toTEI(oriRef, tagConvert)
 				ref_ori.append(oriRef)
@@ -262,6 +269,7 @@ class File(object):
 								contentString += con
 				#print contentString, len(contentString.split())
 				
+				'Find the starting and ending of corresponding tag and replace the string by labeled one'
 				p1 = tmp_str.find('<'+tagTypeCorpus+'>', p2)
 				p11 = tmp_str.find('<'+tagTypeCorpus+' ', p2)
 				if p1 < 0 or (p11 > 0 and p1 > p11) : p1 = p11
@@ -273,7 +281,11 @@ class File(object):
 					if self.options.d :
 						doistring = extractDoi(str(references[cpt]), tagTypeCorpus)
 						if doistring != '' : 
-							text += " <doi>"+str(doistring)+"</doi>"
+							doistring = 'http://dx.doi.org/'+str(doistring)
+							doistring = '<idno type=\"DOI\">'+doistring+'</idno>'
+							ptr1 = text.find('</title>')+len('</title>')
+							text = text[:ptr1] + doistring + text[ptr1:]
+							#print text
 					tmp_list = list(tmp_str)
 					tmp_list[p1:p2+len('</'+tagTypeCorpus+'>')] = text
 					tmp_str = ''.join(tmp_list)
@@ -326,6 +338,141 @@ class File(object):
 		
 		return oriRef
 
+	
+	def findAuthor(self, includedLabels, oriRef):
+		'''
+		Post-processing RULE about author field
+		Separate surname and forename pair per author
+		Step 1. check group of fields continuously tagged as surname or as forename over whole string
+		Step 2. per group, verify if there are more than an author 
+			2-1. Check if there is a comma (or others like &, et, and)
+			2-2. Check if there are more than three tokens
+			if only an author -> wrap the fields with <persName></persName>
+		Step 3. if more than an author, check the type.
+			3-1 separate tokens by comma (or others), if there are more than a token in a separated group,
+				we assume that authors are separated by a comma
+				wrap the fields with <persName></persName>
+			3-2 if there is only a token in a separated group,
+				SURNAME, FORENAME (FORENAME...), SURNAME, FORENAME (FORENAME...), 
+				separate them by surname
+		'''
+		preTag = ""
+		continuousck = ["surname", "forename", "namelink", "genname"]
+		group = []
+		newsoup = BeautifulSoup(oriRef)
+		tmp_group = []
+		for ns in newsoup.find_all() :
+			if ns.name in continuousck :
+				tmp_group.append(ns.name)
+			elif ns.name in includedLabels :
+				if len(tmp_group) > 0 : group.append(tmp_group)
+				tmp_group = []
+				
+		ptr2 = 0
+		#tmpRef = oriRef
+		for tmp_group in group :
+			if len(tmp_group) > 1 :
+				'add persName tag per tmp_group'
+				ptr0 = oriRef.find("<"+tmp_group[0]+">", ptr2)
+				oriRef = oriRef[:ptr0] + "<persName>" + oriRef[ptr0:]
+				for tmp_tag in tmp_group :
+					ptr1 = oriRef.find("<"+tmp_tag+">", ptr2)
+					ptr2 = oriRef.find("</"+tmp_tag+">", ptr1)
+				tmp_tag = tmp_group[len(tmp_group)-1]
+				ptr2 = ptr2 + len("</"+tmp_tag+">")
+				oriRef = oriRef[:ptr2] + "</persName>" + oriRef[ptr2:]
+				
+				'Check if there are more than an author in current tmp_group'
+				if len(tmp_group) > 3 :
+					if oriRef.find(";", ptr0, ptr2) > 0 : #separated by ;
+						ptr1 = oriRef.find(";", ptr0, ptr2)
+						while ptr1 > 0 :
+							[oriRef, ptr1, ptr2] = self._insertPersonTag(oriRef, ptr1, ptr2, ";")
+
+					elif oriRef.find(",", ptr0, ptr2) > 0 : #include comma
+						tmp_string = ''.join(BeautifulSoup(oriRef[ptr0:ptr2]).findAll(text = True))
+						#print "Maybe Multiple person"
+						#print tmp_string
+						multi = True #multiple person indicator
+						if oriRef.count(",", ptr0, ptr2) == 1 : #one comma and exist a field with one token
+							for ts in tmp_string.split(",") : 
+								if len(ts.split()) == 1 : multi = False
+						if multi :
+							'Check separate tokens by comma'
+							commaCut = True #indicator if we can simply separate by comma
+							doubleCut = True #indicator if we can separate by two commas
+							for ts in tmp_string.split(",") :  
+								if len(ts.split()) == 1 : #check if all fields have two tokens at least
+									commaCut = False
+								else : #check if all fields have just one token
+									doubleCut = False
+							if commaCut : #separate by comma
+								#print "Comma cut"
+								ptr1 = oriRef.find(",", ptr0, ptr2)
+								while ptr1 > 0 :
+									[oriRef, ptr1, ptr2] = self._insertPersonTag(oriRef, ptr1, ptr2, ",")
+							elif doubleCut : 
+								#print "Double cut"
+								ptr1 = oriRef.find(",", ptr0, ptr2)
+								if ptr1 > 0 : ptr1 = oriRef.find(",", ptr1+1, ptr2)
+								while ptr1 > 0 :
+									[oriRef, ptr1, ptr2] = self._insertPersonTag(oriRef, ptr1, ptr2, ",")
+									if ptr1 > 0 : ptr1 = oriRef.find(",", ptr1+1, ptr2)								
+							else :
+								#print "No cut" #special case
+								prePtr1 = ptr0
+								tmp_fields = tmp_string.split(",")
+								start = True #indicator is current token if start of a person
+								ptr1 = oriRef.find(",", ptr0, ptr2)
+								for tmp in tmp_fields :
+									if len(tmp.split()) > 1 and ptr1 > 0 :
+										if oriRef[prePtr1:ptr1].find("<surname>") > 0 and oriRef[prePtr1:ptr1].find("<forename>") > 0 :
+											#ok, sufficient as a person
+											prePtr1 = ptr1
+											[oriRef, ptr1, ptr2] = self._insertPersonTag(oriRef, ptr1, ptr2, ",")
+											start = True
+										else : # is probable that surname or forename
+											if start : 
+												start = False
+												prePtr1 = ptr1
+												ptr1 = oriRef.find(",", ptr1+1, ptr2)
+											else :
+												prePtr1 = ptr1
+												[oriRef, ptr1, ptr2] = self._insertPersonTag(oriRef, ptr1, ptr2, ",")
+												start = True
+									elif ptr1 > 0 :
+										if start : 
+											start = False
+											prePtr1 = ptr1
+											ptr1 = oriRef.find(",", ptr1+1, ptr2)	
+										else :
+											#print oriRef[ptr1:]
+											prePtr1 = ptr1
+											[oriRef, ptr1, ptr2] = self._insertPersonTag(oriRef, ptr1, ptr2, ",")
+											start = True								
+										
+			elif len(tmp_group) == 1 :
+				ptr1 = oriRef.find("<"+tmp_group[0]+">", ptr2)
+				ptr2 = oriRef.find("</"+tmp_group[0]+">", ptr1)
+					
+		#print
+		#print group
+		#print oriRef
+		#print
+		
+		return oriRef
+	
+	
+	def _insertPersonTag(self, oriRef, ptr1, ptr2, sep):
+		
+		oriRef = oriRef[:ptr1] + "</persName>" + oriRef[ptr1:]
+		ptr1 = oriRef.find("<", ptr1+len("</persName>"+sep), ptr2)
+		oriRef = oriRef[:ptr1] + "<persName>" + oriRef[ptr1:]
+		ptr2 = ptr2 + len("<persName></persName>")
+		ptr1 = oriRef.find(sep, ptr1, ptr2)
+		
+		return oriRef, ptr1, ptr2
+	
 	
 	def _getName(self):
 		'''

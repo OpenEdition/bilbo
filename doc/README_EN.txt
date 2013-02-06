@@ -266,44 +266,84 @@ Description in doc/documentation/Bilbo.html
 ------------------------
 CRF object is created in a Bilbo object
 CRF model learning and test
-Description in doc/documentation/CRF.html
+Description in doc/documentation/format/CRF.html
+
+------------------------
+ SVM
+------------------------
+SVM object is created in a Bilbo object
+SVM model learning and test
+Description in doc/documentation/format/SVM.html
 
 ------------------------
  Corpus
 ------------------------
 A corpus containing a set of training (or test) references.
-Description in doc/documentation/CRF.html
+Description in doc/documentation/reference/Corpus.html
 
 ------------------------
  File
 ------------------------
 A file class containing all references in a file
-Description in doc/documentation/File.html
+Description in doc/documentation/reference/File.html
 
 ------------------------
  Extract
 ------------------------
 A class to extract training and test data according to a set of predefined criteria
 Base class of Extract_crf and Extract_svm
-Description in doc/documentation/Extract.html
+Description in doc/documentation/format/Extract.html
 
 ------------------------
  Extract_crf
 ------------------------
 A class to extract training and test data for CRF
 Sub class of Extract
-Description in doc/documentation/Extract_crf.html
+Description in doc/documentation/format/Extract_crf.html
 
 ------------------------
  Extract_svm
 ------------------------
-
-
-
-
+A class to extract training and test data for SVM
+Sub class of Extract
+Description in doc/documentation/format/Extract_svm.html
 
 ------------------------
- ListReference
+ Clean
+------------------------
+A class that tokenizes xml input data. Navigates the xml tree and extracts tokens, features and labels.
+It concerns the first step of tokenization such that words are separated by whitespace but not by punctuation 
+marks. A clean object is created in a File object ("extract" method).
+Description in doc/documentation/format/Clean.html
+
+------------------------
+ CleanCorpus1
+------------------------
+A class that tokenizes xml input data for corpus 1 (references).
+Sub class of Clean
+Description in doc/documentation/format/CleanCorpus1.html
+
+------------------------
+ CleanCorpus2
+------------------------
+A class that tokenizes xml input data for corpus 2 (notes).
+Sub class of Clean
+Description in doc/documentation/format/CleanCorpus2.html
+
+------------------------
+ Rule
+------------------------
+A class that reorganizes tokens according to the predefined rules. ("lexique.txt" is loaded)
+Especially the punctuation marks are separated and new Word objects are created.
+Features about initial expression, capitalized token etc. are verified and attached.
+Description in doc/documentation/format/Rule.html
+
+
+
+……TO BE UPDATED…
+
+------------------------
+ ListReferences
 ------------------------
 This class contains references.
 
@@ -349,40 +389,6 @@ nom : Feature (or tag) name
 Methods :
 
 =========
-------------------------
- Clean
-------------------------
-This class cleans input references
-
-Attributes :
-
-Methods :
-####
-processing : this method cleans references and reads the xml files to extract Balise, Word, Reference objects etc. at the end it returns a ListReferences object.
-	parameter :
-		fname : path and file name
-		typeCorpus : corpus type indicator coming from references
-
-####
-__buildWords : this method constructs Word, Balise objects etc.
-	parameter : 
-		dicWord : word dictionaries containing their features and tags: [word, caracteristique] & [word, balise]
-
-------------------------
- Rule
-------------------------
-
-This class extracts word features using some static rules and other rules written in a configuration file : lexique.txt
-
-Attributes :
-
-Methods :
-####
-reorganizing : this method tokenizes input words by separating punctuation and extract features from rules.
-	parameter :
-		listReference : ListReference object
-
-
 	
 ------------------------
  Name
