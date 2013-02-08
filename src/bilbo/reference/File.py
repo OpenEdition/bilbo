@@ -223,11 +223,11 @@ class File(object):
 									newtoken = newtoken.lstrip()
 									newtoken = newtoken.rstrip()
 								#print ptr, newtoken, token
-								if newtoken == token : 
+								if newtoken == token or newtoken.find(token) >= 0: 
 									token = oriRef[ptr_start:ptr_end+1]
 									ptr = ptr_start
 								else :
-									print ptr, newtoken, token
+									print ptr, '*'+newtoken+'*', token
 									print "PROBLEM, CANNOT FIND THE TOKEN", token, s[cptRef]
 									ptr = -1
 									pass
@@ -244,9 +244,12 @@ class File(object):
 				
 				'check continuously annotated tags to eliminate tags per each token'
 				oriRef = self.continuousTags(basicTag, includedLabels, oriRef)
-				
+				'arrange name tag'
+				oriRef = self.arrangeNameTagsPerToken(oriRef, tagTypeCorpus)
 				'add author tags'
 				oriRef = self.findAuthor(includedLabels, oriRef)
+				'correct miss tag inserting'
+				oriRef = self._correctMissTag(oriRef, basicTag, "persName")
 				
 				if self.options.o == 'tei' :
 					oriRef = toTEI(oriRef, tagConvert)
@@ -355,7 +358,7 @@ class File(object):
 			3-2 if there is only a token in a separated group,
 				SURNAME, FORENAME (FORENAME...), SURNAME, FORENAME (FORENAME...), 
 				separate them by surname
-		'''
+		'''		
 		preTag = ""
 		continuousck = ["surname", "forename", "namelink", "genname"]
 		group = []
@@ -381,6 +384,7 @@ class File(object):
 				tmp_tag = tmp_group[len(tmp_group)-1]
 				ptr2 = ptr2 + len("</"+tmp_tag+">")
 				oriRef = oriRef[:ptr2] + "</persName>" + oriRef[ptr2:]
+				
 				
 				'Check if there are more than an author in current tmp_group'
 				if len(tmp_group) > 3 :
@@ -449,16 +453,11 @@ class File(object):
 											#print oriRef[ptr1:]
 											prePtr1 = ptr1
 											[oriRef, ptr1, ptr2] = self._insertPersonTag(oriRef, ptr1, ptr2, ",")
-											start = True								
-										
+											start = True
+							
 			elif len(tmp_group) == 1 :
 				ptr1 = oriRef.find("<"+tmp_group[0]+">", ptr2)
 				ptr2 = oriRef.find("</"+tmp_group[0]+">", ptr1)
-					
-		#print
-		#print group
-		#print oriRef
-		#print
 		
 		return oriRef
 	
@@ -472,6 +471,181 @@ class File(object):
 		ptr1 = oriRef.find(sep, ptr1, ptr2)
 		
 		return oriRef, ptr1, ptr2
+	
+	
+	def arrangeNameTagsPerToken(self, oriRef, tagTypeCorpus):
+		'''
+		Check if a token annotated by name concerning label has wrapped by other basic tag.
+		If yes, change order. It's for prevent the mismatching error of persName tag
+		e.g. To prevent the following error (interruption of <persName> in <hi>)
+			<hi font-variant="small-caps"><persName><surname>Alves</surname></hi>
+			change order as following before add <persName>
+			<surname><hi font-variant="small-caps">Alves</hi></surname>
+		'''
+		nameck = ["surname", "forename", "namelink", "genname"]
+		for tmpTag in nameck :
+			ptr2 = 0
+			ptr1 = oriRef.find('<'+tmpTag+'>', ptr2) #find the starting of a name tag
+			while ptr1 > 0 :
+				ptr2 = oriRef.find('</'+tmpTag+'>', ptr1)+len('</'+tmpTag+'>') #find its ending 
+				ptr3 = oriRef.find('</',ptr2)	#find closest other ending tag
+				closeTag = ''
+				if oriRef.find('<',ptr2,ptr3) < 0 and len((oriRef[ptr2:ptr3]).split()) == 0 : #if there is no starting tag between them and NO char
+					ptr4 = oriRef.find('>',ptr3)
+					closeTag = oriRef[ptr3+len('</'):ptr4] #extract the closest tag name
+					[st1, ed1, dummyTag] = self._closestPreOpeningTag(oriRef, ptr1)
+					if oriRef[st1:ed1].find('<'+closeTag) == 0 and len((oriRef[ed1:ptr1]).split()) == 0 :
+						#then exchange tags
+						tmpRef = self._exchangeTags(oriRef, st1, ed1, ptr1, ptr1+len('<'+tmpTag+'>'))
+						tmpRef = self._exchangeTags(tmpRef, ptr2-len('</'+tmpTag+'>'), ptr2, ptr3, ptr4+1)
+						oriRef = tmpRef
+				ptr1 = oriRef.find('<'+tmpTag+'>', ptr2)
+		
+		#final continuous check
+		continuousNameck = ["</surname><surname>", "</forename><forename>"]
+		for tmpNameTag in continuousNameck :
+			oriRef = oriRef.replace(tmpNameTag,'')
+			
+		return oriRef
+	
+	
+	def _exchangeTags(self, oriRef, st1, ed1, st2, ed2):
+		'''
+		Exchange the position of two tags
+		'''
+		tmpRef = oriRef[:st1] + oriRef[st2:ed2] + oriRef[ed1:st2]
+		tmpRef += oriRef[st1:ed1] + oriRef[ed2:]		
+		
+		return tmpRef
+	
+	
+	def _closestPreOpeningTag(self, oriRef, ptr1):
+		'''
+		Find the position of closest previous tag from a position
+		'''
+		startck1 = (oriRef[ptr1::-1]).find(">", 0)
+		startck2 = (oriRef[ptr1::-1]).find("<", startck1)
+		st = ptr1-startck2
+		ed = ptr1-startck1+1		
+		tagName = ((oriRef[st:ed].split('>')[0]).split()[0])[1:]
+
+		return st, ed, tagName
+	
+	
+	def _preOpeningTag(self, oriRef, ptr1, tagN):
+		'''
+		Find the position of previous tag called tagN from a position
+		'''
+		tagName = ''
+		startck2 = 0
+		startck1 = 0
+		while tagName != tagN or startck1 < 0:
+			startck1 = (oriRef[ptr1::-1]).find(">", startck2)
+			startck2 = (oriRef[ptr1::-1]).find("<", startck1)
+			st = ptr1-startck2
+			ed = ptr1-startck1+1		
+			tagName = ((oriRef[st:ed].split('>')[0]).split()[0])[1:]
+
+		return st, ed, tagName
+	
+
+	def _postEndingTag(self, oriRef, ptr2, tagN):
+		'''
+		Find the position of previous tag called tagN from a position
+		'''
+		tagName = ''
+		st = 0
+		ed = 0
+		while tagName != tagN or st < 0:
+			st = oriRef.find("</", ed)
+			ed = oriRef.find(">", st)	
+			tagName = oriRef[st+len('</'):ed]
+
+		return st, ed, tagName
+	
+	
+	def _closestPreEndingTag(self, oriRef, ptr2):
+		'''
+		Find the position of closest previous tag from a position
+		'''
+		startck1 = (oriRef[ptr2::-1]).find(">", 0)
+		startck2 = (oriRef[ptr2::-1]).find("/<", startck1)
+		
+		st = ptr2-startck2-1
+		ed = ptr2-startck1+1
+		tagName = oriRef[st+len('</'):ed-1]
+
+		return st, ed, tagName
+	
+	
+	def _correctMissTag(self, oriRef, basicTag, addedTag):
+		'''
+		Check interrupted tags in newly attached tag (wrapping other tags), then replace them
+		e.g. <hi rend="bold"><persName><surname>Lallement</surname> <forename>E.</forename></hi></persName>
+			... <hi rend="bold"> <forename>M.</forename></persName> (<abbr>dir</abbr>.)</hi>
+		'''
+		tmpRef = oriRef
+		ptr1 = tmpRef.find('<'+addedTag+'>', 0) #find the starting of new tag
+		while ptr1 > 0 :
+			ptr2 = tmpRef.find('</'+addedTag+'>', ptr1)	
+			#Starting tag		
+			tagName = ''
+			found = []
+			st2 = tmpRef.find('</', ptr1, ptr2)
+			ed2 = tmpRef.find('>', st2, ptr2)
+			if st2 > 0 : tagName = tmpRef[st2+len('</'):ed2]
+			while st2 > 0 and tagName not in found : 
+				while st2 > 0 and tagName not in basicTag :
+					st2 = tmpRef.find('</', ed2, ptr2)
+					ed2 = tmpRef.find('>', st2, ptr2)
+					if st2 > 0 : tagName = tmpRef[st2+len('</'):ed2]
+				if st2 > 0 : 
+					p1 = tmpRef.find('<'+tagName+' ', ptr1, st2)
+					p2 = tmpRef.find('<'+tagName+'>', ptr1, st2)
+					if p1 < 0 and p2 < 0 : 
+						#no starting tag, so find starting tag
+						[st1, ed1, tagN] = self._preOpeningTag(tmpRef, ptr1, tagName)
+						if tagName == tagN :
+							if len((tmpRef[ed1:ptr1+len('<'+addedTag+'>')]).split()) == 0 :
+								tmpRef = self._exchangeTags(tmpRef, st1, ed1, ptr1, ptr1+len('<'+addedTag+'>'))
+								found.append(tagName)
+							else :
+								tmpRef = self._exchangeTags(tmpRef, ptr1, ptr1+len('<'+addedTag+'>'), st2, ed2+1)
+								found.append(tagName)
+								
+					st2 = tmpRef.find('</', ed2, ptr2)
+					ed2 = tmpRef.find('>', st2, ptr2)
+					if st2 > 0 : tagName = tmpRef[st2+len('</'):ed2]
+			#Ending tag		
+			tagName = ''
+			found = []
+			st2 = tmpRef.find('</', ptr2+1)
+			ed2 = tmpRef.find('>', st2)
+			if st2 > 0 : tagName = tmpRef[st2+len('</'):ed2]
+			while st2 > 0 and tagName not in found :
+				while st2 > 0 and tagName not in basicTag :
+					st2 = tmpRef.find('</', ed2)
+					ed2 = tmpRef.find('>', st2)
+					if st2 > 0 : tagName = tmpRef[st2+len('</'):ed2]
+				if st2 > 0 : 
+					p1 = tmpRef.find('<'+tagName+' ', ptr2, st2)
+					p2 = tmpRef.find('<'+tagName+'>', ptr2, st2)
+					if p1 < 0 and p2 < 0 : 
+						#no starting tag, so find starting tag
+						[st1, ed1, tagN] = self._preOpeningTag(tmpRef, ptr2, tagName)
+						if tagName == tagN and st1 > ptr1 :
+							if tmpRef[ptr2+len('</'+addedTag+'>'):st2].find(addedTag) < 0 : 
+								tmpRef = self._exchangeTags(tmpRef, ptr2, ptr2+len('</'+addedTag+'>'), st2, ed2+1)
+								found.append(tagName)
+							else : 
+								tmpRef = self._exchangeTags(tmpRef, st1, ed1, ptr2, ptr2+len('</'+addedTag+'>'))
+								found.append(tagName)
+					st2 = tmpRef.find('</', ed2)
+					ed2 = tmpRef.find('>', st2)
+					if st2 > 0 : tagName = tmpRef[st2+len('</'):ed2]
+			ptr1 = tmpRef.find('<'+addedTag+'>', ptr2)
+		
+		return  tmpRef	
 	
 	
 	def _getName(self):

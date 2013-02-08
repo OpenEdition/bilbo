@@ -11,7 +11,7 @@ import re
 class Clean(object):
 	'''
 	A class that tokenizes xml input data. Navigates the xml tree and extracts tokens, features and labels.
-	It concerns the first step of tokenization such that words are separated by whitespace but not punctuation 
+	It concerns the first step of tokenization such that words are separated by whitespace but not by punctuation 
 	marks. A clean object is created in a File object ("extract" method).
 	'''
 
@@ -43,15 +43,11 @@ class Clean(object):
 		
 
 	def posssign(self, line, sign) :
-		'''
-		posssign : 
-		'''
 		for s in sign :
 			nline = line.replace(s[0], s[1]) # When re.sub is used, French accents were broken
 			#nline = line
 			if nline != line :
 				line = nline
-		
 		return line
 	
 	
@@ -141,7 +137,6 @@ class Clean(object):
 						balise.append("nonbibl")
 					words.append({"nom":s, "caracteristique":caract, "balise":balise})
 				
-
 		'If the tag appears in a nonLabel list'
 		if self.nonLabels.has_key(top_tag):
 			if self.nonLabels[top_tag] != "1":
@@ -210,7 +205,7 @@ class Clean(object):
 	def _elimination (self, tmp_str) :
 		'''
 		Eliminate unnecessary tags
-		'''
+		'''		
 		target_tag_st = "<hi font-variant=\"small-caps\">"
 		target_tag_end = "</hi>"
 		
@@ -221,10 +216,36 @@ class Clean(object):
 			c = tmp_str.find(target_tag_end, b)
 			d = c + len(target_tag_end)
 			
-			new_str =  tmp_str[0:a] + tmp_str[b:c] + tmp_str[d:len(tmp_str)]
+			new_str =  tmp_str[:a] + tmp_str[b:c] + tmp_str[d:]
 			tmp_str = new_str
 			a = tmp_str.find(target_tag_st,0)
+		
+		
+		target_tag_st = "<hi "	#a
+		target_tag_mi = ">"		#c
+		target_tag_end = "</hi>"	#d e
+		
+		tmp_str = new_str
+		a = tmp_str.find(target_tag_st,0)
+		while a > 0 :
+			#print a
+			b = a + len(target_tag_st)
+			c = tmp_str.find(target_tag_mi, b)
+			d = tmp_str.find(target_tag_end, c)
+			e = d + len(target_tag_end)
 			
+			if c > 0 and d > 0 and e > 0 and ( re.match(" [a-zA-Z]", tmp_str[a-2:a]) or (re.match("[a-zA-Z]", tmp_str[d-1:d]) and re.match("[a-zA-Z]", tmp_str[e:e+1]))  ):
+				#print '1**'+tmp_str[a-2:a]+'**'
+				#print '2**'+tmp_str[d-1:d]+'**'
+				#print '3**'+tmp_str[e:e+1]+'**'
+				new_str =  tmp_str[:a] + tmp_str[c+1:d] + tmp_str[e:]
+				tmp_str = new_str
+				a = tmp_str.find(target_tag_st,0)
+			else :
+				if c > 0 and d > 0 and e > 0 :
+					a = tmp_str.find(target_tag_st,e)
+				else : a = 0
+
 		return new_str
 		
 		
