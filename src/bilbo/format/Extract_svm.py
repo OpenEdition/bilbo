@@ -10,9 +10,28 @@ import codecs
 import numpy
 
 class Extract_svm(Extract):
-
+	'''
+	A class to extract training and test data for SVM
+	Sub class of Extract
+	'''
 
 	def __init__(self, options={}):
+		'''
+		Attributes
+		----------	
+		tokens : List of String
+			tokens[k] -> TOKEN STRING with token id 'k'
+		idf : List of int
+			idf[k] -> document frequency of token id 'k'
+		features : List of String
+			features[k] -> FEATURE STRING with feature id 'k'
+		doc_tokens : dict
+			tmp document represented by token strings and their counts
+		doc_features : dict 
+			tmp document represented by feature strings and their counts
+		valid_features : dict
+			*IMPORTANT* valid features to be considered for the svm classification 
+		'''			
 		Extract.__init__(self, options)
 		self.tokens = []	# tokens[k] : TOKEN STRING with token id 'k'
 		self.idf = []		# idf[k] : document frequency of token id 'k'
@@ -21,14 +40,30 @@ class Extract_svm(Extract):
 		self.doc_features = {'0000':0}	# tmp document represented by feature strings and their counts
 		self.options = options
 
-
 		self.valid_features = {'punc':0, 'nopunc':0, 'onepunc':0, 'twopunc':0, 'nonumbers':0, 'dash':0,
 						'noinitial':0, 'startinitial':0, 'posspage':0, 'weblink':0, 'posseditor':0, 'italic':0}
 		
 		
-	#extract training and test data
 	def extract (self, filename, ndocs, tr, filename_ori, file_out) : # tr=1 : training, tr=0 : test
-		
+		'''
+		Extract training and test data in numerical format from source input file which has been 
+		extracted from previous process Extract_crf::prepareTest 
+
+		Parameters
+		----------	
+		filename : String
+			input file name containing source information of data
+		ndocs : int
+			number of instances
+		tr : int, {1, 0}
+			check if training (1) or test data (0)
+		filename_ori : String
+			original file name keeping the original string of input data
+			it's used to check the classification error.
+			for the moment it's same as "filename", but can be modified.
+		file_out : String
+			output file name. this file will be used as training or test data for SVM light
+		'''			
 		i = 0
 		indices = range(ndocs)
 		flagEndRef = 0
@@ -74,7 +109,9 @@ class Extract_svm(Extract):
 	
 	
 	def fill_data(self, line, input, data, tr) : # line[1:], tokens, token_data / line, features, feature_data
-
+		'''
+		Read data in numerical format
+		'''
 		self.doc_tokens.clear()
 		for n in line :
 			if input.count(n.lower()) == 0 :
@@ -100,8 +137,11 @@ class Extract_svm(Extract):
 		return
 	
 	
-	#insert new FEATURES related with total text characters / NOPUNC, ONEPUNC, NONUMBERS, NOINITIAL, 
+	# 
 	def insert_lineFeatures(self, feature_data, tr) :
+		'''
+		Insert new FEATURES related with global character of reference : NOPUNC, ONEPUNC, NONUMBERS, NOINITIAL
+		'''
 		puncnt = 0
 		#extended featues
 		if tr == 1 :
@@ -146,11 +186,11 @@ class Extract_svm(Extract):
 			except ValueError:
 				pass
 		
-
-
-
-			
+		
 	def print_output(self, token_data, feature_data, bibls, tr, indices, fileOut) :
+		'''
+		Print final svm data file
+		'''
 		fich = codecs.open(fileOut, "w", encoding="utf-8")
 
 		i = 0
@@ -168,7 +208,6 @@ class Extract_svm(Extract):
 				except:
 					fich.write( str(bibls[i])+" ")
 
-				
 			for key in keylist:
 				if indices[i] == tr :
 					fich.write( str(key+1)+':'+str(token_data[i][key])+" ")
@@ -189,15 +228,16 @@ class Extract_svm(Extract):
 	
 	#for the counting of input tokens
 	def adding_fId(self, tokens_len, feature_data) :
-		
 		i = 10
 		while i < tokens_len :
 			i = i*10
-			
 		return i
 	
-	#create files having original text form for the varification
+	
 	def load_original(self, filename_ori, indices) :
+		'''
+		Create files having original text form for the verification
+		'''
 		flagEndRef = 0
 		fouttr = open("Result/original_train.txt", "w")
 		fouttst = open("Result/original_test.txt", "w")
@@ -227,8 +267,10 @@ class Extract_svm(Extract):
 		return
 
 
-	#save input(token) id list and feature id list for new data
 	def save_ID(self, tokens, features) :
+		'''
+		Save input(token) id list and feature id list for new data
+		'''
 		f = open("model/corpus2/"+self.options.m+"/inputID.txt", 'w')
 		for k in tokens :
 			f.write(str(k))
@@ -243,8 +285,10 @@ class Extract_svm(Extract):
 		return
 
 
-	#load input(token) id list and feature id list for new data
 	def load_ID(self, tokens, features) :
+		'''
+		Load input(token) id list and feature id list for new data
+		'''
 		#load input(token) id list for new data
 		del tokens[:]
 		for line in open("model/corpus2/"+self.options.m+"/inputID.txt", 'r') :

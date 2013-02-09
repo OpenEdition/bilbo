@@ -186,6 +186,10 @@ class File(object):
 							token = token.encode('utf8')
 							pre_ptr = ptr
 							ptr = oriRef.find(token, ptr)
+							while (oriRef.find(">", ptr) < oriRef.find("<", ptr)) and oriRef.find("<", ptr) > 0 :
+								ptr = oriRef.find(token, ptr+1)
+							if oriRef.find("<", ptr) < 0 : ptr = -1
+							
 							inner_string = ""
 							if ptr >= 0 :
 								tmp_str2 = oriRef[pre_ptr:ptr]
@@ -222,13 +226,16 @@ class File(object):
 									newtoken = re.sub(' ', ' ', newtoken)
 									newtoken = newtoken.lstrip()
 									newtoken = newtoken.rstrip()
-								#print ptr, newtoken, token
 								if newtoken == token or newtoken.find(token) >= 0: 
 									token = oriRef[ptr_start:ptr_end+1]
 									ptr = ptr_start
 								else :
-									print ptr, '*'+newtoken+'*', token
-									print "PROBLEM, CANNOT FIND THE TOKEN", token, s[cptRef]
+									print pre_ptr, ptr, '*'+newtoken+'*', token
+									print "PROBLEM, CANNOT FIND THE TOKEN", token
+									print s[cptRef]
+									#print oriRef[:pre_ptr]
+									#print ref
+									#print 
 									ptr = -1
 									pass
 							else :
@@ -241,11 +248,14 @@ class File(object):
 								ptr += len(nstr)
 							else :
 								ptr = pre_ptr
+						#print pre_ptr, ptr, token
+						#print oriRef[:ptr]
+						#print 
 				
 				'check continuously annotated tags to eliminate tags per each token'
 				oriRef = self.continuousTags(basicTag, includedLabels, oriRef)
 				'arrange name tag'
-				oriRef = self.arrangeNameTagsPerToken(oriRef, tagTypeCorpus)
+				oriRef = self.arrangeTagsPerToken(includedLabels, oriRef, tagTypeCorpus)
 				'add persName tags'
 				oriRef = self.findAuthor(includedLabels, oriRef)
 				'correct missed tag inserting'
@@ -257,6 +267,9 @@ class File(object):
 			cptRef += 1
 		
 		try:
+			tmp_str = self.writeResultInOriginal(tmp_str, soup, ref_ori, references, tagTypeCorpus)
+			
+			'''
 			cpt = 0
 			listRef = soup.findAll(tagTypeCorpus)
 			
@@ -293,7 +306,7 @@ class File(object):
 					tmp_list[p1:p2+len('</'+tagTypeCorpus+'>')] = text
 					tmp_str = ''.join(tmp_list)
 				cpt += 1
-			
+			'''
 		except :
 			pass
 
@@ -302,6 +315,47 @@ class File(object):
 		fich.close()
 		
 		return
+
+
+	def writeResultInOriginal(self, tmp_str, soup, ref_ori, references, tagTypeCorpus):
+		cpt = 0
+		listRef = soup.findAll(tagTypeCorpus)
+			
+		p2 = 0
+		for ref in listRef:
+			contentString ="" # TO CHECK IF THE REFERENCE or NOTE HAS NO CONTENTS
+			for rf in ref.contents :
+				if rf == rf.string : contentString += rf
+					
+			for tag in ref.findAll(True) :
+					if len(tag.findAll(True)) == 0 and len(tag.contents) > 0 :
+						for con in tag.contents :
+							contentString += con
+			#print contentString, len(contentString.split())
+			
+			'Find the starting and ending of corresponding tag and replace the string by labeled one'
+			p1 = tmp_str.find('<'+tagTypeCorpus+'>', p2)
+			p11 = tmp_str.find('<'+tagTypeCorpus+' ', p2)
+			if p1 < 0 or (p11 > 0 and p1 > p11) : p1 = p11
+			p2 = tmp_str.find('</'+tagTypeCorpus+'>', p1)
+	
+			if len(contentString.split()) > 0 :
+				doistring = ''
+				text = str(ref_ori[cpt])
+				if self.options.d :
+					doistring = extractDoi(str(references[cpt]), tagTypeCorpus)
+					if doistring != '' : 
+						doistring = 'http://dx.doi.org/'+str(doistring)
+						doistring = '<idno type=\"DOI\">'+doistring+'</idno>'
+						ptr1 = text.find('</title>')+len('</title>')
+						text = text[:ptr1] + doistring + text[ptr1:]
+						#print text
+				tmp_list = list(tmp_str)
+				tmp_list[p1:p2+len('</'+tagTypeCorpus+'>')] = text
+				tmp_str = ''.join(tmp_list)
+			cpt += 1		
+		
+		return tmp_str
 
 		
 	def continuousTags(self, basicTag, includedLabels, oriRef):
@@ -377,6 +431,50 @@ class File(object):
 		for tmpNameTag in continuousNameck :
 			oriRef = oriRef.replace(tmpNameTag,'')
 			
+		return oriRef
+	
+	
+	def arrangeTagsPerToken(self, includedLabels, oriRef, tagTypeCorpus):
+		'''
+		Check if a field of tokens annotated by a label tag has wrapped by other basic tag.
+		If yes, change order. It's for prevent the mismatching error of persName tag and 
+			also find other continuous tags.
+		e.g. To prevent the following error (interruption of <persName> in <hi>)
+			<hi font-variant="small-caps"><persName><surname>Alves</surname></hi>
+			change order as following before add <persName>
+			<surname><hi font-variant="small-caps">Alves</hi></surname>
+		e.g. To find undetected continuous tags as follows
+			
+		'''
+		nameck = ["surname", "forename", "namelink", "genname"]
+		for tmpTag in includedLabels :
+			ptr2 = 0
+			ptr1 = oriRef.find('<'+tmpTag+'>', ptr2) #find the starting of a name tag
+			while ptr1 > 0 :
+				ptr2 = oriRef.find('</'+tmpTag+'>', ptr1)+len('</'+tmpTag+'>') #find its ending 
+				ptr3 = oriRef.find('</',ptr2)	#find closest other ending tag
+				closeTag = ''
+				if oriRef.find('<',ptr2,ptr3) < 0 and len((oriRef[ptr2:ptr3].replace(' ', ' ')).split()) == 0 : #if there is no starting tag between them and NO char
+					ptr4 = oriRef.find('>',ptr3)
+					closeTag = oriRef[ptr3+len('</'):ptr4] #extract the closest tag name
+					[st1, ed1, dummyTag] = self._closestPreOpeningTag(oriRef, ptr1)
+					if oriRef[st1:ed1].find('<'+closeTag) == 0 and len((oriRef[ed1:ptr1].replace(' ', ' ')).split()) == 0 :#if there is no tag between them and NO char
+						#then exchange tags
+						tmpRef = self._exchangeTags(oriRef, st1, ed1, ptr1, ptr1+len('<'+tmpTag+'>'))
+						tmpRef = self._exchangeTags(tmpRef, ptr2-len('</'+tmpTag+'>'), ptr2, ptr3, ptr4+1)
+						oriRef = tmpRef
+				ptr1 = oriRef.find('<'+tmpTag+'>', ptr2)
+		#final continuous check
+		continuousTagck = []
+		for tmpTag in includedLabels :
+			continuousTagck.append('</'+tmpTag+'><'+tmpTag+'>')
+			if tmpTag not in nameck :
+				continuousTagck.append('</'+tmpTag+'> <'+tmpTag+'>')
+				continuousTagck.append('</'+tmpTag+'> <'+tmpTag+'>')
+
+		for tmpTag in continuousTagck :
+			oriRef = oriRef.replace(tmpTag,'')
+
 		return oriRef
 	
 	
@@ -459,7 +557,7 @@ class File(object):
 									[oriRef, ptr1, ptr2] = self._insertPersonTag(oriRef, ptr1, ptr2, ",")
 									if ptr1 > 0 : ptr1 = oriRef.find(",", ptr1+1, ptr2)								
 							else :
-								#print "No cut" #special case
+								#special case
 								prePtr1 = ptr0
 								tmp_fields = tmp_string.split(",")
 								start = True #indicator is current token if start of a person
@@ -562,21 +660,7 @@ class File(object):
 		tagName = ((oriRef[st:ed].split('>')[0]).split()[0])[1:]
 
 		return st, ed, tagName
-	
-	
-	def _closestPreEndingTag(self, oriRef, ptr2):
-		'''
-		Find the position of closest previous tag from a position
-		'''
-		startck1 = (oriRef[ptr2::-1]).find(">", 0)
-		startck2 = (oriRef[ptr2::-1]).find("/<", startck1)
 		
-		st = ptr2-startck2-1
-		ed = ptr2-startck1+1
-		tagName = oriRef[st+len('</'):ed-1]
-
-		return st, ed, tagName
-	
 	
 	def _preOpeningTag(self, oriRef, ptr1, tagN):
 		'''
@@ -594,21 +678,6 @@ class File(object):
 
 		return st, ed, tagName
 	
-
-	def _postEndingTag(self, oriRef, ptr2, tagN):
-		'''
-		Find the position of previous tag called tagN from a position
-		'''
-		tagName = ''
-		st = 0
-		ed = 0
-		while tagName != tagN or st < 0:
-			st = oriRef.find("</", ed)
-			ed = oriRef.find(">", st)	
-			tagName = oriRef[st+len('</'):ed]
-
-		return st, ed, tagName
-		
 	
 	def _correctMissTag(self, oriRef, basicTag, addedTag):
 		'''
@@ -688,7 +757,6 @@ class File(object):
 							else : # To avoid conflict just move the tag 
 								tmpRef = self._moveSecondTag(tmpRef, st1, ed1, ptr2, ptr2+len('</'+addedTag+'>'))
 								found.append(tagName)
-							
 					st2 = tmpRef.find('</', ed2)
 					ed2 = tmpRef.find('>', st2)
 					if st2 > 0 : tagName = tmpRef[st2+len('</'):ed2]

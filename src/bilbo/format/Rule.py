@@ -5,12 +5,15 @@ Created on 19 avr. 2012
 @author: Young-Min Kim, Jade Tavernier
 '''
 from bilbo.reference.Word import Word
+from bilbo.reference.Reference import Reference
 import re
 
 class Rule(object):
 	'''
-	classdocs
-	'''	
+	A class that reorganizes tokens according to the predefined rules.
+	Especially the punctuation marks are separated and new Word objects are created.
+	Features about initial expression, capitalized token etc. are verified and attached.
+	'''
 	
 	def __init__(self):
 		'''
@@ -50,8 +53,7 @@ class Rule(object):
 		except:
 			print "cannot open file lexique.txt"
 		
-		
-				
+
 	def reorganizing(self, listReference) :
 		'''
 		Separate punctuation marks and add tags or attributes according to predefined rules
@@ -60,121 +62,152 @@ class Rule(object):
 		Parameters
 		----------
 		'''
-		cpt = 0
-		flagAjoutWord = 0 	#Flag to check the number of added words
-		flagPoncDebut = 0 	#Flag to check if a punctuation mark is at the first position
-		cptIgnoreWord = 0
-
 		for reference in listReference.getReferences() :
-			#print reference.affiche()
-			cpt = 0
-			flagAjoutWord = 0 	#Flag to check the number of added words
-			flagPoncDebut = 0 	#Flag to check if a punctuation mark is at the first position
-			cptIgnoreWord = 0
-			
-			for mot in reference.word :
-				if mot.ignoreWord == 0:
-					flagPoncDebut = 0
-					if flagAjoutWord == 0:
-						if mot.nom.split() != 0 :
-							if mot.nom.split()[0] != '!NONE!':
-								'input_str is a string to be handled, new_str is a string to be saved'
-								input_str = mot.nom.split()[0]
-								[new_str, input_str] = self._checkLexique(mot, input_str)								
-								#tokenization
-								remain_str = input_str
-								countCh = 0
-								new_str2 = ''
-								for c in input_str :
-									if c in  ".,():;{}[]!?#$%\*+/<=>@^_|~" and new_str2 == '' :# not including "-"
-										if new_str != '' :
-											feat_str = ''
-											feat_str = self._featureCheck(new_str)
-											if mot.getFeature("initial") != -1: feat_str = ''
-											
-											if self.special.has_key(new_str) :
-												if flagAjoutWord != 0  or flagPoncDebut == 1:
-													nomTag = mot.listNomTag()
-													nomFeat = mot.listNomFeature()
-													refWord = Word(c, nomTag, feat_str.split(" ")+nomFeat)
-													reference.addWord(cpt+1+flagAjoutWord+cptIgnoreWord,refWord)
-													flagAjoutWord += 1
-												else: 
-													mot.nom = new_str
-													mot.addTag("c")
-													#mot.delAllFeature()
-											else :
-												if flagAjoutWord != 0 or flagPoncDebut == 1:
-													nomTag = mot.listNomTag()
-													nomFeat = mot.listNomFeature()
-													refWord = Word(new_str, nomTag, feat_str.split(" ")+nomFeat)
-													refWord.delTag("c")
-													reference.addWord(cpt+1+flagAjoutWord+cptIgnoreWord,refWord)
-													flagAjoutWord += 1
-												else:
-													mot.nom = new_str
-													mot.addFeature(feat_str.split(" "))
-											nomTag = mot.listNomTag()
-											nomTag.append("c")
-											refWord = Word(c, nomTag, feat_str.split(" "))
-											#print mot.nom, c, nomTag, cpt, flagAjoutWord, cptIgnoreWord
-											reference.addWord(cpt+1+flagAjoutWord+cptIgnoreWord,refWord)
-											flagAjoutWord += 1
-										else:
-											if flagAjoutWord != 0:
-												nomTag = mot.listNomTag()
-												refWord = Word(c,nomTag)
-												refWord.addTag("c")
-												reference.addWord(cpt+1+flagAjoutWord+cptIgnoreWord,refWord)
-												flagAjoutWord += 1
-											else:
-												mot.nom = c
-												mot.addTag("c")
-												flagPoncDebut = 1
-										new_str = ''
-										remain_str = remain_str.replace(c,'')
-									else :
-										new_str = new_str+c
-										if flagPoncDebut == 1 and new_str2 == '' :
-											[new_str2, remain_str] = self._checkLexique(mot, remain_str) # for the case (H.)
-										if new_str2 != '' and countCh == input_str.find(new_str2)+len(new_str2)-1 :
-											new_str2 = ''
-									countCh += 1
-								
-								if not new_str == '' :
-									feat_str = ''
-									feat_str = self._featureCheck(new_str)
-									if self.special.has_key(new_str) :
-										if flagPoncDebut == 1:
-													refWord = Word(new_str,"c")
-													reference.addWord(cpt+1+flagAjoutWord+cptIgnoreWord,refWord)
-													flagAjoutWord += 1
-										else:
-											mot.nom = new_str
-											mot.addTag("c")
-											#mot.delAllFeature()
-									else :										
-										if flagPoncDebut == 1 or (mot.nom != new_str): #added or (mot.nom != new_str) for attached words e.g. Ethnicity/Clan
-											nomTag = mot.listNomTag()
-											nomFeat = mot.listNomFeature()
-											refWord = Word(new_str,nomTag, feat_str.split(" ")+nomFeat)
-											refWord.delTag("c")
-											reference.addWord(cpt+1+flagAjoutWord+cptIgnoreWord,refWord)
-											flagAjoutWord += 1
-										else:
-											mot.nom = new_str
-											mot.addFeature(feat_str.split(" "))
-					else:
-						flagAjoutWord -= 1
-					cpt += 1
-				else:
-					cptIgnoreWord += 1
-			#print reference.affiche()
+			reorgWords =[]
+			for word in reference.words :
+				frontWords = []
+				frontWords = self.sepTotalFrontPunc(word)
+				wordSet = frontWords
+				
+				tmpWord = []
+				new_str = ''
+				if word.nom != '' :
+					'new_str is a string to be saved, input_str is a string to be handled'
+					[new_str, input_str] = self._checkLexique(word, word.nom) #lexical matching from front
+					frontWords = []
+					if new_str != '' : #lexical matching OK
+						word.nom = new_str
+						if input_str != '' :
+							tmpWord.append(Word(input_str, word.listNomTag(), word.listNomFeature()))
+							frontWords = self.sepTotalFrontPunc(tmpWord[0])
+					else : pass
+					
+				'arrange'
+				endWord = ''
+				if new_str != '' : #matching
+					wordSet.append(word)
+					if input_str != '' :
+						wordSet = wordSet + frontWords
+						if tmpWord[0].nom != '' : wordSet.append(tmpWord[0])
+						endWord = tmpWord[0].nom
+				else : #nonmatching
+					if word.nom != '' : wordSet.append(word)
+					endWord = word.nom
+					
+				'remained string treatment'
+				while endWord != '' :
+					#Let's separate back punctuation
+					[midWord, tmp_str] = self.sepMidWord(wordSet[len(wordSet)-1])
+					if midWord != [] :
+						#modify final word of wordSet
+						wordSet.pop() #delete last word
+						wordSet.append(midWord[0])
+						if tmp_str != '' : #string with starting punctuation
+							frontWords = []
+							newWord = []
+							newWord.append(Word(tmp_str, (wordSet[len(wordSet)-1]).listNomTag(), (wordSet[len(wordSet)-1]).listNomFeature()))
+							frontWords = self.sepTotalFrontPunc(newWord[0])
+							wordSet += frontWords
+							if frontWords != [] : endWord = newWord[0].nom
+							else : endWord = ''
+							if endWord != '' : wordSet.append(newWord[0])
+					else : #No punctuation
+						endWord = ''
+						
+				for w in wordSet : 
+					feat_str = self._featureCheck(w.nom)
+					if w.getTag("c") == -1 : w.addFeature(feat_str.split(" "))
+					reorgWords.append(w)
+
+			#for w in reorgWords : w.affiche()			
+			reference.replaceReference(reorgWords,len(reorgWords))	
 			
 		return
 	
+		
+	def sepFrontPunc(self, word):
+		
+		frontWords = []
+		input_str = word.nom
+		tagNames = word.listNomTag()
+		featNames = word.listNomFeature()
+		tmp_str = input_str
+		i=0
+		while (i < len(input_str)) :
+			c = input_str[i]
+			if c in  ".,():;{}[]!?#$%\*+/<=>@^_|~" :
+				tmpWord = Word(c, tagNames, featNames)
+				tmpWord.addTag("c")
+				frontWords.append(tmpWord) #create word for a punctuation mark
+				tmp_str = input_str[i+1:]
+				i += 1
+			else : i = len(input_str)	#exit
+				
+		return frontWords, tmp_str
 	
+	
+	def sepMidWord(self, word):
+		
+		midWord = []
+		tagNames = word.listNomTag()
+		featNames = word.listNomFeature()
+		i=0
+		new_str =''
+		tmp_str = ''
+		while (i < len(word.nom)) :
+			c = word.nom[i]
+			if c in  ".,():;{}[]!?#$%\*+/<=>@^_|~" :
+				midWord.append(Word(new_str, tagNames, featNames))
+				tmp_str = word.nom[i:]
+				i = len(word.nom)
+			else : 
+				new_str += c
+				i += 1
+				
+		return midWord, tmp_str
+	
+	
+	def sepFrontSpePunc(self, word):
+		
+		frontWords = []
+		input_str = word.nom
+		tagNames = word.listNomTag()
+		featNames = word.listNomFeature()
+		new_str = input_str
+		
+		for key in self.special.keys() :
+			if new_str.find(key) == 0 :
+				new_str = new_str[len(key):]
+				tmpWord = Word(key, tagNames, featNames)
+				tmpWord.addTag("c")
+				frontWords.append(tmpWord)
+				
+		return frontWords, new_str
+	
+	
+	def sepTotalFrontPunc(self, word):
+		
+		[frontWords, tmp_str] = self.sepFrontPunc(word)
+		word.nom = tmp_str
+		newfrontWords = []
+		change = True
+		while not re.match("^\w+", tmp_str) and len(tmp_str) > 0 and change : 
+			[newfrontWords, tmp_str] = self.sepFrontSpePunc(word)
+			frontWords = frontWords + newfrontWords
+			if word.nom != tmp_str : word.nom = tmp_str
+			else : change = False
+			[newfrontWords, tmp_str] = self.sepFrontPunc(word)
+			frontWords = frontWords + newfrontWords
+			if word.nom != tmp_str : word.nom = tmp_str
+			else : change = False
+		
+		return frontWords
+				
+			
 	def _initCheck(self, input_str) :
+		'''
+		Check initial expressions
+		'''
 		init1 = re.compile('^[A-Z][a-z]?\.-?[A-Z]?[a-z]?\.?')
 		init2 = re.compile('^[A-Z][a-z]?-[A-Z]?[a-z]?\.?')
 		init3 = re.compile('^[A-Z][A-Z]?\.?-?[A-Z]?[a-z]?\.')
@@ -197,6 +230,9 @@ class Rule(object):
 	
 	
 	def _refCheck(self, input_str) :
+		'''
+		Check web link expressions
+		'''
 		ref1 = re.compile('^http')
 		ref2 = re.compile('^www.')
 		ref3 = re.compile('^url')
@@ -210,6 +246,9 @@ class Rule(object):
 		return retrn_str
 	
 	def _featureCheck(self, new_str) :
+		'''
+		Check number, guillemot
+		'''
 		retrn_str = ''
 	
 		#number
@@ -264,14 +303,12 @@ class Rule(object):
 
 			
 
-	def _checkLexique(self, mot, input_str):
+	def _checkLexique(self, word, input_str):
 		'''
-		_checkLexique
 		Add attributes according to predefined rules in a lexicon file
 		'''
 		new_str = '' 
 		retrn_str = ''
-		
 		
 		'check if rules are matched in the string'
 		for regle in self.regles:
@@ -279,14 +316,14 @@ class Rule(object):
 				if (input_str.lower()).find(chaine[0]) == 0 :
 					charck = re.compile('[a-z]')	
 					if regle == "editor" and not charck.findall((input_str.lower()).replace(chaine[0],'')) :
-						mot.delAllFeature()
-						mot.addFeature(self.regles[regle]["caracteristique"])
+						word.delAllFeature()
+						word.addFeature(self.regles[regle]["caracteristique"])
 						retrn_str = chaine[0]
 						new_str = input_str
 						input_str = re.sub(retrn_str, '', input_str.lower())
 						new_str = new_str.replace(input_str, '')
 					if regle == "page" and chaine[0] == input_str.lower() :
-						mot.addFeature(self.regles[regle]["caracteristique"])
+						word.addFeature(self.regles[regle]["caracteristique"])
 						retrn_str = input_str
 						new_str = input_str
 						input_str = ''
@@ -296,14 +333,14 @@ class Rule(object):
 			if not retrn_str == '' :
 				new_str = retrn_str
 				input_str = re.sub(retrn_str, '', input_str)
-				mot.addFeature('initial')
+				word.addFeature('initial')
 				
-		'check html links'
+		'check url'
 		retrn_str = self._refCheck(input_str)
 		if not retrn_str == '' :
 			new_str = input_str
 			input_str = ''
-			mot.addFeature('weblink')
+			word.addFeature('weblink')
 
 		return [new_str, input_str]
 				

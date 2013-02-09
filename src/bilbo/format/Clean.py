@@ -69,6 +69,7 @@ class Clean(object):
 		top_att = ''
 		
 		'If the tag appears in a nonLabel list'
+		'''
 		if self.nonLabels.has_key(top_tag):
 			if self.nonLabels[top_tag] != "1":
 				baliseN = "<"+top_tag
@@ -76,6 +77,7 @@ class Clean(object):
 					baliseN += " "+key+"="+"\""+n.attrs[key]+"\""
 				baliseN += ">"
 				words.append({"nom":baliseN, "caracteristique":"", "balise":["noLabel"]})
+		'''
 			
 		#read attributes 
 		if len(n.attrs) > 0 :	# if attributes exist, make attribute string
@@ -138,11 +140,12 @@ class Clean(object):
 					words.append({"nom":s, "caracteristique":caract, "balise":balise})
 				
 		'If the tag appears in a nonLabel list'
+		'''
 		if self.nonLabels.has_key(top_tag):
 			if self.nonLabels[top_tag] != "1":
 				baliseN = "</"+top_tag+">"
 				words.append({"nom":baliseN, "caracteristique":"", "balise":["noLabel"]})
-		
+		'''
 		return words
 
 
@@ -223,21 +226,16 @@ class Clean(object):
 		
 		target_tag_st = "<hi "	#a
 		target_tag_mi = ">"		#c
-		target_tag_end = "</hi>"	#d e
+		target_tag_end = "</hi>"#d e
 		
 		tmp_str = new_str
 		a = tmp_str.find(target_tag_st,0)
 		while a > 0 :
-			#print a
 			b = a + len(target_tag_st)
 			c = tmp_str.find(target_tag_mi, b)
 			d = tmp_str.find(target_tag_end, c)
 			e = d + len(target_tag_end)
-			
 			if c > 0 and d > 0 and e > 0 and ( re.match(" [a-zA-Z]", tmp_str[a-2:a]) or (re.match("[a-zA-Z]", tmp_str[d-1:d]) and re.match("[a-zA-Z]", tmp_str[e:e+1]))  ):
-				#print '1**'+tmp_str[a-2:a]+'**'
-				#print '2**'+tmp_str[d-1:d]+'**'
-				#print '3**'+tmp_str[e:e+1]+'**'
 				new_str =  tmp_str[:a] + tmp_str[c+1:d] + tmp_str[e:]
 				tmp_str = new_str
 				a = tmp_str.find(target_tag_st,0)

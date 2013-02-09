@@ -14,15 +14,15 @@ class Reference(object):
 	Constructor
 	word
 	'''
-	def __init__(self, word, num):
-		self.word = word
+	def __init__(self, words, num):
+		self.words = words
 		self.num = num
 		self.train = 0 # 1:train, 0:test, -1:classified as negative for SVM note classification
 		self.bibl = 0
 		
 	def affiche(self):
 		print "reference numero : ",self.num,
-		for key in self.word:
+		for key in self.words:
 			key.affiche()
 		print "\n"
 		
@@ -30,12 +30,12 @@ class Reference(object):
 	nbword: retourne le nombre de word que contient la reference
 	'''
 	def nbWord(self):
-		return len(self.word)
+		return len(self.words)
 	'''
 	permet d'ajouter un word a l'indice donne
 	'''
 	def addWord(self, indice, word):
-		self.word.insert(indice,word)
+		self.words.insert(indice,word)
 	
 	'''
 	isTrain permet d'indiquer si la reference fait partie du train
@@ -60,26 +60,32 @@ class Reference(object):
 	retourne tous les word de la reference
 	'''
 	def getWord(self):
-		return self.word
+		return self.words
 	
 	'''
 	retourne le word qui se trouve a l'indice i
 	'''
 	def getWordIndice(self, i):
-		return self.word[i]
+		return self.words[i]
 	
 	def __str__(self):
 		ref = ""
-		for word in self.word:
+		for word in self.words:
 			ref += " "+word.nom
 		return ref 
+	
+	def replaceReference(self, words, num):
+		self.words = words
+		self.num = num
+		
+		return
 	
 	def buildReference(self):
 		ref = ""
 		flagItem = 0
 		balise = ""
 		
-		for word in self.word:
+		for word in self.words:
 			'if il y a une sous reference'
 			if word.item == 1 and flagItem == 0:
 				flagItem = 1

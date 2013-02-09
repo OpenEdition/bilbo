@@ -4,18 +4,13 @@ Created on 2 mai 2012
 
 @author: Young-min Kim, Jade Tavernier
 '''
-import sys
 
 class GenerateXml(object):
 	'''
-	classdocs
+	A class that generates raw version xml output file.
 	'''
 
-
 	def __init__(self):
-		'''
-		Constructor
-		'''
 		self.labels =  {'.':0, ',':0, '(':0, ')':0, ':':0, ';':0, '«':0, '»':0, '-':0, '“':0, '”':0, '{':0, '}':0, '[':0, ']':0,  '!':0, '?':0}
 		
 	def simpleComp(self, truefile, estfile, indicator, outfile):

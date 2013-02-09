@@ -86,8 +86,7 @@ class Extract(object):
 		self.placeObj = Place("KB/config/externalList/list_pays.txt") #PLACELIST
 		self.cityObj = Properlist("KB/config/externalList/LargeCities.txt", "PLACELIST") #PLCAELIST
 		self.journalObj = Properlist("KB/config/externalList/journalAll.txt", "JOURNALLIST") #PLCAELIST
-		
-		
+
 	
 	def extract(self):
 		'''
