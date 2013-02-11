@@ -1,4 +1,5 @@
-# editor nonimpcap posseditor
+[including]
+# editor nonimpact posseditor
 仕.
 仕s.
 ed.
@@ -7,6 +8,7 @@ ed
 eds
 仕
 仕s
+[matching]
 # page posspage
 pp
 pp.

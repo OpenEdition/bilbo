@@ -32,24 +32,33 @@ class Rule(object):
 			lines = fichier.readlines()
 			fichier.close()
 			
+			
 			'Lexicon dictionary creation'
 			#regles - {"000":{"000":[]}}, eg) regles["editor"]["caracteristique"][0] : nonimpcap
 			#								  regles["editor"]["caracteristique"][1] : posseditor
 			#								  regles["editor"]["regle"][0] : ed
+			ruleType = ''
 			for line in lines:
-				if re.match(expression, line):
-					lineSplit = line.split()
-					self.regles[lineSplit[1]] = {}	#Label name
-					self.regles[lineSplit[1]]["caracteristique"] = []	#essential features
-					self.regles[lineSplit[1]]["regle"] = []	#when matching that chars add label
+				if line.split()[0][0] == '[' and line.split()[0][-1] == ']':
+					if line.split()[0] == "[including]" : 
+						ruleType = "including"
+					elif line.split()[0] == "[matching]" : 
+						ruleType = "matching"
+					self.regles[ruleType] = {}
+				else :
+					if re.match(expression, line):
+						lineSplit = line.split()
+						self.regles[ruleType][lineSplit[1]] = {}	#Label name
+						self.regles[ruleType][lineSplit[1]]["caracteristique"] = []	#essential features
+						self.regles[ruleType][lineSplit[1]]["regle"] = []	#when matching that chars add label
+						'append the features of corresponding rule'
+						cpt = 2
+						while cpt < (len(lineSplit)):
+							self.regles[ruleType][lineSplit[1]]["caracteristique"].append(lineSplit[cpt])
+							cpt += 1
+					else:
+						self.regles[ruleType][lineSplit[1]]["regle"].append(line.split())
 					
-					'add les caracteristique de cette regle'
-					cpt = 2
-					while cpt < (len(lineSplit)):
-						self.regles[lineSplit[1]]["caracteristique"].append(lineSplit[cpt])
-						cpt += 1
-				else:
-					self.regles[lineSplit[1]]["regle"].append(line.split())
 		except:
 			print "cannot open file lexique.txt"
 		
@@ -145,28 +154,7 @@ class Rule(object):
 				
 		return frontWords, tmp_str
 	
-	
-	def sepMidWord(self, word):
 		
-		midWord = []
-		tagNames = word.listNomTag()
-		featNames = word.listNomFeature()
-		i=0
-		new_str =''
-		tmp_str = ''
-		while (i < len(word.nom)) :
-			c = word.nom[i]
-			if c in  ".,():;{}[]!?#$%\*+/<=>@^_|~" :
-				midWord.append(Word(new_str, tagNames, featNames))
-				tmp_str = word.nom[i:]
-				i = len(word.nom)
-			else : 
-				new_str += c
-				i += 1
-				
-		return midWord, tmp_str
-	
-	
 	def sepFrontSpePunc(self, word):
 		
 		frontWords = []
@@ -202,7 +190,28 @@ class Rule(object):
 			else : change = False
 		
 		return frontWords
+
+
+	def sepMidWord(self, word):
+		
+		midWord = []
+		tagNames = word.listNomTag()
+		featNames = word.listNomFeature()
+		i=0
+		new_str =''
+		tmp_str = ''
+		while (i < len(word.nom)) :
+			c = word.nom[i]
+			if c in  ".,():;{}[]!?#$%\*+/<=>@^_|~" :
+				midWord.append(Word(new_str, tagNames, featNames))
+				tmp_str = word.nom[i:]
+				i = len(word.nom)
+			else : 
+				new_str += c
+				i += 1
 				
+		return midWord, tmp_str
+			
 			
 	def _initCheck(self, input_str) :
 		'''
@@ -244,6 +253,7 @@ class Rule(object):
 			retrn_str = 'positive'
 		
 		return retrn_str
+	
 	
 	def _featureCheck(self, new_str) :
 		'''
@@ -302,7 +312,6 @@ class Rule(object):
 		return retrn_str
 
 			
-
 	def _checkLexique(self, word, input_str):
 		'''
 		Add attributes according to predefined rules in a lexicon file
@@ -311,22 +320,25 @@ class Rule(object):
 		retrn_str = ''
 		
 		'check if rules are matched in the string'
-		for regle in self.regles:
-			for chaine in self.regles[regle]["regle"]:
-				if (input_str.lower()).find(chaine[0]) == 0 :
-					charck = re.compile('[a-z]')	
-					if regle == "editor" and not charck.findall((input_str.lower()).replace(chaine[0],'')) :
-						word.delAllFeature()
-						word.addFeature(self.regles[regle]["caracteristique"])
-						retrn_str = chaine[0]
-						new_str = input_str
-						input_str = re.sub(retrn_str, '', input_str.lower())
-						new_str = new_str.replace(input_str, '')
-					if regle == "page" and chaine[0] == input_str.lower() :
-						word.addFeature(self.regles[regle]["caracteristique"])
-						retrn_str = input_str
-						new_str = input_str
-						input_str = ''
+		for ruleType in self.regles :
+			for regle in self.regles[ruleType]:
+				for chaine in self.regles[ruleType][regle]["regle"]:
+					if (input_str.lower()).find(chaine[0]) == 0 :
+						charck = re.compile('[a-z]')	
+						'In case of including the key word in the string, no character except the key word'
+						if regle == "editor" and not charck.findall((input_str.lower()).replace(chaine[0],'')) :
+							word.delAllFeature()
+							word.addFeature(self.regles[ruleType][regle]["caracteristique"])
+							retrn_str = chaine[0]
+							new_str = input_str
+							input_str = re.sub(retrn_str, '', input_str.lower())
+							new_str = new_str.replace(input_str, '')
+						'In case of just matching the key word'
+						if regle == "page" and chaine[0] == input_str.lower() :
+							word.addFeature(self.regles[ruleType][regle]["caracteristique"])
+							retrn_str = input_str
+							new_str = input_str
+							input_str = ''
 									
 		if retrn_str == '':
 			retrn_str = self._initCheck(input_str)
