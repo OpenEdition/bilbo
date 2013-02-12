@@ -269,44 +269,6 @@ class File(object):
 		try:
 			tmp_str = self.writeResultInOriginal(tmp_str, soup, ref_ori, references, tagTypeCorpus)
 			
-			'''
-			cpt = 0
-			listRef = soup.findAll(tagTypeCorpus)
-			
-			p2 = 0
-			for ref in listRef:
-				contentString ="" # TO CHECK IF THE REFERENCE or NOTE HAS NO CONTENTS
-				for rf in ref.contents :
-					if rf == rf.string : contentString += rf
-						
-				for tag in ref.findAll(True) :
-						if len(tag.findAll(True)) == 0 and len(tag.contents) > 0 :
-							for con in tag.contents :
-								contentString += con
-				#print contentString, len(contentString.split())
-				
-				'Find the starting and ending of corresponding tag and replace the string by labeled one'
-				p1 = tmp_str.find('<'+tagTypeCorpus+'>', p2)
-				p11 = tmp_str.find('<'+tagTypeCorpus+' ', p2)
-				if p1 < 0 or (p11 > 0 and p1 > p11) : p1 = p11
-				p2 = tmp_str.find('</'+tagTypeCorpus+'>', p1)
-	
-				if len(contentString.split()) > 0 :
-					doistring = ''
-					text = str(ref_ori[cpt])
-					if self.options.d :
-						doistring = extractDoi(str(references[cpt]), tagTypeCorpus)
-						if doistring != '' : 
-							doistring = 'http://dx.doi.org/'+str(doistring)
-							doistring = '<idno type=\"DOI\">'+doistring+'</idno>'
-							ptr1 = text.find('</title>')+len('</title>')
-							text = text[:ptr1] + doistring + text[ptr1:]
-							#print text
-					tmp_list = list(tmp_str)
-					tmp_list[p1:p2+len('</'+tagTypeCorpus+'>')] = text
-					tmp_str = ''.join(tmp_list)
-				cpt += 1
-			'''
 		except :
 			pass
 
@@ -398,41 +360,6 @@ class File(object):
 		
 		return oriRef
 
-
-	def arrangeNameTagsPerToken(self, oriRef, tagTypeCorpus):
-		'''
-		Check if a token annotated by name concerning label has wrapped by other basic tag.
-		If yes, change order. It's for prevent the mismatching error of persName tag
-		e.g. To prevent the following error (interruption of <persName> in <hi>)
-			<hi font-variant="small-caps"><persName><surname>Alves</surname></hi>
-			change order as following before add <persName>
-			<surname><hi font-variant="small-caps">Alves</hi></surname>
-		'''
-		nameck = ["surname", "forename", "namelink", "genname"]
-		for tmpTag in nameck :
-			ptr2 = 0
-			ptr1 = oriRef.find('<'+tmpTag+'>', ptr2) #find the starting of a name tag
-			while ptr1 > 0 :
-				ptr2 = oriRef.find('</'+tmpTag+'>', ptr1)+len('</'+tmpTag+'>') #find its ending 
-				ptr3 = oriRef.find('</',ptr2)	#find closest other ending tag
-				closeTag = ''
-				if oriRef.find('<',ptr2,ptr3) < 0 and len((oriRef[ptr2:ptr3]).split()) == 0 : #if there is no starting tag between them and NO char
-					ptr4 = oriRef.find('>',ptr3)
-					closeTag = oriRef[ptr3+len('</'):ptr4] #extract the closest tag name
-					[st1, ed1, dummyTag] = self._closestPreOpeningTag(oriRef, ptr1)
-					if oriRef[st1:ed1].find('<'+closeTag) == 0 and len((oriRef[ed1:ptr1]).split()) == 0 :
-						#then exchange tags
-						tmpRef = self._exchangeTags(oriRef, st1, ed1, ptr1, ptr1+len('<'+tmpTag+'>'))
-						tmpRef = self._exchangeTags(tmpRef, ptr2-len('</'+tmpTag+'>'), ptr2, ptr3, ptr4+1)
-						oriRef = tmpRef
-				ptr1 = oriRef.find('<'+tmpTag+'>', ptr2)
-		#final continuous check
-		continuousNameck = ["</surname><surname>", "</forename><forename>"]
-		for tmpNameTag in continuousNameck :
-			oriRef = oriRef.replace(tmpNameTag,'')
-			
-		return oriRef
-	
 	
 	def arrangeTagsPerToken(self, includedLabels, oriRef, tagTypeCorpus):
 		'''
@@ -523,7 +450,10 @@ class File(object):
 				
 				'Check if there are more than an author in current tmp_group'
 				if len(tmp_group) > 3 :
-					if oriRef.find(";", ptr0, ptr2) > 0 : #separated by ;
+					tmp_soup = BeautifulSoup(oriRef[ptr0:ptr2])
+					parsed_bs = ''.join(tmp_soup.findAll(text = True))
+					#if oriRef.find(";", ptr0, ptr2) > 0 : #separated by ;
+					if parsed_bs.find(";") > 0 : #separated by ; and search only in contents in case ; exists in tag
 						ptr1 = oriRef.find(";", ptr0, ptr2)
 						while ptr1 > 0 :
 							[oriRef, ptr1, ptr2] = self._insertPersonTag(oriRef, ptr1, ptr2, ";")
@@ -597,12 +527,15 @@ class File(object):
 	
 	
 	def _insertPersonTag(self, oriRef, ptr1, ptr2, sep):
-		
-		oriRef = oriRef[:ptr1] + "</persName>" + oriRef[ptr1:]
-		ptr1 = oriRef.find("<", ptr1+len("</persName>"+sep), ptr2)
-		oriRef = oriRef[:ptr1] + "<persName>" + oriRef[ptr1:]
-		ptr2 = ptr2 + len("<persName></persName>")
-		ptr1 = oriRef.find(sep, ptr1, ptr2)
+		'ADD THE CASE OF INTERUPPED TAG'
+		if oriRef.find(">", ptr1) > oriRef.find("<", ptr1) and oriRef.find("<", ptr1) >= 0 :
+			oriRef = oriRef[:ptr1] + "</persName>" + oriRef[ptr1:]
+			ptr1 = oriRef.find("<", ptr1+len("</persName>"+sep), ptr2)
+			oriRef = oriRef[:ptr1] + "<persName>" + oriRef[ptr1:]
+			ptr2 = ptr2 + len("<persName></persName>")
+			ptr1 = oriRef.find(sep, ptr1, ptr2)
+		else :
+			ptr1 = oriRef.find(sep, ptr1+1, ptr2)
 		
 		return oriRef, ptr1, ptr2
 	
@@ -675,7 +608,6 @@ class File(object):
 			st = ptr1-startck2
 			ed = ptr1-startck1+1		
 			tagName = ((oriRef[st:ed].split('>')[0]).split()[0])[1:]
-
 		return st, ed, tagName
 	
 	
