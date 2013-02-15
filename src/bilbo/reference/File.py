@@ -723,15 +723,20 @@ class File(object):
 		
 		s = BeautifulSoup(oriRef)
 
-		if len(s.find("bibl")) == 1 and len(s.find_all()) > 3 : #totally wrapped
-			tagLimit = s.find_all()[3].name
-			limitst1 = oriRef.find('<'+tagLimit, 0)
-			limited1 = oriRef.find('>', limitst1)
+		tagName = "NOTAG"
+		if s.find("bibl") : tagName="bibl"
+		elif s.find("note") : tagName="note"
+		if s.find(tagName) and len(s.find(tagName)) == 1 :
+			if s.find_all() and len(s.find_all()) > 3 : #totally wrapped
+				
+				tagLimit = s.find_all()[3].name
+				limitst1 = oriRef.find('<'+tagLimit, 0)
+				limited1 = oriRef.find('>', limitst1)
 			
-			startck1 = (oriRef[::-1]).find("<")
-			startck1 = (oriRef[::-1]).find("<",startck1)
-			limitst2 = oriRef.find('</'+tagLimit, startck1)
-			limited2 = oriRef.find('>', limitst1)
+				startck1 = (oriRef[::-1]).find("<")
+				startck1 = (oriRef[::-1]).find("<",startck1)
+				limitst2 = oriRef.find('</'+tagLimit, startck1)
+				limited2 = oriRef.find('>', limitst1)
 		
 			#print limitst2
 			#print oriRef[limitst2:]
