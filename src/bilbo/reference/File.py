@@ -17,6 +17,8 @@ import sys
 prePunc =  {'.':0, ',':0, ')':0, ':':0, ';':0, '-':0, '”':0, '}':0, ']':0, '!':0, '?':0, '/':0}
 postPunc = {'(':0, '-':0, '“':0, '{':0, '[':0}
 
+prePtrlimit = -1
+postPtrlimit = -1
 
 class File(object):
 	'''
@@ -59,6 +61,7 @@ class File(object):
 		elif typeCorpus == 2:
 			clean = CleanCorpus2()
 			
+		#print self.nom
 		references = clean.processing(self.nom, tag, external)
 		if len(references) >= 1:
 			self.corpus[typeCorpus] = ListReferences(references, typeCorpus)
@@ -181,8 +184,9 @@ class File(object):
 					try : r.name
 					except : ck = 1
 					if ck == 0 and not r.name == "c" and r.string:
+						r.string = r.string.replace('&', "&amp;")
 						for token in r.string.split() :
-							if token == "&" : token = "&amp;"
+							#if token == "&" : token = "&amp;"
 							token = token.encode('utf8')
 							pre_ptr = ptr
 							ptr = oriRef.find(token, ptr)
@@ -384,12 +388,13 @@ class File(object):
 				if oriRef.find('<',ptr2,ptr3) < 0 and len((oriRef[ptr2:ptr3].replace(' ', ' ')).split()) == 0 : #if there is no starting tag between them and NO char
 					ptr4 = oriRef.find('>',ptr3)
 					closeTag = oriRef[ptr3+len('</'):ptr4] #extract the closest tag name
-					[st1, ed1, dummyTag] = self._closestPreOpeningTag(oriRef, ptr1)
-					if oriRef[st1:ed1].find('<'+closeTag) == 0 and len((oriRef[ed1:ptr1].replace(' ', ' ')).split()) == 0 :#if there is no tag between them and NO char
-						#then exchange tags
-						tmpRef = self._exchangeTags(oriRef, st1, ed1, ptr1, ptr1+len('<'+tmpTag+'>'))
-						tmpRef = self._exchangeTags(tmpRef, ptr2-len('</'+tmpTag+'>'), ptr2, ptr3, ptr4+1)
-						oriRef = tmpRef
+					if closeTag not in ["note", "bibl", "listNote", "listBibl"] :
+						[st1, ed1, dummyTag] = self._closestPreOpeningTag(oriRef, ptr1)
+						if oriRef[st1:ed1].find('<'+closeTag) == 0 and len((oriRef[ed1:ptr1].replace(' ', ' ')).split()) == 0 :#if there is no tag between them and NO char
+							#then exchange tags
+							tmpRef = self._exchangeTags(oriRef, st1, ed1, ptr1, ptr1+len('<'+tmpTag+'>'))
+							tmpRef = self._exchangeTags(tmpRef, ptr2-len('</'+tmpTag+'>'), ptr2, ptr3, ptr4+1)
+							oriRef = tmpRef
 				ptr1 = oriRef.find('<'+tmpTag+'>', ptr2)
 		#final continuous check
 		continuousTagck = []
@@ -602,12 +607,17 @@ class File(object):
 		tagName = ''
 		startck2 = 0
 		startck1 = 0
+		prePtrlimit
+		
 		while tagName != tagN or startck1 < 0:
 			startck1 = (oriRef[ptr1::-1]).find(">", startck2)
 			startck2 = (oriRef[ptr1::-1]).find("<", startck1)
 			st = ptr1-startck2
 			ed = ptr1-startck1+1		
 			tagName = ((oriRef[st:ed].split('>')[0]).split()[0])[1:]
+		if prePtrlimit > st :
+			tagName = ''
+			
 		return st, ed, tagName
 	
 	
@@ -624,9 +634,13 @@ class File(object):
 						find the starting tag by inversely checking the string. Once 
 					
 		'''
+		[limited1, limitst2] = self._totallyWrapped(oriRef)
+		prePtrlimit = limited1
+		postPtrlimit = limitst2
+		
 		tmpRef = oriRef
 		ptr1 = tmpRef.find('<'+addedTag+'>', 0) #find the starting of new tag
-		while ptr1 > 0 :
+		while ptr1 >= 0 :
 			ptr2 = tmpRef.find('</'+addedTag+'>', ptr1)	
 			#Starting tag, case 1	
 			tagName = ''
@@ -646,7 +660,7 @@ class File(object):
 						#no starting tag, so find starting tag
 						[st1, ed1, tagN] = self._preOpeningTag(tmpRef, ptr1, tagName)
 						if tagName == tagN :
-							if len((tmpRef[ed1:ptr1+len('<'+addedTag+'>')]).split()) == 0 :
+							if len((tmpRef[ed1:ptr1+len('<'+addedTag+'>')]).split()) == 1 :
 								tmpRef = self._moveSecondTag(tmpRef, st1, ed1, ptr1, ptr1+len('<'+addedTag+'>'))
 								found.append(tagName)
 							else :
@@ -662,6 +676,7 @@ class File(object):
 					st2 = tmpRef.find('</', ed2, ptr2)
 					ed2 = tmpRef.find('>', st2, ptr2)
 					if st2 > 0 : tagName = tmpRef[st2+len('</'):ed2]
+					
 			#Ending tag, case 2	
 			tagName = ''
 			found = []
@@ -691,11 +706,37 @@ class File(object):
 								found.append(tagName)
 					st2 = tmpRef.find('</', ed2)
 					ed2 = tmpRef.find('>', st2)
-					if st2 > 0 : tagName = tmpRef[st2+len('</'):ed2]
+					if st2 > 0 and st2 < postPtrlimit : tagName = tmpRef[st2+len('</'):ed2]
 					
 			ptr1 = tmpRef.find('<'+addedTag+'>', ptr2)
 		
 		return  tmpRef	
+	
+	
+	def _totallyWrapped(self, oriRef):
+		
+		limitst1 = -1
+		limited1 = -1
+		
+		limitst2 = -1
+		limited2 = -1
+		
+		s = BeautifulSoup(oriRef)
+
+		if len(s.find("bibl")) == 1 and len(s.find_all()) > 3 : #totally wrapped
+			tagLimit = s.find_all()[3].name
+			limitst1 = oriRef.find('<'+tagLimit, 0)
+			limited1 = oriRef.find('>', limitst1)
+			
+			startck1 = (oriRef[::-1]).find("<")
+			startck1 = (oriRef[::-1]).find("<",startck1)
+			limitst2 = oriRef.find('</'+tagLimit, startck1)
+			limited2 = oriRef.find('>', limitst1)
+		
+			#print limitst2
+			#print oriRef[limitst2:]
+		
+		return limited1, limitst2
 	
 	
 	def _getName(self):

@@ -11,20 +11,19 @@ bookindicator = NONE
 #abbr
 #date
 title_m = title level="m"
-title_a = title type="a"
-title_j = title type="j"
-title_t = title type="t"
-title_u = title type="u"
-title_s = title type="s"
-biblscope_pp = biblScope type="pp"
-biblscope_i = biblScope type="issue"
-biblscope_v = biblScope type="vol"
-biblscope_pa = biblScope type="part"
-biblscope_c = biblScope type="chap"
+title_a = title level ="a"
+title_j = title level ="j"
+title_t = title level ="t"
+title_u = title level ="u"
+title_s = title level ="s"
+biblscope_pp = biblScope unit="pp"
+biblscope_i = biblScope unit="issue"
+biblscope_v = biblScope unit="vol"
+biblscope_pa = biblScope unit="part"
+biblscope_c = biblScope unit="chap"
 #biblscope
 #w 
 #edition 
-#bookindicator
 #meeting
 #title
 #extent

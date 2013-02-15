@@ -84,7 +84,10 @@ class Clean(object):
 			top_att = ''
 			attstyp_string = ''
 			for key in n.attrs.keys() :
-				top_att = top_att + n.attrs[key]+' '
+				if isinstance(n.attrs[key], str) :
+					top_att = top_att + n.attrs[key]+' '
+				else :
+					top_att = top_att + n.attrs[key][0]+' '
 				attstyp_string = attstyp_string+key+' '
 				
 			tagatt_string = n.name+' '+ attstyp_string+' '+top_att
@@ -183,7 +186,10 @@ class Clean(object):
 						atts_string = ''
 						attstyp_string = ''
 						for key in con.attrs.keys() :
-							atts_string = atts_string + con.attrs[key]+' '
+							if isinstance(con.attrs[key], str) :
+								atts_string = atts_string + con.attrs[key]+' '
+							else :
+								atts_string = atts_string + con.attrs[key][0]+' '
 							attstyp_string = attstyp_string + key+' '
 						attrs[ct-1].append(atts_string)
 						#print atts_string
@@ -199,7 +205,10 @@ class Clean(object):
 				atts_string = ''
 				#print con.name, con.attrs
 				for key in con.attrs.keys() :
-					atts_string = atts_string + con.attrs[key]+' '
+					if isinstance(con.attrs[key], str) :
+						atts_string = atts_string + con.attrs[key]+' '
+					else :
+						atts_string = atts_string + con.attrs[key][0]+' '
 				temp_attr = top_att+' '+atts_string
 				self._arrangeData(con, txts, tags, attrs, temp_str, temp_attr)
 		return

@@ -11,7 +11,7 @@ class GenerateXml(object):
 	'''
 
 	def __init__(self):
-		self.labels =  {'.':0, ',':0, '(':0, ')':0, ':':0, ';':0, '«':0, '»':0, '-':0, '“':0, '”':0, '{':0, '}':0, '[':0, ']':0,  '!':0, '?':0}
+		self.labels =  {'.':0, ',':0, '(':0, ')':0, ':':0, ';':0, '«':0, '»':0, '-':0, '—':0, '“':0, '”':0, '{':0, '}':0, '[':0, ']':0,  '!':0, '?':0}
 		
 	def simpleComp(self, truefile, estfile, indicator, outfile):
 	
@@ -38,9 +38,9 @@ class GenerateXml(object):
 				currToken = line[0]
 				currLabel = line[len(line)-1]
 				ckIt = 0 # if you don't want to insert italic attribute, run it
-				if self.labels.has_key(currLabel) : currLabel = 'c'
+				if self.labels.has_key(currToken) : currLabel = 'c'
 				estLabel = est[j]
-				if self.labels.has_key(estLabel) : estLabel = 'c'
+				if self.labels.has_key(currToken) : estLabel = 'c'
 				
 				if indicator == 2 : currLabel = estLabel
 				
@@ -51,6 +51,7 @@ class GenerateXml(object):
 						tmp_str = '<hi rend="italic"> '+currToken+' '
 					elif ckIt == 0 :
 						tmp_str = '</hi> '+currToken+' '
+					tmp_str = tmp_str.replace('&', '&amp;')
 					fout.write(tmp_str)
 	
 				else :
@@ -64,6 +65,7 @@ class GenerateXml(object):
 						tmp_str = '<'+currLabel+'> '+currToken+' '
 					else :
 						tmp_str = '<'+currLabel+'><hi rend="italic"> '+currToken+' '
+					tmp_str = tmp_str.replace('&', '&amp;')
 					fout.write(tmp_str)
 					
 				preLabel = currLabel
@@ -80,6 +82,7 @@ class GenerateXml(object):
 						tmp_str = '</bibl>\n\n'
 					else:
 						tmp_str = '</hi></'+preLabel+'>\n</bibl>\n\n'
+				tmp_str = tmp_str.replace('&', '&amp;')
 				fout.write(tmp_str)
 				preLabel = 'start'
 				
