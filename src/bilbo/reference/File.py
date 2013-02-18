@@ -156,7 +156,7 @@ class File(object):
 		'Read the source file to check the initial contents of references'
 		for line in open (self.nom, 'r') :
 			tmp_str = tmp_str + line
-				
+		
 		soup = BeautifulSoup (tmp_str)
 		s = soup.findAll (tagTypeCorpus)
 		
@@ -183,7 +183,7 @@ class File(object):
 					ck = 0
 					try : r.name
 					except : ck = 1
-					if ck == 0 and not r.name == "c" and r.string:
+					if ck == 0 and not r.name == "c" and not r.name == "nonbibl" and r.string:
 						r.string = r.string.replace('&', "&amp;")
 						for token in r.string.split() :
 							#if token == "&" : token = "&amp;"
@@ -287,7 +287,7 @@ class File(object):
 		cpt = 0
 		listRef = soup.findAll(tagTypeCorpus)
 			
-		p2 = 0
+		pre_p1 = 0
 		for ref in listRef:
 			contentString ="" # TO CHECK IF THE REFERENCE or NOTE HAS NO CONTENTS
 			for rf in ref.contents :
@@ -297,14 +297,13 @@ class File(object):
 					if len(tag.findAll(True)) == 0 and len(tag.contents) > 0 :
 						for con in tag.contents :
 							contentString += con
-			#print contentString, len(contentString.split())
 			
 			'Find the starting and ending of corresponding tag and replace the string by labeled one'
-			p1 = tmp_str.find('<'+tagTypeCorpus+'>', p2)
-			p11 = tmp_str.find('<'+tagTypeCorpus+' ', p2)
+			p1 = tmp_str.find('<'+tagTypeCorpus+'>', pre_p1+10)
+			p11 = tmp_str.find('<'+tagTypeCorpus+' ', pre_p1+10)
 			if p1 < 0 or (p11 > 0 and p1 > p11) : p1 = p11
 			p2 = tmp_str.find('</'+tagTypeCorpus+'>', p1)
-	
+			
 			if len(contentString.split()) > 0 :
 				doistring = ''
 				text = str(ref_ori[cpt])
@@ -318,8 +317,12 @@ class File(object):
 						#print text
 				tmp_list = list(tmp_str)
 				tmp_list[p1:p2+len('</'+tagTypeCorpus+'>')] = text
+				#print p2-p1+len('</'+tagTypeCorpus+'>'), len(text)
 				tmp_str = ''.join(tmp_list)
-			cpt += 1		
+
+				
+			cpt += 1 
+			pre_p1 = p1		
 		
 		return tmp_str
 
@@ -722,7 +725,7 @@ class File(object):
 		limited2 = -1
 		
 		s = BeautifulSoup(oriRef)
-
+		
 		tagName = "NOTAG"
 		if s.find("bibl") : tagName="bibl"
 		elif s.find("note") : tagName="note"

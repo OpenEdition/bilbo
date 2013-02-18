@@ -120,11 +120,13 @@ class CleanCorpus2(Clean):
 							if len(b.contents) > 0 :
 								input_str = b.contents[0]
 								for input in input_str.split() :
-									feature = []
+									features = []
 									if len(b.attrs) : 
 										for key in b.attrs.keys() :
-											feature = b.attrs[key],
-									newWord = Word(input.encode('utf8'), [b.name, 'nonbibl'], feature)
+											if isinstance(b.attrs[key], str) : features.append(b.attrs[key])
+											else : features.append(b.attrs[key][0])
+
+									newWord = Word(input.encode('utf8'), [b.name, 'nonbibl'], features)
 									words.append(newWord)
 						
 					elif len(b.split()) > 0 :
