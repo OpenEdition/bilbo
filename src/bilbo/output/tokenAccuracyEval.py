@@ -105,7 +105,7 @@ def evaluate(srcfile, dsrfile):
 	#		print k, 0, cnt_d[k], 0.0
 	#print
 	
-	'''
+	
 	tes = 0
 	bes = 0
 	ts = 0
@@ -133,7 +133,7 @@ def evaluate(srcfile, dsrfile):
 			print 
 	print '*Total obvious error :', 'title:',tes, 'biblscope:',bes
 	print '*Total error :', 'title:',ts, 'biblscope:',bs
-	'''
+	
 	return
 	
 

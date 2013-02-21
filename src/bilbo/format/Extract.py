@@ -1,6 +1,6 @@
 # encoding: utf-8
 '''
-Created on 19 avr. 2012
+Created on April 19, 2012
 
 @author: Young-Min Kim, Jade Tavernier
 '''
@@ -139,7 +139,6 @@ class Extract(object):
 					if mot.ignoreWord == 0:
 						try:
 							fich.write(unicode(mot.nom,"utf-8"))
-							#fich.write(mot.nom.encode(encoding="utf-8" ,errors='replace'))
 						except TypeError:
 							fich.write(mot.nom)
 						nbCarac = mot.nbFeatures()
@@ -188,7 +187,6 @@ class Extract(object):
 					['SURNAMELIST'],	#10
 					['FORENAMELIST'],	#11
 					['PLACELIST']]		#12
-					#['ONEDIGIT', 'TWODIGIT', 'THREEDIGIT', 'FOURDIGIT']]		#13
 					#['JOURNALLIST']]	#13
 				
 		fich = codecs.open(fichier, "w", encoding="utf-8")
@@ -198,11 +196,10 @@ class Extract(object):
 				for mot in reference.getWord():
 					tmp_features = ['NONUMBERS', 'NODASH', 'NONIMPCAP', 'NULL', 'NOINITIAL',
 									'NOWEBLINK', 'NOITALIC', 'NOEDITOR', 'NOPAGE', 'NOSURLIST',
-									'NOFORELIST', 'NOPLACELIST']#, 'NODIGIT', 'NOJOURLIST']
+									'NOFORELIST', 'NOPLACELIST']#, 'NOJOURLIST']
 					if mot.ignoreWord == 0:
 						try:
 							fich.write(unicode(mot.nom,"utf-8"))
-							#fich.write(mot.nom.encode(encoding="utf-8" ,errors='replace'))
 						except TypeError:
 							fich.write(mot.nom)
 						nbCarac = mot.nbFeatures()
@@ -240,7 +237,6 @@ class Extract(object):
 							fich.write(" "+string_features)
 							
 						if tr != 0:
-							#for balise in mot.getAllTag():
 							balise = mot.getLastTag()
 							try:
 								fich.write(" "+unicode(balise.nom, "utf-8"))
@@ -307,11 +303,9 @@ class Extract(object):
 				#mot.nom = self.convertToUnicode(mot.nom)
 				if mot.ignoreWord == 0:
 					for feat in mot.listNomFeature():
-
 						feature += feat.upper()+" "
 						if cpt == 0 and (feat.lower() == "initial"):
 							feature += "STARTINITIAL "
-
 					if re.search("NUMBERS", feature) != 0 and re.search("ALLNUMBERS", feature) != 0:	
 						try:
 							phrase += " "+unicode(mot.nom,"utf-8")

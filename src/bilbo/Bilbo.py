@@ -10,12 +10,12 @@ and modified by Jade Tavernier for code reorganization in an object oriented des
 BILBO is an open source software for automatic annotation of bibliographic reference.
 It provides the segmentation and tagging of input string. It is principally based on
 Conditional Random Fields (CRFs), machine learning technique to segment and label
-sequence data. As external softwares, Mallet is used for CRF learning and inference
+sequence data. As external softwares, Wapiti is used for CRF learning and inference
 and SVMlight is used for sequence classification. BILBO is licensed under a Creative
 Commons Attribution-NonCommercial-ShareAlike 2.5 Generic License (CC BY-NC-SA 2.5).
 ---------------------------------------------------------------------------------------------------------------------------
 
-Created on 18 avr. 2012
+Created on April 08, 2012
 
 @author: Young-Min Kim, Jade Tavernier
 '''
@@ -85,8 +85,7 @@ class Bilbo(object):
 			
 			print "crf training data extraction..."
 			self.crf.prepareTrain(corpus, 2, "trainingdata_CRF.txt", 1, 1, optsvm)	#CRF training data extraction
-			self.crf.runTrain(dirModel, "trainingdata_CRF_Wapiti.txt", self.crfmodelname) #CRF model learning
-			#self.crf.runTrain(dirModel, "trainingdata_CRF_nega_Wapiti.txt", "revueswapiti_nega", 0.0000001) #Do not work, too homogeneous 
+			self.crf.runTrain(dirModel, "trainingdata_CRF_Wapiti.txt", self.crfmodelname) #CRF model learning			#self.crf.runTrain(dirModel, "trainingdata_CRF_nega_Wapiti.txt", "revueswapiti_nega", 0.0000001) #Do not work, too homogeneous 
 			print
 		self.deleteTmpFiles()
 	
@@ -193,7 +192,6 @@ class Bilbo(object):
 		dirResultRoot = os.path.abspath(os.path.join(self.dirResult, os.path.pardir))+'/'
 		toKeep = []
 		if self.options.k == 'primary' : 
-			#toKeep = ['testEstCRF.xml', 'testEstCRF.xml', 'trainingdata_CRF_OriginalWapiti.txt', 'trainingdata_CRF_Wapiti.txt']
 			toKeep = ['testEstCRF.xml', 'testEstCRF.txt', 'testdatawithlabel_CRF.txt']
 		if self.options.k != 'all' :
 			for dir_name, sub_dirs, files in os.walk(self.dirResult):

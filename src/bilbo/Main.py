@@ -1,5 +1,5 @@
 '''
-Created on 19 avr. 2012
+Created on April 20, 2012
 
 @author: Young-Min Kim, Jade Tavernier
 	argv[1] : 1 => annotate corpus 1, 2 => annotate corpus 2, 11 => train corpus 1, 22 => train corpus 2

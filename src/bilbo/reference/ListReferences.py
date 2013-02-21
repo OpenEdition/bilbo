@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 '''
-Created on 18 avr. 2012
+Created on April 18, 2012
 
-@author: Young-min Kim, Jade Tavernier
+@author: Young-Min Kim, Jade Tavernier
 '''
 
 class ListReferences(object):
@@ -18,55 +18,66 @@ class ListReferences(object):
 		self.listReferences = references
 		self.typeCorpus = typeCorpus
 
-	'''
-	affiche permet d'afficher le detail des references : mots, balises, caracteristiques
-	'''
+
 	def affiche(self):
+		'''
+		Show the reference information : words, tags, features
+		'''
 		for key in self.listReferences:
 			key.affiche()
 			
-	'''
-	nbReference retourne le nombre de reference qu'il contient
-	'''
+			
 	def nbReference(self):
+		'''
+		Return the number of references in the list
+		'''
 		return len(self.listReferences)
 	
-	'''
-	modifyTestIndiceRef permet d'indiquer que toutes les references sont du test
-	'''
+
 	def modifyTestIndice(self, numRef):
+		'''
+		Modify the value of an indicator, which tells if a reference is training data or test data
+		Set all the value of all the references as test
+		'''
 		for ref in self.listReferences:
 			ref.modifyIsTest()
 		
-	'''
-	modifyTrainIndice permet d'indiquer que toutes les references sont train
-	'''
+
 	def modifyTrainIndice(self, numRef):
+		'''
+		Modify the value of an indicator, which tells if a reference is training data or test data
+		Set the value of all the references as train
+		'''
 		for ref in self.listReferences:
 			ref.modifyIsTrain()
 		
-	'''
-	modifyTestIndiceRef permet d'indiquer que la reference numRef fait parti du test
-	'''
+
 	def modifyTestIndiceRef(self, numRef):
+		'''
+		Set the above value as test for a reference
+		'''
 		self.listReferences[numRef].modifyIsTest()
 		
-	'''
-	modifyTrainIndiceRef permet d'indiquer que la reference numRef fait parti du train
-	'''
+
 	def modifyTrainIndiceRef(self, numRef):
+		'''
+		Set the above value as test for a reference
+		'''
 		self.listReferences[numRef].modifyIsTrain()
 		
-	'''
-	getTrainIndiceRef permet de recuperer l'indice du train
-	'''
+
 	def getTrainIndiceRef(self, numRef):
+		'''
+		Return the above value of a reference given the number of the reference
+		'''			
 		return self.listReferences[numRef].train
 		
 
 	def getReferences(self):
 		return self.listReferences
 	
+	
 	def getReferencesIndice(self, indice):
 		return self.listReferences[indice]
+	
 	

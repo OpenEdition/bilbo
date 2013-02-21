@@ -1,6 +1,6 @@
 # encoding: utf-8
 '''
-Created on 18 avr. 2012
+Created on April 18, 2012
 
 @author: Young-Min Kim, Jade Tavernier
 '''
@@ -36,7 +36,6 @@ class Clean(object):
 				elif flag == 2:
 					'nonLabels'
 					self.nonLabels[lineSplit[0]] = lineSplit[1]
-				
 		except:
 			pass
 			print "Feature file not found : config/features.txt \n"
@@ -67,17 +66,6 @@ class Clean(object):
 		n = current_tag
 		top_tag = n.name
 		top_att = ''
-		
-		'If the tag appears in a nonLabel list'
-		'''
-		if self.nonLabels.has_key(top_tag):
-			if self.nonLabels[top_tag] != "1":
-				baliseN = "<"+top_tag
-				for key in n.attrs.keys() :
-					baliseN += " "+key+"="+"\""+n.attrs[key]+"\""
-				baliseN += ">"
-				words.append({"nom":baliseN, "caracteristique":"", "balise":["noLabel"]})
-		'''
 			
 		#read attributes 
 		if len(n.attrs) > 0 :	# if attributes exist, make attribute string
@@ -142,13 +130,6 @@ class Clean(object):
 						balise.append("nonbibl")
 					words.append({"nom":s, "caracteristique":caract, "balise":balise})
 				
-		'If the tag appears in a nonLabel list'
-		'''
-		if self.nonLabels.has_key(top_tag):
-			if self.nonLabels[top_tag] != "1":
-				baliseN = "</"+top_tag+">"
-				words.append({"nom":baliseN, "caracteristique":"", "balise":["noLabel"]})
-		'''
 		return words
 
 
@@ -173,11 +154,7 @@ class Clean(object):
 				ct = len(txts)
 				tags[ct-1].append(top_tag)
 				if (top_att) : attrs[ct-1].append(top_att)		# APPEND ATTRIBUTE
-	
-				#constring2 = ''
-				#try : constring2 = constring.decode('utf8')
-				#except : constring2 = constring
-	
+
 				if con == constring.decode('utf8') :
 					pass
 				else :
@@ -193,7 +170,6 @@ class Clean(object):
 							attstyp_string = attstyp_string + key+' '
 						attrs[ct-1].append(atts_string)
 						#print atts_string
-						
 						tagatt_string = con.name+' '+attstyp_string+' '+atts_string
 						if self.tagAttDict.has_key(tagatt_string) :
 							self.tagAttDict[tagatt_string] += 1
@@ -231,7 +207,6 @@ class Clean(object):
 			new_str =  tmp_str[:a] + tmp_str[b:c] + tmp_str[d:]
 			tmp_str = new_str
 			a = tmp_str.find(target_tag_st,0)
-		
 		
 		target_tag_st = "<hi "	#a
 		target_tag_mi = ">"		#c
@@ -300,8 +275,6 @@ class Clean(object):
 					tmp_str = tmp_str.replace(hit, unichr(entnum))
 				except ValueError:
 					pass
-		
-		#tmp_str = tmp_str.replace('&','&amp;')
 		
 		return tmp_str
 		

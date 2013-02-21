@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 '''
-Created on 18 avr. 2012
+Created on April 20, 2012
 
-@author: Young-min Kim, Jade Tavernier
+@author: Young-Min Kim, Jade Tavernier
 '''
 
 class Feature(object):
@@ -20,10 +20,11 @@ class Feature(object):
 	def affiche(self):
 		print "\t\t",self.nom
 		
-	'''
-	verifie si le nom est celui passe en parametre
-	'''
+		
 	def nameIs(self, nom):
+		'''
+		Verify if the word name is passed one
+		'''
 		if nom == self.nom:
 			return 1
 		return -1

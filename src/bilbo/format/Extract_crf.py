@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 '''
-Created on 11 juin 2012
+Created on June 11, 2012
 
 @author: Young-Min Kim, Jade Tavernier
 '''
@@ -143,8 +143,6 @@ class Extract_crf(Extract):
 						fileResWapiti = fileRes.replace(".", "_Wapiti.")
 						self._printdataWapiti(fileResWapiti, listRef, tr, "deleteNegatives")
 						self._printdata(fileRes, listRef, tr, "deleteNegatives")
-						#fileResWapiti = fileRes.replace(".", "_nega_Wapiti.")
-						#self._printdataWapiti(fileResWapiti, listRef, tr, "deletePositives")	
 			else:
 				self._printOnlyLabel(fileRes, listRef)
 			

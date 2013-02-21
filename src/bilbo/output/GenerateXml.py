@@ -1,6 +1,6 @@
 # encoding: utf-8
 '''
-Created on 2 mai 2012
+Created on May 2, 2012
 
 @author: Young-min Kim, Jade Tavernier
 '''

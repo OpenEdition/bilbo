@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 '''
-Created on 25 avr. 2012
+Created on April 25, 2012
 
-@author: Young-min Kim, Jade Tavernier
+@author: Young-Min Kim, Jade Tavernier
 '''
 import unicodedata
 
@@ -37,13 +37,11 @@ class Properlist(object):
 				else :
 					self.m_targetlist[key][st] = 1
 
-	'''
-	searchProper:
-		listReference : liste des references
-		tr : 
-		listname : 
-	'''
+
 	def searchProper(self, listReference, tr) :
+		'''
+		Add the target feature if the corresponding word is in the list according to the rules
+		'''
 		
 		if tr == 1 or tr == -1 :	pt = 1
 		elif tr == 0 :	pt = 0
@@ -74,7 +72,7 @@ class Properlist(object):
 					
 					tokens = ''
 					full_str = full_str.title()
-					full_str = strip_accents(full_str)
+					full_str = self.strip_accents(full_str)
 					for key in sorted(self.m_targetlist[token], key=len, reverse=True):
 						try:
 							if full_str.find(key) >= 0 :
@@ -86,13 +84,13 @@ class Properlist(object):
 						tokens = tokens.split() 
 						for j in range(cpt,cpt+len(tokens)) :
 							curr = reference.getWordIndice(j)
-							if (tokens[j-cpt]).title() == (strip_accents(curr.nom)).title() :
+							if (tokens[j-cpt]).title() == (self.strip_accents(curr.nom)).title() :
 								curr.addFeature(self.targetfeature)
 								#print "found", self.targetfeature
 				cpt += 1
 
 
-def strip_accents(input_str):
-	nkfd_form = unicodedata.normalize('NFKD', unicode(input_str, 'utf8'))
-	return (u"".join([c for c in nkfd_form if not unicodedata.combining(c)])).title()
+	def strip_accents(self, input_str):
+		nkfd_form = unicodedata.normalize('NFKD', unicode(input_str, 'utf8'))
+		return (u"".join([c for c in nkfd_form if not unicodedata.combining(c)])).title()
 

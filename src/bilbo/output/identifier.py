@@ -88,15 +88,13 @@ def extractDoi(input_str, tagTypeCorpus) :
 		except : 
 			sname2 = urllib.quote(sname)
 			pass
-			
-		#print title2, sname2
+
 
 		q1 = 'http://doi.crossref.org/servlet/query?usr='+usrname+'&format=unixref&qdata=%3C?xml%20version%20=%20%221.0%22%20encoding=%22UTF-8%22?%3E%3Cquery_batch%20version=%222.0%22%20xmlns%20=%20%22http://www.crossref.org/qschema/2.0%22%20xmlns:xsi=%22http://www.w3.org/2001/XMLSchema-instance%22%3E%3Chead%3E%3Cdoi_batch_id%3EDOI%20result%3C/doi_batch_id%3E%3C/head%3E%3Cbody%3E%3Cquery%20key=%22mykey%22%20expanded-results=%22true%22%3E%3Carticle_title%20match=%22fuzzy%22%3E'
 		q2 = '%3C/article_title%3E%3Cauthor%20match=%22fuzzy%22%20search-all-authors=%22false%22%3E'
 		q3 = '%3C/author%3E%3C/query%3E%3C/body%3E%3C/query_batch%3E'
 				
-		qry = q1+title2+q2+sname2+q3
-				
+		qry = q1+title2+q2+sname2+q3				
 		xml = urllib2.urlopen(qry).read()
 		#print xml
 		
@@ -115,8 +113,6 @@ def extractDoi(input_str, tagTypeCorpus) :
 		#print raw_input("Press Enter to Exit")
 		#print 'Total Num. DOI :', count
 		#print
-	
-	#print 'Total Num. DOI :', count
 	
 	return doistring
 

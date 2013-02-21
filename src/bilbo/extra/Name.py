@@ -17,9 +17,7 @@ class Name(object):
 		self.multi_namelist = {'0000': {'0000': 0}} #when surname is more than a word
 		self.forenamelist = {'0000': 0}
 		
-		'''
-		load fichier lexique
-		'''
+		'Load the name list file and save the contents in the lists'
 		for line in open (fname, 'r') :
 			line = re.sub(' ', ' ', line)
 			line = string.replace(line, '-','-')
@@ -51,11 +49,11 @@ class Name(object):
 				
 			self.forenamelist[f_st] = 1
 			
-	
-	'''
-	searchName
-	'''
+
 	def searchName(self, listReference, tr) :
+		'''
+		Add SURNAMELIST and FORENAMELIST features according to the rules
+		'''
 	
 		if tr == 1 or tr == -1 :	pt = 1
 		elif tr == 0 :	pt = 0
@@ -72,8 +70,7 @@ class Name(object):
 				if not self.namelist.has_key(first) :
 					if self.namelist.has_key(first2) :
 						first = first2
-				
-				#print '*****',first
+						
 				if self.namelist.has_key(first) : # current token is surname
 					####### At first, check the cases of [surname , forename] or [surname forename]
 					j=cpt+1
@@ -89,8 +86,7 @@ class Name(object):
 							mot.addFeature('SURNAMELIST')
 							motSuivant = reference.getWordIndice(j)
 							motSuivant.addFeature('FORENAMELIST')
-					
-					#else :
+
 					###### if the first cases don't work, check the case of [forname surname]
 					if cpt > 0 :
 						j = cpt-1
@@ -103,10 +99,10 @@ class Name(object):
 				cpt += 1
 		
 
-	'''
-	has_initial : determine si le mot est un initia
-	'''
 	def _has_initial(self, mot) :
+		'''
+		Check if the word has initial
+		'''		
 		ck = 0
 		feature = mot.getAllFeature()
 		for t in feature :

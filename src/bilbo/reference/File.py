@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 '''
-Created on 25 avr. 2012
+Created on April 25, 2012
 
 @author: Young-Min Kim, Jade Tavernier
 '''
@@ -16,6 +16,7 @@ import sys
 
 prePunc =  {'.':0, ',':0, ')':0, ':':0, ';':0, '-':0, '”':0, '}':0, ']':0, '!':0, '?':0, '/':0}
 postPunc = {'(':0, '-':0, '“':0, '{':0, '[':0}
+specialPunc =  {'«':0, '»':0, '“':0, '”':0, '"':0, '–':0, '-':0}
 
 prePtrlimit = -1
 postPtrlimit = -1
@@ -161,6 +162,7 @@ class File(object):
 		s = soup.findAll (tagTypeCorpus)
 		
 		basicTag = {} #tags existing in the original files
+
 		for ss in s :
 			for sss in ss.find_all() :
 				basicTag[sss.name] = 1
@@ -179,6 +181,7 @@ class File(object):
 			ptr = 0
 			if (len(parsed_soup.split()) > 0) : #if empty <bibl>, pass it
 				oriRef = (str(s[cptRef]))
+
 				for r in ref.contents :
 					ck = 0
 					try : r.name
@@ -237,9 +240,6 @@ class File(object):
 									print pre_ptr, ptr, '*'+newtoken+'*', token
 									print "PROBLEM, CANNOT FIND THE TOKEN", token
 									print s[cptRef]
-									#print oriRef[:pre_ptr]
-									#print ref
-									#print 
 									ptr = -1
 									pass
 							else :
@@ -252,16 +252,13 @@ class File(object):
 								ptr += len(nstr)
 							else :
 								ptr = pre_ptr
-						#print pre_ptr, ptr, token
-						#print oriRef[:ptr]
-						#print 
 				
 				'check continuously annotated tags to eliminate tags per each token'
 				oriRef = self.continuousTags(basicTag, includedLabels, oriRef)
 				'arrange name tag'
 				oriRef = self.arrangeTagsPerToken(includedLabels, oriRef, tagTypeCorpus)
 				
-				if oriRef.find("<author>") < 0 and oriRef.find("<title") < 0: #non-annotated input
+				if oriRef.find("<author>") < 0 : #non-annotated input
 					'add persName tags'
 					oriRef = self.findAuthor(includedLabels, oriRef)
 					'correct missed tag inserting'
@@ -319,10 +316,8 @@ class File(object):
 						#print text
 				tmp_list = list(tmp_str)
 				tmp_list[p1:p2+len('</'+tagTypeCorpus+'>')] = text
-				#print p2-p1+len('</'+tagTypeCorpus+'>'), len(text)
 				tmp_str = ''.join(tmp_list)
 
-				
 			cpt += 1 
 			pre_p1 = p1		
 		
@@ -385,20 +380,20 @@ class File(object):
 		nameck = ["surname", "forename", "namelink", "genname"]
 		for tmpTag in includedLabels :
 			ptr2 = 0
-			ptr1 = oriRef.find('<'+tmpTag+'>', ptr2) #find the starting of a name tag
+			ptr1 = oriRef.find('<'+tmpTag+'>', ptr2) #find the starting of an annotated tag
 			while ptr1 > 0 :
 				ptr2 = oriRef.find('</'+tmpTag+'>', ptr1)+len('</'+tmpTag+'>') #find its ending 
 				ptr3 = oriRef.find('</',ptr2)	#find closest other ending tag
 				closeTag = ''
-				if oriRef.find('<',ptr2,ptr3) < 0 and len((oriRef[ptr2:ptr3].replace(' ', ' ')).split()) == 0 : #if there is no starting tag between them and NO char
+				if oriRef.find('<',ptr2,ptr3) < 0 and self._onlyPunc(oriRef[ptr2:ptr3]) : #if there is no starting tag between them and NO char
 					ptr4 = oriRef.find('>',ptr3)
 					closeTag = oriRef[ptr3+len('</'):ptr4] #extract the closest tag name
 					if closeTag not in ["note", "bibl", "listNote", "listBibl"] :
 						[st1, ed1, dummyTag] = self._closestPreOpeningTag(oriRef, ptr1)
-						if oriRef[st1:ed1].find('<'+closeTag) == 0 and len((oriRef[ed1:ptr1].replace(' ', ' ')).split()) == 0 :#if there is no tag between them and NO char
+						if oriRef[st1:ed1].find('<'+closeTag) == 0 and self._onlyPunc(oriRef[ed1:ptr1]) :#if there is no tag between them and NO char
 							#then exchange tags
-							tmpRef = self._exchangeTags(oriRef, st1, ed1, ptr1, ptr1+len('<'+tmpTag+'>'))
-							tmpRef = self._exchangeTags(tmpRef, ptr2-len('</'+tmpTag+'>'), ptr2, ptr3, ptr4+1)
+							tmpRef = self._moveSecondTag(oriRef, st1, ed1, ptr1, ptr1+len('<'+tmpTag+'>'))
+							tmpRef = self._moveFirstTag(tmpRef, ptr2-len('</'+tmpTag+'>'), ptr2, ptr3, ptr4+1)
 							oriRef = tmpRef
 				ptr1 = oriRef.find('<'+tmpTag+'>', ptr2)
 		#final continuous check
@@ -415,6 +410,17 @@ class File(object):
 		return oriRef
 	
 	
+	def _onlyPunc(self, tmp_str):
+		
+		new_str = tmp_str.replace(' ', ' ')
+		for key in specialPunc.iterkeys(): new_str = new_str.replace(key, ' ')
+		new_str = re.sub('\W', ' ', new_str)
+		onlyPunc = False
+		if len(new_str.split()) == 0 : onlyPunc = True
+					
+		return onlyPunc
+			
+			
 	def findAuthor(self, includedLabels, oriRef):
 		'''
 		Post-processing RULE about author field
@@ -742,9 +748,6 @@ class File(object):
 				startck1 = (oriRef[::-1]).find("<",startck1)
 				limitst2 = oriRef.find('</'+tagLimit, startck1)
 				limited2 = oriRef.find('>', limitst1)
-		
-			#print limitst2
-			#print oriRef[limitst2:]
 		
 		return limited1, limitst2
 	
