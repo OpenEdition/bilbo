@@ -188,6 +188,7 @@ class Extract(object):
 					['SURNAMELIST'],	#10
 					['FORENAMELIST'],	#11
 					['PLACELIST']]		#12
+					#['ONEDIGIT', 'TWODIGIT', 'THREEDIGIT', 'FOURDIGIT']]		#13
 					#['JOURNALLIST']]	#13
 				
 		fich = codecs.open(fichier, "w", encoding="utf-8")
@@ -197,7 +198,7 @@ class Extract(object):
 				for mot in reference.getWord():
 					tmp_features = ['NONUMBERS', 'NODASH', 'NONIMPCAP', 'NULL', 'NOINITIAL',
 									'NOWEBLINK', 'NOITALIC', 'NOEDITOR', 'NOPAGE', 'NOSURLIST',
-									'NOFORELIST', 'NOPLACELIST']#, 'NOJOURLIST']
+									'NOFORELIST', 'NOPLACELIST']#, 'NODIGIT', 'NOJOURLIST']
 					if mot.ignoreWord == 0:
 						try:
 							fich.write(unicode(mot.nom,"utf-8"))
@@ -391,7 +392,7 @@ class Extract(object):
 			if caracteristique.nom == 'a' :
 				titleAttr = caracteristique.nom
 				mot.delFeature('a')
-			elif caracteristique.nom == 'j' or caracteristique.nom == 's' : 
+			elif caracteristique.nom == 'j' or caracteristique.nom == 's' or caracteristique.nom == 'm': 
 				if titleCK == 1 and titleAttr != caracteristique.nom : 
 					balise = mot.getTag("title")
 					balise.nom = 'booktitle'
@@ -399,10 +400,10 @@ class Extract(object):
 					titleAttr = caracteristique.nom
 				mot.delFeature('j')
 				mot.delFeature('s')
-			elif caracteristique.nom == 'm' or caracteristique.nom == 'u' :
+			if caracteristique.nom == 'm' or caracteristique.nom == 'u' :
 				if relatItm == 1 and titleCK == 1 :
 					balise = mot.getTag("title")
-					balise.nom = 'booktitle'
+					if balise > 0 : balise.nom = 'booktitle'
 				else : 
 					titleAttr = caracteristique.nom
 				mot.delFeature('m')

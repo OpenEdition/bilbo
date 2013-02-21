@@ -260,10 +260,12 @@ class File(object):
 				oriRef = self.continuousTags(basicTag, includedLabels, oriRef)
 				'arrange name tag'
 				oriRef = self.arrangeTagsPerToken(includedLabels, oriRef, tagTypeCorpus)
-				'add persName tags'
-				oriRef = self.findAuthor(includedLabels, oriRef)
-				'correct missed tag inserting'
-				oriRef = self._correctMissTag(oriRef, basicTag, "persName")
+				
+				if oriRef.find("<author>") < 0 and oriRef.find("<title") < 0: #non-annotated input
+					'add persName tags'
+					oriRef = self.findAuthor(includedLabels, oriRef)
+					'correct missed tag inserting'
+					oriRef = self._correctMissTag(oriRef, basicTag, "persName")
 				
 				if self.options.o == 'tei' :
 					oriRef = toTEI(oriRef, tagConvert)

@@ -38,9 +38,9 @@ class GenerateXml(object):
 				currToken = line[0]
 				currLabel = line[len(line)-1]
 				ckIt = 0 # if you don't want to insert italic attribute, run it
-				if self.labels.has_key(currToken) : currLabel = 'c'
+				if self.labels.has_key(currToken) and currLabel != 'nonbibl' : currLabel = 'c'
 				estLabel = est[j]
-				if self.labels.has_key(currToken) : estLabel = 'c'
+				if self.labels.has_key(currToken) and currLabel != 'nonbibl' : estLabel = 'c'
 				
 				if indicator == 2 : currLabel = estLabel
 				
