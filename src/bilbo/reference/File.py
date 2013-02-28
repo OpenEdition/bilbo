@@ -511,7 +511,7 @@ class File(object):
 						if f.find("title") == 0 : 
 							tagName = f
 							cntT += 1
-						if f in nameck+['nolabel'] : cntN += 1
+						if f in nameck+['nolabel', 'abbr'] : cntN += 1
 					'case 3 : if there are more than one tag but only one title, move title and delete the other tags'
 					if cntT == 1 :
 						tmpRef = self._exchangeTagPairs(tmpRef, tagName, a, b+1, c, d)
@@ -653,13 +653,34 @@ class File(object):
 	
 	
 	def _devideHi(self, tmpRef, found, hiString, ptr):
-								
+		
+		pre_ed = 0	
 		for i in range(len(found)) :
 			move = 0
 			st1, ed1, st2, ed2 = self._findTagPosition(tmpRef, found[i], ptr)
-			if i != 0 : tmpRef, move = self._insertTag(tmpRef, hiString, st1)
+			if i != 0 : 
+				if len(tmpRef[pre_ed:st1].split()) > 0 : 
+					#print '**'+tmpRef[pre_ed:st1]+'**'
+					tmpRef, move = self._insertTag(tmpRef, hiString, pre_ed)
+					tmpRef, move = self._insertTag(tmpRef, '</hi>', st1+move)
+					st1 = st1+len(hiString)+len('</hi>')
+					st2 = st2+len(hiString)+len('</hi>')
+					ed2 = ed2+len(hiString)+len('</hi>')
+				tmpRef, move = self._insertTag(tmpRef, hiString, st1)
 			ptr = st2+move
-			if i != len(found)-1 : tmpRef, move = self._insertTag(tmpRef, '</hi>', ed2+move)
+			if i != len(found)-1 :
+				nptr = ed2+move
+				tmpRef, move = self._insertTag(tmpRef, '</hi>', nptr)
+				pre_ed = nptr+move
+			
+			else :
+				st1 = tmpRef.find('</hi>', ed2)
+				if len(tmpRef[ed2:st1].split()) > 0 :
+					#print '**'+tmpRef[ed2+move:st1]+'**'
+					nptr = ed2+move
+					tmpRef, move = self._insertTag(tmpRef, '</hi>', nptr)
+					tmpRef, move = self._insertTag(tmpRef, hiString, nptr+move)
+			
 			ptr = ptr+move
 		
 		return tmpRef

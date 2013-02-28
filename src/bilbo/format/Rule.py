@@ -8,6 +8,10 @@ from bilbo.reference.Word import Word
 from bilbo.reference.Reference import Reference
 import re
 
+prePunc =  {'.':0, ',':0, ')':0, ':':0, ';':0, '-':0, '”':0, '»':0, '}':0, ']':0, '!':0, '?':0, '/':0, '\\':0, 
+			'*':0, '%':0, '*':0, '=':0, '_':0, '|':0, '~':0, '>':0, '^':0, '+':0}
+postPunc = {'(':0, '–':0, '-':0, '“':0, '«':0, '{':0, '[':0, '"':0, '#':0, '$':0, '@':0, '<':0}
+
 class Rule(object):
 	'''
 	A class that reorganizes tokens according to the predefined rules.
@@ -131,6 +135,51 @@ class Rule(object):
 			#for w in reorgWords : w.affiche()			
 			reference.replaceReference(reorgWords,len(reorgWords))	
 			
+		#self.attachPunc(listReference)
+			
+		return
+	
+	
+	def attachPunc(self, listReference) :
+		
+		for reference in listReference.getReferences() :
+			reorgWords =[]
+			postCk = False
+			postToken = ''
+			postfeat_str = ''
+			for word in reference.words :
+				oriword = 'NONE'
+				if postCk :
+					oriword = word.nom
+					word.nom = postToken+word.nom
+					word.addFeature(postfeat_str.split())
+					
+				if word.getTag("c") != -1 : # it's a punctuation mark
+					if prePunc.has_key(word.nom) and len(reorgWords) > 0 :
+						#attach to the previous word
+						preWord = reorgWords.pop()
+						preWord.nom = preWord.nom+word.nom
+						feat_str = 'punc '
+						if word.nom == '.' : feat_str+= 'point'
+						elif word.nom == ',' : feat_str+= 'comma'
+						elif word.nom == ';' : feat_str+= 'semicolon'
+						preWord.addFeature(feat_str.split())
+						reorgWords.append(preWord)
+						postCk = False
+					elif postPunc.has_key(word.nom) or postPunc.has_key(oriword) :
+						postCk = True
+						postToken = word.nom
+						postfeat_str = 'punc '
+						if word.nom == '.' : feat_str+= 'point'
+						elif word.nom == ',' : feat_str+= 'comma'
+						elif word.nom == ';' : feat_str+= 'semicolon'
+				else :
+					reorgWords.append(word)
+					postCk = False
+				
+			#for w in reorgWords : w.affiche()			
+			reference.replaceReference(reorgWords,len(reorgWords))	
+		
 		return
 	
 		
