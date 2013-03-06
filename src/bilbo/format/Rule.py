@@ -8,9 +8,10 @@ from bilbo.reference.Word import Word
 from bilbo.reference.Reference import Reference
 import re
 
-prePunc =  {'.':0, ',':0, ')':0, ':':0, ';':0, '-':0, '”':0, '»':0, '}':0, ']':0, '!':0, '?':0, '/':0, '\\':0, 
-			'*':0, '%':0, '*':0, '=':0, '_':0, '|':0, '~':0, '>':0, '^':0, '+':0}
-postPunc = {'(':0, '–':0, '-':0, '“':0, '«':0, '{':0, '[':0, '"':0, '#':0, '$':0, '@':0, '<':0}
+prePunc =  {'.':0, ',':0, ')':0, ';':0, '-':0, '”':0, '»':0, '}':0, ']':0, '!':0, '?':0, '\\':0, 
+			'*':0, '%':0, '*':0, '=':0, '_':0, '~':0, '>':0, '^':0, '+':0, '"':0} #'|':0, '/':0, ':':0, 
+postPunc = {'(':0, '–':0, '-':0, '“':0, '«':0, '{':0, '[':0, '#':0, '$':0, '@':0, '<':0} #'"':0, 
+
 
 class Rule(object):
 	'''
@@ -19,17 +20,20 @@ class Rule(object):
 	Features about initial expression, capitalized token etc. are verified and attached.
 	'''
 	
-	def __init__(self):
+	def __init__(self, options):
 		'''
 		Constructor
 		'''
 		self.special =  {'«':0, '»':0, '“':0, '”':0, '"':0, '–':0}
-		self.paren = {'(':0, '{':0, '[':0, ')':0, '}':0, ']':0, '«':0, '“':0, '»':0, '”':0}
-		self.link = {':':0, '=':0, '_':0, '|':0, '~':0, '-':0, '–':0}
+		self.leadingQuotes = {'(':0, '{':0, '[':0, '«':0, '“':0}
+		self.endingQuotes = {')':0, '}':0, ']':0, '»':0, '”':0}
+		self.link = {':':0, '=':0, '_':0, '|':0, '~':0, '-':0, '–':0, ';':0}
 		
 		'Load the lexicon file'
 		self.regles = {}
+		self.options = options
 		expression = "^#"
+		if self.options.u : del self.special['"']
 		
 		try:
 			fichier = open("KB/config/lexique.txt", "r")
@@ -110,7 +114,7 @@ class Rule(object):
 				'remained string treatment'
 				while endWord != '' :
 					#Let's separate back punctuation
-					[midWord, tmp_str] = self.sepMidWord(wordSet[len(wordSet)-1])
+					[midWord, tmp_str] = self._sepMidWord(wordSet[len(wordSet)-1])
 					if midWord != [] :
 						#modify final word of wordSet
 						wordSet.pop() #delete last word
@@ -135,55 +139,33 @@ class Rule(object):
 			#for w in reorgWords : w.affiche()			
 			reference.replaceReference(reorgWords,len(reorgWords))	
 			
-		#self.attachPunc(listReference)
+		'if -u option is True, we attach punctuation. it is especially used for experiments'
+		if self.options.u : self.attachPunc(listReference)
+		#else : self.descPunc(listReference)
 			
 		return
 	
-	
-	def attachPunc(self, listReference) :
 		
-		for reference in listReference.getReferences() :
-			reorgWords =[]
-			postCk = False
-			postToken = ''
-			postfeat_str = ''
-			for word in reference.words :
-				oriword = 'NONE'
-				if postCk :
-					oriword = word.nom
-					word.nom = postToken+word.nom
-					word.addFeature(postfeat_str.split())
-					
-				if word.getTag("c") != -1 : # it's a punctuation mark
-					if prePunc.has_key(word.nom) and len(reorgWords) > 0 :
-						#attach to the previous word
-						preWord = reorgWords.pop()
-						preWord.nom = preWord.nom+word.nom
-						feat_str = 'punc '
-						if word.nom == '.' : feat_str+= 'point'
-						elif word.nom == ',' : feat_str+= 'comma'
-						elif word.nom == ';' : feat_str+= 'semicolon'
-						preWord.addFeature(feat_str.split())
-						reorgWords.append(preWord)
-						postCk = False
-					elif postPunc.has_key(word.nom) or postPunc.has_key(oriword) :
-						postCk = True
-						postToken = word.nom
-						postfeat_str = 'punc '
-						if word.nom == '.' : feat_str+= 'point'
-						elif word.nom == ',' : feat_str+= 'comma'
-						elif word.nom == ';' : feat_str+= 'semicolon'
-				else :
-					reorgWords.append(word)
-					postCk = False
-				
-			#for w in reorgWords : w.affiche()			
-			reference.replaceReference(reorgWords,len(reorgWords))	
+	def sepTotalFrontPunc(self, word):
 		
-		return
-	
+		[frontWords, tmp_str] = self._sepFrontPunc(word)
+		word.nom = tmp_str
+		newfrontWords = []
+		change = True
+		while not re.match("^\w+", tmp_str) and len(tmp_str) > 0 and change : 
+			[newfrontWords, tmp_str] = self._sepFrontSpePunc(word)
+			frontWords = frontWords + newfrontWords
+			if word.nom != tmp_str : word.nom = tmp_str
+			else : change = False
+			[newfrontWords, tmp_str] = self._sepFrontPunc(word)
+			frontWords = frontWords + newfrontWords
+			if word.nom != tmp_str : word.nom = tmp_str
+			else : change = False
 		
-	def sepFrontPunc(self, word):
+		return frontWords
+
+
+	def _sepFrontPunc(self, word):
 		
 		frontWords = []
 		input_str = word.nom
@@ -191,9 +173,11 @@ class Rule(object):
 		featNames = word.listNomFeature()
 		tmp_str = input_str
 		i=0
+		allPunc = '.,():;{}[]!?#$%\*+/<=>@^_|~"'
+		if self.options.u : allPunc = allPunc[:-1]
 		while (i < len(input_str)) :
 			c = input_str[i]
-			if c in  ".,():;{}[]!?#$%\*+/<=>@^_|~" :
+			if c in allPunc :
 				tmpWord = Word(c, tagNames, featNames)
 				tmpWord.addTag("c")
 				frontWords.append(tmpWord) #create word for a punctuation mark
@@ -204,7 +188,7 @@ class Rule(object):
 		return frontWords, tmp_str
 	
 		
-	def sepFrontSpePunc(self, word):
+	def _sepFrontSpePunc(self, word):
 		
 		frontWords = []
 		input_str = word.nom
@@ -222,26 +206,7 @@ class Rule(object):
 		return frontWords, new_str
 	
 	
-	def sepTotalFrontPunc(self, word):
-		
-		[frontWords, tmp_str] = self.sepFrontPunc(word)
-		word.nom = tmp_str
-		newfrontWords = []
-		change = True
-		while not re.match("^\w+", tmp_str) and len(tmp_str) > 0 and change : 
-			[newfrontWords, tmp_str] = self.sepFrontSpePunc(word)
-			frontWords = frontWords + newfrontWords
-			if word.nom != tmp_str : word.nom = tmp_str
-			else : change = False
-			[newfrontWords, tmp_str] = self.sepFrontPunc(word)
-			frontWords = frontWords + newfrontWords
-			if word.nom != tmp_str : word.nom = tmp_str
-			else : change = False
-		
-		return frontWords
-
-
-	def sepMidWord(self, word):
+	def _sepMidWord(self, word):
 		
 		midWord = []
 		tagNames = word.listNomTag()
@@ -249,9 +214,11 @@ class Rule(object):
 		i=0
 		new_str =''
 		tmp_str = ''
+		allPunc = '.,():;{}[]!?#$%\*+/<=>@^_|~"'
+		if self.options.u : allPunc = allPunc[:-1]	
 		while (i < len(word.nom)) :
 			c = word.nom[i]
-			if c in  ".,():;{}[]!?#$%\*+/<=>@^_|~" :
+			if c in allPunc :
 				midWord.append(Word(new_str, tagNames, featNames))
 				tmp_str = word.nom[i:]
 				i = len(word.nom)
@@ -260,8 +227,93 @@ class Rule(object):
 				i += 1
 				
 		return midWord, tmp_str
-			
-			
+	
+	
+	def descPunc(self, listReference) :
+		
+		for reference in listReference.getReferences() :
+			quotes = 0
+			for word in reference.words :
+				if word.nom.find('"') >= 0 : 
+					quotes += 1
+					if quotes % 2 == 0 : word.addFeature(['endingquotes'])
+					else : word.addFeature(['leadingquotes'])
+					
+				if word.getTag("c") != -1 or word.nom == '"' : # it's a punctuation mark
+					feat_str = 'punc '
+					if word.nom == '.' : feat_str = 'point'
+					elif word.nom == ',' : feat_str = 'comma'
+					
+					if self.leadingQuotes.has_key(word.nom) : feat_str = 'leadingquotes'
+					elif self.endingQuotes.has_key(word.nom) : feat_str = 'endingquotes'
+					elif self.link.has_key(word.nom) : feat_str = 'link'
+					
+					word.addFeature(feat_str.split())
+		return
+		
+		
+	def attachPunc(self, listReference) :
+		'''
+		Undo the separation of punctuation. 
+		'''
+		for reference in listReference.getReferences() :
+			reorgWords =[]
+			postCk = False
+			postToken = ''
+			postfeat_str = ''
+			for word in reference.words :
+				if word.nom.find('"') >= 0 : word.addFeature(['punc'])
+				oriword = 'NONE'
+				if postCk :
+					oriword = word.nom
+					word.nom = postToken+word.nom
+					word.addFeature(postfeat_str.split())
+					
+				if word.getTag("c") != -1 or word.nom == '"' : # it's a punctuation mark
+					if prePunc.has_key(word.nom) and len(reorgWords) > 0 :
+						#attach to the previous word
+						preWord = reorgWords.pop()
+						preWord.nom = preWord.nom+word.nom
+						feat_str = 'punc '
+						if word.nom == '.' : feat_str = 'point'
+						elif word.nom == ',' : feat_str = 'comma'
+						
+						if self.endingQuotes.has_key(word.nom) : feat_str = 'endingquotes'
+						elif self.link.has_key(word.nom) : feat_str = 'link'
+						
+						preWord.addFeature(feat_str.split())
+						reorgWords.append(preWord)
+						postCk = False
+					elif postPunc.has_key(word.nom) or postPunc.has_key(oriword) :
+						postCk = True
+						postToken = word.nom
+						postfeat_str = 'punc '
+						if word.nom == '.' : postfeat_str = 'point'
+						
+						if self.leadingQuotes.has_key(word.nom) : postfeat_str = 'leadingquotes'
+						elif self.link.has_key(word.nom) : postfeat_str = 'link'
+						
+						
+				else :
+					reorgWords.append(word)
+					postCk = False
+				
+			#for w in reorgWords : w.affiche()	
+			reorgWords = self._findPuncFunc(reorgWords)	
+			reference.replaceReference(reorgWords,len(reorgWords))	
+		
+		return
+	
+	
+	def _findPuncFunc(self, words):
+		for w in words :
+			if w.nom[0] == '"' : w.addFeature(['leadingquotes'])
+			elif w.nom.find('"') > 0 : w.addFeature(['endingquotes'])
+			if w.nom.find('(') >= 0 and w.nom.find(')') > 0 :
+				w.addFeature(['pairedbraces'])
+		return words
+
+		
 	def _initCheck(self, input_str) :
 		'''
 		Check initial expressions

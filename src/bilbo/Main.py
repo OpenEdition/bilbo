@@ -50,13 +50,15 @@ if __name__ == '__main__':
 	common_opts.add_option('-g', '--gradetag', dest="g", default="simple", action="store", type='choice', choices=['simple', 'detail'], help="Grade of tag detail when using tei")
 	common_opts.add_option('-k', '--keeptmp', dest="k", default="none", action="store", type='choice', choices=['none', 'primary', 'all'], help="Decide which temp files are kept")
 	common_opts.add_option('-s', '--svmfilt', dest="s", default=False, action="store_true", help="Use a svm for training or labeling")
+	common_opts.add_option('-u', '--undopuncsep', dest="u", default=False, action="store_true", help="undo punctuation separation")	
 	parser.add_option_group(common_opts)
 	label_opts = optparse.OptionGroup(
 		parser, 'Labeling options',
 		'These options are for labeling only'				
 		)	
-	label_opts.add_option('-o', '--outformat', dest="o", default="tei", action="store", type='choice', choices=['tei', 'xml'], help="Output reference format")
+	label_opts.add_option('-o', '--outformat', dest="o", default="tei", action="store", type='choice', choices=['tei', 'xml', 'simple'], help="Output reference format")
 	label_opts.add_option('-d', '--doi', dest="d", default=False, action="store_true", help="DOI extraction via crossref site")
+	label_opts.add_option('-x', '--xmlschema', dest="x", default=False, action="store_true", help="XML schema validation")
 	label_opts.add_option('-e', '--exterdata', dest="e", default=False, action="store_true", help="Labeling data different from training set")	
 	parser.add_option_group(label_opts)
 	
@@ -109,13 +111,20 @@ if __name__ == '__main__':
 		print "  -s : --svmfilt"
 		print "\t Training a svm model or classifying notes to filter out non-bibliographical notes, default='False'"
 
+		print "  -u : --undopuncsep"
+		print "\t Undo punctuation separation, default='False'"
+		
+		
 		print "(labeling)"		
 		print "  -o : --outformat <string>"
 		print "\t Output data format"
 		print "\t  tei => xml following tei guidelines (default)"
 		print "\t  xml => simple xml"
+		print "\t  simple => only labeled references without article contents"
 		print "  -d : --doi"
 		print "\t Digital object identifier (doi) extraction via crossref site, default='False'"
+		print "  -x : --xmlschema"
+		print "\t xml schema validation from a xsd file in \"KB/validation/\" folder, default='False'"
 		print "  -e : --exterdata"
 		print "\t Labeling data different from training set. Do not use svm filtering when using this option. default='False'"
 		

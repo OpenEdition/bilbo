@@ -67,7 +67,7 @@ class Bilbo(object):
 		if typeCorpus == 1:
 			print "Extract references..."
 			corpus.extract(1, "bibl")
-			print "crf training data extraction"
+			print "crf training data extraction..."
 			self.crf.prepareTrain(corpus, 1, "trainingdata_CRF.txt", 1, 1)	#CRF training data extraction
 			self.crf.runTrain(dirModel, "trainingdata_CRF_Wapiti.txt", self.crfmodelname)#CRF model learning
 				

@@ -188,7 +188,8 @@ class Extract(object):
 					['FORENAMELIST'],	#11
 					['PLACELIST']]		#12
 					#['JOURNALLIST']]	#13
-				
+		if self.options.u : features.append(['PUNC', 'COMMA', 'POINT', 'LEADINGQUOTES', 'ENDINGQUOTES', 'LINK','PAIREDBRACES'])
+
 		fich = codecs.open(fichier, "w", encoding="utf-8")
 		for reference in listRef.getReferences():
 			if (not (opt=="deleteNegatives" and reference.train == -1)) and (not (opt=="deletePositives" and reference.train != -1)):
@@ -196,7 +197,8 @@ class Extract(object):
 				for mot in reference.getWord():
 					tmp_features = ['NONUMBERS', 'NODASH', 'NONIMPCAP', 'NULL', 'NOINITIAL',
 									'NOWEBLINK', 'NOITALIC', 'NOEDITOR', 'NOPAGE', 'NOSURLIST',
-									'NOFORELIST', 'NOPLACELIST']#, 'NOJOURLIST']
+									'NOFORELIST', 'NOPLACELIST']#, 'NOPUNC']#, 'NOJOURLIST']
+					if self.options.u : tmp_features.append('NOPUNC')
 					if mot.ignoreWord == 0:
 						try:
 							fich.write(unicode(mot.nom,"utf-8"))
@@ -465,6 +467,7 @@ class Extract(object):
 
 	def _extract_biblscope(self, mot):
 		
+		#mot.affiche()	
 		for caracteristique in mot.getAllFeature():
 			if caracteristique.nom == "vol" :
 				balise = mot.getTag("biblscope")
@@ -481,6 +484,8 @@ class Extract(object):
 			elif caracteristique.nom == "part" : 
 				balise = mot.getTag("biblscope")
 				if balise != -1 : balise.nom = "biblscope_pa"
+		#print "***AFTER"
+		
 		
 		return
 	
@@ -503,6 +508,7 @@ class Extract(object):
 		Modify tags according to the configuration and rules
 		'''
 		balise = mot.getLastTag()
+		
 		if balise != -1:
 			nameTag = balise.nom
 			self._checkTag(mot)

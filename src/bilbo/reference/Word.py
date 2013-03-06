@@ -151,6 +151,8 @@ class Word(object):
 		'''		
 		if len(self.tag) == 0:
 			return -1
+		if self.tag[len(self.tag)-1].nom == 'hi' and len(self.tag) > 1:
+			return self.tag[len(self.tag)-2]
 		return self.tag[len(self.tag)-1]
 	
 

@@ -22,14 +22,14 @@ biblscope_v = biblScope unit="vol"
 biblscope_pa = biblScope unit="part"
 biblscope_c = biblScope unit="chap"
 #biblscope
-#w 
+w = NONE 
 #edition 
 #meeting
 #title
 #extent
 #editor
 #name
-place = placeName 
+place = pubPlace 
 orgname = orgName
 rolename = roleName
 namelink = nameLink

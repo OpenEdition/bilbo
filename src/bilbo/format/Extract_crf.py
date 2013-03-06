@@ -92,11 +92,16 @@ class Extract_crf(Extract):
 					supp = []
 					
 					if chPunc.has_key(mot.nom) : #Instead of checking tag, check directly word for new document
-						mot.delAllFeature()
 						if typeCorpus == 2 and extOption==-1 : #in case of SVM data, add PUNC feature
 							mot.delAllFeature()
 							mot.addFeature("PUNC")
-								
+					
+					'detailed punctuation feature <- for experiments, not used for the moment'
+					if mot.getTag('c') != -1 :
+						for carac in mot.getAllFeature():
+							if not carac.nom.lower() in ['punc', 'point', 'comma', 'leadingquotes', 'endingquotes', 'link', 'pairedbraces'] :
+								mot.delFeature(carac.nom)	
+														
 					for carac in mot.getAllFeature():
 						if not self.features.has_key(carac.nom.lower()) :
 							if extOption != -1 or not (carac.nom.lower() in chFeat4title) :
@@ -122,6 +127,7 @@ class Extract_crf(Extract):
 			nonbiblck = 1
 			
 		if tr != -2 :
+			#pass
 			self.nameObj.searchName(listRef, tr)
 			self.placeObj.searchPlace(listRef, tr)
 			self.cityObj.searchProper(listRef, tr)

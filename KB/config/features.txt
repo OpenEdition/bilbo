@@ -12,6 +12,12 @@ italic
 posseditor
 posspage
 punc
+point
+comma
+leadingquotes
+endingquotes
+link
+pairedbraces
 #	nonLabels
 hi 0
 abbr 1

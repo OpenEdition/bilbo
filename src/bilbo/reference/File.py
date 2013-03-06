@@ -10,9 +10,8 @@ from bilbo.format.CleanCorpus1 import CleanCorpus1
 from bilbo.format.CleanCorpus2 import CleanCorpus2
 from bilbo.format.Rule import Rule
 from bilbo.reference.ListReferences import ListReferences
-from bilbo.output.identifier import extractDoi, loadTEIRule, toTEI
-import re
-import sys
+from bilbo.output.identifier import extractDoi, loadTEIRule, toTEI, teiValidate
+import re, sys
 from xml.dom.minidom import parseString
 
 
@@ -63,12 +62,11 @@ class File(object):
 			clean = CleanCorpus1()
 		elif typeCorpus == 2:
 			clean = CleanCorpus2()
-			
 		#print self.nom
 		references = clean.processing(self.nom, tag, external)
 		if len(references) >= 1:
 			self.corpus[typeCorpus] = ListReferences(references, typeCorpus)
-			rule = Rule()
+			rule = Rule(self.options)
 			rule.reorganizing(self.corpus[typeCorpus])
 
 
@@ -97,9 +95,23 @@ class File(object):
 			
 		except :
 			return 0	
-			
 	
-	def buildReferences(self, references, tagTypeCorpus, typeCorpus, dirResult):
+	
+	def writeSimpleResult(self, references, tagTypeCorpus, dirResult):
+		
+		newName = (self._getName()).replace('.','_simple.')
+		fich = open(dirResult+newName, "w")
+		fich.write('<list'+tagTypeCorpus.title()+'>\n\n')
+		for ref in references:
+			fich.write(str(ref))
+			fich.write('\n\n')
+		fich.write('</list'+tagTypeCorpus.title()+'>\n')
+		fich.close()
+		
+		return
+	
+		
+	def buildReferences(self, references, tagTypeCorpus, dirResult):
 		'''
 		Construct final xml output file, called from Corpus::addTagReferences
 		Unlike the first version, compare token by token, replace the token by automatically tagged token. 
@@ -108,13 +120,10 @@ class File(object):
 		Parameters
 		----------
 		references : list 
-			automatically annotated references by system
+			automatically annotated references in the given file
 		tagTypeCorpus : string, {"bibl", "note"}
 			tag name defining reference types
 			"bibl" : corpus 1, "note" : corpus 2
-				typeCorpus : int, {1, 2, 3}
-		type of corpus
-			1 : corpus 1, 2 : corpus 2...
 		tagTypeList : string, "listbibl"
 			tag name wrapping all references
 		
@@ -234,13 +243,13 @@ class File(object):
 				beforeRef = oriRef
 				
 				if oriRef.find("<author>") < 0 : #non-annotated input
-					'add persName tags'
+					'add author tags'
 					oriRef, noCutRef= self.findAuthor(includedLabels, oriRef)
 					'correct missed tag inserting'
-					oriRef = self._correctMissTag(oriRef, basicTag, "persName")
+					oriRef = self._correctMissTag(oriRef, basicTag, "author")
 					try : parseString(oriRef)
 					except Exception, err:
-						noCutRef = self._correctMissTag(noCutRef, basicTag, "persName")
+						noCutRef = self._correctMissTag(noCutRef, basicTag, "author")
 						oriRef = noCutRef
 						try : parseString(oriRef)
 						except Exception, err:
@@ -256,8 +265,7 @@ class File(object):
 			cptRef += 1
 		
 		try:
-			tmp_str = self.writeResultInOriginal(tmp_str, soup, ref_ori, references, tagTypeCorpus)
-			
+			tmp_str = self.writeResultInOriginal(tmp_str, soup, ref_ori, references, tagTypeCorpus)			
 		except :
 			pass
 
@@ -265,6 +273,12 @@ class File(object):
 		fich.write(tmp_str)
 		fich.close()
 		
+		'xml schema validation'
+		if self.options.x :
+			if self.options.o == 'tei' and len(references) > 0 :
+				try : teiValidate(dirResult+self._getName())
+				except Exception, err: print err #when original file has a fundamental error
+			
 		return
 
 
@@ -354,11 +368,11 @@ class File(object):
 	def arrangeTagsPerToken(self, includedLabels, oriRef, tagTypeCorpus):
 		'''
 		Check if a field of tokens annotated by a label tag has wrapped by other basic tag.
-		If yes, change order. It's for prevent the mismatching error of persName tag and 
+		If yes, change order. It's for prevent the mismatching error of author tag and 
 			also find other continuous tags.
-		e.g. To prevent the following error (interruption of <persName> in <hi>)
-			<hi font-variant="small-caps"><persName><surname>Alves</surname></hi>
-			change order as following before add <persName>
+		e.g. To prevent the following error (interruption of <author> in <hi>)
+			<hi font-variant="small-caps"><author><surname>Alves</surname></hi>
+			change order as following before add <author>
 			<surname><hi font-variant="small-caps">Alves</hi></surname>
 		e.g. To find undetected continuous tags as follows
 			
@@ -653,7 +667,6 @@ class File(object):
 	
 	
 	def _devideHi(self, tmpRef, found, hiString, ptr):
-		
 		pre_ed = 0	
 		for i in range(len(found)) :
 			move = 0
@@ -672,7 +685,6 @@ class File(object):
 				nptr = ed2+move
 				tmpRef, move = self._insertTag(tmpRef, '</hi>', nptr)
 				pre_ed = nptr+move
-			
 			else :
 				st1 = tmpRef.find('</hi>', ed2)
 				if len(tmpRef[ed2:st1].split()) > 0 :
@@ -680,7 +692,6 @@ class File(object):
 					nptr = ed2+move
 					tmpRef, move = self._insertTag(tmpRef, '</hi>', nptr)
 					tmpRef, move = self._insertTag(tmpRef, hiString, nptr+move)
-			
 			ptr = ptr+move
 		
 		return tmpRef
@@ -762,11 +773,11 @@ class File(object):
 		Step 2. per group, verify if there are more than an author 
 			2-1. Check if there is a comma (or others like &, et, and)
 			2-2. Check if there are more than three tokens
-			if only an author -> wrap the fields with <persName></persName>
+			if only an author -> wrap the fields with <author></author>
 		Step 3. if more than an author, check the type.
 			3-1 separate tokens by comma (or others), if there are more than a token in a separated group,
 				we assume that authors are separated by a comma
-				wrap the fields with <persName></persName>
+				wrap the fields with <author></author>
 			3-2 if there is only a token in a separated group,
 				SURNAME, FORENAME (FORENAME...), SURNAME, FORENAME (FORENAME...), 
 				separate them by surname
@@ -787,16 +798,16 @@ class File(object):
 		noCutRef = ''
 		for tmp_group in group :
 			if len(tmp_group) > 1 :
-				'add persName tag per tmp_group'
+				'add author tag per tmp_group'
 				ptr0 = oriRef.find("<"+tmp_group[0]+">", ptr2)
-				oriRef = oriRef[:ptr0] + "<persName>" + oriRef[ptr0:]
+				oriRef = oriRef[:ptr0] + "<author>" + oriRef[ptr0:]
 				for tmp_tag in tmp_group :
 					ptr1 = oriRef.find("<"+tmp_tag+">", ptr2)
 					ptr2 = oriRef.find("</"+tmp_tag+">", ptr1)
 				tmp_tag = tmp_group[len(tmp_group)-1]
 				ptr2 = ptr2 + len("</"+tmp_tag+">")
-				oriRef = oriRef[:ptr2] + "</persName>" + oriRef[ptr2:]
-				
+				oriRef = oriRef[:ptr2] + "</author>" + oriRef[ptr2:]
+
 				noCutRef = oriRef
 				
 				'Check if there are more than an author in current tmp_group'
@@ -868,13 +879,20 @@ class File(object):
 			elif len(tmp_group) == 1 :
 				ptr1 = oriRef.find("<"+tmp_group[0]+">", ptr2)
 				ptr2 = oriRef.find("</"+tmp_group[0]+">", ptr1)
+				'delete solo name tag unwrapped by <author>'
+				tmpRef = self._deleteTag(oriRef, tmp_group[0], ptr1)
+				if tmpRef != oriRef : 
+					ptr2 -= len("<"+tmp_group[0]+">")
+					oriRef = tmpRef
+				if ptr2 < 0 : ptr2 = 0
 				
-		'final check, delete useless <persName> not containing surname or forename caused by <nonbibl>'
-		st1, ed1, st2, ed2  = self._findTagPosition(oriRef, 'persName', 0)
+				
+		'final check, delete useless <author> not containing surname or forename caused by <nonbibl>'
+		st1, ed1, st2, ed2  = self._findTagPosition(oriRef, 'author', 0)
 		while(st1 >= 0) :
 			if oriRef[st1:ed2].find('surname') < 0 and oriRef[st1:ed2].find('forename') < 0 :
-				oriRef = self._deleteTag(oriRef, 'persName', st1)
-			st1, ed1, st2, ed2  = self._findTagPosition(oriRef, 'persName', st1+1)
+				oriRef = self._deleteTag(oriRef, 'author', st1)
+			st1, ed1, st2, ed2  = self._findTagPosition(oriRef, 'author', st1+1)
 			
 		return oriRef, noCutRef
 	
@@ -892,10 +910,10 @@ class File(object):
 			
 		'ADD THE CASE OF INTERUPPED TAG'
 		if valid and oriRef.find(">", ptr1) > oriRef.find("<", ptr1) and oriRef.find("<", ptr1) >= 0 :
-			oriRef = oriRef[:ptr1] + "</persName>" + oriRef[ptr1:]
-			ptr1 = oriRef.find("<", ptr1+len("</persName>"+sep), ptr2)
-			oriRef = oriRef[:ptr1] + "<persName>" + oriRef[ptr1:]
-			ptr2 = ptr2 + len("<persName></persName>")
+			oriRef = oriRef[:ptr1] + "</author>" + oriRef[ptr1:]
+			ptr1 = oriRef.find("<", ptr1+len("</author>"+sep), ptr2)
+			oriRef = oriRef[:ptr1] + "<author>" + oriRef[ptr1:]
+			ptr2 = ptr2 + len("<author></author>")
 			ptr1 = oriRef.find(sep, ptr1, ptr2)
 		else :
 			ptr1 = oriRef.find(sep, ptr1+1, ptr2)
@@ -984,8 +1002,8 @@ class File(object):
 		Check interrupted tags in newly attached tag (wrapping other tags), then replace them
 		This interruption arrives because of originally existing tags (basicTag) in the input file.
 		By grouping fields per person, opening and ending tags can be conflicted.
-		e.g. case 1 : <hi rend="bold"><persName><surname>Lallement</surname> <forename>E.</forename></hi></persName>
-			 case 2 : ... <hi rend="bold"> <forename>M.</forename></persName> (<abbr>dir</abbr>.)</hi>
+		e.g. case 1 : <hi rend="bold"><author><surname>Lallement</surname> <forename>E.</forename></hi></author>
+			 case 2 : ... <hi rend="bold"> <forename>M.</forename></author> (<abbr>dir</abbr>.)</hi>
 		By searching from the beginning of the input string, check case 1 and correct, then check case2 and correct
 			[Algo]	1. find the starting and ending of target tag (pointers, ptr1, ptr2)
 					2. 	(case 1) find an ending tag in basicTag from ptr1, if no starting tag between ptr1 and ptr2
@@ -1088,7 +1106,37 @@ class File(object):
 				else : a = tmpRef.find(target_tag_st, 0)
 			else :	
 				a = tmpRef.find(target_tag_st,d)
+	
+		tmpRef = self._cleanHiTagSpecific(tmpRef)
+	
+		return tmpRef
+
+
+	def _cleanHiTagSpecific(self, tmpRef):	
+	
+		hiStrings = ['<hi rend="subtitle1">', '<hi rend="st">', '<hi rend="apple-style-span">']
+		target_tag_end = "</hi>"#c d
 		
+		for hiString in hiStrings :
+			a = tmpRef.find(hiString,0)
+			while a > 0 :
+				b = a + len(hiString)
+				c = tmpRef.find(target_tag_end, b)
+				d = c + len(target_tag_end)
+			
+				centre = tmpRef[b+1:c]
+				cntHi = centre.count("<hi") # check if <hi> includes other <hi> tags
+				if cntHi > 0 :
+					for i in range(cntHi) :
+						c = tmpRef.find(target_tag_end, d)
+						d = c + len(target_tag_end)
+				#print oriRef
+				tmpRef = tmpRef[:a]+tmpRef[b:c]+tmpRef[d:]
+				e = d-len(hiString)-len(target_tag_end)	
+				a = tmpRef.find(hiString, e)
+				#print "***after***", hiString
+				#print oriRef
+				
 		return tmpRef
 	
 	

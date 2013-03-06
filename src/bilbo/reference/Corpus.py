@@ -87,7 +87,6 @@ class Corpus(object):
 			
 		for fichier in self.fichiers:
 			listRef = fichier.getListReferences(typeCorpus)
-					
 			if listRef != -1:
 				allReferences.extend(listRef.getReferences())
 		return allReferences
@@ -98,15 +97,13 @@ class Corpus(object):
 		Return number of references in the corpus
 		'''
 		nb = 0
-		
 		for fichier in self.fichiers:
-				nb += fichier.nbReference(typeCorpus)
-		
+			nb += fichier.nbReference(typeCorpus)
 		return nb
 
 
 
-	def addTagReferences(self, dirResult, fname, tagDelimRef, typeCorpus, refsAfterSVM=[]): #get "listRef" to check deleted notes
+	def addTagReferences(self, dirResult, fname, tagTypeCorpus, typeCorpus, refsAfterSVM=[]): #get "listRef" to check deleted notes
 		'''
 		Add ignored tags from initial file
 		Check the SVM classification result of reference to give <nonbibl> tag at the final construction
@@ -118,14 +115,14 @@ class Corpus(object):
 			directory for output files
 		fname : string
 			output filename
-		tagDelimRef : 
+		tagTypeCorpus : 
 		typeCorpus : int, {1, 2, 3}
 			type of corpus
 			1 : corpus 1, 2 : corpus 2...
 		refsAfterSVM : list
 		'''
 		tmp_str = ""
-		reference = []
+		references = []
 		fileRes = dirResult+fname
 		for line in open (fileRes, 'r') :
 			tmp_str = tmp_str + ' ' + line
@@ -133,28 +130,25 @@ class Corpus(object):
 		soup = BeautifulSoup (tmp_str)
 		s = soup.findAll ("bibl")
 		
-		cpt = 0
+		cpt = 0 #total reference count
 		for fichier in self.fichiers: # Original data
 			nbRefFile = fichier.nbReference(typeCorpus)
-			reference[:] = []
-			cptRef = 0
-						
+			references[:] = []
+			cptRef = 0 # reference count in the file
 			for ref in s:
 				if cptRef < nbRefFile:
-					
 					if len(refsAfterSVM) > 0 and refsAfterSVM[cpt].train == -1 :	#if the note (now tagged as <bibl>) is classified non-bibl
 							for tag in (s[cpt]).findAll(True) :
 								tag.replaceWith(tag.renderContents())
-
 							s2 = BeautifulSoup()	#prepare tag sets <bibl><nonbibl></nonbibl></bibl>
 							tag1 = s2.new_tag("bibl")
 							tag2 = s2.new_tag("nonbibl")
 							s2.insert(0, tag1)
 							tag1.insert(0, tag2)
 							tag2.insert(0, s[cpt].renderContents()) #put the unwrapped contents in the middle of above tag sets
-							reference.append(s2.find("bibl")) #make s2 have found bibl
+							references.append(s2.find("bibl")) #make s2 have found bibl
 					else :
-						reference.append(s[cpt])
+						references.append(s[cpt])
 				else:
 					break
 				cptRef += 1
@@ -162,8 +156,8 @@ class Corpus(object):
 			
 			'Build references in the original files and save them the root of dirResult'
 			dirResultRoot = os.path.abspath(os.path.join(dirResult, os.path.pardir))+'/'
-			fichier.buildReferences(reference, tagDelimRef, typeCorpus, dirResultRoot) #new result printing
-			
+			if self.options.o == 'simple' : fichier.writeSimpleResult(references, tagTypeCorpus, dirResultRoot)
+			else : fichier.buildReferences(references, tagTypeCorpus, dirResultRoot) #new result printing
 			
 		return
 	
