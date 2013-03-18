@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# encoding: utf-8
+# -*- coding: utf-8 -*-
 """
 identifier.py
 Created by Young-Min Kim on 2012-12-30.
@@ -19,36 +19,39 @@ postPunc = {'(':0, '«':0, '-':0, '“':0, '{':0, '[':0}
 codeURL = [[';', '%3B'], ['/', '%2F'], ['?', '%3F'], [':', '%3A'], ['@', '%40'], ['=', '%3D'], ['&', '%26'], [' ','%20']]
 
 
+main = os.path.realpath(__file__).split('/')
+rootDir = "/".join(main[:len(main)-4])
+
 def extractDoi(input_str, tagTypeCorpus) :
 	
 	config = ConfigParser.ConfigParser()
-	config.read('KB/config/others.txt')
+	config.read(os.path.join(rootDir, 'KB/config/others.txt'))
 	usrname = str(config.get("crossref", "usrname"))
 	soup = BeautifulSoup(input_str)
 	count = 0
 	for s in soup.findAll("bibl") :
-	
 		sname = ''
 		title = ''
 		refString = ''
 		try :		
 			a = s.find('surname')
+			aa = s.find('forename')
 			if a :
 				try : sname =  str(s.surname.string)
 				except : sname =  (s.surname.string).encode('utf8')
-			else : 
-				pass
+			if aa :
+				try : fname =  str(s.forename.string)
+				except : fname =  (s.forename.string).encode('utf8')
 			b = s.find(re.compile('^title'))
 			c = s.find('booktitle')
 			
 			if c :
 				#tmp_str = ' '.join(str(x) for x in s.contents)
 				tmp_str = str(s)
-				if b and tmp_str.find('booktitle') < tmp_str.find(re.compile('^title'))  :
+				if b and tmp_str.find('<booktitle>') < tmp_str.find('<title>')  :
 					tmp = b
 					b = c
-					c = tmp
-					#print "Booktitle is title"		
+					c = tmp	
 			if b :
 				tagname = b.name
 				title = ''
@@ -67,9 +70,10 @@ def extractDoi(input_str, tagTypeCorpus) :
 				except : title =  (c.string).encode('utf8')
 			else : pass #print "No title"
 			#print 'First author : ', sname, '	Title : ', title
-		except :
+		except Exception, err:
 			pass
 			print 'reading error \n\n'
+			print err
 		
 		try : title2 = urllib.quote(title.encode('utf-8'))
 		except : 
@@ -79,6 +83,10 @@ def extractDoi(input_str, tagTypeCorpus) :
 		except : 
 			sname2 = urllib.quote(sname)
 			pass
+		try : fname2 = urllib.quote(fname.encode('utf-8'))
+		except : 
+			fname2 = urllib.quote(fname)
+			pass
 
 		q1 = 'http://doi.crossref.org/servlet/query?usr='+usrname+'&format=unixref&qdata=%3C?xml%20version%20=%20%221.0%22%20encoding=%22UTF-8%22?%3E%3Cquery_batch%20version=%222.0%22%20xmlns%20=%20%22http://www.crossref.org/qschema/2.0%22%20xmlns:xsi=%22http://www.w3.org/2001/XMLSchema-instance%22%3E%3Chead%3E%3Cdoi_batch_id%3EDOI%20result%3C/doi_batch_id%3E%3C/head%3E%3Cbody%3E%3Cquery%20key=%22mykey%22%20expanded-results=%22true%22%3E%3Carticle_title%20match=%22fuzzy%22%3E'
 		q2 = '%3C/article_title%3E%3Cauthor%20match=%22fuzzy%22%20search-all-authors=%22false%22%3E'
@@ -86,8 +94,6 @@ def extractDoi(input_str, tagTypeCorpus) :
 				
 		qry = q1+title2+q2+sname2+q3				
 		xml = urllib2.urlopen(qry).read()
-		#print xml
-		
 		doi = BeautifulSoup(xml).find('doi')
 		doistring = ''
 		if doi : 
@@ -98,17 +104,25 @@ def extractDoi(input_str, tagTypeCorpus) :
 			print
 			count += 1
 		else :
-			print 'No DOI'
-		#print raw_input("Press Enter to Exit")
-		#print 'Total Num. DOI :', count
-		#print
+			qry = q1+title2+q2+fname2+q3				
+			xml = urllib2.urlopen(qry).read()
+			doi = BeautifulSoup(xml).find('doi')
+			if doi :
+				print refString
+				print 'First author : ', fname, '	Start of title : ', title
+				doistring = doi.string
+				print 'DOI :', doistring
+				print
+				count += 1
+			else :
+				print 'No DOI'
 	
 	return doistring
 
 
 def loadTEIRule(tagConvert):
 	parser = ConfigParser.ConfigParser()
-	parser.read('KB/config/others.txt')
+	parser.read(os.path.join(rootDir, 'KB/config/others.txt'))
 	for name in parser.options('tei') :
 		value = parser.get('tei', name)
 		tagBefore = '<'+name+'>'
@@ -143,21 +157,34 @@ def toHttp(tmp_str) :
 	return tmp_str
 
 
-def teiValidate(fname) :
-	'''
+def teiValidate(fname, objfile) :
+	"""
 	Xml validation check using xml schema in a xsd file
-	'''
-	xmlschema_doc = etree.parse(open('KB/validation/tei_openedition3.xsd'))
-	xmlschema = etree.XMLSchema(xmlschema_doc)
-	doc = etree.parse(fname)
-	xmlschema.validate(doc)
-	
-	print '\n*xml validation* '+fname
-	if len(xmlschema.error_log) > 0 : print xmlschema.error_log
-	print 'number of errors :', len(xmlschema.error_log)
-	print
-	#xmlschema.assertValid(doc)
-	return
+	"""
+	valide = True
+	if objfile == 'output' : 
+		xsdfile = os.path.join(rootDir, 'KB/validation/output/tei_openedition3.xsd')
+		xmlschema_doc = etree.parse(open(xsdfile))
+		xmlschema = etree.XMLSchema(xmlschema_doc)
+		doc = etree.parse(fname)
+		valide = xmlschema.validate(doc)
+		numErr = len(xmlschema.error_log)
+		
+		print '\n*xml validation* '+fname
+		if len(xmlschema.error_log) > 0 : print xmlschema.error_log
+		print 'number of errors :', len(xmlschema.error_log)
+		
+	else : 
+		dtdfile = os.path.join(rootDir, 'KB/validation/input/tei_all.dtd')
+		dtd = etree.DTD(open(dtdfile))
+		doc = etree.parse(fname)
+		valide = dtd.validate(doc)
+		numErr = len(dtd.error_log)
+		if not valide :
+			print dtd.validate(doc), fname
+			print 'excluded : non valid xml file with TEI guidelines'
+		
+	return valide, numErr
 
 
 def main():

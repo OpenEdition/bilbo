@@ -1,29 +1,30 @@
 # -*- coding: utf-8 -*-
-'''
+"""
 Created on April 25, 2012
 
 @author: Young-Min Kim, Jade Tavernier
-'''
+"""
 from bilbo.reference.File import File
+from bilbo.output.identifier import teiValidate
 from bs4 import BeautifulSoup
 import os.path
 import commands
 
 class Corpus(object):
-	'''
+	"""
 	A corpus containing a set of training (or test) references.
 	Creation of File objects
-	'''
+	"""
 
 	def __init__(self, directory, options):
-		'''
+		"""
 		Attributes
 		----------
 		directory : string
 			directory where the corpus data is (xml files)
 		fichiers : list
 			list of File objects containing corpus data
-		'''
+		"""
 		self.directory = directory
 		self.fichiers = []
 		self.options = options
@@ -31,9 +32,9 @@ class Corpus(object):
 		
 
 	def getFiles(self):
-		'''
+		"""
 		Extract file names from the directory
-		'''
+		"""
 		'Verify if it is a directory or a single file'
 		if os.path.isdir(self.directory):
 			lsOut = commands.getoutput('ls '+self.directory)
@@ -45,12 +46,32 @@ class Corpus(object):
 			listFichiers.append(nomSplit[len(nomSplit)-1])
 			del nomSplit[len(nomSplit)-1]
 			self.directory = "/".join(nomSplit)
+		
+		if self.options.v in ['input', 'all'] : listFichiers = self.validateXml(listFichiers)
 		return listFichiers
 	
 	
+	def validateXml(self, listFichiers):
+		
+		newList = []
+		for filename in listFichiers :
+			try : 
+				valide, numErr = teiValidate(os.path.join(self.directory, filename), 'input')
+			except Exception, error :
+				valide = False
+				print filename
+				print "Can't even try validation", error
+				pass
+			if valide : newList.append(filename)
+		
+		print "valide files"	
+		for f in newList : print f
+		
+		return newList
+	
 
 	def extract(self, type, tag, nomFichiers="", external=0):
-		'''
+		"""
 		Extract references for each file 
 		
 		Parameters
@@ -63,7 +84,7 @@ class Corpus(object):
 			"bibl" : corpus 1, "note" : corpus 2
 		nomFichier : string
 			target file name for extraction
-		'''
+		"""
 		if nomFichiers == "":
 			nomFichiers = self.getFiles()
 			
@@ -74,7 +95,7 @@ class Corpus(object):
 	
 
 	def getListReferences(self, typeCorpus):
-		'''
+		"""
 		Return reference list in the corpus
 		
 		Parameters
@@ -82,7 +103,7 @@ class Corpus(object):
 		typeCorpus : int, {1, 2, 3}
 			type of corpus
 			1 : corpus 1, 2 : corpus 2...
-		'''
+		"""
 		allReferences = []
 			
 		for fichier in self.fichiers:
@@ -93,9 +114,9 @@ class Corpus(object):
 		
 	
 	def nbReference(self, typeCorpus):
-		'''
+		"""
 		Return number of references in the corpus
-		'''
+		"""
 		nb = 0
 		for fichier in self.fichiers:
 			nb += fichier.nbReference(typeCorpus)
@@ -104,7 +125,7 @@ class Corpus(object):
 
 
 	def addTagReferences(self, dirResult, fname, tagTypeCorpus, typeCorpus, refsAfterSVM=[]): #get "listRef" to check deleted notes
-		'''
+		"""
 		Add ignored tags from initial file
 		Check the SVM classification result of reference to give <nonbibl> tag at the final construction
 		Call File::buildReferences for the modification and punctuation management then print the result
@@ -120,7 +141,7 @@ class Corpus(object):
 			type of corpus
 			1 : corpus 1, 2 : corpus 2...
 		refsAfterSVM : list
-		'''
+		"""
 		tmp_str = ""
 		references = []
 		fileRes = dirResult+fname
@@ -156,15 +177,14 @@ class Corpus(object):
 			
 			'Build references in the original files and save them the root of dirResult'
 			dirResultRoot = os.path.abspath(os.path.join(dirResult, os.path.pardir))+'/'
-			if self.options.o == 'simple' : fichier.writeSimpleResult(references, tagTypeCorpus, dirResultRoot)
-			else : fichier.buildReferences(references, tagTypeCorpus, dirResultRoot) #new result printing
+			fichier.buildReferences(references, tagTypeCorpus, dirResultRoot) #new result printing
 			
 		return
 	
 	
 	def deleteAllFiles(self):
-		'''
+		"""
 		delete all files in File object
-		'''
+		"""
 		self.fichiers[:] = []
 		

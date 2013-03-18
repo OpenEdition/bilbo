@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-'''
+"""
 Created on April 25, 2012
 
 @author: Young-Min Kim, Jade Tavernier
-'''
+"""
 
 class Place(object):
 
@@ -17,9 +17,9 @@ class Place(object):
 	
 
 	def searchPlace(self, listReference, tr) :
-		'''
+		"""
 		Add PLACELIST feature if the corresponding word is in the list
-		'''
+		"""
 		if tr == 1 or tr == -1 :	pt = 1
 		elif tr == 0 :	pt = 0
 	

@@ -1,32 +1,35 @@
-# encoding: utf-8
-'''
+# -*- coding: utf-8 -*-
+"""
 Created on April 18, 2012
 
 @author: Young-Min Kim, Jade Tavernier
-'''
+"""
 from bilbo.reference.Word import Word
 import string
-import re
+import re, os
 
 class Clean(object):
-	'''
+	"""
 	A class that tokenizes xml input data. Navigates the xml tree and extracts tokens, features and labels.
 	It concerns the first step of tokenization such that words are separated by whitespace but not by punctuation 
 	marks. A clean object is created in a File object ("extract" method).
-	'''
+	"""
 
 	def __init__(self):
-		'''
+		"""
 		Load nonLabels and features in feature file
 		Tags in nonLabels dictionary are that should be ignored
-		'''
-		self.tagAttDict = {'0000': 0}
+		"""
 		self.nonLabels = {}
+		self.tagAttDict = {'0000': 0}
+		main = os.path.realpath(__file__).split('/')
+		self.rootDir = "/".join(main[:len(main)-4])		
 		try:
 			'flag = 1 : features, flag = 2 : nonLabels, flag = 3 : bookindicator'
 			flag = 0 
 			nameRegle = ""	
-			for line in open("KB/config/features.txt"):
+			
+			for line in open(os.path.join(self.rootDir, "KB/config/features.txt")):
 				lineSplit = re.split("\s", line)
 				if lineSplit[0] == "#":
 					nameRegle = lineSplit[1]
@@ -51,11 +54,11 @@ class Clean(object):
 	
 	
 	def _extract_tags(self,current_tag, lens) :
-		'''
+		"""
 		Extract tags and attributes for each token by navigating xml tree
 		We should carefully consider the encoding of input string because BeautifulSoup 4 causes encoding error
 		when using str for the string including special accents only.
-		'''	
+		"""	
 		words = []
 		txts = []
 		tokens = []
@@ -134,9 +137,9 @@ class Clean(object):
 
 
 	def _arrangeData(self, n, txts, tags, attrs, top_tag, top_att) :
-		'''
+		"""
 		Unwrap the entered string(n) until the string has no tags in it. A recursive method.
-		'''
+		"""
 		for con in n.contents :
 			constring = ''
 			try : constring = str(con.string)
@@ -191,9 +194,9 @@ class Clean(object):
 	
 
 	def _elimination (self, tmp_str) :
-		'''
+		"""
 		Eliminate unnecessary tags
-		'''		
+		"""		
 		target_tag_st = "<hi font-variant=\"small-caps\">"
 		target_tag_end = "</hi>"
 		
@@ -232,10 +235,10 @@ class Clean(object):
 		
 		
 	def _buildWords(self, dicWords):
-		'''
+		"""
 		Make 'Word' objects with words in dicWords
 		dicWord : dictionary of words returned from _extract_tags
-		'''		
+		"""		
 		words = []
 		for word in dicWords:
 			instanceWord = Word(word["nom"], word["balise"], word["caracteristique"])
@@ -249,9 +252,9 @@ class Clean(object):
 
 
 	def _html2unicode(self, tmp_str) :
-		'''
+		"""
 		html2unicode
-		'''
+		"""
 		#for numerical codes
 		matches = re.findall("&#\d+;", tmp_str)
 		if len(matches) > 0 :
@@ -280,9 +283,9 @@ class Clean(object):
 		
 		
 	def _checkUTF8(self, tmp_str) :
-		'''
+		"""
 		In BeatifulSoup 4, string matching error when there are accents only
-		'''
+		"""
 		ck = 0
 		try : str(tmp_str)
 		except : 

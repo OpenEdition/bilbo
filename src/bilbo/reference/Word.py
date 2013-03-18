@@ -1,24 +1,25 @@
 # -*- coding: utf-8 -*-
-'''
+"""
 Created on April 18, 2012
 
 @author: Young-Min Kim, Jade Tavernier
-'''
+"""
 from bilbo.reference.Balise import  Balise
 from bilbo.reference.Feature import  Feature
 
 class Word(object):
-	'''
+	"""
 	classdocs
-	'''
+	"""
 
 
 	def __init__(self, mot, tags=[], features=[]):
-		'''
+		"""
 		Constructor
-		'''
+		"""
 		'Generate Tag objects'
 		self.nom = mot
+		self.core = mot
 		self.tag = []
 		self.feature = []
 		self.ignoreWord = 0
@@ -42,7 +43,7 @@ class Word(object):
 
 	
 	def affiche(self):
-		print "\nWord : ",self.nom
+		print "\nWord : ",self.nom, self.core
 		if len(self.tag) >= 1:
 			print "\tTAG :"
 			for key in self.tag:
@@ -137,18 +138,18 @@ class Word(object):
 	
 
 	def getLastFeature(self):
-		'''
+		"""
 		Return the last feature
-		'''
+		"""
 		if len(self.feature) == 0:
 			return -1
 		return self.feature[len(self.feature)-1]
 	
 
 	def getLastTag(self):
-		'''
+		"""
 		Return the last tag
-		'''		
+		"""		
 		if len(self.tag) == 0:
 			return -1
 		if self.tag[len(self.tag)-1].nom == 'hi' and len(self.tag) > 1:
@@ -158,46 +159,46 @@ class Word(object):
 
 
 	def getFeatureIndice(self, index):
-		'''
+		"""
 		Return the feature at the index
-		'''
+		"""
 		if index < 0: return -1
 		return self.feature[index]
 	
 	
 	def getTagIndice(self, index):
-		'''
+		"""
 		Return the tag at the index
-		'''
+		"""
 		if index < 0: return -1
 		return self.tag[index]
 	
 
 	def getAllFeature(self):
-		'''
+		"""
 		Return all the features
-		'''		
+		"""		
 		return self.feature
 	
 
 	def getAllTag(self):
-		'''
+		"""
 		Return all the tags
-		'''		
+		"""		
 		return self.tag
 	
 
 	def nbTag(self):
-		'''
+		"""
 		Return the number of tags
-		'''		
+		"""		
 		return len(self.tag)
 
 
 	def nbFeatures(self):
-		'''
+		"""
 		Return the number of features
-		'''	
+		"""	
 		return len(self.feature)
 	
 	

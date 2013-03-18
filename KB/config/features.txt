@@ -11,6 +11,7 @@ weblink
 italic
 posseditor
 posspage
+possmonth
 punc
 point
 comma

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-'''
+"""
 -----------------------------------------------------------------------------------------------------------------------
 BILBO : Automatic labeling of bibliographic reference
 
@@ -18,7 +18,7 @@ Commons Attribution-NonCommercial-ShareAlike 2.5 Generic License (CC BY-NC-SA 2.
 Created on April 08, 2012
 
 @author: Young-Min Kim, Jade Tavernier
-'''
+"""
 from bilbo.format.CRF import CRF
 from bilbo.format.SVM import SVM
 from bilbo.reference.Corpus import Corpus
@@ -26,29 +26,34 @@ import os
 import shutil
 
 class Bilbo(object):
-	'''
+	"""
 	A machine Bilbo that trains a CRF (and a SVM) model and automatically labels new references.
-	'''
+	"""
 
-	def __init__(self, dirResult="Result/", options={}, crfmodelname="crf_model_simple"): #Set the default result directory
-		'''
+	def __init__(self, dirResult='', options={}, crfmodelname="crf_model_simple"): #Set the default result directory
+		"""
 		Attributes
 		----------
 		crf : CRF
 		svm : SVM
 		dirResult : string
 			directory for output files
-		'''
+		"""
+		main = os.path.realpath(__file__).split('/')
+		self.rootDir = "/".join(main[:len(main)-3])
+		
+		if dirResult == '' : dirResult = os.path.join(self.rootDir, 'Result')
 		self.dirResult = dirResult+'/tmp/'
 		self.crf = CRF(self.dirResult, options)
 		self.svm = SVM(self.dirResult, options)
 		self.options = options
 		self.crfmodelname = crfmodelname
 		if not os.path.exists(self.dirResult): os.makedirs(self.dirResult)
+		
 
 		
 	def train(self, dirCorpus, dirModel, typeCorpus):
-		'''
+		"""
 		CRF model learning (corpus 1 and 2), SVM model learning (corpus 2)
 		Corpus object declaration
 		
@@ -61,7 +66,7 @@ class Bilbo(object):
 		typeCorpus : int, {1, 2, 3}
 			type of corpus
 			1 : corpus 1, 2 : corpus 2...
-		'''
+		"""
 		corpus = Corpus(dirCorpus, self.options)
 		self.crf.setDirModel(dirModel)
 		if typeCorpus == 1:
@@ -91,7 +96,7 @@ class Bilbo(object):
 	
 	
 	def annotate(self, dirCorpus, dirModel, typeCorpus, external=0):		
-		'''
+		"""
 		Automatic annotation of references 
 		
 		Parameters
@@ -105,7 +110,7 @@ class Bilbo(object):
 		external : int, {1, 0}
 			1 : if the references are external data except CLEO, 0 : if that of CLEO
 			it is used to decide whether Bilbo learn call a SVM classification or not.
-		'''
+		"""
 		corpus = Corpus(dirCorpus, self.options)
 		self.crf.setDirModel(dirModel)	#
 		files = corpus.getFiles()
@@ -115,14 +120,13 @@ class Bilbo(object):
 				corpus = self.annotateCorpus1(dirModel, corpus, fname)
 			elif typeCorpus == 2:
 				corpus = self.annotateCorpus2(dirModel, corpus, fname, external)
-				
 			corpus.deleteAllFiles()
 			
 		self.deleteTmpFiles()
 
 
 	def annotateCorpus1(self, dirModel, corpus, fname):
-		'''
+		"""
 		Automatic annotation of reference type 1 (reference)
 		
 		Parameters
@@ -133,7 +137,7 @@ class Bilbo(object):
 			set of references that we want to annotate
 		fname :	string
 			name of file to be annotated
-		'''
+		"""
 		print "Extract references..."
 		corpus.extract(1, "bibl", fname)
 		print "crf data extraction for labeling..."
@@ -145,7 +149,7 @@ class Bilbo(object):
 	
 
 	def annotateCorpus2(self, dirModel, corpus, fname, external=0):
-		'''
+		"""
 		Automatic annotation of reference type 2 (note)
 		
 		Parameters
@@ -164,7 +168,7 @@ class Bilbo(object):
 		Oct. 18, 2012 	SVM classification problem is fixed
 						Check the classification result of reference (reference.train) in 'addTagReferences' method
 						of 'Corpus' class that is called in 'annotateCorpus2' method of 'Bilbo' class.
-		'''
+		"""
 		print "Extract notes..."
 		corpus.extract(2, "note", fname, external)
 		if external == 0 and self.options.s : #if not external data and svm option is true
@@ -188,6 +192,9 @@ class Bilbo(object):
 		return corpus
 	
 	
+
+		
+		
 	def deleteTmpFiles(self):
 		dirResultRoot = os.path.abspath(os.path.join(self.dirResult, os.path.pardir))+'/'
 		toKeep = []
@@ -203,7 +210,7 @@ class Bilbo(object):
 				
 
 	def _list_split(self, flist, size):
-		'''
+		"""
 		Split a filelist
 		
 		Parameters
@@ -214,7 +221,7 @@ class Bilbo(object):
 			new file list size
 		result : list
 			new file list
-		'''	
+		"""	
 		result = [[]]
 		while len(flist) > 0:
 			if len(result[-1]) >= size: result.append([])
@@ -223,7 +230,7 @@ class Bilbo(object):
 	
 	
 	
-	'''memoire'''
+	"""memory"""
 	def mem(self, size="rss"):
 		"""Generalization; memory sizes: rss, rsz, vsz."""
 		return os.popen('ps -p %d -o %s | tail -1' % (os.getpid(), size)).read()
@@ -239,3 +246,4 @@ class Bilbo(object):
 	def vsz(self):
 		"""Return ps -o vsz (virtual) memory in kB."""
 		return self.mem("vsz")
+

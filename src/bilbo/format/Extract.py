@@ -1,24 +1,24 @@
-# encoding: utf-8
-'''
+# -*- coding: utf-8 -*-
+"""
 Created on April 19, 2012
 
 @author: Young-Min Kim, Jade Tavernier
-'''
+"""
 from bilbo.extra.Name import Name
 from bilbo.extra.Place import Place
 from bilbo.extra.Properlist import Properlist
-import sys
+import sys, os
 import re
 import codecs
 
 class Extract(object):
-	'''
+	"""
 	A class to extract training and test data according to a set of predefined criteria
 	Base class of Extract_crf and Extract_svm
-	'''
+	"""
 
 	def __init__(self, options={}):
-		'''
+		"""
 		Attributes
 		----------
 		nonLabels : dict
@@ -32,21 +32,25 @@ class Extract(object):
 		nameObj : Name
 		placeObj : Place
 		properObj :	Properlist
-		'''
+		"""
 		self.options = options
 		self.link = {':':0, '=':0, '_':0, '|':0, '~':0, '-':0, '–':0}
 		self.nonLabels = {}
 		self.features = {}
 		self.regles = {}
 		
-		'''
-		Fill "nonLabels" and "features" that are in the file "feature.txt"
-		'''
+		main = os.path.realpath(__file__).split('/')
+		self.rootDir = "/".join(main[:len(main)-4])		
+		
+		
+		'Fill "nonLabels" and "features" that are in the file "feature.txt"'
+		
 		try:
 			'flag = 1 : features, flag = 2 : nonLabels, flag = 3 : bookindicator'
 			flag = 0 
 			nameRegle = ""	
-			for line in open("KB/config/features.txt"):
+			
+			for line in open(os.path.join(self.rootDir, "KB/config/features.txt")):
 				lineSplit = re.split("\s", line)
 				if lineSplit[0] == "#":
 					nameRegle = lineSplit[1]
@@ -72,7 +76,7 @@ class Extract(object):
 		
 		if self.options.i == "tei" :
 			try:
-				for line in open("KB/config/balise.txt", "r"):
+				for line in open(os.path.join(self.rootDir, "KB/config/balise.txt"), "r"):
 					lineSplit = re.split("\s", line)
 					self.configTag[lineSplit[0]] = lineSplit[1].split("\n")[0]
 				if self.options.g == "detail" :
@@ -82,21 +86,21 @@ class Extract(object):
 				print "Cannot open the file \"KB/config/balise.txt\" \n"
 			
 		'Load people name and place'
-		self.nameObj = Name("KB/config/externalList/auteurs_revuesorg2.txt") #SURNAMELIST, FORENAMELIST
-		self.placeObj = Place("KB/config/externalList/list_pays.txt") #PLACELIST
-		self.cityObj = Properlist("KB/config/externalList/LargeCities.txt", "PLACELIST") #PLCAELIST
-		self.journalObj = Properlist("KB/config/externalList/journalAll.txt", "JOURNALLIST") #PLCAELIST
+		self.nameObj = Name(os.path.join(self.rootDir, "KB/config/externalList/auteurs_revuesorg2.txt")) #SURNAMELIST, FORENAMELIST
+		self.placeObj = Place(os.path.join(self.rootDir, "KB/config/externalList/list_pays.txt")) #PLACELIST
+		self.cityObj = Properlist(os.path.join(self.rootDir, "KB/config/externalList/LargeCities.txt"), "PLACELIST") #PLCAELIST
+		self.journalObj = Properlist(os.path.join(self.rootDir, "KB/config/externalList/journalAll.txt"), "JOURNALLIST") #PLCAELIST
 
 	
 	def extract(self):
-		'''
+		"""
 		To be defined in a sub class
-		'''	
+		"""	
 		return
 
 
 	def randomgen(self, listRef, tr) :
-		'''
+		"""
 		Generate indicators for the training and test documents
 		
 		Parameters
@@ -104,7 +108,7 @@ class Extract(object):
 		listRef : listReferences
 		tr : int, {1, 0, -1, -2}
 			check if training or test data
-		'''
+		"""
 		nbRef = listRef.nbReference()
 		
 		for i in range(nbRef) :
@@ -117,9 +121,9 @@ class Extract(object):
 	
 
 	def loadIndices(self, fichier):
-		'''
+		"""
 		Load the indices of the File object
-		'''
+		"""
 		indices = []
 		for line in open(fichier):
 			indices.append(line)
@@ -128,9 +132,9 @@ class Extract(object):
 	
 
 	def _printdata(self, fichier, listRef, tr, opt="saveNegatives") : #default value of 'opt' is "saveNegatives"
-		'''
+		"""
 		Print training or test data for Mallet CRF
-		'''
+		"""
 		fich = codecs.open(fichier, "w", encoding="utf-8")
 		for reference in listRef.getReferences():
 			if (not (opt=="deleteNegatives" and reference.train == -1)) and (not (opt=="deletePositives" and reference.train != -1)) :
@@ -158,7 +162,6 @@ class Extract(object):
 									fich.write(" "+unicode(caracteristique.nom.upper(), "utf-8"))
 								cpt += 1
 						if tr != 0:
-							#for balise in mot.getAllTag():
 							balise = mot.getLastTag()	
 							try:
 								fich.write(" "+unicode(balise.nom, "utf-8"))
@@ -172,9 +175,9 @@ class Extract(object):
 	
 
 	def _printdataWapiti(self, fichier, listRef, tr, opt="saveNegatives") : #default value of 'opt' is "saveNegatives"
-		'''
+		"""
 		Print training or test data for Wapiti CRF 
-		'''
+		"""
 		features = [['ALLNUMBERS', 'NUMBERS'],	#1
 					['DASH'],					#2
 					['ALLCAP', 'ALLSMALL', 'FIRSTCAP', 'NONIMPCAP'],	#3
@@ -184,10 +187,11 @@ class Extract(object):
 					['ITALIC'],		#7
 					['POSSEDITOR'],	#8
 					['POSSPAGE'],	#9
-					['SURNAMELIST'],	#10
-					['FORENAMELIST'],	#11
-					['PLACELIST']]		#12
-					#['JOURNALLIST']]	#13
+					['NOMONTH'],	#10POSSMONTH
+					['SURNAMELIST'],	#11
+					['FORENAMELIST'],	#12
+					['PLACELIST'],		#13
+					['JOURNALLIST']]	#14
 		if self.options.u : features.append(['PUNC', 'COMMA', 'POINT', 'LEADINGQUOTES', 'ENDINGQUOTES', 'LINK','PAIREDBRACES'])
 
 		fich = codecs.open(fichier, "w", encoding="utf-8")
@@ -196,8 +200,8 @@ class Extract(object):
 			
 				for mot in reference.getWord():
 					tmp_features = ['NONUMBERS', 'NODASH', 'NONIMPCAP', 'NULL', 'NOINITIAL',
-									'NOWEBLINK', 'NOITALIC', 'NOEDITOR', 'NOPAGE', 'NOSURLIST',
-									'NOFORELIST', 'NOPLACELIST']#, 'NOPUNC']#, 'NOJOURLIST']
+									'NOWEBLINK', 'NOITALIC', 'NOEDITOR', 'NOPAGE', 'NOMONTH', 'NOSURLIST',
+									'NOFORELIST', 'NOPLACELIST', 'NOJOURLIST']#, 'NOPUNC']#, 'NOJOURLIST']
 					if self.options.u : tmp_features.append('NOPUNC')
 					if mot.ignoreWord == 0:
 						try:
@@ -253,9 +257,9 @@ class Extract(object):
 	
 	
 	def _printOnlyLabel(self, fichier, listRef) :
-		'''
+		"""
 		Print training or test data for CRF (only labels)
-		'''
+		"""
 		fich = codecs.open(fichier, "w", encoding="utf-8")
 		for reference in listRef.getReferences():
 			for mot in reference.getWord():
@@ -273,9 +277,9 @@ class Extract(object):
 		
 		
 	def _print_alldata(self, fichier, listRef) :
-		'''
+		"""
 		Print all data for SVM
-		'''
+		"""
 		fich = codecs.open(fichier, "w", encoding="utf-8")
 		for reference in listRef.getReferences():
 			for mot in reference.getWord():
@@ -291,9 +295,9 @@ class Extract(object):
 
 	
 	def _print_parallel(self, fichier, listRef) :
-		'''
+		"""
 		Print result in parallel lines for SVM
-		'''
+		"""
 		phrase = ""
 		feature = ""
 		cpt = 0;
@@ -337,9 +341,9 @@ class Extract(object):
 	
 	
 	def _addlayout(self, listRef) :
-		'''
+		"""
 		Add layout features
-		'''	
+		"""	
 		for reference in listRef.getReferences():
 			i = 0
 			tmp_length = float(reference.nbWord())
@@ -363,7 +367,7 @@ class Extract(object):
 		
 
 	def _extract_title(self, mot, relatItm, titleCK, titleAttr) :
-		'''
+		"""
 		Title tag rearrangement. by checking the attribute, re-tag the word as "title" or "booktitle"
 		
 		Parameters
@@ -381,7 +385,7 @@ class Extract(object):
 				j - (journal) journal title
 				s - (series) series title
 				u -	(unpublished) title of unpublished material (including theses and dissertations unless published by a commercial press)
-		'''	
+		"""	
 		flagU = 0
 		
 		for caracteristique in mot.getAllFeature():
@@ -420,7 +424,7 @@ class Extract(object):
 
 
 	def _extract_title_alter(self, mot, relatItm, titleCK, titleAttr) :
-		'''
+		"""
 		Alternative title tag extraction. Separate all types of title.
 		
 		Parameters
@@ -438,7 +442,7 @@ class Extract(object):
 				j - (journal) journal title
 				s - (series) series title
 				u -	(unpublished) title of unpublished material (including theses and dissertations unless published by a commercial press)
-		'''			
+		"""			
 		for caracteristique in mot.getAllFeature():
 			if caracteristique.nom == "a" :
 				balise = mot.getTag("title")
@@ -491,9 +495,9 @@ class Extract(object):
 	
 
 	def _checkTag(self, mot):
-		'''
+		"""
 		Modify tags according to the configuration in the file "balise.txt"
-		'''	
+		"""	
 		balises = mot.getAllTag()
 		
 		for balise in balises:
@@ -504,9 +508,9 @@ class Extract(object):
 		
 
 	def _updateTag(self, mot):
-		'''
+		"""
 		Modify tags according to the configuration and rules
-		'''
+		"""
 		balise = mot.getLastTag()
 		
 		if balise != -1:
@@ -536,9 +540,9 @@ class Extract(object):
 				
 
 	def _checkNonLabels(self, mot):
-		'''
+		"""
 		Keep the best tag of the word and verify if it appears in nonLabels
-		'''
+		"""
 		j = mot.nbTag() - 2
 		if mot.getLastTag() == -1:
 			return
@@ -579,7 +583,7 @@ class Extract(object):
 			
 
 	def extractIndices(self, svmprediction_trainfile, listRef):
-		'''
+		"""
 		Extract indices for nonbibls from SVM classification result
 		then modify 'train' attribute of each reference
 		
@@ -589,7 +593,7 @@ class Extract(object):
 			SVM classification result for training data
 		listRef : list
 			reference list
-		'''
+		"""
 		nbRef = listRef.nbReference()
 		
 		svm_train = []
@@ -618,7 +622,7 @@ class Extract(object):
 	
 
 	def extractIndices4new(self, svmprediction_newfile, listRef):
-		'''
+		"""
 		Extract indices for nonbibls from SVM classification result
 		then modify 'train' attribute of each reference
 		
@@ -628,7 +632,7 @@ class Extract(object):
 			SVM classification result for test data
 		listRef : list
 			reference list
-		'''
+		"""
 		i = 0
 		
 		for line in open (svmprediction_newfile, 'r') :
@@ -642,9 +646,9 @@ class Extract(object):
 
 
 	def convertToUnicode(self, chaine):
-		'''
+		"""
 		Convert a string to unicode
-		'''
+		"""
 		try:
 			if isinstance(chaine, str):
 				chaine = unicode(chaine, sys.stdin.encoding)

@@ -1,14 +1,14 @@
-# encoding: utf-8
-'''
+# -*- coding: utf-8 -*-
+"""
 Created on May 2, 2012
 
 @author: Young-min Kim, Jade Tavernier
-'''
+"""
 
 class GenerateXml(object):
-	'''
+	"""
 	A class that generates raw version xml output file.
-	'''
+	"""
 
 	def __init__(self):
 		self.labels =  {'.':0, ',':0, '(':0, ')':0, ':':0, ';':0, '«':0, '»':0, '-':0, '—':0, '“':0, '”':0, '{':0, '}':0, '[':0, ']':0,  '!':0, '?':0}
@@ -90,3 +90,5 @@ class GenerateXml(object):
 		fout.close()
 			
 		return
+	
+	

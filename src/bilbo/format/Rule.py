@@ -1,12 +1,12 @@
-# encoding: utf-8
-'''
+# -*- coding: utf-8 -*-
+"""
 Created on April 20, 2012
 
 @author: Young-Min Kim, Jade Tavernier
-'''
+"""
 from bilbo.reference.Word import Word
 from bilbo.reference.Reference import Reference
-import re
+import re, os
 
 prePunc =  {'.':0, ',':0, ')':0, ';':0, '-':0, '”':0, '»':0, '}':0, ']':0, '!':0, '?':0, '\\':0, 
 			'*':0, '%':0, '*':0, '=':0, '_':0, '~':0, '>':0, '^':0, '+':0, '"':0} #'|':0, '/':0, ':':0, 
@@ -14,37 +14,40 @@ postPunc = {'(':0, '–':0, '-':0, '“':0, '«':0, '{':0, '[':0, '#':0, '$':0, 
 
 
 class Rule(object):
-	'''
+	"""
 	A class that reorganizes tokens according to the predefined rules.
 	Especially the punctuation marks are separated and new Word objects are created.
 	Features about initial expression, capitalized token etc. are verified and attached.
-	'''
+	"""
 	
 	def __init__(self, options):
-		'''
+		"""
 		Constructor
-		'''
+		"""
 		self.special =  {'«':0, '»':0, '“':0, '”':0, '"':0, '–':0}
 		self.leadingQuotes = {'(':0, '{':0, '[':0, '«':0, '“':0}
 		self.endingQuotes = {')':0, '}':0, ']':0, '»':0, '”':0}
 		self.link = {':':0, '=':0, '_':0, '|':0, '~':0, '-':0, '–':0, ';':0}
 		
+		main = os.path.realpath(__file__).split('/')
+		self.rootDir = "/".join(main[:len(main)-4])		
+		
 		'Load the lexicon file'
-		self.regles = {}
+		self.rules = {}
 		self.options = options
 		expression = "^#"
 		if self.options.u : del self.special['"']
 		
 		try:
-			fichier = open("KB/config/lexique.txt", "r")
+			fichier = open(os.path.join(self.rootDir, "KB/config/lexique.txt"), "r")
 			lines = fichier.readlines()
 			fichier.close()
 			
 			
 			'Lexicon dictionary creation'
-			#regles - {"000":{"000":[]}}, eg) regles["editor"]["caracteristique"][0] : nonimpcap
-			#								  regles["editor"]["caracteristique"][1] : posseditor
-			#								  regles["editor"]["regle"][0] : ed
+			#rules - {"000":{"000":[]}}, eg) rules["editor"]["feature"][0] : nonimpcap
+			#								  rules["editor"]["feature"][1] : posseditor
+			#								  rules["editor"]["rule"][0] : ed
 			ruleType = ''
 			for line in lines:
 				if line.split()[0][0] == '[' and line.split()[0][-1] == ']':
@@ -52,33 +55,33 @@ class Rule(object):
 						ruleType = "including"
 					elif line.split()[0] == "[matching]" : 
 						ruleType = "matching"
-					self.regles[ruleType] = {}
+					self.rules[ruleType] = {}
 				else :
 					if re.match(expression, line):
 						lineSplit = line.split()
-						self.regles[ruleType][lineSplit[1]] = {}	#Label name
-						self.regles[ruleType][lineSplit[1]]["caracteristique"] = []	#essential features
-						self.regles[ruleType][lineSplit[1]]["regle"] = []	#when matching that chars add label
+						self.rules[ruleType][lineSplit[1]] = {}	#Label name
+						self.rules[ruleType][lineSplit[1]]["feature"] = []	#essential features
+						self.rules[ruleType][lineSplit[1]]["rule"] = []	#when matching that chars add label
 						'append the features of corresponding rule'
 						cpt = 2
 						while cpt < (len(lineSplit)):
-							self.regles[ruleType][lineSplit[1]]["caracteristique"].append(lineSplit[cpt])
+							self.rules[ruleType][lineSplit[1]]["feature"].append(lineSplit[cpt])
 							cpt += 1
 					else:
-						self.regles[ruleType][lineSplit[1]]["regle"].append(line.split())
+						self.rules[ruleType][lineSplit[1]]["rule"].append(line.split())
 					
 		except:
 			print "cannot open file lexique.txt"
 		
 
 	def reorganizing(self, listReference) :
-		'''
+		"""
 		Separate punctuation marks and add tags or attributes according to predefined rules
 		If there is a newly detached token, create a new 'Word' object and append it in the reference
 		
 		Parameters
 		----------
-		'''
+		"""
 		for reference in listReference.getReferences() :
 			reorgWords =[]
 			for word in reference.words :
@@ -173,7 +176,7 @@ class Rule(object):
 		featNames = word.listNomFeature()
 		tmp_str = input_str
 		i=0
-		allPunc = '.,():;{}[]!?#$%\*+/<=>@^_|~"'
+		allPunc = '.,():;{}[]!?#$%\*+<=>@^_|~"' #exclude /
 		if self.options.u : allPunc = allPunc[:-1]
 		while (i < len(input_str)) :
 			c = input_str[i]
@@ -214,7 +217,7 @@ class Rule(object):
 		i=0
 		new_str =''
 		tmp_str = ''
-		allPunc = '.,():;{}[]!?#$%\*+/<=>@^_|~"'
+		allPunc = '.,():;{}[]!?#$%\*+<=>@^_|~"' #exclude /
 		if self.options.u : allPunc = allPunc[:-1]	
 		while (i < len(word.nom)) :
 			c = word.nom[i]
@@ -253,9 +256,9 @@ class Rule(object):
 		
 		
 	def attachPunc(self, listReference) :
-		'''
+		"""
 		Undo the separation of punctuation. 
-		'''
+		"""
 		for reference in listReference.getReferences() :
 			reorgWords =[]
 			postCk = False
@@ -315,9 +318,9 @@ class Rule(object):
 
 		
 	def _initCheck(self, input_str) :
-		'''
+		"""
 		Check initial expressions
-		'''
+		"""
 		init1 = re.compile('^[A-Z][a-z]?\.-?[A-Z]?[a-z]?\.?')
 		init2 = re.compile('^[A-Z][a-z]?-[A-Z]?[a-z]?\.?')
 		init3 = re.compile('^[A-Z][A-Z]?\.?-?[A-Z]?[a-z]?\.')
@@ -340,9 +343,9 @@ class Rule(object):
 	
 	
 	def _refCheck(self, input_str) :
-		'''
+		"""
 		Check web link expressions
-		'''
+		"""
 		ref1 = re.compile('^http')
 		ref2 = re.compile('^www.')
 		ref3 = re.compile('^url')
@@ -357,9 +360,9 @@ class Rule(object):
 	
 	
 	def _featureCheck(self, new_str) :
-		'''
+		"""
 		Check number, guillemot
-		'''
+		"""
 		retrn_str = ''
 	
 		#number
@@ -414,29 +417,29 @@ class Rule(object):
 
 			
 	def _checkLexique(self, word, input_str):
-		'''
+		"""
 		Add attributes according to predefined rules in a lexicon file
-		'''
+		"""
 		new_str = '' 
 		retrn_str = ''
 		
 		'check if rules are matched in the string'
-		for ruleType in self.regles :
-			for regle in self.regles[ruleType]:
-				for chaine in self.regles[ruleType][regle]["regle"]:
+		for ruleType in self.rules :
+			for rule in self.rules[ruleType]:
+				for chaine in self.rules[ruleType][rule]["rule"]:
 					if (input_str.lower()).find(chaine[0]) == 0 :
 						charck = re.compile('[a-z]')	
 						'In case of including the key word in the string, no character except the key word'
-						if regle == "editor" and not charck.findall((input_str.lower()).replace(chaine[0],'')) :
-							word.delAllFeature()
-							word.addFeature(self.regles[ruleType][regle]["caracteristique"])
+						if ruleType == "including" and not charck.findall((input_str.lower()).replace(chaine[0],'')) :
+							#word.delAllFeature()
+							word.addFeature(self.rules[ruleType][rule]["feature"])
 							retrn_str = chaine[0]
 							new_str = input_str
 							input_str = re.sub(retrn_str, '', input_str.lower())
 							new_str = new_str.replace(input_str, '')
 						'In case of just matching the key word'
-						if regle == "page" and chaine[0] == input_str.lower() :
-							word.addFeature(self.regles[ruleType][regle]["caracteristique"])
+						if ruleType == "matching" and chaine[0] == input_str.lower() :
+							word.addFeature(self.rules[ruleType][rule]["feature"])
 							retrn_str = input_str
 							new_str = input_str
 							input_str = ''

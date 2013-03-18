@@ -1,5 +1,5 @@
 [including]
-# editor nonimpact posseditor
+# editor posseditor
 仕.
 仕s.
 ed.
@@ -8,6 +8,47 @@ ed
 eds
 仕
 仕s
+# month possmonth
+january
+february
+march
+april
+may
+june
+july
+august
+september
+october
+november
+december
+jan
+feb
+mar
+apr
+jun
+jul
+aug
+sep
+oct
+nov
+dec
+janvier
+f思rier
+mars
+avril
+mai
+juin
+juillet
+ao柎
+septembre
+octobre
+novembre
+d残embre
+jan
+f思
+avr
+jui
+d残
 [matching]
 # page posspage
 pp

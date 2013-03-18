@@ -1,9 +1,9 @@
-# encoding: utf-8
-'''
+# -*- coding: utf-8 -*-
+"""
 Created on April 18, 2012
 
 @author: Young-Min Kim, Jade Tavernier
-'''
+"""
 from bs4 import BeautifulSoup
 from bilbo.reference.Word import Word
 from bilbo.reference.Reference import Reference
@@ -12,18 +12,17 @@ import string
 import re
 
 class CleanCorpus1(Clean):
-	'''
+	"""
 	A class that tokenizes xml input data for corpus 1 (references).
 	Sub class of Clean
-	'''
+	"""
 	def __init__(self):
 		Clean.__init__(self)
 		self.tagAttDict = {'0000': 0}
 		
-	
 
 	def processing (self, fname, nameTagCorpus, external) :
-		'''
+		"""
 		Extract tags and attributes of each word and create a Word object 
 		
 		Parameters
@@ -34,7 +33,7 @@ class CleanCorpus1(Clean):
 			tag name of Corpus
 		external : int, {1, 0}
 			1 : if the references are external data except CLEO, 0 : if that of CLEO
-		'''
+		"""
 		try :
 			references = []
 			tmp_str = ''

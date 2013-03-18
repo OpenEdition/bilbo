@@ -1,4 +1,5 @@
-'''
+# -*- coding: utf-8 -*-
+"""
 Created on April 20, 2012
 
 @author: Young-Min Kim, Jade Tavernier
@@ -8,63 +9,26 @@ Created on April 20, 2012
 
 This is Main.py that creates bilbo object to learn and label reference data.
 
-'''
+"""
 import sys
 import os
-import optparse
 
-'''
+"""
 Add paths to the package
-'''
-directoryTab = os.getcwd().replace("\\", "/").split("/")
-last = directoryTab.pop()
-if last == "bilbo":
-	directoryTab.append(last)
-	directoryTab.append("src")
-	directory = "/".join(directoryTab)
-	sys.path.append(directory)
-else:
-	print "error: please execute the program from bilbo fold"
-	
+"""
+main = os.path.realpath(__file__).split('/')
+rootDir = "/".join(main[:len(main)-3])
+srcDir = os.path.join(rootDir, 'src')
+sys.path.append(srcDir)
+
 
 from bilbo.Bilbo import Bilbo
+from bilbo.utils import *
 
 if __name__ == '__main__':
 	
-	parser = optparse.OptionParser(
-		usage ='%prog [options] <input data folder> <output data folder>'
-		'\n  e.g. (training) python src/bilbo/Main.py -T -t bibl Data/train/ Result/train/'
-		'\n       (labeling) python src/bilbo/Main.py -L -t bibl -d Data/test/ Result/test/'
-		'\n       for more information, type \"python src/bilbo/Main.py\" without --help option' 
-					
-		)
-	parser.add_option('-T', '--Training', dest="T", default=False, action="store_true", help="Bilbo training")
-	parser.add_option('-L', '--Labeling', dest="L", default=False, action="store_true", help="Bilbo labeling")
-	common_opts = optparse.OptionGroup(
-		parser, 'Training and labeling options',
-		'These options are for both training and labeling'				
-		)
-	common_opts.add_option('-t', '--typeref', dest="t", default="bibl", action="store", type='choice', choices=['bibl', 'note', 'impl'], help="Input reference type")
-	common_opts.add_option('-i', '--informat', dest="i", default="tei", action="store", type='choice', choices=['tei', 'xml', 'plain'], help="Input reference format")
-	common_opts.add_option('-m', '--model', dest="m", default="revues", action="store", help="Bilbo model name")
-	common_opts.add_option('-g', '--gradetag', dest="g", default="simple", action="store", type='choice', choices=['simple', 'detail'], help="Grade of tag detail when using tei")
-	common_opts.add_option('-k', '--keeptmp', dest="k", default="none", action="store", type='choice', choices=['none', 'primary', 'all'], help="Decide which temp files are kept")
-	common_opts.add_option('-s', '--svmfilt', dest="s", default=False, action="store_true", help="Use a svm for training or labeling")
-	common_opts.add_option('-u', '--undopuncsep', dest="u", default=False, action="store_true", help="undo punctuation separation")	
-	parser.add_option_group(common_opts)
-	label_opts = optparse.OptionGroup(
-		parser, 'Labeling options',
-		'These options are for labeling only'				
-		)	
-	label_opts.add_option('-o', '--outformat', dest="o", default="tei", action="store", type='choice', choices=['tei', 'xml', 'simple'], help="Output reference format")
-	label_opts.add_option('-d', '--doi', dest="d", default=False, action="store_true", help="DOI extraction via crossref site")
-	label_opts.add_option('-x', '--xmlschema', dest="x", default=False, action="store_true", help="XML schema validation")
-	label_opts.add_option('-e', '--exterdata', dest="e", default=False, action="store_true", help="Labeling data different from training set")	
-	parser.add_option_group(label_opts)
-	
+	parser = defaultOptions()
 	options, args = parser.parse_args(sys.argv[1:])
-	
-	#bilbo = Bilbo()
 	
 	if len(args) < 2 or ((not options.T) and (not options.L)) :
 		print "--------------------------------------"
@@ -107,7 +71,14 @@ if __name__ == '__main__':
 		print "\t  none => keep nothing (default)"
 		print "\t  primary => keep primary temp files"
 		print "\t  all => keep all files"
-		
+
+		print "  -v : --validatexml <string>"
+		print "\t Decide if we validate files, "
+		print "\t  none => do not validate (default)"
+		print "\t  input => validate input files with tei_all.dtd"
+		print "\t  output => validate output files with tei_openedition3.xsd"
+		print "\t  all => validate input and output files"
+
 		print "  -s : --svmfilt"
 		print "\t Training a svm model or classifying notes to filter out non-bibliographical notes, default='False'"
 
@@ -120,11 +91,9 @@ if __name__ == '__main__':
 		print "\t Output data format"
 		print "\t  tei => xml following tei guidelines (default)"
 		print "\t  xml => simple xml"
-		print "\t  simple => only labeled references without article contents"
+		print "\t  simple => only labeled references without article contents or original tags"
 		print "  -d : --doi"
 		print "\t Digital object identifier (doi) extraction via crossref site, default='False'"
-		print "  -x : --xmlschema"
-		print "\t xml schema validation from a xsd file in \"KB/validation/\" folder, default='False'"
 		print "  -e : --exterdata"
 		print "\t Labeling data different from training set. Do not use svm filtering when using this option. default='False'"
 		
@@ -144,7 +113,7 @@ if __name__ == '__main__':
 		dtype = options.t
 		if dtype == "bibl" : typeCorpus = 1
 		elif dtype == "note" : typeCorpus = 2
-		dirModel = "model/corpus"+str(typeCorpus)+"/"+options.m+"/"
+		dirModel = os.path.join(rootDir, 'model/corpus')+str(typeCorpus)+"/"+options.m+"/"
 		if not os.path.exists(dirModel): os.makedirs(dirModel)
 		
 		if options.T : #training
@@ -156,6 +125,7 @@ if __name__ == '__main__':
 				bilbo.annotate(str(args[0]), dirModel, typeCorpus)
 		else :
 			print "Please choose training(-T option) or labeling(-L option)"
-			
+	
+	#simpleLabeling("Y.-M. KIM et al., An Extension of PLSA for Document Clustering, In Proceedings of ACM 17th Conference on Information and Knowledge Management, 2008.")
 
 		

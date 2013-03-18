@@ -1,18 +1,18 @@
 # -*- coding: utf-8 -*-
-'''
+"""
 Created on 25 avr. 2012
 
 @author: Young-min Kim, Jade Tavernier
-'''
+"""
 import re
 import string
 
 class Name(object):
 
 	def __init__(self, fname):
-		'''
+		"""
 		variables
-		'''
+		"""
 		self.namelist = {'0000': {'000': 0}}
 		self.multi_namelist = {'0000': {'0000': 0}} #when surname is more than a word
 		self.forenamelist = {'0000': 0}
@@ -51,9 +51,9 @@ class Name(object):
 			
 
 	def searchName(self, listReference, tr) :
-		'''
+		"""
 		Add SURNAMELIST and FORENAMELIST features according to the rules
-		'''
+		"""
 	
 		if tr == 1 or tr == -1 :	pt = 1
 		elif tr == 0 :	pt = 0
@@ -100,9 +100,9 @@ class Name(object):
 		
 
 	def _has_initial(self, mot) :
-		'''
+		"""
 		Check if the word has initial
-		'''		
+		"""		
 		ck = 0
 		feature = mot.getAllFeature()
 		for t in feature :

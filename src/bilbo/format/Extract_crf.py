@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-'''
+"""
 Created on June 11, 2012
 
 @author: Young-Min Kim, Jade Tavernier
-'''
+"""
 from bilbo.format.Extract import Extract
 
 chPunc =  {'.':0, ',':0, ')':0,'”':0, '}':0, ']':0, 
@@ -11,17 +11,17 @@ chPunc =  {'.':0, ',':0, ')':0,'”':0, '}':0, ']':0,
 chFeat4title = ["a","m","j","s","u","volume_title", "translated_title", "research_programm" ]
 
 class Extract_crf(Extract):
-	'''
+	"""
 	A class to extract training and test data for CRF
 	Sub class of Extract
-	'''
+	"""
 
 	def __init__(self, options={}):
 		Extract.__init__(self, options)
 		
 
 	def extract (self, typeCorpus, ndocs, fileRes, listRef, tr=-1, extOption=-1) :
-		'''
+		"""
 		Extract training and test data
 
 		Parameters
@@ -43,7 +43,7 @@ class Extract_crf(Extract):
 			-1 : data format for SVM 
 			1 : data format for normal CRF training/test data 
 			2-5 : (not yet provided)
-		'''	
+		"""	
 		self.titleCK = 0
 		self.titleAttr = ''
 		self.relatItm = 0
@@ -64,11 +64,11 @@ class Extract_crf(Extract):
 				if mot.ignoreWord == 0:
 					if mot.item == 1: self.relatItm = 1
 					
-					'''
+					"""
 					reference.train is a note indicator to see if it has been classified nonbibl from SVM classification
 					But to print original tags of test data, we should not change tags as "nonbibl"
 					Notes classified as nonbibl will be eliminated at printing
-					'''
+					"""
 					#label check
 					if self.options.i == 'tei' : self._updateTag(mot)
 						
@@ -131,22 +131,22 @@ class Extract_crf(Extract):
 			self.nameObj.searchName(listRef, tr)
 			self.placeObj.searchPlace(listRef, tr)
 			self.cityObj.searchProper(listRef, tr)
-			#self.journalObj.searchProper(listRef, tr)
+			self.journalObj.searchProper(listRef, tr)
 		
 		if extOption == 1 or extOption == 2 :
 			if tr != -2 :
 				self._addlayout(listRef)	#Layout feature added
 				if tr != 1 or not self.options.s:
 					self._printdata(fileRes, listRef, tr)
-					fileResWapiti = fileRes.replace(".", "_Wapiti.")
+					fileResWapiti = fileRes.replace(".txt", "_Wapiti.txt")
 					self._printdataWapiti(fileResWapiti, listRef, tr)
 				else :
 					if self.options.s : #if svm classification on
-						fileResOri = fileRes.replace(".", "_Original.")
+						fileResOri = fileRes.replace(".txt", "_Original.txt")
 						self._printdata(fileResOri, listRef, tr)
-						fileResWapiti = fileRes.replace(".", "_OriginalWapiti.")
+						fileResWapiti = fileRes.replace(".txt", "_OriginalWapiti.txt")
 						self._printdataWapiti(fileResWapiti, listRef, tr)
-						fileResWapiti = fileRes.replace(".", "_Wapiti.")
+						fileResWapiti = fileRes.replace(".txt", "_Wapiti.txt")
 						self._printdataWapiti(fileResWapiti, listRef, tr, "deleteNegatives")
 						self._printdata(fileRes, listRef, tr, "deleteNegatives")
 			else:

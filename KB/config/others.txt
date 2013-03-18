@@ -5,24 +5,24 @@ usrname = youngminn.kim@gmail.com
 nonbibl = NONE
 nolabel = NONE
 bookindicator = NONE
+w = NONE
 #surname = 
 #forename =
 #publisher = 
 #abbr
 #date
 title_m = title level="m"
-title_a = title level ="a"
-title_j = title level ="j"
-title_t = title level ="t"
-title_u = title level ="u"
-title_s = title level ="s"
+title_a = title level="a"
+title_j = title level="j"
+title_t = title level="a"
+title_u = title level="u"
+title_s = title level="s"
 biblscope_pp = biblScope unit="pp"
 biblscope_i = biblScope unit="issue"
 biblscope_v = biblScope unit="vol"
 biblscope_pa = biblScope unit="part"
 biblscope_c = biblScope unit="chap"
-#biblscope
-w = NONE 
+biblscope = NONE
 #edition 
 #meeting
 #title
@@ -32,5 +32,5 @@ w = NONE
 place = pubPlace 
 orgname = orgName
 rolename = roleName
-namelink = nameLink
+namelink = forename
 genname = genName

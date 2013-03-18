@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-'''
+"""
 Created on April 25, 2012
 
 @author: Young-Min Kim, Jade Tavernier
-'''
+"""
 import unicodedata
 
 class Properlist(object):
@@ -39,9 +39,9 @@ class Properlist(object):
 
 
 	def searchProper(self, listReference, tr) :
-		'''
+		"""
 		Add the target feature if the corresponding word is in the list according to the rules
-		'''
+		"""
 		
 		if tr == 1 or tr == -1 :	pt = 1
 		elif tr == 0 :	pt = 0
