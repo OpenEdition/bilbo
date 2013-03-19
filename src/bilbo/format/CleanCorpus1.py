@@ -16,9 +16,10 @@ class CleanCorpus1(Clean):
 	A class that tokenizes xml input data for corpus 1 (references).
 	Sub class of Clean
 	"""
-	def __init__(self):
+	def __init__(self, options):
 		Clean.__init__(self)
 		self.tagAttDict = {'0000': 0}
+		self.options = options
 		
 
 	def processing (self, fname, nameTagCorpus, external) :

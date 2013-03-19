@@ -16,10 +16,10 @@ class CleanCorpus2(Clean):
 	A class that tokenizes xml input data for corpus 2 (notes).
 	Sub class of Clean
 	"""
-	def __init__(self):
+	def __init__(self, options):
 		Clean.__init__(self)
 		self.tagAttDict = {'0000': 0}
-		
+		self.options = options
 	
 	def processing (self, fname, nameTagCorpus, external) :
 		"""
@@ -82,8 +82,11 @@ class CleanCorpus2(Clean):
 				s = nt.findAll ("bibl")	
 				sAll = nt.contents 
 				words = []
+				#Filter the non-annotated notes for training, if we don't use SVM, just select notes including bibls
+				validNote = True
+				if self.options.T and not self.options.v and len(s) == 0 : validNote = False
 				
-				while i < len(sAll) :
+				while i < len(sAll) and validNote :
 					if i == 20:
 						pass
 					b = sAll[i]	#each item in nt.contents

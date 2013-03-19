@@ -66,9 +66,9 @@ def labeling(line, modelname, options):
 	#tmp file generation	
 	filename = os.path.join(tmpDir, 'tmp.xml')
 	tmpFile = open(filename, "w")
-	tmpFile.write('<list'+dtype+'>\n')	
+	tmpFile.write('<list'+dtype.title()+'>\n')	
 	tmpFile.write('<'+dtype+'> '+str(line)+' </'+dtype+'>')
-	tmpFile.write('\n</list'+dtype+'>\n')
+	tmpFile.write('\n</list'+dtype.title()+'>\n')
 	tmpFile.close()
 	
 	if options.t == "note" and options.e: bilbo.annotate(tmpDir, dirModel, typeCorpus, 1)

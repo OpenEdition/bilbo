@@ -37,7 +37,6 @@ class File(object):
 		self.nom = fname
 		self.corpus = {}
 		self.options = options
-		#self.tagtool = tagTools()
 	
 
 	def extract(self, typeCorpus, tag, external):
@@ -58,9 +57,9 @@ class File(object):
 		"""	
 		clean = Clean()
 		if typeCorpus == 1:
-			clean = CleanCorpus1()
+			clean = CleanCorpus1(self.options)
 		elif typeCorpus == 2:
-			clean = CleanCorpus2()
+			clean = CleanCorpus2(self.options)
 		#print self.nom
 		references = clean.processing(self.nom, tag, external)
 		if len(references) >= 1:
@@ -421,7 +420,7 @@ class File(object):
 				if oriRef.find('<',ptr2,ptr3) < 0 and self._onlyPunc(oriRef[ptr2:ptr3]) : #if there is no starting tag between them and NO char
 					ptr4 = oriRef.find('>',ptr3)
 					closeTag = oriRef[ptr3+len('</'):ptr4] #extract the closest tag name
-					if closeTag not in ["note", "bibl", "listNote", "listBibl", "ref"] and closeTag not in includedLabels :
+					if closeTag not in ["note", "bibl", "listNote", "listBibl", "ref", "p"] and closeTag not in includedLabels :
 						[st1, ed1, dummyTag] = tagtool._closestPreTag(oriRef, ptr1)
 						if oriRef[st1:ed1].find('<'+closeTag) == 0 and self._onlyPunc(oriRef[ed1:ptr1]) :#if there is no tag between them and NO char
 							#then exchange tags
