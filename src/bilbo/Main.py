@@ -3,9 +3,6 @@
 Created on April 20, 2012
 
 @author: Young-Min Kim, Jade Tavernier
-	argv[1] : 1 => annotate corpus 1, 2 => annotate corpus 2, 11 => train corpus 1, 22 => train corpus 2
-	argv[2] : directory where the data files are
-	argv[3] : directory where the result files are saved (default : Result)
 
 This is Main.py that creates bilbo object to learn and label reference data.
 

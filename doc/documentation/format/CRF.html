@@ -9,7 +9,7 @@
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>CRF</strong></big></big></font></td
 ><td align=right valign=bottom
 ><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/young-minkim/Documents/workspace/bilbo/src/bilbo/format/CRF.py">/Users/young-minkim/Documents/workspace/bilbo/src/bilbo/format/CRF.py</a></font></td></tr></table>
-    <p><tt>Created&nbsp;on&nbsp;18&nbsp;avr.&nbsp;2012<br>
+    <p><tt>Created&nbsp;on&nbsp;April&nbsp;18,&nbsp;2012<br>
 &nbsp;<br>
 @author:&nbsp;Young-Min&nbsp;Kim,&nbsp;Jade&nbsp;Tavernier</tt></p>
 <p>
@@ -19,8 +19,9 @@
 <font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
     
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="subprocess.html">subprocess</a><br>
-</td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="os.html">os</a><br>
+</td><td width="25%" valign=top><a href="subprocess.html">subprocess</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ee77aa">
 <td colspan=3 valign=bottom>&nbsp;<br>
@@ -52,7 +53,17 @@ generateXml&nbsp;:&nbsp;GenerateXml<br>
 dirResult&nbsp;:&nbsp;string<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;directory&nbsp;for&nbsp;result&nbsp;files</tt></dd></dl>
 
-<dl><dt><a name="CRF-postProcessTest"><strong>postProcessTest</strong></a>(self, fnameCRFresult, fnameCRFtoAdd, refsAfterSVM)</dt></dl>
+<dl><dt><a name="CRF-postProcessTest"><strong>postProcessTest</strong></a>(self, fnameCRFresult, fnameCRFtoAdd, refsAfterSVM)</dt><dd><tt>Post-processing&nbsp;of&nbsp;labeling&nbsp;result.&nbsp;After&nbsp;a&nbsp;normal&nbsp;<a href="#CRF">CRF</a>&nbsp;labeling,&nbsp;we&nbsp;return&nbsp;to&nbsp;the&nbsp;SVM&nbsp;classification&nbsp;result,<br>
+then&nbsp;check&nbsp;which&nbsp;notes&nbsp;should&nbsp;be&nbsp;annotated&nbsp;as&nbsp;non-bibliographic&nbsp;ones,&nbsp;then&nbsp;actually&nbsp;modify&nbsp;the&nbsp;labeling&nbsp;result.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+fnameCRFresult&nbsp;:&nbsp;string&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;directory&nbsp;where&nbsp;we&nbsp;save&nbsp;the&nbsp;model<br>
+fnameCRFtoAdd&nbsp;:&nbsp;string<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;filename&nbsp;that&nbsp;has&nbsp;been&nbsp;generated&nbsp;by&nbsp;preprareTest<br>
+refsAfterSVM&nbsp;:&nbsp;list&nbsp;of&nbsp;'Reference'&nbsp;objects<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reference&nbsp;list&nbsp;containing&nbsp;SVM&nbsp;classification&nbsp;result</tt></dd></dl>
 
 <dl><dt><a name="CRF-prepareTest"><strong>prepareTest</strong></a>(self, corpus, typeCorpus, indiceSvm<font color="#909090">=0</font>)</dt><dd><tt>Prepare&nbsp;<a href="#CRF">CRF</a>&nbsp;test&nbsp;data<br>
 &nbsp;<br>

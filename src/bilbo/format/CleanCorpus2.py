@@ -46,7 +46,8 @@ class CleanCorpus2(Clean):
 				line = line.replace('<!-- <pb/> -->', '')
 				line = line.replace('“', '“ ')			# !!! sparate the special characters '“', '”'
 				line = line.replace('”', ' ”')			# !!! sparate the special characters '“', '”'
-				#line = line.replace('&amp;', '&')	
+				line = line.replace('\'\'', ' " ')
+				line = line.replace('&amp;nbsp;', '&nbsp;')	
 				line = self.posssign(line, refSign)		# term or phrase representing the reference part in note, IF THIS IS A PHRASE INSERT DASH BETWEEN WORDS
 				line = self.posssign(line, precitSign)	# term or phrase indicating the previously cited reference, IF THIS IS A PHRASE INSERT DASH BETWEEN WORDS
 				tmp_str = tmp_str + ' ' + line

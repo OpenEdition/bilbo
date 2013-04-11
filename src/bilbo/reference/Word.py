@@ -9,13 +9,17 @@ from bilbo.reference.Feature import  Feature
 
 class Word(object):
 	"""
-	classdocs
+	A class corresponding to a word in a reference. It contains word name, features, tags, etc.
+	Word object is first created in CleanCorpus1 and CleanCorpus2.
 	"""
 
 
 	def __init__(self, mot, tags=[], features=[]):
 		"""
-		Constructor
+		nom : word name
+		tag : list of Balise objects
+		feature : list of Feature objects
+		item : indicator of sub-reference (0 : no, 1 : yes)
 		"""
 		'Generate Tag objects'
 		self.nom = mot

@@ -7,7 +7,8 @@ Created on April 18, 2012
 
 class Reference(object):
 	"""
-	classdocs
+	A class corresponding to a reference. It contains Word objects. 
+	Reference object is first created in CleanCorpus1 and CleanCorpus2.
 	"""
 
 	"""
@@ -15,6 +16,15 @@ class Reference(object):
 	word
 	"""
 	def __init__(self, words, num):
+		"""
+		Attributes
+		----------
+		num : int 
+			reference number 
+		words : list of Word objects
+			word list included in the reference
+		train : an indicator if this reference should be used for training or test (1 : learning, 0 : test, -1 : nonBibl)
+		"""
 		self.words = words
 		self.num = num
 		self.train = 0 # 1:train, 0:test, -1:classified as negative for SVM note classification

@@ -187,7 +187,7 @@ class Extract(object):
 					['ITALIC'],		#7
 					['POSSEDITOR'],	#8
 					['POSSPAGE'],	#9
-					['NOMONTH'],	#10POSSMONTH
+					['POSSMONTH'],	#10POSSMONTH
 					['SURNAMELIST'],	#11
 					['FORENAMELIST'],	#12
 					['PLACELIST'],		#13

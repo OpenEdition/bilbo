@@ -7,7 +7,7 @@ Created on April 18, 2012
 
 class ListReferences(object):
 	"""
-	classdocs
+	A class containing a list of reference objects and corpus type information. 
 	"""
 
 

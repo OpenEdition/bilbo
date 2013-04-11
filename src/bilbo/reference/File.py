@@ -233,14 +233,21 @@ class File(object):
 				oriRef = self.checkHiTag(oriRef, includedLabels)
 				beforeRef = oriRef
 				
+				'WHEN DIRTY DATA CONTATING SPECIAL HTML TAGS'
+				oriRef = oriRef.replace('&ndash;', '&#8211;')
+				oriRef = oriRef.replace('&nbsp;', '&#160;')
+				oriRef = oriRef.replace('&mdash;', '-')
+				
+				
 				if oriRef.find("<author>") < 0 : #non-annotated input
 					'add author tags'
 					oriRef, noCutRef= self.findAuthor(includedLabels, oriRef)
 					'correct missed tag inserting'
-					oriRef = self._correctMissTag(oriRef, basicTag, "author")
+					oriRef = self.correctMissTag(oriRef, basicTag, "author")
+					'''
 					try : parseString(oriRef)
 					except Exception, err:
-						noCutRef = self._correctMissTag(noCutRef, basicTag, "author")
+						noCutRef = self.correctMissTag(noCutRef, basicTag, "author")
 						oriRef = noCutRef
 						try : parseString(oriRef)
 						except Exception, err:
@@ -249,12 +256,16 @@ class File(object):
 							m = re.search('(?<=column )\w+', str(err))
 							print "Abandon person separation"
 							oriRef = beforeRef
+					'''
+					
 					'bibl separation'
-					if tagTypeCorpus == 'note' : oriRef = self.detectBibl(oriRef, includedLabels)
-					try : parseString(oriRef)
-					except Exception, err:
-						print err, self.nom, oriRef
-						pass
+					if tagTypeCorpus == 'note' : 
+						oriRef = self.detectBibl(oriRef, includedLabels)
+					
+						try : parseString(oriRef)
+						except Exception, err:
+							print err, self.nom, oriRef
+							pass
 					
 				#'''
 				if self.options.o == 'tei' :
@@ -345,6 +356,9 @@ class File(object):
 
 
 	def doiExtraction(self, text, reference, tagTypeCorpus):
+		"""
+		Call extractDoi from indentifier.py then insert the result
+		"""
 		doistring = ''
 		if self.options.d :
 			doistring = extractDoi(str(reference), tagTypeCorpus)
@@ -800,7 +814,7 @@ class File(object):
 		return oriRef, ptr1, ptr2
 	
 		
-	def _correctMissTag(self, oriRef, basicTag, addedTag):
+	def correctMissTag(self, oriRef, basicTag, addedTag):
 		"""
 		Check interrupted tags in newly attached tag (wrapping other tags), then replace them
 		This interruption arrives because of originally existing tags (basicTag) in the input file.
@@ -940,6 +954,9 @@ class File(object):
 	
 	
 	def detectBibl(self, oriRef, includedLabels):
+		"""
+		Separate references included in a note
+		"""
 		'find tags'
 		refLabels = []
 		soup = BeautifulSoup(oriRef)
@@ -974,7 +991,7 @@ class File(object):
 	
 	def _separateSemicolonBibl(self, oriRef, includedLabels):
 		"""
-		separate multiple references in a detected reference zone
+		Separate multiple references in a detected reference zone using semicolons
 		"""
 		validLabels = includedLabels
 		toRemove = ['nolabel', 'nonbibl', 'w', 'bookindicator']
@@ -1038,7 +1055,7 @@ class File(object):
 	
 	def _separateNonbiblBibl(self, oriRef, includedLabels):
 		"""
-		separate multiple references in a detected reference zone
+		separate multiple references in a detected reference zone using <nonbibl> fields
 		"""
 		validLabels = includedLabels
 		toRemove = ['nolabel', 'nonbibl', 'w', 'bookindicator']

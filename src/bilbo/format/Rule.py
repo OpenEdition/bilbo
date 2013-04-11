@@ -43,7 +43,6 @@ class Rule(object):
 			lines = fichier.readlines()
 			fichier.close()
 			
-			
 			'Lexicon dictionary creation'
 			#rules - {"000":{"000":[]}}, eg) rules["editor"]["feature"][0] : nonimpcap
 			#								  rules["editor"]["feature"][1] : posseditor
@@ -150,7 +149,9 @@ class Rule(object):
 	
 		
 	def sepTotalFrontPunc(self, word):
-		
+		"""
+		Separate punctuation marks at the front of the word, it includes self._sepFrontPunc and self._sepFrontSpePunc.
+		"""
 		[frontWords, tmp_str] = self._sepFrontPunc(word)
 		word.nom = tmp_str
 		newfrontWords = []
@@ -169,7 +170,9 @@ class Rule(object):
 
 
 	def _sepFrontPunc(self, word):
-		
+		"""
+		Separate punctuation marks at the front of the word
+		"""
 		frontWords = []
 		input_str = word.nom
 		tagNames = word.listNomTag()
@@ -192,6 +195,11 @@ class Rule(object):
 	
 		
 	def _sepFrontSpePunc(self, word):
+		"""
+		Separate special punctuation marks at the front of the word
+		Special punctuation marks are non-English marks, which cannot be processed by regular expression
+		Check out 'self.special'
+		"""
 		
 		frontWords = []
 		input_str = word.nom
@@ -210,6 +218,9 @@ class Rule(object):
 	
 	
 	def _sepMidWord(self, word):
+		"""
+		Extract the word in the middle of string
+		"""
 		
 		midWord = []
 		tagNames = word.listNomTag()
@@ -233,6 +244,10 @@ class Rule(object):
 	
 	
 	def descPunc(self, listReference) :
+		"""
+		Add descriptions of punctuation as features when we detach the marks. 
+		It is used for experimental objective. Now we don't use it. But keep it for further experiments.
+		"""
 		
 		for reference in listReference.getReferences() :
 			quotes = 0
@@ -296,7 +311,6 @@ class Rule(object):
 						if self.leadingQuotes.has_key(word.nom) : postfeat_str = 'leadingquotes'
 						elif self.link.has_key(word.nom) : postfeat_str = 'link'
 						
-						
 				else :
 					reorgWords.append(word)
 					postCk = False
@@ -309,6 +323,9 @@ class Rule(object):
 	
 	
 	def _findPuncFunc(self, words):
+		"""
+		Add quotes features when we attach punctuation marks. They are essential features when punctuation is attached. 
+		"""
 		for w in words :
 			if w.nom[0] == '"' : w.addFeature(['leadingquotes'])
 			elif w.nom.find('"') > 0 : w.addFeature(['endingquotes'])

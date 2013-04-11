@@ -19,12 +19,12 @@ and&nbsp;modified&nbsp;by&nbsp;Jade&nbsp;Tavernier&nbsp;for&nbsp;code&nbsp;reorg
 BILBO&nbsp;is&nbsp;an&nbsp;open&nbsp;source&nbsp;software&nbsp;for&nbsp;automatic&nbsp;annotation&nbsp;of&nbsp;bibliographic&nbsp;reference.<br>
 It&nbsp;provides&nbsp;the&nbsp;segmentation&nbsp;and&nbsp;tagging&nbsp;of&nbsp;input&nbsp;string.&nbsp;It&nbsp;is&nbsp;principally&nbsp;based&nbsp;on<br>
 Conditional&nbsp;Random&nbsp;Fields&nbsp;(CRFs),&nbsp;machine&nbsp;learning&nbsp;technique&nbsp;to&nbsp;segment&nbsp;and&nbsp;label<br>
-sequence&nbsp;data.&nbsp;As&nbsp;external&nbsp;softwares,&nbsp;Mallet&nbsp;is&nbsp;used&nbsp;for&nbsp;CRF&nbsp;learning&nbsp;and&nbsp;inference<br>
+sequence&nbsp;data.&nbsp;As&nbsp;external&nbsp;softwares,&nbsp;Wapiti&nbsp;is&nbsp;used&nbsp;for&nbsp;CRF&nbsp;learning&nbsp;and&nbsp;inference<br>
 and&nbsp;SVMlight&nbsp;is&nbsp;used&nbsp;for&nbsp;sequence&nbsp;classification.&nbsp;BILBO&nbsp;is&nbsp;licensed&nbsp;under&nbsp;a&nbsp;Creative<br>
 Commons&nbsp;Attribution-NonCommercial-ShareAlike&nbsp;2.5&nbsp;Generic&nbsp;License&nbsp;(CC&nbsp;BY-NC-SA&nbsp;2.5).<br>
 ---------------------------------------------------------------------------------------------------------------------------<br>
 &nbsp;<br>
-Created&nbsp;on&nbsp;18&nbsp;avr.&nbsp;2012<br>
+Created&nbsp;on&nbsp;April&nbsp;08,&nbsp;2012<br>
 &nbsp;<br>
 @author:&nbsp;Young-Min&nbsp;Kim,&nbsp;Jade&nbsp;Tavernier</tt></p>
 <p>
@@ -61,7 +61,7 @@ Created&nbsp;on&nbsp;18&nbsp;avr.&nbsp;2012<br>
 <td colspan=2><tt>A&nbsp;machine&nbsp;<a href="#Bilbo">Bilbo</a>&nbsp;that&nbsp;trains&nbsp;a&nbsp;CRF&nbsp;(and&nbsp;a&nbsp;SVM)&nbsp;model&nbsp;and&nbsp;automatically&nbsp;labels&nbsp;new&nbsp;references.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%">Methods defined here:<br>
-<dl><dt><a name="Bilbo-__init__"><strong>__init__</strong></a>(self, dirResult<font color="#909090">='Result/'</font>, options<font color="#909090">={}</font>, crfmodelname<font color="#909090">='crf_model_simple'</font>)</dt><dd><tt>Attributes<br>
+<dl><dt><a name="Bilbo-__init__"><strong>__init__</strong></a>(self, dirResult<font color="#909090">=''</font>, options<font color="#909090">={}</font>, crfmodelname<font color="#909090">='crf_model_simple'</font>)</dt><dd><tt>Attributes<br>
 ----------<br>
 crf&nbsp;:&nbsp;CRF<br>
 svm&nbsp;:&nbsp;SVM<br>

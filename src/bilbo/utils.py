@@ -4,7 +4,9 @@ Created on March 7, 2013
 
 @author: Young-Min Kim
 
-This is utils.py
+This is utils.py providing APIs to process simple string for labeling.
+It also contains default option setting function, which is called in main.
+
 """
 import sys
 import os
@@ -47,7 +49,7 @@ def detailLabeling(line, type='bibl'):
 
 def labeling(line, modelname, options):
 	"""
-	Label input sting
+	Label input sting. Called by simpleLabeling or detailLabeling
 	"""
 	tmpDir = rootDir+'/simpletmp'
 	resDir = os.getcwd() #current working directory
@@ -83,6 +85,9 @@ def labeling(line, modelname, options):
 
 
 def defaultOptions():
+	"""
+	Set default options. Called in Main.py
+	"""
 	
 	parser = optparse.OptionParser(
 		usage ='%prog [options] <input data folder> <output data folder>'

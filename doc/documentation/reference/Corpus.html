@@ -9,7 +9,7 @@
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>Corpus</strong></big></big></font></td
 ><td align=right valign=bottom
 ><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/young-minkim/Documents/workspace/bilbo/src/bilbo/reference/Corpus.py">/Users/young-minkim/Documents/workspace/bilbo/src/bilbo/reference/Corpus.py</a></font></td></tr></table>
-    <p><tt>Created&nbsp;on&nbsp;25&nbsp;avr.&nbsp;2012<br>
+    <p><tt>Created&nbsp;on&nbsp;April&nbsp;25,&nbsp;2012<br>
 &nbsp;<br>
 @author:&nbsp;Young-Min&nbsp;Kim,&nbsp;Jade&nbsp;Tavernier</tt></p>
 <p>
@@ -54,7 +54,7 @@ directory&nbsp;:&nbsp;string<br>
 fichiers&nbsp;:&nbsp;list<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list&nbsp;of&nbsp;File&nbsp;objects&nbsp;containing&nbsp;corpus&nbsp;data</tt></dd></dl>
 
-<dl><dt><a name="Corpus-addTagReferences"><strong>addTagReferences</strong></a>(self, dirResult, fname, tagDelimRef, typeCorpus, refsAfterSVM<font color="#909090">=[]</font>)</dt><dd><tt>Add&nbsp;ignored&nbsp;tags&nbsp;from&nbsp;initial&nbsp;file<br>
+<dl><dt><a name="Corpus-addTagReferences"><strong>addTagReferences</strong></a>(self, dirResult, fname, tagTypeCorpus, typeCorpus, refsAfterSVM<font color="#909090">=[]</font>)</dt><dd><tt>Add&nbsp;ignored&nbsp;tags&nbsp;from&nbsp;initial&nbsp;file<br>
 Check&nbsp;the&nbsp;SVM&nbsp;classification&nbsp;result&nbsp;of&nbsp;reference&nbsp;to&nbsp;give&nbsp;&lt;nonbibl&gt;&nbsp;tag&nbsp;at&nbsp;the&nbsp;final&nbsp;construction<br>
 Call&nbsp;File::buildReferences&nbsp;for&nbsp;the&nbsp;modification&nbsp;and&nbsp;punctuation&nbsp;management&nbsp;then&nbsp;print&nbsp;the&nbsp;result<br>
 &nbsp;<br>
@@ -64,7 +64,7 @@ dirResult&nbsp;:&nbsp;string<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;directory&nbsp;for&nbsp;output&nbsp;files<br>
 fname&nbsp;:&nbsp;string<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;output&nbsp;filename<br>
-tagDelimRef&nbsp;:&nbsp;<br>
+tagTypeCorpus&nbsp;:&nbsp;<br>
 typeCorpus&nbsp;:&nbsp;int,&nbsp;{1,&nbsp;2,&nbsp;3}<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;of&nbsp;corpus<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;:&nbsp;corpus&nbsp;1,&nbsp;2&nbsp;:&nbsp;corpus&nbsp;2...<br>
@@ -96,6 +96,8 @@ typeCorpus&nbsp;:&nbsp;int,&nbsp;{1,&nbsp;2,&nbsp;3}<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;:&nbsp;corpus&nbsp;1,&nbsp;2&nbsp;:&nbsp;corpus&nbsp;2...</tt></dd></dl>
 
 <dl><dt><a name="Corpus-nbReference"><strong>nbReference</strong></a>(self, typeCorpus)</dt><dd><tt>Return&nbsp;number&nbsp;of&nbsp;references&nbsp;in&nbsp;the&nbsp;corpus</tt></dd></dl>
+
+<dl><dt><a name="Corpus-validateXml"><strong>validateXml</strong></a>(self, listFichiers)</dt></dl>
 
 <hr>
 Data descriptors defined here:<br>

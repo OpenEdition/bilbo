@@ -44,7 +44,9 @@ class CleanCorpus1(Clean):
 				line = line.replace('<!-- <pb/> -->', '')
 				line = line.replace('“', '“ ')			# !!! sparate the special characters '“', '”'
 				line = line.replace('”', ' ”')			# !!! sparate the special characters '“', '”'
+				line = line.replace('\'\'', ' " ')
 				#line = line.replace('&amp;', '&')
+				line = line.replace('&amp;nbsp;', '&nbsp;')	
 				tmp_str = tmp_str + ' ' + line
 			
 			tmp_str = self._elimination (tmp_str)

@@ -1,7 +1,7 @@
 
-BILBO : Automatic annotation of bibliographic reference
+BILBO : Automatic reference labeling
 
-(C) Copyright 2012 by Young-Min Kim and Jade Tavernier.
+(C) Copyright 2013 by Young-Min Kim and Jade Tavernier.
 written by Young-Min Kim, modified by Jade Tavernier.
 
 BILBO is an open source software for automatic annotation of bibliographic reference.
@@ -49,6 +49,9 @@ $ sudo python setup.py install
 
 command:
 $ cd bilbo
+$ python src/bilbo/Main.py 		(help full ver.)
+$ python src/bilbo/Main.py -h 	(help simple ver.)
+
 
 Usage: python src/bilbo/Main.py [options] <input data folder> <output data folder>
 e.g. training: python src/bilbo/Main.py -T -t bibl Data/train/ Result/train/
@@ -67,7 +70,7 @@ Options
 	  impl => implicit citations
   -i : --informat <string>
 	 Input reference format
-	  tei => xml following tei guidelines including manual annotation (default)
+	  tei => xml following tei guidelines including manual annotation (defalut)
 	  xml => simple xml without tree in manual annotation
 	  plain => plain text (for labeling only)
   -m : --model <string>
@@ -82,13 +85,22 @@ Options
 	  none => keep nothing (default)
 	  primary => keep primary temp files
 	  all => keep all files
+  -v : --validatexml <string>
+	 Decide if we validate files, 
+	  none => do not validate (default)
+	  input => validate input files with tei_all.dtd
+	  output => validate output files with tei_openedition3.xsd
+	  all => validate input and output files
   -s : --svmfilt
 	 Training a svm model or classifying notes to filter out non-bibliographical notes, default='False'
+  -u : --undopuncsep
+	 Undo punctuation separation, default='False'
 (labeling)
   -o : --outformat <string>
 	 Output data format
 	  tei => xml following tei guidelines (default)
-	  xml => simple xml 
+	  xml => simple xml
+	  simple => only labeled references without article contents or original tags
   -d : --doi
 	 Digital object identifier (doi) extraction via crossref site, default='False'
   -e : --exterdata
@@ -129,6 +141,9 @@ config directory :
 data directory :
 	Training corpus
 
+validation directory :
+	xml validation files
+
 ------------------------
  model directory
 ------------------------
@@ -137,7 +152,7 @@ Model created and used by BILBO
 ------------------------
  result directory
 ------------------------	
-Annotated files
+Result files
 
 
 
@@ -149,16 +164,14 @@ Annotated files
  Description
 ==============================================
 
-Execute BILBO from command line :
-Move to the directory BILBO then,
-python src/mypkg/Main.py 
+
 
 ========================
  Configuration files
 ========================
 
 ------------------------
- externalList
+ externalList directory
 ------------------------
 External proper noun lists used to improve proper noun tagging. Any proper noun list
 can be used, for example, common name list in the world or world city list.
@@ -171,7 +184,7 @@ data are too detailed, so they are replaced with simple tags.
 e.g. 'meeting' tag is replaced with 'booktitle'
 
 FILE FORMAT
-<tag name to be replaced> <space> <replacing tag name>
+(tag name to be replaced) (space) (replacing tag name)
 ...
 
 
@@ -179,26 +192,39 @@ FILE FORMAT
  lexique.txt
 ------------------------
 This file contains lexical features to be added to specific words. It is used by Rule
-class. 
+class. There are two types of lexical features : [including] and [matching]
+[including] means check if the corresponding word is INCLUDED in the input token
+[matching] means check if the corresponding word is exactly matching the input token
+e.g. (January), string should de verified as [including] feature     
 
 FILE FORMAT
-
-# <rule name> <space> <feature> <space> <feature> É.
+[including]
+# (rule name) (space) (feature) (space) (feature) É.
 word
 word
 ...
-# <rule name> <space> <feature> <space> <feature> É.
+# (rule name) (space) (feature) (space) (feature) É.
+word
+word
+...
+[matching]
+# (rule name) (space) (feature) (space) (feature) É.
+word
+word
+...
+# (rule name) (space) (feature) (space) (feature) É.
 word
 word
 ...
 
 EXAMPLE :
+[including]
 # editor nonimpcap posseditor
 ed
 eds
 ed.
 eds.
--> if a word 'ed' is a input token, 'nonimpact' and 'posseditor' features are added.
+-> if a word 'ed' is a input token, 'nonimpcap' and 'posseditor' features are added.
 
 
 ------------------------
@@ -238,7 +264,41 @@ dans
 This file contains other configurations about TEI extraction (username of crossref site)
 and TEI output format. As Bilbo label reference with its own tags, a change rule from
 own tags to TEI is necessary. It is used in the functions of identifier.py called from
-File::buildReferences.
+File::buildReferences. Lines starting with # are ignored.
+[crossref] is for crossref user name to call crossref API for TEI extraction
+[tei] is for replacement of tags for the rewrite of result in TEI format
+  (old tag) = (new tag)
+  if new tag is NONE, it means that the corresponding old tag will be ignored in TEI format
+
+
+FILE FORMAT
+[crossref]
+usrname = (crossref user email)
+
+[tei]
+nonbibl = NONE
+nolabel = NONE
+bookindicator = NONE
+w = NONE
+#surname = 
+#forename =
+#publisher = 
+#abbr
+#date
+title_m = title level="m"
+title_a = title level="a"
+title_j = title level="j"
+title_t = title level="a"
+title_u = title level="u"
+title_s = title level="s"
+biblscope_pp = biblScope unit="pp"
+biblscope_i = biblScope unit="issue"
+biblscope_v = biblScope unit="vol"
+biblscope_pa = biblScope unit="part"
+biblscope_c = biblScope unit="chap"
+biblscope = NONE
+É
+
 
 
 ------------------------
@@ -338,55 +398,31 @@ Especially the punctuation marks are separated and new Word objects are created.
 Features about initial expression, capitalized token etc. are verified and attached.
 Description in doc/documentation/format/Rule.html
 
-
-
-ÉÉTO BE UPDATEDÉ
-
 ------------------------
  ListReferences
 ------------------------
-This class contains references.
-
-Attributes :
-listReferences : Reference object list
-corpus : data type indicator
-
-Methods :
+A class containing a list of reference objects and corpus type information.
+Description in doc/documentation/format/ListReferences.html
 
 ------------------------
  Reference
 ------------------------
-This class contains words in a reference
-
-Attributes :
-num : reference number 
-word : word list included in the reference - Word object
-train : an indicator if this reference should be used for training or test (1 : learning, 0 : test, -1 : nonBibl)
-
-Methods :
+A class corresponding to a reference. It contains, word objects. 
+Reference object is first created in CleanCorpus1 and CleanCorpus2.
+Description in doc/documentation/format/Reference.html
 
 ------------------------
  Word
 ------------------------
-This class contains tags and each word's features.
-
-Attributes :
-tag : Balise object list
-feature : Feature object list
-nom : word name
-item : indicator of sub-reference (0 : no, 1 : yes)
-
-Methods :
+A class corresponding to a word in a reference. It contains word name, features, tags etc.
+Word object is first created in CleanCorpus1 and CleanCorpus2.
+Description in doc/documentation/format/Word.html
 
 ------------------------
  Feature and Balise
 ------------------------
 These classes contain feature name or tag name.
 
-Attributes :
-nom : Feature (or tag) name
-
-Methods :
 
 =========
 	
@@ -425,9 +461,48 @@ searchPlace : this method checks if the entered word is found in the place (for 
 
 
 
+========================
+ OTHERS
+========================
+
+------------------------
+ Main.py
+------------------------
+
+Main creates Bilbo object to train or to label reference
 
 
+------------------------
+ utils.py
+------------------------
 
+utils.py provides APIs to process simple string for labeling.
+It also contains default option setting function, which is called in main.
+
+There are two functions that we can execute :
+- simpleLabeling : for labeling with a simple CRF model (having less number of labels)
+- detailLabeling : for labeling with a detailed CRF model (having labels for TEI)
+
+You can test simply this function at the directory src.
+
+e.g. Labeling a reference
+$cd src
+$python
+>>> from bilbo.utils import *
+>>> detailLabeling("Y.-M. KIM et al., An Extension of PLSA for Document Clustering, In Proceedings of ACM 17th Conference on Information and Knowledge Management, 2008.")
+
+Result
+First author :   KIM  	Start of title :   An Extension of PLSA for Document Clustering 
+DOI : 10.1145/1458082
+
+'<listBibl>\n<bibl> <author><forename>Y.-M.</forename> <surname>KIM</surname></author> et al., <title level="a">An Extension of PLSA for Document Clustering</title><idno type="DOI">http://dx.doi.org/10.1145/1458082</idno>, <meeting>In Proceedings of ACM 17th Conference on Information and Knowledge Management</meeting>, <date>2008</date>. </bibl>\n</listBibl>\n'
+
+The result is also saved in a file tmp.xml in the current directory.
+We can also test it in Main.py (an example in comments in this file)
+
+To label a note, we just add "note" as second parameter.
+e.g.
+>>> detailLabeling("For more information see, Y.-M. KIM et al., An Extension of PLSA for Document Clustering, In Proceedings of ACM 17th Conference on Information and Knowledge Management, 2008.", "note")
 
 
 
