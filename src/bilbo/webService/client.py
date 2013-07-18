@@ -9,11 +9,11 @@ from SOAPpy import WSDL
 
 def client():
     text = []
-    fich = open("/Applications/XAMPP/xamppfiles/htdocs/annotationSave/XML_annotated2/aspd-164 - copie.xml", "r")
+    fich = open("../../../test/entite-tei-2236.xml", "r")
     resultat = fich.readlines()
     fich.close()
     
-    server = SOAPpy.SOAPProxy("http://127.0.0.1:80/")
+    server = SOAPpy.SOAPProxy("http://127.0.0.1:7070/")
     
     server.config.dumpSOAPOut = 1            
     server.config.dumpSOAPIn = 1
@@ -21,11 +21,11 @@ def client():
     text.append(''.join(resultat))
     text[0] = text[0].decode("utf-8")
     
-    fich = open("/Applications/XAMPP/xamppfiles/htdocs/annotationSave/XML_annotated2/espacepolitique-1712 - copie.xml", "r")
+    fich = open("../../../test/entite-tei-2236.xml", "r")
     resultat = fich.readlines()
     fich.close()
     
-    server = SOAPpy.SOAPProxy("http://127.0.0.1:80/")
+    server = SOAPpy.SOAPProxy("http://127.0.0.1:7070/")
     
     server.config.dumpSOAPOut = 1            
     server.config.dumpSOAPIn = 1
