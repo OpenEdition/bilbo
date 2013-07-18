@@ -142,7 +142,9 @@ class Bilbo(object):
 		corpus.extract(1, "bibl", fname)
 		print "crf data extraction for labeling..."
 		self.crf.prepareTest(corpus, 1)
+		print "crf run test for labeling..."
 		self.crf.runTest(dirModel, 'testdata_CRF_Wapiti.txt', self.crfmodelname)
+		print "corpus add tag for labeling..."
 		corpus.addTagReferences(self.dirResult, "testEstCRF.xml", "bibl", 1)
 		
 		return corpus
@@ -185,8 +187,11 @@ class Bilbo(object):
 			corpus.addTagReferences(self.dirResult, "testEstCRF.xml", "note", 2, newlistReferences.getReferences())
 			
 		else:										#if external data : external=1, we do not call a SVM model
+			print "crf data extraction for labeling..."
 			self.crf.prepareTest(corpus, 2, 2)		#indiceSvm=2 at prepareTest(self, corpus, typeCorpus, indiceSvm = 0)
+			print "crf run test for labeling..."
 			self.crf.runTest(dirModel, 'testdata_CRF_Wapiti.txt', self.crfmodelname)
+			print "corpus add tag for labeling..."
 			corpus.addTagReferences(self.dirResult, "testEstCRF.xml", "note", 2)
 
 		return corpus
