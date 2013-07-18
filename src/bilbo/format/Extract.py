@@ -66,9 +66,11 @@ class Extract(object):
 					if not self.regles.has_key(nameRegle):
 						self.regles[nameRegle] = {}
 					self.regles[nameRegle][lineSplit[0]] = 0
-		except:
-			pass
+		except IOError:
 			print "Cannot open the file \"KB/config/features.txt\" \n"
+		except:
+			print "Unexpected error:", sys.exc_info()[0]
+			raise
 		
 		
 		'Load the tag matching rules in "balise.txt"'
@@ -81,9 +83,11 @@ class Extract(object):
 					self.configTag[lineSplit[0]] = lineSplit[1].split("\n")[0]
 				if self.options.g == "detail" :
 					del self.configTag['meeting']
-			except:
-				pass
+			except IOError:
 				print "Cannot open the file \"KB/config/balise.txt\" \n"
+			except:
+				print "Unexpected error:", sys.exc_info()[0]
+				raise
 			
 		'Load people name and place'
 		self.nameObj = Name(os.path.join(self.rootDir, "KB/config/externalList/auteurs_revuesorg2.txt")) #SURNAMELIST, FORENAMELIST
