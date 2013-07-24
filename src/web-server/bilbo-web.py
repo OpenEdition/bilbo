@@ -37,7 +37,10 @@ class annotate:
 			fichier.close()
 			cpt += 1
 		
-		annoterCorpus(corpus)
+		if (cpt>0):
+			annoterCorpus(corpus)
+		else:
+			return web.webapi.BadRequest()
 		
 		resultat = []
 		while cpt > 0:
@@ -48,9 +51,18 @@ class annotate:
 			fichier.close()
 		
 		delTmp()
-		
-		return json.dumps(resultat)
 
+		retour = json.dumps(resultat)
+		if ('callback' in i):
+			retour = i.callback + '(' + retour + ')'
+		
+		web.header('Content-Type','application/json;')
+		return retour
+		
+	def GET(self):
+		return self.POST()
+	
+	
 def annoterCorpus(corpus):
 	options = type('object', (), {'i':'tei', 'm':'revues', 'g':'simple', 'k':'none', 'v':'none', 'u':False, 's':False, 'o':'tei', 'd':False, 'e':False})
 	dirModel = os.path.abspath('../../model/corpus' + str(corpus) + "/revues/") + "/"
