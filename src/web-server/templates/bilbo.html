@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr" dir="ltr">
+	<head>
+		<title>Bilbo - web</title>
+		<style type="text/css">
+			listBibl {display:block; margin:1em; cursor:pointer;}
+			bibl {display:block; margin-bottom:0.5em;}
+			bibl *:hover {color:red}
+			#type {font-weight:bold;}
+		</style>
+	</head>
+	<body>
+		<form method="POST" id='bilbo'>
+			<input type="hidden" name="corpus" value="1" />
+<textarea name="texts" rows="25" cols="100">&lt;?xml version="1.0" encoding="UTF-8"?>
+	&lt;listBibl>
+		&lt;bibl>
+			Bortoli M., Cutini V., 1999, Accessibilità urbana e distribuzione delle attività. L’analisi configurazionale del centro storico di Volterra, in Atti della XX Conferenza Italiana di Scienze Regionali, Piacenza, 5-7 Ottobre.
+		&lt;/bibl>
+		&lt;bibl>
+			Hill D.M., Bakker J.J., Akers B.L., 1964, An Evaluation of the Needs of the Pedestrian in Downtown, Traffic Research Corporation, Chicago.
+		&lt;/bibl>
+		&lt;bibl>
+			Hillier B., 1996, Space is the Machine, Cambridge University Press, Cambridge.
+		&lt;/bibl>
+		&lt;bibl>
+			Hillier B., 1999, Why space syntax works, when it looks as though it should not, in Environment &amp; Planning B : Planning and Design, numero speciale monografico sullo Space Syntax Symposium (in corso di pubblicazione).
+		&lt;/bibl>
+		&lt;bibl>
+			Hillier B., Hanson J., 1984, The Social Logic of Space, Cambridge University Press, Cambridge.
+		&lt;/bibl>
+		&lt;bibl>
+			Hillier B., Penn A., Hanson J., Grajevski, Xu J., 1993, Natural Movement : or, Configuration and Attraction in Urban Pedestrian Movement, in Enviroment &amp; Planning B, Planning and Design, vol. 20.
+		&lt;/bibl>
+		&lt;bibl>
+			Hoel L.A., 1968, Pedestrian Travel Rates in Central Business Districts, in Traffic Engineering and Control, January, 10-13.
+		&lt;/bibl>
+		&lt;bibl>
+			Lautso K., Murola P., 1974, A Study of Pedestrian Traffic in Helsinki, in Traffic Engineering and Control, January, 446-449.
+		&lt;/bibl>
+		&lt;bibl>
+			O’Flaherty C.A., Parkinson M.H., 1972, Movement on a City Centre Footway, in Traffic Engineering and Control, February, 434-438.
+		&lt;/bibl>
+		&lt;bibl>
+			Pushkarev B., Zupan J., 1975, Urban Space for Pedestrians, MIT Press, Cambridge, MA.
+		&lt;/bibl>
+	&lt;/listBibl>
+</textarea>
+			<input type="submit" value="Annotate" id="bls" />
+		</form>
+		<div>Type: <span id='type'></span></div>
+		<div id="result"></div>
+		<script src="http://code.jquery.com/jquery-1.10.1.js"></script>
+		<script>
+			jQuery(document).ready(function() {
+				jQuery('#bilbo').on('submit', function(e) {
+					e.preventDefault();
+					data = jQuery(this).serialize();
+					jQuery.ajax({
+						type: "POST",
+						url: "annotate",
+						data: data,
+						dataType: 'json',
+						success: function(data) {
+							res = data[0].replace(/<\?xml version="1.0" encoding="UTF-8"\?>/,'');
+							res = data[0].replace(/title/g,'titre');
+							jQuery('#result').html(res);
+						},
+						error: function(err, s, e) {
+							console.log('error', err, s, e);
+							console.log('headers', err.getAllResponseHeaders());
+						}
+					});
+					return false;
+				});
+				var Type = jQuery('#type');
+				jQuery('#result').on('mouseover', function(e) {
+// 					console.log(e.target);
+					var name = e.target.localName;
+// 					console.log(name);
+					if (name !== 'bibl' && name !== 'listbibl') {
+						Type.html(name);
+					} else {
+						Type.html('');
+					}
+				});
+			});
+		</script>
+	</body>
+</html>

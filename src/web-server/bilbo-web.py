@@ -18,7 +18,8 @@ from bilbo.Bilbo import Bilbo
 from bilbo.utils import *
 
 urls = (
-	'/', 'annotate',
+	'/', 'bilboWeb',
+	'/bilbo', 'bilboWeb',
 	'/annotate', 'annotate',
 )
 
@@ -58,10 +59,14 @@ class annotate:
 		
 		web.header('Content-Type','application/json;')
 		return retour
-		
+
 	def GET(self):
 		return self.POST()
-	
+
+class bilboWeb:
+	def GET(self):
+		render = web.template.render('templates/')
+		return render.bilbo()
 	
 def annoterCorpus(corpus):
 	options = type('object', (), {'i':'tei', 'm':'revues', 'g':'simple', 'k':'none', 'v':'none', 'u':False, 's':False, 'o':'tei', 'd':False, 'e':False})
