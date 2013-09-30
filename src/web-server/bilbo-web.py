@@ -27,7 +27,7 @@ class annotate:
 	def POST(self):
 		i = web.input(('corpus'), texts=[])
 		corpus = int(i.corpus)
-		if (not corpus > 0):
+		if (corpus < 1 or corpus > 2):
 			return web.webapi.BadRequest()
 
 		mkTmp()
@@ -69,10 +69,15 @@ class bilboWeb:
 		return render.bilbo()
 	
 def annoterCorpus(corpus):
-	options = type('object', (), {'i':'tei', 'm':'revues', 'g':'simple', 'k':'none', 'v':'none', 'u':False, 's':False, 'o':'tei', 'd':False, 'e':False})
 	dirModel = os.path.abspath('../../model/corpus' + str(corpus) + "/revues/") + "/"
 	dir_in = os.path.abspath('tmp/in') + "/"
 	dir_out = os.path.abspath('tmp/out') + "/"
+
+	if corpus == 2: optStr = '-T -t note'
+	else: optStr = '-T -t bibl'
+	parser = defaultOptions()
+	options, args = parser.parse_args(optStr.split())
+	
 	bilbo = Bilbo(dir_out, options, "crf_model_simple")
 	bilbo.annotate(dir_in, dirModel, corpus)
 	return
