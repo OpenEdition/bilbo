@@ -2,7 +2,7 @@
 import urllib
 import json
 
-url = 'http://localhost:8079'
+url = 'http://localhost:8079/annotate'
 
 texts = []
 fich = open("../../test/entite-tei-2236.xml", "r")
