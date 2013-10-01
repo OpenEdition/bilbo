@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Usage: python biblo-web.py 8079 (or another port)
+Usage: python bibloweb.py 8079 (or another port)
 
 Makes use of the simple web framework "web.py" http://webpy.org/ ~ https://github.com/webpy/webpy
 """
@@ -22,6 +22,7 @@ urls = (
 	'/bilbo', 'bilboWeb',
 	'/annotate', 'annotate',
 )
+
 
 class annotate:
 	def POST(self):
