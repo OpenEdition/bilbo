@@ -4,10 +4,13 @@
 	<head>
 		<title>Bilbo - web</title>
 		<style type="text/css">
-			listBibl {display:block; margin:1em; cursor:pointer;}
-			bibl {display:block; margin-bottom:0.5em;}
-			bibl *:hover {color:red}
-			#type {font-weight:bold;}
+			listBibl {display:block; margin:1em; cursor:pointer; }
+			bibl {display:block; margin-bottom:0.5em; }
+			bibl *:hover {color:red; }
+			#type {font-weight:bold; }
+			.doi {color:blue; font-family:"DejaVu serif"; vertical-align:super; }
+			textarea {float:left; }
+			#explain {clear:both; }
 		</style>
 	</head>
 	<body>
@@ -47,9 +50,10 @@
 		&lt;/bibl>
 	&lt;/listBibl>
 </textarea>
+			<label for="doi">DOI</label> : <input id="doi" type="checkbox" value="oui" name="doi" checked="checked" /><br/><br/>
 			<input type="submit" value="Annotate" id="bls" />
 		</form>
-		<div>Type: <span id='type'></span></div>
+		<div id="explain">Type: <span id='type'></span></div>
 		<div id="result"></div>
 		<script src="http://code.jquery.com/jquery-1.10.1.js"></script>
 		<script>
@@ -64,7 +68,8 @@
 						dataType: 'json',
 						success: function(data) {
 							res = data[0].replace(/<\?xml version="1.0" encoding="UTF-8"\?>/,'');
-							res = data[0].replace(/title/g,'titre');
+							res = res.replace(/title/g,'titre');
+							res = res.replace(/<idno type="DOI">([^<]*)<\/idno>/g, ' <a class="doi" href="$$1">⤱</a> ');
 							jQuery('#result').html(res);
 						},
 						error: function(err, s, e) {

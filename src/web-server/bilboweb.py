@@ -28,6 +28,7 @@ class annotate:
 	def POST(self):
 		i = web.input(('corpus'), texts=[])
 		corpus = int(i.corpus)
+
 		if (corpus < 1 or corpus > 2):
 			return web.webapi.BadRequest()
 
@@ -40,7 +41,7 @@ class annotate:
 			cpt += 1
 		
 		if (cpt>0):
-			annoterCorpus(corpus)
+			annoterCorpus(corpus, i)
 		else:
 			return web.webapi.BadRequest()
 		
@@ -69,13 +70,17 @@ class bilboWeb:
 		render = web.template.render('templates/')
 		return render.bilbo()
 	
-def annoterCorpus(corpus):
+def annoterCorpus(corpus, request):
 	dirModel = os.path.abspath('../../model/corpus' + str(corpus) + "/revues/") + "/"
 	dir_in = os.path.abspath('tmp/in') + "/"
 	dir_out = os.path.abspath('tmp/out') + "/"
 
 	if corpus == 2: optStr = '-T -t note'
 	else: optStr = '-T -t bibl'
+	
+	if hasattr(request, 'doi'):
+		optStr += ' -d'
+	
 	parser = defaultOptions()
 	options, args = parser.parse_args(optStr.split())
 	
