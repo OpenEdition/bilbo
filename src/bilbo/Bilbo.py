@@ -24,6 +24,7 @@ from bilbo.format.SVM import SVM
 from bilbo.reference.Corpus import Corpus
 import os
 import shutil
+from tempfile import mkdtemp
 
 class Bilbo(object):
 	"""
@@ -43,15 +44,13 @@ class Bilbo(object):
 		self.rootDir = "/".join(main[:len(main)-3])
 		
 		if dirResult == '' : dirResult = os.path.join(self.rootDir, 'Result')
-		self.dirResult = dirResult+'/tmp/'
+		if not os.path.exists(dirResult): os.makedirs(dirResult)
+		self.dirResult = mkdtemp(dir = dirResult) + '/'
 		self.crf = CRF(self.dirResult, options)
 		self.svm = SVM(self.dirResult, options)
 		self.options = options
 		self.crfmodelname = crfmodelname
-		if not os.path.exists(self.dirResult): os.makedirs(self.dirResult)
-		
 
-		
 	def train(self, dirCorpus, dirModel, typeCorpus):
 		"""
 		CRF model learning (corpus 1 and 2), SVM model learning (corpus 2)
