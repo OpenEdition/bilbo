@@ -25,7 +25,7 @@ from bilbo.reference.File import File
 
 def getFilesFromPath(path, options):
 	files = []
-	dirList=os.listdir(path)
+	dirList=sorted(os.listdir(path))
 	for fname in dirList:
 		fpath = path + fname
 		if os.path.isfile(fpath):
