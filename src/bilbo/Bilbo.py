@@ -24,6 +24,7 @@ from bilbo.format.SVM import SVM
 from bilbo.reference.Corpus import Corpus
 import os
 import shutil
+import sys
 from tempfile import mkdtemp
 
 class Bilbo(object):
@@ -51,57 +52,58 @@ class Bilbo(object):
 		self.options = options
 		self.crfmodelname = crfmodelname
 
-	def train(self, dirCorpus, dirModel, typeCorpus):
+
+	def train(self, files, dirModel, typeCorpus):
 		"""
 		CRF model learning (corpus 1 and 2), SVM model learning (corpus 2)
 		Corpus object declaration
 		
 		Parameters
 		----------
-		dirCorpus : string
-			directory where training references (notes) are
+		files : list
+			list of File where training references (notes) are
 		dirModel : string
 			directory where CRF and SVM models are saved
 		typeCorpus : int, {1, 2, 3}
 			type of corpus
 			1 : corpus 1, 2 : corpus 2...
 		"""
-		corpus = Corpus(dirCorpus, self.options)
+		corpus = Corpus(files, self.options)
 		self.crf.setDirModel(dirModel)
 		if typeCorpus == 1:
-			print "Extract references..."
+			sys.stderr.write("Extract references...\n")
 			corpus.extract(1, "bibl")
-			print "crf training data extraction..."
+			sys.stderr.write("crf training data extraction...\n")
 			self.crf.prepareTrain(corpus, 1, "trainingdata_CRF.txt", 1, 1)	#CRF training data extraction
 			self.crf.runTrain(dirModel, "trainingdata_CRF_Wapiti.txt", self.crfmodelname)#CRF model learning
 				
 		elif typeCorpus == 2:
-			print "Extract notes..."
+			sys.stderr.write("Extract notes...\n")
 			corpus.extract(2, "note")
 			optsvm = self.options.s
 			if optsvm == True :
-				print "svm source data extraction..."
+				sys.stderr.write("svm source data extraction...\n")
 				self.crf.prepareTrain(corpus, 2, "data04SVM_ori.txt", 1) #Source data extraction for SVM note classification
-				print "svm training data extraction..."
+				sys.stderr.write("svm training data extraction...\n")
 				self.svm.prepareTrain(corpus)	#Training data extraction for SVM note classification
-				print "svm training..."
+				sys.stderr.write("svm training...\n")
 				self.svm.runTrain(dirModel)		#SVM model learning
 			
-			print "crf training data extraction..."
+			sys.stderr.write("crf training data extraction...\n")
 			self.crf.prepareTrain(corpus, 2, "trainingdata_CRF.txt", 1, 1, optsvm)	#CRF training data extraction
 			self.crf.runTrain(dirModel, "trainingdata_CRF_Wapiti.txt", self.crfmodelname) #CRF model learning			#self.crf.runTrain(dirModel, "trainingdata_CRF_nega_Wapiti.txt", "revueswapiti_nega", 0.0000001) #Do not work, too homogeneous 
-			print
+			
 		self.deleteTmpFiles()
-	
-	
-	def annotate(self, dirCorpus, dirModel, typeCorpus, external=0):		
+
+
+	def annotate(self, files, dirModel, typeCorpus, external=0):		
 		"""
 		Automatic annotation of references 
 		
 		Parameters
 		----------
-		dirCorpus : string
-			directory where the references to be annotated are
+		files : list
+			list of File with text where the references to be annotated are
 		dirModel : string
 			directory where the learned CRF model and SVM model have been saved
 		typeCorpus : int, {1, 2, 3}
@@ -110,21 +112,18 @@ class Bilbo(object):
 			1 : if the references are external data except CLEO, 0 : if that of CLEO
 			it is used to decide whether Bilbo learn call a SVM classification or not.
 		"""
-		corpus = Corpus(dirCorpus, self.options)
+		corpus = Corpus(files, self.options)
 		self.crf.setDirModel(dirModel)	#
-		files = corpus.getFiles()
-		filesTab = self._list_split(files, 50)
-		for fname in filesTab:
-			if typeCorpus == 1:
-				corpus = self.annotateCorpus1(dirModel, corpus, fname)
-			elif typeCorpus == 2:
-				corpus = self.annotateCorpus2(dirModel, corpus, fname, external)
-			corpus.deleteAllFiles()
+
+		if typeCorpus == 1:
+			self.annotateCorpus1(dirModel, corpus)
+		elif typeCorpus == 2:
+			self.annotateCorpus2(dirModel, corpus, external)
 			
 		self.deleteTmpFiles()
 
 
-	def annotateCorpus1(self, dirModel, corpus, fname):
+	def annotateCorpus1(self, dirModel, corpus):
 		"""
 		Automatic annotation of reference type 1 (reference)
 		
@@ -134,22 +133,22 @@ class Bilbo(object):
 			directory where the learned CRF model has been saved
 		corpus : Corpus
 			set of references that we want to annotate
-		fname :	string
-			name of file to be annotated
+		files :	List
+			list of File to be annotated
 		"""
-		print "Extract references..."
-		corpus.extract(1, "bibl", fname)
-		print "crf data extraction for labeling..."
+		sys.stderr.write("Extract references...\n")
+		corpus.extract(1, "bibl")
+		sys.stderr.write("crf data extraction for labeling...\n")
 		self.crf.prepareTest(corpus, 1)
-		print "crf run test for labeling..."
+		sys.stderr.write("crf run test for labeling...\n")
 		self.crf.runTest(dirModel, 'testdata_CRF_Wapiti.txt', self.crfmodelname)
-		print "corpus add tag for labeling..."
+		sys.stderr.write("corpus add tag for labeling...\n")
 		corpus.addTagReferences(self.dirResult, "testEstCRF.xml", "bibl", 1)
 		
 		return corpus
-	
 
-	def annotateCorpus2(self, dirModel, corpus, fname, external=0):
+
+	def annotateCorpus2(self, dirModel, corpus, external=0):
 		"""
 		Automatic annotation of reference type 2 (note)
 		
@@ -159,8 +158,8 @@ class Bilbo(object):
 			directory where learned CRF model and SVM model have been saved
 		corpus : Corpus
 			set of notes that we want to annotate
-		fname :	string
-			name of file to be annotated
+		files :	List
+			list of File to be annotated
 		external : int, {1, 0}
 			1 : if external data, 0 : if CLEO data
 
@@ -170,35 +169,32 @@ class Bilbo(object):
 						Check the classification result of reference (reference.train) in 'addTagReferences' method
 						of 'Corpus' class that is called in 'annotateCorpus2' method of 'Bilbo' class.
 		"""
-		print "Extract notes..."
-		corpus.extract(2, "note", fname, external)
+		sys.stderr.write("Extract notes...\n")
+		corpus.extract(2, "note", external)
 		if external == 0 and self.options.s : #if not external data and svm option is true
-			print "svm source data extraction..."
+			sys.stderr.write("svm source data extraction...\n")
 			self.crf.prepareTest(corpus, 2, -1) 	#last argument:int, -1:prepare source data for SVM learning, default:0
-			print "svm data extraction for labeling..."
+			sys.stderr.write("svm data extraction for labeling...\n")
 			self.svm.prepareTest(corpus)
 			self.svm.runTest(dirModel)
 		
-			print "crf data extraction for labeling..."
+			sys.stderr.write("crf data extraction for labeling...\n")
 			newlistReferences = self.crf.prepareTest(corpus, 2)
 			self.crf.runTest(dirModel, 'testdata_CRF_Wapiti.txt', self.crfmodelname)
 			self.crf.postProcessTest("testEstCRF.txt", "testEstCLNblCRF.txt", newlistReferences.getReferences())
 			corpus.addTagReferences(self.dirResult, "testEstCRF.xml", "note", 2, newlistReferences.getReferences())
 			
 		else:										#if external data : external=1, we do not call a SVM model
-			print "crf data extraction for labeling..."
+			sys.stderr.write("crf data extraction for labeling...\n")
 			self.crf.prepareTest(corpus, 2, 2)		#indiceSvm=2 at prepareTest(self, corpus, typeCorpus, indiceSvm = 0)
-			print "crf run test for labeling..."
+			sys.stderr.write("crf run test for labeling...\n")
 			self.crf.runTest(dirModel, 'testdata_CRF_Wapiti.txt', self.crfmodelname)
-			print "corpus add tag for labeling..."
+			sys.stderr.write("corpus add tag for labeling...\n")
 			corpus.addTagReferences(self.dirResult, "testEstCRF.xml", "note", 2)
 
 		return corpus
-	
-	
 
-		
-		
+
 	def deleteTmpFiles(self):
 		dirResultRoot = os.path.abspath(os.path.join(self.dirResult, os.path.pardir))+'/'
 		toKeep = []
@@ -231,9 +227,8 @@ class Bilbo(object):
 			if len(result[-1]) >= size: result.append([])
 			result[-1].append(flist.pop(0))
 		return result
-	
-	
-	
+
+
 	"""memory"""
 	def mem(self, size="rss"):
 		"""Generalization; memory sizes: rss, rsz, vsz."""

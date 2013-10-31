@@ -21,13 +21,29 @@ sys.path.append(srcDir)
 
 from bilbo.Bilbo import Bilbo
 from bilbo.utils import *
+from bilbo.reference.File import File
+
+def getFilesFromPath(path, options):
+	files = []
+	dirList=os.listdir(path)
+	for fname in dirList:
+		fpath = path + fname
+		if os.path.isfile(fpath):
+			files.append(File(fpath, options))
+	return files
+
+def getFilesFromStdin(options):
+	files = []
+	text = sys.stdin.read()
+	files.append(File('stdin', options, text))
+	return files
 
 if __name__ == '__main__':
 	
 	parser = defaultOptions()
 	options, args = parser.parse_args(sys.argv[1:])
 	
-	if len(args) < 2 or ((not options.T) and (not options.L)) :
+	if ((not options.T) and (not options.L)) :
 		print "--------------------------------------"
 		print " BILBO : automatic reference labeling"
 		print "--------------------------------------"
@@ -102,10 +118,19 @@ if __name__ == '__main__':
 		
 	else:	
 		
+		if len(args) == 2:
+			fromPath = True
+			dirResult = str(args[1])
+			files = getFilesFromPath(str(args[0]), options)
+		else:
+			fromPath = False
+			dirResult = ''
+			files = getFilesFromStdin(options)
+			
 		if options.g == "simple" :
-			bilbo = Bilbo(str(args[1]), options, "crf_model_simple")
+			bilbo = Bilbo(dirResult, options, "crf_model_simple")
 		elif options.g == "detail" :
-			bilbo = Bilbo(str(args[1]), options, "crf_model_detail")
+			bilbo = Bilbo(dirResult, options, "crf_model_detail")
 			
 		dtype = options.t
 		if dtype == "bibl" : typeCorpus = 1
@@ -113,16 +138,27 @@ if __name__ == '__main__':
 		dirModel = os.path.join(rootDir, 'model/corpus')+str(typeCorpus)+"/"+options.m+"/"
 		if not os.path.exists(dirModel): os.makedirs(dirModel)
 		
+		
 		if options.T : #training
-			bilbo.train(str(args[0]), dirModel, typeCorpus)
+			bilbo.train(files, dirModel, typeCorpus)
 		elif options.L : #labeling
 			if dtype == "note" and options.e:
-				bilbo.annotate(str(args[0]), dirModel, typeCorpus, 1)
+				bilbo.annotate(files, dirModel, typeCorpus, 1)
 			else :
-				bilbo.annotate(str(args[0]), dirModel, typeCorpus)
+				bilbo.annotate(files, dirModel, typeCorpus)
+			for f in files:
+				if f.valide:
+					if fromPath:
+						newpath = os.path.abspath(str(args[1])) + '/' + f._getName()
+						fich = open(newpath, "w")
+						fich.write(f.result)
+						fich.close()
+					else:
+						sys.stdout.write(f.result)
 		else :
 			print "Please choose training(-T option) or labeling(-L option)"
 	
+		
 	#simpleLabeling("Y.-M. KIM et al., An Extension of PLSA for Document Clustering, In Proceedings of ACM 17th Conference on Information and Knowledge Management, 2008.")
 
 		

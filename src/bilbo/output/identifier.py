@@ -157,32 +157,38 @@ def toHttp(tmp_str) :
 	return tmp_str
 
 
-def teiValidate(fname, objfile) :
+def teiValidate(xml, objfile, fname) :
 	"""
 	Xml validation check using xml schema in a xsd file
 	"""
 	valide = True
+	numErr = -1
 	if objfile == 'output' : 
 		xsdfile = os.path.join(rootDir, 'KB/validation/output/tei_openedition3.xsd')
 		xmlschema_doc = etree.parse(open(xsdfile))
 		xmlschema = etree.XMLSchema(xmlschema_doc)
-		doc = etree.parse(fname)
-		valide = xmlschema.validate(doc)
-		numErr = len(xmlschema.error_log)
-		
-		print '\n*xml validation* '+fname
-		if len(xmlschema.error_log) > 0 : print xmlschema.error_log
-		print 'number of errors :', len(xmlschema.error_log)
+		try:
+			doc = etree.fromstring(xml)
+			valide = xmlschema.validate(doc)
+			numErr = len(xmlschema.error_log)
+		except Exception, error:
+			valide = False
+
+		sys.stderr.write('*xml validation* ' + fname + "\n")
+		if numErr > 0:
+			sys.stderr.write('number of errors: ' + str(numErr) + '\n')
 		
 	else : 
 		dtdfile = os.path.join(rootDir, 'KB/validation/input/tei_all.dtd')
 		dtd = etree.DTD(open(dtdfile))
-		doc = etree.parse(fname)
-		valide = dtd.validate(doc)
-		numErr = len(dtd.error_log)
+		try:
+			doc = etree.fromstring(xml)
+			valide = dtd.validate(doc)
+			numErr = len(dtd.error_log)
+		except Exception, error:
+			valide = False
 		if not valide :
-			print dtd.validate(doc), fname
-			print 'excluded : non valid xml file with TEI guidelines'
+			sys.stderr.write('Excluded : non valid xml file with TEI guidelines: ' + fname + '\n')
 		
 	return valide, numErr
 

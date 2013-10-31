@@ -22,14 +22,14 @@ class CleanCorpus1(Clean):
 		self.options = options
 		
 
-	def processing (self, fname, nameTagCorpus, external) :
+	def processing (self, text, nameTagCorpus, external) :
 		"""
 		Extract tags and attributes of each word and create a Word object 
 		
 		Parameters
 		----------
-		fname : string
-			name of file to be treated
+		text : string
+			content to be treated
 		nameTagCorpus : string, {'bibl', 'note', ...}
 			tag name of Corpus
 		external : int, {1, 0}
@@ -39,7 +39,7 @@ class CleanCorpus1(Clean):
 			references = []
 			tmp_str = ''
 
-			for line in open (fname, 'r') :
+			for line in text.splitlines():
 				line = re.sub(' ', ' ', line)	# !!! eliminate this character representing a kind of SPACE but not a WHITESPACE
 				line = line.replace('<!-- <pb/> -->', '')
 				line = line.replace('“', '“ ')			# !!! sparate the special characters '“', '”'

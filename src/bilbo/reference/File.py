@@ -25,7 +25,7 @@ class File(object):
 	A file class containing all references in a file
 	"""
 
-	def __init__(self, fname, options):
+	def __init__(self, nom, options, text=''):
 		"""
 		Attributes
 		----------
@@ -34,10 +34,24 @@ class File(object):
 		corpus : dictionary of reference list
 			 references in the file
 		"""
-		self.nom = fname
+		self.nom = nom
 		self.corpus = {}
 		self.options = options
+		
+		#Import du texte
+		if (text == ''):
+			with open(nom, 'r') as f:
+				text = f.read()
+		self.text = text
+
+		#Validation XML
+		if self.options.v in ['input', 'all']:
+			self.valide, numEr = teiValidate(self.text, 'input', self.nom)
+		else:
+			self.valide = True
 	
+		self.result = ''
+		
 
 	def extract(self, typeCorpus, tag, external):
 		"""
@@ -55,13 +69,16 @@ class File(object):
 			1 : if the references are external data except CLEO, 0 : if that of CLEO
 			it is used to decide whether Bilbo learn call a SVM classification or not.			
 		"""	
-		clean = Clean()
+
+		if not self.valide:
+			return
+
 		if typeCorpus == 1:
 			clean = CleanCorpus1(self.options)
 		elif typeCorpus == 2:
 			clean = CleanCorpus2(self.options)
-		#print self.nom
-		references = clean.processing(self.nom, tag, external)
+
+		references = clean.processing(self.text, tag, external)
 		if len(references) >= 1:
 			self.corpus[typeCorpus] = ListReferences(references, typeCorpus)
 			rule = Rule(self.options)
@@ -78,6 +95,8 @@ class File(object):
 			type of corpus
 			1 : corpus 1, 2 : corpus 2...
 		"""
+		if not self.valide:
+			return -1
 		try:
 			return self.corpus[typeCorpus]
 		except :
@@ -88,14 +107,15 @@ class File(object):
 		"""
 		count the number of references
 		"""
+		if not self.valide:
+			return 0
 		try:
 			return self.corpus[typeCorpus].nbReference()
-			
 		except :
 			return 0	
 	
 		
-	def buildReferences(self, references, tagTypeCorpus, dirResult):
+	def buildReferences(self, references, tagTypeCorpus):
 		"""
 		Construct final xml output file, called from Corpus::addTagReferences
 		Unlike the first version, compare token by token, replace the token by automatically tagged token. 
@@ -117,14 +137,9 @@ class File(object):
 		
 		"""
 		cptRef = 0		#reference counter
-		tmp_str = ""
 		ref_ori = []
 		
-		'Read the source file to check the initial contents of references'
-		for line in open (self.nom, 'r') :
-			tmp_str = tmp_str + line
-		
-		soup = BeautifulSoup (tmp_str)
+		soup = BeautifulSoup (self.text)
 		s = soup.findAll (tagTypeCorpus)
 		
 		basicTag = {} #tags existing in the original files
@@ -282,34 +297,35 @@ class File(object):
 			cptRef += 1
 		
 		try:
-			if self.options.o == 'simple' : tmp_str = self.writeResultOnly(ref_ori, references, tagTypeCorpus)
-			else : tmp_str = self.writeResultInOriginal(tmp_str, soup, ref_ori, references, tagTypeCorpus)	
+			if self.options.o == 'simple':
+				self.result = self.writeResultOnly(ref_ori, references, tagTypeCorpus)
+			else:
+				self.result = self.writeResultInOriginal(self.text, soup, ref_ori, references, tagTypeCorpus)	
 		except :
 			pass
 
-		fich = open(dirResult+self._getName(), "w")
-		fich.write(tmp_str)
-		fich.close()
-		
 		'xml schema validation'
-		self.schemaValidation(len(references), dirResult)
+		self.schemaValidation(len(references))
 		
 		return
 
 
-	def schemaValidation(self, numReferences, dirResult):
+	def schemaValidation(self, numReferences):
 		"""
 		xml schema validation for output file
 		"""
 		if self.options.v in ['output', 'all'] :
 			if self.options.o == 'tei' and numReferences > 0 :
 				try : 
-					valide, numErr = teiValidate(dirResult+self._getName(), 'output')
+					valide, numErr = teiValidate(self.result, 'output', self.nom)
 					if not valide :
-						valide, numErrOri = teiValidate(self.nom, 'output')
-						if numErr == numErrOri : print "Original file also has", numErr, "errors. Annotation OK."
-						else : print "Original file has", numErrOri, "errors. Annotation NOT OK."
-				except Exception, err: print err #when original file has a fundamental error
+						valide, numErrOri = teiValidate(self.text, 'output', self.nom)
+						if numErr == numErrOri:
+							sys.stderr.write("Original file also has " + str(numErr) + " errors. Annotation OK.\n") # not if -1 TODO
+						else:
+							sys.stderr.write("Original file has " + str(numErrOri) + " errors. Annotation NOT OK.\n")
+				except Exception, err:
+					sys.stderr.write(str(err)) #when original file has a fundamental error
 		return
 	
 
