@@ -16,6 +16,7 @@ from pprint import pprint
 sys.path.append('..')
 from bilbo.Bilbo import Bilbo
 from bilbo.utils import *
+from bilbo.reference.File import File
 
 urls = (
 	'/', 'bilboWeb',
@@ -23,41 +24,29 @@ urls = (
 	'/annotate', 'annotate',
 )
 
-
 class annotate:
 	def POST(self):
-		i = web.input(('corpus'), texts=[])
-		corpus = int(i.corpus)
+		request = web.input(('corpus'), texts=[])
+		corpus = int(request.corpus)
 
 		if (corpus < 1 or corpus > 2):
 			return web.webapi.BadRequest()
 
-		mkTmp()
-		cpt = 0
-		for text in i.texts:
-			fichier = codecs.open("tmp/in/fichier_" + str(cpt)+".xml", "w", "utf-8")
-			fichier.write(text)
-			fichier.close()
-			cpt += 1
-		
+		cpt = len(request.texts)
 		if (cpt>0):
-			annoterCorpus(corpus, i)
+			files = annoterCorpus(corpus, request)
 		else:
 			return web.webapi.BadRequest()
-		
+
+		#recupere le resultat de BILBO
 		resultat = []
 		while cpt > 0:
 			cpt -= 1
-			#recupere le resultat de BILBO
-			fichier = codecs.open("tmp/out/fichier_" + str(cpt)+".xml", "r", "utf-8")
-			resultat.append(''.join( fichier.readlines()))
-			fichier.close()
-		
-		delTmp()
+			resultat.append(files[cpt].result)
 
 		retour = json.dumps(resultat)
-		if ('callback' in i):
-			retour = i.callback + '(' + retour + ')'
+		if ('callback' in request): # support jsonp
+			retour = request.callback + '(' + retour + ')'
 		
 		web.header('Content-Type','application/json;')
 		return retour
@@ -72,8 +61,6 @@ class bilboWeb:
 	
 def annoterCorpus(corpus, request):
 	dirModel = os.path.abspath('../../model/corpus' + str(corpus) + "/revues/") + "/"
-	dir_in = os.path.abspath('tmp/in') + "/"
-	dir_out = os.path.abspath('tmp/out') + "/"
 
 	if corpus == 2: optStr = '-T -t note'
 	else: optStr = '-T -t bibl'
@@ -83,22 +70,16 @@ def annoterCorpus(corpus, request):
 	
 	parser = defaultOptions()
 	options, args = parser.parse_args(optStr.split())
-	
-	bilbo = Bilbo(dir_out, options, "crf_model_simple")
-	bilbo.annotate(dir_in, dirModel, corpus)
-	return
 
-def mkTmp():
-	try: os.mkdir('tmp/in')
-	except OSError:	pass
-	except:	raise
-	try: os.mkdir('tmp/out')
-	except OSError:	pass
-	except:	raise
-	
-def delTmp():
-	shutil.rmtree('tmp/in')
-	shutil.rmtree('tmp/out')
+	cpt = 0
+	files = []
+	for text in request.texts:
+		cpt += 1
+		files.append(File('file' + str(cpt), options, text.encode('utf8')))
+
+	bilbo = Bilbo('', options, "crf_model_simple")
+	bilbo.annotate(files, dirModel, corpus)
+	return files
 
 if __name__ == "__main__":
 	app = web.application(urls, globals())
