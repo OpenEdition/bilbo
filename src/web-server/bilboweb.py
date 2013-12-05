@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Usage: python bibloweb.py 8079 (or another port)
+Usage: python bilboweb.py 8079 (or another port)
 
 Makes use of the simple web framework "web.py" http://webpy.org/ ~ https://github.com/webpy/webpy
 """

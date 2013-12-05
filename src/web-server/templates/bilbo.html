@@ -18,44 +18,13 @@
 	</head>
 	<body>
 		<form method="POST" id='bilbo'>
-			<input type="hidden" name="corpus" value="1" />
-<textarea name="texts" rows="25" cols="100">&lt;?xml version="1.0" encoding="UTF-8"?>
-	&lt;listBibl>
-		&lt;bibl>
-			Bortoli M., Cutini V., 1999, Accessibilità urbana e distribuzione delle attività. L’analisi configurazionale del centro storico di Volterra, in Atti della XX Conferenza Italiana di Scienze Regionali, Piacenza, 5-7 Ottobre.
-		&lt;/bibl>
-		&lt;bibl>
-			Hill D.M., Bakker J.J., Akers B.L., 1964, An Evaluation of the Needs of the Pedestrian in Downtown, Traffic Research Corporation, Chicago.
-		&lt;/bibl>
-		&lt;bibl>
-			Hillier B., 1996, Space is the Machine, Cambridge University Press, Cambridge.
-		&lt;/bibl>
-		&lt;bibl>
-			Hillier B., 1999, Why space syntax works, when it looks as though it should not, in Environment &amp; Planning B : Planning and Design, numero speciale monografico sullo Space Syntax Symposium (in corso di pubblicazione).
-		&lt;/bibl>
-		&lt;bibl>
-			Hillier B., Hanson J., 1984, The Social Logic of Space, Cambridge University Press, Cambridge.
-		&lt;/bibl>
-		&lt;bibl>
-			Hillier B., Penn A., Hanson J., Grajevski, Xu J., 1993, Natural Movement : or, Configuration and Attraction in Urban Pedestrian Movement, in Enviroment &amp; Planning B, Planning and Design, vol. 20.
-		&lt;/bibl>
-		&lt;bibl>
-			Hoel L.A., 1968, Pedestrian Travel Rates in Central Business Districts, in Traffic Engineering and Control, January, 10-13.
-		&lt;/bibl>
-		&lt;bibl>
-			Lautso K., Murola P., 1974, A Study of Pedestrian Traffic in Helsinki, in Traffic Engineering and Control, January, 446-449.
-		&lt;/bibl>
-		&lt;bibl>
-			O’Flaherty C.A., Parkinson M.H., 1972, Movement on a City Centre Footway, in Traffic Engineering and Control, February, 434-438.
-		&lt;/bibl>
-		&lt;bibl>
-			Pushkarev B., Zupan J., 1975, Urban Space for Pedestrians, MIT Press, Cambridge, MA.
-		&lt;/bibl>
-	&lt;/listBibl>
-</textarea>
-			<label for="doi">DOI</label> : <input id="doi" type="checkbox" value="oui" name="doi" /><br/><br/>
-			<input type="submit" value="Annotate" id="bls" />
+<textarea name="texts" rows="25" cols="100" id="texts"></textarea>
+			<label for="doi">DOI</label> : <input id="doi" type="checkbox" value="oui" name="doi" /><br/>
+			<label for="corpus1">Corpus 1 (bibliography)</label> : <input id="corpus1" name="corpus" value="1" type="radio" checked="checked" /> /
+			<label for="corpus2">Corpus 2 (notes)</label> : <input id="corpus2" name="corpus" value="2" type="radio" /><br/><br/>
+			<input type="submit" value="Annotate" id="bls" /> - <input type="reset" value="Reset" />
 		</form>
+		<p><input type="submit" value="Test corpus 1" id="testC1" /> <input type="submit" value="Test corpus 2" id="testC2" /></p>
 		<div id="explain">Type: <span id='type'></span></div>
 		<div id="result"></div>
 		<script src="http://code.jquery.com/jquery-1.10.1.js"></script>
@@ -93,7 +62,19 @@
 						Type.html('');
 					}
 				});
+				jQuery('#testC1').on('click', function(e) {
+					jQuery('#texts').val(window.testCorpus1);
+					jQuery('#corpus1').click();
+				});
+				jQuery('#testC2').on('click', function(e) {
+					jQuery('#texts').val(window.testCorpus2);
+					jQuery('#corpus2').click();
+				});
 			});
 		</script>
+<script>
+window.testCorpus1 = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\t<listBibl>\n\t\t<bibl>\n\t\t\tBortoli M., Cutini V., 1999, Accessibilità urbana e distribuzione delle attività. L’analisi configurazionale del centro storico di Volterra, in Atti della XX Conferenza Italiana di Scienze Regionali, Piacenza, 5-7 Ottobre.\n\t\t</bibl>\n\t\t<bibl>\n\t\t\tHill D.M., Bakker J.J., Akers B.L., 1964, An Evaluation of the Needs of the Pedestrian in Downtown, Traffic Research Corporation, Chicago.\n\t\t</bibl>\n\t\t<bibl>\n\t\t\tHillier B., 1996, Space is the Machine, Cambridge University Press, Cambridge.\n\t\t</bibl>\n\t\t<bibl>\n\t\t\tHillier B., 1999, Why space syntax works, when it looks as though it should not, in Environment &amp; Planning B : Planning and Design, numero speciale monografico sullo Space Syntax Symposium (in corso di pubblicazione).\n\t\t</bibl>\n\t\t<bibl>\n\t\t\tHillier B., Hanson J., 1984, The Social Logic of Space, Cambridge University Press, Cambridge.\n\t\t</bibl>\n\t\t<bibl>\n\t\t\tHillier B., Penn A., Hanson J., Grajevski, Xu J., 1993, Natural Movement : or, Configuration and Attraction in Urban Pedestrian Movement, in Enviroment &amp; Planning B, Planning and Design, vol. 20.\n\t\t</bibl>\n\t\t<bibl>\n\t\t\tHoel L.A., 1968, Pedestrian Travel Rates in Central Business Districts, in Traffic Engineering and Control, January, 10-13.\n\t\t</bibl>\n\t\t<bibl>\n\t\t\tLautso K., Murola P., 1974, A Study of Pedestrian Traffic in Helsinki, in Traffic Engineering and Control, January, 446-449.\n\t\t</bibl>\n\t\t<bibl>\n\t\t\tO’Flaherty C.A., Parkinson M.H., 1972, Movement on a City Centre Footway, in Traffic Engineering and Control, February, 434-438.\n\t\t</bibl>\n\t\t<bibl>\n\t\t\tPushkarev B., Zupan J., 1975, Urban Space for Pedestrians, MIT Press, Cambridge, MA.\n\t\t</bibl>\n\t</listBibl>";
+window.testCorpus2 = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<note place=\"foot\" n=\"157\">\n\tSupra note 85.\n</note>\n<note place=\"foot\" n=\"3\">\n\tGómez, Magdalena, « El convenio 169 de la Organización Internacional del Trabajo ». In : Míkel Berraondo (coord.), 2006, p. 136\n</note>\n<note place=\"foot\" n=\"120\">\n\tGeorges DUPLESSIS, Simples notes…, ouv. cité, lettre préface de F. Lamoureux.\n</note>\n<note place=\"foot\" n=\"156\">\n\tSurvey of Palestine, supra note 139, Vol. I, p. 206.\n</note>\n<note place=\"foot\" n=\"2\">\n\tJe me permets de renvoyer à Mercedes Volait, « Colonisation, mondialisation et patrimonialisation de l’espace bâti dans le Monde Arabe »  in Questions sur le patrimoine architectural et urbain au Liban, Zyad Akl et Michael Davie (dir.), Beyrouth/ Tours, ALBA/URBAMA, 1999, p. 29-50  ; Idem, « Passés et actualités d’un ensemble urbain d’origine coloniale : Héliopolis (1905-2005) » in  Mélanges offerts à Jean-Claude Vatin, Alain Roussillon, Ghislaine Alleaume et Iman Farag (dir.), Le Caire, Cedej, (en préparation).\n</note>\n<note place=\"foot\" n=\"22\">\n\tMathieu Nicole-Claude, « Notes pour une définition des catégories de sexe », 1970, repris dans L’anatomie politique. Catégorisations et idéologies du sexe, op. cit.\n</note>\n<note place=\"foot\" n=\"55\">\n\t. Pour une analyse de l’impact du 11 septembre sur le JAI de l’UE, voir Guild E., « International terrorism and EU immigration, asylum and borders policy: the unexpected victims of 11 September 2001 », European Foreign Affairs Review n°8, 2003.\n</note>\n<note place=\"end\" n=\"104\">\n\t Barratt, G. Op. cit., pp. 226–232. \n</note>\n<note place=\"foot\" n=\"5\">\n\tSÉrieux Paul (1888), Recherches cliniques sur les anomalies de l'instinct sexuel, Paris, Imp. Lanier et ses fils, p. 21-23, reproduit dans  Chaperon Sylvie, La médecine du sexe et les femmes, op.cit. p. 47-48.\n</note>\n<note place=\"foot\" n=\"27\">\n\tÉlisabeth ZADORA-RIO, « Lieux d’inhumation et espaces consacrés. Le voyage du pape Urbain II en France (août 1095-août 1096) », dans  André VAUCHEZ dir., Lieux sacrés, lieux de culte, Sanctuaires. Approches terminologiques, méthodologiques, historiques et monographiques, Paris-Rome, 2000, p. 197-213 (collection de l’École française de Rome). Désormais, la question des relations entre l’espace et le sacré connaît un profond renouvellement dans une tout autre perspective, sous l’impulsion de Michel Lauwers, particulièrement au sujet des rites de consécration d’églises : « Consécration d’églises, réforme et ecclésiologie monastique. Recherches sur les chartes de consécration provençales du 11e siècle », dans Didier MÉHU éd., Mises en scène et mémoire de la consécration d’église dans l’Occident médiéval, Collection d’études médiévales de Nice, 7, sous presse, dont l’auteur a eu l’amabilité de me communiquer le manuscrit.\n</note>\n<note place=\"foot\" n=\"34\">\n\tAbraham Baumkoller, Le mandat sur la Palestine (Paris: Librairie Arthur Rousseau, 1931), pp. 67-72 ; Maurice Mock, Le mandat britannique en Palestine (Paris: Éditions Albert Mechelinck, 1932), pp. 47-8.\n</note>\n<note place=\"foot\" n=\"221\">\n\tDélibérations du conseil généraldu Calvados, 1851, p. 384 et de Haute-Saône, 1851, p. 369.\n</note>\n<note place=\"foot\" n=\"32\">\n\t. Pour une lecture des approches sociologiques de l’étude de l’Europe et de l’UE, voir Christiansen T., Joergensen K., Wiener A. (eds), « Constructivism in European studies », European Journal of Public Policy, n°6, 1999.\n</note>\n<note place=\"foot\" n=\"54\">\n\tLaw n° 117 of the year 1983 concerning the issuance of Antiquities’ protection law, published in the Official Gazette on August 11th, 1983, p. 13 [ma traduction].\n</note>\n<note place=\"foot\" n=\"39\">\n\tCh.-R. Ageron, Politiques coloniales au Maghreb, Paris, PUF, Paris, 1972.\n</note>\n<note place=\"end\" n=\"2\">\n\tSur ces royaumes voir Nicholas Tarling (ed.), The Cambridge History of Southeast Asia, Cambridge, Cambridge University Press, 1999, volume 1,From Early Times to c. 1500, et en particulier le chapitre 3 « The Early Kingdoms » (Keith W. Taylor).\n</note>\n<note place=\"foot\" n=\"36\">\n\tJ. Baïda et V. Feroldi, Présence chrétienne au Maroc, XIXe- XXe siècles, Éd. Buregreg, Rabat, 2005, p. 62-65 (une conversion emblématique). \n</note>";
+</script>
 	</body>
 </html>
