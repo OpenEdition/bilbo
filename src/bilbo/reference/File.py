@@ -224,6 +224,9 @@ class File(object):
 								ptr += len(nstr)
 							else :
 								ptr = pre_ptr
+				
+				oriRef = BeautifulSoup (oriRef)
+				oriRef = str(oriRef.body.contents[0])# clean mismatching tags trusting BeautifulSoup
 				#'''
 				'check continuously annotated tags to eliminate tags per each token'
 				oriRef = self.continuousTags(basicTag, includedLabels, oriRef)
