@@ -474,7 +474,7 @@ class File(object):
 					ed1 = tmp_str.find('>', st1) + 1
 					st2 = tmp_str.find('<'+tmpTag+'>', st1)
 					ed2 = tmp_str.find('>', st2) + 1
-					if self._onlyPunc(tmp_str[ed1:st2]) :
+					if st2>=0 and self._onlyPunc(tmp_str[ed1:st2]) :
 						tmp_str = tmp_str[:st1]+tmp_str[ed1:st2]+tmp_str[ed2:]
 					st1 = tmp_str.find('</'+tmpTag+'>', st1+1)
 
