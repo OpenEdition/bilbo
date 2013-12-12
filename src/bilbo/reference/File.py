@@ -225,8 +225,13 @@ class File(object):
 							else :
 								ptr = pre_ptr
 				
+				try:
+					oriRef = oriRef.decode('utf8') # TODO: corriger la gestion globale de l'encodage des caractères !!!
+				except Exception, err:
+					pass
 				oriRef = BeautifulSoup (oriRef)
 				oriRef = str(oriRef.body.contents[0])# clean mismatching tags trusting BeautifulSoup
+
 				#'''
 				'check continuously annotated tags to eliminate tags per each token'
 				oriRef = self.continuousTags(basicTag, includedLabels, oriRef)
