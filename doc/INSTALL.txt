@@ -1,0 +1,14 @@
+Installation using python virtualenv and pip
+
+Create a virtualenv
+  virtualenv -p /usr/bin/python2.7 bilboVE
+  cd bilboVE
+  source bilboVE/bin/activate
+
+Clone bilbo
+  git clone path.to.bilbo.repository
+
+Install dependencies
+  pip install -r bilbo/dependencies/requirements.txt
+
+You're good to go.
