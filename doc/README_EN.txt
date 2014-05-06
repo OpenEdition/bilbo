@@ -26,23 +26,6 @@ http://wapiti.limsi.fr/
 ------------------------
 http://svmlight.joachims.org/
 
-------------------------
- lxml for BeautifulSoup
-------------------------
-http://www.crummy.com/software/BeautifulSoup/bs4/doc/#installing-a-parser
-
-------------------------
- SOAPpy
-------------------------
-$ cd dependencies/SOAP
-$ sudo python setup.py install
-
-------------------------
- fpconst
-------------------------
-$ cd dependencies/fpconst
-$ sudo python setup.py install
-
 ==============================================
  Execute
 ==============================================
@@ -503,7 +486,3 @@ We can also test it in Main.py (an example in comments in this file)
 To label a note, we just add "note" as second parameter.
 e.g.
 >>> detailLabeling("For more information see, Y.-M. KIM et al., An Extension of PLSA for Document Clustering, In Proceedings of ACM 17th Conference on Information and Knowledge Management, 2008.", "note")
-
-
-
-
