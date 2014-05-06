@@ -248,16 +248,12 @@ This file contains other configurations about TEI extraction (username of crossr
 and TEI output format. As Bilbo label reference with its own tags, a change rule from
 own tags to TEI is necessary. It is used in the functions of identifier.py called from
 File::buildReferences. Lines starting with # are ignored.
-[crossref] is for crossref user name to call crossref API for TEI extraction
 [tei] is for replacement of tags for the rewrite of result in TEI format
   (old tag) = (new tag)
   if new tag is NONE, it means that the corresponding old tag will be ignored in TEI format
 
 
 FILE FORMAT
-[crossref]
-usrname = (crossref user email)
-
 [tei]
 nonbibl = NONE
 nolabel = NONE

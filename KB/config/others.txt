@@ -1,6 +1,3 @@
-[crossref]
-usrname = youngminn.kim@gmail.com
-
 [tei]
 nonbibl = NONE
 nolabel = NONE

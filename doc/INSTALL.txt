@@ -11,4 +11,9 @@ Clone bilbo
 Install dependencies
   pip install -r bilbo/dependencies/requirements.txt
 
+Config for DOI search
+  cd KB/config/
+  cp config.txt.dist config.txt
+  edit crossref username
+
 You're good to go.

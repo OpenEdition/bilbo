@@ -13,7 +13,7 @@ import ConfigParser
 from bs4 import BeautifulSoup
 from lxml import etree
 
-#usrname is initialized in 'KB/config/others.txt'
+#usrname is initialized in 'KB/config/config.txt'
 prePunc =  {'.':0, ',':0, ')':0, ':':0, ';':0, '»':0, '-':0, '”':0, '}':0, ']':0,  '!':0, '?':0}
 postPunc = {'(':0, '«':0, '-':0, '“':0, '{':0, '[':0}
 codeURL = [[';', '%3B'], ['/', '%2F'], ['?', '%3F'], [':', '%3A'], ['@', '%40'], ['=', '%3D'], ['&', '%26'], [' ','%20']]
@@ -25,7 +25,7 @@ rootDir = "/".join(main[:len(main)-4])
 def extractDoi(input_str, tagTypeCorpus) :
 	
 	config = ConfigParser.ConfigParser()
-	config.read(os.path.join(rootDir, 'KB/config/others.txt'))
+	config.read(os.path.join(rootDir, 'KB/config/config.txt'))
 	usrname = str(config.get("crossref", "usrname"))
 	soup = BeautifulSoup(input_str)
 	count = 0
