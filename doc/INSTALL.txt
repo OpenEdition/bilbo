@@ -1,9 +1,10 @@
 Installation using python virtualenv and pip
+You need build-essential package (on debian based distribution) in order to compile dependencies
 
 Create a virtualenv
   virtualenv -p /usr/bin/python2.7 bilboVE
   cd bilboVE
-  source bilboVE/bin/activate
+  source bin/activate
 
 Clone bilbo
   git clone path.to.bilbo.repository
