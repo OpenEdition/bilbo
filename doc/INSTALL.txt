@@ -27,9 +27,9 @@ You're good to go.
 
 Installing the web API :
 Beware that the web API is not secure proof at all, open it to the world at your own risk.
-Using uwsgi to launch python and an httpd to handle request.
+Using uwsgi to launch python and an httpd to handle requests.
 
-Give httpd user write access to bilbo/src/web-server/tmp/ 
+Give httpd user write access to bilbo/src/web-api/tmp/ 
 
 
 ** uwsgi **
@@ -40,8 +40,8 @@ socket = /var/run/uwsgi/bilbo-web.sock
 master = true
 processes = 4
 plugins = http,python
-chdir = /path/to/bilbo/src/web-server
-module = bilbo-web
+chdir = /path/to/bilbo/src/web-api
+module = bilbowsgi
 uid = www-data
 gid = www-data
 virtualenv = /path/to/bilboVE
@@ -56,7 +56,7 @@ max-requests = 10
 server {
 	listen 80;
 	server_name bilbo-web.example.org;
-	root /path/to/bilbo/src/web-server;
+	root /path/to/bilbo/src/web-api;
 	location / {
 		include uwsgi_params;
 		uwsgi_read_timeout 3600;
@@ -71,10 +71,10 @@ You should have mod_uwsgi enabled (package libapache2-mod-uwsgi on debian based 
 
 <VirtualHost *:80>
 	ServerName bilbo-web.example.org
-	DocumentRoot /path/to/bilbo/src/web-server
+	DocumentRoot /path/to/bilbo/src/web-api
 	ErrorLog  /var/log/apache2/bilbo-web_error.log
 	CustomLog /var/log/apache2/bilbo-web_access.log combined
-	<Directory /path/to/bilbo/src/web-server>
+	<Directory /path/to/bilbo/src/web-api>
 		Order deny,allow
 		Allow from all
 	</Directory>
