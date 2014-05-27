@@ -8,8 +8,8 @@ BILBO is an open source software for automatic annotation of bibliographic refer
 It provides the segmentation and tagging of input string. It is principally based on
 Conditional Random Fields (CRFs), machine learning technique to segment and label
 sequence data. As external softwares, Wapiti is used for CRF learning and inference
-and SVMlight is used for sequence classification. BILBO is licensed under a Creative
-Commons Attribution-NonCommercial-ShareAlike 2.5 Generic License (CC BY-NC-SA 2.5).
+and SVMlight is used for sequence classification. BILBO is is released under the terms
+of the GPL version 2.
 
 
 ==============================================
