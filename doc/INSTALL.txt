@@ -1,7 +1,7 @@
 ** Installation **
 
 Using python virtualenv and pip.
-You need build-essential package (on debian based distributions) in order to compile python dependencies.
+You need build-essential, libxslt1-dev and libxml2-dev packages (on debian based distributions) in order to compile python dependencies.
 
 Create a virtualenv
   virtualenv -p /usr/bin/python2.7 bilboVE
