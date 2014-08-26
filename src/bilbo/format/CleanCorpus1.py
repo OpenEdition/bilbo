@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 """
 Created on April 18, 2012
 
@@ -8,6 +9,7 @@ from bs4 import BeautifulSoup
 from bilbo.reference.Word import Word
 from bilbo.reference.Reference import Reference
 from bilbo.format.Clean import Clean
+from codecs import open
 import string
 import re
 
@@ -39,23 +41,22 @@ class CleanCorpus1(Clean):
 			references = []
 			tmp_str = ''
 
-			for line in open (fname, 'r') :
+			for line in open (fname, 'r', encoding='utf8', errors='replace') :
 				line = re.sub(' ', ' ', line)	# !!! eliminate this character representing a kind of SPACE but not a WHITESPACE
 				line = line.replace('<!-- <pb/> -->', '')
 				line = line.replace('“', '“ ')			# !!! sparate the special characters '“', '”'
 				line = line.replace('”', ' ”')			# !!! sparate the special characters '“', '”'
 				line = line.replace('\'\'', ' " ')
 				#line = line.replace('&amp;', '&')
-				line = line.replace('&amp;nbsp;', '&nbsp;')	
+				line = line.replace('&amp;nbsp;', '&nbsp;')
 				tmp_str = tmp_str + ' ' + line
 			
 			tmp_str = self._elimination (tmp_str)
-			try:
-				tmp_str = tmp_str.decode('utf8')
-			except:
-				tmp_str = str(tmp_str)
-			tmp_str = self._html2unicode(tmp_str)
-			soup = BeautifulSoup (tmp_str)		
+				
+			#print type(tmp_str)
+			tmp_str = self._xmlEntitiesDecode(tmp_str)
+			#print type(tmp_str)
+			soup = BeautifulSoup (tmp_str)
 
 			i = 0
 			s = soup.findAll (nameTagCorpus)
@@ -73,10 +74,10 @@ class CleanCorpus1(Clean):
 				if external == 1 : limit = 0 
 				if len(allTags) >= limit : #WHEN IT IS FOR EXTRACTION of NEW REFERENCE '>=0', It's for the elimination of empty references.
 					for c_tag in b.contents :
-						ck = self._checkUTF8(c_tag)
-						if len(c_tag) > 0  and ((ck == 0 and str(c_tag) != "\n" and c_tag != " ") or (ck == 1)) :# NEW----------------
+						#ck = self._checkUTF8(c_tag)
+						if len(c_tag) > 0  and c_tag != "\n" and c_tag != " " :# NEW----------------
 							
-							if (c_tag != c_tag.string) :	#if : if there is tag 
+							if (c_tag != c_tag.string) :	#if : if there is tag
 								wordExtr = self._extract_tags(c_tag, 1)
 								if len(wordExtr) > 0:
 									instanceWords = self._buildWords(wordExtr)
@@ -85,12 +86,14 @@ class CleanCorpus1(Clean):
 								c_tag_str = string.split(c_tag)
 								if len(c_tag_str) > 0 and c_tag_str != "\n" :
 									for ss in c_tag_str :
-										words.append(Word(ss.encode('utf8'), ["nolabel"]))
+										#print type(ss)
+										words.append(Word(ss, ["nolabel"]))
 										
 					if b.find('relateditem') or b.find(nameTagCorpus) : #related item
 						i += 1
 
 				references.append(Reference(words,i))
+				#references[0].affiche()
 				i += 1
 						
 		except IOError:

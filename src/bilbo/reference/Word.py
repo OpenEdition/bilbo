@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 """
 Created on April 18, 2012
 
@@ -28,7 +29,10 @@ class Word(object):
 		self.feature = []
 		self.ignoreWord = 0
 		'item is an indicator showing if the word is in a sub reference'
-		self.item = 0			
+		self.item = 0
+		#print "mot " + str(type(mot))
+		if type(mot) is str:
+			print mot
 		
 		for tag in tags:
 			'Eliminate the spaces at the beginning and ending'
@@ -48,6 +52,7 @@ class Word(object):
 	
 	def affiche(self):
 		print "\nWord : ",self.nom, self.core
+		#print type(self.nom)
 		if len(self.tag) >= 1:
 			print "\tTAG :"
 			for key in self.tag:

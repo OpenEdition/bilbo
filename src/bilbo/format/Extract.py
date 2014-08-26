@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 """
 Created on April 19, 2012
 
@@ -9,7 +10,7 @@ from bilbo.extra.Place import Place
 from bilbo.extra.Properlist import Properlist
 import sys, os
 import re
-import codecs
+from codecs import open
 
 class Extract(object):
 	"""
@@ -50,8 +51,8 @@ class Extract(object):
 			flag = 0 
 			nameRegle = ""	
 			
-			for line in open(os.path.join(self.rootDir, "KB/config/features.txt")):
-				lineSplit = re.split("\s", line)
+			for line in open(os.path.join(self.rootDir, "KB/config/features.txt"), encoding='utf8'):
+				lineSplit = re.split("\s", line, flags=re.UNICODE)
 				if lineSplit[0] == "#":
 					nameRegle = lineSplit[1]
 					flag += 1
@@ -78,8 +79,8 @@ class Extract(object):
 		
 		if self.options.i == "tei" :
 			try:
-				for line in open(os.path.join(self.rootDir, "KB/config/balise.txt"), "r"):
-					lineSplit = re.split("\s", line)
+				for line in open(os.path.join(self.rootDir, "KB/config/balise.txt"), "r", encoding='utf8'):
+					lineSplit = re.split("\s", line, flags=re.UNICODE)
 					self.configTag[lineSplit[0]] = lineSplit[1].split("\n")[0]
 				if self.options.g == "detail" :
 					del self.configTag['meeting']
@@ -129,7 +130,7 @@ class Extract(object):
 		Load the indices of the File object
 		"""
 		indices = []
-		for line in open(fichier):
+		for line in open(fichier, encoding='utf8'):
 			indices.append(line)
 			
 		return indices
@@ -139,38 +140,26 @@ class Extract(object):
 		"""
 		Print training or test data for Mallet CRF
 		"""
-		fich = codecs.open(fichier, "w", encoding="utf-8")
+		fich = open(fichier, "w", encoding="utf-8")
 		for reference in listRef.getReferences():
 			if (not (opt=="deleteNegatives" and reference.train == -1)) and (not (opt=="deletePositives" and reference.train != -1)) :
 			
 				for mot in reference.getWord():
 					if mot.ignoreWord == 0:
-						try:
-							fich.write(unicode(mot.nom,"utf-8"))
-						except TypeError:
-							fich.write(mot.nom)
+						fich.write(mot.nom)
 						nbCarac = mot.nbFeatures()
 						cpt = 0
 						if nbCarac > 0:
 							caracteristique = mot.getFeatureIndice(nbCarac-1)
-							try:
-								fich.write(" "+unicode(caracteristique.nom.upper(), "utf-8"))
-							except TypeError:
-								fich.write(" "+caracteristique.nom.upper())
+							fich.write(" "+caracteristique.nom.upper())
 						
 							while cpt < nbCarac-1:
 								caracteristique = mot.getFeatureIndice(cpt)
-								try:
-									fich.write(" "+caracteristique.nom.upper())
-								except:
-									fich.write(" "+unicode(caracteristique.nom.upper(), "utf-8"))
+								fich.write(" "+caracteristique.nom.upper())
 								cpt += 1
 						if tr != 0:
 							balise = mot.getLastTag()	
-							try:
-								fich.write(" "+unicode(balise.nom, "utf-8"))
-							except:
-								fich.write(" "+balise.nom)
+							fich.write(" "+balise.nom)
 						fich.write("\n")
 				fich.write("\n")
 			#--------
@@ -198,7 +187,7 @@ class Extract(object):
 					['JOURNALLIST']]	#14
 		if self.options.u : features.append(['PUNC', 'COMMA', 'POINT', 'LEADINGQUOTES', 'ENDINGQUOTES', 'LINK','PAIREDBRACES'])
 
-		fich = codecs.open(fichier, "w", encoding="utf-8")
+		fich = open(fichier, "w", encoding="utf-8")
 		for reference in listRef.getReferences():
 			if (not (opt=="deleteNegatives" and reference.train == -1)) and (not (opt=="deletePositives" and reference.train != -1)):
 			
@@ -208,28 +197,19 @@ class Extract(object):
 									'NOFORELIST', 'NOPLACELIST', 'NOJOURLIST']#, 'NOPUNC']#, 'NOJOURLIST']
 					if self.options.u : tmp_features.append('NOPUNC')
 					if mot.ignoreWord == 0:
-						try:
-							fich.write(unicode(mot.nom,"utf-8"))
-						except TypeError:
-							fich.write(mot.nom)
+						fich.write(mot.nom)
 						nbCarac = mot.nbFeatures()
 						cpt = 0
 						if nbCarac > 0:
 							total_features = ""
 							caracteristique = mot.getFeatureIndice(nbCarac-1)
 							cur_feature = ""
-							try:
-								cur_feature = unicode(caracteristique.nom.upper(), "utf-8")
-							except TypeError:
-								cur_feature = caracteristique.nom.upper()
+							cur_feature = caracteristique.nom.upper()
 							total_features += cur_feature+" "
 							
 							while cpt < nbCarac-1:
 								caracteristique = mot.getFeatureIndice(cpt)
-								try:
-									cur_feature = caracteristique.nom.upper()
-								except:
-									cur_feature = unicode(caracteristique.nom.upper(), "utf-8")
+								cur_feature = caracteristique.nom.upper()
 								total_features += cur_feature+" "
 								cpt += 1
 							
@@ -248,10 +228,7 @@ class Extract(object):
 							
 						if tr != 0:
 							balise = mot.getLastTag()
-							try:
-								fich.write(" "+unicode(balise.nom, "utf-8"))
-							except:
-								fich.write(" "+balise.nom)
+							fich.write(" "+balise.nom)
 						fich.write("\n")
 				fich.write("\n")
 			#--------
@@ -264,15 +241,12 @@ class Extract(object):
 		"""
 		Print training or test data for CRF (only labels)
 		"""
-		fich = codecs.open(fichier, "w", encoding="utf-8")
+		fich = open(fichier, "w", encoding="utf-8")
 		for reference in listRef.getReferences():
 			for mot in reference.getWord():
 
 				for balise in mot.getAllTag():
-					try:
-						fich.write(unicode(balise.nom, "utf-8"))
-					except:
-						fich.write(balise.nom)
+					fich.write(balise.nom)
 				fich.write("\n")
 			fich.write("\n")
 				
@@ -284,13 +258,10 @@ class Extract(object):
 		"""
 		Print all data for SVM
 		"""
-		fich = codecs.open(fichier, "w", encoding="utf-8")
+		fich = open(fichier, "w", encoding="utf-8")
 		for reference in listRef.getReferences():
 			for mot in reference.getWord():
-				try:
-					fich.write(unicode(mot.nom,"utf-8"))
-				except TypeError:
-					fich.write(mot.nom)
+				fich.write(mot.nom)
 
 			fich.write("\n")
 				
@@ -306,7 +277,7 @@ class Extract(object):
 		feature = ""
 		cpt = 0;
 		
-		fich = codecs.open(fichier, "w", encoding="utf-8")
+		fich = open(fichier, "w", encoding="utf-8")
 		for reference in listRef.getReferences():
 			cpt=0
 			for mot in reference.getWord():
@@ -316,23 +287,14 @@ class Extract(object):
 						feature += feat.upper()+" "
 						if cpt == 0 and (feat.lower() == "initial"):
 							feature += "STARTINITIAL "
-					if re.search("NUMBERS", feature) != 0 and re.search("ALLNUMBERS", feature) != 0:	
-						try:
-							phrase += " "+unicode(mot.nom,"utf-8")
-						except:
-							phrase += " "+mot.nom
+					if re.search("NUMBERS", feature, flags=re.UNICODE) != 0 and re.search("ALLNUMBERS", feature, flags=re.UNICODE) != 0:	
+						phrase += " "+mot.nom
 					cpt+=1
 
-			fich.write(str(reference.bibl))
-			try:
-				fich.write(unicode(phrase,"utf-8")+"\n")
-			except:
-				fich.write(phrase+"\n")
+			fich.write(unicode(reference.bibl))
+			fich.write(phrase+"\n")
 
-			try:
-				fich.write(unicode(feature,"utf-8")+"\n")
-			except:
-				fich.write(feature+"\n")
+			fich.write(feature+"\n")
 			
 			fich.write("\n")
 			
@@ -419,10 +381,10 @@ class Extract(object):
 		############# for thesis ####### 2012-01-19 ###
 		namefeature = mot.listNomFeature()
 		if flagU == 1 and 'sub' in  namefeature :
-				balise = mot.getTag("title")
-				balise.nom = 'booktitle'
-				mot.delFeature('sub')
-				flagU = 0
+			balise = mot.getTag("title")
+			balise.nom = 'booktitle'
+			mot.delFeature('sub')
+			flagU = 0
 				
 		return titleAttr
 
@@ -601,7 +563,7 @@ class Extract(object):
 		nbRef = listRef.nbReference()
 		
 		svm_train = []
-		for line in open (svmprediction_trainfile, 'r') :
+		for line in open (svmprediction_trainfile, 'r', encoding='utf8') :
 			line = line.split()
 			svm_train.append(float(line[0]))	
 	
@@ -639,7 +601,7 @@ class Extract(object):
 		"""
 		i = 0
 		
-		for line in open (svmprediction_newfile, 'r') :
+		for line in open (svmprediction_newfile, 'r', encoding='utf8') :
 			line = line.split()
 			if float(line[0]) > 0 :
 				listRef.getReferencesIndice(i).train = 0
@@ -649,17 +611,17 @@ class Extract(object):
 		return
 
 
-	def convertToUnicode(self, chaine):
-		"""
-		Convert a string to unicode
-		"""
-		try:
-			if isinstance(chaine, str):
-				chaine = unicode(chaine, sys.stdin.encoding)
-		except:
-			try:
-				chaine = unicode(chaine, 'ascii')
-			except:
-				pass
+	#def convertToUnicode(self, chaine):
+		#"""
+		#Convert a string to unicode
+		#"""
+		#try:
+			#if isinstance(chaine, str):
+				#chaine = unicode(chaine, sys.stdin.encoding)
+		#except:
+			#try:
+				#chaine = unicode(chaine, 'ascii')
+			#except:
+				#pass
 
-		return chaine
+		#return chaine

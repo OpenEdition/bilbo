@@ -1,13 +1,13 @@
 [including]
 # editor posseditor
-仕.
-仕s.
+ﾃｩ.
+ﾃｩs.
 ed.
 eds.
 ed
 eds
-仕
-仕s
+ﾃｩ
+ﾃｩs
 # month possmonth
 january
 february
@@ -33,22 +33,22 @@ oct
 nov
 dec
 janvier
-f思rier
+fﾃｩvrier
 mars
 avril
 mai
 juin
 juillet
-ao柎
+aoﾃｻt
 septembre
 octobre
 novembre
-d残embre
+dﾃｩcembre
 jan
-f思
+fﾃｩv
 avr
 jui
-d残
+dﾃｩc
 [matching]
 # page posspage
 pp

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 """
 Created on April 20, 2012
 
@@ -6,6 +7,7 @@ Created on April 20, 2012
 """
 from bilbo.reference.Word import Word
 from bilbo.reference.Reference import Reference
+from codecs import open
 import re, os
 
 prePunc =  {'.':0, ',':0, ')':0, ';':0, '-':0, '”':0, '»':0, '}':0, ']':0, '!':0, '?':0, '\\':0, 
@@ -39,7 +41,7 @@ class Rule(object):
 		if self.options.u : del self.special['"']
 		
 		try:
-			fichier = open(os.path.join(self.rootDir, "KB/config/lexique.txt"), "r")
+			fichier = open(os.path.join(self.rootDir, "KB/config/lexique.txt"), "r", encoding='utf8')
 			lines = fichier.readlines()
 			fichier.close()
 			
@@ -56,7 +58,7 @@ class Rule(object):
 						ruleType = "matching"
 					self.rules[ruleType] = {}
 				else :
-					if re.match(expression, line):
+					if re.match(expression, line, flags=re.UNICODE):
 						lineSplit = line.split()
 						self.rules[ruleType][lineSplit[1]] = {}	#Label name
 						self.rules[ruleType][lineSplit[1]]["feature"] = []	#essential features
@@ -157,7 +159,7 @@ class Rule(object):
 		word.nom = tmp_str
 		newfrontWords = []
 		change = True
-		while not re.match("^\w+", tmp_str) and len(tmp_str) > 0 and change : 
+		while not re.match("^\w+", tmp_str, flags=re.UNICODE) and len(tmp_str) > 0 and change : 
 			[newfrontWords, tmp_str] = self._sepFrontSpePunc(word)
 			frontWords = frontWords + newfrontWords
 			if word.nom != tmp_str : word.nom = tmp_str
@@ -340,9 +342,9 @@ class Rule(object):
 		"""
 		Check initial expressions
 		"""
-		init1 = re.compile('^[A-Z][a-z]?\.-?[A-Z]?[a-z]?\.?')
-		init2 = re.compile('^[A-Z][a-z]?-[A-Z]?[a-z]?\.?')
-		init3 = re.compile('^[A-Z][A-Z]?\.?-?[A-Z]?[a-z]?\.')
+		init1 = re.compile('^[A-Z][a-z]?\.-?[A-Z]?[a-z]?\.?', flags=re.UNICODE)
+		init2 = re.compile('^[A-Z][a-z]?-[A-Z]?[a-z]?\.?', flags=re.UNICODE)
+		init3 = re.compile('^[A-Z][A-Z]?\.?-?[A-Z]?[a-z]?\.', flags=re.UNICODE)
 		p1 = init1.findall(input_str)
 		p2 = init2.findall(input_str)
 		p3 = init3.findall(input_str)
@@ -365,9 +367,9 @@ class Rule(object):
 		"""
 		Check web link expressions
 		"""
-		ref1 = re.compile('^http')
-		ref2 = re.compile('^www.')
-		ref3 = re.compile('^url')
+		ref1 = re.compile('^http', flags=re.UNICODE)
+		ref2 = re.compile('^www.', flags=re.UNICODE)
+		ref3 = re.compile('^url', flags=re.UNICODE)
 		p1 = ref1.findall(input_str)
 		p2 = ref2.findall(input_str)
 		p3 = ref3.findall(input_str)
@@ -385,7 +387,7 @@ class Rule(object):
 		retrn_str = ''
 	
 		#number
-		numbers = re.compile('\d+')
+		numbers = re.compile('\d+', flags=re.UNICODE)
 		if (numbers.search(new_str)) :
 			retrn_str = 'numbers'
 			
@@ -403,7 +405,7 @@ class Rule(object):
 			else : retrn_str = 'allnumbers'
 			
 		elif len(num) > 1 :
-			if (re.compile('-')).search(new_str) :
+			if (re.compile('-', flags=re.UNICODE)).search(new_str) :
 				retrn_str = retrn_str+' dash'
 			digitck = 0
 			for nn in num :
@@ -412,8 +414,8 @@ class Rule(object):
 				retrn_str = retrn_str+' fourdigit'
 		
 		#allcapital
-		allnum = re.compile('^allnumbers')
-		num = re.compile('^numbers')
+		allnum = re.compile('^allnumbers', flags=re.UNICODE)
+		num = re.compile('^numbers', flags=re.UNICODE)
 		if not allnum.findall(retrn_str) :
 			if not num.findall(retrn_str) :		#if retrn_str != 'numbers' and retrn_str != 'numbers dash' :
 				if new_str.upper() == new_str :
@@ -447,15 +449,15 @@ class Rule(object):
 			for rule in self.rules[ruleType]:
 				for chaine in self.rules[ruleType][rule]["rule"]:
 					if (input_str.lower()).find(chaine[0]) == 0 :
-						charck = re.compile('[a-z]')	
+						charck = re.compile('[a-z]', flags=re.UNICODE)	
 						'In case of including the key word in the string, no character except the key word'
 						if ruleType == "including" and not charck.findall((input_str.lower()).replace(chaine[0],'')) :
 							#word.delAllFeature()
 							word.addFeature(self.rules[ruleType][rule]["feature"])
 							retrn_str = chaine[0]
 							new_str = input_str
-							input_str = re.sub(retrn_str, '', input_str.lower())
-							new_str = new_str.replace(input_str, '',1)
+							input_str = re.sub(retrn_str, '', input_str.lower(), flags=re.UNICODE)
+							new_str = new_str.replace(input_str, '', 1)
 						'In case of just matching the key word'
 						if ruleType == "matching" and chaine[0] == input_str.lower() :
 							word.addFeature(self.rules[ruleType][rule]["feature"])

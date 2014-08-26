@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 """
 Created on April 25, 2012
 
@@ -7,6 +8,7 @@ Created on April 25, 2012
 from bilbo.reference.File import File
 from bilbo.output.identifier import teiValidate
 from bs4 import BeautifulSoup
+from codecs import open
 import os.path
 import commands
 
@@ -64,7 +66,7 @@ class Corpus(object):
 				pass
 			if valide : newList.append(filename)
 		
-		print "valide files"	
+		print "valide files"
 		for f in newList : print f
 		
 		return newList
@@ -145,9 +147,9 @@ class Corpus(object):
 		tmp_str = ""
 		references = []
 		fileRes = dirResult+fname
-		for line in open (fileRes, 'r') :
+		for line in open (fileRes, 'r', encoding='utf8') :
 			tmp_str = tmp_str + ' ' + line
-				
+		
 		soup = BeautifulSoup (tmp_str)
 		s = soup.findAll ("bibl")
 		
@@ -158,10 +160,10 @@ class Corpus(object):
 			cptRef = 0 # reference count in the file
 			for ref in s:
 				if cptRef < nbRefFile:
-					if len(refsAfterSVM) > 0 and refsAfterSVM[cpt].train == -1 :	#if the note (now tagged as <bibl>) is classified non-bibl
+					if len(refsAfterSVM) > 0 and refsAfterSVM[cpt].train == -1 : #if the note (now tagged as <bibl>) is classified non-bibl
 							for tag in (s[cpt]).findAll(True) :
 								tag.replaceWith(tag.renderContents())
-							s2 = BeautifulSoup()	#prepare tag sets <bibl><nonbibl></nonbibl></bibl>
+							s2 = BeautifulSoup() #prepare tag sets <bibl><nonbibl></nonbibl></bibl>
 							tag1 = s2.new_tag("bibl")
 							tag2 = s2.new_tag("nonbibl")
 							s2.insert(0, tag1)
