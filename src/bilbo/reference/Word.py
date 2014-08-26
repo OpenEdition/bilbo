@@ -126,6 +126,7 @@ class Word(object):
 		
 
 	def getTag(self,tag):
+		print "getTag"
 		for bal in self.tag:
 			if bal.nameIs(tag) == 1:
 				return bal

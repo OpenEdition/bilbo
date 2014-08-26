@@ -176,7 +176,7 @@ class Extract_svm(Extract):
 				#'numbers', 'allnumbers', 'initial' check 
 				if not feature_data[i].has_key(self.features.index('numbers')) and not feature_data[i].has_key(self.features.index('allnumbers')) :
 					new_features.append('nonumbers')
-				if not feature_data[i].has_key(self.features.index('initial')) : 
+				if not feature_data[i].has_key(self.features.index('initial')) :
 					new_features.append('noinitial')
 	
 				#we can also append some important featues to the new_features list for weighting them 
@@ -185,7 +185,7 @@ class Extract_svm(Extract):
 				#now update features representation of the document with previously found features
 				for nf in new_features :
 					id = self.features.index(nf)
-					feature_data[i][id] = 1#*len(feature_data[i]) # !!!!!!! VALIDE CONSIDERATION OF VECTOR SIZE !				
+					feature_data[i][id] = 1#*len(feature_data[i]) # !!!!!!! VALIDE CONSIDERATION OF VECTOR SIZE !
 			except ValueError:
 				pass
 		

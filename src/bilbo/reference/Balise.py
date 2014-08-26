@@ -27,7 +27,9 @@ class Balise(object):
 		"""
 		Check the tag name
 		"""
+		print nom + " == " + self.nom
 		if nom == self.nom:
+			print "oui"
 			return 1
 		return -1
 	
