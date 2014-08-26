@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 """
 Created on April 18, 2012
 
@@ -7,6 +8,7 @@ Created on April 18, 2012
 from bilbo.reference.Word import Word
 import string
 import re, os
+from codecs import open
 
 class Clean(object):
 	"""
@@ -29,8 +31,8 @@ class Clean(object):
 			flag = 0 
 			nameRegle = ""	
 			
-			for line in open(os.path.join(self.rootDir, "KB/config/features.txt")):
-				lineSplit = re.split("\s", line)
+			for line in open(os.path.join(self.rootDir, "KB/config/features.txt"), encoding='utf8'):
+				lineSplit = re.split("\s", line, flags=re.UNICODE)
 				if lineSplit[0] == "#":
 					nameRegle = lineSplit[1]
 					flag += 1
@@ -39,9 +41,11 @@ class Clean(object):
 				elif flag == 2:
 					'nonLabels'
 					self.nonLabels[lineSplit[0]] = lineSplit[1]
-		except:
+		except IOError:
 			pass
 			print "Feature file not found : config/features.txt \n"
+		except:
+			raise
 		
 
 	def posssign(self, line, sign) :
@@ -75,7 +79,10 @@ class Clean(object):
 			top_att = ''
 			attstyp_string = ''
 			for key in n.attrs.keys() :
-				if isinstance(n.attrs[key], str) :
+				print "_extract_tags"
+				print type(n.attrs[key])
+				if isinstance(n.attrs[key], unicode) :
+					print "c'est unicode"
 					top_att = top_att + n.attrs[key]+' '
 				else :
 					top_att = top_att + n.attrs[key][0]+' '
@@ -91,8 +98,8 @@ class Clean(object):
 	
 		#read contents
 		nstring = ''
-		try : nstring = str(n.string)
-		except : nstring = (n.string).encode('utf8')
+		#try : nstring = str(n.string)
+		#except : nstring = (n.string).encode('utf8')
 			
 		tagsCk = 1
 		try : n.contents[0].name
@@ -120,8 +127,8 @@ class Clean(object):
 		for j in range(0,len(txts)) :
 			balise = []
 			caract = []
-			if str(txts[j]) != 'None' and str(txts[j]) != '\n':
-				st = string.split(str(txts[j]))
+			if txts[j] != 'None' and txts[j] != '\n':
+				st = string.split(txts[j])
 				for s in st :
 					balise = []
 					caract = []
@@ -142,15 +149,16 @@ class Clean(object):
 		"""
 		for con in n.contents :
 			constring = ''
-			try : constring = str(con.string)
-			except : constring = (con.string).encode('utf8')
+			#try : constring = str(con.string)
+			#except : constring = (con.string).encode('utf8')
+			constring = unicode(con)
 			
 			tagsCk = 1
 			try : con.contents[0].name
 			except : tagsCk = 0
 
 			txt = constring
-			if str(txt) != 'None' and tagsCk == 0 : 
+			if txt != 'None' and tagsCk == 0 : 
 				txts.append(txt)
 				tags.append([])
 				attrs.append([])
@@ -158,7 +166,7 @@ class Clean(object):
 				tags[ct-1].append(top_tag)
 				if (top_att) : attrs[ct-1].append(top_att)		# APPEND ATTRIBUTE
 
-				if con == constring.decode('utf8') :
+				if unicode(con) == constring :
 					pass
 				else :
 					tags[ct-1].append(con.name)
@@ -166,8 +174,11 @@ class Clean(object):
 						atts_string = ''
 						attstyp_string = ''
 						for key in con.attrs.keys() :
-							if isinstance(con.attrs[key], str) :
+							print "_arrangeData"
+							print type(con.attrs[key])
+							if isinstance(con.attrs[key], unicode) :
 								atts_string = atts_string + con.attrs[key]+' '
+								print "c'est unicode"
 							else :
 								atts_string = atts_string + con.attrs[key][0]+' '
 							attstyp_string = attstyp_string + key+' '
@@ -184,7 +195,7 @@ class Clean(object):
 				atts_string = ''
 				#print con.name, con.attrs
 				for key in con.attrs.keys() :
-					if isinstance(con.attrs[key], str) :
+					if isinstance(con.attrs[key], unicode) :
 						atts_string = atts_string + con.attrs[key]+' '
 					else :
 						atts_string = atts_string + con.attrs[key][0]+' '
@@ -222,7 +233,7 @@ class Clean(object):
 			c = tmp_str.find(target_tag_mi, b)
 			d = tmp_str.find(target_tag_end, c)
 			e = d + len(target_tag_end)
-			if c > 0 and d > 0 and e > 0 and ( re.match(" [a-zA-Z]", tmp_str[a-2:a]) or (re.match("[a-zA-Z]", tmp_str[d-1:d]) and re.match("[a-zA-Z]", tmp_str[e:e+1]))  ):
+			if c > 0 and d > 0 and e > 0 and ( re.match(" [a-zA-Z]", tmp_str[a-2:a], flags=re.UNICODE) or (re.match("[a-zA-Z]", tmp_str[d-1:d], flags=re.UNICODE) and re.match("[a-zA-Z]", tmp_str[e:e+1], flags=re.UNICODE))  ):
 				new_str =  tmp_str[:a] + tmp_str[c+1:d] + tmp_str[e:]
 				tmp_str = new_str
 				a = tmp_str.find(target_tag_st,0)
@@ -251,12 +262,12 @@ class Clean(object):
 		return words
 
 
-	def _html2unicode(self, tmp_str) :
+	def _xmlEntitiesDecode(self, tmp_str) :
 		"""
-		html2unicode
+		xmlEntitiesDecode
 		"""
 		#for numerical codes
-		matches = re.findall("&#\d+;", tmp_str)
+		matches = re.findall("&#\d+;", tmp_str, flags=re.UNICODE)
 		if len(matches) > 0 :
 			hits = set(matches)
 			for hit in hits :
@@ -268,7 +279,7 @@ class Clean(object):
 					pass
 	
 		#for hex codes
-		matches = re.findall("&#[xX][0-9a-fA-F]+;", tmp_str)
+		matches = re.findall("&#[xX][0-9a-fA-F]+;", tmp_str, flags=re.UNICODE)
 		if len(matches) > 0 :
 			hits = set(matches)
 			for hit in hits :
@@ -282,15 +293,16 @@ class Clean(object):
 		return tmp_str
 		
 		
-	def _checkUTF8(self, tmp_str) :
-		"""
-		In BeatifulSoup 4, string matching error when there are accents only
-		"""
-		ck = 0
-		try : str(tmp_str)
-		except : 
-			(tmp_str).encode('utf8')
-			ck = 1
-		return ck
+	#def _checkUTF8(self, tmp_str) :
+		#"""
+		#In BeatifulSoup 4, string matching error when there are accents only
+		#"""
+		#ck = 0
+		#try : str(tmp_str)
+		#except : 
+			#(tmp_str).encode('utf8')
+			##print type(tmp_str.string)
+			#ck = 1
+		#return ck
 		
 	

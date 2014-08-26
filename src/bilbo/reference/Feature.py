@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 """
 Created on April 20, 2012
 
@@ -18,6 +19,7 @@ class Feature(object):
 		self.nom = nom
 		
 	def affiche(self):
+		#print type(self.nom)
 		print "\t\t",self.nom
 		
 		

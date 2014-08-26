@@ -35,8 +35,8 @@ time 0
 num 0
 # bookindicator
 in
-in 
+in√ä
 dans
-dans 
+dans√ä
 en
-en 
+en√ä

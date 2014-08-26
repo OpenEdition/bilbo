@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 """
 Created on March 9, 2013
 
@@ -7,7 +8,6 @@ Created on March 9, 2013
 """
 from bs4 import BeautifulSoup
 import re
-
 
 def _findTagPosition(tmp_str, tagName, ptr):
 		

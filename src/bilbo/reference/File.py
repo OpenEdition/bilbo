@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 """
 Created on April 25, 2012
 
@@ -13,6 +14,7 @@ from bilbo.reference.ListReferences import ListReferences
 from bilbo.output.identifier import extractDoi, loadTEIRule, toTEI, teiValidate
 from bilbo.reference import tagtool
 from xml.dom.minidom import parseString
+from codecs import open
 import copy
 import re, sys
 
@@ -121,7 +123,7 @@ class File(object):
 		ref_ori = []
 		
 		'Read the source file to check the initial contents of references'
-		for line in open (self.nom, 'r') :
+		for line in open (self.nom, 'r', encoding='utf8') :
 			tmp_str = tmp_str + line
 		
 		soup = BeautifulSoup (tmp_str)
@@ -145,11 +147,10 @@ class File(object):
 			parsed_soup = ''.join(s[cptRef].findAll(text = True)) # String only
 			ptr = 0
 			if (len(parsed_soup.split()) > 0) : #if empty <bibl>, pass it
-				oriRef = (str(s[cptRef]))
+				oriRef = (unicode(s[cptRef]))
 				oriRef = self._cleanTags(oriRef)
 				
 				if self.options.o == 'simple' :
-					parsed_soup = parsed_soup.encode('utf8')
 					parsed_soup = parsed_soup.replace('&', "&amp;")
 					parsed_soup = parsed_soup.replace('<pb/>', '')
 					parsed_soup = parsed_soup.replace('<', "&lt;")
@@ -163,7 +164,6 @@ class File(object):
 						r.string = r.string.replace('&', "&amp;")
 						for token in r.string.split() :
 							#if token == "&" : token = "&amp;"
-							token = token.encode('utf8')
 							pre_ptr = ptr
 							ptr = oriRef.find(token, ptr)
 							while (oriRef.find(">", ptr) < oriRef.find("<", ptr)) and oriRef.find("<", ptr) > 0 :
@@ -177,7 +177,7 @@ class File(object):
 								for s2 in soup2 :
 									try : inner_string = ''.join(s2.findAll(text = True))
 									except : pass
-									inner_string = inner_string.encode('utf8')
+									#inner_string = inner_string.encode('utf8')
 							#EXCEPTION
 							if (ptr < 0) or inner_string.find(token) >= 0 : 
 								#try again by eliminating tags
@@ -203,7 +203,7 @@ class File(object):
 									tag_end_r = oriRef.find(">",tag_end_l)
 									ptr_end = tag_end_r
 									newtoken = oriRef[ptr_start:tag_start_l]+oriRef[tag_start_r+1:tag_end_l]
-									newtoken = re.sub(' ', ' ', newtoken)
+									newtoken = re.sub(' ', ' ', newtoken, flags=re.UNICODE)
 									newtoken = newtoken.lstrip()
 									newtoken = newtoken.rstrip()
 								if newtoken == token or newtoken.find(token) >= 0: 
@@ -225,12 +225,12 @@ class File(object):
 							else :
 								ptr = pre_ptr
 				
-				try:
-					oriRef = oriRef.decode('utf8') # TODO: corriger la gestion globale de l'encodage des caractères !!!
-				except Exception, err:
-					pass
+				#try:
+					#oriRef = oriRef.decode('utf8') # TODO: corriger la gestion globale de l'encodage des caractères !!!
+				#except Exception, err:
+					#pass
 				oriRef = BeautifulSoup (oriRef)
-				oriRef = str(oriRef.body.contents[0])# clean mismatching tags trusting BeautifulSoup
+				oriRef = unicode(oriRef.body.contents[0])# clean mismatching tags trusting BeautifulSoup
 
 				#'''
 				'check continuously annotated tags to eliminate tags per each token'
@@ -284,10 +284,12 @@ class File(object):
 		try:
 			if self.options.o == 'simple' : tmp_str = self.writeResultOnly(ref_ori, references, tagTypeCorpus)
 			else : tmp_str = self.writeResultInOriginal(tmp_str, soup, ref_ori, references, tagTypeCorpus)	
-		except :
+		except Exception, err:
+			print err
+			print "ERROR : could not finish write of orgininal"
 			pass
 
-		fich = open(dirResult+self._getName(), "w")
+		fich = open(dirResult+self._getName(), "w", encoding='utf8')
 		fich.write(tmp_str)
 		fich.close()
 		
@@ -309,7 +311,8 @@ class File(object):
 						valide, numErrOri = teiValidate(self.nom, 'output')
 						if numErr == numErrOri : print "Original file also has", numErr, "errors. Annotation OK."
 						else : print "Original file has", numErrOri, "errors. Annotation NOT OK."
-				except Exception, err: print err #when original file has a fundamental error
+				except Exception, err:
+					print err #when original file has a fundamental error
 		return
 	
 
@@ -338,14 +341,14 @@ class File(object):
 			p2 = tmp_str.find('</'+tagTypeCorpus+'>', p1)
 			
 			if len(contentString.split()) > 0 :
-				text = str(ref_ori[cpt])
-				text = self.doiExtraction(text, str(references[cpt]), tagTypeCorpus)
+				text = ref_ori[cpt]
+				text = self.doiExtraction(text, references[cpt], tagTypeCorpus)
 				tmp_list = list(tmp_str)
 				tmp_list[p1:p2+len('</'+tagTypeCorpus+'>')] = text
 				tmp_str = ''.join(tmp_list)
 
-			cpt += 1 
-			pre_p1 = p1		
+			cpt += 1
+			pre_p1 = p1
 		
 		return tmp_str
 
@@ -356,7 +359,7 @@ class File(object):
 		"""
 		tmp_str = '<list'+tagTypeCorpus.title()+'>\n'
 		for i, r in enumerate(ref_ori) :
-			text = str(ref_ori[i])
+			text = ref_ori[i]
 			text = self.doiExtraction(text, references[i], tagTypeCorpus)
 			tmp_str += text+'\n'
 		tmp_str += '</list'+tagTypeCorpus.title()+'>\n'
@@ -369,9 +372,9 @@ class File(object):
 		"""
 		doistring = ''
 		if self.options.d :
-			doistring = extractDoi(str(reference), tagTypeCorpus)
-			if doistring != '' : 
-				doistring = 'http://dx.doi.org/'+str(doistring)
+			doistring = extractDoi(unicode(reference), tagTypeCorpus)
+			if doistring != '' :
+				doistring = 'http://dx.doi.org/'+doistring
 				doistring = '<idno type=\"DOI\">'+doistring+'</idno>'
 				ptr1 = text.find('</title>')+len('</title>')
 				text = text[:ptr1] + doistring + text[ptr1:]
@@ -495,7 +498,7 @@ class File(object):
 		"""
 		new_str = tmp_str.replace(' ', ' ')
 		for key in specialPunc.iterkeys(): new_str = new_str.replace(key, ' ')
-		new_str = re.sub('\W', ' ', new_str)
+		new_str = re.sub('\W', ' ', new_str, flags=re.UNICODE)
 		onlyPunc = False
 		if len(new_str.split()) == 0 : onlyPunc = True
 					
@@ -924,7 +927,7 @@ class File(object):
 			b = tmpRef.find(target_tag_mi, a + len(target_tag_st))
 			c = tmpRef.find(target_tag_end, b)
 			d = c + len(target_tag_end)
-			if re.match('<hi xml:lang=\"\w\w\">', tmpRef[a:b+1]) :
+			if re.match('<hi xml:lang=\"\w\w\">', tmpRef[a:b+1], flags=re.UNICODE) :
 				tmpRef = tmpRef[:a]+tmpRef[b+1:c]+tmpRef[d:]
 				e = d-len('<hi xml:lang=\"AA\"></hi>')
 				if e > 0 : a = tmpRef.find(target_tag_st, e)
@@ -1054,7 +1057,7 @@ class File(object):
 									tmpRef = tmpRef[:st] + '<bibl>' + tmpRef[st:]
 									ptr1 = st
 									oriRef = tmpRef
-									case1 = True								
+									case1 = True
 				ptr0 = ptr1+1	
 				ptr1 = oriRef.find(";", ptr1+1, ptr2)
 				
@@ -1120,7 +1123,7 @@ class File(object):
 									oriRef = tmpRef
 									case2 = True
 					st1, ed1, st2, ed2 = tagtool._findTagPosition(oriRef, 'nonbibl', st1+1)
-				
+		
 		return oriRef
 	
 	
@@ -1132,15 +1135,15 @@ class File(object):
 		return chemin.pop()
 	
 
-	def convertToUnicode(self, chaine):
-		"""
-		Convert a string to unicode
-		"""
-		try:
-			if isinstance(chaine, str):
-				chaine = unicode(chaine, sys.stdin.encoding)
-		except:
-			chaine = unicode(chaine, 'ascii')
-		return chaine
+	#def convertToUnicode(self, chaine):
+		#"""
+		#Convert a string to unicode
+		#"""
+		#try:
+			#if isinstance(chaine, str):
+				#chaine = unicode(chaine, sys.stdin.encoding)
+		#except:
+			#chaine = unicode(chaine, 'ascii')
+		#return chaine
 
 	

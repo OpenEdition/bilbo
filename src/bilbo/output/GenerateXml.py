@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 """
 Created on May 2, 2012
 
 @author: Young-min Kim, Jade Tavernier
 """
+from codecs import open
 
 class GenerateXml(object):
 	"""
@@ -16,19 +18,19 @@ class GenerateXml(object):
 	def simpleComp(self, truefile, estfile, indicator, outfile):
 	
 		est = []
-		for line in open (estfile, 'r') :
+		for line in open (estfile, 'r', encoding='utf8') :
 			line = line.split()
 			if len(line) != 0 :
 				est.append(line[0])
 				
-		fout = open(outfile, "w")
+		fout = open(outfile, "w", encoding='utf8')
 	
 		num = 0
 		j = 0
 		preLabel = 'start'
 		preckIt = 0
 		fout.write('<listBibl>\n\n')
-		for line in open (truefile, 'r') :
+		for line in open (truefile, 'r', encoding='utf8') :
 			if preLabel == 'start' :
 				num += 1
 				fout.write('<bibl>\n')

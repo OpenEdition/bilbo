@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 """
 Created on 25 avr. 2012
 
@@ -6,6 +7,7 @@ Created on 25 avr. 2012
 """
 import re
 import string
+from codecs import open
 
 class Name(object):
 
@@ -18,8 +20,8 @@ class Name(object):
 		self.forenamelist = {'0000': 0}
 		
 		'Load the name list file and save the contents in the lists'
-		for line in open (fname, 'r') :
-			line = re.sub(' ', ' ', line)
+		for line in open (fname, 'r', encoding='utf8') :
+			line = re.sub(' ', ' ', line, flags=re.UNICODE)
 			line = string.replace(line, '-','-')
 			#line = string.replace(nline, '.','')
 			line = line.split('/')

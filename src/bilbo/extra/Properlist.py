@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 """
 Created on April 25, 2012
 
 @author: Young-Min Kim, Jade Tavernier
 """
 import unicodedata
+from codecs import open
 
 class Properlist(object):
 
@@ -17,7 +19,7 @@ class Properlist(object):
 		self.targetlist = self.properlist
 		self.m_targetlist = self.m_properlist
 		
-		for line in open (fname, 'r') :
+		for line in open (fname, 'r', encoding='utf8') :
 			line = line.split('\n')
 			line = line[0].split('(')
 			line = line[0].split(',')
@@ -36,7 +38,6 @@ class Properlist(object):
 					self.m_targetlist[key] = {st:1}
 				else :
 					self.m_targetlist[key][st] = 1
-
 
 	def searchProper(self, listReference, tr) :
 		"""
@@ -91,6 +92,5 @@ class Properlist(object):
 
 
 	def strip_accents(self, input_str):
-		nkfd_form = unicodedata.normalize('NFKD', unicode(input_str, 'utf8'))
-		return (u"".join([c for c in nkfd_form if not unicodedata.combining(c)])).title()
-
+		nkfd_form = unicodedata.normalize('NFKD', input_str)
+		return ("".join([c for c in nkfd_form if not unicodedata.combining(c)])).title()

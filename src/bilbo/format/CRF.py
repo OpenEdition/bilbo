@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 """
 Created on April 18, 2012
 
@@ -8,7 +9,7 @@ from bilbo.format.Extract_crf import Extract_crf
 from bilbo.reference.ListReferences import ListReferences 
 from bilbo.output.GenerateXml import GenerateXml
 import subprocess, os
-
+from codecs import open
 
 class CRF(object):
 	"""
@@ -150,8 +151,8 @@ class CRF(object):
 		process.wait()
 	
 		'Create testEstCRF.txt keeping only predicted labels'
-		fafter = open(self.dirResult+"testEstCRF"+addStr+".txt", 'w')
-		for line in open(self.dirResult+"testEstCRF"+addStr+"_Wapiti.txt", 'r') :
+		fafter = open(self.dirResult+"testEstCRF"+addStr+".txt", 'w', encoding='utf8')
+		for line in open(self.dirResult+"testEstCRF"+addStr+"_Wapiti.txt", 'r', encoding='utf8') :
 			line = line.split()
 			if len(line) > 0 : 
 				fafter.write(str(line[len(line)-1]))
