@@ -287,7 +287,7 @@ class Extract(object):
 						feature += feat.upper()+" "
 						if cpt == 0 and (feat.lower() == "initial"):
 							feature += "STARTINITIAL "
-					if re.search("NUMBERS", feature, flags=re.UNICODE) != 0 and re.search("ALLNUMBERS", feature, flags=re.UNICODE) != 0:	
+					if re.search("NUMBERS", feature, flags=re.UNICODE) != 0 and re.search("ALLNUMBERS", feature, flags=re.UNICODE) != 0:
 						phrase += " "+mot.nom
 					cpt+=1
 
@@ -361,7 +361,7 @@ class Extract(object):
 			elif caracteristique.nom == 'j' or caracteristique.nom == 's' or caracteristique.nom == 'm': 
 				if titleCK == 1 and titleAttr != caracteristique.nom : 
 					balise = mot.getTag("title")
-					balise.nom = 'booktitle'
+					if balise > 0 : balise.nom = 'booktitle'
 				else : 
 					titleAttr = caracteristique.nom
 				mot.delFeature('j')

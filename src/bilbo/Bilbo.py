@@ -90,12 +90,12 @@ class Bilbo(object):
 			
 			print "crf training data extraction..."
 			self.crf.prepareTrain(corpus, 2, "trainingdata_CRF.txt", 1, 1, optsvm)	#CRF training data extraction
-			self.crf.runTrain(dirModel, "trainingdata_CRF_Wapiti.txt", self.crfmodelname) #CRF model learning			#self.crf.runTrain(dirModel, "trainingdata_CRF_nega_Wapiti.txt", "revueswapiti_nega", 0.0000001) #Do not work, too homogeneous 
+			self.crf.runTrain(dirModel, "trainingdata_CRF_Wapiti.txt", self.crfmodelname) #CRF model learning			#self.crf.runTrain(dirModel, "trainingdata_CRF_nega_Wapiti.txt", "revueswapiti_nega", 0.0000001) #Do not work, too homogeneous
 			print
 		self.deleteTmpFiles()
-	
-	
-	def annotate(self, dirCorpus, dirModel, typeCorpus, external=0):		
+
+
+	def annotate(self, dirCorpus, dirModel, typeCorpus, external=0):
 		"""
 		Automatic annotation of references 
 		
@@ -195,11 +195,8 @@ class Bilbo(object):
 			corpus.addTagReferences(self.dirResult, "testEstCRF.xml", "note", 2)
 
 		return corpus
-	
-	
 
-		
-		
+
 	def deleteTmpFiles(self):
 		dirResultRoot = os.path.abspath(os.path.join(self.dirResult, os.path.pardir))+'/'
 		toKeep = []
@@ -212,7 +209,7 @@ class Bilbo(object):
 						shutil.copyfile(dir_name+f, dirResultRoot+f)
 					os.unlink(os.path.join(dir_name, f))
 			os.rmdir(self.dirResult)
-				
+
 
 	def _list_split(self, flist, size):
 		"""
@@ -232,9 +229,8 @@ class Bilbo(object):
 			if len(result[-1]) >= size: result.append([])
 			result[-1].append(flist.pop(0))
 		return result
-	
-	
-	
+
+
 	"""memory"""
 	def mem(self, size="rss"):
 		"""Generalization; memory sizes: rss, rsz, vsz."""

@@ -71,6 +71,7 @@ class Clean(object):
 	
 		#read current tag
 		n = current_tag
+		print type(n)
 		top_tag = n.name
 		top_att = ''
 			
@@ -81,8 +82,8 @@ class Clean(object):
 			for key in n.attrs.keys() :
 				print "_extract_tags"
 				print type(n.attrs[key])
-				if isinstance(n.attrs[key], unicode) :
-					print "c'est unicode"
+				if isinstance(n.attrs[key], str) :
+					print "c'est unicode" + top_att + n.attrs[key]+' '
 					top_att = top_att + n.attrs[key]+' '
 				else :
 					top_att = top_att + n.attrs[key][0]+' '
