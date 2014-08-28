@@ -42,10 +42,10 @@ class CleanCorpus1(Clean):
 			tmp_str = ''
 
 			for line in open (fname, 'r', encoding='utf8', errors='replace') :
-				line = re.sub(' ', ' ', line)	# !!! eliminate this character representing a kind of SPACE but not a WHITESPACE
+				line = re.sub(' ', ' ', line)  # !!! eliminate this character representing a kind of SPACE but not a WHITESPACE
 				line = line.replace('<!-- <pb/> -->', '')
-				line = line.replace('“', '“ ')			# !!! sparate the special characters '“', '”'
-				line = line.replace('”', ' ”')			# !!! sparate the special characters '“', '”'
+				line = line.replace('“', '“ ') # !!! sparate the special characters '“', '”'
+				line = line.replace('”', ' ”') # !!! sparate the special characters '“', '”'
 				line = line.replace('\'\'', ' " ')
 				#line = line.replace('&amp;', '&')
 				line = line.replace('&amp;nbsp;', '&nbsp;')
@@ -53,47 +53,42 @@ class CleanCorpus1(Clean):
 			
 			tmp_str = self._elimination (tmp_str)
 				
-			#print type(tmp_str)
 			tmp_str = self._xmlEntitiesDecode(tmp_str)
-			#print type(tmp_str)
 			soup = BeautifulSoup (tmp_str)
 
 			i = 0
 			s = soup.findAll (nameTagCorpus)
 			if len(s) > 15000:
-				print "Attention : there are more than 15 000 references in a file so that it uses too much memory (divide the references in several different files)"	
+				print "Attention : there are more than 15 000 references in a file so that it uses too much memory (divide the references in several different files)"
 				return
 			
 			while i < len(s) :
 				words = []
-				b = s[i]	#each bibl
+				b = s[i] #each bibl
 				if i == 639:
 					pass
 				allTags = b.findAll(True) #extract all tags in the current bibl
 				limit = 0
-				if external == 1 : limit = 0 
+				if external == 1 : limit = 0
 				if len(allTags) >= limit : #WHEN IT IS FOR EXTRACTION of NEW REFERENCE '>=0', It's for the elimination of empty references.
 					for c_tag in b.contents :
-						#ck = self._checkUTF8(c_tag)
 						if len(c_tag) > 0  and c_tag != "\n" and c_tag != " " :# NEW----------------
 							
-							if (c_tag != c_tag.string) :	#if : if there is tag
+							if (c_tag != c_tag.string) : #if : if there is tag
 								wordExtr = self._extract_tags(c_tag, 1)
 								if len(wordExtr) > 0:
 									instanceWords = self._buildWords(wordExtr)
 									words.extend(instanceWords)
-							else :							#else : if there is no tags : nolabel or nonbibl
+							else :                       #else : if there is no tags : nolabel or nonbibl
 								c_tag_str = string.split(c_tag)
 								if len(c_tag_str) > 0 and c_tag_str != "\n" :
 									for ss in c_tag_str :
-										#print type(ss)
 										words.append(Word(ss, ["nolabel"]))
 										
-					if b.find('relateditem') :	#related item
+					if b.find('relateditem') : #related item
 						i += 1
 
 				references.append(Reference(words,i))
-				#references[0].affiche()
 				i += 1
 						
 		except IOError:

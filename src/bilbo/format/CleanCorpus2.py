@@ -49,7 +49,7 @@ class CleanCorpus2(Clean):
 				line = line.replace('“', '“ ')			# !!! sparate the special characters '“', '”'
 				line = line.replace('”', ' ”')			# !!! sparate the special characters '“', '”'
 				line = line.replace('\'\'', ' " ')
-				line = line.replace('&amp;nbsp;', '&nbsp;')	
+				line = line.replace('&amp;nbsp;', '&nbsp;')
 				line = self.posssign(line, refSign)		# term or phrase representing the reference part in note, IF THIS IS A PHRASE INSERT DASH BETWEEN WORDS
 				line = self.posssign(line, precitSign)	# term or phrase indicating the previously cited reference, IF THIS IS A PHRASE INSERT DASH BETWEEN WORDS
 				tmp_str = tmp_str + ' ' + line
@@ -93,7 +93,7 @@ class CleanCorpus2(Clean):
 					if b != b.string :
 						allTags = b.findAll(True)	#extract all tags in the current bibl
 						limit = 1
-						if external == 1 : limit = 0 
+						if external == 1 : limit = 0
 						
 						if len(allTags) >= limit : # WHEN IT IS FOR EXTRACTION of NEW REFERENCE '>=0'
 							for c_tag in b.contents :
@@ -122,7 +122,7 @@ class CleanCorpus2(Clean):
 								input_str = b.contents[0]
 								for input in input_str.split() :
 									features = []
-									if len(b.attrs) : 
+									if len(b.attrs) :
 										for key in b.attrs.keys() :
 											if isinstance(b.attrs[key], unicode) : features.append(b.attrs[key])
 											else : features.append(b.attrs[key][0])

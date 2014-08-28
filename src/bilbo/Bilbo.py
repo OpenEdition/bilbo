@@ -5,9 +5,9 @@ from __future__ import unicode_literals
 BILBO : Automatic labeling of bibliographic reference
 
 (C) Copyright 2012 by Young-Min Kim (youngminn.kim@gmail.com) and Jade Tavernier
-(jade.tavernier@gmail.com). This is initially written by Young-Min Kim for the prototype 
+(jade.tavernier@gmail.com). This is initially written by Young-Min Kim for the prototype
 and modified by Jade Tavernier for code reorganization in an object oriented design.
- 
+
 BILBO is an open source software for automatic annotation of bibliographic reference.
 It provides the segmentation and tagging of input string. It is principally based on
 Conditional Random Fields (CRFs), machine learning technique to segment and label
@@ -52,6 +52,7 @@ class Bilbo(object):
 		self.options = options
 		self.crfmodelname = crfmodelname
 
+
 	def train(self, dirCorpus, dirModel, typeCorpus):
 		"""
 		CRF model learning (corpus 1 and 2), SVM model learning (corpus 2)
@@ -73,8 +74,8 @@ class Bilbo(object):
 			print "Extract references..."
 			corpus.extract(1, "bibl")
 			print "crf training data extraction..."
-			self.crf.prepareTrain(corpus, 1, "trainingdata_CRF.txt", 1, 1)	#CRF training data extraction
-			self.crf.runTrain(dirModel, "trainingdata_CRF_Wapiti.txt", self.crfmodelname)#CRF model learning
+			self.crf.prepareTrain(corpus, 1, "trainingdata_CRF.txt", 1, 1) #CRF training data extraction
+			self.crf.runTrain(dirModel, "trainingdata_CRF_Wapiti.txt", self.crfmodelname) #CRF model learning
 				
 		elif typeCorpus == 2:
 			print "Extract notes..."
@@ -84,20 +85,21 @@ class Bilbo(object):
 				print "svm source data extraction..."
 				self.crf.prepareTrain(corpus, 2, "data04SVM_ori.txt", 1) #Source data extraction for SVM note classification
 				print "svm training data extraction..."
-				self.svm.prepareTrain(corpus)	#Training data extraction for SVM note classification
+				self.svm.prepareTrain(corpus) #Training data extraction for SVM note classification
 				print "svm training..."
-				self.svm.runTrain(dirModel)		#SVM model learning
+				self.svm.runTrain(dirModel) #SVM model learning
 			
 			print "crf training data extraction..."
-			self.crf.prepareTrain(corpus, 2, "trainingdata_CRF.txt", 1, 1, optsvm)	#CRF training data extraction
-			self.crf.runTrain(dirModel, "trainingdata_CRF_Wapiti.txt", self.crfmodelname) #CRF model learning			#self.crf.runTrain(dirModel, "trainingdata_CRF_nega_Wapiti.txt", "revueswapiti_nega", 0.0000001) #Do not work, too homogeneous
+			self.crf.prepareTrain(corpus, 2, "trainingdata_CRF.txt", 1, 1, optsvm) #CRF training data extraction
+			self.crf.runTrain(dirModel, "trainingdata_CRF_Wapiti.txt", self.crfmodelname) #CRF model learning
+			#self.crf.runTrain(dirModel, "trainingdata_CRF_nega_Wapiti.txt", "revueswapiti_nega", 0.0000001) #Do not work, too homogeneous
 			print
 		self.deleteTmpFiles()
 
 
 	def annotate(self, dirCorpus, dirModel, typeCorpus, external=0):
 		"""
-		Automatic annotation of references 
+		Automatic annotation of references
 		
 		Parameters
 		----------
@@ -148,7 +150,7 @@ class Bilbo(object):
 		corpus.addTagReferences(self.dirResult, "testEstCRF.xml", "bibl", 1)
 		
 		return corpus
-	
+
 
 	def annotateCorpus2(self, dirModel, corpus, fname, external=0):
 		"""
@@ -200,7 +202,7 @@ class Bilbo(object):
 	def deleteTmpFiles(self):
 		dirResultRoot = os.path.abspath(os.path.join(self.dirResult, os.path.pardir))+'/'
 		toKeep = []
-		if self.options.k == 'primary' : 
+		if self.options.k == 'primary' :
 			toKeep = ['testEstCRF.xml', 'testEstCRF.txt', 'testdatawithlabel_CRF.txt']
 		if self.options.k != 'all' :
 			for dir_name, sub_dirs, files in os.walk(self.dirResult):
@@ -223,7 +225,7 @@ class Bilbo(object):
 			new file list size
 		result : list
 			new file list
-		"""	
+		"""
 		result = [[]]
 		while len(flist) > 0:
 			if len(result[-1]) >= size: result.append([])
@@ -235,16 +237,15 @@ class Bilbo(object):
 	def mem(self, size="rss"):
 		"""Generalization; memory sizes: rss, rsz, vsz."""
 		return os.popen('ps -p %d -o %s | tail -1' % (os.getpid(), size)).read()
-	
+
 	def rss(self):
 		"""Return ps -o rss (resident) memory in kB."""
 		return self.mem("rss")
-	
+
 	def rsz(self):
 		"""Return ps -o rsz (resident + text) memory in kB."""
 		return self.mem("rsz")
-	
+
 	def vsz(self):
 		"""Return ps -o vsz (virtual) memory in kB."""
 		return self.mem("vsz")
-

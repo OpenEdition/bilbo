@@ -17,7 +17,7 @@ class Place(object):
 		for line in open (fname, 'r', encoding='utf8') :
 			line = line.split('\n')[0]
 			self.placelist[line] = 1
-	
+
 
 	def searchPlace(self, listReference, tr) :
 		"""
@@ -30,5 +30,3 @@ class Place(object):
 			for mot in reference.getWord():
 				if self.placelist.has_key(mot.nom.upper()):
 					mot.addFeature('PLACELIST')
-
-		

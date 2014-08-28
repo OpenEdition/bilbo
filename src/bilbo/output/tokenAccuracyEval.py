@@ -24,7 +24,6 @@ cnt_d = {'0000': 0}
 errors = {'0000':{'000':0}} #{desired:{predicted:count}}
 
 def evaluate(srcfile, dsrfile):
-	
 	src = []
 	i = 0
 	for line in open (srcfile, 'r') :
@@ -49,7 +48,7 @@ def evaluate(srcfile, dsrfile):
 			if cnt_d.has_key(currstr) :
 				cnt_d[currstr] += 1
 			else :
-				cnt_d[currstr] = 1			
+				cnt_d[currstr] = 1
 			if (src[j] == currstr) : #predicted==desired
 				c += 1
 				acc[currstr] += 1
@@ -106,7 +105,6 @@ def evaluate(srcfile, dsrfile):
 	#		print k, 0, cnt_d[k], 0.0
 	#print
 	
-	
 	tes = 0
 	bes = 0
 	ts = 0
@@ -136,10 +134,9 @@ def evaluate(srcfile, dsrfile):
 	print '*Total error :', 'title:',ts, 'biblscope:',bs
 	
 	return
-	
+
 
 def main():
-
 	if len (sys.argv) != 3 :
 		print 'python tokenAccuracyEval.py (file to be evaluated) (correct label file)'
 		sys.exit (1)
@@ -149,4 +146,3 @@ def main():
 
 if __name__ == '__main__':
 	main()
-
