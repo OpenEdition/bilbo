@@ -145,9 +145,9 @@ def _initCheck(input_str) :
 	"""
 	Check initial expressions
 	"""
-	init1 = re.compile('^[A-Z][a-z]?\.-?[A-Z]?[a-z]?\.?')
-	init2 = re.compile('^[A-Z][a-z]?-[A-Z]?[a-z]?\.?')
-	init3 = re.compile('^[A-Z][A-Z]?\.?-?[A-Z]?[a-z]?\.')
+	init1 = re.compile('^[A-Z][a-z]?\.-?[A-Z]?[a-z]?\.?', flags=re.UNICODE)
+	init2 = re.compile('^[A-Z][a-z]?-[A-Z]?[a-z]?\.?', flags=re.UNICODE)
+	init3 = re.compile('^[A-Z][A-Z]?\.?-?[A-Z]?[a-z]?\.', flags=re.UNICODE)
 	p1 = init1.findall(input_str)
 	p2 = init2.findall(input_str)
 	p3 = init3.findall(input_str)

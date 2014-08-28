@@ -19,8 +19,7 @@ class Feature(object):
 		self.nom = nom
 		
 	def affiche(self):
-		#print type(self.nom)
-		print "\t\t",self.nom
+		print "\t\t", self.nom.encode('utf8')
 		
 		
 	def nameIs(self, nom):
