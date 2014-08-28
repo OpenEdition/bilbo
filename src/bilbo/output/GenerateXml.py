@@ -14,9 +14,9 @@ class GenerateXml(object):
 
 	def __init__(self):
 		self.labels =  {'.':0, ',':0, '(':0, ')':0, ':':0, ';':0, '«':0, '»':0, '-':0, '—':0, '“':0, '”':0, '{':0, '}':0, '[':0, ']':0,  '!':0, '?':0}
-		
+
+
 	def simpleComp(self, truefile, estfile, indicator, outfile):
-	
 		est = []
 		for line in open (estfile, 'r', encoding='utf8') :
 			line = line.split()
@@ -60,7 +60,7 @@ class GenerateXml(object):
 					if not preLabel == 'start' :
 						if preckIt == 0 :
 							tmp_str = '</'+preLabel+'>\n'
-						else : 
+						else :
 							tmp_str = '</hi></'+preLabel+'>\n'
 						fout.write(tmp_str)
 					if ckIt == 0 :
@@ -92,5 +92,3 @@ class GenerateXml(object):
 		fout.close()
 			
 		return
-	
-	

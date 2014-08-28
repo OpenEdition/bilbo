@@ -19,7 +19,7 @@ class Extract_svm(Extract):
 	def __init__(self, options={}):
 		"""
 		Attributes
-		----------	
+		----------
 		tokens : List of String
 			tokens[k] -> TOKEN STRING with token id 'k'
 		idf : List of int
@@ -28,11 +28,11 @@ class Extract_svm(Extract):
 			features[k] -> FEATURE STRING with feature id 'k'
 		doc_tokens : dict
 			tmp document represented by token strings and their counts
-		doc_features : dict 
+		doc_features : dict
 			tmp document represented by feature strings and their counts
 		valid_features : dict
-			*IMPORTANT* valid features to be considered for the svm classification 
-		"""			
+			*IMPORTANT* valid features to be considered for the svm classification
+		"""
 		Extract.__init__(self, options)
 		self.tokens = []	# tokens[k] : TOKEN STRING with token id 'k'
 		self.idf = []		# idf[k] : document frequency of token id 'k'
@@ -41,19 +41,19 @@ class Extract_svm(Extract):
 		self.doc_features = {'0000':0}	# tmp document represented by feature strings and their counts
 		self.options = options
 		main = os.path.realpath(__file__).split('/')
-		self.rootDir = "/".join(main[:len(main)-4])		
+		self.rootDir = "/".join(main[:len(main)-4])
 
 		self.valid_features = {'punc':0, 'nopunc':0, 'onepunc':0, 'twopunc':0, 'nonumbers':0, 'dash':0,
 						'noinitial':0, 'startinitial':0, 'posspage':0, 'weblink':0, 'posseditor':0, 'italic':0}
-		
-		
+
+
 	def extract (self, filename, ndocs, tr, filename_ori, file_out) : # tr=1 : training, tr=0 : test
 		"""
-		Extract training and test data in numerical format from source input file which has been 
+		Extract training and test data in numerical format from source input file which has been
 		extracted from previous process Extract_crf::prepareTest 
 
 		Parameters
-		----------	
+		----------
 		filename : String
 			input file name containing source information of data
 		ndocs : int
@@ -66,7 +66,7 @@ class Extract_svm(Extract):
 			for the moment it's same as "filename", but can be modified.
 		file_out : String
 			output file name. this file will be used as training or test data for SVM light
-		"""			
+		"""
 		i = 0
 		indices = range(ndocs)
 		flagEndRef = 0
@@ -96,7 +96,7 @@ class Extract_svm(Extract):
 					flagEndRef += 1
 					self.fill_data(line, self.features, feature_data, tr)
 	
-			else : # end of a block, a note		
+			else : # end of a block, a note
 				if flagEndRef == 1:
 					i += 1
 					flagEndRef = 0
@@ -109,8 +109,8 @@ class Extract_svm(Extract):
 		if tr == 1 : self.save_ID(self.tokens, self.features)
 		
 		return
-	
-	
+
+
 	def fill_data(self, line, input, data, tr) : # line[1:], tokens, token_data / line, features, feature_data
 		"""
 		Read data in numerical format
@@ -138,9 +138,9 @@ class Extract_svm(Extract):
 		del data[len(data)-1][-1]
 		
 		return
-	
-	
-	# 
+
+
+	#
 	def insert_lineFeatures(self, feature_data, tr) :
 		"""
 		Insert new FEATURES related with global character of reference : NOPUNC, ONEPUNC, NONUMBERS, NOINITIAL
@@ -161,7 +161,7 @@ class Extract_svm(Extract):
 					puncnt = feature_data[i][id]
 					if puncnt == 1 : new_features.append('onepunc')
 					elif puncnt == 2 : new_features.append('twopunc')
-				else : 
+				else :
 					puncnt == 0
 					new_features.append('nopunc')
 					
@@ -173,13 +173,13 @@ class Extract_svm(Extract):
 					allcnt += feature_data[i][key]
 				"""
 
-				#'numbers', 'allnumbers', 'initial' check 
+				#'numbers', 'allnumbers', 'initial' check
 				if not feature_data[i].has_key(self.features.index('numbers')) and not feature_data[i].has_key(self.features.index('allnumbers')) :
 					new_features.append('nonumbers')
 				if not feature_data[i].has_key(self.features.index('initial')) :
 					new_features.append('noinitial')
 	
-				#we can also append some important featues to the new_features list for weighting them 
+				#we can also append some important featues to the new_features list for weighting them
 				if feature_data[i].has_key(self.features.index('startinitial')) : new_features.append('startinitial')
 				
 				#now update features representation of the document with previously found features
@@ -188,8 +188,8 @@ class Extract_svm(Extract):
 					feature_data[i][id] = 1#*len(feature_data[i]) # !!!!!!! VALIDE CONSIDERATION OF VECTOR SIZE !
 			except ValueError:
 				pass
-		
-		
+
+
 	def print_output(self, token_data, feature_data, bibls, tr, indices, fileOut) :
 		"""
 		Print final svm data file
@@ -227,16 +227,16 @@ class Extract_svm(Extract):
 				fich.write("\n")
 	
 		return
-		
-	
+
+
 	#for the counting of input tokens
 	def adding_fId(self, tokens_len, feature_data) :
 		i = 10
 		while i < tokens_len :
 			i = i*10
 		return i
-	
-	
+
+
 	def load_original(self, filename_ori, indices) :
 		"""
 		Create files having original text form for the verification
@@ -257,7 +257,7 @@ class Extract_svm(Extract):
 					if j == 0 : fouttst.write(line.split('\n')[0])
 					else : fouttst.write(line)
 				j += 1
-			else : 
+			else :
 				if flagEndRef == 1:
 					i += 1
 					j=0

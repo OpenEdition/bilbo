@@ -13,7 +13,7 @@ from codecs import open
 class Clean(object):
 	"""
 	A class that tokenizes xml input data. Navigates the xml tree and extracts tokens, features and labels.
-	It concerns the first step of tokenization such that words are separated by whitespace but not by punctuation 
+	It concerns the first step of tokenization such that words are separated by whitespace but not by punctuation
 	marks. A clean object is created in a File object ("extract" method).
 	"""
 
@@ -25,11 +25,11 @@ class Clean(object):
 		self.nonLabels = {}
 		self.tagAttDict = {'0000': 0}
 		main = os.path.realpath(__file__).split('/')
-		self.rootDir = "/".join(main[:len(main)-4])		
+		self.rootDir = "/".join(main[:len(main)-4])
 		try:
 			'flag = 1 : features, flag = 2 : nonLabels, flag = 3 : bookindicator'
-			flag = 0 
-			nameRegle = ""	
+			flag = 0
+			nameRegle = ""
 			
 			for line in open(os.path.join(self.rootDir, "KB/config/features.txt"), encoding='utf8'):
 				lineSplit = re.split("\s", line, flags=re.UNICODE)
@@ -46,7 +46,7 @@ class Clean(object):
 			print "Feature file not found : config/features.txt \n"
 		except:
 			raise
-		
+
 
 	def posssign(self, line, sign) :
 		for s in sign :
@@ -55,14 +55,14 @@ class Clean(object):
 			if nline != line :
 				line = nline
 		return line
-	
-	
+
+
 	def _extract_tags(self,current_tag, lens) :
 		"""
 		Extract tags and attributes for each token by navigating xml tree
 		We should carefully consider the encoding of input string because BeautifulSoup 4 causes encoding error
 		when using str for the string including special accents only.
-		"""	
+		"""
 		words = []
 		txts = []
 		tokens = []
@@ -71,7 +71,6 @@ class Clean(object):
 	
 		#read current tag
 		n = current_tag
-		print type(n)
 		top_tag = n.name
 		top_att = ''
 			
@@ -89,8 +88,8 @@ class Clean(object):
 			tagatt_string = n.name+' '+ attstyp_string+' '+top_att
 			if self.tagAttDict.has_key(tagatt_string) :
 				self.tagAttDict[tagatt_string] += 1
-			else : 
-				self.tagAttDict[tagatt_string] = 1	
+			else :
+				self.tagAttDict[tagatt_string] = 1
 		else :
 			pass
 	
@@ -121,7 +120,7 @@ class Clean(object):
 			for s in st :
 				tokens.append(s)
 		
-		#save extracted tokens to the dictionary "words" 
+		#save extracted tokens to the dictionary "words"
 		for j in range(0,len(txts)) :
 			balise = []
 			caract = []
@@ -134,7 +133,7 @@ class Clean(object):
 						caract.extend(attr.split(" "))
 					for tag in tags[j] :
 						balise.extend(tag.split(" "))
-					if not lens > 0 : 
+					if not lens > 0 :
 						balise.append("nonbibl")
 					words.append({"nom":s, "caracteristique":caract, "balise":balise})
 				
@@ -169,7 +168,7 @@ class Clean(object):
 					pass
 				else :
 					tags[ct-1].append(con.name)
-					if len(con.attrs) > 0 : 
+					if len(con.attrs) > 0 :
 						atts_string = ''
 						attstyp_string = ''
 						for key in con.attrs.keys() :
@@ -182,7 +181,7 @@ class Clean(object):
 						tagatt_string = con.name+' '+attstyp_string+' '+atts_string
 						if self.tagAttDict.has_key(tagatt_string) :
 							self.tagAttDict[tagatt_string] += 1
-						else : 
+						else :
 							self.tagAttDict[tagatt_string] = 1
 					
 			else : #case2b : more than 2 levels
@@ -196,12 +195,12 @@ class Clean(object):
 				temp_attr = top_att+' '+atts_string
 				self._arrangeData(con, txts, tags, attrs, temp_str, temp_attr)
 		return
-	
+
 
 	def _elimination (self, tmp_str) :
 		"""
 		Eliminate unnecessary tags
-		"""		
+		"""
 		target_tag_st = "<hi font-variant=\"small-caps\">"
 		target_tag_end = "</hi>"
 		
@@ -237,13 +236,13 @@ class Clean(object):
 				else : a = 0
 
 		return new_str
-		
-		
+
+
 	def _buildWords(self, dicWords):
 		"""
 		Make 'Word' objects with words in dicWords
 		dicWord : dictionary of words returned from _extract_tags
-		"""		
+		"""
 		words = []
 		for word in dicWords:
 			instanceWord = Word(word["nom"], word["balise"], word["caracteristique"])

@@ -30,8 +30,7 @@ class Corpus(object):
 		self.directory = directory
 		self.fichiers = []
 		self.options = options
-		
-		
+
 
 	def getFiles(self):
 		"""
@@ -51,13 +50,12 @@ class Corpus(object):
 		
 		if self.options.v in ['input', 'all'] : listFichiers = self.validateXml(listFichiers)
 		return listFichiers
-	
-	
+
+
 	def validateXml(self, listFichiers):
-		
 		newList = []
 		for filename in listFichiers :
-			try : 
+			try :
 				valide, numErr = teiValidate(os.path.join(self.directory, filename), 'input')
 			except Exception, error :
 				valide = False
@@ -70,11 +68,11 @@ class Corpus(object):
 		for f in newList : print f
 		
 		return newList
-	
+
 
 	def extract(self, type, tag, nomFichiers="", external=0):
 		"""
-		Extract references for each file 
+		Extract references for each file
 		
 		Parameters
 		----------
@@ -94,7 +92,7 @@ class Corpus(object):
 			fichObj = File(self.directory+"/"+nomFichier, self.options)
 			fichObj.extract(type, tag, external)
 			self.fichiers.append(fichObj)
-	
+
 
 	def getListReferences(self, typeCorpus):
 		"""
@@ -113,8 +111,8 @@ class Corpus(object):
 			if listRef != -1:
 				allReferences.extend(listRef.getReferences())
 		return allReferences
-		
-	
+
+
 	def nbReference(self, typeCorpus):
 		"""
 		Return number of references in the corpus
@@ -123,7 +121,6 @@ class Corpus(object):
 		for fichier in self.fichiers:
 			nb += fichier.nbReference(typeCorpus)
 		return nb
-
 
 
 	def addTagReferences(self, dirResult, fname, tagTypeCorpus, typeCorpus, refsAfterSVM=[]): #get "listRef" to check deleted notes
@@ -138,7 +135,7 @@ class Corpus(object):
 			directory for output files
 		fname : string
 			output filename
-		tagTypeCorpus : 
+		tagTypeCorpus :
 		typeCorpus : int, {1, 2, 3}
 			type of corpus
 			1 : corpus 1, 2 : corpus 2...
@@ -182,11 +179,10 @@ class Corpus(object):
 			fichier.buildReferences(references, tagTypeCorpus, dirResultRoot) #new result printing
 			
 		return
-	
-	
+
+
 	def deleteAllFiles(self):
 		"""
 		delete all files in File object
 		"""
 		self.fichiers[:] = []
-		

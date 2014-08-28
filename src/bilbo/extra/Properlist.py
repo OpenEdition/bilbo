@@ -11,7 +11,6 @@ from codecs import open
 class Properlist(object):
 
 	def __init__(self, fname, nameFeature):
-
 		self.targetfeature = nameFeature
 		self.properlist = {'0000': 0} #other proper nouns than person names considering whitespaces
 		self.m_properlist = {'0000': {'0000': 0}}
@@ -39,16 +38,19 @@ class Properlist(object):
 				else :
 					self.m_targetlist[key][st] = 1
 
+
 	def searchProper(self, listReference, tr) :
 		"""
 		Add the target feature if the corresponding word is in the list according to the rules
 		"""
 		
-		if tr == 1 or tr == -1 :	pt = 1
-		elif tr == 0 :	pt = 0
+		if tr == 1 or tr == -1 :
+			pt = 1
+		elif tr == 0 :
+			pt = 0
 		
 		self.targetlist = self.properlist
-		self.m_targetlist = self.m_properlist		
+		self.m_targetlist = self.m_properlist
 		
 		for reference in listReference.getReferences():
 			cpt = 0
@@ -82,7 +84,7 @@ class Properlist(object):
 							pass
 						
 					if len(tokens) > 0:
-						tokens = tokens.split() 
+						tokens = tokens.split()
 						for j in range(cpt,cpt+len(tokens)) :
 							curr = reference.getWordIndice(j)
 							if (tokens[j-cpt]).title() == (self.strip_accents(curr.nom)).title() :

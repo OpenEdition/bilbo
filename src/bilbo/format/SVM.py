@@ -24,8 +24,8 @@ class SVM(object):
 		self.dirResult = dirResult
 		self.options = options
 		main = os.path.realpath(__file__).split('/')
-		self.rootDir = "/".join(main[:len(main)-4])		
-		
+		self.rootDir = "/".join(main[:len(main)-4])
+
 
 	def prepareTrain(self, corpus):
 		"""
@@ -40,12 +40,12 @@ class SVM(object):
 		nbRef : String
 			number of instances
 		extractor : Extract_svm
-		"""	
+		"""
 		nbRef = corpus.nbReference(2) #corpus type = 2
-		extractor = Extract_svm(self.options)        
+		extractor = Extract_svm(self.options)
 		extractor.extract(self.dirResult+"data04SVM_ori.txt", nbRef, 1, self.dirResult+"data04SVM_ori.txt", self.dirResult+"trainingdata_SVM.txt")
-		
-		
+
+
 	def prepareTest(self, corpus):
 		"""
 		Prepare SVM test data
@@ -63,8 +63,8 @@ class SVM(object):
 		nbRef = corpus.nbReference(2) #corpus type = 2
 		extractor = Extract_svm(self.options)
 		extractor.extract(self.dirResult+"data04SVM_ori.txt", nbRef, 0, self.dirResult+"data04SVM_ori.txt", self.dirResult+"newdata.txt")
-		
-		
+
+
 	def runTrain(self, directoryModel):
 		"""
 		Run SVM training module from SVM light software
@@ -72,7 +72,7 @@ class SVM(object):
 		
 		Parameters
 		----------
-		directoryModel : string 
+		directoryModel : string
 			directory where we save the model
 		"""
 		dependencyDir = os.path.join(self.rootDir, 'dependencies')
@@ -85,18 +85,16 @@ class SVM(object):
 		process.wait()
 
 
-
 	def runTest(self, directoryModel):
 		"""
 		Run SVM test module from SVM light software to classify new data
 		
 		Parameters
 		----------
-		directoryModel : string 
+		directoryModel : string
 			directory where we save the model
 		"""
 		dependencyDir = os.path.join(self.rootDir, 'dependencies')
 		command = dependencyDir+'/svm_light/svm_classify '+self.dirResult+'newdata.txt '+directoryModel+'svm_model '+self.dirResult+'svm_predictions_new'
 		process = subprocess.Popen(command , shell=True, stdout=subprocess.PIPE)
 		process.wait()
-		

@@ -19,7 +19,7 @@ leadingquotes
 endingquotes
 link
 pairedbraces
-#	nonLabels
+# nonLabels
 hi 0
 abbr 1
 lb 0

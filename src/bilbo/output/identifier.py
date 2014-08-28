@@ -24,7 +24,6 @@ main = os.path.realpath(__file__).split('/')
 rootDir = "/".join(main[:len(main)-4])
 
 def extractDoi(input_str, tagTypeCorpus) :
-	
 	config = ConfigParser.ConfigParser()
 	config.read(os.path.join(rootDir, 'KB/config/config.txt'))
 	usrname = unicode(config.get("crossref", "usrname"))
@@ -109,6 +108,7 @@ def extractDoi(input_str, tagTypeCorpus) :
 	
 	return doistring
 
+
 def loadTEIRule(tagConvert):
 	parser = ConfigParser.ConfigParser()
 	parser.read(os.path.join(rootDir, 'KB/config/others.txt'))
@@ -121,7 +121,7 @@ def loadTEIRule(tagConvert):
 		tagBefore = '</'+name+'>'
 		tagAfter = '</'+value.split()[0]+'>'
 		if value != 'NONE' : tagConvert[tagBefore] = tagAfter
-		else : tagConvert[tagBefore] = ''			
+		else : tagConvert[tagBefore] = ''
 		
 	return tagConvert
 
@@ -129,7 +129,7 @@ def loadTEIRule(tagConvert):
 def toTEI(tmp_str, tagConvert):
 	for key in tagConvert.keys() :
 		tmp_str = tmp_str.replace(key, tagConvert[key])
-		#print key, 'to', tagConvert[key], 'converting finished'	
+		#print key, 'to', tagConvert[key], 'converting finished'
 	return tmp_str
 
 
@@ -151,7 +151,7 @@ def teiValidate(fname, objfile) :
 	Xml validation check using xml schema in a xsd file
 	"""
 	valide = True
-	if objfile == 'output' : 
+	if objfile == 'output' :
 		xsdfile = os.path.join(rootDir, 'KB/validation/output/tei_openedition3.xsd')
 		xmlschema_doc = etree.parse(open(xsdfile))
 		xmlschema = etree.XMLSchema(xmlschema_doc)
@@ -163,7 +163,7 @@ def teiValidate(fname, objfile) :
 		if len(xmlschema.error_log) > 0 : print xmlschema.error_log
 		print 'number of errors :', len(xmlschema.error_log)
 		
-	else : 
+	else :
 		dtdfile = os.path.join(rootDir, 'KB/validation/input/tei_all.dtd')
 		dtd = etree.DTD(open(dtdfile))
 		doc = etree.parse(fname)
@@ -189,4 +189,3 @@ def main():
 
 if __name__ == '__main__':
 	main()
-

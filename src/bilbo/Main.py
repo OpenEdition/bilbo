@@ -24,7 +24,6 @@ from bilbo.Bilbo import Bilbo
 from bilbo.utils import *
 
 if __name__ == '__main__':
-	
 	parser = defaultOptions()
 	options, args = parser.parse_args(sys.argv[1:])
 	
@@ -83,8 +82,7 @@ if __name__ == '__main__':
 		print "  -u : --undopuncsep"
 		print "\t Undo punctuation separation, default='False'"
 		
-		
-		print "(labeling)"		
+		print "(labeling)"
 		print "  -o : --outformat <string>"
 		print "\t Output data format"
 		print "\t  tei => xml following tei guidelines (default)"
@@ -99,10 +97,9 @@ if __name__ == '__main__':
 		print "  arg1 : <string>"
 		print "\t input data folder where the data files are (training or labeling)"
 		print "  arg2 : <string>"
-		print "\t output data folder where the result files are saved\n"		
-		
-	else:	
-		
+		print "\t output data folder where the result files are saved\n"
+
+	else:
 		if options.g == "simple" :
 			bilbo = Bilbo(str(args[1]), options, "crf_model_simple")
 		elif options.g == "detail" :
@@ -123,7 +120,6 @@ if __name__ == '__main__':
 				bilbo.annotate(str(args[0]), dirModel, typeCorpus)
 		else :
 			print "Please choose training(-T option) or labeling(-L option)"
-	
+
 	#simpleLabeling("Y.-M. KIM et al., An Extension of PLSA for Document Clustering, In Proceedings of ACM 17th Conference on Information and Knowledge Management, 2008.")
 
-		
