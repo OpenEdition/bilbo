@@ -80,10 +80,7 @@ class Clean(object):
 			top_att = ''
 			attstyp_string = ''
 			for key in n.attrs.keys() :
-				print "_extract_tags"
-				print type(n.attrs[key])
-				if isinstance(n.attrs[key], str) :
-					print "c'est unicode" + top_att + n.attrs[key]+' '
+				if isinstance(n.attrs[key], (str, unicode)) :
 					top_att = top_att + n.attrs[key]+' '
 				else :
 					top_att = top_att + n.attrs[key][0]+' '
@@ -98,20 +95,20 @@ class Clean(object):
 			pass
 	
 		#read contents
-		nstring = ''
-		#try : nstring = str(n.string)
-		#except : nstring = (n.string).encode('utf8')
+		nstring = unicode(n.string)
 			
 		tagsCk = 1
-		try : n.contents[0].name
-		except : tagsCk = 0
+		try :
+			n.contents[0].name
+		except :
+			tagsCk = 0
 		
 		if nstring == 'None' or tagsCk == 1 :	#case1 : no contents, case2 : tags in current tag
 			ncons = len(n.contents)
 			if ncons == 0 :						#case1
 				pass
 			else :								#case2
-				self._arrangeData(n, txts, tags, attrs, top_tag, top_att)							
+				self._arrangeData(n, txts, tags, attrs, top_tag, top_att)
 		else :									#case 3 just a content, no tags in it
 			txt = nstring
 			txts.append(txt)
@@ -150,24 +147,25 @@ class Clean(object):
 		"""
 		for con in n.contents :
 			constring = ''
-			#try : constring = str(con.string)
-			#except : constring = (con.string).encode('utf8')
-			constring = unicode(con)
+			constring = unicode(con.string)
 			
 			tagsCk = 1
-			try : con.contents[0].name
-			except : tagsCk = 0
+			try :
+				con.contents[0].name
+			except:
+				tagsCk = 0
 
 			txt = constring
-			if txt != 'None' and tagsCk == 0 : 
+			if txt != 'None' and tagsCk == 0 :
 				txts.append(txt)
 				tags.append([])
 				attrs.append([])
 				ct = len(txts)
 				tags[ct-1].append(top_tag)
-				if (top_att) : attrs[ct-1].append(top_att)		# APPEND ATTRIBUTE
+				if (top_att) :
+					attrs[ct-1].append(top_att)		# APPEND ATTRIBUTE
 
-				if unicode(con) == constring :
+				if unicode(con) == constring:
 					pass
 				else :
 					tags[ct-1].append(con.name)
@@ -175,28 +173,23 @@ class Clean(object):
 						atts_string = ''
 						attstyp_string = ''
 						for key in con.attrs.keys() :
-							print "_arrangeData"
-							print type(con.attrs[key])
-							if isinstance(con.attrs[key], unicode) :
+							if isinstance(con.attrs[key], (str, unicode)) :
 								atts_string = atts_string + con.attrs[key]+' '
-								print "c'est unicode"
 							else :
 								atts_string = atts_string + con.attrs[key][0]+' '
 							attstyp_string = attstyp_string + key+' '
 						attrs[ct-1].append(atts_string)
-						#print atts_string
 						tagatt_string = con.name+' '+attstyp_string+' '+atts_string
 						if self.tagAttDict.has_key(tagatt_string) :
 							self.tagAttDict[tagatt_string] += 1
 						else : 
 							self.tagAttDict[tagatt_string] = 1
 					
-			else : 				#case2b : more than 2 levels
+			else : #case2b : more than 2 levels
 				temp_str = top_tag+' '+con.name
 				atts_string = ''
-				#print con.name, con.attrs
 				for key in con.attrs.keys() :
-					if isinstance(con.attrs[key], unicode) :
+					if isinstance(con.attrs[key], (str, unicode)) :
 						atts_string = atts_string + con.attrs[key]+' '
 					else :
 						atts_string = atts_string + con.attrs[key][0]+' '
@@ -292,18 +285,3 @@ class Clean(object):
 					pass
 		
 		return tmp_str
-		
-		
-	#def _checkUTF8(self, tmp_str) :
-		#"""
-		#In BeatifulSoup 4, string matching error when there are accents only
-		#"""
-		#ck = 0
-		#try : str(tmp_str)
-		#except : 
-			#(tmp_str).encode('utf8')
-			##print type(tmp_str.string)
-			#ck = 1
-		#return ck
-		
-	

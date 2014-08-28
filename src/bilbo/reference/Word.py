@@ -49,10 +49,9 @@ class Word(object):
 			if feature != "" and self.getFeature(feature) == -1:
 				self.feature.append(Feature(feature))
 
-	
+
 	def affiche(self):
-		print "\nWord : ",self.nom, self.core
-		#print type(self.nom)
+		print "\nWord : ",self.nom.encode('utf8'), self.core.encode('utf8')
 		if len(self.tag) >= 1:
 			print "\tTAG :"
 			for key in self.tag:

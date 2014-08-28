@@ -19,17 +19,14 @@ class Balise(object):
 		self.nom = nom
 		
 	def affiche(self):
-		print type(self.nom)
-		print "\t\t",self.nom
+		print "\t\t", self.nom.encode('utf8')
 		
 
 	def nameIs(self, nom):
 		"""
 		Check the tag name
 		"""
-		print nom + " == " + self.nom
 		if nom == self.nom:
-			print "oui"
 			return 1
 		return -1
 	
