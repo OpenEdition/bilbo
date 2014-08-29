@@ -172,12 +172,14 @@ class File(object):
 							inner_string = ""
 							if ptr >= 0 :
 								tmp_str2 = oriRef[pre_ptr:ptr]
-								soup2 = BeautifulSoup (tmp_str2)
-								for s2 in soup2 :
-									try : inner_string = ''.join(s2.findAll(text = True))
-									except : pass
-									#inner_string = inner_string.encode('utf8')
-							#EXCEPTION
+								if tmp_str2 != '.': # bs4 display a warning because '.' looks like a filename…
+									soup2 = BeautifulSoup (tmp_str2)
+									for s2 in soup2 :
+										try : inner_string = ''.join(s2.findAll(text = True))
+										except : pass
+								else:
+									inner_string = tmp_str2
+								#EXCEPTION
 							if (ptr < 0) or inner_string.find(token) >= 0 :
 								#try again by eliminating tags
 								c = token[0]
