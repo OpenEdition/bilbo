@@ -7,7 +7,7 @@ Created on March 9, 2013
 
 """
 from bs4 import BeautifulSoup
-import re
+import regex as re
 
 def _findTagPosition(tmp_str, tagName, ptr):
 	st1 = tmp_str.find('<'+tagName, ptr)
@@ -140,9 +140,9 @@ def _initCheck(input_str) :
 	"""
 	Check initial expressions
 	"""
-	init1 = re.compile('^[A-Z][a-z]?\.-?[A-Z]?[a-z]?\.?', flags=re.UNICODE)
-	init2 = re.compile('^[A-Z][a-z]?-[A-Z]?[a-z]?\.?', flags=re.UNICODE)
-	init3 = re.compile('^[A-Z][A-Z]?\.?-?[A-Z]?[a-z]?\.', flags=re.UNICODE)
+	init1 = re.compile('^\p{Lu}\p{Ll}?\.-?\p{Lu}?\p{Ll}?\.?', flags=re.UNICODE)
+	init2 = re.compile('^\p{Lu}\p{Ll}?-\p{Lu}?\p{Ll}?\.?', flags=re.UNICODE)
+	init3 = re.compile('^\p{Lu}\p{Lu}?\.?-?\p{Lu}?\p{Ll}?\.', flags=re.UNICODE)
 	p1 = init1.findall(input_str)
 	p2 = init2.findall(input_str)
 	p3 = init3.findall(input_str)
