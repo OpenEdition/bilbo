@@ -8,7 +8,8 @@ Created on April 20, 2012
 from bilbo.reference.Word import Word
 from bilbo.reference.Reference import Reference
 from codecs import open
-import re, os
+import regex as re
+import os
 
 prePunc =  {'.':0, ',':0, ')':0, ';':0, '-':0, '”':0, '»':0, '}':0, ']':0, '!':0, '?':0, '\\':0, '*':0, '%':0, '*':0, '=':0, '_':0, '~':0, '>':0, '^':0, '+':0, '"':0} #'|':0, '/':0, ':':0,
 postPunc = {'(':0, '–':0, '-':0, '“':0, '«':0, '{':0, '[':0, '#':0, '$':0, '@':0, '<':0} #'"':0,
@@ -338,22 +339,22 @@ class Rule(object):
 		"""
 		Check initial expressions
 		"""
-		init1 = re.compile('^[A-Z][a-z]?\.-?[A-Z]?[a-z]?\.?', flags=re.UNICODE)
-		init2 = re.compile('^[A-Z][a-z]?-[A-Z]?[a-z]?\.?', flags=re.UNICODE)
-		init3 = re.compile('^[A-Z][A-Z]?\.?-?[A-Z]?[a-z]?\.', flags=re.UNICODE)
+		init1 = re.compile('^\p{Lu}\p{Ll}?\.-?\p{Lu}?\p{Ll}?\.?', flags=re.UNICODE)
+		init2 = re.compile('^\p{Lu}\p{Ll}?-\p{Lu}?\p{Ll}?\.?', flags=re.UNICODE)
+		init3 = re.compile('^\p{Lu}\p{Lu}?\.?-?\p{Lu}?\p{Ll}?\.', flags=re.UNICODE)
 		p1 = init1.findall(input_str)
 		p2 = init2.findall(input_str)
 		p3 = init3.findall(input_str)
 		
 		retrn_str = ''
 		if p1 :
-			#print '################',p1[0]
+			#print '################1',p1[0]
 			retrn_str = p1[len(p1)-1]
 		elif p2 :
-			#print '################',p2[0]
+			#print '################2',p2[0]
 			retrn_str = p2[len(p2)-1]
 		elif p3 :
-			#print '################',p3[0]
+			#print '################3',p3[0]
 			retrn_str = p3[len(p3)-1]
 	
 		return retrn_str
@@ -445,7 +446,7 @@ class Rule(object):
 			for rule in self.rules[ruleType]:
 				for chaine in self.rules[ruleType][rule]["rule"]:
 					if (input_str.lower()).find(chaine[0]) == 0 :
-						charck = re.compile('[a-z]', flags=re.UNICODE)
+						charck = re.compile('\p{L}', flags=re.UNICODE)
 						'In case of including the key word in the string, no character except the key word'
 						if ruleType == "including" and not charck.findall((input_str.lower()).replace(chaine[0],'')) :
 							#word.delAllFeature()

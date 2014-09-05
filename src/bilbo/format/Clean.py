@@ -7,7 +7,8 @@ Created on April 18, 2012
 """
 from bilbo.reference.Word import Word
 import string
-import re, os
+import regex as re
+import os
 from codecs import open
 
 class Clean(object):
@@ -226,7 +227,7 @@ class Clean(object):
 			c = tmp_str.find(target_tag_mi, b)
 			d = tmp_str.find(target_tag_end, c)
 			e = d + len(target_tag_end)
-			if c > 0 and d > 0 and e > 0 and ( re.match(" [a-zA-Z]", tmp_str[a-2:a], flags=re.UNICODE) or (re.match("[a-zA-Z]", tmp_str[d-1:d], flags=re.UNICODE) and re.match("[a-zA-Z]", tmp_str[e:e+1], flags=re.UNICODE))  ):
+			if c > 0 and d > 0 and e > 0 and ( re.match(" \p{L}", tmp_str[a-2:a], flags=re.UNICODE) or (re.match("\p{L}", tmp_str[d-1:d], flags=re.UNICODE) and re.match("\p{L}", tmp_str[e:e+1], flags=re.UNICODE))  ):
 				new_str =  tmp_str[:a] + tmp_str[c+1:d] + tmp_str[e:]
 				tmp_str = new_str
 				a = tmp_str.find(target_tag_st,0)
