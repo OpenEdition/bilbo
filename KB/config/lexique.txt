@@ -1,13 +1,13 @@
 [including]
 # editor posseditor
-é.
-és.
 ed.
+éd.
 eds.
+éds.
 ed
+éd
 eds
-é
-és
+éds
 # month possmonth
 january
 february
