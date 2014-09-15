@@ -7,11 +7,12 @@
 
 
 dirResult=Result/
-bilboXML=`ls -dt ${dirResult}tmp*|head -n 1`/testEstCRF.xml
 labeledXML=Train/train.xml
 
 echo "Go Bilbo"
-python src/bilbo/Main.py -L -k all -t bibl  Label/ Result/
+python src/bilbo/Main.py -L -k all -t bibl  Label/ ${dirResult}
+
+bilboXML=`ls -dt ${dirResult}tmp*|head -n 1`/testEstCRF.xml
 
 echo "python src/bilbo/output/formatEvalBilbo.py $bilboXML"
 python src/bilbo/output/formatEvalBilbo.py $bilboXML > ${dirResult}testEval.txt
