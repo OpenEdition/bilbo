@@ -5,7 +5,7 @@
 #  put labeled xml in Train/train.xml
 #  evaluation/evaluate.sh [dirResult]
 
-if [ $1 != "" ]; then
+if [ "$1" != "" ]; then
 	dirResult=$1
 else
 	dirResult=Result/
