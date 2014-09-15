@@ -3,10 +3,13 @@
 # usage
 #  put xml to be labeled in Label/ folder
 #  put labeled xml in Train/train.xml
-#  evaluation/evaluate.sh
+#  evaluation/evaluate.sh [dirResult]
 
-
-dirResult=Result/
+if [ $1 != "" ]; then
+	dirResult=$1
+else
+	dirResult=Result/
+fi
 labeledXML=Train/train.xml
 
 echo "Go Bilbo"
