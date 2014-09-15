@@ -33,7 +33,7 @@ def evaluate(srcfile, dsrfile):
 	for line in open (srcfile, 'r') :
 		line = string.split(line)
 		if len(line) != 0 :
-			currstr = line[len(line)-1]
+			currstr = line[0]
 			src.append(currstr)
 			i += 1
 			if cnt.has_key(currstr) :
@@ -48,7 +48,7 @@ def evaluate(srcfile, dsrfile):
 	for line in open (dsrfile, 'r') :
 		line = string.split(line)
 		if len(line) != 0 :
-			currstr = line[len(line)-1]
+			currstr = line[0]
 			if cnt_d.has_key(currstr) :
 				cnt_d[currstr] += 1
 			else :

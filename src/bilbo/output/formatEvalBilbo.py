@@ -17,9 +17,6 @@ from codecs import open
 
 # usage : python formatEvalBilbo.py testEstCRF.xml > correct.txt
 
-#debug = True
-debug = False
-
 args = sys.argv[1:]
 fichier = str(args[0])
 
@@ -34,11 +31,7 @@ def printText(text, tag):
 		text = addSpaces(text)
 		for mot in text.split(" "):
 			if not spaces.match(mot) and not mot=='':
-				if debug:
-					print (tag + "\t'" + mot.strip() + "'").encode('utf-8')
-					#print (mot.strip() + "'").encode('utf-8')
-				else:
-					print tag.encode('utf-8')
+				print (tag + "\t'" + mot.strip() + "'").encode('utf-8')
 
 def recursItem(bibl, parentName):
 	elems = list(bibl)
