@@ -23,4 +23,7 @@ echo "python src/bilbo/output/formatEvalBilbo.py $labeledXML"
 python src/bilbo/output/formatEvalBilbo.py $labeledXML > ${dirResult}testEval-source.txt
 
 echo "python src/bilbo/output/tokenAccuracyEval.py ${dirResult}testEval.txt ${dirResult}testEval-source.txt"
-python src/bilbo/output/tokenAccuracyEval.py ${dirResult}testEval.txt ${dirResult}testEval-source.txt
+python src/bilbo/output/tokenAccuracyEval.py ${dirResult}testEval.txt ${dirResult}testEval-source.txt > ${dirResult}evaluation.txt
+
+echo "wc -l ${dirResult}testEval.txt ${dirResult}testEval-source.txt"
+wc -l ${dirResult}testEval.txt ${dirResult}testEval-source.txt
