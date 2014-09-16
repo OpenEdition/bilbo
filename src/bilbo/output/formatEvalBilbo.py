@@ -32,7 +32,8 @@ def printText(text, tag):
 		for mot in text.split(" "):
 			if not spaces.match(mot) and not mot=='':
 				print (tag + "\t'" + mot.strip() + "'").encode('utf-8')
-
+				#print (mot.strip() + "'").encode('utf-8')
+				
 def recursItem(bibl, parentName):
 	elems = list(bibl)
 	if elems:
