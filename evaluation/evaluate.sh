@@ -12,7 +12,7 @@ else
 fi
 labeledXML=Train/train.xml
 
-echo "Go Bilbo"
+echo "python src/bilbo/Main.py -L -k all -t bibl  Label/ ${dirResult}"
 python src/bilbo/Main.py -L -k all -t bibl  Label/ ${dirResult}
 
 bilboXML=`ls -dt ${dirResult}tmp*|head -n 1`/testEstCRF.xml
