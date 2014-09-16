@@ -341,9 +341,9 @@ class Rule(object):
 		"""
 		Check initial expressions
 		"""
-		init1 = re.compile('^\p{Lu}\p{Ll}?\.-?\p{Lu}?\p{Ll}?\.?', flags=re.UNICODE)
-		init2 = re.compile('^\p{Lu}\p{Ll}?-\p{Lu}?\p{Ll}?\.?', flags=re.UNICODE)
-		init3 = re.compile('^\p{Lu}\p{Lu}?\.?-?\p{Lu}?\p{Ll}?\.', flags=re.UNICODE)
+		init1 = re.compile('^\p{Lu}\p{Ll}?\.-?\p{Lu}?\p{Ll}?\.?$', flags=re.UNICODE)
+		init2 = re.compile('^\p{Lu}\p{Ll}?-\p{Lu}?\p{Ll}?\.?$', flags=re.UNICODE)
+		init3 = re.compile('^\p{Lu}\p{Lu}?\.?-?\p{Lu}?\p{Ll}?\.$', flags=re.UNICODE)
 		p1 = init1.findall(input_str)
 		p2 = init2.findall(input_str)
 		p3 = init3.findall(input_str)
