@@ -50,9 +50,10 @@ class Partition():
 		if not os.path.isdir(dirCorpus):
 			raise IOError("corpus directory '" + dirCorpus + "' does not exist")
 		
+		numberOfPartition = int(numberOfPartition)
 		self.createPartitionFolders(dirCorpus, testPercentage, numberOfPartition)
-		self.saveAllBibl(dirCorpus)
-		self.createEvaluationfiles(dirCorpus, testPercentage, numberOfPartition)
+		allBibl = self.saveAllBibl(dirCorpus)
+		self.createEvaluationfiles(dirCorpus, testPercentage, numberOfPartition, allBibl)
 	
 	def createPartitionFolders(self, dirCorpus, testPercentage, numberOfPartition = 10):
 		dirEval = Partition.getDirEvalName(dirCorpus)
@@ -67,17 +68,34 @@ class Partition():
 			for testDir in Partition.getDirTestNames(dirPartition):
 				self.createFolder(testDir)
 
-	def createEvaluationfiles(self, dirCorpus, testPercentage, numberOfPartition = 10):
+	def createEvaluationfiles(self, dirCorpus, testPercentage, numberOfPartition, allBibl):
 		dirPartitions = Partition.getDirPartitionNames(dirCorpus, testPercentage, numberOfPartition)
 		for dirPartition in dirPartitions:
-			print dirPartition
+			(testDir, trainDir, modelDir) = Partition.getDirTestNames(dirPartition)
+			testCorpus, trainCorpus = FormatEval.getShuffledCorpus(allBibl, testPercentage)
+			
+			evalFile = os.path.join(dirPartition, 'test.xml')
+			evalString  = "\n".join(testCorpus)
+			with open(evalFile, 'w', encoding='utf-8') as content_file:
+				content_file.write(evalString)
+				
+			trainFile = os.path.join(trainDir, 'train.xml')
+			trainString  = "\n".join(trainCorpus)
+			with open(trainFile, 'w', encoding='utf-8') as content_file:
+				content_file.write(trainString)
+			
+			# TODO: create cleaned file, save it in testDir
+			#print evalFile, trainFile
+			
+			#print testCorpus, trainCorpus
 
 	def saveAllBibl(self, dirCorpus):
-		bibl = FormatEval.getBiblFromDir(dirCorpus)
-		biblString = "\n".join(bibl)
+		allBibl = FormatEval.getBiblFromDir(dirCorpus)
+		biblString = "\n".join(allBibl)
 		fileName = os.path.join(Partition.getDirEvalName(dirCorpus), 'all_bibl.xml')
 		with open(fileName, 'w', encoding='utf-8') as content_file:
 			content_file.write(biblString)
+		return allBibl
 
 	@staticmethod
 	def getDirEvalName(dirCorpus):

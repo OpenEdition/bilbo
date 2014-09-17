@@ -5,6 +5,7 @@ import glob
 import os
 from lxml import html
 import HTMLParser
+import random
 
 class FormatEval():
 
@@ -31,5 +32,13 @@ class FormatEval():
 		
 		return allBibl
 
+	@staticmethod
+	def getShuffledCorpus(allBibl, testPercentage):
+		random.shuffle(allBibl)
+		cut = int(len(allBibl) / int(testPercentage))
+		testCorpus = allBibl[:cut]
+		trainCorpus = allBibl[cut:]
+		#print cut, len(testCorpus), len(trainCorpus), testPercentage
+		return testCorpus, trainCorpus
 
 FormatEval.getBiblFromDir('evaluate')
