@@ -12,9 +12,9 @@ from __future__ import unicode_literals
       01/train/
       01/model/
     3 files :
-      01/test.xml with 10% bibl (random)
+      01/test.xml with 10% bibl (random) (labeled for evaluation)
       01/train/train.xml with 90% of remaining bibl
-      01/test/test-clean.xml (cleaned from annotation)
+      01/test/test-clean.xml (cleaned for annotation)
  
  foreach directory-evaluation/10%/ directory
    train bilbo with 01/train/train.xml file
@@ -37,6 +37,7 @@ launch bilbo
 import sys
 import os
 from codecs import open
+from formatEval import FormatEval
 
 class Partition():
 	# dirName of directory containing the corpus
@@ -45,37 +46,51 @@ class Partition():
 		create "directory-evaluation"
 		create "directory-evaluation/10%/" and 01 to 10 folder in it
 	"""
-	def __init__(self, dirName, testPercentage, numberOfPartition = 10):
-		if not os.path.isdir(dirName):
-			raise IOError("corpus directory '" + dirName + "' does not exist")
+	def __init__(self, dirCorpus, testPercentage, numberOfPartition = 10):
+		if not os.path.isdir(dirCorpus):
+			raise IOError("corpus directory '" + dirCorpus + "' does not exist")
 		
-		self.createPartitionFolders(dirName, testPercentage, numberOfPartition)
+		self.createPartitionFolders(dirCorpus, testPercentage, numberOfPartition)
+		self.saveAllBibl(dirCorpus)
+		self.createEvaluationfiles(dirCorpus, testPercentage, numberOfPartition)
 	
-	def createPartitionFolders(self, dirName, testPercentage, numberOfPartition = 10):
-		dirEval = Partition.getDirEvalName(dirName)
+	def createPartitionFolders(self, dirCorpus, testPercentage, numberOfPartition = 10):
+		dirEval = Partition.getDirEvalName(dirCorpus)
 		self.createFolder(dirEval)
 		
-		dirPercent = Partition.getDirPercentName(dirName, testPercentage)
+		dirPercent = Partition.getDirPercentName(dirCorpus, testPercentage)
 		self.createFolder(dirPercent)
 		
-		dirPartitions = Partition.getDirPartitionNames(dirName, testPercentage, numberOfPartition)
+		dirPartitions = Partition.getDirPartitionNames(dirCorpus, testPercentage, numberOfPartition)
 		for dirPartition in dirPartitions:
 			self.createFolder(dirPartition)
 			for testDir in Partition.getDirTestNames(dirPartition):
 				self.createFolder(testDir)
 
-	@staticmethod
-	def getDirEvalName(dirName):
-		return os.path.dirname(dirName) + "-evaluation"
+	def createEvaluationfiles(self, dirCorpus, testPercentage, numberOfPartition = 10):
+		dirPartitions = Partition.getDirPartitionNames(dirCorpus, testPercentage, numberOfPartition)
+		for dirPartition in dirPartitions:
+			print dirPartition
+
+	def saveAllBibl(self, dirCorpus):
+		bibl = FormatEval.getBiblFromDir(dirCorpus)
+		biblString = "\n".join(bibl)
+		fileName = os.path.join(Partition.getDirEvalName(dirCorpus), 'all_bibl.xml')
+		with open(fileName, 'w', encoding='utf-8') as content_file:
+			content_file.write(biblString)
 
 	@staticmethod
-	def getDirPercentName(dirName, testPercentage):
-		dirEval = Partition.getDirEvalName(dirName)
+	def getDirEvalName(dirCorpus):
+		return os.path.dirname(dirCorpus) + "-evaluation"
+
+	@staticmethod
+	def getDirPercentName(dirCorpus, testPercentage):
+		dirEval = Partition.getDirEvalName(dirCorpus)
 		return os.path.join(dirEval, str(testPercentage)+'%')
 
 	@staticmethod
-	def getDirPartitionNames(dirName, testPercentage, numberOfPartition = 10):
-		dirPercent = Partition.getDirPercentName(dirName, testPercentage)
+	def getDirPartitionNames(dirCorpus, testPercentage, numberOfPartition = 10):
+		dirPercent = Partition.getDirPercentName(dirCorpus, testPercentage)
 		dirPartitions = []
 		for i in range(1, numberOfPartition+1):
 			dirPartitions.append(os.path.join(dirPercent, "{:0>2d}" .format(i)))
