@@ -34,10 +34,11 @@ class FormatEval():
 
 	@staticmethod
 	def getShuffledCorpus(allBibl, testPercentage):
-		random.shuffle(allBibl)
-		cut = int(len(allBibl) / int(testPercentage))
-		testCorpus = allBibl[:cut]
-		trainCorpus = allBibl[cut:]
+		shuffled = list(allBibl)
+		random.shuffle(shuffled)
+		cut = int(len(shuffled) / int(testPercentage))
+		testCorpus = shuffled[:cut]
+		trainCorpus = shuffled[cut:]
 		#print cut, len(testCorpus), len(trainCorpus), testPercentage
 		return testCorpus, trainCorpus
 
