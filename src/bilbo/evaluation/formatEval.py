@@ -3,9 +3,8 @@ from __future__ import unicode_literals
 from codecs import open
 import glob
 import os
-from lxml import html
-import HTMLParser
 import random
+from bs4 import BeautifulSoup, NavigableString
 
 class FormatEval():
 
@@ -19,17 +18,25 @@ class FormatEval():
 			bibls = FormatEval.getBiblList(content)
 			biblList += bibls
 		#print biblList, len(biblList)
-		#print biblList[len(biblList)-1]
+		#print biblList[len(biblList)-1].encode('utf8')
 		#print str(type(biblList[0]))
 		return biblList
 
 	@staticmethod
 	# test : xml string
 	def getBiblList(text):
-		content = text
-		tree = html.fromstring(content)
-		allBiblPath = tree.xpath('//bibl[not(ancestor::bibl)]')
-		allBibl = [html.tostring(bibl, encoding='utf8').decode('utf8') for bibl in allBiblPath]
+		parsedText = BeautifulSoup(text)
+		allBibl = []
+		biblInside = 0
+		allBiblTag = parsedText.findAll('bibl')
+		for bibl in allBiblTag:
+			if biblInside > 0: # do not duplicate line of <bibl> inside <bibl>
+				biblInside -= 1
+				continue
+			line = unicode(bibl)
+			allBibl.append(line)
+			biblInside = len(bibl.findAll('bibl'))
+			#print str(biblInside), unicode(bibl).encode('utf8')
 		
 		return allBibl
 
