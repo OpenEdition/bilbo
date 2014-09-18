@@ -1,0 +1,40 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
+import sys
+if __name__ == '__main__':
+	sys.path.append('src/')
+import os
+from bilbo.Bilbo import Bilbo
+from bilbo.utils import *
+from partition import Partition
+
+
+'''
+ foreach directory-evaluation/10%/ directory
+ train bilbo with 01/train/train.xml file
+ save model in 01/model/
+'''
+
+class bibloTrain():
+	def __init__(self, options, dirCorpus, testPercentage, numberOfPartition = 10):
+		options.T = True
+		options.t = 'bibl'
+		print options
+		
+		dirPartitions = Partition.getDirPartitionNames(dirCorpus, testPercentage, numberOfPartition)
+		for dirPartition in dirPartitions:
+			print "dirPartition", dirPartition
+			(testDir, trainDir, modelDir, resultDir) = Partition.getDirTestNames(dirPartition)
+			
+			bilbo = Bilbo(resultDir, options, "crf_model_simple")
+			bilbo.train(trainDir, modelDir, 1)
+
+
+if __name__ == '__main__':
+	parser = defaultOptions()
+	options, args = parser.parse_args(sys.argv[1:])
+	
+	# usage python src/bilbo/evalution/bilboTrain.py [bilbo option] dirCorpus 10
+	p = bibloTrain(options, str(sys.argv[1]), str(sys.argv[2]))
+	
