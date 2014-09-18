@@ -14,7 +14,7 @@ from __future__ import unicode_literals
     3 files :
       01/test.xml with 10% bibl (random) (labeled for evaluation)
       01/train/train.xml with 90% of remaining bibl
-      01/test/test-clean.xml (cleaned for annotation)
+      01/test/test_clean.xml (cleaned for annotation)
  
  foreach directory-evaluation/10%/ directory
    train bilbo with 01/train/train.xml file
@@ -80,10 +80,13 @@ class Partition():
 			trainFile = os.path.join(trainDir, 'train.xml')
 			self.saveListToFile(trainCorpus, trainFile)
 			
-			# TODO: create cleaned file, save it in testDir
-			#print evalFile, trainFile
+			cleanCorpus = FormatEval.stripTags(testCorpus)
+			cleanFile = os.path.join(testDir, 'test_clean.xml')
+			self.saveListToFile(cleanCorpus, cleanFile)
+
+			#print evalFile, trainFile, cleanFile
 			
-			#print testCorpus, trainCorpus
+			#print testCorpus, trainCorpus, cleanCorpus
 
 	def getAndSaveAllBibl(self, dirCorpus):
 		allBibl = FormatEval.getBiblFromDir(dirCorpus)

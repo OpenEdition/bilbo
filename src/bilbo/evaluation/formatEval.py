@@ -52,4 +52,22 @@ class FormatEval():
 		#print cut, len(testCorpus), len(trainCorpus), testPercentage
 		return testCorpus, trainCorpus
 
-FormatEval.getBiblFromDir('evaluate')
+	@staticmethod
+	def stripTags(xmlList, tagCorpus='bibl'):
+		striped = []
+		for line in xmlList:
+			soup = BeautifulSoup(line)
+			for tag in soup.findAll():
+				if tag.name != tagCorpus:
+					tag.unwrap()
+					
+			txt = unicode(soup)
+			#print str(type(txt)), ("———" + txt).encode('utf8')
+			striped.append(txt)
+		return striped
+
+if __name__ == '__main__':
+	myList = FormatEval.getBiblFromDir('evaluate')
+	striped = FormatEval.stripTags(myList)
+	for txt in striped:
+		print str(type(txt)), ("———" + txt).encode('utf8')
