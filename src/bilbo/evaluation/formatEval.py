@@ -24,6 +24,7 @@ class FormatEval():
 		return biblList
 
 	@staticmethod
+	# test : xml string
 	def getBiblList(text):
 		content = text
 		tree = html.fromstring(content)
@@ -33,8 +34,10 @@ class FormatEval():
 		return allBibl
 
 	@staticmethod
-	def getShuffledCorpus(allBibl, testPercentage):
-		shuffled = list(allBibl)
+	# myList : list to shuffle
+	# testPercentage : percentage of lenght of the first list
+	def getShuffledCorpus(myList, testPercentage):
+		shuffled = list(myList)
 		random.shuffle(shuffled)
 		cut = int(len(shuffled) / int(testPercentage))
 		testCorpus = shuffled[:cut]

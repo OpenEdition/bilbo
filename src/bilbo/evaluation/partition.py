@@ -52,9 +52,9 @@ class Partition():
 		
 		numberOfPartition = int(numberOfPartition)
 		self.createPartitionFolders(dirCorpus, testPercentage, numberOfPartition)
-		allBibl = self.saveAllBibl(dirCorpus)
+		allBibl = self.getAndSaveAllBibl(dirCorpus)
 		self.createEvaluationfiles(dirCorpus, testPercentage, numberOfPartition, allBibl)
-	
+
 	def createPartitionFolders(self, dirCorpus, testPercentage, numberOfPartition = 10):
 		dirEval = Partition.getDirEvalName(dirCorpus)
 		self.createFolder(dirEval)
@@ -75,26 +75,20 @@ class Partition():
 			testCorpus, trainCorpus = FormatEval.getShuffledCorpus(allBibl, testPercentage)
 			
 			evalFile = os.path.join(dirPartition, 'test.xml')
-			evalString  = "\n".join(testCorpus)
-			with open(evalFile, 'w', encoding='utf-8') as content_file:
-				content_file.write(evalString)
+			self.saveListToFile(testCorpus, evalFile)
 				
 			trainFile = os.path.join(trainDir, 'train.xml')
-			trainString  = "\n".join(trainCorpus)
-			with open(trainFile, 'w', encoding='utf-8') as content_file:
-				content_file.write(trainString)
+			self.saveListToFile(trainCorpus, trainFile)
 			
 			# TODO: create cleaned file, save it in testDir
 			#print evalFile, trainFile
 			
 			#print testCorpus, trainCorpus
 
-	def saveAllBibl(self, dirCorpus):
+	def getAndSaveAllBibl(self, dirCorpus):
 		allBibl = FormatEval.getBiblFromDir(dirCorpus)
-		biblString = "\n".join(allBibl)
 		fileName = os.path.join(Partition.getDirEvalName(dirCorpus), 'all_bibl.xml')
-		with open(fileName, 'w', encoding='utf-8') as content_file:
-			content_file.write(biblString)
+		self.saveListToFile(allBibl, fileName)
 		return allBibl
 
 	@staticmethod
@@ -120,14 +114,18 @@ class Partition():
 	def getDirTestNames(dirPartition):
 		dirEvals = ( os.path.join(dirPartition, testDir) for testDir in ('test', 'train', 'model') )
 		return dirEvals
-			
-		
-	def createFolder(sefl, dirName):
+
+	def saveListToFile(self, myList, fileName):
+		myString = "\n".join(myList)
+		if type(myString) is str:
+			print "String not unicode ! It shouldn't."
+		with open(fileName, 'w', encoding='utf-8') as content_file:
+			content_file.write(myString)
+
+	def createFolder(self, dirName):
 		if not os.path.isdir(dirName):
 			os.mkdir(dirName)
 			print dirName
-	
-
 
 
 
