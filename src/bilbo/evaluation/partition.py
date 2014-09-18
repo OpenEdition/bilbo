@@ -35,8 +35,11 @@ launch bilbo
 '''
 
 import sys
+if __name__ == '__main__':
+	sys.path.append('src/')
 import os
 from codecs import open
+from bilbo.Bilbo import Bilbo
 from formatEval import FormatEval
 
 class Partition():
@@ -71,7 +74,7 @@ class Partition():
 	def createEvaluationfiles(self, dirCorpus, testPercentage, numberOfPartition, allBibl):
 		dirPartitions = Partition.getDirPartitionNames(dirCorpus, testPercentage, numberOfPartition)
 		for dirPartition in dirPartitions:
-			(testDir, trainDir, modelDir) = Partition.getDirTestNames(dirPartition)
+			(testDir, trainDir, modelDir, _) = Partition.getDirTestNames(dirPartition)
 			testCorpus, trainCorpus = FormatEval.getShuffledCorpus(allBibl, testPercentage)
 			
 			evalFile = os.path.join(dirPartition, 'test.xml')
@@ -96,7 +99,7 @@ class Partition():
 
 	@staticmethod
 	def getDirEvalName(dirCorpus):
-		return os.path.dirname(dirCorpus) + "-evaluation"
+		return os.path.dirname(dirCorpus + os.sep) + "-evaluation"
 
 	@staticmethod
 	def getDirPercentName(dirCorpus, testPercentage):
@@ -115,7 +118,7 @@ class Partition():
 	# given a dirPartition
 	# return test, train, model folder
 	def getDirTestNames(dirPartition):
-		dirEvals = ( os.path.join(dirPartition, testDir) for testDir in ('test', 'train', 'model') )
+		dirEvals = ( os.path.join(dirPartition, testDir) for testDir in ('test', 'train', 'model', 'result') )
 		return dirEvals
 
 	def saveListToFile(self, myList, fileName):
@@ -133,4 +136,5 @@ class Partition():
 
 
 if __name__ == '__main__':
+	# usage python src/bilbo/evalution/partition.py dirCorpus 10
 	p = Partition(str(sys.argv[1]), str(sys.argv[2]))
