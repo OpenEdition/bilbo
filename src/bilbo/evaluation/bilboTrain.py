@@ -36,5 +36,6 @@ if __name__ == '__main__':
 	options, args = parser.parse_args(sys.argv[1:])
 	
 	# usage python src/bilbo/evalution/bilboTrain.py [bilbo option] dirCorpus 10
-	p = bibloTrain(options, str(sys.argv[1]), str(sys.argv[2]))
+	numberOfPartition = int(sys.argv[3]) if len(sys.argv)==4 else 10
+	p = bibloTrain(options, str(sys.argv[1]), str(sys.argv[2]), numberOfPartition)
 	

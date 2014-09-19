@@ -8,12 +8,20 @@ fichier XML pas annoté => fichier XML annoté bilbo
 -k all => testEstCRF.xml => formatEvalBilbo.py => testEval.txt
 
 toKenAccuracy testEval.txt testEval-source.txt
+
+# TODO:
+this version can separate word like : <editor>Me</editor>and you<c>.</c>, => Me and you.
+but Bilbo do not => Meand you.
+which is the right thing to do, although the xml is obviously not well formed !
 """
 
 import sys
 import regex as re
 import xml.etree.ElementTree as ET
 from codecs import open
+
+# TODO: ne pas utiliser xml.etree testEstCRF.xml contient du xml non valide : <c> : < </c>
+# TODO: corriger l'écriture de testEstCRF.xml !
 
 # usage : python formatEvalBilbo.py testEstCRF.xml > correct.txt
 
@@ -46,6 +54,7 @@ class FormatEvalBilbo():
 					self.text += tag + "\t'" + mot.strip() + "'\n"
 					#print (tag + "\t'" + mot.strip() + "'").encode('utf-8')
 					#print (mot.strip() + "'").encode('utf-8')
+					#self.text += mot.strip() + "'\n" # do not erase, very useful for debug
 					
 	def recursItem(self, bibl, parentName):
 		elems = list(bibl)

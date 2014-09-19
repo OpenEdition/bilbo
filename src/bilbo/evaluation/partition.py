@@ -137,4 +137,5 @@ class Partition():
 
 if __name__ == '__main__':
 	# usage python src/bilbo/evalution/partition.py dirCorpus 10
-	p = Partition(str(sys.argv[1]), str(sys.argv[2]))
+	numberOfPartition = int(sys.argv[3]) if len(sys.argv)==4 else 10
+	p = Partition(str(sys.argv[1]), str(sys.argv[2]), numberOfPartition)

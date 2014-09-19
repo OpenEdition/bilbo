@@ -5,11 +5,13 @@ import glob
 import os
 import random
 from bs4 import BeautifulSoup, NavigableString
+import regex as re
 
 class FormatEval():
 
 	@staticmethod
-	def getBiblFromDir(dirName, pattern = "*xml"):
+	# addWhiteSpace to change XML so <editor>Me</editor>and you<c>.</c> becomes <editor>Me</editor> and you<c>.</c>
+	def getBiblFromDir(dirName, addWhiteSpace=False, pattern="*xml"):
 		files = os.path.join(dirName,pattern)
 		biblList = []
 		for xmlFile in glob.glob(files):
@@ -17,6 +19,8 @@ class FormatEval():
 				content = content_file.read()
 			bibls = FormatEval.getBiblList(content)
 			biblList += bibls
+		if addWhiteSpace:
+			biblList = FormatEval.addWhiteSpace(biblList)
 		#print biblList, len(biblList)
 		#print biblList[len(biblList)-1].encode('utf8')
 		#print str(type(biblList[0]))
@@ -66,8 +70,19 @@ class FormatEval():
 			striped.append(txt)
 		return striped
 
+	@staticmethod
+	# this is realy bad, but we use it to make FormatEvalBiblo work, and accept wrong XML
+	# TODO: correct FormatEvalBiblo !!
+	def addWhiteSpace(xmlList, tagCorpus='bibl'):
+		spaced = []
+		for line in xmlList:
+			line = re.sub('<\/',' </', line, encoding='utf8')
+			line = re.sub('>','> ', line, encoding='utf8')
+			spaced.append(line.strip())
+			
+		return spaced
+
 if __name__ == '__main__':
-	myList = FormatEval.getBiblFromDir('evaluate')
-	striped = FormatEval.stripTags(myList)
-	for txt in striped:
+	myList = FormatEval.getBiblFromDir('evaluate', addWhiteSpace=True)
+	for txt in myList:
 		print str(type(txt)), ("———" + txt).encode('utf8')
