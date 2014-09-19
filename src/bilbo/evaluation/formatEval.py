@@ -50,7 +50,7 @@ class FormatEval():
 	def getShuffledCorpus(myList, testPercentage):
 		shuffled = list(myList)
 		random.shuffle(shuffled)
-		cut = int(len(shuffled) / int(testPercentage))
+		cut = int(len(shuffled) * (int(testPercentage) / 100.0))
 		testCorpus = shuffled[:cut]
 		trainCorpus = shuffled[cut:]
 		#print cut, len(testCorpus), len(trainCorpus), testPercentage
