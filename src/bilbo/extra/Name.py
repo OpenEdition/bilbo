@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 """
 Created on 25 avr. 2012
 
@@ -6,6 +7,7 @@ Created on 25 avr. 2012
 """
 import re
 import string
+from codecs import open
 
 class Name(object):
 
@@ -18,8 +20,8 @@ class Name(object):
 		self.forenamelist = {'0000': 0}
 		
 		'Load the name list file and save the contents in the lists'
-		for line in open (fname, 'r') :
-			line = re.sub(' ', ' ', line)
+		for line in open (fname, 'r', encoding='utf8') :
+			line = re.sub(' ', ' ', line, flags=re.UNICODE)
 			line = string.replace(line, '-','-')
 			#line = string.replace(nline, '.','')
 			line = line.split('/')
@@ -28,7 +30,7 @@ class Name(object):
 			f_st = ''
 			if len(fname) > 0 :
 				for n in fname : f_st = f_st+n+' '
-				f_st = f_st[:len(f_st)-1]	
+				f_st = f_st[:len(f_st)-1]
 		
 			s_st = ''
 			if len(sname) > 0 :
@@ -48,13 +50,13 @@ class Name(object):
 					self.multi_namelist[start_sname] = {s_st:1}
 				
 			self.forenamelist[f_st] = 1
-			
+
 
 	def searchName(self, listReference, tr) :
 		"""
 		Add SURNAMELIST and FORENAMELIST features according to the rules
 		"""
-	
+		
 		if tr == 1 or tr == -1 :	pt = 1
 		elif tr == 0 :	pt = 0
 			
@@ -77,8 +79,8 @@ class Name(object):
 					if reference.nbWord() > cpt+1 :
 						if reference.getWordIndice(cpt+1).nom != ',' : ####### Modification : instead of 'c' in label, check ',' ### 2012-01-22 ###
 							j = cpt+1 # second token id
-						else : 
-							j = cpt+2	# second token id
+						else :
+							j = cpt+2 # second token id
 					
 					if reference.nbWord() > j and ( self.forenamelist.has_key(reference.getWordIndice(j).nom) or  self._has_initial(reference.getWordIndice(j)) == 1): # second token is forename
 							#insert NAMELIST in the feature part of the list
@@ -97,12 +99,12 @@ class Name(object):
 							motSuivant.addFeature('FORENAMELIST')
 
 				cpt += 1
-		
+
 
 	def _has_initial(self, mot) :
 		"""
 		Check if the word has initial
-		"""		
+		"""
 		ck = 0
 		feature = mot.getAllFeature()
 		for t in feature :

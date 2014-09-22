@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 """
 Created on April 25, 2012
 
@@ -13,6 +14,7 @@ from bilbo.reference.ListReferences import ListReferences
 from bilbo.output.identifier import extractDoi, loadTEIRule, toTEI, teiValidate
 from bilbo.reference import tagtool
 from xml.dom.minidom import parseString
+from codecs import open
 import copy
 import re, sys
 
@@ -37,7 +39,7 @@ class File(object):
 		self.nom = fname
 		self.corpus = {}
 		self.options = options
-	
+
 
 	def extract(self, typeCorpus, tag, external):
 		"""
@@ -53,14 +55,13 @@ class File(object):
 			"bibl" : corpus 1, "note" : corpus 2
 		external : int, {1, 0}
 			1 : if the references are external data except CLEO, 0 : if that of CLEO
-			it is used to decide whether Bilbo learn call a SVM classification or not.			
-		"""	
+			it is used to decide whether Bilbo learn call a SVM classification or not.
+		"""
 		clean = Clean()
 		if typeCorpus == 1:
 			clean = CleanCorpus1(self.options)
 		elif typeCorpus == 2:
 			clean = CleanCorpus2(self.options)
-		#print self.nom
 		references = clean.processing(self.nom, tag, external)
 		if len(references) >= 1:
 			self.corpus[typeCorpus] = ListReferences(references, typeCorpus)
@@ -82,7 +83,7 @@ class File(object):
 			return self.corpus[typeCorpus]
 		except :
 			return -1
-		
+
 
 	def nbReference(self, typeCorpus):
 		"""
@@ -92,13 +93,13 @@ class File(object):
 			return self.corpus[typeCorpus].nbReference()
 			
 		except :
-			return 0	
-	
-		
+			return 0
+
+
 	def buildReferences(self, references, tagTypeCorpus, dirResult):
 		"""
 		Construct final xml output file, called from Corpus::addTagReferences
-		Unlike the first version, compare token by token, replace the token by automatically tagged token. 
+		Unlike the first version, compare token by token, replace the token by automatically tagged token.
 		That's why we keep perfectly the original data format.
 		Don't forget to put the '&amp;' instead of '&'
 		
@@ -121,7 +122,7 @@ class File(object):
 		ref_ori = []
 		
 		'Read the source file to check the initial contents of references'
-		for line in open (self.nom, 'r') :
+		for line in open (self.nom, 'r', encoding='utf8') :
 			tmp_str = tmp_str + line
 		
 		soup = BeautifulSoup (tmp_str)
@@ -145,11 +146,10 @@ class File(object):
 			parsed_soup = ''.join(s[cptRef].findAll(text = True)) # String only
 			ptr = 0
 			if (len(parsed_soup.split()) > 0) : #if empty <bibl>, pass it
-				oriRef = (str(s[cptRef]))
+				oriRef = (unicode(s[cptRef]))
 				oriRef = self._cleanTags(oriRef)
 				
 				if self.options.o == 'simple' :
-					parsed_soup = parsed_soup.encode('utf8')
 					parsed_soup = parsed_soup.replace('&', "&amp;")
 					parsed_soup = parsed_soup.replace('<pb/>', '')
 					parsed_soup = parsed_soup.replace('<', "&lt;")
@@ -163,7 +163,6 @@ class File(object):
 						r.string = r.string.replace('&', "&amp;")
 						for token in r.string.split() :
 							#if token == "&" : token = "&amp;"
-							token = token.encode('utf8')
 							pre_ptr = ptr
 							ptr = oriRef.find(token, ptr)
 							while (oriRef.find(">", ptr) < oriRef.find("<", ptr)) and oriRef.find("<", ptr) > 0 :
@@ -173,13 +172,15 @@ class File(object):
 							inner_string = ""
 							if ptr >= 0 :
 								tmp_str2 = oriRef[pre_ptr:ptr]
-								soup2 = BeautifulSoup (tmp_str2)
-								for s2 in soup2 :
-									try : inner_string = ''.join(s2.findAll(text = True))
-									except : pass
-									inner_string = inner_string.encode('utf8')
-							#EXCEPTION
-							if (ptr < 0) or inner_string.find(token) >= 0 : 
+								if tmp_str2 != '.': # bs4 display a warning because '.' looks like a filename…
+									soup2 = BeautifulSoup (tmp_str2)
+									for s2 in soup2 :
+										try : inner_string = ''.join(s2.findAll(text = True))
+										except : pass
+								else:
+									inner_string = tmp_str2
+								#EXCEPTION
+							if (ptr < 0) or inner_string.find(token) >= 0 :
 								#try again by eliminating tags
 								c = token[0]
 								ptr = oriRef.find(c, pre_ptr)
@@ -196,17 +197,17 @@ class File(object):
 									#print token[len(token)-1], oriRef[mtoken_r+1]
 									ptr_start = ptr_start - oriRef[ptr_start:pre_ptr:-1].find("<",0)
 									ptr_end = mtoken_r
-								else :												#case) B<hi font-variant="small-caps">ayram</hi>
+								else :                                                #case) B<hi font-variant="small-caps">ayram</hi>
 									tag_start_l = oriRef.find("<",ptr_start)
 									tag_start_r = oriRef.find(">",tag_start_l)
 									tag_end_l = oriRef.find("<",tag_start_r)
 									tag_end_r = oriRef.find(">",tag_end_l)
 									ptr_end = tag_end_r
 									newtoken = oriRef[ptr_start:tag_start_l]+oriRef[tag_start_r+1:tag_end_l]
-									newtoken = re.sub(' ', ' ', newtoken)
+									newtoken = re.sub(' ', ' ', newtoken, flags=re.UNICODE)
 									newtoken = newtoken.lstrip()
 									newtoken = newtoken.rstrip()
-								if newtoken == token or newtoken.find(token) >= 0: 
+								if newtoken == token or newtoken.find(token) >= 0:
 									token = oriRef[ptr_start:ptr_end+1]
 									ptr = ptr_start
 								else :
@@ -225,12 +226,12 @@ class File(object):
 							else :
 								ptr = pre_ptr
 				
-				try:
-					oriRef = oriRef.decode('utf8') # TODO: corriger la gestion globale de l'encodage des caractères !!!
-				except Exception, err:
-					pass
+				#try:
+					#oriRef = oriRef.decode('utf8') # TODO: corriger la gestion globale de l'encodage des caractères !!!
+				#except Exception, err:
+					#pass
 				oriRef = BeautifulSoup (oriRef)
-				oriRef = str(oriRef.body.contents[0])# clean mismatching tags trusting BeautifulSoup
+				oriRef = unicode(oriRef.body.contents[0])# clean mismatching tags trusting BeautifulSoup
 
 				#'''
 				'check continuously annotated tags to eliminate tags per each token'
@@ -267,7 +268,7 @@ class File(object):
 					'''
 					
 					'bibl separation'
-					if tagTypeCorpus == 'note' : 
+					if tagTypeCorpus == 'note' :
 						oriRef = self.detectBibl(oriRef, includedLabels)
 					
 						try : parseString(oriRef)
@@ -283,11 +284,13 @@ class File(object):
 		
 		try:
 			if self.options.o == 'simple' : tmp_str = self.writeResultOnly(ref_ori, references, tagTypeCorpus)
-			else : tmp_str = self.writeResultInOriginal(tmp_str, soup, ref_ori, references, tagTypeCorpus)	
-		except :
+			else : tmp_str = self.writeResultInOriginal(tmp_str, soup, ref_ori, references, tagTypeCorpus)
+		except Exception, err:
+			print err
+			print "ERROR : could not finish write of orgininal"
 			pass
 
-		fich = open(dirResult+self._getName(), "w")
+		fich = open(dirResult+self._getName(), "w", encoding='utf8')
 		fich.write(tmp_str)
 		fich.close()
 		
@@ -303,15 +306,16 @@ class File(object):
 		"""
 		if self.options.v in ['output', 'all'] :
 			if self.options.o == 'tei' and numReferences > 0 :
-				try : 
+				try :
 					valide, numErr = teiValidate(dirResult+self._getName(), 'output')
 					if not valide :
 						valide, numErrOri = teiValidate(self.nom, 'output')
 						if numErr == numErrOri : print "Original file also has", numErr, "errors. Annotation OK."
 						else : print "Original file has", numErrOri, "errors. Annotation NOT OK."
-				except Exception, err: print err #when original file has a fundamental error
+				except Exception, err:
+					print err #when original file has a fundamental error
 		return
-	
+
 
 	def writeResultInOriginal(self, tmp_str, soup, ref_ori, references, tagTypeCorpus):
 		"""
@@ -338,14 +342,14 @@ class File(object):
 			p2 = tmp_str.find('</'+tagTypeCorpus+'>', p1)
 			
 			if len(contentString.split()) > 0 :
-				text = str(ref_ori[cpt])
-				text = self.doiExtraction(text, str(references[cpt]), tagTypeCorpus)
+				text = ref_ori[cpt]
+				text = self.doiExtraction(text, references[cpt], tagTypeCorpus)
 				tmp_list = list(tmp_str)
 				tmp_list[p1:p2+len('</'+tagTypeCorpus+'>')] = text
 				tmp_str = ''.join(tmp_list)
 
-			cpt += 1 
-			pre_p1 = p1		
+			cpt += 1
+			pre_p1 = p1
 		
 		return tmp_str
 
@@ -356,7 +360,7 @@ class File(object):
 		"""
 		tmp_str = '<list'+tagTypeCorpus.title()+'>\n'
 		for i, r in enumerate(ref_ori) :
-			text = str(ref_ori[i])
+			text = ref_ori[i]
 			text = self.doiExtraction(text, references[i], tagTypeCorpus)
 			tmp_str += text+'\n'
 		tmp_str += '</list'+tagTypeCorpus.title()+'>\n'
@@ -369,15 +373,15 @@ class File(object):
 		"""
 		doistring = ''
 		if self.options.d :
-			doistring = extractDoi(str(reference), tagTypeCorpus)
-			if doistring != '' : 
-				doistring = 'http://dx.doi.org/'+str(doistring)
+			doistring = extractDoi(unicode(reference), tagTypeCorpus)
+			if doistring != '' :
+				doistring = 'http://dx.doi.org/'+doistring
 				doistring = '<idno type=\"DOI\">'+doistring+'</idno>'
 				ptr1 = text.find('</title>')+len('</title>')
 				text = text[:ptr1] + doistring + text[ptr1:]
 		return text
-		
-			
+
+
 	def continuousTags(self, basicTag, includedLabels, oriRef):
 		"""
 		Check continuously annotated tags to eliminate tags per each token
@@ -399,7 +403,7 @@ class File(object):
 					token = "<"+preTag+">"
 					ptr = oriRef.find(token, ptr1)
 					oriRef = oriRef[:ptr] + oriRef[ptr+len(token):]
-					found[ns.name] = 0 #there is no other continuous tag after this tag 
+					found[ns.name] = 0 #there is no other continuous tag after this tag
 					for k in found.keys():
 						if k == ns.name : found[k] = 0
 						else : found[k] = 1
@@ -418,11 +422,11 @@ class File(object):
 		
 		return oriRef
 
-	
+
 	def arrangeTagsPerToken(self, includedLabels, oriRef, tagTypeCorpus):
 		"""
 		Check if a field of tokens annotated by a label tag has wrapped by other basic tag.
-		If yes, change order. It's for prevent the mismatching error of author tag and 
+		If yes, change order. It's for prevent the mismatching error of author tag and
 			also find other continuous tags.
 		e.g. To prevent the following error (interruption of <author> in <hi>)
 			<hi font-variant="small-caps"><author><surname>Alves</surname></hi>
@@ -436,8 +440,8 @@ class File(object):
 			ptr2 = 0
 			ptr1 = oriRef.find('<'+tmpTag+'>', ptr2) #find the starting of an annotated tag
 			while ptr1 > 0 :
-				ptr2 = oriRef.find('</'+tmpTag+'>', ptr1)+len('</'+tmpTag+'>') #find its ending 
-				ptr3 = oriRef.find('</',ptr2)	#find closest other ending tag
+				ptr2 = oriRef.find('</'+tmpTag+'>', ptr1)+len('</'+tmpTag+'>') #find its ending
+				ptr3 = oriRef.find('</',ptr2) #find closest other ending tag
 				closeTag = ''
 				if oriRef.find('<',ptr2,ptr3) < 0 and self._onlyPunc(oriRef[ptr2:ptr3]) : #if there is no starting tag between them and NO char
 					ptr4 = oriRef.find('>',ptr3)
@@ -451,7 +455,7 @@ class File(object):
 							oriRef = tmpRef
 				ptr1 = oriRef.find('<'+tmpTag+'>', ptr2)
 		
-		'final continuous check'		
+		'final continuous check'
 		oriRef = self._continuousTagck(includedLabels, nameck, oriRef)
 		'delete tags in <ref>'
 		st1, ed1, st2, ed2  = tagtool._findTagPosition(oriRef, 'ref', 0)
@@ -460,16 +464,16 @@ class File(object):
 			if centre.find("<") >= 0 and centre.find(">") > 0 :
 				ns = BeautifulSoup(centre)
 				found = []
-				for n in ns.find_all() : 
+				for n in ns.find_all() :
 					if n.name in includedLabels : found.append(n.name)
-				for f in found : 
+				for f in found :
 					oriRef = tagtool._deleteTag(oriRef, f, ed1)
 					ed2 -= 2*len(f)+len('<></>')
 			st1, ed1, st2, ed2  = tagtool._findTagPosition(oriRef, 'ref', ed2)
 
 		return oriRef
-	
-	
+
+
 	def _continuousTagck(self, includedLabels, nameck, oriRef):
 		"""
 		After a tag arrangement, check again if there are continuous tags. If yes, delete them.
@@ -485,40 +489,39 @@ class File(object):
 					if st2>=0 and self._onlyPunc(tmp_str[ed1:st2]) :
 						tmp_str = tmp_str[:st1]+tmp_str[ed1:st2]+tmp_str[ed2:]
 					st1 = tmp_str.find('</'+tmpTag+'>', st1+1)
-
 		return tmp_str
-	
-	
+
+
 	def _onlyPunc(self, tmp_str):
 		"""
 		Check if tmp_str has non-alphanumeric character only. Find also special characters in dict specialPunc.
 		"""
 		new_str = tmp_str.replace(' ', ' ')
 		for key in specialPunc.iterkeys(): new_str = new_str.replace(key, ' ')
-		new_str = re.sub('\W', ' ', new_str)
+		new_str = re.sub('\W', ' ', new_str, flags=re.UNICODE)
 		onlyPunc = False
-		if len(new_str.split()) == 0 : onlyPunc = True
-					
+		if len(new_str.split()) == 0:
+			onlyPunc = True
+		
 		return onlyPunc
-	
-	
+
+
 	def checkHiTag(self, oriRef, includedLabels):
 		"""
 		Solve tag encoding problem concerning <hi> tag. As original xml contains a lot of <hi> tags, which are often
 		complicate and sometimes not correctly written, we should especially deal with the conflict among <hi> tag
-		and annotated tags by Bilbo. The objective is exchanging tags so that <hi> tag includes text only. It is not 
+		and annotated tags by Bilbo. The objective is exchanging tags so that <hi> tag includes text only. It is not
 		easy because users sometimes do errors when they modify character appearance in their articles (<hi> concerns
 		character appearance). Even if this is not very often, it's not easy to add some rules to detect and solve
-		this problem because Bilbo also mistakes and it is not easy to automatically detect if the conflict comes 
-		from user or Bilbo. Anyway we start the correction from the obvious error of Bilbo and try to make some 
+		this problem because Bilbo also mistakes and it is not easy to automatically detect if the conflict comes
+		from user or Bilbo. Anyway we start the correction from the obvious error of Bilbo and try to make some
 		detailed rules for every error cases.
 		"""
-		
 		refLabels = []
 		hasTitle = False
 		soup = BeautifulSoup(oriRef)
-		for s in soup.find_all() : 
-			if s.name in includedLabels : 
+		for s in soup.find_all() :
+			if s.name in includedLabels :
 				refLabels.append(s.name)
 				if (s.name).find("title") == 0 : hasTitle = True
 				
@@ -549,7 +552,7 @@ class File(object):
 				'Find other tags and move them'
 				ns = BeautifulSoup(centre)
 				found = []
-				for n in ns.find_all() : 
+				for n in ns.find_all() :
 					if n.name in includedLabels : found.append(n.name)
 				'If there is only one type of tag but the tags have not been joined because they are name tags'
 				'-> group them, cause they are part of an author wrapped by <hi>'
@@ -577,7 +580,7 @@ class File(object):
 								tmpRef = tagtool._exchangeTagPairs(tmpRef, tagName, a, b+1, c, d)
 							else :
 								'case 2-2 : if not, delete all'
-								for f in found : 
+								for f in found :
 									tmpRef = tagtool._deleteTag(tmpRef, f, b+1)
 									d -= 2*len(f)+len('<></>')
 				else :
@@ -585,7 +588,7 @@ class File(object):
 					cntN = 0
 					tagName = ''
 					for f in found : #Check if there is just one type of title
-						if f.find("title") == 0 : 
+						if f.find("title") == 0 :
 							tagName = f
 							cntT += 1
 						if f in nameck+['nolabel', 'abbr'] : cntN += 1
@@ -609,14 +612,14 @@ class File(object):
 							tmpRef = tagtool._exchangeTagPairs(tmpRef, tagName, a, b+1, c, d)
 							for f in found :
 								tmpRef = tagtool._deleteTag(tmpRef, f, b+1)
-								d -= 2*len(f)+len('<></>')					
+								d -= 2*len(f)+len('<></>')
 					elif len(found) > 0 and cntN == len(found) : #all name tag or (nolabel)
 						'case 5 : if all tags are name tags and there are other words, maybe annotation error, delete'
 						tmp_centre = centre
 						for f in found : tmp_centre = tagtool._deleteTag(tmp_centre, f, 0)
 						if len(tmp_centre.split()) > len(found) :
 							'delete all'
-							for f in found : 
+							for f in found :
 								tmpRef = tagtool._deleteTag(tmpRef, f, b+1)
 								d -= 2*len(f)+len('<></>')
 						else : ####FULLY ANNOTATED NAME TAGS####
@@ -643,21 +646,21 @@ class File(object):
 						if len(found) == 0 : pass #NO problem
 						else : #### tags are mixed, but no title
 							allDelete = True
-							for f in found : 
+							for f in found :
 								if f not in canDelete : allDelete = False
 							'case 6 : if all tags are removable ones, delete ALL'
 							if allDelete :
-								for f in found : 
+								for f in found :
 									tmpRef = tagtool._deleteTag(tmpRef, f, b+1)
 									d -= 2*len(f)+len('<></>')
 							else :
 								'case 7 : fully mixed, but most of case is removable. consider some special sub cases.'
 								isPublisher = False
 								if found == ['place','publisher','abbr'] : isPublisher = True
-								if not hasTitle or not tagtool._hasTitleAfterSemi(tmpRef, a, d) : 
+								if not hasTitle or not tagtool._hasTitleAfterSemi(tmpRef, a, d) :
 									'case 7-1: if there is no title in oriRef, delete all tags and wrap with title_m'
 									tmpRef, d = tagtool._delAllandWrap(tmpRef, found, 'title_m', a, d)
-								elif isPublisher :	
+								elif isPublisher :
 									'case 7-2: <place>, <publisher>, <abbr> <---- keep them'
 									hiString = tmpRef[a:b+1]
 									tmpRef = tagtool._devideHi(tmpRef, found, hiString, a)
@@ -672,14 +675,14 @@ class File(object):
 		tmpRef = self._continuousTagck(includedLabels, nameck, tmpRef)
 			
 		return tmpRef
-	
-	
+
+
 	def findAuthor(self, includedLabels, oriRef):
 		"""
 		Post-processing RULE about author field
 		Separate surname and forename pair per author
 		Step 1. check group of fields continuously tagged as surname or as forename over whole string
-		Step 2. per group, verify if there are more than an author 
+		Step 2. per group, verify if there are more than an author
 			2-1. Check if there is a comma (or others like &, et, and)
 			2-2. Check if there are more than three tokens
 			if only an author -> wrap the fields with <author></author>
@@ -688,9 +691,9 @@ class File(object):
 				we assume that authors are separated by a comma
 				wrap the fields with <author></author>
 			3-2 if there is only a token in a separated group,
-				SURNAME, FORENAME (FORENAME...), SURNAME, FORENAME (FORENAME...), 
+				SURNAME, FORENAME (FORENAME...), SURNAME, FORENAME (FORENAME...),
 				separate them by surname
-		"""		
+		"""
 		preTag = ""
 		continuousck = ["surname", "forename", "namelink", "genname"]
 		group = []
@@ -730,24 +733,24 @@ class File(object):
 						tmp_string = ''.join(BeautifulSoup(oriRef[ptr0:ptr2]).findAll(text = True))
 						multi = True #multiple person indicator
 						if oriRef.count(",", ptr0, ptr2) == 1 : #one comma and exist a field with one token
-							for ts in tmp_string.split(",") : 
+							for ts in tmp_string.split(",") :
 								if len(ts.split()) == 1 : multi = False
 						if multi :
 							'Check separate tokens by comma'
 							commaCut = True #indicator if we can simply separate by comma
 							doubleCut = True #indicator if we can separate by two commas
-							for ts in tmp_string.split(",") :  
+							for ts in tmp_string.split(",") :
 								if len(ts.split()) == 1 : commaCut = False #check if all fields have two tokens at least
 								else : doubleCut = False #check if all fields have just one token
 							if commaCut : #separate by comma
 								ptr1 = oriRef.find(",", ptr0, ptr2)
 								while ptr1 > 0 : [oriRef, ptr1, ptr2] = self._inserAuthorTag(oriRef, ptr1, ptr2, ",")
-							elif doubleCut : 
+							elif doubleCut :
 								ptr1 = oriRef.find(",", ptr0, ptr2)
 								if ptr1 > 0 : ptr1 = oriRef.find(",", ptr1+1, ptr2)
 								while ptr1 > 0 :
 									[oriRef, ptr1, ptr2] = self._inserAuthorTag(oriRef, ptr1, ptr2, ",")
-									if ptr1 > 0 : ptr1 = oriRef.find(",", ptr1+1, ptr2)								
+									if ptr1 > 0 : ptr1 = oriRef.find(",", ptr1+1, ptr2)
 							else : #special case
 								prePtr1 = ptr0
 								tmp_fields = tmp_string.split(",")
@@ -761,7 +764,7 @@ class File(object):
 											[oriRef, ptr1, ptr2] = self._inserAuthorTag(oriRef, ptr1, ptr2, ",")
 											start = True
 										else : # is probable that surname or forename
-											if start : 
+											if start :
 												start = False
 												prePtr1 = ptr1
 												ptr1 = oriRef.find(",", ptr1+1, ptr2)
@@ -770,10 +773,10 @@ class File(object):
 												[oriRef, ptr1, ptr2] = self._inserAuthorTag(oriRef, ptr1, ptr2, ",")
 												start = True
 									elif ptr1 > 0 :
-										if start : 
+										if start :
 											start = False
 											prePtr1 = ptr1
-											ptr1 = oriRef.find(",", ptr1+1, ptr2)	
+											ptr1 = oriRef.find(",", ptr1+1, ptr2)
 										else :
 											prePtr1 = ptr1
 											[oriRef, ptr1, ptr2] = self._inserAuthorTag(oriRef, ptr1, ptr2, ",")
@@ -793,8 +796,8 @@ class File(object):
 		oriRef = oriRef.replace('</orgname>', '</orgname></author>')
 			
 		return oriRef, noCutRef
-	
-	
+
+
 	def _inserAuthorTag(self, oriRef, ptr1, ptr2, sep):
 		"""
 		Insert <author> tag at the given positions
@@ -820,8 +823,8 @@ class File(object):
 			ptr1 = oriRef.find(sep, ptr1+1, ptr2)
 		
 		return oriRef, ptr1, ptr2
-	
-		
+
+
 	def correctMissTag(self, oriRef, basicTag, addedTag):
 		"""
 		Check interrupted tags in newly attached tag (wrapping other tags), then replace them
@@ -832,7 +835,7 @@ class File(object):
 		By searching from the beginning of the input string, check case 1 and correct, then check case2 and correct
 			[Algo]	1. find the starting and ending of target tag (pointers, ptr1, ptr2)
 					2. 	(case 1) find an ending tag in basicTag from ptr1, if no starting tag between ptr1 and ptr2
-						find the starting tag by inversely checking the string. Once 		
+						find the starting tag by inversely checking the string. Once
 		"""
 		[limited1, limitst2] = tagtool._totallyWrapped(oriRef)
 		prePtrlimit = limited1
@@ -841,22 +844,22 @@ class File(object):
 		tmpRef = oriRef
 		ptr1 = tmpRef.find('<'+addedTag+'>', 0) #find the starting of new tag
 		while ptr1 >= 0 :
-			ptr2 = tmpRef.find('</'+addedTag+'>', ptr1)	
-			#Starting tag, case 1	
+			ptr2 = tmpRef.find('</'+addedTag+'>', ptr1)
+			#Starting tag, case 1
 			tagName = ''
 			found = []
 			st2 = tmpRef.find('</', ptr1, ptr2)
 			ed2 = tmpRef.find('>', st2, ptr2)
 			if st2 > 0 : tagName = tmpRef[st2+len('</'):ed2]
-			while st2 > 0 and tagName not in found : 
+			while st2 > 0 and tagName not in found :
 				while st2 > 0 and tagName not in basicTag :
 					st2 = tmpRef.find('</', ed2, ptr2)
 					ed2 = tmpRef.find('>', st2, ptr2)
 					if st2 > 0 : tagName = tmpRef[st2+len('</'):ed2]
-				if st2 > 0 : 
+				if st2 > 0 :
 					p1 = tmpRef.find('<'+tagName+' ', ptr1, st2)
 					p2 = tmpRef.find('<'+tagName+'>', ptr1, st2)
-					if p1 < 0 and p2 < 0 : 
+					if p1 < 0 and p2 < 0 :
 						#no starting tag, so find starting tag
 						[st1, ed1, tagN] = tagtool._preOpeningTag(tmpRef, ptr1, tagName, prePtrlimit)
 						if tagName == tagN :
@@ -870,13 +873,13 @@ class File(object):
 								if tmpstr.find('<') < 0 :
 									tmpRef = tagtool._moveFirstTag(tmpRef, ptr1, ptr1+len('<'+addedTag+'>'), st2, ed2+1)
 									found.append(tagName)
-								else : 
+								else :
 									print "can't deal it"
 									print tmpRef
 					st2 = tmpRef.find('</', ed2, ptr2)
 					ed2 = tmpRef.find('>', st2, ptr2)
-					if st2 > 0 : tagName = tmpRef[st2+len('</'):ed2]	
-			#Ending tag, case 2	
+					if st2 > 0 : tagName = tmpRef[st2+len('</'):ed2]
+			#Ending tag, case 2
 			tagName = ''
 			found = []
 			st2 = tmpRef.find('</', ptr2+1)
@@ -887,30 +890,30 @@ class File(object):
 					st2 = tmpRef.find('</', ed2)
 					ed2 = tmpRef.find('>', st2)
 					if st2 > 0 : tagName = tmpRef[st2+len('</'):ed2]
-				if st2 > 0 : 
+				if st2 > 0 :
 					p1 = tmpRef.find('<'+tagName+' ', ptr2, st2)
 					p2 = tmpRef.find('<'+tagName+'>', ptr2, st2)
-					if p1 < 0 and p2 < 0 : 
+					if p1 < 0 and p2 < 0 :
 						#no starting tag, so find starting tag
 						[st1, ed1, tagN] = tagtool._preOpeningTag(tmpRef, ptr2, tagName, prePtrlimit)
 						if tagName == tagN and st1 > ptr1 :
 							tmpstr = tmpRef[ptr2+len('</'+addedTag+'>'):st2]
 							ignored = ["<nolabel>", "</nolabel>", "<abbr>", "</abbr>"]
 							for st in ignored : tmpstr.replace(st,"")
-							if tmpstr.find('<') < 0 : 
+							if tmpstr.find('<') < 0 :
 								tmpRef = tagtool._moveFirstTag(tmpRef, ptr2, ptr2+len('</'+addedTag+'>'), st2, ed2+1)
 								found.append(tagName)
-							else : # To avoid conflict just move the tag 
+							else : # To avoid conflict just move the tag
 								tmpRef = tagtool._moveSecondTag(tmpRef, st1, ed1, ptr2, ptr2+len('</'+addedTag+'>'))
 								found.append(tagName)
 					st2 = tmpRef.find('</', ed2)
 					ed2 = tmpRef.find('>', st2)
-					if st2 > 0 and st2 < postPtrlimit : tagName = tmpRef[st2+len('</'):ed2]		
+					if st2 > 0 and st2 < postPtrlimit : tagName = tmpRef[st2+len('</'):ed2]
 			ptr1 = tmpRef.find('<'+addedTag+'>', ptr2)
 		
-		return  tmpRef	
-	
-	
+		return  tmpRef
+
+
 	def _cleanTags(self, oriRef):
 		"""
 		Clean unnecessary <hi> tag
@@ -924,19 +927,19 @@ class File(object):
 			b = tmpRef.find(target_tag_mi, a + len(target_tag_st))
 			c = tmpRef.find(target_tag_end, b)
 			d = c + len(target_tag_end)
-			if re.match('<hi xml:lang=\"\w\w\">', tmpRef[a:b+1]) :
+			if re.match('<hi xml:lang=\"\w\w\">', tmpRef[a:b+1], flags=re.UNICODE) :
 				tmpRef = tmpRef[:a]+tmpRef[b+1:c]+tmpRef[d:]
 				e = d-len('<hi xml:lang=\"AA\"></hi>')
 				if e > 0 : a = tmpRef.find(target_tag_st, e)
 				else : a = tmpRef.find(target_tag_st, 0)
-			else :	
+			else :
 				a = tmpRef.find(target_tag_st,d)
 		tmpRef = self._cleanHiTagSpecific(tmpRef)
 	
 		return tmpRef
 
 
-	def _cleanHiTagSpecific(self, tmpRef):	
+	def _cleanHiTagSpecific(self, tmpRef):
 		"""
 		Clean unnecessary <hi> tag with an exact matching
 		"""
@@ -955,12 +958,12 @@ class File(object):
 						c = tmpRef.find(target_tag_end, d)
 						d = c + len(target_tag_end)
 				tmpRef = tmpRef[:a]+tmpRef[b:c]+tmpRef[d:]
-				e = d-len(hiString)-len(target_tag_end)	
+				e = d-len(hiString)-len(target_tag_end)
 				a = tmpRef.find(hiString, e)
 				
 		return tmpRef
-	
-	
+
+
 	def detectBibl(self, oriRef, includedLabels):
 		"""
 		Separate references included in a note
@@ -973,7 +976,7 @@ class File(object):
 		toAdd = ['title_m', 'title_a', 'title_j', 'title_t', 'title_u', 'title_s']
 		for k in toAdd : tempLabels[k] = 1
 		if tempLabels.has_key('nonbibl') : del tempLabels['nonbibl']
-		for s in soup.find_all() : 
+		for s in soup.find_all() :
 			if s.name in tempLabels : refLabels.append(s.name)
 		
 		'find position and insert <bibl> and </bibl>'
@@ -995,8 +998,8 @@ class File(object):
 		if not case1 : oriRef = self._separateNonbiblBibl(oriRef, includedLabels)
 
 		return oriRef
-	
-	
+
+
 	def _separateSemicolonBibl(self, oriRef, includedLabels):
 		"""
 		Separate multiple references in a detected reference zone using semicolons
@@ -1004,12 +1007,12 @@ class File(object):
 		validLabels = includedLabels
 		toRemove = ['nolabel', 'nonbibl', 'w', 'bookindicator']
 		toAdd = ['title_m', 'title_a', 'title_j', 'title_t', 'title_u', 'title_s']
-		for k in toRemove : 
+		for k in toRemove :
 			if k in validLabels : del validLabels[k]
 		for k in toAdd : validLabels[k] = 1
 		separateLabels = copy.deepcopy(validLabels)
 		nameck = ['surname', 'forename', 'namelink', 'genname', 'author']
-		for k in nameck : 
+		for k in nameck :
 			if k in separateLabels : del separateLabels[k]
 		
 		'case 1 : find semicolons and verify if they are used for the reference separation'
@@ -1024,7 +1027,7 @@ class File(object):
 			'find semiconlon'
 			ptr1 = oriRef.find(";", ptr0, ptr2)
 			ckend = oriRef.find("<", ptr1, ptr2)
-			while ptr1 > 0 : 
+			while ptr1 > 0 :
 				centre = BeautifulSoup(oriRef[ptr0:ptr1])
 				if not oriRef[ckend:].find('</') == 0 :
 					sepBibl = False
@@ -1054,31 +1057,31 @@ class File(object):
 									tmpRef = tmpRef[:st] + '<bibl>' + tmpRef[st:]
 									ptr1 = st
 									oriRef = tmpRef
-									case1 = True								
-				ptr0 = ptr1+1	
+									case1 = True
+				ptr0 = ptr1+1
 				ptr1 = oriRef.find(";", ptr1+1, ptr2)
 				
 		return oriRef, case1
-	
-	
+
+
 	def _separateNonbiblBibl(self, oriRef, includedLabels):
 		"""
 		separate multiple references in a detected reference zone using <nonbibl> fields
 		"""
 		validLabels = includedLabels
 		toRemove = ['nolabel', 'nonbibl', 'w', 'bookindicator']
-		for k in toRemove : 
+		for k in toRemove :
 			if k in validLabels : del validLabels[k]
 		separateLabels = copy.deepcopy(validLabels)
 		nameck = ['surname', 'forename', 'namelink', 'genname', 'author']
-		for k in nameck : 
+		for k in nameck :
 			if k in separateLabels : del separateLabels[k]
 		
 		'case 2'
 		case2 = False
 		tmp_soup = BeautifulSoup(oriRef)
 		sub_soup = tmp_soup.find('bibl')
-		if sub_soup : 
+		if sub_soup :
 			for ss in sub_soup.findAll() :
 				if ss.name == 'nonbibl' : case2 = True
 			if case2 :
@@ -1120,27 +1123,13 @@ class File(object):
 									oriRef = tmpRef
 									case2 = True
 					st1, ed1, st2, ed2 = tagtool._findTagPosition(oriRef, 'nonbibl', st1+1)
-				
+		
 		return oriRef
-	
-	
+
+
 	def _getName(self):
 		"""
 		Return the file name without the complete path
 		"""
 		chemin = self.nom.split("/")
 		return chemin.pop()
-	
-
-	def convertToUnicode(self, chaine):
-		"""
-		Convert a string to unicode
-		"""
-		try:
-			if isinstance(chaine, str):
-				chaine = unicode(chaine, sys.stdin.encoding)
-		except:
-			chaine = unicode(chaine, 'ascii')
-		return chaine
-
-	

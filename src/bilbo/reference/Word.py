@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 """
 Created on April 18, 2012
 
@@ -28,7 +29,9 @@ class Word(object):
 		self.feature = []
 		self.ignoreWord = 0
 		'item is an indicator showing if the word is in a sub reference'
-		self.item = 0			
+		self.item = 0
+		if type(mot) is str:
+			print mot
 		
 		for tag in tags:
 			'Eliminate the spaces at the beginning and ending'
@@ -45,9 +48,9 @@ class Word(object):
 			if feature != "" and self.getFeature(feature) == -1:
 				self.feature.append(Feature(feature))
 
-	
+
 	def affiche(self):
-		print "\nWord : ",self.nom, self.core
+		print "\nWord : ",self.nom.encode('utf8'), self.core.encode('utf8')
 		if len(self.tag) >= 1:
 			print "\tTAG :"
 			for key in self.tag:
@@ -57,7 +60,7 @@ class Word(object):
 			print "\tFEATURE :"
 			for key in self.feature:
 				key.affiche()
-	
+
 
 	def addFeature(self,feature):
 		if isinstance(feature, list):
@@ -73,7 +76,7 @@ class Word(object):
 			feature.rstrip()
 			if self.getFeature(feature) == -1:
 				self.feature.append(Feature(feature))
-		
+
 
 	def addTag(self,tag):
 		if isinstance(tag, list):
@@ -89,14 +92,14 @@ class Word(object):
 			tag.rstrip()
 			if self.getTag(tag) == -1:
 				self.tag.append(Balise(tag))
-		
+
 
 	def delFeature(self,feature):
 		ref = self.getFeature(feature)
 		if ref != -1:
 			self.feature.remove(ref)
 		return -1
-	
+
 
 	def delTag(self,tag):
 		ref = self.getTag(tag)
@@ -107,7 +110,7 @@ class Word(object):
 
 	def delAllFeature(self):
 		del(self.feature[:])
-	
+
 
 	def delAllTag(self):
 		del(self.tag[:])
@@ -118,28 +121,28 @@ class Word(object):
 			if carac.nameIs(feature) == 1:
 				return carac
 		return -1
-		
+
 
 	def getTag(self,tag):
 		for bal in self.tag:
 			if bal.nameIs(tag) == 1:
 				return bal
 		return -1
-	
+
 
 	def listNomFeature(self):
 		carac = []
 		for key in self.feature:
 			carac.append(key.nom)
 		return carac
-		
+
 
 	def listNomTag(self):
 		bal = []
 		for key in self.tag:
 			bal.append(key.nom)
 		return bal
-	
+
 
 	def getLastFeature(self):
 		"""
@@ -148,18 +151,17 @@ class Word(object):
 		if len(self.feature) == 0:
 			return -1
 		return self.feature[len(self.feature)-1]
-	
+
 
 	def getLastTag(self):
 		"""
 		Return the last tag
-		"""		
+		"""
 		if len(self.tag) == 0:
 			return -1
 		if self.tag[len(self.tag)-1].nom == 'hi' and len(self.tag) > 1:
 			return self.tag[len(self.tag)-2]
 		return self.tag[len(self.tag)-1]
-	
 
 
 	def getFeatureIndice(self, index):
@@ -168,45 +170,43 @@ class Word(object):
 		"""
 		if index < 0: return -1
 		return self.feature[index]
-	
-	
+
+
 	def getTagIndice(self, index):
 		"""
 		Return the tag at the index
 		"""
 		if index < 0: return -1
 		return self.tag[index]
-	
+
 
 	def getAllFeature(self):
 		"""
 		Return all the features
-		"""		
+		"""
 		return self.feature
-	
+
 
 	def getAllTag(self):
 		"""
 		Return all the tags
-		"""		
+		"""
 		return self.tag
-	
+
 
 	def nbTag(self):
 		"""
 		Return the number of tags
-		"""		
+		"""
 		return len(self.tag)
 
 
 	def nbFeatures(self):
 		"""
 		Return the number of features
-		"""	
+		"""
 		return len(self.feature)
-	
-	
+
+
 	def __getattr__(self, nom):
 		print("Alert ! There is no attribute {0} here !".format(nom))
-		
-

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 """
 Created on June 11, 2012
 
@@ -6,8 +7,7 @@ Created on June 11, 2012
 """
 from bilbo.format.Extract import Extract
 
-chPunc =  {'.':0, ',':0, ')':0,'”':0, '}':0, ']':0, 
-		'(':0, '“':0, '{':0, '[':0, '«':0, '»':0, '“':0, '”':0, '"':0}
+chPunc =  {'.':0, ',':0, ')':0,'”':0, '}':0, ']':0, '(':0, '“':0, '{':0, '[':0, '«':0, '»':0, '“':0, '”':0, '"':0}
 chFeat4title = ["a","m","j","s","u","volume_title", "translated_title", "research_programm" ]
 
 class Extract_crf(Extract):
@@ -18,18 +18,18 @@ class Extract_crf(Extract):
 
 	def __init__(self, options={}):
 		Extract.__init__(self, options)
-		
+
 
 	def extract (self, typeCorpus, ndocs, fileRes, listRef, tr=-1, extOption=-1) :
 		"""
 		Extract training and test data
 
 		Parameters
-		----------	
+		----------
 		typeCorpus : int, {1, 2, 3}
 			type of corpus
 			1 : corpus 1, 2 : corpus 2...
-		ndocs : int 
+		ndocs : int
 			number of references
 		fileRes : string
 			output file name
@@ -40,10 +40,10 @@ class Extract_crf(Extract):
 		extOption : int, {-1, 1, ...} (default -1)
 			extra option for crf training/test data format
 			check if data is internal data, if yes we'll use a modified index for corpus type 2
-			-1 : data format for SVM 
-			1 : data format for normal CRF training/test data 
+			-1 : data format for SVM
+			1 : data format for normal CRF training/test data
 			2-5 : (not yet provided)
-		"""	
+		"""
 		self.titleCK = 0
 		self.titleAttr = ''
 		self.relatItm = 0
@@ -81,7 +81,7 @@ class Extract_crf(Extract):
 							if nonbiblck == 1:
 								tmp_nonbiblck = 1
 									
-					if tmp_nonbiblck == 1 : 
+					if tmp_nonbiblck == 1 :
 						mot.delAllTag()
 						mot.addTag("nonbibl")
 	
@@ -100,8 +100,8 @@ class Extract_crf(Extract):
 					if mot.getTag('c') != -1 :
 						for carac in mot.getAllFeature():
 							if not carac.nom.lower() in ['punc', 'point', 'comma', 'leadingquotes', 'endingquotes', 'link', 'pairedbraces'] :
-								mot.delFeature(carac.nom)	
-														
+								mot.delFeature(carac.nom)
+					
 					for carac in mot.getAllFeature():
 						if not self.features.has_key(carac.nom.lower()) :
 							if extOption != -1 or not (carac.nom.lower() in chFeat4title) :
@@ -122,7 +122,7 @@ class Extract_crf(Extract):
 			
 			if nonbiblck == 1 :
 				reference.bibl = -1
-			else : 
+			else :
 				reference.bibl = 1
 			nonbiblck = 1
 			
@@ -159,4 +159,3 @@ class Extract_crf(Extract):
 			self._print_parallel(fileRes, listRef)
 				
 		return
-	

@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 """
 htmlGenerator.py
 
@@ -12,9 +13,7 @@ import os
 
 labels =  {'.':0, ',':0, '(':0, ')':0, ':':0, ';':0, '«':0, '»':0, '-':0, '—':0, '“':0, '”':0, '{':0, '}':0, '[':0, ']':0,  '!':0, '?':0}
 
-
 def simpleComp(truefile, estfile, indicator):
-	
 	est = []
 	for line in open (estfile, 'r') :
 		line = line.split()
@@ -51,9 +50,9 @@ def simpleComp(truefile, estfile, indicator):
 					print_layout(currLabel, currToken, 0)
 				#print '<'+currLabel+'>',
 				#print currToken,
-			preLabel = currLabel	
+			preLabel = currLabel
 			j += 1
-		else : 
+		else :
 			print '</font>'
 			print '<br><br>'
 			preLabel = 'start'
@@ -61,7 +60,8 @@ def simpleComp(truefile, estfile, indicator):
 	print '\n</html>\n'
 		
 	return
-	
+
+
 def print_layout(currLabel, currToken, st) :
 	if (currLabel =='surname') :
 		color = 'lightslategray'
@@ -92,7 +92,7 @@ def print_layout(currLabel, currToken, st) :
 	elif (currLabel =='extent') :
 		color = 'darkseagreen'
 	elif (currLabel =='edition') :
-		color = 'lightsteelblue'	
+		color = 'lightsteelblue'
 	elif (currLabel =='name') :
 		color = 'skyblue'
 	elif (currLabel =='pages') :
@@ -107,8 +107,6 @@ def print_layout(currLabel, currToken, st) :
 	else :
 		str = "</font><font style=\"background:"+color+"\">"+currToken
 	print str,
-	
-
 
 
 def main():
@@ -121,4 +119,3 @@ def main():
 
 if __name__ == '__main__':
 	main()
-

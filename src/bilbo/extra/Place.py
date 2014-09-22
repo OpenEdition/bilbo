@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 """
 Created on April 25, 2012
 
 @author: Young-Min Kim, Jade Tavernier
 """
+
+from codecs import open
 
 class Place(object):
 
@@ -11,10 +14,10 @@ class Place(object):
 		self.placelist = {'0000': 0}
 		
 		'Load the place list file and save the contents in the list'
-		for line in open (fname, 'r') :
+		for line in open (fname, 'r', encoding='utf8') :
 			line = line.split('\n')[0]
 			self.placelist[line] = 1
-	
+
 
 	def searchPlace(self, listReference, tr) :
 		"""
@@ -27,5 +30,3 @@ class Place(object):
 			for mot in reference.getWord():
 				if self.placelist.has_key(mot.nom.upper()):
 					mot.addFeature('PLACELIST')
-
-		

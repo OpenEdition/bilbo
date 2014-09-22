@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 """
 Created on April 18, 2012
 
@@ -6,12 +7,14 @@ Created on April 18, 2012
 """
 from bilbo.reference.Word import Word
 import string
-import re, os
+import regex as re
+import os
+from codecs import open
 
 class Clean(object):
 	"""
 	A class that tokenizes xml input data. Navigates the xml tree and extracts tokens, features and labels.
-	It concerns the first step of tokenization such that words are separated by whitespace but not by punctuation 
+	It concerns the first step of tokenization such that words are separated by whitespace but not by punctuation
 	marks. A clean object is created in a File object ("extract" method).
 	"""
 
@@ -23,14 +26,14 @@ class Clean(object):
 		self.nonLabels = {}
 		self.tagAttDict = {'0000': 0}
 		main = os.path.realpath(__file__).split('/')
-		self.rootDir = "/".join(main[:len(main)-4])		
+		self.rootDir = "/".join(main[:len(main)-4])
 		try:
 			'flag = 1 : features, flag = 2 : nonLabels, flag = 3 : bookindicator'
-			flag = 0 
-			nameRegle = ""	
+			flag = 0
+			nameRegle = ""
 			
-			for line in open(os.path.join(self.rootDir, "KB/config/features.txt")):
-				lineSplit = re.split("\s", line)
+			for line in open(os.path.join(self.rootDir, "KB/config/features.txt"), encoding='utf8'):
+				lineSplit = re.split("\s", line, flags=re.UNICODE)
 				if lineSplit[0] == "#":
 					nameRegle = lineSplit[1]
 					flag += 1
@@ -39,10 +42,12 @@ class Clean(object):
 				elif flag == 2:
 					'nonLabels'
 					self.nonLabels[lineSplit[0]] = lineSplit[1]
-		except:
+		except IOError:
 			pass
 			print "Feature file not found : config/features.txt \n"
-		
+		except:
+			raise
+
 
 	def posssign(self, line, sign) :
 		for s in sign :
@@ -51,14 +56,14 @@ class Clean(object):
 			if nline != line :
 				line = nline
 		return line
-	
-	
+
+
 	def _extract_tags(self,current_tag, lens) :
 		"""
 		Extract tags and attributes for each token by navigating xml tree
 		We should carefully consider the encoding of input string because BeautifulSoup 4 causes encoding error
 		when using str for the string including special accents only.
-		"""	
+		"""
 		words = []
 		txts = []
 		tokens = []
@@ -75,7 +80,7 @@ class Clean(object):
 			top_att = ''
 			attstyp_string = ''
 			for key in n.attrs.keys() :
-				if isinstance(n.attrs[key], str) :
+				if isinstance(n.attrs[key], (str, unicode)) :
 					top_att = top_att + n.attrs[key]+' '
 				else :
 					top_att = top_att + n.attrs[key][0]+' '
@@ -84,26 +89,26 @@ class Clean(object):
 			tagatt_string = n.name+' '+ attstyp_string+' '+top_att
 			if self.tagAttDict.has_key(tagatt_string) :
 				self.tagAttDict[tagatt_string] += 1
-			else : 
-				self.tagAttDict[tagatt_string] = 1	
+			else :
+				self.tagAttDict[tagatt_string] = 1
 		else :
 			pass
 	
 		#read contents
-		nstring = ''
-		try : nstring = str(n.string)
-		except : nstring = (n.string).encode('utf8')
+		nstring = unicode(n.string)
 			
 		tagsCk = 1
-		try : n.contents[0].name
-		except : tagsCk = 0
+		try :
+			n.contents[0].name
+		except :
+			tagsCk = 0
 		
 		if nstring == 'None' or tagsCk == 1 :	#case1 : no contents, case2 : tags in current tag
 			ncons = len(n.contents)
 			if ncons == 0 :						#case1
 				pass
 			else :								#case2
-				self._arrangeData(n, txts, tags, attrs, top_tag, top_att)							
+				self._arrangeData(n, txts, tags, attrs, top_tag, top_att)
 		else :									#case 3 just a content, no tags in it
 			txt = nstring
 			txts.append(txt)
@@ -116,12 +121,12 @@ class Clean(object):
 			for s in st :
 				tokens.append(s)
 		
-		#save extracted tokens to the dictionary "words" 
+		#save extracted tokens to the dictionary "words"
 		for j in range(0,len(txts)) :
 			balise = []
 			caract = []
-			if str(txts[j]) != 'None' and str(txts[j]) != '\n':
-				st = string.split(str(txts[j]))
+			if txts[j] != 'None' and txts[j] != '\n':
+				st = string.split(txts[j])
 				for s in st :
 					balise = []
 					caract = []
@@ -129,7 +134,7 @@ class Clean(object):
 						caract.extend(attr.split(" "))
 					for tag in tags[j] :
 						balise.extend(tag.split(" "))
-					if not lens > 0 : 
+					if not lens > 0 :
 						balise.append("nonbibl")
 					words.append({"nom":s, "caracteristique":caract, "balise":balise})
 				
@@ -142,61 +147,61 @@ class Clean(object):
 		"""
 		for con in n.contents :
 			constring = ''
-			try : constring = str(con.string)
-			except : constring = (con.string).encode('utf8')
+			constring = unicode(con.string)
 			
 			tagsCk = 1
-			try : con.contents[0].name
-			except : tagsCk = 0
+			try :
+				con.contents[0].name
+			except:
+				tagsCk = 0
 
 			txt = constring
-			if str(txt) != 'None' and tagsCk == 0 : 
+			if txt != 'None' and tagsCk == 0 :
 				txts.append(txt)
 				tags.append([])
 				attrs.append([])
 				ct = len(txts)
 				tags[ct-1].append(top_tag)
-				if (top_att) : attrs[ct-1].append(top_att)		# APPEND ATTRIBUTE
+				if (top_att) :
+					attrs[ct-1].append(top_att)		# APPEND ATTRIBUTE
 
-				if con == constring.decode('utf8') :
+				if unicode(con) == constring:
 					pass
 				else :
 					tags[ct-1].append(con.name)
-					if len(con.attrs) > 0 : 
+					if len(con.attrs) > 0 :
 						atts_string = ''
 						attstyp_string = ''
 						for key in con.attrs.keys() :
-							if isinstance(con.attrs[key], str) :
+							if isinstance(con.attrs[key], (str, unicode)) :
 								atts_string = atts_string + con.attrs[key]+' '
 							else :
 								atts_string = atts_string + con.attrs[key][0]+' '
 							attstyp_string = attstyp_string + key+' '
 						attrs[ct-1].append(atts_string)
-						#print atts_string
 						tagatt_string = con.name+' '+attstyp_string+' '+atts_string
 						if self.tagAttDict.has_key(tagatt_string) :
 							self.tagAttDict[tagatt_string] += 1
-						else : 
+						else :
 							self.tagAttDict[tagatt_string] = 1
 					
-			else : 				#case2b : more than 2 levels
+			else : #case2b : more than 2 levels
 				temp_str = top_tag+' '+con.name
 				atts_string = ''
-				#print con.name, con.attrs
 				for key in con.attrs.keys() :
-					if isinstance(con.attrs[key], str) :
+					if isinstance(con.attrs[key], (str, unicode)) :
 						atts_string = atts_string + con.attrs[key]+' '
 					else :
 						atts_string = atts_string + con.attrs[key][0]+' '
 				temp_attr = top_att+' '+atts_string
 				self._arrangeData(con, txts, tags, attrs, temp_str, temp_attr)
 		return
-	
+
 
 	def _elimination (self, tmp_str) :
 		"""
 		Eliminate unnecessary tags
-		"""		
+		"""
 		target_tag_st = "<hi font-variant=\"small-caps\">"
 		target_tag_end = "</hi>"
 		
@@ -222,7 +227,7 @@ class Clean(object):
 			c = tmp_str.find(target_tag_mi, b)
 			d = tmp_str.find(target_tag_end, c)
 			e = d + len(target_tag_end)
-			if c > 0 and d > 0 and e > 0 and ( re.match(" [a-zA-Z]", tmp_str[a-2:a]) or (re.match("[a-zA-Z]", tmp_str[d-1:d]) and re.match("[a-zA-Z]", tmp_str[e:e+1]))  ):
+			if c > 0 and d > 0 and e > 0 and ( re.match(" \p{L}", tmp_str[a-2:a], flags=re.UNICODE) or (re.match("\p{L}", tmp_str[d-1:d], flags=re.UNICODE) and re.match("\p{L}", tmp_str[e:e+1], flags=re.UNICODE))  ):
 				new_str =  tmp_str[:a] + tmp_str[c+1:d] + tmp_str[e:]
 				tmp_str = new_str
 				a = tmp_str.find(target_tag_st,0)
@@ -232,13 +237,13 @@ class Clean(object):
 				else : a = 0
 
 		return new_str
-		
-		
+
+
 	def _buildWords(self, dicWords):
 		"""
 		Make 'Word' objects with words in dicWords
 		dicWord : dictionary of words returned from _extract_tags
-		"""		
+		"""
 		words = []
 		for word in dicWords:
 			instanceWord = Word(word["nom"], word["balise"], word["caracteristique"])
@@ -251,12 +256,12 @@ class Clean(object):
 		return words
 
 
-	def _html2unicode(self, tmp_str) :
+	def _xmlEntitiesDecode(self, tmp_str) :
 		"""
-		html2unicode
+		xmlEntitiesDecode
 		"""
 		#for numerical codes
-		matches = re.findall("&#\d+;", tmp_str)
+		matches = re.findall("&#\d+;", tmp_str, flags=re.UNICODE)
 		if len(matches) > 0 :
 			hits = set(matches)
 			for hit in hits :
@@ -268,7 +273,7 @@ class Clean(object):
 					pass
 	
 		#for hex codes
-		matches = re.findall("&#[xX][0-9a-fA-F]+;", tmp_str)
+		matches = re.findall("&#[xX][0-9a-fA-F]+;", tmp_str, flags=re.UNICODE)
 		if len(matches) > 0 :
 			hits = set(matches)
 			for hit in hits :
@@ -280,17 +285,3 @@ class Clean(object):
 					pass
 		
 		return tmp_str
-		
-		
-	def _checkUTF8(self, tmp_str) :
-		"""
-		In BeatifulSoup 4, string matching error when there are accents only
-		"""
-		ck = 0
-		try : str(tmp_str)
-		except : 
-			(tmp_str).encode('utf8')
-			ck = 1
-		return ck
-		
-	
