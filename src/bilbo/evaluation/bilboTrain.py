@@ -25,9 +25,10 @@ class bibloTrain():
 		dirPartitions = Partition.getDirPartitionNames(dirCorpus, testPercentage, numberOfPartition)
 		for dirPartition in dirPartitions:
 			print "dirPartition", dirPartition
-			(testDir, trainDir, modelDir, resultDir) = Partition.getDirTestNames(dirPartition)
+			(annotateDir, testDir, trainDir, modelDir, resultDir) = Partition.getDirTestNames(dirPartition)
 			
-			bilbo = Bilbo(resultDir, options, "crf_model_simple")
+			#self._del_tmp_file(modelDir)
+			bilbo = Bilbo(modelDir, options, "crf_model_simple") # To save tmpFiles in modelDir
 			bilbo.train(trainDir, modelDir, 1)
 
 

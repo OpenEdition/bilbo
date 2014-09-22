@@ -74,7 +74,7 @@ class Partition():
 	def createEvaluationfiles(self, dirCorpus, testPercentage, numberOfPartition, allBibl):
 		dirPartitions = Partition.getDirPartitionNames(dirCorpus, testPercentage, numberOfPartition)
 		for dirPartition in dirPartitions:
-			(testDir, trainDir, modelDir, _) = Partition.getDirTestNames(dirPartition)
+			(annotateDir, testDir, trainDir, modelDir, _) = Partition.getDirTestNames(dirPartition)
 			testCorpus, trainCorpus = FormatEval.getShuffledCorpus(allBibl, testPercentage)
 			
 			evalFile = os.path.join(dirPartition, 'test.xml')
@@ -84,7 +84,7 @@ class Partition():
 			self.saveListToFile(trainCorpus, trainFile)
 			
 			cleanCorpus = FormatEval.stripTags(testCorpus)
-			cleanFile = os.path.join(testDir, 'test_clean.xml')
+			cleanFile = os.path.join(annotateDir, 'test_clean.xml')
 			self.saveListToFile(cleanCorpus, cleanFile)
 
 			#print evalFile, trainFile, cleanFile
@@ -118,7 +118,7 @@ class Partition():
 	# given a dirPartition
 	# return test, train, model folder
 	def getDirTestNames(dirPartition):
-		dirEvals = ( os.path.join(dirPartition, testDir) for testDir in ('test', 'train', 'model', 'result') )
+		dirEvals = ( os.path.join(dirPartition, testDir) for testDir in ('annotate', 'test', 'train', 'model/', 'result') )
 		return dirEvals
 
 	def saveListToFile(self, myList, fileName):

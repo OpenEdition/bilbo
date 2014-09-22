@@ -26,12 +26,11 @@ class bilboAnnotate():
 		
 		dirPartitions = Partition.getDirPartitionNames(dirCorpus, testPercentage, numberOfPartition)
 		for dirPartition in dirPartitions:
-			print "dirPartition", dirPartition
-			(testDir, trainDir, modelDir, resultDir) = Partition.getDirTestNames(dirPartition)
+			(annotateDir, testDir, trainDir, modelDir, resultDir) = Partition.getDirTestNames(dirPartition)
 			
 			self._del_tmp_file(resultDir)
 			bilbo = Bilbo(resultDir, options, "crf_model_simple")
-			bilbo.annotate(testDir, modelDir, 1)
+			bilbo.annotate(annotateDir, modelDir, 1)
 
 	def _del_tmp_file(self, resultDir):
 		pattern = os.path.join(resultDir,'tmp*')
