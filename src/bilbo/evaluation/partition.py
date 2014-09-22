@@ -122,7 +122,7 @@ class Partition():
 		return dirEvals
 
 	def saveListToFile(self, myList, fileName):
-		myString = "\n".join(myList)
+		myString = "<listBibl>\n" + "\n".join(myList) + "\n</listBibl>\n"
 		if type(myString) is str:
 			print "String not unicode ! It shouldn't."
 		with open(fileName, 'w', encoding='utf-8') as content_file:
