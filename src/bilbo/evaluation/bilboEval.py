@@ -25,12 +25,14 @@ from bilbo.utils import *
 
 class bilboEval():
 	def __init__(self, dirCorpus, testPercentage, numberOfPartition = 10):
-		
-		dirPartitions = Partition.getDirPartitionNames(dirCorpus, testPercentage, numberOfPartition)
+		self.partitions = Partition(dirCorpus, testPercentage, numberOfPartition)
+		self.dirPartitions = self.partitions.getDirPartitionNames()
+
+	def eval(self):
 		allValues = []
-		for dirPartition in dirPartitions:
+		for dirPartition in self.dirPartitions:
 			#print "dirPartition", dirPartition
-			(annotateDir, testDir, trainDir, modelDir, resultDir) = Partition.getDirTestNames(dirPartition)
+			(annotateDir, testDir, trainDir, modelDir, resultDir) = self.partitions.getDirTestNames(dirPartition)
 			
 			testEstCRF = self._getTestEstCRF(resultDir)
 			testEstCRFFormated = self._formatEval(testEstCRF)
@@ -50,9 +52,10 @@ class bilboEval():
 			evalText, labels, values = TokenAccuracyEval.evaluate(testEstCRFFormated, desiredResultFormated)
 			allValues.append(values)
 			self._saveFile(evalText, dirPartition, 'evaluation.txt')
+		
 		finalEval = ",".join(labels) + "\n"
 		finalEval += "\n".join([",".join(v) for v in allValues])
-		self._saveFile(finalEval, Partition.getDirPercentName(dirCorpus, testPercentage), 'evaluation.csv')
+		self._saveFile(finalEval, self.partitions.getDirPercentName(), 'evaluation.csv')
 
 	# output is not the same length, before debug, dirty solution to harmonise output
 	def _harmonizeList(self, shortList, longList):
@@ -159,7 +162,9 @@ class bilboEval():
 				formated.append('')
 		return formated
 
+
 if __name__ == '__main__':
 	# usage python src/bilbo/evalution/bilboEval.py [bilbo option] dirCorpus 10
 	numberOfPartition = int(sys.argv[3]) if len(sys.argv)==4 else 10
-	p = bilboEval(str(sys.argv[1]), str(sys.argv[2]), numberOfPartition)
+	be = bilboEval(str(sys.argv[1]), str(sys.argv[2]), numberOfPartition)
+	be.eval()

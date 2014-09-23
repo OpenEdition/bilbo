@@ -19,19 +19,22 @@ import shutil
 '''
 
 class bibloTrain():
-	def __init__(self, options, dirCorpus, testPercentage, numberOfPartition = 10):
-		options.T = True
-		options.t = 'bibl'
-		#options.k = 'all'
-		#print options
-		
-		dirPartitions = Partition.getDirPartitionNames(dirCorpus, testPercentage, numberOfPartition)
-		for dirPartition in dirPartitions:
+	def __init__(self, bilboOptions, dirCorpus, testPercentage, numberOfPartition = 10):
+		self.bilboOptions = bilboOptions
+		self.bilboOptions.T = True
+		self.bilboOptions.t = 'bibl'
+		#self.bilboOptions.k = 'all'
+		#print self.bilboOptions
+		self.partitions = Partition(dirCorpus, testPercentage, numberOfPartition)
+		self.dirPartitions = self.partitions.getDirPartitionNames()
+	
+	def train(self):
+		for dirPartition in self.dirPartitions:
 			print "dirPartition", dirPartition
-			(annotateDir, testDir, trainDir, modelDir, resultDir) = Partition.getDirTestNames(dirPartition)
+			(annotateDir, testDir, trainDir, modelDir, resultDir) = self.partitions.getDirTestNames(dirPartition)
 			
 			#self._del_tmp_file(modelDir)
-			bilbo = Bilbo(modelDir, options, "crf_model_simple") # To save tmpFiles in modelDir
+			bilbo = Bilbo(modelDir, self.bilboOptions, "crf_model_simple") # To save tmpFiles in modelDir
 			bilbo.train(trainDir, modelDir, 1)
 
 	def _del_tmp_file(self, resultDir):
@@ -47,5 +50,5 @@ if __name__ == '__main__':
 	
 	# usage python src/bilbo/evalution/bilboTrain.py [bilbo option] dirCorpus 10
 	numberOfPartition = int(sys.argv[3]) if len(sys.argv)==4 else 10
-	p = bibloTrain(options, str(sys.argv[1]), str(sys.argv[2]), numberOfPartition)
-	
+	bt = bibloTrain(options, str(sys.argv[1]), str(sys.argv[2]), numberOfPartition)
+	bt.train()

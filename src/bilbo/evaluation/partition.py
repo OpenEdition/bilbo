@@ -52,29 +52,33 @@ class Partition():
 	def __init__(self, dirCorpus, testPercentage, numberOfPartition = 10):
 		if not os.path.isdir(dirCorpus):
 			raise IOError("corpus directory '" + dirCorpus + "' does not exist")
+		self.dirCorpus = dirCorpus
+		self.testPercentage = testPercentage
+		self.numberOfPartition = int(numberOfPartition)
+
+	def partition(self):
+		self.createPartitionFolders(self.dirCorpus, self.testPercentage, self.numberOfPartition)
+		allBibl = self.getAndSaveAllBibl(self.dirCorpus)
+		self.createEvaluationfiles(self.dirCorpus, self.testPercentage, self.numberOfPartition, allBibl)
 		
-		numberOfPartition = int(numberOfPartition)
-		self.createPartitionFolders(dirCorpus, testPercentage, numberOfPartition)
-		allBibl = self.getAndSaveAllBibl(dirCorpus)
-		self.createEvaluationfiles(dirCorpus, testPercentage, numberOfPartition, allBibl)
 
 	def createPartitionFolders(self, dirCorpus, testPercentage, numberOfPartition = 10):
-		dirEval = Partition.getDirEvalName(dirCorpus)
+		dirEval = self.getDirEvalName()
 		self.createFolder(dirEval)
 		
-		dirPercent = Partition.getDirPercentName(dirCorpus, testPercentage)
+		dirPercent = self.getDirPercentName()
 		self.createFolder(dirPercent)
 		
-		dirPartitions = Partition.getDirPartitionNames(dirCorpus, testPercentage, numberOfPartition)
+		dirPartitions = self.getDirPartitionNames()
 		for dirPartition in dirPartitions:
 			self.createFolder(dirPartition)
-			for testDir in Partition.getDirTestNames(dirPartition):
+			for testDir in self.getDirTestNames(dirPartition):
 				self.createFolder(testDir)
 
 	def createEvaluationfiles(self, dirCorpus, testPercentage, numberOfPartition, allBibl):
-		dirPartitions = Partition.getDirPartitionNames(dirCorpus, testPercentage, numberOfPartition)
+		dirPartitions = self.getDirPartitionNames()
 		for dirPartition in dirPartitions:
-			(annotateDir, testDir, trainDir, modelDir, _) = Partition.getDirTestNames(dirPartition)
+			(annotateDir, testDir, trainDir, modelDir, _) = self.getDirTestNames(dirPartition)
 			testCorpus, trainCorpus = FormatEval.getShuffledCorpus(allBibl, testPercentage)
 			
 			trainFile = os.path.join(trainDir, 'train.xml')
@@ -89,38 +93,31 @@ class Partition():
 			evalFile = os.path.join(testDir, 'test.xml')
 			testCorpus = FormatEval.getBiblList("\n".join(testCorpus), duplicateBibl=True)
 			self.saveListToFile(testCorpus, evalFile)
-
 			#print evalFile, trainFile, cleanFile
-			
 			#print testCorpus, trainCorpus, cleanCorpus
 
 	def getAndSaveAllBibl(self, dirCorpus):
 		allBibl = FormatEval.getBiblFromDir(dirCorpus)
-		fileName = os.path.join(Partition.getDirEvalName(dirCorpus), 'all_bibl.xml')
+		fileName = os.path.join(self.getDirEvalName(), 'all_bibl.xml')
 		self.saveListToFile(allBibl, fileName)
 		return allBibl
 
-	@staticmethod
-	def getDirEvalName(dirCorpus):
-		return os.path.dirname(dirCorpus + os.sep) + "-evaluation"
+	def getDirEvalName(self):
+		return os.path.dirname(self.dirCorpus + os.sep) + "-evaluation"
 
-	@staticmethod
-	def getDirPercentName(dirCorpus, testPercentage):
-		dirEval = Partition.getDirEvalName(dirCorpus)
-		return os.path.join(dirEval, str(testPercentage)+'%')
+	def getDirPercentName(self):
+		dirEval = self.getDirEvalName()
+		return os.path.join(dirEval, str(self.testPercentage)+'%')
 
-	@staticmethod
-	def getDirPartitionNames(dirCorpus, testPercentage, numberOfPartition = 10):
-		dirPercent = Partition.getDirPercentName(dirCorpus, testPercentage)
+	def getDirPartitionNames(self):
+		dirPercent = self.getDirPercentName()
 		dirPartitions = []
-		for i in range(1, numberOfPartition+1):
+		for i in range(1, self.numberOfPartition+1):
 			dirPartitions.append(os.path.join(dirPercent, "{:0>2d}" .format(i)))
 		return dirPartitions
 
-	@staticmethod
-	# given a dirPartition
-	# return test, train, model folder
-	def getDirTestNames(dirPartition):
+	# return annotate, test, train, model folder
+	def getDirTestNames(self, dirPartition):
 		dirEvals = ( os.path.join(dirPartition, testDir) for testDir in ('annotate', 'test', 'train', 'model/', 'result') )
 		return dirEvals
 
@@ -142,3 +139,4 @@ if __name__ == '__main__':
 	# usage python src/bilbo/evalution/partition.py dirCorpus 10
 	numberOfPartition = int(sys.argv[3]) if len(sys.argv)==4 else 10
 	p = Partition(str(sys.argv[1]), str(sys.argv[2]), numberOfPartition)
+	p.partition()
