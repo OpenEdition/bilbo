@@ -19,13 +19,13 @@ import shutil
 '''
 
 class bibloTrain():
-	def __init__(self, bilboOptions, dirCorpus, testPercentage, numberOfPartition = 10):
+	def __init__(self, bilboOptions, dirCorpus, testPercentage, numberOfPartition=10, prefix=''):
 		self.bilboOptions = bilboOptions
 		self.bilboOptions.T = True
 		self.bilboOptions.t = 'bibl'
 		#self.bilboOptions.k = 'all'
 		#print self.bilboOptions
-		self.partitions = Partition(dirCorpus, testPercentage, numberOfPartition)
+		self.partitions = Partition(dirCorpus, testPercentage, numberOfPartition, prefix)
 		self.dirPartitions = self.partitions.getDirPartitionNames()
 	
 	def train(self):
@@ -50,5 +50,6 @@ if __name__ == '__main__':
 	
 	# usage python src/bilbo/evalution/bilboTrain.py [bilbo option] dirCorpus 10
 	numberOfPartition = int(sys.argv[3]) if len(sys.argv)==4 else 10
-	bt = bibloTrain(options, str(sys.argv[1]), str(sys.argv[2]), numberOfPartition)
+	prefix = sys.argv[4] if len(sys.argv)==5 else ''
+	bt = bibloTrain(options, str(sys.argv[1]), str(sys.argv[2]), numberOfPartition, prefix)
 	bt.train()

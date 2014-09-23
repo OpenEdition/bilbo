@@ -18,7 +18,7 @@ import shutil
 '''
 
 class bilboAnnotate():
-	def __init__(self, bilboOptions, dirCorpus, testPercentage, numberOfPartition = 10):
+	def __init__(self, bilboOptions, dirCorpus, testPercentage, numberOfPartition=10, prefix=''):
 		self.bilboOptions = bilboOptions
 		self.bilboOptions.L = True
 		self.bilboOptions.t = 'bibl'
@@ -26,7 +26,7 @@ class bilboAnnotate():
 		self.bilboOptions.o = 'simple'
 		#print self.bilboOptions
 		
-		self.partitions = Partition(dirCorpus, testPercentage, numberOfPartition)
+		self.partitions = Partition(dirCorpus, testPercentage, numberOfPartition, prefix)
 		self.dirPartitions = self.partitions.getDirPartitionNames()
 
 	def annotate(self):
@@ -50,5 +50,6 @@ if __name__ == '__main__':
 	
 	# usage python src/bilbo/evalution/bilboAnnotate.py [bilbo option] dirCorpus 10
 	numberOfPartition = int(sys.argv[3]) if len(sys.argv)==4 else 10
-	ba = bilboAnnotate(options, str(sys.argv[1]), str(sys.argv[2]), numberOfPartition)
+	prefix = sys.argv[4] if len(sys.argv)==5 else ''
+	ba = bilboAnnotate(options, str(sys.argv[1]), str(sys.argv[2]), numberOfPartition, prefix)
 	ba.annotate()

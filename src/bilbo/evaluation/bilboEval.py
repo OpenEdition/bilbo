@@ -24,8 +24,8 @@ from bilbo.utils import *
 '''
 
 class bilboEval():
-	def __init__(self, dirCorpus, testPercentage, numberOfPartition = 10):
-		self.partitions = Partition(dirCorpus, testPercentage, numberOfPartition)
+	def __init__(self, dirCorpus, testPercentage, numberOfPartition=10, prefix=''):
+		self.partitions = Partition(dirCorpus, testPercentage, numberOfPartition, prefix)
 		self.dirPartitions = self.partitions.getDirPartitionNames()
 
 	def eval(self):
@@ -166,5 +166,6 @@ class bilboEval():
 if __name__ == '__main__':
 	# usage python src/bilbo/evalution/bilboEval.py [bilbo option] dirCorpus 10
 	numberOfPartition = int(sys.argv[3]) if len(sys.argv)==4 else 10
-	be = bilboEval(str(sys.argv[1]), str(sys.argv[2]), numberOfPartition)
+	prefix = sys.argv[4] if len(sys.argv)==5 else ''
+	be = bilboEval(str(sys.argv[1]), str(sys.argv[2]), numberOfPartition, prefix)
 	be.eval()

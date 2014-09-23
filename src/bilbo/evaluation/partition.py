@@ -49,10 +49,11 @@ class Partition():
 		create "directory-evaluation"
 		create "directory-evaluation/10%/" and 01 to 10 folder in it
 	"""
-	def __init__(self, dirCorpus, testPercentage, numberOfPartition = 10):
+	def __init__(self, dirCorpus, testPercentage, numberOfPartition=10, prefix=''):
 		if not os.path.isdir(dirCorpus):
 			raise IOError("corpus directory '" + dirCorpus + "' does not exist")
 		self.dirCorpus = dirCorpus
+		self.prefix = "-eval" + ("-" + prefix if prefix else "")
 		self.testPercentage = testPercentage
 		self.numberOfPartition = int(numberOfPartition)
 
@@ -103,7 +104,7 @@ class Partition():
 		return allBibl
 
 	def getDirEvalName(self):
-		return os.path.dirname(self.dirCorpus + os.sep) + "-evaluation"
+		return os.path.dirname(self.dirCorpus + os.sep) + self.prefix
 
 	def getDirPercentName(self):
 		dirEval = self.getDirEvalName()
@@ -138,5 +139,6 @@ class Partition():
 if __name__ == '__main__':
 	# usage python src/bilbo/evalution/partition.py dirCorpus 10
 	numberOfPartition = int(sys.argv[3]) if len(sys.argv)==4 else 10
-	p = Partition(str(sys.argv[1]), str(sys.argv[2]), numberOfPartition)
+	prefix = sys.argv[4] if len(sys.argv)==5 else ''
+	p = Partition(str(sys.argv[1]), str(sys.argv[2]), numberOfPartition, prefix)
 	p.partition()
