@@ -8,6 +8,8 @@ import os
 from bilbo.Bilbo import Bilbo
 from bilbo.utils import *
 from partition import Partition
+import glob
+import shutil
 
 
 '''
@@ -20,7 +22,8 @@ class bibloTrain():
 	def __init__(self, options, dirCorpus, testPercentage, numberOfPartition = 10):
 		options.T = True
 		options.t = 'bibl'
-		print options
+		#options.k = 'all'
+		#print options
 		
 		dirPartitions = Partition.getDirPartitionNames(dirCorpus, testPercentage, numberOfPartition)
 		for dirPartition in dirPartitions:
@@ -30,6 +33,12 @@ class bibloTrain():
 			#self._del_tmp_file(modelDir)
 			bilbo = Bilbo(modelDir, options, "crf_model_simple") # To save tmpFiles in modelDir
 			bilbo.train(trainDir, modelDir, 1)
+
+	def _del_tmp_file(self, resultDir):
+		pattern = os.path.join(resultDir,'tmp*')
+		tmpDirs = glob.glob(pattern)
+		for tmpDir in tmpDirs:
+			shutil.rmtree(tmpDir)
 
 
 if __name__ == '__main__':
