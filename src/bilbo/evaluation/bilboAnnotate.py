@@ -22,7 +22,8 @@ class bilboAnnotate():
 		options.L = True
 		options.t = 'bibl'
 		options.k = 'all'
-		print options
+		options.o = 'simple'
+		#print options
 		
 		dirPartitions = Partition.getDirPartitionNames(dirCorpus, testPercentage, numberOfPartition)
 		for dirPartition in dirPartitions:
