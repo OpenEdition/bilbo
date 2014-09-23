@@ -57,6 +57,14 @@ class bilboEval():
 		finalEval += "\n".join([",".join(v) for v in allValues])
 		self._saveFile(finalEval, self.partitions.getDirPercentName(), 'evaluation.csv')
 
+	def _getFeatureAndName(self, token):
+		words = token.split("\t")
+		feature = words[0]
+		name = words[1] if len(words) > 1 else ""
+		if len(name.split()) > 1:
+			name = "".join(name.split()) # kind of a bug: get rid of non printing utf-8 characters
+		return feature, name
+
 	# output is not the same length, before debug, dirty solution to harmonise output
 	def _harmonizeList(self, shortList, longList):
 		indexLong = 0
@@ -66,51 +74,35 @@ class bilboEval():
 		newShortList = []
 		newLongList = []
 		while True:
-			while True:
-				#print "short", indexShort, lengthShort
-				wordShort = shortList[indexShort].split("\t")
-				if len(wordShort) > 1 or indexShort == lengthShort-1:
-					break
-				indexShort += 1
-			while True:
-				#print "long", indexLong, lengthLong
-				wordLong = longList[indexLong].split("\t")
-				if len(wordLong) > 1 or indexLong == lengthLong-1:
-					break
-				indexLong += 1
+			featureShort, partShort = self._getFeatureAndName(shortList[indexShort])
+			featureLong , partLong = self._getFeatureAndName(longList[indexLong])
 			
-			if indexShort == lengthShort-1 or indexLong == lengthLong-1:
-				break
-			
-			if wordShort[1] == wordLong[1]:
-				newShortList.append(shortList[indexShort])
-				newLongList.append(longList[indexLong])
-			else:
-				if (len(wordLong[1]) < len(wordShort[1])):
-					feature = wordLong[0]
-					nom = wordLong[1]
-					while (nom != wordShort[1]):
-						#print nom, "différent", wordShort[1], "first", indexLong, lengthLong
-						indexLong +=1
-						wordLong = longList[indexLong].split("\t")
-						nom += wordLong[1]
-					newLongList.append(feature + "\t" + nom)
-					newShortList.append(shortList[indexShort])
-					#print wordShort, nom, indexLong, shortList[indexShort], longList[indexLong], indexShort
+			while True:
+				if partShort == partLong:
+					#print indexShort, partShort.encode('utf8'), indexLong, partLong.encode('utf8'), "RESOLVED"
+					break
+				#print indexShort, partShort.encode('utf8'), len(partShort), indexLong, partLong.encode('utf8'), len(partLong)
+				if partShort < partLong:
+					indexShort +=1
+					_, partShortAppend = self._getFeatureAndName(shortList[indexShort])
+					partShort += partShortAppend
 				else:
-					feature = wordShort[0]
-					nom = wordShort[1]
-					while (nom != wordLong[1]):
-						#print nom, "différent", wordLong[1], "second", indexShort, lengthShort
-						indexShort +=1
-						wordShort = shortList[indexShort].split("\t")
-						nom += wordShort[1]
-						newShortList.append(feature + "\t" + nom)
-						newLongList.append(longList[indexLong])
-						#print wordShort, nom, indexLong, shortList[indexShort], longList[indexLong], indexShort
+					indexLong +=1
+					_, partLongAppend  = self._getFeatureAndName(longList[indexLong])
+					partLong += partLongAppend
+
+			textShort = featureShort + "\t" + partShort if partShort else ''
+			newShortList.append(textShort)
+			textLong = featureLong + "\t" + partLong if partLong else ''
+			newLongList.append(textLong)
+			
 			indexShort += 1
 			indexLong += 1
-		#print str(len(newShortList)), str(len(newLongList))
+			
+			if indexShort == lengthShort or indexLong == lengthLong:
+				break
+		
+		#print str(len(newShortList)), indexShort, lengthShort, str(len(newLongList)), indexLong, lengthLong
 		return newShortList, newLongList
 
 	def _getTestEstCRF(self, resultDir):
@@ -153,10 +145,10 @@ class bilboEval():
 	def _formatEval(self, content):
 		formated = []
 		for line in content.split("\n"):
-			words = line.split()
+			words = line.split(" ")
 			#print words
-			if words:
-				formated.append(words[-1] + "\t" + words[0])
+			if len(words)>1:
+				formated.append(words[-1].strip() + "\t" + words[0].strip())
 				#formated.append(words[0])
 			else:
 				formated.append('')
