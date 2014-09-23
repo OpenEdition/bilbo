@@ -77,15 +77,18 @@ class Partition():
 			(annotateDir, testDir, trainDir, modelDir, _) = Partition.getDirTestNames(dirPartition)
 			testCorpus, trainCorpus = FormatEval.getShuffledCorpus(allBibl, testPercentage)
 			
-			evalFile = os.path.join(dirPartition, 'test.xml')
-			self.saveListToFile(testCorpus, evalFile)
-				
 			trainFile = os.path.join(trainDir, 'train.xml')
 			self.saveListToFile(trainCorpus, trainFile)
 			
 			cleanCorpus = FormatEval.stripTags(testCorpus)
 			cleanFile = os.path.join(annotateDir, 'test_clean.xml')
 			self.saveListToFile(cleanCorpus, cleanFile)
+
+			# In test.xml we need to duplicate <bibl> inside <bibl>, in order to present the same data for evaluation
+			# Bilbo does not format the "same" data equaly between train and annotation
+			evalFile = os.path.join(testDir, 'test.xml')
+			testCorpus = FormatEval.getBiblList("\n".join(testCorpus), duplicateBibl=True)
+			self.saveListToFile(testCorpus, evalFile)
 
 			#print evalFile, trainFile, cleanFile
 			

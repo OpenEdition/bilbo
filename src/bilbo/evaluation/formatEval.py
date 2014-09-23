@@ -28,15 +28,16 @@ class FormatEval():
 
 	@staticmethod
 	# test : xml string
-	def getBiblList(text):
+	def getBiblList(text, duplicateBibl=False):
 		parsedText = BeautifulSoup(text)
 		allBibl = []
 		biblInside = 0
 		allBiblTag = parsedText.findAll('bibl')
 		for bibl in allBiblTag:
-			if biblInside > 0: # do not duplicate line of <bibl> inside <bibl>
-				biblInside -= 1
-				continue
+			if not duplicateBibl:
+				if biblInside > 0: # do not duplicate line of <bibl> inside <bibl>
+					biblInside -= 1
+					continue
 			line = unicode(bibl)
 			allBibl.append(line)
 			biblInside = len(bibl.findAll('bibl'))
