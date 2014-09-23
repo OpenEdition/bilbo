@@ -8,7 +8,6 @@ import os
 from partition import Partition
 import glob
 import shutil
-from formatEvalBilbo import FormatEvalBilbo
 from tokenAccuracyEval import TokenAccuracyEval
 from codecs import open
 from bilbo.Bilbo import Bilbo
@@ -28,7 +27,6 @@ class bilboEval():
 	def __init__(self, dirCorpus, testPercentage, numberOfPartition = 10):
 		
 		dirPartitions = Partition.getDirPartitionNames(dirCorpus, testPercentage, numberOfPartition)
-		formatEval = FormatEvalBilbo()
 		for dirPartition in dirPartitions:
 			#print "dirPartition", dirPartition
 			(annotateDir, testDir, trainDir, modelDir, resultDir) = Partition.getDirTestNames(dirPartition)
