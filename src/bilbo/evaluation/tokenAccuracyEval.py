@@ -23,6 +23,9 @@ class TokenAccuracyEval():
 	
 	@staticmethod
 	def evaluate(srcfile, dsrfile):
+		returnLabels = []
+		returnValues = []
+		
 		excluded = {'nonbibl': 0, 'c':0} #label exclue sauf pour le calcul de la micro
 		cnt = {'0000': 0}# nombre de token étiqueté par label dans le test (ce que l'on souhaite avoir)
 		acc = {'0000': 0} # nombre d'étiquette correct par label
@@ -85,13 +88,22 @@ class TokenAccuracyEval():
 		for key in excluded.keys() :
 			if cnt_d.has_key(key) :
 				evaluation += '\n- {:s}'.format(key) + "\n"
-				apr = float(c - acc[key])/float(j - cnt[key])*100 #c-acc[key] est le nombre d'étiquette prédite moins le nombre d'étiquette correct prédite pour le label exclu divisé par le nombre d'étiquette moins le nombre d'étiquette exclue
-				are = float(c - acc[key])/float(j - cnt_d[key])*100
+				#c-acc[key] est le nombre d'étiquette prédite moins le nombre d'étiquette correct prédite pour le label exclu divisé par le nombre d'étiquette moins le nombre d'étiquette exclue
+				apr = float(c - acc[key])/float(j - cnt[key])*100 
+				returnLabels.append('avg Micro Precision');
+				returnValues.append('{:f}'.format(apr))
 				evaluation += '(Averaged micro Precision) exclu {:s} {:f} {: >4d} {: >4d}'.format(key, apr, (c - acc[key]), (j - cnt[key]))  + "\n"
+
+				are = float(c - acc[key])/float(j - cnt_d[key])*100
+				returnLabels.append('avg Micro Recall')
+				returnValues.append('{:f}'.format(are))
 				evaluation += '(Averaged micro Recall)          {:s} {:f} {: >4d} {: >4d}'.format(key, are, (c - acc[key]), (j - cnt_d[key])) + "\n"
-				evaluation += '(micro F-measure) exclu          {:s} {:f}'.format(key, 2*apr*are/(apr+are)) + "\n"
-		
 			
+				mfm = 2*apr*are/(apr+are)
+				returnLabels.append('micro F-measure')
+				returnValues.append('{:f}'.format(mfm))
+				evaluation += '(micro F-measure) exclu          {:s} {:f}'.format(key, mfm) + "\n"
+
 		evaluation += '\n***** Precision *****\n'
 		
 		for key, value in sorted(cnt_d.iteritems(), key=lambda (k,v): (v,k), reverse=True):
@@ -137,19 +149,36 @@ class TokenAccuracyEval():
 		#print
 
 		evaluation += '\n***** Macro Precision/Recall *****\n'
+		
 		macro_precision = sum(tab_precision)/len(tab_precision)
-		macro_rappel = sum(tab_recall)/len(tab_recall)
-
-		macro_precision_mainElmt = sum(tab_mainElmt_precision)/len(tab_mainElmt_precision)
-		macro_recall_mainElmt =	sum(tab_mainElmt_recall)/len(tab_mainElmt_recall)
-
+		returnLabels.append('Macro Precision all');
+		returnValues.append('{:f}'.format(macro_precision))
 		evaluation += '(macro precision all elements)   {:f}'.format(macro_precision) + "\n"
-		evaluation += '(macro rappel all elements)      {:f}'.format(macro_rappel) + "\n"
-		evaluation += '(macro F-mesure all elements)    {:f}'.format((2*(macro_precision*macro_rappel))/(macro_precision+macro_rappel)) + "\n\n"
-
+		
+		macro_recall = sum(tab_recall)/len(tab_recall)
+		returnLabels.append('Macro Rappel all');
+		returnValues.append('{:f}'.format(macro_recall))
+		evaluation += '(macro rappel all elements)      {:f}'.format(macro_recall) + "\n"
+		
+		macro_fmesure = (2*(macro_precision*macro_recall))/(macro_precision+macro_recall)
+		returnLabels.append('Macro F-mesure all');
+		returnValues.append('{:f}'.format(macro_fmesure))
+		evaluation += '(macro F-mesure all elements)    {:f}'.format(macro_fmesure) + "\n\n"
+		
+		macro_precision_mainElmt = sum(tab_mainElmt_precision)/len(tab_mainElmt_precision)
+		returnLabels.append('Macro Precision of 3');
+		returnValues.append('{:f}'.format(macro_precision_mainElmt))
 		evaluation += '(macro precision three elements) {:f}'.format(macro_precision_mainElmt) + "\n"
+		
+		macro_recall_mainElmt =	sum(tab_mainElmt_recall)/len(tab_mainElmt_recall)
+		returnLabels.append('Macro Rappel of 3');
+		returnValues.append('{:f}'.format(macro_recall_mainElmt))
 		evaluation += '(macro rappel three elements)    {:f}'.format(macro_recall_mainElmt) + "\n"
-		evaluation += '(macro F-mesure three elements)  {:f}'.format((2*(macro_precision_mainElmt*macro_recall_mainElmt))/(macro_precision_mainElmt+macro_recall_mainElmt)) + "\n\n"
+		
+		macro_fmesure_mainElmt = (2*(macro_precision_mainElmt*macro_recall_mainElmt))/(macro_precision_mainElmt+macro_recall_mainElmt)
+		returnLabels.append('Macro F-mesure of 3');
+		returnValues.append('{:f}'.format(macro_fmesure_mainElmt))
+		evaluation += '(macro F-mesure three elements)  {:f}'.format(macro_fmesure_mainElmt) + "\n\n"
 
 		tes = 0
 		bes = 0
@@ -182,7 +211,7 @@ class TokenAccuracyEval():
 		evaluation += '*Total obvious errors : title: {: >3d} - biblscope: {: >3d}\n'.format(tes, bes)
 		evaluation += '*Total errors         : title: {: >3d} - biblscope: {: >3d}\n'.format(ts, bs)
 		
-		return evaluation
+		return evaluation, returnLabels, returnValues
 
 
 if __name__ == '__main__':
@@ -200,4 +229,3 @@ if __name__ == '__main__':
 	
 	evaluation = TokenAccuracyEval.evaluate(annotated, desired)
 	print evaluation.encode('utf-8'),
-	

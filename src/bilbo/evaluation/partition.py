@@ -134,7 +134,7 @@ class Partition():
 	def createFolder(self, dirName):
 		if not os.path.isdir(dirName):
 			os.mkdir(dirName)
-			print dirName
+			#print dirName
 
 
 

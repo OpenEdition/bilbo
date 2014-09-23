@@ -27,6 +27,7 @@ class bilboEval():
 	def __init__(self, dirCorpus, testPercentage, numberOfPartition = 10):
 		
 		dirPartitions = Partition.getDirPartitionNames(dirCorpus, testPercentage, numberOfPartition)
+		allValues = []
 		for dirPartition in dirPartitions:
 			#print "dirPartition", dirPartition
 			(annotateDir, testDir, trainDir, modelDir, resultDir) = Partition.getDirTestNames(dirPartition)
@@ -46,8 +47,12 @@ class bilboEval():
 			self._saveFile(testEstCRFFormated, resultDir, 'annotatedEval.txt')
 			self._saveFile(desiredResultFormated, resultDir, 'desiredEval.txt')
 			
-			evalText = TokenAccuracyEval.evaluate(testEstCRFFormated, desiredResultFormated)
+			evalText, labels, values = TokenAccuracyEval.evaluate(testEstCRFFormated, desiredResultFormated)
+			allValues.append(values)
 			self._saveFile(evalText, dirPartition, 'evaluation.txt')
+		finalEval = ",".join(labels) + "\n"
+		finalEval += "\n".join([",".join(v) for v in allValues])
+		self._saveFile(finalEval, Partition.getDirPercentName(dirCorpus, testPercentage), 'evaluation.csv')
 
 	# output is not the same length, before debug, dirty solution to harmonise output
 	def _harmonizeList(self, shortList, longList):
