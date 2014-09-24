@@ -53,9 +53,12 @@ class bilboEval():
 			allValues.append(values)
 			self._saveFile(evalText, dirPartition, 'evaluation.txt')
 		
-		finalEval = ",".join(labels) + "\n"
-		finalEval += "\n".join([",".join(v) for v in allValues])
-		self._saveFile(finalEval, self.partitions.getDirPercentName(), 'evaluation.csv')
+		average = [float(sum(col))/len(col) for col in zip(*allValues)]
+		allValues.append(average)
+		
+		finalEval = "\t".join(labels) + "\n"
+		finalEval += "\n".join(["\t".join(['{:f}'.format(v) for v in values]) for values in allValues])
+		self._saveFile(finalEval, self.partitions.getDirPercentName(), 'evaluation.tsv')
 
 	def _getFeatureAndName(self, token):
 		words = token.split("\t")

@@ -91,17 +91,17 @@ class TokenAccuracyEval():
 				#c-acc[key] est le nombre d'étiquette prédite moins le nombre d'étiquette correct prédite pour le label exclu divisé par le nombre d'étiquette moins le nombre d'étiquette exclue
 				apr = float(c - acc[key])/float(j - cnt[key])*100 
 				returnLabels.append('avg Micro Precision');
-				returnValues.append('{:f}'.format(apr))
+				returnValues.append(apr)
 				evaluation += '(Averaged micro Precision) exclu {:s} {:f} {: >4d} {: >4d}'.format(key, apr, (c - acc[key]), (j - cnt[key]))  + "\n"
 
 				are = float(c - acc[key])/float(j - cnt_d[key])*100
 				returnLabels.append('avg Micro Recall')
-				returnValues.append('{:f}'.format(are))
+				returnValues.append(are)
 				evaluation += '(Averaged micro Recall)          {:s} {:f} {: >4d} {: >4d}'.format(key, are, (c - acc[key]), (j - cnt_d[key])) + "\n"
 			
 				mfm = 2*apr*are/(apr+are)
 				returnLabels.append('micro F-measure')
-				returnValues.append('{:f}'.format(mfm))
+				returnValues.append(mfm)
 				evaluation += '(micro F-measure) exclu          {:s} {:f}'.format(key, mfm) + "\n"
 
 		evaluation += '\n***** Precision *****\n'
@@ -152,32 +152,32 @@ class TokenAccuracyEval():
 		
 		macro_precision = sum(tab_precision)/len(tab_precision)
 		returnLabels.append('Macro Precision all');
-		returnValues.append('{:f}'.format(macro_precision))
+		returnValues.append(macro_precision)
 		evaluation += '(macro precision all elements)   {:f}'.format(macro_precision) + "\n"
 		
 		macro_recall = sum(tab_recall)/len(tab_recall)
 		returnLabels.append('Macro Rappel all');
-		returnValues.append('{:f}'.format(macro_recall))
+		returnValues.append(macro_recall)
 		evaluation += '(macro rappel all elements)      {:f}'.format(macro_recall) + "\n"
 		
 		macro_fmesure = (2*(macro_precision*macro_recall))/(macro_precision+macro_recall)
 		returnLabels.append('Macro F-mesure all');
-		returnValues.append('{:f}'.format(macro_fmesure))
+		returnValues.append(macro_fmesure)
 		evaluation += '(macro F-mesure all elements)    {:f}'.format(macro_fmesure) + "\n\n"
 		
 		macro_precision_mainElmt = sum(tab_mainElmt_precision)/len(tab_mainElmt_precision)
 		returnLabels.append('Macro Precision of 3');
-		returnValues.append('{:f}'.format(macro_precision_mainElmt))
+		returnValues.append(macro_precision_mainElmt)
 		evaluation += '(macro precision three elements) {:f}'.format(macro_precision_mainElmt) + "\n"
 		
 		macro_recall_mainElmt =	sum(tab_mainElmt_recall)/len(tab_mainElmt_recall)
 		returnLabels.append('Macro Rappel of 3');
-		returnValues.append('{:f}'.format(macro_recall_mainElmt))
+		returnValues.append(macro_recall_mainElmt)
 		evaluation += '(macro rappel three elements)    {:f}'.format(macro_recall_mainElmt) + "\n"
 		
 		macro_fmesure_mainElmt = (2*(macro_precision_mainElmt*macro_recall_mainElmt))/(macro_precision_mainElmt+macro_recall_mainElmt)
 		returnLabels.append('Macro F-mesure of 3');
-		returnValues.append('{:f}'.format(macro_fmesure_mainElmt))
+		returnValues.append(macro_fmesure_mainElmt)
 		evaluation += '(macro F-mesure three elements)  {:f}'.format(macro_fmesure_mainElmt) + "\n\n"
 
 		tes = 0
