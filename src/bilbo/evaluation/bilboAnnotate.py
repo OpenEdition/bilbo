@@ -49,7 +49,7 @@ if __name__ == '__main__':
 	options, args = parser.parse_args(sys.argv[1:])
 	
 	# usage python src/bilbo/evalution/bilboAnnotate.py [bilbo option] dirCorpus 10
-	numberOfPartition = int(sys.argv[3]) if len(sys.argv)==4 else 10
-	prefix = sys.argv[4] if len(sys.argv)==5 else ''
+	numberOfPartition = int(sys.argv[3]) if len(sys.argv)>=4 else 10
+	prefix = sys.argv[4] if len(sys.argv)>=5 else ''
 	ba = bilboAnnotate(options, str(sys.argv[1]), str(sys.argv[2]), numberOfPartition, prefix)
 	ba.annotate()

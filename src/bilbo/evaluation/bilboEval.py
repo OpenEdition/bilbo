@@ -160,7 +160,7 @@ class bilboEval():
 
 if __name__ == '__main__':
 	# usage python src/bilbo/evalution/bilboEval.py [bilbo option] dirCorpus 10
-	numberOfPartition = int(sys.argv[3]) if len(sys.argv)==4 else 10
-	prefix = sys.argv[4] if len(sys.argv)==5 else ''
+	numberOfPartition = int(sys.argv[3]) if len(sys.argv)>=4 else 10
+	prefix = sys.argv[4] if len(sys.argv)>=5 else ''
 	be = bilboEval(str(sys.argv[1]), str(sys.argv[2]), numberOfPartition, prefix)
 	be.eval()

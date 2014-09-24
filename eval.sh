@@ -17,7 +17,7 @@ prefix=$1
 shift
 
 for percentOfTest in $@; do
-	echo "Evaluation for ${percentOfTest}% of test data"
+	echo "Evaluation for ${percentOfTest}% of test data with $numberOfpartition partition"
 	echo "  partitionning…"
 	python src/bilbo/evaluation/partition.py     ${dirCorpus} $percentOfTest $numberOfpartition $prefix;
 	echo "  training…"
