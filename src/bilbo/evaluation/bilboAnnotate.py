@@ -22,6 +22,7 @@ class bilboAnnotate():
 	def __init__(self, bilboOptions, dirCorpus, testPercentage, numberOfPartition=10, prefix=''):
 		self.bilboOptions = bilboOptions
 		self.bilboOptions.L = True
+		self.bilboOptions.T = False
 		self.bilboOptions.t = 'bibl'
 		self.bilboOptions.k = 'all'
 		self.bilboOptions.o = 'simple'
@@ -67,7 +68,7 @@ if __name__ == '__main__':
 	options, args = parser.parse_args(sys.argv[1:])
 	
 	# usage python src/bilbo/evalution/bilboAnnotate.py [bilbo option] dirCorpus 10
-	numberOfPartition = int(sys.argv[3]) if len(sys.argv)>=4 else 10
-	prefix = sys.argv[4] if len(sys.argv)>=5 else ''
-	ba = bilboAnnotate(options, str(sys.argv[1]), str(sys.argv[2]), numberOfPartition, prefix)
+	numberOfPartition = int(args[2]) if len(args)>=3 else 10
+	prefix = args[3] if len(args)>=4 else ''
+	ba = bilboAnnotate(options, str(args[0]), str(args[1]), numberOfPartition, prefix)
 	ba.annotate()
