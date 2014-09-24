@@ -10,11 +10,6 @@ import glob
 import shutil
 from tokenAccuracyEval import TokenAccuracyEval
 from codecs import open
-from bilbo.Bilbo import Bilbo
-from bilbo.format.CRF import CRF
-from bilbo.reference.Corpus import Corpus
-from bilbo.utils import *
-
 
 '''
  foreach directory-evaluation/10%/ directory
@@ -34,11 +29,11 @@ class bilboEval():
 			#print "dirPartition", dirPartition
 			(annotateDir, testDir, trainDir, modelDir, resultDir) = self.partitions.getDirTestNames(dirPartition)
 			
-			testEstCRF = self._getTestEstCRF(resultDir)
+			testEstCRF = self._getFile(resultDir, 'testEstCRF_Wapiti.txt')
 			testEstCRFFormated = self._formatEval(testEstCRF)
 			##print testEstCRFFormated
 			
-			desiredResult = self._getDesired(testDir, trainDir)
+			desiredResult = self._getFile(trainDir, 'evaldata_CRF_Wapiti.txt')
 			desiredResultFormated = self._formatEval(desiredResult)
 			#print desiredResultFormated
 
@@ -108,37 +103,12 @@ class bilboEval():
 		#print str(len(newShortList)), indexShort, lengthShort, str(len(newLongList)), indexLong, lengthLong
 		return newShortList, newLongList
 
-	def _getTestEstCRF(self, resultDir):
-		pattern = os.path.join(resultDir,'tmp*','testEstCRF_Wapiti.txt')
+	def _getFile(self, fileDir, pattern):
+		pattern = os.path.join(fileDir,'tmp*', pattern)
 		files = glob.glob(pattern)
 		with open(files[0], 'r', encoding='utf-8') as content_file:
-			testEstCRF = content_file.read()
-		return testEstCRF
-
-	def _getDesired(self, testDir, trainDir):
-		self._del_tmp_file(trainDir)
-		parser = defaultOptions()
-		options, args = parser.parse_args([])
-		options.T = True
-		options.t = 'bibl'
-		options.k = 'all'
-		bilbo = Bilbo(trainDir, options, "crf_model_simple") # To save tmpFiles in testDir
-		corpus = Corpus(testDir, options)
-		bilbo.crf.setDirModel(testDir)
-		corpus.extract(1, "bibl")
-		bilbo.crf.prepareTrain(corpus, 1, "evaldata_CRF.txt", 1, 1) #CRF training data extraction
-		
-		pattern = os.path.join(trainDir,'tmp*','evaldata_CRF_Wapiti.txt')
-		files = glob.glob(pattern)
-		with open(files[0], 'r', encoding='utf-8') as content_file:
-			desiredResult = content_file.read()
-		return desiredResult
-
-	def _del_tmp_file(self, resultDir):
-		pattern = os.path.join(resultDir,'tmp*')
-		tmpDirs = glob.glob(pattern)
-		for tmpDir in tmpDirs:
-			shutil.rmtree(tmpDir)
+			content = content_file.read()
+			return content
 
 	def _saveFile(self, content, dirName, fileName):
 		fileName = os.path.join(dirName, fileName)
