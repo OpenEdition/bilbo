@@ -100,7 +100,7 @@ class Rule(object):
 							tmpWord.append(Word(input_str, word.listNomTag(), word.listNomFeature()))
 							frontWords = self.sepTotalFrontPunc(tmpWord[0])
 					else : pass
-					
+				
 				'arrange'
 				endWord = ''
 				if new_str != '' : #matching
@@ -453,7 +453,7 @@ class Rule(object):
 							retrn_str = chaine[0]
 							new_str = input_str
 							input_str = re.sub(retrn_str, '', input_str.lower())
-							new_str = new_str.replace(input_str, '')
+							new_str = new_str.replace(input_str, '',1)
 						'In case of just matching the key word'
 						if ruleType == "matching" and chaine[0] == input_str.lower() :
 							word.addFeature(self.rules[ruleType][rule]["feature"])
