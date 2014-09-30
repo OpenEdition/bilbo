@@ -92,7 +92,7 @@ class Partition():
 			# In test.xml we need to duplicate <bibl> inside <bibl>, in order to present the same data for evaluation
 			# Bilbo does not format the "same" data equaly between train and annotation
 			evalFile = os.path.join(testDir, 'test.xml')
-			testCorpus = FormatEval.getBiblList("\n".join(testCorpus), duplicateBibl=True)
+			testCorpus = FormatEval.getBiblList("\n".join(testCorpus))
 			self.saveListToFile(testCorpus, evalFile)
 			#print evalFile, trainFile, cleanFile
 			#print testCorpus, trainCorpus, cleanCorpus

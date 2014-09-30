@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from codecs import open
 import glob
 import os
+import sys
 import random
 from bs4 import BeautifulSoup, NavigableString
 import regex as re
@@ -63,10 +64,9 @@ class FormatEval():
 		for line in xmlList:
 			soup = BeautifulSoup(line)
 			for tag in soup.findAll():
-				if tag.name != tagCorpus:
 					tag.unwrap()
 					
-			txt = unicode(soup)
+			txt = '<'+tagCorpus+'>' + unicode(soup) + '</' + tagCorpus + '>'
 			#print str(type(txt)), ("———" + txt).encode('utf8')
 			striped.append(txt)
 		return striped
@@ -84,6 +84,7 @@ class FormatEval():
 		return spaced
 
 if __name__ == '__main__':
-	myList = FormatEval.getBiblFromDir('evaluate', addWhiteSpace=True)
+	myList = FormatEval.getBiblFromDir(sys.argv[1], addWhiteSpace=True)
+	myList = FormatEval.stripTags(myList)
 	for txt in myList:
 		print str(type(txt)), ("———" + txt).encode('utf8')
