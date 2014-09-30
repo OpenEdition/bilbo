@@ -322,7 +322,6 @@ class Rule(object):
 		
 		return
 
-
 	def _findPuncFunc(self, words):
 		"""
 		Add quotes features when we attach punctuation marks. They are essential features when punctuation is attached.
@@ -364,14 +363,18 @@ class Rule(object):
 		"""
 		Check web link expressions
 		"""
-		ref1 = re.compile('^http', flags=re.UNICODE)
-		ref2 = re.compile('^www.', flags=re.UNICODE)
-		ref3 = re.compile('^url', flags=re.UNICODE)
-		p1 = ref1.findall(input_str)
-		p2 = ref2.findall(input_str)
-		p3 = ref3.findall(input_str)
+		weblink = re.compile('(?:http://|https://|www.)[^"\' ]+', flags=re.UNICODE)
+		weblink1 = re.compile('^http', flags=re.UNICODE)
+		weblink2 = re.compile('^url', flags=re.UNICODE)
+		email = re.compile('[\w\-\.]+@\w[\w\-]+\.+[\w\-]+', flags=re.UNICODE)
+
+		p1 = weblink.findall(input_str)
+		p2 = email.findall(input_str)
+		p3 = weblink1.findall(input_str)
+		p4 = weblink2.findall(input_str)
 		retrn_str = ''
-		if p1 or p2 or p3 :
+		#if p1 or p2 or p3 :
+		if p1 or p2 or p3 or p4:
 			retrn_str = 'positive'
 		
 		return retrn_str
@@ -384,10 +387,11 @@ class Rule(object):
 		retrn_str = ''
 	
 		#number
+
 		numbers = re.compile('\d+', flags=re.UNICODE)
 		if (numbers.search(new_str)) :
 			retrn_str = 'numbers'
-			
+
 		num = numbers.findall(new_str)
 		if len(num) == 1 and num[0] == new_str :
 			retrn_str = 'allnumbers'
@@ -409,7 +413,8 @@ class Rule(object):
 				if len(nn) == 4 :  digitck += 1
 			if digitck == len(num) :
 				retrn_str = retrn_str+' fourdigit'
-		
+
+
 		#allcapital
 		allnum = re.compile('^allnumbers', flags=re.UNICODE)
 		num = re.compile('^numbers', flags=re.UNICODE)

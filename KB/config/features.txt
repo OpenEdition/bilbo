@@ -12,6 +12,8 @@ italic
 posseditor
 posspage
 possmonth
+possbiblscop
+possrole
 punc
 point
 comma

@@ -76,6 +76,15 @@ if __name__ == '__main__':
 		print "\t  output => validate output files with tei_openedition3.xsd"
 		print "\t  all => validate input and output files"
 
+		print "  -p : --postagging"
+		print "\t add postagging"
+
+		print "  -c : --postagging+Context"
+		print "\t add pos tagging annotation and retrieve POS next and previous word"
+
+		print "  -a : --stemmer"
+		print "\t add pos tagging annotation and retrieve POS next and previous word"
+
 		print "  -s : --svmfilt"
 		print "\t Training a svm model or classifying notes to filter out non-bibliographical notes, default='False'"
 

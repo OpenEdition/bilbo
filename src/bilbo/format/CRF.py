@@ -8,6 +8,8 @@ Created on April 18, 2012
 from bilbo.format.Extract_crf import Extract_crf
 from bilbo.reference.ListReferences import ListReferences 
 from bilbo.output.GenerateXml import GenerateXml
+import re
+import Stemmer
 import subprocess, os
 from codecs import open
 
@@ -201,4 +203,422 @@ class CRF(object):
 		
 		self.generateXml.simpleComp(self.dirResult+"testdata_CRF.txt", self.dirResult+fnameCRFtoAdd, 2, self.dirResult+'testEstCRF.xml')
 		
+		return
+
+		''' FONCTION TREE TAGGER '''
+
+	def _prepareAnalyse(self, corpus, typeCorpus, fileRes):
+
+		"""
+
+		Retrieve token for Tree Tagger Analyse
+
+		"""
+		dependencyDir = os.path.join(self.rootDir, 'dependencies')
+		fileResult = open(os.path.join(self.dirResult, 'treeTaggerAnalyse.txt'), 'w', encoding='utf-8')
+
+		listRef = corpus.getListReferences(typeCorpus)
+		newListReferences = ListReferences(listRef, typeCorpus)
+		listReferences = newListReferences.getReferences()
+
+		for reference in listReferences:
+			for mot in reference.getWord():
+				fileResult.write(mot.nom)
+				fileResult.write('\n')
+		
+		fileResult.close()
+		return
+
+	def runAnalyseTrain(self, corpus, typeCorpus, directory, fileRes) :
+		
+		fileAnalyse = self._prepareAnalyse(corpus, typeCorpus, fileRes)
+		fileReadyAnalyse = os.path.join(self.dirResult, 'treeTaggerAnalyse.txt')
+		
+		dependencyDir = os.path.join(self.rootDir, 'dependencies')
+		#-threshold 0.5
+		command = dependencyDir+"/tree-tagger-linux-3.2/bin/tree-tagger -token -no-unknown "+self.rootDir+"/KB/config/treetagger/french.par "+fileReadyAnalyse+" "+self.dirResult+fileRes
+		process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
+		process.wait()
+		return
+
+	def runAnalyseBeforeTrain(self, fileRes, PosDetails = 0) :
+
+		"""
+		reform the training file with result of TreeTagger
+		"""
+
+		fanalyseTreeTagger= open(self.dirResult+fileRes, 'r', encoding='utf-8')
+		ftrainWapiti= open(self.dirResult+'trainingdata_CRF_Wapiti.txt', 'r', encoding='utf-8')
+		fResultFinal= open(self.dirResult+'trainingdata_CRF_TreeTagger_Wapiti.txt', 'w', encoding='utf-8')
+ 
+		myLongList = list(ftrainWapiti)
+		myShortList= list(fanalyseTreeTagger)
+		taille = len(myLongList)
+
+		j = -1
+		for i in range(0, taille):
+		    ligne = myLongList[i]
+		    mots = ligne.split()
+
+		    nbMots = len(mots)
+
+		    if nbMots == 0 :
+		        fResultFinal.write('\n')
+		    else :
+		        j = j + 1
+		        mots2 = myShortList[j].split()
+		        if PosDetails == 1:
+		            newList = []
+		            for w in mots2:
+		                a = re.sub("(VER|DET|PRO|PRP|PUN):.+",r'\1', w)
+		                newList.append(a)
+		                mots2 = newList
+
+		        newLine = "{0} {1}".format(' '.join(mots2), ' '.join(mots[1:nbMots]))
+			fResultFinal.write(newLine)
+			fResultFinal.write('\n')
+
+		fResultFinal.close()
+		fanalyseTreeTagger.close()
+		ftrainWapiti.close()
+		return
+
+	def runAnalyseBeforeTest(self, fileRes, PosDetails = 0) :
+		"""
+		reform the test file with result of TreeTagger
+		"""
+
+		fanalyseTreeTagger= open(self.dirResult+fileRes, 'r', encoding='utf-8')
+		ftestWapiti= open(self.dirResult+'testdata_CRF_Wapiti.txt', 'r', encoding='utf-8')
+		fResultFinal= open(self.dirResult+'testdata_CRF_TreeTagger_Wapiti.txt', 'w', encoding='utf-8')
+
+ 		myLongList = list(ftestWapiti)
+		myShortList= list(fanalyseTreeTagger)
+		taille = len(myLongList)
+
+		j = -1
+		for i in range(0, taille):
+		    ligne = myLongList[i]
+		    mots = ligne.split()
+
+		    nbMots = len(mots)
+
+		    if nbMots == 0 :
+		        fResultFinal.write('\n')
+		        
+		    else :
+		        j = j + 1
+		        mots2 = myShortList[j].split()
+		        if PosDetails == 1:
+		            newList = []
+		            for w in mots2:
+		                a = re.sub("(VER|DET|PRO|PRP|PUN):.+",r'\1', w)
+		                newList.append(a)
+		                mots2 = newList
+
+		        newLine = "{0} {1}".format(' '.join(mots2), ' '.join(mots[1:nbMots]))
+			fResultFinal.write(newLine)
+			fResultFinal.write('\n')
+
+		fResultFinal.close()
+		fanalyseTreeTagger.close()
+		ftestWapiti.close()
+		return
+
+	def runAnalyseTest(self, corpus, typeCorpus, fileRes) :
+		"""
+		Analyse of TreeTagger
+		"""
+		
+		fileAnalyse = self._prepareAnalyse(corpus, typeCorpus, fileRes)
+		fileReadyAnalyse = os.path.join(self.dirResult, 'treeTaggerAnalyse.txt')
+		
+		dependencyDir = os.path.join(self.rootDir, 'dependencies')
+
+		command = dependencyDir+"/tree-tagger-linux-3.2/bin/tree-tagger -token -no-unknown "+self.rootDir+"/KB/config/treetagger/french.par "+fileReadyAnalyse+" "+self.dirResult+fileRes
+		process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
+		process.wait()
+		return
+
+	def _retrieveTestContext(self, fileTreeWapiti, Context=0, PosDetails = 0):
+		'''
+		PosDetails : 0 = POS with detail ex: VER:inf  
+		             1 = harmonisation POS ex : VER:inf --> VER
+				 
+		Context :    0 = Token + POS
+		             1 = Only POS
+		'''
+		
+		inputt = open(self.dirResult+fileTreeWapiti, 'r', encoding='utf-8')
+		output = open(self.dirResult+'testdata_CRF_TreeTagger_Wapiti_Context.txt', 'w', encoding='utf-8')
+		
+		inputList = list(inputt)
+		taille = len(inputList)
+    
+		for i in range(0, taille):
+		    
+			ligne = inputList[i]
+			mots = ligne.split()
+			currentToken = mots[0:2]
+			if PosDetails == 1 :
+			    newList = []
+			    for w in currentToken:
+				a = re.sub("(VER|DET|PRO|PRP|PUN):.+",r'\1', w)
+				newList.append(a)
+				currentToken = newList
+		
+			nbMots = len(mots)
+			endLine = mots[3:nbMots]
+		
+		    
+			if nbMots == 0 :
+			    output.write('\n')
+			    continue
+		    
+			prevline = inputList[i-1] if i !=0  else ""
+			previousLine = prevline.split()
+		    
+			nextline = inputList[i+1] if i != (taille-1) else ""
+			nextli = nextline.split()
+		
+			if Context == 0:
+			    nextToken = nextli[0:2]#Token + POS
+			    previousWord = previousLine[0:2]
+			    
+			    if PosDetails == 1 :
+				nextTokenList = []
+				previousWordList = []
+				for nextw in nextToken:
+				    a = re.sub("(VER|DET|PRO|PRP|PUN):.+",r'\1', nextw)
+				    nextTokenList.append(a)
+				    nextToken = nextTokenList
+				    
+				for prevw in previousWord:
+				    a = re.sub("(VER|DET|PRO|PRP|PUN):.+",r'\1', prevw)
+				    previousWordList.append(a)
+				    previousWord = previousWordList
+				
+			    if len(previousWord) == 0:
+				newLine = "{0} {1} {2} {3}".format(' '.join(currentToken),''.join('NULL NULL'),' '.join(nextToken),' '.join(endLine))
+				output.write(newLine)
+				output.write('\n')
+			    
+			    elif len(nextToken) == 0:
+				newLine = "{0} {1} {2} {3}".format(' '.join(currentToken),' '.join(previousWord),''.join('NULL NULL'),' '.join(endLine))
+				output.write(newLine)
+				output.write('\n')
+		      
+			    else:
+		    
+				newLine = "{0} {1} {2} {3}".format(' '.join(currentToken),' '.join(previousWord),' '.join(nextToken),' '.join(endLine))
+				output.write(newLine)
+				output.write('\n')
+			else:
+			    nextToken = nextli[1:2]#Only POS
+			    previousWord = previousLine[1:2]
+			    
+			    if PosDetails == 1 :
+				nextTokenList = []
+				previousWordList = []
+				for nextw in nextToken:
+				    a = re.sub("(VER|DET|PRO|PRP|PUN):.+",r'\1', nextw)
+				    nextTokenList.append(a)
+				    nextToken = nextTokenList
+				
+				for prevw in previousWord:
+				    b = re.sub("(VER|DET|PRO|PRP|PUN):.+",r'\1', prevw)
+				    previousWordList.append(b)
+				    previousWord = previousWordList
+			    
+			    if len(previousWord) == 0:
+				newLine = "{0} {1} {2} {3}".format(' '.join(currentToken),''.join('NULL'),' '.join(nextToken),' '.join(endLine))
+				output.write(newLine)
+				output.write('\n')
+				
+			    elif len(nextToken) == 0:
+				newLine = "{0} {1} {2} {3}".format(' '.join(currentToken),' '.join(previousWord),''.join('NULL'),' '.join(endLine))
+				output.write(newLine)
+				output.write('\n')
+			  
+			    else:
+		
+				newLine = "{0} {1} {2} {3}".format(' '.join(currentToken),' '.join(previousWord),' '.join(nextToken),' '.join(endLine))
+				output.write(newLine)
+				output.write('\n')
+
+		inputt.close()
+		output.close()
+		return
+
+	def _prepareTestFileEvaluation(self, fileTree):
+		"""
+
+		Retrieve token for Tree Tagger Analyse
+
+		"""
+		fanalyseTreeTagger= open(self.dirResult+fileTree, 'r', encoding='utf-8')
+		ftestWapiti= open(self.dirResult+'testdata_CRF.txt', 'r', encoding='utf-8')
+		fResultFinal= open(self.dirResult+'testdata_CRF_TreeTagger.txt', 'w', encoding='utf-8')
+
+		myLongList = list(ftestWapiti)
+		myShortList= list(fanalyseTreeTagger)
+		taille = len(myLongList)
+
+		j = -1
+		for i in range(0, taille):
+		    ligne = myLongList[i]
+		    mots = ligne.split()
+
+		    nbMots = len(mots)
+
+		    if nbMots == 0 :
+			fResultFinal.write('\n')
+		    else :
+			j = j + 1
+			mots2 = myShortList[j].split()
+			newLine = "{0} {1}".format(' '.join(mots2), ' '.join(mots[1:nbMots]))
+			fResultFinal.write(newLine)
+			fResultFinal.write('\n')
+
+		fResultFinal.close()
+		fanalyseTreeTagger.close()
+		ftestWapiti.close()
+		return
+
+	def _retrieveTrainContext(self, fileTreeWapiti, Context=0, PosDetails = 0):
+		
+		inputt = open(self.dirResult+fileTreeWapiti, 'r', encoding='utf-8')
+		output = open(self.dirResult+'trainingdata_CRF_TreeTagger_Wapiti_Context.txt', 'w', encoding='utf-8')
+
+		inputList = list(inputt)
+		taille = len(inputList)
+    
+		for i in range(0, taille):
+		    
+			ligne = inputList[i]
+			mots = ligne.split()
+			currentToken = mots[0:2]
+			if PosDetails == 1 :
+			    newList = []
+			    for w in currentToken:
+				a = re.sub("(VER|DET|PRO|PRP|PUN):.+",r'\1', w)
+				newList.append(a)
+				currentToken = newList
+		
+			nbMots = len(mots)
+			endLine = mots[3:nbMots]
+		
+		    
+			if nbMots == 0 :
+			    output.write('\n')
+			    continue
+		    
+			prevline = inputList[i-1] if i !=0  else ""
+			previousLine = prevline.split()
+		    
+			nextline = inputList[i+1] if i != (taille-1) else ""
+			nextli = nextline.split()
+		
+			if Context == 0:
+			    nextToken = nextli[0:2]#Token + POS
+			    previousWord = previousLine[0:2]
+			    
+			    if PosDetails == 1 :
+				nextTokenList = []
+				previousWordList = []
+				for nextw in nextToken:
+				    a = re.sub("(VER|DET|PRO|PRP|PUN):.+",r'\1', nextw)
+				    nextTokenList.append(a)
+				    nextToken = nextTokenList
+				    
+				for prevw in previousWord:
+				    a = re.sub("(VER|DET|PRO|PRP|PUN):.+",r'\1', prevw)
+				    previousWordList.append(a)
+				    previousWord = previousWordList
+				
+			    if len(previousWord) == 0:
+				newLine = "{0} {1} {2} {3}".format(' '.join(currentToken),''.join('NULL NULL'),' '.join(nextToken),' '.join(endLine))
+				output.write(newLine)
+				output.write('\n')
+			    
+			    elif len(nextToken) == 0:
+				newLine = "{0} {1} {2} {3}".format(' '.join(currentToken),' '.join(previousWord),''.join('NULL NULL'),' '.join(endLine))
+				output.write(newLine)
+				output.write('\n')
+		      
+			    else:
+		    
+				newLine = "{0} {1} {2} {3}".format(' '.join(currentToken),' '.join(previousWord),' '.join(nextToken),' '.join(endLine))
+				output.write(newLine)
+				output.write('\n')
+			else:
+			    nextToken = nextli[1:2]#Only POS
+			    previousWord = previousLine[1:2]
+			    
+			    if PosDetails == 1 :
+				nextTokenList = []
+				previousWordList = []
+				for nextw in nextToken:
+				    a = re.sub("(VER|DET|PRO|PRP|PUN):.+",r'\1', nextw)
+				    nextTokenList.append(a)
+				    nextToken = nextTokenList
+				
+				for prevw in previousWord:
+				    b = re.sub("(VER|DET|PRO|PRP|PUN):.+",r'\1', prevw)
+				    previousWordList.append(b)
+				    previousWord = previousWordList
+			    
+			    if len(previousWord) == 0:
+				newLine = "{0} {1} {2} {3}".format(' '.join(currentToken),''.join('NULL'),' '.join(nextToken),' '.join(endLine))
+				output.write(newLine)
+				output.write('\n')
+				
+			    elif len(nextToken) == 0:
+				newLine = "{0} {1} {2} {3}".format(' '.join(currentToken),' '.join(previousWord),''.join('NULL'),' '.join(endLine))
+				output.write(newLine)
+				output.write('\n')
+			  
+			    else:
+		
+				newLine = "{0} {1} {2} {3}".format(' '.join(currentToken),' '.join(previousWord),' '.join(nextToken),' '.join(endLine))
+				output.write(newLine)
+				output.write('\n')
+
+		inputt.close()
+		output.close()
+		return
+
+	def _prepareTrainFileEvaluation(self, fileTree):
+		"""
+
+		Retrieve token for Tree Tagger Analyse
+
+		"""
+		fanalyseTreeTagger= open(self.dirResult+fileTree, 'r', encoding='utf-8')
+		ftestWapiti= open(self.dirResult+'trainingdata_CRF.txt', 'r', encoding='utf-8')
+		fResultFinal= open(self.dirResult+'trainingdata_CRF_TreeTagger.txt', 'w', encoding='utf-8')
+
+		myLongList = list(ftestWapiti)
+		myShortList= list(fanalyseTreeTagger)
+		taille = len(myLongList)
+
+		j = -1
+		for i in range(0, taille):
+		    ligne = myLongList[i]
+		    mots = ligne.split()
+
+		    nbMots = len(mots)
+
+		    if nbMots == 0 :
+			fResultFinal.write('\n')
+		    else :
+			j = j + 1
+			mots2 = myShortList[j].split()
+			newLine = "{0} {1}".format(' '.join(mots2), ' '.join(mots[1:nbMots]))
+			fResultFinal.write(newLine)
+			fResultFinal.write('\n')
+
+		fResultFinal.close()
+		fanalyseTreeTagger.close()
+		ftestWapiti.close()
 		return

@@ -55,3 +55,23 @@ pp
 pp.
 p
 p.
+# trad possbiblscop
+tr. fr.
+tr.
+trad.
+fr.
+vol.
+Vol.
+No.
+n°
+op. cit.
+ibid.
+# role possrole
+dir.
+dir
+collab
+collab.
+comp
+comp.
+pref
+pref.

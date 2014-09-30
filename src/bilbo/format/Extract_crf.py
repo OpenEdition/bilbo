@@ -132,6 +132,8 @@ class Extract_crf(Extract):
 			self.placeObj.searchPlace(listRef, tr)
 			self.cityObj.searchProper(listRef, tr)
 			self.journalObj.searchProper(listRef, tr)
+			self.editorObj.searchProper(listRef, tr)
+			self.meetingObj.searchProper(listRef, tr)
 		
 		if extOption == 1 or extOption == 2 :
 			if tr != -2 :

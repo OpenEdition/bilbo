@@ -10,6 +10,7 @@ from bilbo.extra.Place import Place
 from bilbo.extra.Properlist import Properlist
 import sys, os
 import re
+import Stemmer
 from codecs import open
 
 class Extract(object):
@@ -92,8 +93,10 @@ class Extract(object):
 		'Load people name and place'
 		self.nameObj = Name(os.path.join(self.rootDir, "KB/config/externalList/auteurs_revuesorg2.txt")) #SURNAMELIST, FORENAMELIST
 		self.placeObj = Place(os.path.join(self.rootDir, "KB/config/externalList/list_pays.txt")) #PLACELIST
-		self.cityObj = Properlist(os.path.join(self.rootDir, "KB/config/externalList/LargeCities.txt"), "PLACELIST") #PLCAELIST
-		self.journalObj = Properlist(os.path.join(self.rootDir, "KB/config/externalList/journalAll.txt"), "JOURNALLIST") #PLCAELIST
+		self.cityObj = Properlist(os.path.join(self.rootDir, "KB/config/externalList/LargeCities.txt"), "PLACELIST") #PLACELIST
+		self.journalObj = Properlist(os.path.join(self.rootDir, "KB/config/externalList/journalAll.txt"), "JOURNALLIST") #PLACELIST
+		self.editorObj = Properlist(os.path.join(self.rootDir, "KB/config/externalList/editor.txt"), "EDITORLIST") #PLCAELIST
+		self.meetingObj = Properlist(os.path.join(self.rootDir, "KB/config/externalList/meeting.txt"), "MEETINGLIST") #PLCAELIST
 
 
 	def extract(self):
@@ -180,21 +183,28 @@ class Extract(object):
 					['POSSEDITOR'],	#8
 					['POSSPAGE'],	#9
 					['POSSMONTH'],	#10POSSMONTH
-					['SURNAMELIST'],	#11
-					['FORENAMELIST'],	#12
-					['PLACELIST'],		#13
-					['JOURNALLIST']]	#14
+					['POSSBIBLSCOP'], #11
+					['POSSROLE'],	#12
+					['SURNAMELIST'],	#13
+					['FORENAMELIST'],	#14
+					['PLACELIST'],		#15
+					['JOURNALLIST'], #16
+					['EDITORLIST'], #17
+					['MEETINGLIST']]	#18
 		if self.options.u : features.append(['PUNC', 'COMMA', 'POINT', 'LEADINGQUOTES', 'ENDINGQUOTES', 'LINK','PAIREDBRACES'])
-
+		#if self.options.p : features.append(['ABR', 'ADJ', 'ADV', 'DET:ART', 'DET:POS', 'INT','KON','NAM','NOM','PRO','PRO:DEM','PRO:IND','PRO:PER','PRO:POS','PRO:REL','PRP','PRP:det','PUN','PUN:cit','SENT','SYM','VER:cond','VER:futu','VER:impe','VER:impf','VER:infi','VER:pper','VER:ppre','VER:pres','VER:simp','VER:subi','VER:subp'])
+		
 		fich = open(fichier, "w", encoding="utf-8")
 		for reference in listRef.getReferences():
 			if (not (opt=="deleteNegatives" and reference.train == -1)) and (not (opt=="deletePositives" and reference.train != -1)):
 			
 				for mot in reference.getWord():
+					stemmer = Stemmer.Stemmer('french')
 					tmp_features = ['NONUMBERS', 'NODASH', 'NONIMPCAP', 'NULL', 'NOINITIAL',
-									'NOWEBLINK', 'NOITALIC', 'NOEDITOR', 'NOPAGE', 'NOMONTH', 'NOSURLIST',
-									'NOFORELIST', 'NOPLACELIST', 'NOJOURLIST']#, 'NOPUNC']#, 'NOJOURLIST']
+									'NOWEBLINK', 'NOITALIC', 'NOEDITOR', 'NOPAGE', 'NOMONTH', 'NOBIBLSCOP', 'NOROLE', 'NOSURLIST',
+									'NOFORELIST', 'NOPLACELIST', 'NOJOURLIST', 'NOEDITORLIST', 'NOMEETING']#, 'NOPUNC']#, 'NOJOURLIST']
 					if self.options.u : tmp_features.append('NOPUNC')
+					if self.options.a : tmp_features.append(stemmer.stemWord(mot.nom))
 					if mot.ignoreWord == 0:
 						fich.write(mot.nom)
 						nbCarac = mot.nbFeatures()

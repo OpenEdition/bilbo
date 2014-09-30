@@ -67,15 +67,41 @@ class Bilbo(object):
 		typeCorpus : int, {1, 2, 3}
 			type of corpus
 			1 : corpus 1, 2 : corpus 2...
+
+		PosDetails : 0 = POS with detail ex: VER:inf  
+		             1 = harmonisation POS ex : VER:inf --> VER
+				 
+		Context :    0 = Token + POS
+		             1 = Only POS
 		"""
 		corpus = Corpus(dirCorpus, self.options)
 		self.crf.setDirModel(dirModel)
 		if typeCorpus == 1:
-			print "Extract references..."
-			corpus.extract(1, "bibl")
-			print "crf training data extraction..."
-			self.crf.prepareTrain(corpus, 1, "trainingdata_CRF.txt", 1, 1) #CRF training data extraction
-			self.crf.runTrain(dirModel, "trainingdata_CRF_Wapiti.txt", self.crfmodelname) #CRF model learning
+			if self.options.p:
+				print "Extract references..."
+				corpus.extract(1, "bibl")
+				print "crf training data extraction..."
+				self.crf.prepareTrain(corpus, 1, "trainingdata_CRF.txt", 1, 1) #CRF training data extraction
+				print "run tree tagger analyse...THINK ABOUT add pattern_ref"
+				self.crf.runAnalyseTrain(corpus, 1, dirModel, "trainingTreetagger.txt")
+				print "prepare tree tagger result for training..."
+				self.crf.runAnalyseBeforeTrain("trainingTreetagger.txt", PosDetails = 0)
+				print "crf run test for labeling...THINK ABOUT add pattern_ref"
+				self.crf._prepareTrainFileEvaluation('trainingTreetagger.txt')
+				if self.options.c:
+					self.crf._retrieveTrainContext('trainingdata_CRF_TreeTagger_Wapiti.txt', Context=1, PosDetails=1)
+					self.crf.runTrain(dirModel, 'trainingdata_CRF_TreeTagger_Wapiti_Context.txt', self.crfmodelname)
+				else:
+					print "run train..."
+					self.crf.runTrain(dirModel, "trainingdata_CRF_TreeTagger_Wapiti.txt", self.crfmodelname)#CRF model learning
+			
+			else:
+				print "Extract references..."
+				corpus.extract(1, "bibl")
+				print "crf training data extraction..."
+				self.crf.prepareTrain(corpus, 1, "trainingdata_CRF.txt", 1, 1) #CRF training data extraction
+				print "run train..."
+				self.crf.runTrain(dirModel, "trainingdata_CRF_Wapiti.txt", self.crfmodelname)	
 				
 		elif typeCorpus == 2:
 			print "Extract notes..."
@@ -139,16 +165,42 @@ class Bilbo(object):
 			set of references that we want to annotate
 		fname :	string
 			name of file to be annotated
+
+		PosDetails : 0 = POS with detail ex: VER:inf  
+		             1 = harmonisation POS ex : VER:inf --> VER
+				 
+		Context :    0 = Token + POS
+		             1 = Only POS
 		"""
-		print "Extract references..."
-		corpus.extract(1, "bibl", fname)
-		print "crf data extraction for labeling..."
-		self.crf.prepareTest(corpus, 1)
-		print "crf run test for labeling..."
-		self.crf.runTest(dirModel, 'testdata_CRF_Wapiti.txt', self.crfmodelname)
-		print "corpus add tag for labeling..."
-		corpus.addTagReferences(self.dirResult, "testEstCRF.xml", "bibl", 1)
-		
+		if self.options.p:
+			print "Extract references..."
+			corpus.extract(1, "bibl", fname)
+			print "crf data extraction for labeling..."
+			self.crf.prepareTest(corpus, 1)
+			print "tree tagger analyse..."
+			self.crf.runAnalyseTest(corpus, 1, "testTreetagger.txt")
+			print "tree tagger run for labeling..."
+			self.crf.runAnalyseBeforeTest("testTreetagger.txt", PosDetails = 0)
+			print "crf run test for labeling...THINK ABOUT add pattern_ref"
+			self.crf._prepareTestFileEvaluation('testTreetagger.txt')
+			if self.options.c:
+				self.crf._retrieveTestContext('testdata_CRF_TreeTagger_Wapiti.txt', Context=1, PosDetails=1)
+				self.crf.runTest(dirModel, 'testdata_CRF_TreeTagger_Wapiti_Context.txt', self.crfmodelname)
+			else:
+				self.crf.runTest(dirModel, 'testdata_CRF_TreeTagger_Wapiti.txt', self.crfmodelname)
+			print "corpus add tag for labeling..."
+			corpus.addTagReferences(self.dirResult, "testEstCRF.xml", "bibl", 1)
+		else :
+			
+			print "Extract references..."
+			corpus.extract(1, "bibl", fname)
+			print "crf data extraction for labeling..."
+			self.crf.prepareTest(corpus, 1)
+			print "crf run test for labeling..."
+			self.crf.runTest(dirModel, 'testdata_CRF_Wapiti.txt', self.crfmodelname)
+			print "corpus add tag for labeling..."
+			corpus.addTagReferences(self.dirResult, "testEstCRF.xml", "bibl", 1)
+
 		return corpus
 
 

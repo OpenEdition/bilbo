@@ -109,6 +109,9 @@ def defaultOptions():
 	common_opts.add_option('-v', '--validatexml', dest="v", default="none", action="store", type='choice', choices=['none', 'input', 'output', 'all'], help="XML schema validation")
 	common_opts.add_option('-s', '--svmfilt', dest="s", default=False, action="store_true", help="Use a svm for training or labeling")
 	common_opts.add_option('-u', '--undopuncsep', dest="u", default=False, action="store_true", help="undo punctuation separation")
+	common_opts.add_option('-p', '--postagging', dest="p", default=False, action="store_true", help="add pos tagging annotation")
+	common_opts.add_option('-c', '--postagging+context', dest="c", default=False, action="store_true", help="add pos tagging annotation and retrieve POS next and previous word")
+	common_opts.add_option('-a', '--stemmer', dest="a", default=False, action="store_true", help="add stemme")
 	parser.add_option_group(common_opts)
 	label_opts = optparse.OptionGroup(
 		parser, 'Labeling options',
