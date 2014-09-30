@@ -87,7 +87,7 @@ class CleanCorpus1(Clean):
 									for ss in c_tag_str :
 										words.append(Word(ss.encode('utf8'), ["nolabel"]))
 										
-					if b.find('relateditem') :	#related item
+					if b.find('relateditem') or b.find(nameTagCorpus) : #related item
 						i += 1
 
 				references.append(Reference(words,i))
