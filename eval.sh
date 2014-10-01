@@ -40,7 +40,9 @@ done;
 # Création du fichier global de l'évaluation
 globalEvalFile=${dirEval}/evaluation.tsv
 head -n 1 ${dirEval}/${percents%% *}%/evaluation.tsv | sed "s/^/% of test data\t/" > $globalEvalFile
-for percentOfTest in $percents; do
-	tail -n 1 ${dirEval}/${percentOfTest}%/evaluation.tsv | sed "s/^/${percentOfTest}%\t/" >> $globalEvalFile
-	echo >> $globalEvalFile
+# re-get all files, $percents may not be all of them
+allPercents=`find ${dirEval} -iwholename '*%/evaluation.tsv'|sort|sed -e 's/.*\([0-9][0-9]\)%.*/\1/'`
+for percentOfTest in $allPercents; do
+ 	tail -n 1 ${dirEval}/${percentOfTest}%/evaluation.tsv | sed "s/^/${percentOfTest}%\t/" >> $globalEvalFile
+ 	echo >> $globalEvalFile
 done;
