@@ -42,6 +42,7 @@ class bilboAnnotate():
 			bilbo.annotate(annotateDir, modelDir, 1)
 			
 			# train with test data for evaluation
+			self._setBilboTrain()
 			self._del_tmp_file(trainDir)
 			bilbo = Bilbo(trainDir, self.bilboOptions, "crf_model_simple") # To save tmpFiles in testDir
 			corpus = Corpus(testDir, self.bilboOptions)
