@@ -142,9 +142,10 @@ class Rule(object):
 			reference.replaceReference(reorgWords,len(reorgWords))	
 			
 		'if -u option is True, we attach punctuation. it is especially used for experiments'
-		if self.options.u : self.attachPunc(listReference)
+		if self.options.u :
+			self.attachPunc(listReference)
 		#else : self.descPunc(listReference)
-			
+		
 		return
 	
 		
@@ -302,7 +303,8 @@ class Rule(object):
 						preWord.addFeature(feat_str.split())
 						reorgWords.append(preWord)
 						postCk = False
-					elif postPunc.has_key(word.nom) or postPunc.has_key(oriword) :
+					#elif postPunc.has_key(word.nom) or postPunc.has_key(oriword) :
+					else: # take punctuation not recognised as post, being pre ! (yes variable names prePunc, postPunc are misleading)
 						postCk = True
 						postToken = word.nom
 						postfeat_str = 'punc '
