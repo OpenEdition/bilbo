@@ -27,9 +27,9 @@ class TokenAccuracyEval():
 		returnValues = []
 		
 		excluded = {'nonbibl': 0, 'c':0} #label exclue sauf pour le calcul de la micro
-		cnt = {'0000': 0}# nombre de token étiqueté par label dans le test (ce que l'on souhaite avoir)
-		acc = {'0000': 0} # nombre d'étiquette correct par label
-		cnt_d = {'0000': 0}# nombre de token étiqueté par label dans la référence (ce qu'il faut avoir)
+		cnt = {'0000': 0, 'c':0}# nombre de token étiqueté par label dans le test (ce que l'on souhaite avoir)
+		acc = {'0000': 0, 'c':0} # nombre d'étiquette correct par label
+		cnt_d = {'0000': 0, 'c':0}# nombre de token étiqueté par label dans la référence (ce qu'il faut avoir)
 		errors = {'0000':{'000':0}} #{desired:{predicted:count}}
 		tab_precision = []
 		tab_recall = []
@@ -80,7 +80,7 @@ class TokenAccuracyEval():
 					
 				j += 1
 		del acc['0000']
-		del cnt_d['0000']	
+		del cnt_d['0000']
 
 		evaluation += 'Total accuracy (Micro Averaged Precision)\n'
 		evaluation += '# {:d} {:d} {:f}'.format(c, j, float(c)/float(j)*100) + "\n"
@@ -107,7 +107,7 @@ class TokenAccuracyEval():
 		evaluation += '\n***** Precision *****\n'
 		
 		for key, value in sorted(cnt_d.iteritems(), key=lambda (k,v): (v,k), reverse=True):
-			if acc.has_key(key) :
+			if acc.has_key(key) and cnt[key]>0 :
 				result_key = float(acc[key])/float(cnt[key])*100
 				tab_precision.append(result_key)
 				evaluation += "{: <15s} {: >3d} {: >3d} {: >10f}".format(key, acc[key], cnt[key], result_key) + "\n"
@@ -125,7 +125,7 @@ class TokenAccuracyEval():
 		
 		evaluation += '\n***** Recall *****\n'
 		for key, value in sorted(cnt_d.iteritems(), key=lambda (k,v): (v,k), reverse=True):
-			if acc.has_key(key) :
+			if acc.has_key(key) and cnt[key]>0 :
 				result_key = float(acc[key])/float(value)*100
 				tab_recall.append(result_key)
 				evaluation += "{: <15s} {: >3d} {: >3d} {: >10f}".format(key, acc[key], value, result_key) + "\n"
