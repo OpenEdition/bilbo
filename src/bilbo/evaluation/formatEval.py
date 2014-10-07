@@ -48,7 +48,7 @@ class FormatEval():
 
 	@staticmethod
 	# myList : list to shuffle
-	# testPercentage : percentage of lenght of the first list
+	# testPercentage : percentage of length of the first list
 	def getShuffledCorpus(myList, testPercentage):
 		shuffled = list(myList)
 		random.shuffle(shuffled)
@@ -73,7 +73,7 @@ class FormatEval():
 
 	@staticmethod
 	# this is realy bad, but we use it to make FormatEvalBiblo work, and accept wrong XML
-	# TODO: correct FormatEvalBiblo !!
+	# fortunatly it is not needed :D
 	def addWhiteSpace(xmlList, tagCorpus='bibl'):
 		spaced = []
 		for line in xmlList:
@@ -82,6 +82,84 @@ class FormatEval():
 			spaced.append(line.strip())
 			
 		return spaced
+
+"""
+ Using the content of tmp files from labeling and training
+ Format them as ['label \t word'] lists
+ Harmonise the length of each list, creating same token on each line
+ Return each list as one big string
+"""
+class prepareEval():
+	# TODO: use this class in bilboEval
+	@staticmethod
+	def prepareEval(desiredContent, labeledContent):
+		pe = prepareEval()
+		desiredContentFormated = pe.splitForEval(desiredContent)
+		labeledContentFormated = pe.splitForEval(labeledContent)
+		
+		desiredContentHarmonized, labeledContentHarmonized = pe.harmonizeList(desiredContentFormated, labeledContentFormated)
+		
+		return "\n".join(desiredContentHarmonized), "\n".join(labeledContentHarmonized)
+
+	def splitForEval(self, content):
+		formated = []
+		for line in content.split("\n"):
+			words = line.split(" ")
+			#print words
+			if len(words)>1:
+				formated.append(words[-1].strip() + "\t" + words[0].strip())
+				#formated.append(words[0])
+			else:
+				formated.append('')
+		return formated
+
+	def _getFeatureAndName(self, token):
+		words = token.split("\t")
+		feature = words[0]
+		name = words[1] if len(words) > 1 else ""
+		if len(name.split()) > 1:
+			name = "".join(name.split()) # kind of a bug: get rid of non printing (but spliters) utf-8 characters
+		return feature, name
+
+	# output is not the same length, before debug, dirty solution to harmonise output
+	def harmonizeList(self, shortList, longList):
+		indexLong = 0
+		indexShort = 0
+		lengthShort = len(shortList)
+		lengthLong = len(longList)
+		newShortList = []
+		newLongList = []
+		while True:
+			featureShort, partShort = self._getFeatureAndName(shortList[indexShort])
+			featureLong , partLong = self._getFeatureAndName(longList[indexLong])
+			
+			while True:
+				if partShort == partLong:
+					#print indexShort, partShort.encode('utf8'), indexLong, partLong.encode('utf8'), "RESOLVED"
+					break
+				#print indexShort, partShort.encode('utf8'), len(partShort), indexLong, partLong.encode('utf8'), len(partLong)
+				if partShort < partLong:
+					indexShort +=1
+					_, partShortAppend = self._getFeatureAndName(shortList[indexShort])
+					partShort += partShortAppend
+				else:
+					indexLong +=1
+					_, partLongAppend  = self._getFeatureAndName(longList[indexLong])
+					partLong += partLongAppend
+
+			textShort = featureShort + "\t" + partShort if partShort else ''
+			newShortList.append(textShort)
+			textLong = featureLong + "\t" + partLong if partLong else ''
+			newLongList.append(textLong)
+			
+			indexShort += 1
+			indexLong += 1
+			
+			if indexShort == lengthShort or indexLong == lengthLong:
+				break
+		
+		#print str(len(newShortList)), indexShort, lengthShort, str(len(newLongList)), indexLong, lengthLong
+		return newShortList, newLongList
 
 if __name__ == '__main__':
 	myList = FormatEval.getBiblFromDir(sys.argv[1], addWhiteSpace=True)
