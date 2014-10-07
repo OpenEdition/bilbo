@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 """
 Created on April 19, 2012
 
@@ -9,7 +10,7 @@ from bilbo.extra.Place import Place
 from bilbo.extra.Properlist import Properlist
 import sys, os
 import re
-import codecs
+from codecs import open
 
 class Extract(object):
 	"""
@@ -40,18 +41,17 @@ class Extract(object):
 		self.regles = {}
 		
 		main = os.path.realpath(__file__).split('/')
-		self.rootDir = "/".join(main[:len(main)-4])		
-		
+		self.rootDir = "/".join(main[:len(main)-4])
 		
 		'Fill "nonLabels" and "features" that are in the file "feature.txt"'
 		
 		try:
 			'flag = 1 : features, flag = 2 : nonLabels, flag = 3 : bookindicator'
-			flag = 0 
-			nameRegle = ""	
+			flag = 0
+			nameRegle = ""
 			
-			for line in open(os.path.join(self.rootDir, "KB/config/features.txt")):
-				lineSplit = re.split("\s", line)
+			for line in open(os.path.join(self.rootDir, "KB/config/features.txt"), encoding='utf8'):
+				lineSplit = re.split("\s", line, flags=re.UNICODE)
 				if lineSplit[0] == "#":
 					nameRegle = lineSplit[1]
 					flag += 1
@@ -78,8 +78,8 @@ class Extract(object):
 		
 		if self.options.i == "tei" :
 			try:
-				for line in open(os.path.join(self.rootDir, "KB/config/balise.txt"), "r"):
-					lineSplit = re.split("\s", line)
+				for line in open(os.path.join(self.rootDir, "KB/config/balise.txt"), "r", encoding='utf8'):
+					lineSplit = re.split("\s", line, flags=re.UNICODE)
 					self.configTag[lineSplit[0]] = lineSplit[1].split("\n")[0]
 				if self.options.g == "detail" :
 					del self.configTag['meeting']
@@ -95,11 +95,11 @@ class Extract(object):
 		self.cityObj = Properlist(os.path.join(self.rootDir, "KB/config/externalList/LargeCities.txt"), "PLACELIST") #PLCAELIST
 		self.journalObj = Properlist(os.path.join(self.rootDir, "KB/config/externalList/journalAll.txt"), "JOURNALLIST") #PLCAELIST
 
-	
+
 	def extract(self):
 		"""
 		To be defined in a sub class
-		"""	
+		"""
 		return
 
 
@@ -122,65 +122,53 @@ class Extract(object):
 				listRef.modifyTestIndiceRef(i)
 
 		return
-	
+
 
 	def loadIndices(self, fichier):
 		"""
 		Load the indices of the File object
 		"""
 		indices = []
-		for line in open(fichier):
+		for line in open(fichier, encoding='utf8'):
 			indices.append(line)
 			
 		return indices
-	
+
 
 	def _printdata(self, fichier, listRef, tr, opt="saveNegatives") : #default value of 'opt' is "saveNegatives"
 		"""
 		Print training or test data for Mallet CRF
 		"""
-		fich = codecs.open(fichier, "w", encoding="utf-8")
+		fich = open(fichier, "w", encoding="utf-8")
 		for reference in listRef.getReferences():
 			if (not (opt=="deleteNegatives" and reference.train == -1)) and (not (opt=="deletePositives" and reference.train != -1)) :
 			
 				for mot in reference.getWord():
 					if mot.ignoreWord == 0:
-						try:
-							fich.write(unicode(mot.nom,"utf-8"))
-						except TypeError:
-							fich.write(mot.nom)
+						fich.write(mot.nom)
 						nbCarac = mot.nbFeatures()
 						cpt = 0
 						if nbCarac > 0:
 							caracteristique = mot.getFeatureIndice(nbCarac-1)
-							try:
-								fich.write(" "+unicode(caracteristique.nom.upper(), "utf-8"))
-							except TypeError:
-								fich.write(" "+caracteristique.nom.upper())
+							fich.write(" "+caracteristique.nom.upper())
 						
 							while cpt < nbCarac-1:
 								caracteristique = mot.getFeatureIndice(cpt)
-								try:
-									fich.write(" "+caracteristique.nom.upper())
-								except:
-									fich.write(" "+unicode(caracteristique.nom.upper(), "utf-8"))
+								fich.write(" "+caracteristique.nom.upper())
 								cpt += 1
 						if tr != 0:
-							balise = mot.getLastTag()	
-							try:
-								fich.write(" "+unicode(balise.nom, "utf-8"))
-							except:
-								fich.write(" "+balise.nom)
+							balise = mot.getLastTag()
+							fich.write(" "+balise.nom)
 						fich.write("\n")
 				fich.write("\n")
 			#--------
 		fich.close()
 		return
-	
+
 
 	def _printdataWapiti(self, fichier, listRef, tr, opt="saveNegatives") : #default value of 'opt' is "saveNegatives"
 		"""
-		Print training or test data for Wapiti CRF 
+		Print training or test data for Wapiti CRF
 		"""
 		features = [['ALLNUMBERS', 'NUMBERS'],	#1
 					['DASH'],					#2
@@ -198,7 +186,7 @@ class Extract(object):
 					['JOURNALLIST']]	#14
 		if self.options.u : features.append(['PUNC', 'COMMA', 'POINT', 'LEADINGQUOTES', 'ENDINGQUOTES', 'LINK','PAIREDBRACES'])
 
-		fich = codecs.open(fichier, "w", encoding="utf-8")
+		fich = open(fichier, "w", encoding="utf-8")
 		for reference in listRef.getReferences():
 			if (not (opt=="deleteNegatives" and reference.train == -1)) and (not (opt=="deletePositives" and reference.train != -1)):
 			
@@ -208,28 +196,19 @@ class Extract(object):
 									'NOFORELIST', 'NOPLACELIST', 'NOJOURLIST']#, 'NOPUNC']#, 'NOJOURLIST']
 					if self.options.u : tmp_features.append('NOPUNC')
 					if mot.ignoreWord == 0:
-						try:
-							fich.write(unicode(mot.nom,"utf-8"))
-						except TypeError:
-							fich.write(mot.nom)
+						fich.write(mot.nom)
 						nbCarac = mot.nbFeatures()
 						cpt = 0
 						if nbCarac > 0:
 							total_features = ""
 							caracteristique = mot.getFeatureIndice(nbCarac-1)
 							cur_feature = ""
-							try:
-								cur_feature = unicode(caracteristique.nom.upper(), "utf-8")
-							except TypeError:
-								cur_feature = caracteristique.nom.upper()
+							cur_feature = caracteristique.nom.upper()
 							total_features += cur_feature+" "
 							
 							while cpt < nbCarac-1:
 								caracteristique = mot.getFeatureIndice(cpt)
-								try:
-									cur_feature = caracteristique.nom.upper()
-								except:
-									cur_feature = unicode(caracteristique.nom.upper(), "utf-8")
+								cur_feature = caracteristique.nom.upper()
 								total_features += cur_feature+" "
 								cpt += 1
 							
@@ -248,56 +227,46 @@ class Extract(object):
 							
 						if tr != 0:
 							balise = mot.getLastTag()
-							try:
-								fich.write(" "+unicode(balise.nom, "utf-8"))
-							except:
-								fich.write(" "+balise.nom)
+							fich.write(" "+balise.nom)
 						fich.write("\n")
 				fich.write("\n")
 			#--------
 		fich.close()
 		return
-	
-	
-	
+
+
 	def _printOnlyLabel(self, fichier, listRef) :
 		"""
 		Print training or test data for CRF (only labels)
 		"""
-		fich = codecs.open(fichier, "w", encoding="utf-8")
+		fich = open(fichier, "w", encoding="utf-8")
 		for reference in listRef.getReferences():
 			for mot in reference.getWord():
 
 				for balise in mot.getAllTag():
-					try:
-						fich.write(unicode(balise.nom, "utf-8"))
-					except:
-						fich.write(balise.nom)
+					fich.write(balise.nom)
 				fich.write("\n")
 			fich.write("\n")
 				
 		fich.close()
 		return
-		
-		
+
+
 	def _print_alldata(self, fichier, listRef) :
 		"""
 		Print all data for SVM
 		"""
-		fich = codecs.open(fichier, "w", encoding="utf-8")
+		fich = open(fichier, "w", encoding="utf-8")
 		for reference in listRef.getReferences():
 			for mot in reference.getWord():
-				try:
-					fich.write(unicode(mot.nom,"utf-8"))
-				except TypeError:
-					fich.write(mot.nom)
+				fich.write(mot.nom)
 
 			fich.write("\n")
 				
 		fich.close()
 		return
 
-	
+
 	def _print_parallel(self, fichier, listRef) :
 		"""
 		Print result in parallel lines for SVM
@@ -306,7 +275,7 @@ class Extract(object):
 		feature = ""
 		cpt = 0;
 		
-		fich = codecs.open(fichier, "w", encoding="utf-8")
+		fich = open(fichier, "w", encoding="utf-8")
 		for reference in listRef.getReferences():
 			cpt=0
 			for mot in reference.getWord():
@@ -316,23 +285,14 @@ class Extract(object):
 						feature += feat.upper()+" "
 						if cpt == 0 and (feat.lower() == "initial"):
 							feature += "STARTINITIAL "
-					if re.search("NUMBERS", feature) != 0 and re.search("ALLNUMBERS", feature) != 0:	
-						try:
-							phrase += " "+unicode(mot.nom,"utf-8")
-						except:
-							phrase += " "+mot.nom
+					if re.search("NUMBERS", feature, flags=re.UNICODE) != 0 and re.search("ALLNUMBERS", feature, flags=re.UNICODE) != 0:
+						phrase += " "+mot.nom
 					cpt+=1
 
-			fich.write(str(reference.bibl))
-			try:
-				fich.write(unicode(phrase,"utf-8")+"\n")
-			except:
-				fich.write(phrase+"\n")
+			fich.write(unicode(reference.bibl))
+			fich.write(phrase+"\n")
 
-			try:
-				fich.write(unicode(feature,"utf-8")+"\n")
-			except:
-				fich.write(feature+"\n")
+			fich.write(feature+"\n")
 			
 			fich.write("\n")
 			
@@ -342,12 +302,12 @@ class Extract(object):
 				
 		fich.close()
 		return
-	
-	
+
+
 	def _addlayout(self, listRef) :
 		"""
 		Add layout features
-		"""	
+		"""
 		for reference in listRef.getReferences():
 			i = 0
 			tmp_length = float(reference.nbWord())
@@ -363,12 +323,12 @@ class Extract(object):
 				elif i < tmp_length :
 					layout_feature = 'BIBL_END'
 					
-				if layout_feature != '' : 
+				if layout_feature != '' :
 					mot.addFeature(layout_feature)
 					
 				i += 1
-		return			
-		
+		return
+
 
 	def _extract_title(self, mot, relatItm, titleCK, titleAttr) :
 		"""
@@ -383,24 +343,24 @@ class Extract(object):
 			indicates if there is another title string before this
 		titleAttr : char
 			attribute
-				according to TEI guidelines, 
+				according to TEI guidelines,
 				a - (analytic) analytic title (article, poem, or other item published as part of a larger item)
 				m - (monographic) monographic title (book, collection, or other item published as a distinct item, including single volumes of multi-volume works)
 				j - (journal) journal title
 				s - (series) series title
 				u -	(unpublished) title of unpublished material (including theses and dissertations unless published by a commercial press)
-		"""	
+		"""
 		flagU = 0
 		
 		for caracteristique in mot.getAllFeature():
 			if caracteristique.nom == 'a' :
 				titleAttr = caracteristique.nom
 				mot.delFeature('a')
-			elif caracteristique.nom == 'j' or caracteristique.nom == 's' or caracteristique.nom == 'm': 
-				if titleCK == 1 and titleAttr != caracteristique.nom : 
+			elif caracteristique.nom == 'j' or caracteristique.nom == 's' or caracteristique.nom == 'm':
+				if titleCK == 1 and titleAttr != caracteristique.nom :
 					balise = mot.getTag("title")
-					balise.nom = 'booktitle'
-				else : 
+					if balise > 0 : balise.nom = 'booktitle'
+				else :
 					titleAttr = caracteristique.nom
 				mot.delFeature('j')
 				mot.delFeature('s')
@@ -408,7 +368,7 @@ class Extract(object):
 				if relatItm == 1 and titleCK == 1 :
 					balise = mot.getTag("title")
 					if balise > 0 : balise.nom = 'booktitle'
-				else : 
+				else :
 					titleAttr = caracteristique.nom
 				mot.delFeature('m')
 				mot.delFeature('u')
@@ -419,10 +379,10 @@ class Extract(object):
 		############# for thesis ####### 2012-01-19 ###
 		namefeature = mot.listNomFeature()
 		if flagU == 1 and 'sub' in  namefeature :
-				balise = mot.getTag("title")
-				balise.nom = 'booktitle'
-				mot.delFeature('sub')
-				flagU = 0
+			balise = mot.getTag("title")
+			balise.nom = 'booktitle'
+			mot.delFeature('sub')
+			flagU = 0
 				
 		return titleAttr
 
@@ -440,30 +400,30 @@ class Extract(object):
 			indicates if there is another title string before this
 		titleAttr : char
 			attribute
-				according to TEI guidelines, 
+				according to TEI guidelines,
 				a - (analytic) analytic title (article, poem, or other item published as part of a larger item)
 				m - (monographic) monographic title (book, collection, or other item published as a distinct item, including single volumes of multi-volume works)
 				j - (journal) journal title
 				s - (series) series title
 				u -	(unpublished) title of unpublished material (including theses and dissertations unless published by a commercial press)
-		"""			
+		"""
 		for caracteristique in mot.getAllFeature():
 			if caracteristique.nom == "a" :
 				balise = mot.getTag("title")
 				if balise != -1 : balise.nom = "title_a"
 			elif caracteristique.nom == "m" or caracteristique.nom == "volume_title" :
 				balise = mot.getTag("title")
-				if balise != -1  : balise.nom = "title_m"	
+				if balise != -1  : balise.nom = "title_m"
 			elif caracteristique.nom == "j" :
 				balise = mot.getTag("title")
 				if balise != -1  : balise.nom = "title_j"
 			elif caracteristique.nom == "s" :
 				balise = mot.getTag("title")
 				if balise != -1 : balise.nom = "title_s"
-			elif caracteristique.nom == "u" : 
+			elif caracteristique.nom == "u" :
 				balise = mot.getTag("title")
 				if balise != -1 : balise.nom = "title_u"
-			elif caracteristique.nom == "translated_title" : 
+			elif caracteristique.nom == "translated_title" :
 				balise = mot.getTag("title")
 				if balise != -1 : balise.nom = "title_t"
 			elif caracteristique.nom == "research_programm" :
@@ -471,37 +431,34 @@ class Extract(object):
 				if balise != -1 : balise.nom = "title_r"
 		
 		return titleAttr
-		
+
 
 	def _extract_biblscope(self, mot):
-		
-		#mot.affiche()	
 		for caracteristique in mot.getAllFeature():
 			if caracteristique.nom == "vol" :
 				balise = mot.getTag("biblscope")
 				if balise != -1 : balise.nom = "biblscope_v"
 			elif caracteristique.nom == "issue" :
 				balise = mot.getTag("biblscope")
-				if balise != -1  : balise.nom = "biblscope_i"	
+				if balise != -1  : balise.nom = "biblscope_i"
 			elif caracteristique.nom == "pp" :
 				balise = mot.getTag("biblscope")
 				if balise != -1  : balise.nom = "biblscope_pp"
 			elif caracteristique.nom == "chap" :
 				balise = mot.getTag("biblscope")
 				if balise != -1 : balise.nom = "biblscope_c"
-			elif caracteristique.nom == "part" : 
+			elif caracteristique.nom == "part" :
 				balise = mot.getTag("biblscope")
 				if balise != -1 : balise.nom = "biblscope_pa"
 		#print "***AFTER"
 		
-		
 		return
-	
+
 
 	def _checkTag(self, mot):
 		"""
 		Modify tags according to the configuration in the file "balise.txt"
-		"""	
+		"""
 		balises = mot.getAllTag()
 		
 		for balise in balises:
@@ -509,7 +466,7 @@ class Extract(object):
 				balise.nom = self.configTag[balise.nom]
 		
 		return
-		
+
 
 	def _updateTag(self, mot):
 		"""
@@ -541,7 +498,7 @@ class Extract(object):
 				if mot.getFeature('publicationDate') != -1:
 					mot.delAllTag()
 					mot.addTag('date')
-				
+
 
 	def _checkNonLabels(self, mot):
 		"""
@@ -583,8 +540,8 @@ class Extract(object):
 		else:
 			saveNom = mot.getLastTag().nom
 			mot.delAllTag()
-			mot.addTag(saveNom)	
-			
+			mot.addTag(saveNom)
+
 
 	def extractIndices(self, svmprediction_trainfile, listRef):
 		"""
@@ -601,9 +558,9 @@ class Extract(object):
 		nbRef = listRef.nbReference()
 		
 		svm_train = []
-		for line in open (svmprediction_trainfile, 'r') :
+		for line in open (svmprediction_trainfile, 'r', encoding='utf8') :
 			line = line.split()
-			svm_train.append(float(line[0]))	
+			svm_train.append(float(line[0]))
 	
 		positive_indices = range(nbRef)
 		
@@ -619,11 +576,11 @@ class Extract(object):
 		n=0
 		for ref in listRef.getReferences() :
 			if positive_indices[n] == 0 : # instance NOT OK so attribute train = -1
-				ref.train =  -1 
+				ref.train =  -1
 			n += 1
 		
 		return
-	
+
 
 	def extractIndices4new(self, svmprediction_newfile, listRef):
 		"""
@@ -639,7 +596,7 @@ class Extract(object):
 		"""
 		i = 0
 		
-		for line in open (svmprediction_newfile, 'r') :
+		for line in open (svmprediction_newfile, 'r', encoding='utf8') :
 			line = line.split()
 			if float(line[0]) > 0 :
 				listRef.getReferencesIndice(i).train = 0
@@ -647,19 +604,3 @@ class Extract(object):
 				listRef.getReferencesIndice(i).train = -1
 			i += 1
 		return
-
-
-	def convertToUnicode(self, chaine):
-		"""
-		Convert a string to unicode
-		"""
-		try:
-			if isinstance(chaine, str):
-				chaine = unicode(chaine, sys.stdin.encoding)
-		except:
-			try:
-				chaine = unicode(chaine, 'ascii')
-			except:
-				pass
-
-		return chaine

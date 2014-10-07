@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 """
 Created on April 25, 2012
 
 @author: Young-Min Kim, Jade Tavernier
 """
 import unicodedata
+from codecs import open
 
 class Properlist(object):
 
 	def __init__(self, fname, nameFeature):
-
 		self.targetfeature = nameFeature
 		self.properlist = {'0000': 0} #other proper nouns than person names considering whitespaces
 		self.m_properlist = {'0000': {'0000': 0}}
@@ -17,7 +18,7 @@ class Properlist(object):
 		self.targetlist = self.properlist
 		self.m_targetlist = self.m_properlist
 		
-		for line in open (fname, 'r') :
+		for line in open (fname, 'r', encoding='utf8') :
 			line = line.split('\n')
 			line = line[0].split('(')
 			line = line[0].split(',')
@@ -43,11 +44,13 @@ class Properlist(object):
 		Add the target feature if the corresponding word is in the list according to the rules
 		"""
 		
-		if tr == 1 or tr == -1 :	pt = 1
-		elif tr == 0 :	pt = 0
+		if tr == 1 or tr == -1 :
+			pt = 1
+		elif tr == 0 :
+			pt = 0
 		
 		self.targetlist = self.properlist
-		self.m_targetlist = self.m_properlist		
+		self.m_targetlist = self.m_properlist
 		
 		for reference in listReference.getReferences():
 			cpt = 0
@@ -81,7 +84,7 @@ class Properlist(object):
 							pass
 						
 					if len(tokens) > 0:
-						tokens = tokens.split() 
+						tokens = tokens.split()
 						for j in range(cpt,cpt+len(tokens)) :
 							curr = reference.getWordIndice(j)
 							if (tokens[j-cpt]).title() == (self.strip_accents(curr.nom)).title() :
@@ -91,6 +94,5 @@ class Properlist(object):
 
 
 	def strip_accents(self, input_str):
-		nkfd_form = unicodedata.normalize('NFKD', unicode(input_str, 'utf8'))
-		return (u"".join([c for c in nkfd_form if not unicodedata.combining(c)])).title()
-
+		nkfd_form = unicodedata.normalize('NFKD', input_str)
+		return ("".join([c for c in nkfd_form if not unicodedata.combining(c)])).title()

@@ -3,5 +3,6 @@ beautifulsoup4==4.3.2
 distribute==0.6.24
 lxml==3.3.4
 numpy==1.8.1
+regex==2014.08.28
 web.py==0.37
 wsgiref==0.1.2

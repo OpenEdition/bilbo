@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 """
 Created on April 18, 2012
 
@@ -7,7 +8,7 @@ Created on April 18, 2012
 
 class ListReferences(object):
 	"""
-	A class containing a list of reference objects and corpus type information. 
+	A class containing a list of reference objects and corpus type information.
 	"""
 
 
@@ -25,14 +26,14 @@ class ListReferences(object):
 		"""
 		for key in self.listReferences:
 			key.affiche()
-			
-			
+
+
 	def nbReference(self):
 		"""
 		Return the number of references in the list
 		"""
 		return len(self.listReferences)
-	
+
 
 	def modifyTestIndice(self, numRef):
 		"""
@@ -41,7 +42,7 @@ class ListReferences(object):
 		"""
 		for ref in self.listReferences:
 			ref.modifyIsTest()
-		
+
 
 	def modifyTrainIndice(self, numRef):
 		"""
@@ -50,34 +51,32 @@ class ListReferences(object):
 		"""
 		for ref in self.listReferences:
 			ref.modifyIsTrain()
-		
+
 
 	def modifyTestIndiceRef(self, numRef):
 		"""
 		Set the above value as test for a reference
 		"""
 		self.listReferences[numRef].modifyIsTest()
-		
+
 
 	def modifyTrainIndiceRef(self, numRef):
 		"""
 		Set the above value as test for a reference
 		"""
 		self.listReferences[numRef].modifyIsTrain()
-		
+
 
 	def getTrainIndiceRef(self, numRef):
 		"""
 		Return the above value of a reference given the number of the reference
-		"""			
+		"""
 		return self.listReferences[numRef].train
-		
+
 
 	def getReferences(self):
 		return self.listReferences
-	
-	
+
+
 	def getReferencesIndice(self, indice):
 		return self.listReferences[indice]
-	
-	
