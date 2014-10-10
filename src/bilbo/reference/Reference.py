@@ -16,7 +16,7 @@ class Reference(object):
 	Constructor
 	word
 	"""
-	def __init__(self, words, num):
+	def __init__(self, words, num, features=None):
 		"""
 		Attributes
 		----------
@@ -30,6 +30,7 @@ class Reference(object):
 		self.num = num
 		self.train = 0 # 1:train, 0:test, -1:classified as negative for SVM note classification
 		self.bibl = 0
+		self.features = features
 
 
 	def affiche(self):

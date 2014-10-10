@@ -225,6 +225,11 @@ class Extract(object):
 								string_features += ftr+" "
 							fich.write(" "+string_features)
 							
+							# Add features of the reference
+							if reference.features:
+								for feature in reference.features:
+									fich.write(feature+" ")
+							
 						if tr != 0:
 							balise = mot.getLastTag()
 							fich.write(" "+balise.nom)

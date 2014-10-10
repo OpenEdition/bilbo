@@ -56,6 +56,11 @@ class CleanCorpus1(Clean):
 			tmp_str = self._xmlEntitiesDecode(tmp_str)
 			soup = BeautifulSoup (tmp_str)
 
+			# TODO: chercher en vrai ces features
+			# pour tous les fichiers les nombres de reference_features doit être identique !
+			# self.get_reference_features(soup)
+			reference_features = ['CYBERGEO', 'LANG_FR', 'DROIT']
+
 			i = 0
 			s = soup.findAll (nameTagCorpus)
 			if len(s) > 15000:
@@ -88,7 +93,8 @@ class CleanCorpus1(Clean):
 					if b.find('relateditem') or b.find(nameTagCorpus) : #related item
 						i += 1
 
-				references.append(Reference(words,i))
+				reference = Reference(words, i , features=reference_features)
+				references.append(reference)
 				i += 1
 						
 		except IOError:
