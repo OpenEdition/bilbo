@@ -285,3 +285,30 @@ class Clean(object):
 					pass
 		
 		return tmp_str
+
+	# Find features that are in the document not in the reference
+	# all implemented here, but should be moved elsewhere one refactoring day !
+	def get_reference_features(self, soup):
+		features_to_find = [
+			('JNAME', 'parent_tag_attr', ('publicationstmt', 'ref', 'target')),
+			('LANG', 'parent_tag_attr', ('langusage', 'language', 'ident')),
+			('CAT', 'parent_tag_attr', ('category', 'catdesc', 'xml:id')),
+		]
+		features = []
+		for (feature_name, search_type, search_terms) in features_to_find:
+			feature = None
+			if search_type == 'parent_tag_attr':
+				tag_parent, tag_name, attribute = search_terms
+				feature = soup.find(tag_parent)
+				if feature:
+					feature = feature.find(tag_name)
+				if feature:
+					feature = feature.get(attribute)
+				if feature:
+					feature = feature_name + "_" + feature.upper()
+				else:
+					feature = "NO_" + feature_name
+			if feature:
+				features.append(feature)
+
+		return features

@@ -56,10 +56,8 @@ class CleanCorpus1(Clean):
 			tmp_str = self._xmlEntitiesDecode(tmp_str)
 			soup = BeautifulSoup (tmp_str)
 
-			# TODO: chercher en vrai ces features
-			# pour tous les fichiers les nombres de reference_features doit être identique !
-			# self.get_reference_features(soup)
-			reference_features = ['CYBERGEO', 'LANG_FR', 'DROIT']
+			# find features document wide
+			reference_features = self.get_reference_features(soup)
 
 			i = 0
 			s = soup.findAll (nameTagCorpus)
