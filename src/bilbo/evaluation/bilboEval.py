@@ -33,7 +33,7 @@ class bilboEval():
 			testEstCRFFormated = self._formatEval(testEstCRF)
 			##print testEstCRFFormated
 			
-			desiredResult = self._getFile(trainDir, 'evaldata_CRF_Wapiti.txt')
+			desiredResult = self._getFile(trainDir, 'evaldata_CRF_Wapiti.txt') # tmpFiles from training of testDir are saved in trainDir !
 			desiredResultFormated = self._formatEval(desiredResult)
 			#print desiredResultFormated
 

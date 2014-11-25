@@ -38,13 +38,13 @@ class bilboAnnotate():
 			# annotation of test data striped tagged
 			self._setBilboAnnotate()
 			self._del_tmp_file(resultDir)
-			bilbo = Bilbo(resultDir, self.bilboOptions, "crf_model_simple")
+			bilbo = Bilbo(resultDir, self.bilboOptions, "crf_model_simple") # To save tmpFiles in resultDir
 			bilbo.annotate(annotateDir, modelDir, 1)
 			
 			# train with test data for evaluation
 			self._setBilboTrain()
 			self._del_tmp_file(trainDir)
-			bilbo = Bilbo(trainDir, self.bilboOptions, "crf_model_simple") # To save tmpFiles in testDir
+			bilbo = Bilbo(trainDir, self.bilboOptions, "crf_model_simple") # To save tmpFiles in trainDir
 			corpus = Corpus(testDir, self.bilboOptions)
 			corpus.extract(1, "bibl")
 			bilbo.crf.prepareTrain(corpus, 1, "evaldata_CRF.txt", 1, 1) #CRF training data extraction
