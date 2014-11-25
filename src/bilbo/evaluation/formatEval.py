@@ -10,41 +10,84 @@ import regex as re
 
 class FormatEval():
 
+	#@staticmethod
+	## addWhiteSpace to change XML so <editor>Me</editor>and you<c>.</c> becomes <editor>Me</editor> and you<c>.</c>
+	#def getBiblFromDir(dirName, addWhiteSpace=False, pattern="*xml"):
+		#files = os.path.join(dirName,pattern)
+		#biblList = []
+		#for xmlFile in glob.glob(files):
+			#with open(xmlFile, 'r', encoding='utf-8') as content_file:
+				#content = content_file.read()
+			#bibls = FormatEval.getBiblList(content)
+			#biblList += bibls
+		#if addWhiteSpace:
+			#biblList = FormatEval.addWhiteSpace(biblList)
+		##print biblList, len(biblList)
+		##print biblList[len(biblList)-1].encode('utf8')
+		##print str(type(biblList[0]))
+		#return biblList
+
 	@staticmethod
-	# addWhiteSpace to change XML so <editor>Me</editor>and you<c>.</c> becomes <editor>Me</editor> and you<c>.</c>
-	def getBiblFromDir(dirName, addWhiteSpace=False, pattern="*xml"):
-		files = os.path.join(dirName,pattern)
+	# find all bibl in a directory
+	# return a list of (filename, bibl_index)
+	def get_bibl_fist_from_dir(dirName, file_pattern="*xml"):
+		files = os.path.join(dirName, file_pattern)
 		biblList = []
 		for xmlFile in glob.glob(files):
 			with open(xmlFile, 'r', encoding='utf-8') as content_file:
 				content = content_file.read()
-			bibls = FormatEval.getBiblList(content)
-			biblList += bibls
-		if addWhiteSpace:
-			biblList = FormatEval.addWhiteSpace(biblList)
-		#print biblList, len(biblList)
-		#print biblList[len(biblList)-1].encode('utf8')
-		#print str(type(biblList[0]))
+				#print xmlFile
+				bibls = FormatEval.count_bibl_and_process(content)
+				filename = os.path.basename(xmlFile)
+				bibls = [(filename, index) for index in bibls]
+				biblList += bibls
+
 		return biblList
 
 	@staticmethod
-	# test : xml string
-	def getBiblList(text, duplicateBibl=False):
-		parsedText = BeautifulSoup(text)
-		allBibl = []
-		biblInside = 0
+	# step one bibl at a time, not counting bibl inside bibl
+	# if keep is a list of index, will keep only those bibl
+	def count_bibl_and_process(text, keep=None):
+		all_bibl = []
+		bibl_counter = -1
+		bibl_inside = 0
+
+		parsedText = BeautifulSoup(text, 'xml')
 		allBiblTag = parsedText.findAll('bibl')
 		for bibl in allBiblTag:
-			if not duplicateBibl:
-				if biblInside > 0: # do not duplicate line of <bibl> inside <bibl>
-					biblInside -= 1
-					continue
-			line = unicode(bibl)
-			allBibl.append(line)
-			biblInside = len(bibl.findAll('bibl'))
-			#print str(biblInside), unicode(bibl).encode('utf8')
+			if bibl_inside > 0: # do not count <bibl> inside <bibl>
+				bibl_inside -= 1
+				#print bibl_counter
+				continue
+			bibl_inside = len(bibl.findAll('bibl'))
+			bibl_counter +=1
+			if keep and not (bibl_counter in keep):
+				bibl.replace_with('')
+			else:
+				all_bibl.append(bibl_counter)
+
+		if keep:
+			return (all_bibl, unicode(parsedText))
+		return all_bibl
+
+	#@staticmethod
+	## test : xml string
+	#def getBiblList(text, duplicateBibl=False):
+		#parsedText = BeautifulSoup(text)
+		#allBibl = []
+		#biblInside = 0
+		#allBiblTag = parsedText.findAll('bibl')
+		#for bibl in allBiblTag:
+			#if not duplicateBibl:
+				#if biblInside > 0: # do not duplicate line of <bibl> inside <bibl>
+					#biblInside -= 1
+					#continue
+			#line = unicode(bibl)
+			#allBibl.append(line)
+			#biblInside = len(bibl.findAll('bibl'))
+			##print str(biblInside), unicode(bibl).encode('utf8')
 		
-		return allBibl
+		#return allBibl
 
 	@staticmethod
 	# myList : list to shuffle
@@ -53,23 +96,46 @@ class FormatEval():
 		shuffled = list(myList)
 		random.shuffle(shuffled)
 		cut = int(len(shuffled) * (int(testPercentage) / 100.0))
-		testCorpus = shuffled[:cut]
-		trainCorpus = shuffled[cut:]
+
+		testCorpus = {}
+		for filename, index in shuffled[:cut]:
+			if filename in testCorpus:
+				testCorpus[filename].append(index)
+			else:
+				testCorpus[filename] = [index]
+
+		trainCorpus = {}
+		for filename, index in shuffled[cut:]:
+			if filename in trainCorpus:
+				trainCorpus[filename].append(index)
+			else:
+				trainCorpus[filename] = [index]
+
 		#print cut, len(testCorpus), len(trainCorpus), testPercentage
 		return testCorpus, trainCorpus
 
 	@staticmethod
-	def stripTags(xmlList, tagCorpus='bibl'):
-		striped = []
-		for line in xmlList:
-			soup = BeautifulSoup(line)
-			for tag in soup.findAll():
-					tag.unwrap()
+	# take a document (string) and strip all tags inside the given tag
+	def strip_tags(text, tagCorpus='bibl'):
+		parsedText = BeautifulSoup(text, 'xml')
+		allBiblTag = parsedText.findAll(tagCorpus)
+		for tag in allBiblTag:
+			for children in tag.findAll():
+				children.unwrap()
+		return unicode(parsedText)
+
+	#@staticmethod
+	#def stripTags(xmlList, tagCorpus='bibl'):
+		#striped = []
+		#for line in xmlList:
+			#soup = BeautifulSoup(line)
+			#for tag in soup.findAll():
+					#tag.unwrap()
 					
-			txt = '<'+tagCorpus+'>' + unicode(soup) + '</' + tagCorpus + '>'
-			#print str(type(txt)), ("———" + txt).encode('utf8')
-			striped.append(txt)
-		return striped
+			#txt = '<'+tagCorpus+'>' + unicode(soup) + '</' + tagCorpus + '>'
+			##print str(type(txt)), ("———" + txt).encode('utf8')
+			#striped.append(txt)
+		#return striped
 
 	@staticmethod
 	# this is realy bad, but we use it to make FormatEvalBiblo work, and accept wrong XML
@@ -80,7 +146,7 @@ class FormatEval():
 			line = re.sub('<\/',' </', line, encoding='utf8')
 			line = re.sub('>','> ', line, encoding='utf8')
 			spaced.append(line.strip())
-			
+
 		return spaced
 
 """
@@ -161,8 +227,8 @@ class prepareEval():
 		#print str(len(newShortList)), indexShort, lengthShort, str(len(newLongList)), indexLong, lengthLong
 		return newShortList, newLongList
 
-if __name__ == '__main__':
-	myList = FormatEval.getBiblFromDir(sys.argv[1], addWhiteSpace=True)
-	myList = FormatEval.stripTags(myList)
-	for txt in myList:
-		print str(type(txt)), ("———" + txt).encode('utf8')
+#if __name__ == '__main__':
+	#myList = FormatEval.getBiblFromDir(sys.argv[1], addWhiteSpace=True)
+	#myList = FormatEval.stripTags(myList)
+	#for txt in myList:
+		#print str(type(txt)), ("———" + txt).encode('utf8')
