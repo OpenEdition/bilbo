@@ -35,7 +35,7 @@ class bibloTrain():
 			(annotateDir, testDir, trainDir, modelDir, resultDir) = self.partitions.getDirTestNames(dirPartition)
 			
 			#self._del_tmp_file(modelDir)
-			bilbo = Bilbo(modelDir, self.bilboOptions, "crf_model_simple") # To save tmpFiles in modelDir
+			bilbo = Bilbo(modelDir, self.bilboOptions, "crf_model_simple") # tmpFiles saved in modelDir if -k all
 			bilbo.train(trainDir, modelDir, 1)
 
 	def _del_tmp_file(self, resultDir):

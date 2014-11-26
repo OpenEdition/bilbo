@@ -11,77 +11,97 @@ import regex as re
 class FormatEval():
 
 	@staticmethod
-	# addWhiteSpace to change XML so <editor>Me</editor>and you<c>.</c> becomes <editor>Me</editor> and you<c>.</c>
-	def getBiblFromDir(dirName, addWhiteSpace=False, pattern="*xml"):
-		files = os.path.join(dirName,pattern)
+	# find all bibl in a directory
+	# return a list of [(filename, bibl_index)]
+	def get_list_of_tag_from_dir(dirName, corpusTag='bibl', file_pattern="*xml"):
+		files = os.path.join(dirName, file_pattern)
 		biblList = []
 		for xmlFile in glob.glob(files):
 			with open(xmlFile, 'r', encoding='utf-8') as content_file:
 				content = content_file.read()
-			bibls = FormatEval.getBiblList(content)
-			biblList += bibls
-		if addWhiteSpace:
-			biblList = FormatEval.addWhiteSpace(biblList)
-		#print biblList, len(biblList)
-		#print biblList[len(biblList)-1].encode('utf8')
-		#print str(type(biblList[0]))
+				#print xmlFile
+				bibls = FormatEval.count_tags_and_process(content, corpusTag=corpusTag)
+				filename = os.path.basename(xmlFile)
+				bibls = [(filename, index) for index in bibls]
+				biblList += bibls
+
 		return biblList
 
 	@staticmethod
-	# test : xml string
-	def getBiblList(text, duplicateBibl=False):
-		parsedText = BeautifulSoup(text)
-		allBibl = []
-		biblInside = 0
-		allBiblTag = parsedText.findAll('bibl')
+	# step one bibl at a time, not counting bibl inside bibl
+	# if keep is a list of corpusTag_index, will keep only those bibl and return resulting text
+	def count_tags_and_process(text, keep=None, corpusTag='bibl'):
+		all_bibl = []
+		bibl_counter = -1
+		bibl_inside = 0
+
+		parsedText = BeautifulSoup(text, 'xml')
+		allBiblTag = parsedText.findAll(corpusTag)
 		for bibl in allBiblTag:
-			if not duplicateBibl:
-				if biblInside > 0: # do not duplicate line of <bibl> inside <bibl>
-					biblInside -= 1
-					continue
-			line = unicode(bibl)
-			allBibl.append(line)
-			biblInside = len(bibl.findAll('bibl'))
-			#print str(biblInside), unicode(bibl).encode('utf8')
-		
-		return allBibl
+			if bibl_inside > 0: # do not count <bibl> inside <bibl>
+				bibl_inside -= 1
+				#print bibl_counter
+				continue
+			bibl_inside = len(bibl.findAll(corpusTag))
+			bibl_counter +=1
+			if keep and not (bibl_counter in keep):
+				bibl.replace_with('')
+			else:
+				all_bibl.append(bibl_counter)
+
+		if keep:
+			return (all_bibl, unicode(parsedText))
+		return all_bibl
 
 	@staticmethod
-	# myList : list to shuffle
+	# myList : list of tupple to shuffle [(filename, corpusTag_index)]
 	# testPercentage : percentage of length of the first list
 	def getShuffledCorpus(myList, testPercentage):
-		shuffled = list(myList)
+		shuffled = list(myList) # make a copy of the list
 		random.shuffle(shuffled)
 		cut = int(len(shuffled) * (int(testPercentage) / 100.0))
-		testCorpus = shuffled[:cut]
-		trainCorpus = shuffled[cut:]
+
+		testCorpus = {}
+		for filename, index in shuffled[:cut]:
+			if filename in testCorpus:
+				testCorpus[filename].append(index)
+			else:
+				testCorpus[filename] = [index]
+
+		trainCorpus = {}
+		for filename, index in shuffled[cut:]:
+			if filename in trainCorpus:
+				trainCorpus[filename].append(index)
+			else:
+				trainCorpus[filename] = [index]
+
 		#print cut, len(testCorpus), len(trainCorpus), testPercentage
 		return testCorpus, trainCorpus
 
 	@staticmethod
-	def stripTags(xmlList, tagCorpus='bibl'):
-		striped = []
-		for line in xmlList:
-			soup = BeautifulSoup(line)
-			for tag in soup.findAll():
-					tag.unwrap()
-					
-			txt = '<'+tagCorpus+'>' + unicode(soup) + '</' + tagCorpus + '>'
-			#print str(type(txt)), ("———" + txt).encode('utf8')
-			striped.append(txt)
-		return striped
+	# take a document (string) and strip all tags inside the given tag
+	def strip_tags(text, tagCorpus='bibl'):
+		parsedText = BeautifulSoup(text, 'xml')
+		allBiblTag = parsedText.findAll(tagCorpus)
+		for tag in allBiblTag:
+			for children in tag.findAll():
+				children.unwrap()
+		return unicode(parsedText)
 
 	@staticmethod
-	# this is realy bad, but we use it to make FormatEvalBiblo work, and accept wrong XML
-	# fortunatly it is not needed :D
-	def addWhiteSpace(xmlList, tagCorpus='bibl'):
-		spaced = []
-		for line in xmlList:
-			line = re.sub('<\/',' </', line, encoding='utf8')
-			line = re.sub('>','> ', line, encoding='utf8')
-			spaced.append(line.strip())
-			
-		return spaced
+	# copy files for corpus directory, keeping tags from the given list of index
+	# strip=True will strip all tags in the given corpusTag
+	def copy_files_for_eval(dirCorpus, destDir, file_list, corpusTag='bibl', strip=False):
+		for filename, tags_to_keep in file_list.items():
+			with open(os.path.join(dirCorpus, filename), 'r', encoding='utf-8') as content_file:
+				content = content_file.read()
+				tags_kept, text = FormatEval.count_tags_and_process(content, tags_to_keep, corpusTag)
+				#print filename, tags_to_keep, tags_kept
+			if strip:
+				text = FormatEval.strip_tags(text, corpusTag)
+			with open(os.path.join(destDir, filename), 'w', encoding='utf-8') as content_file:
+				content_file.write(text)
+
 
 """
  Using the content of tmp files from labeling and training
@@ -101,6 +121,7 @@ class prepareEval():
 		
 		return "\n".join(desiredContentHarmonized), "\n".join(labeledContentHarmonized)
 
+	# take first word and last word of a text content (using space as separator)
 	def splitForEval(self, content):
 		formated = []
 		for line in content.split("\n"):
@@ -132,7 +153,7 @@ class prepareEval():
 		while True:
 			featureShort, partShort = self._getFeatureAndName(shortList[indexShort])
 			featureLong , partLong = self._getFeatureAndName(longList[indexLong])
-			
+
 			while True:
 				if partShort == partLong:
 					#print indexShort, partShort.encode('utf8'), indexLong, partLong.encode('utf8'), "RESOLVED"
@@ -157,12 +178,6 @@ class prepareEval():
 			
 			if indexShort == lengthShort or indexLong == lengthLong:
 				break
-		
+
 		#print str(len(newShortList)), indexShort, lengthShort, str(len(newLongList)), indexLong, lengthLong
 		return newShortList, newLongList
-
-if __name__ == '__main__':
-	myList = FormatEval.getBiblFromDir(sys.argv[1], addWhiteSpace=True)
-	myList = FormatEval.stripTags(myList)
-	for txt in myList:
-		print str(type(txt)), ("———" + txt).encode('utf8')

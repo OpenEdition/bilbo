@@ -24,12 +24,13 @@ class simpleEval():
 		self.dirCorpus = dirCorpus
 		self.dirResult = dirResult
 		self.dirModel = os.path.join('model', 'corpus'+str(typeCorpus), bilboOptions.m, '')
+		self.corpusTag = 'bibl'
 		
 		# define bilbo options
 		self.bilboOptions = bilboOptions
 		self.bilboOptions.T = True
 		self.bilboOptions.L = False
-		self.bilboOptions.t = 'bibl'
+		self.bilboOptions.t = self.corpusTag
 		self.bilboOptions.k = 'all'
 		self.bilboOptions.o = 'simple'
 
@@ -45,12 +46,14 @@ class simpleEval():
 		# eval both results
 		self.tokenEval()
 
-	# extract bibl from corpus, stripTag it and save it
+	# copy files from corpus, stripTag them and save them
 	def extractAndCleanCorpus(self):
-		biblList = FormatEval.getBiblFromDir(self.dirCorpus)
-		cleanedlList = FormatEval.stripTags(biblList)
-		myString = "<listBibl>\n" + "\n".join(cleanedlList) + "\n</listBibl>\n"
-		self._saveFile(myString, self.dirLabel, 'corpusCleaned.xml')
+		files = os.path.join(self.dirCorpus, "*xml")
+		for xmlFile in glob.glob(files):
+			with open(xmlFile, 'r', encoding='utf-8') as content_file:
+				content = content_file.read()
+			striped = FormatEval.strip_tags(content, self.corpusTag)
+			self._saveFile(striped, self.dirLabel, os.path.basename(xmlFile))
 
 	# train with test data to get tmp file for evaluation
 	def formatTrain(self):
@@ -58,7 +61,7 @@ class simpleEval():
 		self.bilboOptions.L = False
 		bilbo = Bilbo(self.dirResult, self.bilboOptions, "crf_model_simple") # To save tmpFiles in testDir
 		corpus = Corpus(self.dirCorpus, self.bilboOptions)
-		corpus.extract(1, "bibl")
+		corpus.extract(1, self.corpusTag)
 		bilbo.crf.prepareTrain(corpus, 1, "evaldata_CRF.txt", 1, 1) #CRF training data extraction
 
 	# annotation of test data striped tagged
