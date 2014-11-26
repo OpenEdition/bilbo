@@ -59,7 +59,7 @@ class Partition():
 
 	def partition(self):
 		self.createPartitionFolders(self.dirCorpus, self.testPercentage, self.numberOfPartition)
-		bibl_list = FormatEval.get_bibl_fist_from_dir(self.dirCorpus)
+		bibl_list = FormatEval.get_list_of_tag_from_dir(self.dirCorpus)
 		# faire une liste de toutes les bibl dans les fichiers [(nom_fichier, bibl_index)]
 		# shuffle de cette liste label/train
 		# sort la liste par fichier
@@ -80,52 +80,22 @@ class Partition():
 			for testDir in self.getDirTestNames(dirPartition):
 				self.createFolder(testDir)
 
+	# prepare files for labeling, training and evaluation in each partition folder
 	def createEvaluationfiles(self, dirCorpus, testPercentage, numberOfPartition, bibl_list):
 		dirPartitions = self.getDirPartitionNames()
 		for dirPartition in dirPartitions:
 			(annotateDir, testDir, trainDir, modelDir, _) = self.getDirTestNames(dirPartition)
 			testCorpus, trainCorpus = FormatEval.getShuffledCorpus(bibl_list, testPercentage)
-			print testCorpus
-			print trainCorpus
+			#print testCorpus
+			#print trainCorpus
 			
-			# files used for training
-			self.copy_truncated_file(trainCorpus, trainDir)
-			# files used for evaluation
-			self.copy_truncated_file(testCorpus, testDir)
-			# copy file for evaluation, and strip the annotations
-			self.copy_truncated_file(testCorpus, annotateDir, 'bibl')
+			# files used for training (100 - testPercentage % of the corpus)
+			FormatEval.copy_files_for_eval(self.dirCorpus, trainDir, trainCorpus)
+			# files used for evaluation keeping annotations (testPercentage % of the corpus)
+			FormatEval.copy_files_for_eval(self.dirCorpus, testDir, testCorpus)
+			# files used for evaluation, strip the annotations
 			# they will be labeled by bilbo
-			
-			#sys.exit()
-			#cleanCorpus = FormatEval.stripTags(testCorpus)
-			#cleanFile = os.path.join(annotateDir, 'test_clean.xml')
-			#self.saveListToFile(cleanCorpus, cleanFile)
-
-			# this is not true anymore, comment should go away
-			# In test.xml we need to duplicate <bibl> inside <bibl>, in order to present the same data for evaluation
-			# Bilbo does not format the "same" data equaly between train and annotation
-			#evalFile = os.path.join(testDir, 'test.xml')
-			#testCorpus = FormatEval.getBiblList("\n".join(testCorpus))
-			#self.saveListToFile(testCorpus, evalFile)
-			#print evalFile, trainFile, cleanFile
-			#print testCorpus, trainCorpus, cleanCorpus
-
-	#def getAndSaveAllBibl(self, dirCorpus):
-		#allBibl = FormatEval.getBiblListFromDir(dirCorpus)
-		#fileName = os.path.join(self.getDirEvalName(), 'all_bibl.xml')
-		#self.saveListToFile(allBibl, fileName)
-		#return allBibl
-
-	# copy a file keeping only bibl of given indexes
-	def copy_truncated_file(self,  bibl_list, destDir, strip_tags=""):
-		for filename, bibl_index in bibl_list.items():
-			with open(os.path.join(self.dirCorpus, filename), 'r', encoding='utf-8') as content_file:
-				content = content_file.read()
-				bibls, text = FormatEval.count_bibl_and_process(content, bibl_index)
-			if strip_tags:
-				text = FormatEval.strip_tags(text, strip_tags)
-			with open(os.path.join(destDir, filename), 'w', encoding='utf-8') as content_file:
-				content_file.write(text)
+			FormatEval.copy_files_for_eval(self.dirCorpus, annotateDir, testCorpus, 'bibl', strip=True)
 
 	def getDirEvalName(self):
 		return os.path.dirname(self.dirCorpus + os.sep) + self.prefix
