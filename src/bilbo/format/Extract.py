@@ -10,6 +10,7 @@ from bilbo.extra.Place import Place
 from bilbo.extra.Properlist import Properlist
 import sys, os
 import re
+import Stemmer
 from codecs import open
 
 class Extract(object):
@@ -90,10 +91,10 @@ class Extract(object):
 				raise
 			
 		'Load people name and place'
-		self.nameObj = Name(os.path.join(self.rootDir, "KB/config/externalList/auteurs_revuesorg2.txt")) #SURNAMELIST, FORENAMELIST
-		self.placeObj = Place(os.path.join(self.rootDir, "KB/config/externalList/list_pays.txt")) #PLACELIST
-		self.cityObj = Properlist(os.path.join(self.rootDir, "KB/config/externalList/LargeCities.txt"), "PLACELIST") #PLCAELIST
-		self.journalObj = Properlist(os.path.join(self.rootDir, "KB/config/externalList/journalAll.txt"), "JOURNALLIST") #PLCAELIST
+		#self.nameObj = Name(os.path.join(self.rootDir, "KB/config/externalList/auteurs_revuesorg2.txt")) #SURNAMELIST, FORENAMELIST
+		#self.placeObj = Place(os.path.join(self.rootDir, "KB/config/externalList/list_pays.txt")) #PLACELIST
+		#self.cityObj = Properlist(os.path.join(self.rootDir, "KB/config/externalList/LargeCities.txt"), "PLACELIST") #PLCAELIST
+		#self.journalObj = Properlist(os.path.join(self.rootDir, "KB/config/externalList/journalAll.txt"), "JOURNALLIST") #PLCAELIST
 
 
 	def extract(self):
@@ -145,7 +146,7 @@ class Extract(object):
 			
 				for mot in reference.getWord():
 					if mot.ignoreWord == 0:
-						fich.write(mot.nom)
+						fich.write(unicode(mot.nom))
 						nbCarac = mot.nbFeatures()
 						cpt = 0
 						if nbCarac > 0:
@@ -170,20 +171,14 @@ class Extract(object):
 		"""
 		Print training or test data for Wapiti CRF
 		"""
+		
 		features = [['ALLNUMBERS', 'NUMBERS'],	#1
 					['DASH'],					#2
 					['ALLCAP', 'ALLSMALL', 'FIRSTCAP', 'NONIMPCAP'],	#3
-					['BIBL_START', 'BIBL_IN', 'BIBL_END'],				#4
+					#['BIBL_START', 'BIBL_IN', 'BIBL_END'],				#4
 					['INITIAL'],	#5
 					['WEBLINK'],	#6
-					['ITALIC'],		#7
-					['POSSEDITOR'],	#8
-					['POSSPAGE'],	#9
-					['POSSMONTH'],	#10POSSMONTH
-					['SURNAMELIST'],	#11
-					['FORENAMELIST'],	#12
-					['PLACELIST'],		#13
-					['JOURNALLIST']]	#14
+					['ITALIC']]
 		if self.options.u : features.append(['PUNC', 'COMMA', 'POINT', 'LEADINGQUOTES', 'ENDINGQUOTES', 'LINK','PAIREDBRACES'])
 
 		fich = open(fichier, "w", encoding="utf-8")
@@ -191,10 +186,12 @@ class Extract(object):
 			if (not (opt=="deleteNegatives" and reference.train == -1)) and (not (opt=="deletePositives" and reference.train != -1)):
 			
 				for mot in reference.getWord():
-					tmp_features = ['NONUMBERS', 'NODASH', 'NONIMPCAP', 'NULL', 'NOINITIAL',
-									'NOWEBLINK', 'NOITALIC', 'NOEDITOR', 'NOPAGE', 'NOMONTH', 'NOSURLIST',
-									'NOFORELIST', 'NOPLACELIST', 'NOJOURLIST']#, 'NOPUNC']#, 'NOJOURLIST']
+					stemmer = Stemmer.Stemmer('french')
+					tmp_features = ['NONUMBERS', 'NODASH', 'NONIMPCAP', 'NOINITIAL','NOWEBLINK', 'NOITALIC']
+
 					if self.options.u : tmp_features.append('NOPUNC')
+					if self.options.n :tmp_features.append(self._numberCheck(mot.nom)) #before delete number feature
+					if self.options.a : tmp_features.append(stemmer.stemWord(mot.nom))
 					if mot.ignoreWord == 0:
 						fich.write(mot.nom)
 						nbCarac = mot.nbFeatures()

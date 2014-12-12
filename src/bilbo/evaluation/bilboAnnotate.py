@@ -26,6 +26,9 @@ class bilboAnnotate():
 		self.bilboOptions.t = 'bibl'
 		self.bilboOptions.k = 'all'
 		self.bilboOptions.o = 'simple'
+		self.bilboOptions.a = True
+		self.bilboOptions.p = True
+		#self.bilboOptions.u = True
 		#print self.bilboOptions
 		
 		self.partitions = Partition(dirCorpus, testPercentage, numberOfPartition, prefix)
@@ -47,7 +50,10 @@ class bilboAnnotate():
 			bilbo = Bilbo(trainDir, self.bilboOptions, "crf_model_simple") # To save tmpFiles in trainDir
 			corpus = Corpus(testDir, self.bilboOptions)
 			corpus.extract(1, "bibl")
-			bilbo.crf.prepareTrain(corpus, 1, "evaldata_CRF.txt", 1, 1) #CRF training data extraction
+			bilbo.crf.prepareTest(corpus, 1)
+			bilbo.crf.runAnalyseTest(corpus, 1, "testTreetagger.txt")
+			bilbo.crf.runAnalyseBeforeTestEval("testTreetagger.txt", PosDetails = 0)
+			#bilbo.crf.prepareTrain(corpus, 1, "evaldata_CRF.txt", 1, 1) #CRF training data extraction
 
 	def _setBilboAnnotate(self):
 		self.bilboOptions.L = True

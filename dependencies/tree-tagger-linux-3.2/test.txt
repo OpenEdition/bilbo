@@ -1,0 +1,5548 @@
+<s>
+<NP>
+REDIEN-COLLOT	NAM	<unknown>
+,	PUN	,
+Renaud	NAM	Renaud
+,	PUN	,
+</NP>
+<NP>
+2006	NUM	@card@
+,	PUN	,
+«	PUN:cit	«
+</NP>
+<NP>
+L’entrepreneur	NOM	<unknown>
+</NP>
+<AP>
+post-moderne	ADJ	<unknown>
+</AP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+ses	DET:POS	son
+stratégies	NOM	stratégie
+</NP>
+<AP>
+d’accomplissement	NOM	<unknown>
+»	PUN:cit	»
+,	PUN	,
+</AP>
+<NP>
+<NP>
+Sciences	NOM	science
+sociales	ADJ	social
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+management	NOM	management
+,	PUN	,
+</NP>
+</NP>
+<NP>
+3	NUM	@card@
+:	PUN	:
+[	PUN	[
+en	PRP	en
+ligne	NOM	ligne
+]	PUN	]
+</NP>
+<NP>
+BOURGUET	NAM	<unknown>
+L.	NAM	<unknown>
+,	PUN	,
+VAILLEUX	NAM	<unknown>
+Y.	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+<NP>
+CAMERLO	NAM	<unknown>
+J.	NAM	<unknown>
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+FAHY	NAM	<unknown>
+J.	ABR	<unknown>
+C.	ABR	<unknown>
+(	PUN	(
+</NP>
+</NP>
+<NP>
+1980-81	NUM	@card@
+)	PUN	)
+-	PUN	-
+</NP>
+<NP>
+Méthodologie	NOM	méthodologie
+</NP>
+<PP>
+de	PRP	de
+<NP>
+la	DET:ART	le
+recherche	NOM	recherche
+hydrogéologique	ADJ	hydrogéologique
+en	PRP	en
+zone	NOM	zone
+</NP>
+</PP>
+<PP>
+de	PRP	de
+<NP>
+socle	NOM	socle
+</NP>
+</PP>
+<AP>
+cristallin	ADJ	cristallin
+</AP>
+.	SENT	.
+</s>
+<s>
+<AP>
+Bulletin	NOM	bulletin
+</AP>
+<PP>
+du	PRP:det	du
+<NP>
+BRGM	NAM	<unknown>
+,	PUN	,
+</NP>
+</PP>
+<NP>
+2	NUM	@card@
+ème	ADJ	<unknown>
+série	NOM	série
+,	PUN	,
+</NP>
+<NP>
+vol	ABR	volume
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+III	NUM	III
+,	PUN	,
+</NP>
+<NP>
+n°	ABR	numéro
+4	NUM	@card@
+,	PUN	,
+</NP>
+<NP>
+p.	ABR	<unknown>
+</NP>
+273-288	NUM	@card@
+.	SENT	.
+</s>
+<s>
+<NP>
+Rousseau	NAM	Rousseau
+P.	NAM	<unknown>
+(	PUN	(
+</NP>
+<NP>
+2007	NUM	@card@
+)	PUN	)
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Pratique	NOM	pratique
+</NP>
+<PP>
+des	PRP:det	du
+<NP>
+<NP>
+écrits	NOM	écrit
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+écriture	NOM	écriture
+</NP>
+</NP>
+</PP>
+<PP>
+des	PRP:det	du
+<NP>
+pratiques	NOM	pratique
+</NP>
+</PP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Paris	NAM	Paris
+:	PUN	:
+L’Harmattan	NAM	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+RUF	NOM	<unknown>
+F.	ABR	<unknown>
+,	PUN	,
+</NP>
+<NP>
+1993	NUM	@card@
+,	PUN	,
+«	PUN:cit	«
+</NP>
+<NP>
+<NP>
+Adoption	NAM	<unknown>
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+abandon	NOM	abandon
+</NP>
+</NP>
+<PP>
+du	PRP:det	du
+<NP>
+cacaoyer	NOM	cacaoyer
+:	PUN	:
+</NP>
+</PP>
+<NP>
+cycles	NOM	cycle
+</NP>
+<PP>
+d'	PRP	de
+<NP>
+<NP>
+innovations	NOM	innovation
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+ajustements	NOM	ajustement
+»	PUN:cit	»
+</NP>
+</NP>
+</PP>
+.	SENT	.
+</s>
+<s>
+<AP>
+In	ADJ	in
+:	PUN	:
+</AP>
+<NP>
+J.	ABR	<unknown>
+-P	NOM	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+<NP>
+Chauveau	NAM	<unknown>
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+J.	ABR	<unknown>
+</NP>
+</NP>
+<NP>
+M.	NOM	monsieur
+Yung	NAM	<unknown>
+(	PUN	(
+Eds	NAM	<unknown>
+)	PUN	)
+,	PUN	,
+</NP>
+<NP>
+1993	NUM	@card@
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Les	DET:ART	le
+diversités	NOM	diversité
+</NP>
+<PP>
+de	PRP	de
+<NP>
+l’innovation	NOM	<unknown>
+,	PUN	,
+</NP>
+</PP>
+<VN>
+Actes	VER:pres	acter
+</VN>
+<PP>
+de	PRP	de
+<NP>
+la	DET:ART	le
+conférence	NOM	conférence
+«	PUN:cit	«
+</NP>
+</PP>
+<NP>
+<NP>
+Innovations	NOM	innovation
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+sociétés	NOM	société
+»	PUN:cit	»
+,	PUN	,
+</NP>
+</NP>
+<NP>
+CIRAD	NAM	<unknown>
+,	PUN	,
+INRA	NAM	<unknown>
+,	PUN	,
+ORSTOM	NAM	<unknown>
+,	PUN	,
+Montpellier	NAM	Montpellier
+,	PUN	,
+</NP>
+<NP>
+13-16	NUM	@card@
+septembre	NOM	septembre
+1993	NUM	@card@
+,	PUN	,
+</NP>
+<NP>
+2	NUM	@card@
+,	PUN	,
+337-346	NUM	@card@
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Cislaru	NAM	<unknown>
+G.	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+<NP>
+Pugnière	NAM	<unknown>
+F.	NAM	<unknown>
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+Sitri	NAM	<unknown>
+F.	ABR	<unknown>
+(	PUN	(
+</NP>
+</NP>
+<NP>
+dir	VER:infi	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+)	PUN	)
+(	PUN	(
+</NP>
+<NP>
+2008	NUM	@card@
+)	PUN	)
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Les	DET:ART	le
+Carnets	NAM	<unknown>
+</NP>
+<PP>
+du	PRP:det	du
+<NP>
+Cediscor	NAM	<unknown>
+</NP>
+</PP>
+<NP>
+10	NUM	@card@
+(	PUN	(
+</NP>
+<Sint>
+«	PUN:cit	«
+</Sint>
+<NP>
+Analyse	NAM	<unknown>
+de	PRP	de
+discours	NOM	discours
+et	KON	et
+demande	NOM	demande
+sociale	ADJ	social
+:	PUN	:
+</NP>
+<NP>
+le	DET:ART	le
+cas	NOM	cas
+</NP>
+<PP>
+des	PRP:det	du
+<NP>
+écrits	NOM	écrit
+</NP>
+</PP>
+<PP>
+de	PRP	de
+<NP>
+signalement	NOM	signalement
+»	PUN:cit	»
+)	PUN	)
+</NP>
+</PP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Paris	NAM	Paris
+:	PUN	:
+PSN	NAM	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Loureiro	NAM	<unknown>
+Adolfo	NAM	<unknown>
+,	PUN	,
+Viegas	NAM	<unknown>
+</NP>
+António	NAM	<unknown>
+<NP>
+dos	NOM	dos
+Santos	NAM	<unknown>
+,	PUN	,
+Porto	NAM	Porto
+</NP>
+<PP>
+de	PRP	de
+<NP>
+Leixões	NAM	<unknown>
+</NP>
+</PP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Projecto	NOM	<unknown>
+</NP>
+<AP>
+do	NOM	do
+melhoramento	ADJ	<unknown>
+do	NOM	do
+</AP>
+<AP>
+porto	NOM	porto
+</AP>
+<PP>
+de	PRP	de
+<NP>
+abrigo	NOM	<unknown>
+</NP>
+</PP>
+<VN>
+e	VER:subi	<unknown>
+</VN>
+<NP>
+criação	NOM	<unknown>
+</NP>
+<PP>
+de	PRP	de
+<NP>
+um	NOM	<unknown>
+</NP>
+</PP>
+<AP>
+porto	NOM	porto
+comercial	ADJ	<unknown>
+nexo	NOM	<unknown>
+,	PUN	,
+</AP>
+<NP>
+Lisboa	NAM	Lisboa
+,	PUN	,
+</NP>
+<NP>
+Imprensa	NAM	<unknown>
+Nacional	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+1908	NUM	@card@
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+(	PUN	(
+</NP>
+<VN>
+Ne	ADV	ne
+sont	VER:pres	être
+mentionnés	VER:pper	mentionner
+ici	ADV	ici
+</VN>
+<Ssub>
+que	KON	que
+</Ssub>
+<NP>
+les	DET:ART	le
+ouvrages	NOM	ouvrage
+</NP>
+<VPpart>
+cités	VER:pper	citer
+</VPpart>
+<PP>
+dans	PRP	dans
+<PP>
+le	DET:ART	le
+<PP>
+cours	NOM	cour|cours
+<PP>
+du	PRP:det	du
+<NP>
+texte	NOM	texte
+)	PUN	)
+</NP>
+</PP>
+</PP>
+</PP>
+</PP>
+<NP>
+Calame	NAM	<unknown>
+Claude	NAM	Claude
+(	PUN	(
+</NP>
+<NP>
+1983	NUM	@card@
+)	PUN	)
+,	PUN	,
+</NP>
+<NP>
+Alcman	NAM	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Introduction	NOM	introduction
+,	PUN	,
+texte	NOM	texte
+</NP>
+<AP>
+critique	ADJ	critique
+,	PUN	,
+</AP>
+<NP>
+<NP>
+témoignages	NOM	témoignage
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+commentaire	NOM	commentaire
+,	PUN	,
+</NP>
+</NP>
+<NP>
+Rome	NAM	Rome
+,	PUN	,
+Edizioni	NAM	<unknown>
+</NP>
+dell’Ateneo	NOM	<unknown>
+.	SENT	.
+</s>
+<s>
+<NP>
+Junta	NAM	<unknown>
+Autónoma	NAM	<unknown>
+do	NOM	do
+Porto	NAM	Porto
+</NP>
+<PP>
+de	PRP	de
+<NP>
+Setúbal	NAM	<unknown>
+,	PUN	,
+Porto	NAM	Porto
+</NP>
+</PP>
+<PP>
+de	PRP	de
+<NP>
+Setúbal	NAM	<unknown>
+,	PUN	,
+Setúbal	NAM	<unknown>
+,	PUN	,
+JAPS	NAM	<unknown>
+,	PUN	,
+</NP>
+</PP>
+<NP>
+1949	NUM	@card@
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Janssens	NAM	<unknown>
+(	PUN	(
+K.	NAM	<unknown>
+)	PUN	)
+,	PUN	,
+</NP>
+<NP>
+Van	NAM	Van
+Grieken	NAM	<unknown>
+(	PUN	(
+R.	NAM	<unknown>
+)	PUN	)
+,	PUN	,
+</NP>
+<NP>
+2004	NUM	@card@
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Non-destructive	NAM	<unknown>
+Microanalysis	NAM	<unknown>
+</NP>
+<VN>
+of	VER:futu	<unknown>
+</VN>
+<NP>
+Cultural	NAM	<unknown>
+Heritage	NAM	<unknown>
+Materials	NAM	<unknown>
+,	PUN	,
+(	PUN	(
+</NP>
+<NP>
+Eds	NAM	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+)	PUN	)
+,	PUN	,
+</NP>
+<NP>
+Comprehensive	NAM	<unknown>
+Analytical	NAM	<unknown>
+Chemistry	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+vol	NOM	vol
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+XLII	NUM	XLII
+,	PUN	,
+</NP>
+<NP>
+Elsevier	NAM	<unknown>
+,	PUN	,
+Amsterdam	NAM	Amsterdam
+,	PUN	,
+</NP>
+<VN>
+the	VER:simp	<unknown>
+</VN>
+<NP>
+Netherlands	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+800	NUM	@card@
+p.	ABR	<unknown>
+BENNAFLA	NAM	<unknown>
+K.	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+2005	NUM	@card@
+,	PUN	,
+</NP>
+<NP>
+La	DET:ART	le
+région	NOM	région
+</NP>
+<PP>
+de	PRP	de
+<NP>
+la	DET:ART	le
+Békaa	NAM	<unknown>
+:	PUN	:
+</NP>
+</PP>
+<NP>
+les	DET:ART	le
+mutations	NOM	mutation
+d’un	ADJ	<unknown>
+espace-frontière	NOM	<unknown>
+</NP>
+<PP>
+entre	PRP	entre
+<NP>
+<NP>
+Syrie	NAM	Syrie
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+Liban	NAM	Liban
+,	PUN	,
+</NP>
+</NP>
+</PP>
+<NP>
+Revue	NOM	revue
+</NP>
+<PP>
+de	PRP	de
+<NP>
+l’Économie	NOM	<unknown>
+Méridionale	ADJ	méridional
+,	PUN	,
+</NP>
+</PP>
+<NP>
+n°	ABR	numéro
+1-2	NUM	@card@
+,	PUN	,
+</NP>
+<NP>
+vol	NOM	vol
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+53	NUM	@card@
+,	PUN	,
+</NP>
+<NP>
+p.	ABR	<unknown>
+</NP>
+211-218	NUM	@card@
+.	SENT	.
+</s>
+<s>
+<NP>
+Cislaru	NAM	<unknown>
+G.	NAM	<unknown>
+(	PUN	(
+</NP>
+<NP>
+2008	NUM	@card@
+)	PUN	)
+</NP>
+.	SENT	.
+</s>
+<s>
+<VPinf>
+«	PUN:cit	«
+</VPinf>
+<NP>
+L’intersubjectivation	NAM	<unknown>
+</NP>
+<PP>
+comme	KON	comme
+<NP>
+<NP>
+source	NOM	source
+de	PRP	de
+sens	NOM	sen|sens
+:	PUN	:
+expression	NOM	expression
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+description	NOM	description
+</NP>
+</NP>
+</PP>
+<PP>
+de	PRP	de
+<NP>
+la	DET:ART	le
+peur	NOM	peur
+</NP>
+</PP>
+<PP>
+dans	PRP	dans
+<NP>
+les	DET:ART	le
+écrits	NOM	écrit
+</NP>
+</PP>
+<PP>
+de	PRP	de
+<NP>
+signalement	NOM	signalement
+»	PUN:cit	»
+,	PUN	,
+</NP>
+</PP>
+<NP>
+Les	DET:ART	le
+Carnets	NAM	<unknown>
+</NP>
+<PP>
+du	PRP:det	du
+<NP>
+Cediscor	NAM	<unknown>
+</NP>
+</PP>
+<NP>
+10	NUM	@card@
+:	PUN	:
+117-136	NUM	@card@
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+MASMAEKER	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+D.	ABR	<unknown>
+,	PUN	,
+</NP>
+<NP>
+La	DET:ART	le
+conservation-restauration	NOM	<unknown>
+</NP>
+<PP>
+des	PRP:det	du
+<NP>
+sculptures	NOM	sculpture
+</NP>
+</PP>
+<AP>
+bouddhiques	ADJ	bouddhique
+</AP>
+<PP>
+en	PRP	en
+<NP>
+bois	NOM	bois
+</NP>
+</PP>
+<AP>
+laqué	ADJ	laqué
+</AP>
+<VPpart>
+doré	VER:pper	dorer
+</VPpart>
+<PP>
+du	PRP:det	du
+<NP>
+Japon	NAM	Japon
+</NP>
+</PP>
+<AP>
+Mémoire	NOM	mémoire
+</AP>
+<PP>
+de	PRP	de
+<NP>
+fin	ADJ	fin
+d’études	NOM	<unknown>
+(	PUN	(
+</NP>
+</PP>
+<NP>
+La	DET:ART	le
+Cambre	NAM	<unknown>
+)	PUN	)
+</NP>
+<NP>
+2005/2006	NUM	@card@
+</NP>
+.	SENT	.
+</s>
+<s>
+<AP>
+CHAUVIN	ADJ	chauvin
+</AP>
+<NP>
+Maïlys	NOM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+2003	NUM	@card@
+–	PUN	–
+</NP>
+<NP>
+<NP>
+Acteurs	NAM	<unknown>
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+réseaux	NOM	réseau
+sociaux	ADJ	social
+</NP>
+</NP>
+<PP>
+du	PRP:det	du
+<NP>
+tourisme	NOM	tourisme
+</NP>
+</PP>
+<AP>
+international	ADJ	international
+</AP>
+<PP>
+en	PRP	en
+<NP>
+Tanzanie	NAM	<unknown>
+,	PUN	,
+</NP>
+</PP>
+<PP>
+entre	PRP	entre
+<NP>
+<NP>
+échelles	NOM	échelle
+locales	ADJ	local
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+globales	ADJ	global
+</NP>
+</NP>
+</PP>
+.	SENT	.
+</s>
+<s>
+<AP>
+In	ADJ	in
+:	PUN	:
+</AP>
+<NP>
+<NP>
+BART	NAM	<unknown>
+F.	NAM	<unknown>
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+LENOBLE-BART	NAM	<unknown>
+A.	ABR	<unknown>
+,	PUN	,
+</NP>
+</NP>
+<NP>
+eds	NOM	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+–	PUN	–
+Afrique	NAM	Afrique
+</NP>
+<PP>
+des	PRP:det	du
+<NP>
+<NP>
+réseaux	NOM	réseau
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+mondialisation	NOM	mondialisation
+</NP>
+</NP>
+</PP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Paris	NAM	Paris
+:	PUN	:
+Karthala	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+p.	ABR	<unknown>
+</NP>
+131-151	NUM	@card@
+.	SENT	.
+</s>
+<s>
+<NP>
+<NP>
+Bourdieu	NAM	<unknown>
+,	PUN	,
+Pierre	NAM	Pierre
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+Loïc	NAM	<unknown>
+Wacquant	NAM	<unknown>
+,	PUN	,
+</NP>
+</NP>
+<NP>
+1992	NUM	@card@
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Réponses	NOM	réponse
+:	PUN	:
+</NP>
+<PP>
+pour	PRP	pour
+<NP>
+une	DET:ART	un
+anthropologie	NOM	anthropologie
+</NP>
+</PP>
+<AP>
+réflexive	ADJ	réflexif
+</AP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Paris	NAM	Paris
+,	PUN	,
+Seuil	NAM	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Allard	NOM	<unknown>
+</NP>
+<AP>
+2004	NUM	@card@
+</AP>
+<NP>
+<NP>
+Allard	NAM	<unknown>
+P.	NAM	<unknown>
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+al	VER:simp	<unknown>
+</NP>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+-	PUN	-
+</NP>
+<NP>
+Fonction	NOM	fonction
+</NP>
+<PP>
+des	PRP:det	du
+<NP>
+outillages	NOM	outillage
+</NP>
+</PP>
+<AP>
+lithiques	ADJ	lithique
+</AP>
+<PP>
+dans	PRP	dans
+<NP>
+le	DET:ART	le
+Bassin	NOM	bassin
+</NP>
+</PP>
+<AP>
+parisien	ADJ	parisien
+</AP>
+<PP>
+au	PRP:det	au
+<NP>
+Néolithique	NAM	<unknown>
+,	PUN	,
+in	ADJ	in
+:	PUN	:
+</NP>
+</PP>
+<NP>
+<NP>
+C.	ABR	<unknown>
+Constantin	NAM	Constantin
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+P.	ABR	<unknown>
+Bodu	ADJ	<unknown>
+(	PUN	(
+</NP>
+</NP>
+<NP>
+dir	VER:infi	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+)	PUN	)
+,	PUN	,
+</NP>
+<NP>
+Approches	NOM	approche
+fonctionnelles	ADJ	fonctionnel
+</NP>
+<PP>
+en	PRP	en
+<NP>
+Préhistoire	NAM	<unknown>
+,	PUN	,
+Actes	NAM	<unknown>
+</NP>
+</PP>
+<PP>
+du	PRP:det	du
+<NP>
+XXV	NUM	XXV
+e	NOM	<unknown>
+congrès	NOM	congrès
+</NP>
+</PP>
+<AP>
+préhistorique	ADJ	préhistorique
+</AP>
+<PP>
+de	PRP	de
+<NP>
+France	NAM	France
+,	PUN	,
+Nanterre	NAM	<unknown>
+,	PUN	,
+</NP>
+</PP>
+<NP>
+24-26	NUM	@card@
+novembre	NOM	novembre
+2000	NUM	@card@
+,	PUN	,
+</NP>
+<NP>
+Société	NAM	<unknown>
+Préhistorique	NAM	<unknown>
+Française	NAM	<unknown>
+:	PUN	:
+</NP>
+<NP>
+81-192	NUM	@card@
+</NP>
+.	SENT	.
+</s>
+<s>
+<AP>
+Enste	NOM	<unknown>
+D.	ABR	<unknown>
+</AP>
+<NP>
+,	PUN	,
+</NP>
+<Sint>
+«	PUN:cit	«
+</Sint>
+<PP>
+‚	PUN:cit	‚
+<NP>
+Zwischen	NAM	<unknown>
+Gier	NAM	<unknown>
+und	NOM	<unknown>
+</NP>
+</PP>
+<NP>
+Gewissen	NAM	<unknown>
+’	PUN:cit	’
+–	PUN	–
+</NP>
+<NP>
+Eine	NOM	<unknown>
+Kritik	NAM	<unknown>
+an	NOM	an
+</NP>
+<NP>
+der	NOM	der
+Kritik	NAM	<unknown>
+der	NOM	der
+</NP>
+<NP>
+Marktwirtschaft	NAM	<unknown>
+»	PUN:cit	»
+,	PUN	,
+</NP>
+<NP>
+Munich	NAM	Munich
+,	PUN	,
+RHI-Diskussion	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+n°	ABR	numéro
+6/2007	ABR	@card@
+CAMPBELL	NAM	<unknown>
+</NP>
+Jeffrey	NAM	<unknown>
+<NP>
+&	SYM	&
+</NP>
+<NP>
+Zvi	VER:pper	<unknown>
+HERCOWITZ	NAM	<unknown>
+,	PUN	,
+</NP>
+<Sint>
+“	PUN:cit	“
+</Sint>
+<NP>
+The	NAM	<unknown>
+Role	NAM	<unknown>
+</NP>
+<VN>
+of	VER:futu	<unknown>
+</VN>
+<NP>
+Collateralized	NAM	<unknown>
+Household	NAM	<unknown>
+</NP>
+<VN>
+Debt	VER:futu	<unknown>
+</VN>
+<AP>
+in	ADJ	in
+</AP>
+<NP>
+Macroeconomic	NAM	<unknown>
+Stabilization	NAM	<unknown>
+”	PUN:cit	”
+,	PUN	,
+</NP>
+<NP>
+NBER	NAM	<unknown>
+Working	NAM	<unknown>
+Paper	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+11330	NUM	@card@
+,	PUN	,
+2005	NUM	@card@
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Yusta	NAM	<unknown>
+,	PUN	,
+Mercedes	NAM	Mercedes
+,	PUN	,
+“	PUN:cit	“
+</NP>
+<NP>
+La	DET:ART	le
+segunda	NOM	<unknown>
+republica	NOM	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Significado	NAM	<unknown>
+para	VER:simp	parer
+las	ADJ	las
+mujeres	NOM	<unknown>
+”	PUN:cit	”
+,	PUN	,
+</NP>
+<PP>
+en	PRP	en
+<NP>
+Isabel	NOM	<unknown>
+Morant	ADJ	<unknown>
+(	PUN	(
+</NP>
+</PP>
+<NP>
+dir	VER:infi	<unknown>
+)	PUN	)
+,	PUN	,
+</NP>
+<NP>
+Historia	NAM	<unknown>
+de	PRP	de
+las	ADJ	las
+Mujeres	NOM	<unknown>
+</NP>
+<PP>
+en	PRP	en
+<NP>
+España	NAM	<unknown>
+</NP>
+</PP>
+<PP>
+y	PRO:PER	y
+<NP>
+América	NAM	<unknown>
+Latina	NAM	<unknown>
+,	PUN	,
+</NP>
+</PP>
+<VN>
+dir	VER:infi	<unknown>
+</VN>
+.	SENT	.
+</s>
+<s>
+<NP>
+,	PUN	,
+</NP>
+<NP>
+Madrid	NAM	Madrid
+,	PUN	,
+</NP>
+<NP>
+2005	NUM	@card@
+,	PUN	,
+</NP>
+<NP>
+Vol	ABR	volume
+IV	NUM	IV
+,	PUN	,
+</NP>
+<NP>
+pp	NOM	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+110-122	NUM	@card@
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+VERIN-ZIMMERRMANN	NAM	<unknown>
+,	PUN	,
+Hélène	NAM	Hélène
+,	PUN	,
+</NP>
+<NP>
+1982	NUM	@card@
+,	PUN	,
+</NP>
+<NP>
+Entrepreneurs/Entreprise	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+histoire	NOM	histoire
+d’une	NOM	<unknown>
+idée	NOM	idée
+,	PUN	,
+</NP>
+<NP>
+Paris	NAM	Paris
+,	PUN	,
+PUF	NAM	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Beaudu	NOM	<unknown>
+G.	ABR	<unknown>
+,	PUN	,
+</NP>
+<NP>
+2009	NUM	@card@
+,	PUN	,
+</NP>
+<NP>
+L’externalisation	NOM	<unknown>
+</NP>
+<PP>
+dans	PRP	dans
+<PP>
+le	DET:ART	le
+<PP>
+domaine	NOM	domaine
+<PP>
+des	PRP:det	du
+<NP>
+visas	NOM	visa
+Schengen	NAM	Schengen
+[	PUN	[
+</NP>
+</PP>
+</PP>
+</PP>
+</PP>
+<NP>
+actualisation	NOM	actualisation
+</NP>
+<PP>
+de	PRP	de
+<NP>
+février	NOM	février
+2009	NUM	@card@
+]	PUN	]
+</NP>
+</PP>
+.	SENT	.
+</s>
+<s>
+<NP>
+SCICOLONE	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+G.	ABR	<unknown>
+C.	ABR	<unknown>
+,	PUN	,
+</NP>
+<NP>
+Il	NOM	<unknown>
+restauro	NOM	<unknown>
+dei	NOM	<unknown>
+</NP>
+<VPpart>
+dipinti	VER:pper	<unknown>
+</VPpart>
+<VPpart>
+contemporanei	VER:pper	<unknown>
+</VPpart>
+.	SENT	.
+</s>
+<s>
+<NP>
+Dalle	NOM	dalle
+tecniche	NOM	<unknown>
+di	VER:subi	<unknown>
+</NP>
+<NP>
+intervento	NOM	<unknown>
+tradizionali	ADJ	<unknown>
+alle	ADJ	<unknown>
+metodologie	NOM	<unknown>
+</NP>
+<AP>
+innovative	ADJ	<unknown>
+,	PUN	,
+</AP>
+<NP>
+Firenzi	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+Nardini	NAM	<unknown>
+Editore	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+1993	NUM	@card@
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Rubbens	NAM	<unknown>
+,	PUN	,
+E.	NAM	<unknown>
+,	PUN	,
+Édouard	NAM	Édouard
+Ducpétiaux	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+1804-1868	NUM	@card@
+,	PUN	,
+</NP>
+<NP>
+Bruxelles	NAM	Bruxelles
+,	PUN	,
+</NP>
+<NP>
+Éditions	NOM	édition
+</NP>
+<PP>
+de	PRP	de
+<NP>
+la	DET:ART	le
+Société	ADJ	<unknown>
+d’études	NOM	<unknown>
+</NP>
+</PP>
+<AP>
+morales	ADJ	moral
+,	PUN	,
+</AP>
+<AP>
+sociales	ADJ	social
+</AP>
+<COORD>
+et	KON	et
+</COORD>
+<AP>
+juridiques	ADJ	juridique
+,	PUN	,
+</AP>
+<NP>
+Librairie	NAM	<unknown>
+Albert	NAM	Albert
+Dewit	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+1922-1934	NUM	@card@
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Ballard	NAM	<unknown>
+,	PUN	,
+R.	NAM	<unknown>
+,	PUN	,
+«	PUN:cit	«
+</NP>
+<NP>
+Migration	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+Remittances	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+Economic	NAM	<unknown>
+Growth	NAM	<unknown>
+</NP>
+<VN>
+and	VER:futu	<unknown>
+</VN>
+<NP>
+Poverty	NAM	<unknown>
+Reduction	NAM	<unknown>
+:	PUN	:
+</NP>
+<VN>
+Reflections	VER:impf	<unknown>
+on	PRO:PER	on
+</VN>
+<NP>
+Some	NAM	<unknown>
+South	NAM	<unknown>
+Asian	NAM	<unknown>
+Developments	NAM	<unknown>
+»	PUN:cit	»
+,	PUN	,
+</NP>
+<VN>
+in	ADJ	in
+</VN>
+<NP>
+T.	NAM	<unknown>
+Siddiqui	NAM	<unknown>
+(	PUN	(
+</NP>
+<NP>
+ed	NOM	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<AP>
+)	PUN	)
+,	PUN	,
+</AP>
+<NP>
+Migration	NAM	<unknown>
+and	VER:simp	<unknown>
+</NP>
+<NP>
+Development	NAM	<unknown>
+:	PUN	:
+</NP>
+<NP>
+Pro-Poor	NAM	<unknown>
+Policy	NAM	<unknown>
+Choices	NAM	<unknown>
+,	PUN	,
+Dhaka	NAM	<unknown>
+,	PUN	,
+The	NAM	<unknown>
+</NP>
+University	NAM	<unknown>
+<NP>
+Press	NAM	<unknown>
+Ltd	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+2005	NUM	@card@
+,	PUN	,
+</NP>
+<NP>
+pp	NOM	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+333-358	NUM	@card@
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Bauman	NOM	<unknown>
+Z.	ABR	<unknown>
+,	PUN	,
+</NP>
+<NP>
+1999	NUM	@card@
+,	PUN	,
+</NP>
+<NP>
+Les	DET:ART	le
+conséquences	NOM	conséquence
+</NP>
+<PP>
+de	PRP	de
+<NP>
+la	DET:ART	le
+mondialisation	NOM	mondialisation
+,	PUN	,
+</NP>
+</PP>
+<NP>
+Paris	NAM	Paris
+,	PUN	,
+</NP>
+<NP>
+Hachette	NAM	Hachette
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+HARLEY	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+R.	ABR	<unknown>
+D.	ABR	<unknown>
+,	PUN	,
+Artists´	ABR	<unknown>
+</NP>
+<VN>
+Pigments	NOM	pigment
+</VN>
+<VPpart>
+c	ADJ	<unknown>
+</VPpart>
+.	SENT	.
+</s>
+<s>
+<NP>
+1600-1835	NUM	@card@
+,	PUN	,
+</NP>
+<NP>
+Second	NAM	<unknown>
+Edition	NAM	<unknown>
+,	PUN	,
+England	NAM	<unknown>
+,	PUN	,
+Butterworths	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+1982	NUM	@card@
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+<NP>
+MAHIEU	NOM	<unknown>
+F.	ABR	<unknown>
+R.	NAM	<unknown>
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+ODUNFA	NAM	<unknown>
+A.	NAM	<unknown>
+,	PUN	,
+</NP>
+</NP>
+<NP>
+1993	NUM	@card@
+,	PUN	,
+«	PUN:cit	«
+</NP>
+<NP>
+Contraintes	NOM	contrainte
+</NP>
+<AP>
+communautaires	ADJ	communautaire
+</AP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+consommation	NOM	consommation
+</NP>
+<AP>
+alimentaire	ADJ	alimentaire
+»	PUN:cit	»
+</AP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Une	DET:ART	un
+réflexion	NOM	réflexion
+</NP>
+<PP>
+sur	PRP	sur
+<NP>
+la	DET:ART	le
+Côte	NAM	<unknown>
+d’Ivoire	ADJ	<unknown>
+</NP>
+</PP>
+.	SENT	.
+</s>
+<s>
+<AP>
+In	ADJ	in
+</AP>
+<NP>
+J.	NAM	<unknown>
+Muchnik	NAM	<unknown>
+(	PUN	(
+</NP>
+<NP>
+Ed	ABR	Ed
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+)	PUN	)
+,	PUN	,
+</NP>
+<NP>
+<NP>
+Alimentation	NAM	<unknown>
+,	PUN	,
+techniques	ADJ	technique
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+innovations	NOM	innovation
+</NP>
+</NP>
+<PP>
+dans	PRP	dans
+<NP>
+les	DET:ART	le
+régions	NOM	région
+</NP>
+</PP>
+<AP>
+tropicales	ADJ	tropical
+(	PUN	(
+</AP>
+<NP>
+pp	NOM	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+93-126	NUM	@card@
+)	PUN	)
+,	PUN	,
+</NP>
+<NP>
+L’harmattan	NAM	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Brisson	NAM	<unknown>
+Luc	NAM	Luc
+(	PUN	(
+</NP>
+<NP>
+1986	NUM	@card@
+)	PUN	)
+,	PUN	,
+</NP>
+<Sint>
+«	PUN:cit	«
+</Sint>
+<NP>
+Neutrum	NAM	<unknown>
+utrumque	NOM	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+La	DET:ART	le
+bisexualité	NOM	bisexualité
+</NP>
+<PP>
+dans	PRP	dans
+<NP>
+l’Antiquité	NOM	<unknown>
+</NP>
+</PP>
+<AP>
+gréco-romaine	ADJ	gréco-romain
+»	PUN:cit	»
+,	PUN	,
+</AP>
+<PP>
+dans	PRP	dans
+<NP>
+L’Androgyne	NAM	<unknown>
+,	PUN	,
+</NP>
+</PP>
+<NP>
+Les	DET:ART	le
+Cahiers	NOM	cahier
+</NP>
+<PP>
+de	PRP	de
+<NP>
+l’hermétisme	NOM	<unknown>
+,	PUN	,
+</NP>
+</PP>
+<NP>
+Paris	NAM	Paris
+,	PUN	,
+</NP>
+<NP>
+Albin	NAM	<unknown>
+Michel	NAM	Michel
+,	PUN	,
+</NP>
+<NP>
+p.	ABR	<unknown>
+</NP>
+27-61	NUM	@card@
+.	SENT	.
+</s>
+<s>
+<NP>
+Ratha	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+D.	ABR	<unknown>
+,	PUN	,
+</NP>
+<Sint>
+«	PUN:cit	«
+</Sint>
+<NP>
+Workers	NAM	<unknown>
+’	PUN:cit	’
+</NP>
+<AP>
+Remittances	NOM	<unknown>
+:	PUN	:
+</AP>
+<NP>
+An	NOM	an
+Important	NAM	<unknown>
+</NP>
+<VN>
+and	VER:futu	<unknown>
+</VN>
+<NP>
+Stable	NAM	<unknown>
+Source	NAM	<unknown>
+</NP>
+<VN>
+of	VER:futu	<unknown>
+</VN>
+<NP>
+External	NAM	<unknown>
+</NP>
+<NP>
+Development	NAM	<unknown>
+Finance	NAM	<unknown>
+»	PUN:cit	»
+,	PUN	,
+</NP>
+<NP>
+Global	NAM	<unknown>
+Development	NAM	<unknown>
+Finance	NAM	<unknown>
+</NP>
+<NP>
+2003	NUM	@card@
+,	PUN	,
+</NP>
+<NP>
+Washington	NAM	Washington
+,	PUN	,
+</NP>
+<NP>
+DC	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+World	NAM	<unknown>
+Bank	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+2003	NUM	@card@
+,	PUN	,
+</NP>
+<NP>
+pp	NOM	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+157-175	NUM	@card@
+Bigo	NAM	<unknown>
+D.	NAM	<unknown>
+,	PUN	,
+Guild	NAM	<unknown>
+E.	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+2006	NUM	@card@
+,	PUN	,
+</NP>
+<NP>
+Polizia	NAM	<unknown>
+</NP>
+<VN>
+a	VER:pres	avoir
+</VN>
+<NP>
+distanza	NOM	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Le	DET:ART	le
+frontiere	NOM	<unknown>
+mobili	ADJ	<unknown>
+e	VER:simp	<unknown>
+i	VER:pper	<unknown>
+</NP>
+<VN>
+confini	ADJ	<unknown>
+</VN>
+<NP>
+di	NOM	<unknown>
+carta	VER:simp	carter
+dell’Unione	NOM	<unknown>
+</NP>
+<NP>
+Europea	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+Conflitti	NAM	<unknown>
+Globali	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+2	NUM	@card@
+,	PUN	,
+58-76	NUM	@card@
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Martys	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+F.	ABR	<unknown>
+,	PUN	,
+</NP>
+<NP>
+2006	NUM	@card@
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Mimet	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+<NP>
+in	ADJ	in
+,	PUN	,
+Nocci	NAM	<unknown>
+,	PUN	,
+F.	NAM	<unknown>
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+Nin	NAM	<unknown>
+,	PUN	,
+</NP>
+</NP>
+<NP>
+N.	NAM	<unknown>
+(	PUN	(
+</NP>
+<VN>
+dir	VER:infi	<unknown>
+</VN>
+.	SENT	.
+</s>
+<s>
+<NP>
+)	PUN	)
+,	PUN	,
+</NP>
+<NP>
+Aix	NAM	Aix
+</NP>
+<PP>
+en	PRP	en
+<NP>
+Provence	NAM	Provence
+,	PUN	,
+Pays	NAM	<unknown>
+</NP>
+</PP>
+<VN>
+d’Aix	VER:simp	<unknown>
+,	PUN	,
+</VN>
+<NP>
+Val	NAM	<unknown>
+</NP>
+<PP>
+de	PRP	de
+<NP>
+Durance	NAM	<unknown>
+,	PUN	,
+Académie	NAM	Académie
+</NP>
+</PP>
+<PP>
+des	PRP:det	du
+<NP>
+<NP>
+inscriptions	NOM	inscription
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+Belles	NAM	<unknown>
+Lettres	NAM	<unknown>
+,	PUN	,
+</NP>
+</NP>
+</PP>
+<NP>
+2006	NUM	@card@
+,	PUN	,
+</NP>
+<NP>
+p.	ABR	<unknown>
+597-600	NUM	@card@
+,	PUN	,
+(	PUN	(
+</NP>
+<NP>
+Carte	NOM	carte
+</NP>
+<AP>
+archéologique	ADJ	archéologique
+</AP>
+<PP>
+de	PRP	de
+<NP>
+la	DET:ART	le
+Gaule	NAM	Gaule
+,	PUN	,
+</NP>
+</PP>
+<NP>
+13/4	NUM	@card@
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+)	PUN	)
+</NP>
+<AdP>
+–	PUN	–
+</AdP>
+<NP>
+2003	NUM	@card@
+b	NOM	<unknown>
+,	PUN	,
+</NP>
+<Sint>
+«	PUN:cit	«
+</Sint>
+<NP>
+Pour	NAM	<unknown>
+une	NUM	un
+critique	NOM	critique
+</NP>
+<PP>
+de	PRP	de
+<NP>
+la	DET:ART	le
+philosophie	NOM	philosophie
+</NP>
+</PP>
+<PP>
+du	PRP:det	du
+<NP>
+droit	NOM	droit
+de	PRP	de
+Hegel	NAM	Hegel
+»	PUN:cit	»
+,	PUN	,
+</NP>
+</PP>
+<NP>
+Argent	NAM	<unknown>
+,	PUN	,
+État	NAM	État
+,	PUN	,
+</NP>
+<NP>
+prolétariat	NOM	prolétariat
+,	PUN	,
+</NP>
+<PP>
+dans	PRP	dans
+<NP>
+Œuvres	NOM	œuvre
+</NP>
+</PP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Philosophie	NOM	philosophie
+,	PUN	,
+</NP>
+<NP>
+trad	NOM	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+M.	NOM	monsieur
+Rubel	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+<NP>
+L.	NAM	<unknown>
+Evrard	NAM	<unknown>
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+L.	NAM	<unknown>
+Janover	NAM	<unknown>
+,	PUN	,
+</NP>
+</NP>
+<NP>
+Paris	NAM	Paris
+,	PUN	,
+Gallimard	NAM	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Rastier	NOM	<unknown>
+F.	ABR	<unknown>
+(	PUN	(
+</NP>
+<NP>
+2007	NUM	@card@
+)	PUN	)
+</NP>
+.	SENT	.
+</s>
+<s>
+<VPinf>
+«	PUN:cit	«
+</VPinf>
+<NP>
+Le	DET:ART	le
+corpus	NOM	corpus
+</NP>
+<PP>
+en	PRP	en
+<NP>
+questions	NOM	question
+»	PUN:cit	»
+,	PUN	,
+</NP>
+</PP>
+<VN>
+in	ADJ	in
+</VN>
+<NP>
+<NP>
+Rastier	NAM	<unknown>
+F.	NAM	<unknown>
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+Ballabriga	NAM	<unknown>
+M.	NOM	monsieur
+(	PUN	(
+</NP>
+</NP>
+<VN>
+dir	VER:infi	<unknown>
+</VN>
+.	SENT	.
+</s>
+<s>
+<NP>
+)	PUN	)
+,	PUN	,
+Corpus	NAM	<unknown>
+</NP>
+<PP>
+en	PRP	en
+<NP>
+<NP>
+Lettres	NAM	<unknown>
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+Sciences	NAM	<unknown>
+sociales	ADJ	social
+</NP>
+</NP>
+</PP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Toulouse	NAM	Toulouse
+:	PUN	:
+</NP>
+<VPpart>
+PU	VER:pper	pouvoir
+</VPpart>
+<PP>
+de	PRP	de
+<NP>
+Toulouse	NAM	Toulouse
+</NP>
+</PP>
+<NP>
+Le	DET:ART	le
+Mirail	NAM	<unknown>
+,	PUN	,
+</NP>
+<VPpart>
+viii-xiii	VER:pper	<unknown>
+</VPpart>
+.	SENT	.
+</s>
+<s>
+<NP>
+Claverie	NAM	<unknown>
+,	PUN	,
+É	NAM	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+,	PUN	,
+</NP>
+<VN>
+De	VER:ppre	<unknown>
+</VN>
+<NP>
+la	DET:ART	le
+difficulté	NOM	difficulté
+</NP>
+<VPinf>
+de	PRP	de
+</VPinf>
+<VN>
+faire	VER:infi	faire
+</VN>
+<NP>
+un	DET:ART	un
+citoyen	NOM	citoyen
+:	PUN	:
+</NP>
+<NP>
+les	DET:ART	le
+‘	PUN:cit	‘
+acquittements	NOM	acquittement
+</NP>
+<AP>
+scandaleux	ADJ	scandaleux
+’	PUN:cit	’
+</AP>
+<PP>
+du	PRP:det	du
+<NP>
+jury	NOM	jury
+</NP>
+</PP>
+<PP>
+dans	PRP	dans
+<NP>
+la	DET:ART	le
+France	NAM	France
+</NP>
+</PP>
+<AP>
+provinciale	ADJ	provincial
+</AP>
+<PP>
+du	PRP:det	du
+<NP>
+XIXe	NUM	XIXe
+siècle	NOM	siècle
+,	PUN	,
+</NP>
+</PP>
+<NP>
+Études	NOM	étude
+rurales	ADJ	rural
+,	PUN	,
+</NP>
+<NP>
+1984	NUM	@card@
+,	PUN	,
+</NP>
+<NP>
+pp	NOM	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+95-96	NUM	@card@
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Encyclopédie	NOM	encyclopédie
+Méthodique	NAM	<unknown>
+Marine	NAM	Marine
+</NP>
+<NP>
+1783	NUM	@card@
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Paris	NAM	Paris
+:	PUN	:
+Panckouke	NAM	<unknown>
+(	PUN	(
+</NP>
+<NP>
+tome	NOM	tome
+1	NUM	@card@
+)	PUN	)
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Maingueneau	NOM	<unknown>
+D.	ABR	<unknown>
+(	PUN	(
+</NP>
+<NP>
+1991	NUM	@card@
+)	PUN	)
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+L’Analyse	NOM	<unknown>
+</NP>
+<PP>
+du	PRP:det	du
+<NP>
+discours	NOM	discours
+:	PUN	:
+introduction	NOM	introduction
+</NP>
+</PP>
+<PP>
+aux	PRP:det	au
+<NP>
+lectures	NOM	lecture
+</NP>
+</PP>
+<PP>
+de	PRP	de
+<NP>
+l’archive	NOM	<unknown>
+</NP>
+</PP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Paris	NAM	Paris
+:	PUN	:
+Hachette	NAM	Hachette
+</NP>
+Supérieur	NAM	<unknown>
+.	SENT	.
+</s>
+<s>
+<NP>
+SORO	NAM	<unknown>
+N.	NAM	<unknown>
+(	PUN	(
+</NP>
+<NP>
+2002	NUM	@card@
+)	PUN	)
+-	PUN	-
+</NP>
+<NP>
+<NP>
+Hydrochimie	NAM	<unknown>
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+Géochimie	NAM	<unknown>
+isotopique	ADJ	isotopique
+</NP>
+</NP>
+<PP>
+des	PRP:det	du
+<NP>
+eaux	NOM	eau
+</NP>
+</PP>
+<AP>
+souterraines	ADJ	souterrain
+</AP>
+<PP>
+du	PRP:det	du
+<NP>
+degré	NOM	degré
+</NP>
+</PP>
+<VPpart>
+carré	VER:pper	carrer
+</VPpart>
+<PP>
+de	PRP	de
+<NP>
+<NP>
+Grand-Lahou	NAM	<unknown>
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+ses	DET:POS	son
+environs	NOM	environ|environs
+(	PUN	(
+Sud-Ouest	NOM	sud-ouest
+</NP>
+</NP>
+</PP>
+<PP>
+de	PRP	de
+<NP>
+la	DET:ART	le
+Côte	NAM	<unknown>
+d'	PRP	de
+Ivoire	NAM	<unknown>
+)	PUN	)
+</NP>
+</PP>
+.	SENT	.
+</s>
+<s>
+<NP>
+<NP>
+Implication	NOM	implication
+hydrologique	ADJ	hydrologique
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+hydrogéologique	ADJ	hydrogéologique
+</NP>
+</NP>
+.	SENT	.
+</s>
+<s>
+<AP>
+Thèse	NOM	thèse
+</AP>
+<PP>
+de	PRP	de
+<NP>
+Doctorat	NAM	<unknown>
+</NP>
+</PP>
+<PP>
+d'	PRP	de
+<NP>
+État	NAM	État
+,	PUN	,
+Université	NAM	<unknown>
+</NP>
+</PP>
+<PP>
+de	PRP	de
+<NP>
+Cocody	NAM	<unknown>
+,	PUN	,
+</NP>
+</PP>
+<NP>
+272	NUM	@card@
+p.	ABR	<unknown>
+DELGADO	ABR	<unknown>
+C.	ABR	<unknown>
+L.	NAM	<unknown>
+,	PUN	,
+REARDON	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+<NP>
+T.	ABR	<unknown>
+A.	ABR	<unknown>
+,	PUN	,
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+THIOMBIANO	NAM	<unknown>
+,	PUN	,
+T.	NAM	<unknown>
+,	PUN	,
+</NP>
+</NP>
+<NP>
+1988	NUM	@card@
+,	PUN	,
+«	PUN:cit	«
+</NP>
+<NP>
+La	DET:ART	le
+substitution	NOM	substitution
+</NP>
+<PP>
+des	PRP:det	du
+<NP>
+céréales	NOM	céréale
+</NP>
+</PP>
+<AP>
+locales	ADJ	local
+</AP>
+<PP>
+par	PRP	par
+<NP>
+les	DET:ART	le
+céréales	NOM	céréale
+</NP>
+</PP>
+<AP>
+importées	VER:pper	importer
+:	PUN	:
+</AP>
+<NP>
+la	DET:ART	le
+consommation	NOM	consommation
+</NP>
+<AP>
+alimentaire	ADJ	alimentaire
+</AP>
+<PP>
+des	PRP:det	du
+<NP>
+ménages	NOM	ménage
+</NP>
+</PP>
+<PP>
+à	PRP	à
+<NP>
+Ouagadougou	NOM	<unknown>
+»	PUN:cit	»
+,	PUN	,
+</NP>
+</PP>
+<NP>
+Colloque	NOM	colloque
+</NP>
+<PP>
+sur	PRP	sur
+<NP>
+la	DET:ART	le
+consommation	NOM	consommation
+</NP>
+</PP>
+<AP>
+alimentaire	ADJ	alimentaire
+</AP>
+<PP>
+au	PRP:det	au
+<NP>
+Burkina	NAM	<unknown>
+Faso	NAM	<unknown>
+,	PUN	,
+</NP>
+</PP>
+<NP>
+Ouagadougou	NOM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+6-7	NUM	@card@
+juin	NOM	juin
+1988	NUM	@card@
+,	PUN	,
+</NP>
+<NP>
+CEDRES-IFPRI	NAM	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+DARD-TERNISEN	NOM	<unknown>
+C.	ABR	<unknown>
+,	PUN	,
+</NP>
+<NP>
+<NP>
+Étude	NOM	étude
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+restauration	NOM	restauration
+</NP>
+</NP>
+<AP>
+d’un	ADJ	<unknown>
+Avalokitesvara	NAM	<unknown>
+</AP>
+<AP>
+tibétain	ADJ	tibétain
+</AP>
+<PP>
+en	PRP	en
+<NP>
+bois	NOM	bois
+</NP>
+</PP>
+<AP>
+polychromé	ADJ	polychromé
+</AP>
+<VN>
+appartenant	VER:ppre	appartenir
+</VN>
+<PP>
+au	PRP:det	au
+<NP>
+musée	NOM	musée
+</NP>
+</PP>
+<AP>
+national	ADJ	national
+</AP>
+<PP>
+des	PRP:det	du
+<NP>
+Arts	NAM	<unknown>
+asiatiques-Guimet	NOM	<unknown>
+,	PUN	,
+</NP>
+</PP>
+<NP>
+Paris	NAM	Paris
+:	PUN	:
+</NP>
+<NP>
+Recherche	NOM	recherche
+d’un	ADJ	<unknown>
+</NP>
+<AP>
+adhésif	ADJ	adhésif
+</AP>
+<PP>
+de	PRP	de
+<NP>
+consolidation	NOM	consolidation
+</NP>
+</PP>
+<COORD>
+et	KON	et
+</COORD>
+<PP>
+de	PRP	de
+<NP>
+refixage	NOM	<unknown>
+</NP>
+</PP>
+<PP>
+pour	PRP	pour
+<NP>
+une	DET:ART	un
+couche	NOM	couche
+d’azurite	NOM	<unknown>
+</NP>
+</PP>
+<AP>
+mate	ADJ	mat
+</AP>
+<COORD>
+et	KON	et
+</COORD>
+<AP>
+pulvérulente	ADJ	pulvérulent
+,	PUN	,
+</AP>
+<PP>
+sans	PRP	sans
+<NP>
+modification	NOM	modification
+</NP>
+</PP>
+<AP>
+optique	ADJ	optique
+,	PUN	,
+</AP>
+<NP>
+Mémoire	NOM	mémoire
+</NP>
+<PP>
+de	PRP	de
+<NP>
+fin	ADJ	fin
+d’études	NOM	<unknown>
+(	PUN	(
+</NP>
+</PP>
+<NP>
+IFROA	NAM	<unknown>
+)	PUN	)
+,	PUN	,
+</NP>
+<NP>
+N°	ABR	numéro
+d’inventaire	NOM	<unknown>
+:	PUN	:
+</NP>
+<NP>
+1214	NUM	@card@
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Boehringer	NAM	<unknown>
+Sandra	NAM	Sandra
+,	PUN	,
+«	PUN:cit	«
+</NP>
+<NP>
+Comparer	VER:infi	comparer
+l’incomparable	ADJ	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+La	DET:ART	le
+sunkrisis	NOM	<unknown>
+</NP>
+<AP>
+érotique	ADJ	érotique
+</AP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+les	DET:ART	le
+catégories	NOM	catégorie
+</NP>
+<AP>
+sexuelles	ADJ	sexuel
+</AP>
+<PP>
+dans	PRP	dans
+<NP>
+le	DET:ART	le
+monde	NOM	monde
+</NP>
+</PP>
+<AP>
+gréco-romain	ADJ	gréco-romain
+»	PUN:cit	»
+</AP>
+<PP>
+dans	PRP	dans
+<NP>
+Perreau	NAM	<unknown>
+Bruno	NAM	Bruno
+(	PUN	(
+</NP>
+</PP>
+<VN>
+dir	VER:infi	<unknown>
+</VN>
+.	SENT	.
+</s>
+<s>
+<NP>
+)	PUN	)
+,	PUN	,
+</NP>
+<NP>
+Le	DET:ART	le
+choix	NOM	choix
+</NP>
+<PP>
+de	PRP	de
+<NP>
+l’homosexualité	NOM	<unknown>
+</NP>
+</PP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Recherches	NOM	recherche
+</NP>
+<AP>
+inédites	ADJ	inédit
+</AP>
+<PP>
+sur	PRP	sur
+<NP>
+la	DET:ART	le
+question	NOM	question
+</NP>
+</PP>
+<AP>
+gay	ADJ	gay
+</AP>
+<COORD>
+et	KON	et
+</COORD>
+<AP>
+lesbienne	ADJ	lesbien
+,	PUN	,
+</AP>
+<NP>
+Paris	NAM	Paris
+,	PUN	,
+Epel	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+2007	NUM	@card@
+b	NOM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+p.	ABR	<unknown>
+</NP>
+39-56	NUM	@card@
+.	SENT	.
+</s>
+<s>
+<NP>
+SCHWARTZ	ABR	<unknown>
+A.	ABR	<unknown>
+,	PUN	,
+</NP>
+<NP>
+1993	NUM	@card@
+,	PUN	,
+</NP>
+<NP>
+<NP>
+Sous-peuplement	NAM	<unknown>
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+développement	NOM	développement
+</NP>
+</NP>
+<PP>
+dans	PRP	dans
+<NP>
+le	DET:ART	le
+sud-ouest	NOM	sud-ouest
+</NP>
+</PP>
+<PP>
+de	PRP	de
+<NP>
+la	DET:ART	le
+Côte	NAM	<unknown>
+</NP>
+</PP>
+<PP>
+d'	PRP	de
+<NP>
+Ivoire	NAM	<unknown>
+:	PUN	:
+</NP>
+</PP>
+<NP>
+cinq	NUM	cinq
+siècles	NOM	siècle
+</NP>
+<PP>
+d'	PRP	de
+<NP>
+histoire	NOM	histoire
+</NP>
+</PP>
+<AP>
+économique	ADJ	économique
+</AP>
+<COORD>
+et	KON	et
+</COORD>
+<AP>
+sociale	ADJ	social
+,	PUN	,
+</AP>
+<NP>
+Paris	NAM	Paris
+,	PUN	,
+ORSTOM	NAM	<unknown>
+(	PUN	(
+</NP>
+<NP>
+coll	NOM	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+<NP>
+Études	NOM	étude
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+Thèses	NAM	<unknown>
+)	PUN	)
+,	PUN	,
+</NP>
+</NP>
+<NP>
+p.	ABR	<unknown>
+</NP>
+490	NUM	@card@
+<NP>
+p.	ABR	<unknown>
+GREENSPAN	NAM	<unknown>
+Alan	NAM	<unknown>
+,	PUN	,
+</NP>
+<Sint>
+“	PUN:cit	“
+</Sint>
+<NP>
+Testimony	NAM	<unknown>
+Before	NAM	<unknown>
+</NP>
+<VN>
+the	VER:futu	<unknown>
+</VN>
+<NP>
+Committee	NAM	<unknown>
+</NP>
+<VN>
+on	PRO:PER	on
+</VN>
+<NP>
+Banking	NAM	<unknown>
+,	PUN	,
+Housing	NAM	<unknown>
+,	PUN	,
+and	VER:simp	<unknown>
+</NP>
+<NP>
+Urban	NAM	<unknown>
+Affairs	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+U.	ABR	<unknown>
+S.	ABR	<unknown>
+Senate	NAM	<unknown>
+”	PUN:cit	”
+,	PUN	,
+</NP>
+<NP>
+16	NUM	@card@
+février	NOM	février
+2005	NUM	@card@
+,	PUN	,
+</NP>
+<NP>
+&lt	NOM	<unknown>
+;	PUN	;
+&gt	VER:pper	<unknown>
+;	PUN	;
+,	PUN	,
+</NP>
+<VPpart>
+consulté	VER:pper	consulter
+</VPpart>
+<PP>
+en	PRP	en
+<NP>
+octobre	NOM	octobre
+2008	NUM	@card@
+</NP>
+</PP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Gautherin	NAM	<unknown>
+,	PUN	,
+J.	NAM	<unknown>
+(	PUN	(
+</NP>
+<NP>
+1991	NUM	@card@
+)	PUN	)
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+La	DET:ART	le
+fondation	NOM	fondation
+</NP>
+<VN>
+d’une	VER:subp	<unknown>
+</VN>
+<NP>
+discipline	NOM	discipline
+</NP>
+<AP>
+universitaire	ADJ	universitaire
+:	PUN	:
+</AP>
+<NP>
+la	DET:ART	le
+science	NOM	science
+</NP>
+<PP>
+de	PRP	de
+<NP>
+l’éducation	NOM	<unknown>
+,	PUN	,
+</NP>
+</PP>
+<NP>
+1880-1914	NUM	@card@
+(	PUN	(
+</NP>
+<NP>
+essai	NOM	essai
+d’histoire	ADJ	<unknown>
+sociale	ADJ	social
+)	PUN	)
+,	PUN	,
+</NP>
+<NP>
+thèse	NOM	thèse
+</NP>
+<PP>
+de	PRP	de
+<NP>
+doctorat	NOM	doctorat
+,	PUN	,
+</NP>
+</PP>
+<NP>
+Paris	NAM	Paris
+:	PUN	:
+</NP>
+<NP>
+université	NOM	université
+René-Descartes	NAM	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Warner	NAM	<unknown>
+G.	NAM	<unknown>
+(	PUN	(
+</NP>
+<NP>
+1997	NUM	@card@
+)	PUN	)
+</NP>
+.	SENT	.
+</s>
+<s>
+<VPinf>
+“	PUN:cit	“
+</VPinf>
+<NP>
+Participatory	NAM	<unknown>
+management	NOM	management
+,	PUN	,
+</NP>
+<NP>
+popular	NOM	<unknown>
+knowledge	ADJ	<unknown>
+and	VER:simp	<unknown>
+community	ADJ	<unknown>
+</NP>
+<AP>
+empowerment	NOM	<unknown>
+:	PUN	:
+</AP>
+<VPpart>
+the	VER:simp	<unknown>
+</VPpart>
+<NP>
+case	NOM	case
+of	VER:subi	<unknown>
+sea-urchin	NOM	<unknown>
+harvesting	NOM	<unknown>
+</NP>
+<AP>
+in	ADJ	in
+</AP>
+<NP>
+the	VER:pper	<unknown>
+Vieux	NAM	<unknown>
+Fort	NAM	Fort
+are	NOM	are
+of	VER:subi	<unknown>
+</NP>
+<NP>
+Saint	NAM	<unknown>
+Lucia	NAM	<unknown>
+”	PUN:cit	”
+,	PUN	,
+</NP>
+<NP>
+Human	NAM	<unknown>
+Ecology	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+vol	ABR	volume
+25	NUM	@card@
+,	PUN	,
+</NP>
+<NP>
+n°	ABR	numéro
+1	NUM	@card@
+:	PUN	:
+</NP>
+<NP>
+29-46	NUM	@card@
+Pardo	NAM	<unknown>
+Bazán	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+Emilia	NOM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+La	DET:ART	le
+mujer	NOM	<unknown>
+</NP>
+<VN>
+española	VER:simp	<unknown>
+y	PRO:PER	y
+</VN>
+<NP>
+otros	ADJ	<unknown>
+escritos	NOM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+Madrid	NAM	Madrid
+,	PUN	,
+</NP>
+<NP>
+1889	NUM	@card@
+,	PUN	,
+(	PUN	(
+</NP>
+<NP>
+ed	NOM	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<PP>
+de	PRP	de
+<NP>
+Guadalupr	NAM	<unknown>
+Gómez-Ferrer	NAM	<unknown>
+,	PUN	,
+Madrid	NAM	Madrid
+,	PUN	,
+</NP>
+</PP>
+<NP>
+1999	NUM	@card@
+)	PUN	)
+</NP>
+<NP>
+Llinares	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+Sylviane	NAM	<unknown>
+«	PUN:cit	«
+</NP>
+<NP>
+<NP>
+Maîtres	NOM	maître
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+ouvriers	NOM	ouvrier
+</NP>
+</NP>
+<PP>
+des	PRP:det	du
+<NP>
+arsenaux	NOM	arsenal
+</NP>
+</PP>
+<PP>
+au	PRP:det	au
+<NP>
+XVIII	NUM	XVIII
+e	NOM	<unknown>
+siècle	NOM	siècle
+»	PUN:cit	»
+,	PUN	,
+</NP>
+</PP>
+<NP>
+pp	NOM	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+10-15	NUM	@card@
+,	PUN	,
+</NP>
+<NP>
+in	ADJ	in
+Actes	NOM	acte
+</NP>
+<PP>
+de	PRP	de
+<NP>
+la	DET:ART	le
+Table	ADJ	<unknown>
+Ronde	NOM	ronde
+</NP>
+</PP>
+<NP>
+Les	DET:ART	le
+usages	NOM	usage
+</NP>
+<PP>
+des	PRP:det	du
+<NP>
+littoraux	NOM	littoral
+XV	NUM	XV
+e	NOM	<unknown>
+-	PUN	-
+</NP>
+</PP>
+<NP>
+XX	NUM	XX
+e	ADJ	<unknown>
+siècles	NOM	siècle
+,	PUN	,
+</NP>
+<NP>
+<NP>
+Ancrage	NOM	ancrage
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+mobilité	NOM	mobilité
+sociale	ADJ	social
+,	PUN	,
+Lorient	NAM	Lorient
+:	PUN	:
+</NP>
+</NP>
+<NP>
+C.	ABR	<unknown>
+L.	ABR	<unknown>
+</NP>
+<VN>
+S	VER:futu	<unknown>
+</VN>
+.	SENT	.
+</s>
+<s>
+<NP>
+P	NAM	<unknown>
+-	PUN	-
+</NP>
+<NP>
+UBS/Rennes	ABR	<unknown>
+II	NUM	II
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+2000	NUM	@card@
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+«	PUN:cit	«
+</NP>
+<NP>
+<NP>
+Travail	NAM	<unknown>
+pouvoirs	NOM	pouvoir
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+mentalités	NOM	mentalité
+à	PRP	à
+Brest	NAM	Brest
+</NP>
+</NP>
+<PP>
+au	PRP:det	au
+<NP>
+XVIII	NUM	XVIII
+e	NOM	<unknown>
+siècle	NOM	siècle
+»	PUN:cit	»
+,	PUN	,
+</NP>
+</PP>
+<NP>
+pp	NOM	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+665-680	NUM	@card@
+,	PUN	,
+</NP>
+<NP>
+in	ADJ	in
+Pouvoirs	NOM	pouvoir
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<AP>
+Littoraux	ADJ	littoral
+</AP>
+<PP>
+du	PRP:det	du
+<NP>
+XV	NUM	XV
+e	NOM	<unknown>
+</NP>
+</PP>
+<PP>
+au	PRP:det	au
+<NP>
+XX	NUM	XX
+e	NOM	<unknown>
+siècles	NOM	siècle
+,	PUN	,
+</NP>
+</PP>
+<NP>
+Rennes	NAM	Rennes
+:	PUN	:
+</NP>
+<NP>
+Presses	NOM	presse
+Universitaires	NAM	<unknown>
+</NP>
+<PP>
+de	PRP	de
+<NP>
+Rennes	NAM	Rennes
+</NP>
+</PP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Del	NAM	<unknown>
+Grande	NAM	Grande
+G.	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+2007	NUM	@card@
+,	PUN	,
+</NP>
+<NP>
+Mamadou	NAM	<unknown>
+va	VER:pres	aller
+</NP>
+<VN>
+a	VER:pres	avoir
+</VN>
+<NP>
+morire	NOM	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+La	DET:ART	le
+strage	NOM	<unknown>
+dei	NOM	<unknown>
+clandestini	NOM	<unknown>
+nel	NOM	<unknown>
+Mediterraneo	NAM	<unknown>
+,	PUN	,
+Torino	NAM	<unknown>
+,	PUN	,
+Infinito	NAM	<unknown>
+</NP>
+Edizioni	NAM	<unknown>
+.	SENT	.
+</s>
+<s>
+<NP>
+Fluzin	NAM	<unknown>
+,	PUN	,
+P.	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+2002	NUM	@card@
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+La	DET:ART	le
+chaîne	NOM	chaîne
+</NP>
+<AP>
+opératoire	ADJ	opératoire
+</AP>
+<PP>
+en	PRP	en
+<NP>
+sidérurgie	NOM	sidérurgie
+:	PUN	:
+</NP>
+</PP>
+<NP>
+matériaux	NOM	matériau|matériaux
+</NP>
+<AP>
+archéologiques	ADJ	archéologique
+</AP>
+<COORD>
+et	KON	et
+</COORD>
+<VPpart>
+procédés	VER:pper	procéder
+</VPpart>
+.	SENT	.
+</s>
+<s>
+<NP>
+Apports	NOM	apport
+</NP>
+<PP>
+des	PRP:det	du
+<NP>
+études	NOM	étude
+</NP>
+</PP>
+<AP>
+métallographiques	ADJ	métallographique
+,	PUN	,
+</AP>
+<NP>
+in	ADJ	in
+Bocoum	NAM	<unknown>
+,	PUN	,
+H.	NAM	<unknown>
+,	PUN	,
+Aux	NAM	<unknown>
+origines	NOM	origine
+</NP>
+<PP>
+de	PRP	de
+<NP>
+la	DET:ART	le
+métallurgie	NOM	métallurgie
+</NP>
+</PP>
+<PP>
+du	PRP:det	du
+<NP>
+fer	NOM	fer
+en	PRP	en
+Afrique	NAM	Afrique
+</NP>
+</PP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Une	DET:ART	un
+ancienneté	NOM	ancienneté
+</NP>
+<VPpart>
+méconnue	VER:pper	méconnaître
+</VPpart>
+.	SENT	.
+</s>
+<s>
+<NP>
+Afrique	NAM	Afrique
+</NP>
+<PP>
+de	PRP	de
+<NP>
+<NP>
+l’Ouest	NAM	<unknown>
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+Afrique	NAM	Afrique
+centrale	ADJ	central
+,	PUN	,
+</NP>
+</NP>
+</PP>
+<NP>
+UNESCO	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+2002	NUM	@card@
+,	PUN	,
+p.	ABR	<unknown>
+59-91	NUM	@card@
+</NP>
+.	SENT	.
+</s>
+<s>
+<AP>
+Maffesoli	ADJ	<unknown>
+</AP>
+<NP>
+M.	NOM	monsieur
+,	PUN	,
+</NP>
+<NP>
+1997	NUM	@card@
+,	PUN	,
+</NP>
+<NP>
+Du	NAM	<unknown>
+nomadisme	NOM	nomadisme
+,	PUN	,
+</NP>
+<NP>
+Vagabondages	NOM	vagabondage
+initiatiques	ADJ	initiatique
+,	PUN	,
+</NP>
+<NP>
+Paris	NAM	Paris
+,	PUN	,
+Livres	NAM	<unknown>
+poche	VER:pres	pocher
+,	PUN	,
+</NP>
+<NP>
+190	NUM	@card@
+p.	ABR	<unknown>
+Janicaud	NAM	<unknown>
+D.	ABR	<unknown>
+,	PUN	,
+</NP>
+<NP>
+(	PUN	(
+1991	NUM	@card@
+)	PUN	)
+</NP>
+.	SENT	.
+</s>
+<s>
+<VN>
+A	PRP	à
+nouveau	ADJ	nouveau
+</VN>
+<NP>
+la	DET:ART	le
+philosophie	NOM	philosophie
+,	PUN	,
+</NP>
+<NP>
+Paris	NAM	Paris
+,	PUN	,
+</NP>
+<NP>
+Ed	ABR	Ed
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Albin	NAM	<unknown>
+Michel	NAM	Michel
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Enste	NOM	<unknown>
+D.	ABR	<unknown>
+,	PUN	,
+</NP>
+<NP>
+Klös	NAM	<unknown>
+H.	NAM	<unknown>
+-P	ADJ	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+,	PUN	,
+</NP>
+<Sint>
+«	PUN:cit	«
+</Sint>
+<NP>
+Grenzenlose	NAM	<unknown>
+Wirtschaft	NAM	<unknown>
+–	PUN	–
+</NP>
+<NP>
+grenzenlose	NOM	<unknown>
+Freiheit	NAM	<unknown>
+</NP>
+?	SENT	?
+</s>
+<s>
+<VN>
+Ein	ADJ	<unknown>
+</VN>
+<NP>
+Plädoyer	NOM	<unknown>
+für	NOM	<unknown>
+unternehmerische	VER:pres	<unknown>
+</NP>
+<NP>
+Freiheit	NAM	<unknown>
+»	PUN:cit	»
+,	PUN	,
+</NP>
+<NP>
+AEU	NAM	<unknown>
+,	PUN	,
+Karlsruhe	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+2006	NUM	@card@
+Broderick	NAM	<unknown>
+D.	ABR	<unknown>
+(	PUN	(
+</NP>
+<NP>
+2001	NUM	@card@
+)	PUN	)
+,	PUN	,
+</NP>
+<NP>
+The	NAM	<unknown>
+Spike	NAM	<unknown>
+,	PUN	,
+New	NAM	New
+York	NAM	York
+,	PUN	,
+Forge	NAM	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+CANTAT	NOM	<unknown>
+O.	ABR	<unknown>
+(	PUN	(
+</NP>
+<NP>
+1995	NUM	@card@
+)	PUN	)
+-	PUN	-
+</NP>
+<NP>
+<NP>
+Variabilité	NOM	variabilité
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+variation	NOM	variation
+climatiques	ADJ	climatique
+en	PRP	en
+Normandie	NAM	Normandie
+</NP>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+L'	DET:ART	le
+évolution	NOM	évolution
+</NP>
+<AP>
+récente	ADJ	récent
+</AP>
+<PP>
+des	PRP:det	du
+<NP>
+températures	NOM	température
+</NP>
+</PP>
+<PP>
+à	PRP	à
+<NP>
+Caen-Carpiquet	NAM	<unknown>
+</NP>
+</PP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Sécheresse	NOM	sécheresse
+,	PUN	,
+</NP>
+<NP>
+vol	ABR	volume
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+6	NUM	@card@
+,	PUN	,
+</NP>
+<NP>
+n°	ABR	numéro
+3	NUM	@card@
+,	PUN	,
+</NP>
+<NP>
+p.	ABR	<unknown>
+</NP>
+273-279	NUM	@card@
+.	SENT	.
+</s>
+<s>
+<NP>
+Valterova	NAM	<unknown>
+(	PUN	(
+P.	NAM	<unknown>
+)	PUN	)
+,	PUN	,
+</NP>
+<NP>
+1998	NUM	@card@
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Palynology	NAM	<unknown>
+</NP>
+<VN>
+of	VER:futu	<unknown>
+</VN>
+<VPpart>
+the	VER:pper	<unknown>
+</VPpart>
+<NP>
+Kounov-type	NOM	<unknown>
+</NP>
+<AP>
+sapropelite	ADJ	<unknown>
+,	PUN	,
+</AP>
+<NP>
+in	ADJ	in
+Venclova	NAM	<unknown>
+(	PUN	(
+</NP>
+<VN>
+dir	VER:infi	<unknown>
+</VN>
+.	SENT	.
+</s>
+<s>
+<NP>
+)	PUN	)
+</NP>
+<NP>
+Mšecké	NAM	<unknown>
+Zehrovice	NAM	<unknown>
+in	ADJ	in
+Bohemia	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+Archaeological	ADJ	<unknown>
+background	NOM	background
+to	NOM	to
+</NP>
+<VN>
+a	VER:pres	avoir
+</VN>
+<VN>
+celtic	NOM	<unknown>
+</VN>
+<NP>
+hero	NOM	<unknown>
+3rd-2nd	VER:subi	<unknown>
+</NP>
+<NP>
+cent	NUM	cent
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+B.	ABR	<unknown>
+-C	ADJ	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+,	PUN	,
+</NP>
+<NP>
+Sceaux	NAM	<unknown>
+,	PUN	,
+Kronos	NAM	<unknown>
+édition	NOM	édition
+,	PUN	,
+</NP>
+<NP>
+coll	NOM	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+«	PUN:cit	«
+</NP>
+<NP>
+Chronothèque	NAM	<unknown>
+;	PUN	;
+</NP>
+<NP>
+2	NUM	@card@
+»	PUN:cit	»
+,	PUN	,
+</NP>
+<NP>
+p.	ABR	<unknown>
+311	NUM	@card@
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Watts	NOM	watt
+(	PUN	(
+</NP>
+<NP>
+<NP>
+S.	ABR	<unknown>
+)	PUN	)
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+Pollard	NAM	<unknown>
+(	PUN	(
+</NP>
+</NP>
+<NP>
+A.	ABR	<unknown>
+</NP>
+<NP>
+M.	NOM	monsieur
+)	PUN	)
+,	PUN	,
+</NP>
+<NP>
+1998	NUM	@card@
+</NP>
+.	SENT	.
+</s>
+<s>
+<AP>
+Identifying	NOM	<unknown>
+archaeological	ADJ	<unknown>
+jet	NOM	jet
+</AP>
+<VN>
+and	VER:subi	<unknown>
+</VN>
+<NP>
+jet-like	NOM	<unknown>
+</NP>
+<VN>
+artifacts	ADJ	<unknown>
+</VN>
+<NP>
+using	NOM	<unknown>
+FTIR	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+Résumé	NOM	résumé
+</NP>
+<PP>
+des	PRP:det	du
+<NP>
+communications	NOM	communication
+</NP>
+</PP>
+<PP>
+du	PRP:det	du
+<NP>
+colloque	NOM	colloque
+Infrared	NAM	<unknown>
+User’s	NAM	<unknown>
+Group	NAM	<unknown>
+(	PUN	(
+IRUG	NAM	<unknown>
+)	PUN	)
+</NP>
+</PP>
+<NP>
+septembre	NOM	septembre
+1995	NUM	@card@
+,	PUN	,
+</NP>
+<NP>
+p.	ABR	<unknown>
+</NP>
+37-52	NUM	@card@
+.	SENT	.
+</s>
+<s>
+<NP>
+SPD	NAM	<unknown>
+:	PUN	:
+</NP>
+<NP>
+Hamburger	NOM	hamburger
+Programm	NAM	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Das	NAM	<unknown>
+Grundsatzprogramm	NAM	<unknown>
+</NP>
+<NP>
+der	NOM	der
+SPD	NAM	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Beschlossen	NAM	<unknown>
+</NP>
+<VN>
+am	VER:futu	<unknown>
+</VN>
+<NP>
+28	NUM	@card@
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Oktober	NOM	<unknown>
+2007	NUM	@card@
+auf	NOM	<unknown>
+</NP>
+<NP>
+dem	NOM	<unknown>
+SPD-Parteitag	NAM	<unknown>
+in	ADJ	in
+Hamburg	NAM	<unknown>
+Althusser	NAM	<unknown>
+Louis	NAM	Louis
+,	PUN	,
+</NP>
+<NP>
+1996	NUM	@card@
+,	PUN	,
+</NP>
+<NP>
+Pour	NAM	<unknown>
+Marx	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+Paris	NAM	Paris
+,	PUN	,
+</NP>
+<NP>
+La	DET:ART	le
+Découverte	NAM	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+SERVAT	NAM	<unknown>
+É	NAM	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+,	PUN	,
+</NP>
+<NP>
+PATUREL	NAM	<unknown>
+J.	NAM	<unknown>
+E.	NAM	<unknown>
+,	PUN	,
+LUBÈS	NAM	<unknown>
+H.	NAM	<unknown>
+,	PUN	,
+KOUAMÉ	NAM	<unknown>
+B.	NAM	<unknown>
+,	PUN	,
+MASSON	NAM	<unknown>
+</NP>
+J.	NAM	<unknown>
+<NP>
+M.	NOM	monsieur
+,	PUN	,
+TRAVAGLIO	NAM	<unknown>
+</NP>
+<NP>
+M.	NOM	monsieur
+,	PUN	,
+OUÉDRAOGO	NAM	<unknown>
+</NP>
+<NP>
+<NP>
+M.	NOM	monsieur
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+MARIEU	NAM	<unknown>
+B.	NAM	<unknown>
+(	PUN	(
+</NP>
+</NP>
+<NP>
+1999	NUM	@card@
+)	PUN	)
+-	PUN	-
+</NP>
+<VN>
+De	VER:simp	<unknown>
+</VN>
+<AP>
+différents	ADJ	différent
+aspects	NOM	aspect
+</AP>
+<PP>
+de	PRP	de
+<NP>
+la	DET:ART	le
+variabilité	NOM	variabilité
+</NP>
+</PP>
+<PP>
+de	PRP	de
+<NP>
+la	DET:ART	le
+pluviométrie	NOM	pluviométrie
+</NP>
+</PP>
+<PP>
+en	PRP	en
+<NP>
+Afrique	NAM	Afrique
+</NP>
+</PP>
+<PP>
+de	PRP	de
+<NP>
+<NP>
+l'	DET:ART	le
+Ouest	NOM	Ouest
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+centrale	NOM	centrale
+non	ADV	non
+sahélienne	ADJ	sahélien
+</NP>
+</NP>
+</PP>
+.	SENT	.
+</s>
+<s>
+<VPpart>
+Revue	VER:pper	revoir
+</VPpart>
+<PP>
+des	PRP:det	du
+<NP>
+sciences	NOM	science
+</NP>
+</PP>
+<PP>
+de	PRP	de
+<NP>
+l'	DET:ART	le
+eau	NOM	eau
+,	PUN	,
+</NP>
+</PP>
+<NP>
+vol	ABR	volume
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+12	NUM	@card@
+,	PUN	,
+</NP>
+<NP>
+n°	ABR	numéro
+2	NUM	@card@
+,	PUN	,
+</NP>
+<NP>
+p.	ABR	<unknown>
+</NP>
+363-387	NUM	@card@
+.	SENT	.
+</s>
+<s>
+<NP>
+<NP>
+Arcelin	NAM	<unknown>
+,	PUN	,
+P.	NAM	<unknown>
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+Verdin	NAM	<unknown>
+,	PUN	,
+</NP>
+</NP>
+<NP>
+F.	ABR	<unknown>
+,	PUN	,
+</NP>
+<NP>
+2006	NUM	@card@
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+La	DET:ART	le
+région	NOM	région
+d’Aix-en-Provence	NOM	<unknown>
+</NP>
+<PP>
+à	PRP	à
+<NP>
+l’âge	NOM	<unknown>
+</NP>
+</PP>
+<PP>
+du	PRP:det	du
+<NP>
+Fer	NAM	<unknown>
+,	PUN	,
+</NP>
+</PP>
+<NP>
+in	ADJ	in
+Nocci	NAM	<unknown>
+,	PUN	,
+F.	NAM	<unknown>
+,	PUN	,
+Nin	NAM	<unknown>
+,	PUN	,
+N.	NAM	<unknown>
+(	PUN	(
+</NP>
+<VN>
+dir	VER:infi	<unknown>
+</VN>
+.	SENT	.
+</s>
+<s>
+<NP>
+)	PUN	)
+,	PUN	,
+</NP>
+<NP>
+Aix	NAM	Aix
+</NP>
+<PP>
+en	PRP	en
+<NP>
+Provence	NAM	Provence
+,	PUN	,
+Pays	NAM	<unknown>
+</NP>
+</PP>
+<VN>
+d’Aix	VER:simp	<unknown>
+,	PUN	,
+</VN>
+<NP>
+Val	NAM	<unknown>
+</NP>
+<PP>
+de	PRP	de
+<NP>
+Durance	NAM	<unknown>
+,	PUN	,
+Académie	NAM	Académie
+</NP>
+</PP>
+<PP>
+des	PRP:det	du
+<NP>
+<NP>
+inscriptions	NOM	inscription
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+Belles	NAM	<unknown>
+Lettres	NAM	<unknown>
+,	PUN	,
+</NP>
+</NP>
+</PP>
+<NP>
+p.	ABR	<unknown>
+66-92	NUM	@card@
+,	PUN	,
+(	PUN	(
+</NP>
+<NP>
+Carte	NOM	carte
+</NP>
+<AP>
+archéologique	ADJ	archéologique
+</AP>
+<PP>
+de	PRP	de
+<NP>
+la	DET:ART	le
+Gaule	NAM	Gaule
+,	PUN	,
+</NP>
+</PP>
+<NP>
+13/4	NUM	@card@
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+)	PUN	)
+</NP>
+<NP>
+Tavares	NAM	<unknown>
+João	NAM	<unknown>
+Fernando	NAM	<unknown>
+Cansado	NAM	<unknown>
+,	PUN	,
+Esteves	NAM	<unknown>
+Joaquim	NAM	<unknown>
+Moura	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+100	NUM	@card@
+Obras	NOM	<unknown>
+</NP>
+<PP>
+de	PRP	de
+<NP>
+Engenharia	NAM	<unknown>
+Civil	NAM	<unknown>
+</NP>
+</PP>
+<VN>
+no	VER:futu	<unknown>
+</VN>
+<NP>
+século	NOM	<unknown>
+XX	NUM	XX
+:	PUN	:
+</NP>
+<NP>
+Portugal	NAM	Portugal
+,	PUN	,
+Lisboa	NAM	Lisboa
+,	PUN	,
+Ordem	NAM	<unknown>
+dos	NOM	dos
+Engenheiros	NOM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+2000	NUM	@card@
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Fancello	NOM	<unknown>
+S.	ABR	<unknown>
+,	PUN	,
+</NP>
+<NP>
+2007	NUM	@card@
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+«	PUN:cit	«
+</NP>
+<NP>
+Guérison	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+<NP>
+délivrance	NOM	délivrance
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+sida	NOM	sida
+:	PUN	:
+</NP>
+</NP>
+<NP>
+<NP>
+les	DET:ART	le
+femmes	NOM	femme
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+la	DET:ART	le
+"	PUN:cit	"
+maladie	NOM	maladie
+</NP>
+</NP>
+<PP>
+de	PRP	de
+<NP>
+Dieu	NOM	Dieu
+"	PUN:cit	"
+</NP>
+</PP>
+<PP>
+dans	PRP	dans
+<NP>
+les	DET:ART	le
+Églises	NOM	église
+</NP>
+</PP>
+<AP>
+pentecôtistes	ADJ	pentecôtiste
+</AP>
+<AP>
+africaines	ADJ	africain
+»	PUN:cit	»
+,	PUN	,
+</AP>
+<NP>
+<NP>
+Sciences	NAM	<unknown>
+Sociales	NAM	<unknown>
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+Santé	NAM	<unknown>
+,	PUN	,
+</NP>
+</NP>
+<NP>
+25	NUM	@card@
+(	PUN	(
+4	NUM	@card@
+)	PUN	)
+:	PUN	:
+</NP>
+<NP>
+5-34	NUM	@card@
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Bauvais	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+S.	ABR	<unknown>
+2007	NUM	@card@
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Évolution	NOM	évolution
+</NP>
+<PP>
+de	PRP	de
+<NP>
+l’organisation	NOM	<unknown>
+</NP>
+</PP>
+<PP>
+des	PRP:det	du
+<NP>
+activités	NOM	activité
+de	PRP	de
+post-réduction	NOM	<unknown>
+</NP>
+</PP>
+<PP>
+dans	PRP	dans
+<PP>
+le	DET:ART	le
+<PP>
+nord	NOM	nord
+<PP>
+du	PRP:det	du
+<NP>
+bassin-parisien	NOM	<unknown>
+</NP>
+</PP>
+</PP>
+</PP>
+</PP>
+<PP>
+au	PRP:det	au
+<NP>
+second	NUM	second
+âge	NOM	âge
+</NP>
+</PP>
+<PP>
+du	PRP:det	du
+<NP>
+Fer	NAM	<unknown>
+:	PUN	:
+</NP>
+</PP>
+<NP>
+études	NOM	étude
+</NP>
+<AP>
+multidisciplinaires	ADJ	multidisciplinaire
+</AP>
+<PP>
+de	PRP	de
+<NP>
+la	DET:ART	le
+chaîne	NOM	chaîne
+</NP>
+</PP>
+<AP>
+opératoire	ADJ	opératoire
+</AP>
+<PP>
+en	PRP	en
+<NP>
+métallurgie	NOM	métallurgie
+</NP>
+</PP>
+<PP>
+du	PRP:det	du
+<NP>
+fer	NOM	fer
+,	PUN	,
+</NP>
+</PP>
+<NP>
+Thèse	NOM	thèse
+</NP>
+<PP>
+de	PRP	de
+<NP>
+doctorat	NOM	doctorat
+,	PUN	,
+</NP>
+</PP>
+<PP>
+sous	PRP	sous
+<PP>
+la	DET:ART	le
+<PP>
+direction	NOM	direction
+<PP>
+de	PRP	de
+<NP>
+Philippe	NAM	Philippe
+Fluzin	NAM	<unknown>
+,	PUN	,
+Université	NAM	<unknown>
+</NP>
+</PP>
+</PP>
+</PP>
+</PP>
+<PP>
+de	PRP	de
+<NP>
+Technologie	NAM	<unknown>
+Belfort-Montbéliard	NAM	<unknown>
+,	PUN	,
+</NP>
+</PP>
+<NP>
+2007	NUM	@card@
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+MAHÉ	NAM	<unknown>
+G.	NAM	<unknown>
+,	PUN	,
+OLIVRY	NAM	<unknown>
+J.	NAM	<unknown>
+C.	NAM	<unknown>
+,	PUN	,
+DESSOUASSI	NAM	<unknown>
+R.	NAM	<unknown>
+,	PUN	,
+ORANGE	NAM	Orange
+D.	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+<NP>
+BAMBA	NAM	<unknown>
+F.	NAM	<unknown>
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+SERVAT	NAM	<unknown>
+É	NAM	<unknown>
+</NP>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+(	PUN	(
+</NP>
+<NP>
+2000	NUM	@card@
+)	PUN	)
+-	PUN	-
+</NP>
+<NP>
+Relations	NOM	relation
+eaux	NOM	eau
+</NP>
+<PP>
+de	PRP	de
+<NP>
+surface-eaux	NOM	<unknown>
+</NP>
+</PP>
+<AP>
+souterraines	ADJ	souterrain
+</AP>
+<PP>
+d'	PRP	de
+<NP>
+une	DET:ART	un
+rivière	NOM	rivière
+</NP>
+</PP>
+<AP>
+tropicale	ADJ	tropical
+</AP>
+<PP>
+au	PRP:det	au
+<NP>
+Mali	NAM	<unknown>
+</NP>
+</PP>
+.	SENT	.
+</s>
+<s>
+<NP>
+C.	ABR	<unknown>
+R.	ABR	<unknown>
+Acad	NAM	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<AP>
+Sci	VER:pper	<unknown>
+</AP>
+.	SENT	.
+</s>
+<s>
+<NP>
+,	PUN	,
+</NP>
+<NP>
+Paris	NAM	Paris
+,	PUN	,
+Sciences	NAM	<unknown>
+</NP>
+<PP>
+de	PRP	de
+<NP>
+la	DET:ART	le
+Terre	NAM	<unknown>
+</NP>
+</PP>
+<COORD>
+et	KON	et
+</COORD>
+<PP>
+des	PRP:det	du
+<NP>
+Planètes	NAM	<unknown>
+,	PUN	,
+</NP>
+</PP>
+<NP>
+vol	NOM	vol
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+330	NUM	@card@
+,	PUN	,
+</NP>
+<NP>
+p.	ABR	<unknown>
+689-692	NUM	@card@
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+—	PUN	—
+</NP>
+<NP>
+2002	NUM	@card@
+,	PUN	,
+</NP>
+<NP>
+La	DET:ART	le
+mondialisation	NOM	mondialisation
+</NP>
+<PP>
+par	PRP	par
+<NP>
+le	DET:ART	le
+bas	NOM	bas
+,	PUN	,
+</NP>
+</PP>
+<NP>
+Paris	NAM	Paris
+,	PUN	,
+Balland	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+168	NUM	@card@
+p.	ABR	<unknown>
+Hashmi	NAM	<unknown>
+,	PUN	,
+Nilofer	NAM	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<COORD>
+“	PUN:cit	“
+</COORD>
+<PP>
+‘	PUN:cit	‘
+<NP>
+Hills	NAM	<unknown>
+Like	NAM	<unknown>
+White	NAM	<unknown>
+Elephants	NAM	<unknown>
+’	PUN:cit	’
+:	PUN	:
+</NP>
+</PP>
+<NP>
+The	NAM	<unknown>
+Jilting	NAM	<unknown>
+</NP>
+<VN>
+of	VER:futu	<unknown>
+</VN>
+<NP>
+Jig	NAM	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+”	PUN:cit	”
+</NP>
+<NP>
+The	NAM	<unknown>
+Hemingway	NAM	<unknown>
+Review	NAM	<unknown>
+23	NUM	@card@
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+1	NUM	@card@
+(	PUN	(
+</NP>
+<NP>
+Fall	ABR	<unknown>
+2003	NUM	@card@
+)	PUN	)
+:	PUN	:
+</NP>
+<NP>
+72-83	NUM	@card@
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Nandrin	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+J.	ABR	<unknown>
+-P	NOM	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+,	PUN	,
+</NP>
+<NP>
+La	DET:ART	le
+justice	NOM	justice
+de	PRP	de
+paix	NOM	paix
+</NP>
+<PP>
+à	PRP	à
+<NP>
+l’aube	NOM	<unknown>
+</NP>
+</PP>
+<PP>
+de	PRP	de
+<NP>
+l’indépendance	NOM	<unknown>
+</NP>
+</PP>
+<PP>
+de	PRP	de
+<NP>
+la	DET:ART	le
+Belgique	NAM	Belgique
+(	PUN	(
+</NP>
+</PP>
+<NP>
+1832-1848	NUM	@card@
+)	PUN	)
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+La	DET:ART	le
+professionnalisation	NOM	professionnalisation
+</NP>
+<VN>
+d’une	VER:subp	<unknown>
+</VN>
+<NP>
+fonction	NOM	fonction
+judiciaire	ADJ	judiciaire
+,	PUN	,
+</NP>
+<NP>
+Bruxelles	NAM	Bruxelles
+,	PUN	,
+</NP>
+<NP>
+1998	NUM	@card@
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Legallois	NOM	<unknown>
+D.	ABR	<unknown>
+(	PUN	(
+</NP>
+<NP>
+2006	NUM	@card@
+)	PUN	)
+</NP>
+.	SENT	.
+</s>
+<s>
+<VPinf>
+«	PUN:cit	«
+</VPinf>
+<NP>
+<NP>
+L’hypertextualité	NAM	<unknown>
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+virtualité	NOM	virtualité
+</NP>
+</NP>
+<COORD>
+comme	KON	comme
+</COORD>
+<NP>
+modes	NOM	mode
+</NP>
+<PP>
+de	PRP	de
+<NP>
+la	DET:ART	le
+construction	NOM	construction
+</NP>
+</PP>
+<PP>
+des	PRP:det	du
+<NP>
+discours	NOM	discours
+</NP>
+</PP>
+<COORD>
+et	KON	et
+</COORD>
+<PP>
+des	PRP:det	du
+<NP>
+connaissances	NOM	connaissance
+»	PUN:cit	»
+,	PUN	,
+</NP>
+</PP>
+<NP>
+Pratiques	NOM	pratique
+129-130	NUM	@card@
+:	PUN	:
+</NP>
+<NP>
+139-156	NUM	@card@
+</NP>
+.	SENT	.
+</s>
+<s>
+<PP>
+*	NOM	<unknown>
+<PP>
+“	PUN:cit	“
+</PP>
+<NP>
+Hombres	NAM	<unknown>
+</NP>
+</PP>
+<VN>
+y	PRO:PER	y
+mujeres	VER:simp	<unknown>
+</VN>
+<PP>
+en	PRP	en
+<NP>
+el	ADJ	<unknown>
+discurso	NOM	<unknown>
+</NP>
+</PP>
+<PP>
+de	PRP	de
+<NP>
+los	NOM	los
+</NP>
+</PP>
+<NP>
+moralistas	VER:simp	<unknown>
+”	PUN:cit	”
+,	PUN	,
+</NP>
+<PP>
+en	PRP	en
+<NP>
+Isabel	NOM	<unknown>
+</NP>
+</PP>
+<VN>
+Morant	VER:ppre	<unknown>
+</VN>
+<VN>
+dir	VER:infi	<unknown>
+,	PUN	,
+</VN>
+<NP>
+Historia	NAM	<unknown>
+de	PRP	de
+las	ADJ	las
+mujeres	NOM	<unknown>
+</NP>
+<PP>
+en	PRP	en
+<NP>
+España	NAM	<unknown>
+</NP>
+</PP>
+<PP>
+y	PRO:PER	y
+<NP>
+América	NAM	<unknown>
+Latina	NAM	<unknown>
+,	PUN	,
+Madrid	NAM	Madrid
+2004	NUM	@card@
+,	PUN	,
+</NP>
+</PP>
+<NP>
+vol	NOM	vol
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+II	NUM	II
+,	PUN	,
+</NP>
+<NP>
+pp	NOM	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+25-62	NUM	@card@
+Poe	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+E.	ABR	<unknown>
+,	PUN	,
+«	PUN:cit	«
+</NP>
+<NP>
+Révélation	NOM	révélation
+</NP>
+<AP>
+magnétique	ADJ	magnétique
+»	PUN:cit	»
+,	PUN	,
+</AP>
+<NP>
+tr	NOM	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+fr	NOM	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+C.	ABR	<unknown>
+Baudelaire	NAM	Baudelaire
+,	PUN	,
+</NP>
+<NP>
+in	ADJ	in
+Contes	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+essais	NOM	essai
+,	PUN	,
+</NP>
+<NP>
+poèmes	NOM	poème
+,	PUN	,
+</NP>
+<NP>
+Paris	NAM	Paris
+,	PUN	,
+</NP>
+<NP>
+Laffont	NAM	<unknown>
+«	PUN:cit	«
+</NP>
+<AP>
+Bouquins	NOM	bouquin
+»	PUN:cit	»
+,	PUN	,
+</AP>
+<VPpart>
+pp	NOM	<unknown>
+</VPpart>
+.	SENT	.
+</s>
+<s>
+764-772	NUM	@card@
+.	SENT	.
+</s>
+<s>
+<NP>
+Dubois	NAM	<unknown>
+V.	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+1999	NUM	@card@
+,	PUN	,
+</NP>
+<NP>
+La	DET:ART	le
+vie	NOM	vie
+</NP>
+<PP>
+au	PRP:det	au
+<NP>
+guichet	NOM	guichet
+</NP>
+</PP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Relation	NOM	relation
+</NP>
+<AP>
+administrative	ADJ	administratif
+</AP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+traitement	NOM	traitement
+</NP>
+<PP>
+de	PRP	de
+<NP>
+la	DET:ART	le
+misère	NOM	misère
+,	PUN	,
+</NP>
+</PP>
+<NP>
+Paris	NAM	Paris
+,	PUN	,
+Economica	NAM	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Packer	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+J.	NAM	<unknown>
+Beyond	NAM	<unknown>
+Learning	NAM	<unknown>
+:	PUN	:
+Exploring	NAM	<unknown>
+Visitor’s	NAM	<unknown>
+</NP>
+<AP>
+Perceptions	NAM	<unknown>
+</AP>
+<AdP>
+of	VER:futu	<unknown>
+</AdP>
+<NP>
+the	VER:pper	<unknown>
+Value	NAM	<unknown>
+</NP>
+<VN>
+and	VER:futu	<unknown>
+</VN>
+<NP>
+Benefits	NAM	<unknown>
+</NP>
+<VN>
+of	VER:futu	<unknown>
+</VN>
+<NP>
+Museums	NAM	<unknown>
+Experiences	NAM	<unknown>
+,	PUN	,
+Curator	NAM	<unknown>
+,	PUN	,
+</NP>
+<NP>
+volume	NOM	volume
+51	NUM	@card@
+,	PUN	,
+</NP>
+<NP>
+n°	ABR	numéro
+1	NUM	@card@
+,	PUN	,
+</NP>
+<NP>
+janvier	NOM	janvier
+2008	NUM	@card@
+,	PUN	,
+</NP>
+<NP>
+pp	NOM	<unknown>
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+33-54	NUM	@card@
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Dépôt	NOM	dépôt
+,	PUN	,
+</NP>
+<PP>
+par	PRP	par
+<NP>
+M.	NOM	monsieur
+Boivin-Champeaux	NAM	<unknown>
+,	PUN	,
+</NP>
+</PP>
+<PP>
+d'	PRP	de
+<NP>
+un	DET:ART	un
+rapport	NOM	rapport
+,	PUN	,
+</NP>
+</PP>
+<PP>
+au	PRP:det	au
+<PP>
+nom	NOM	nom
+<PP>
+de	PRP	de
+<NP>
+la	DET:ART	le
+commission	NOM	commission
+de	PRP	de
+législation	NOM	législation
+,	PUN	,
+</NP>
+</PP>
+</PP>
+</PP>
+<PP>
+sur	PRP	sur
+<NP>
+la	DET:ART	le
+proposition	NOM	proposition
+de	PRP	de
+loi	NOM	loi
+</NP>
+</PP>
+<VPpart>
+adoptée	VER:pper	adopter
+</VPpart>
+<PP>
+par	PRP	par
+<NP>
+la	DET:ART	le
+Chambre	NAM	<unknown>
+des	PRP:det	du
+députés	NOM	député
+,	PUN	,
+</NP>
+</PP>
+<VN>
+portant	VER:ppre	porter
+</VN>
+<NP>
+modification	NOM	modification
+</NP>
+<PP>
+des	PRP:det	du
+<NP>
+articles	NOM	article
+</NP>
+</PP>
+<NP>
+<NP>
+443	NUM	@card@
+,	PUN	,
+444	NUM	@card@
+</NP>
+<COORD>
+et	KON	et
+</COORD>
+<NP>
+446	NUM	@card@
+</NP>
+</NP>
+<PP>
+du	PRP:det	du
+<NP>
+code	NOM	code
+d'	PRP	de
+instruction	NOM	instruction
+</NP>
+</PP>
+<AP>
+criminelle	ADJ	criminel
+</AP>
+<PP>
+sur	PRP	sur
+<NP>
+le	DET:ART	le
+recours	NOM	recours
+</NP>
+</PP>
+<PP>
+en	PRP	en
+<NP>
+révision	NOM	révision
+</NP>
+</PP>
+.	SENT	.
+</s>
+<s>
+<NP>
+N°	ABR	numéro
+484	NUM	@card@
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Journal	NOM	journal
+Officiel	NAM	<unknown>
+</NP>
+<PP>
+de	PRP	de
+<NP>
+la	DET:ART	le
+République	NOM	république
+</NP>
+</PP>
+<AP>
+française	ADJ	français
+</AP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Débats	NOM	débat
+parlementaires	ADJ	parlementaire
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Sénat	NOM	sénat
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Session	NOM	session
+</NP>
+<AP>
+ordinaire	ADJ	ordinaire
+</AP>
+<PP>
+de	PRP	de
+<NP>
+1935	NUM	@card@
+</NP>
+</PP>
+.	SENT	.
+</s>
+<s>
+<AP>
+Séance	NOM	séance
+</AP>
+<PP>
+du	PRP:det	du
+<NP>
+jeudi	NOM	jeudi
+20	NUM	@card@
+juin	NOM	juin
+1935	NUM	@card@
+,	PUN	,
+</NP>
+</PP>
+<NP>
+Paris	NAM	Paris
+,	PUN	,
+</NP>
+<NP>
+Imprimerie	NOM	imprimerie
+</NP>
+<PP>
+des	PRP:det	du
+<NP>
+Journaux	NAM	<unknown>
+</NP>
+</PP>
+<AP>
+officiels	ADJ	officiel
+,	PUN	,
+</AP>
+<NP>
+n°	ABR	numéro
+60	NUM	@card@
+,	PUN	,
+1935	NUM	@card@
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Conche	NOM	conche
+</NP>
+<NP>
+M.	NOM	monsieur
+,	PUN	,
+(	PUN	(
+</NP>
+<NP>
+2003	NUM	@card@
+)	PUN	)
+</NP>
+.	SENT	.
+</s>
+<s>
+<NP>
+Quelle	PRO:REL	quel
+</NP>
+<NP>
+philosophie	NOM	philosophie
+</NP>
+<PP>
+pour	KON	pour
+<PP>
+demain	ADV	demain
+<NP>
+,	PUN	,
+</NP>
+<NP>
+Paris	NAM	Paris
+,	PUN	,
+PUF	NAM	<unknown>
+</NP>
+</PP>
+</PP>
+</s>

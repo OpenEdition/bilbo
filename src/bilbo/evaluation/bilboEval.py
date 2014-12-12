@@ -31,7 +31,8 @@ class bilboEval():
 			(annotateDir, testDir, trainDir, modelDir, resultDir) = self.partitions.getDirTestNames(dirPartition)
 			
 			labeledContent = self._getFile(resultDir, 'testEstCRF_Wapiti.txt')
-			desiredContent = self._getFile(trainDir, 'evaldata_CRF_Wapiti.txt') # tmpFiles from training of testDir are saved in trainDir !
+			desiredContent = self._getFile(trainDir, 'testdata_CRF_TreeTagger_WapitiEval.txt')
+			#desiredContent = self._getFile(trainDir, 'evaldata_CRF_Wapiti.txt') # tmpFiles from training of testDir are saved in trainDir !
 
 			# harmonize the two lists, they are not tokenized the same way
 			desiredContentHarmonized, labeledContentHarmonized = prepareEval.prepareEval(desiredContent, labeledContent)

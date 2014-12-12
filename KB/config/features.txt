@@ -9,16 +9,6 @@ nonimpcap
 firstcap
 weblink
 italic
-posseditor
-posspage
-possmonth
-punc
-point
-comma
-leadingquotes
-endingquotes
-link
-pairedbraces
 # nonLabels
 hi 0
 abbr 1
@@ -35,8 +25,8 @@ time 0
 num 0
 # bookindicator
 in
-inÊ
+in
 dans
-dansÊ
+dans
 en
-enÊ
+en

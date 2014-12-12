@@ -24,6 +24,9 @@ class bibloTrain():
 		self.bilboOptions.T = True
 		self.bilboOptions.L = False
 		self.bilboOptions.t = 'bibl'
+		self.bilboOptions.a = True
+		self.bilboOptions.p = True
+		#self.bilboOptions.u = True
 		#self.bilboOptions.k = 'all'
 		#print self.bilboOptions
 		self.partitions = Partition(dirCorpus, testPercentage, numberOfPartition, prefix)

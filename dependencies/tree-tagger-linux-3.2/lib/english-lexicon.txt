@@ -1,0 +1,2 @@
+dummying	NN dummying	VVG dummy
+can	MD can	VB can	VBP can	NN can

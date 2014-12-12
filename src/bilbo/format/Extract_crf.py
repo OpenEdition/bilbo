@@ -127,11 +127,11 @@ class Extract_crf(Extract):
 			nonbiblck = 1
 			
 		if tr != -2 :
-			#pass
-			self.nameObj.searchName(listRef, tr)
-			self.placeObj.searchPlace(listRef, tr)
-			self.cityObj.searchProper(listRef, tr)
-			self.journalObj.searchProper(listRef, tr)
+			pass
+			#self.nameObj.searchName(listRef, tr)
+			#self.placeObj.searchPlace(listRef, tr)
+			#self.cityObj.searchProper(listRef, tr)
+			#self.journalObj.searchProper(listRef, tr)
 		
 		if extOption == 1 or extOption == 2 :
 			if tr != -2 :

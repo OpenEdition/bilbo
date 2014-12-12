@@ -111,13 +111,14 @@ class TokenAccuracyEval():
 				result_key = float(acc[key])/float(cnt[key])*100
 				tab_precision.append(result_key)
 				evaluation += "{: <15s} {: >3d} {: >3d} {: >10f}".format(key, acc[key], cnt[key], result_key) + "\n"
+			'''
 			if key == 'title':
 				tab_mainElmt_precision.append(float(acc[key])/float(cnt[key])*100)
 			if key == 'surname':
 				tab_mainElmt_precision.append(float(acc[key])/float(cnt[key])*100)
 			if key == 'forename':
 				tab_mainElmt_precision.append(float(acc[key])/float(cnt[key])*100)
-			
+			'''
 		
 		#print '\n***** Precision *****'
 		#for k in acc.keys() :
@@ -131,13 +132,14 @@ class TokenAccuracyEval():
 				evaluation += "{: <15s} {: >3d} {: >3d} {: >10f}".format(key, acc[key], value, result_key) + "\n"
 			else :
 				evaluation += "{: <15s} {: >3d} {: >3d} {: >10f}".format(key, 0, cnt_d[key], 0.0) + "\n"
+			'''
 			if key == 'title':
 				tab_mainElmt_recall.append(float(acc[key])/float(value)*100)
 			if key == 'surname':
 				tab_mainElmt_recall.append(float(acc[key])/float(value)*100)
 			if key == 'forename':
 				tab_mainElmt_recall.append(float(acc[key])/float(value)*100)
-			
+			'''
 		evaluation += "\n"
 		
 		#print '\n***** Recall *****'
@@ -164,7 +166,7 @@ class TokenAccuracyEval():
 		returnLabels.append('Macro F-mesure all');
 		returnValues.append(macro_fmesure)
 		evaluation += '(macro F-mesure all elements)    {:f}'.format(macro_fmesure) + "\n\n"
-		
+		'''
 		macro_precision_mainElmt = sum(tab_mainElmt_precision)/len(tab_mainElmt_precision)
 		returnLabels.append('Macro Precision of 3');
 		returnValues.append(macro_precision_mainElmt)
@@ -179,7 +181,7 @@ class TokenAccuracyEval():
 		returnLabels.append('Macro F-mesure of 3');
 		returnValues.append(macro_fmesure_mainElmt)
 		evaluation += '(macro F-mesure three elements)  {:f}'.format(macro_fmesure_mainElmt) + "\n\n"
-
+		'''
 		tes = 0
 		bes = 0
 		ts = 0

@@ -1,0 +1,19 @@
+
+# Set these paths appropriately
+
+BIN=./bin
+CMD=./cmd
+LIB=./lib
+
+OPTIONS="-token -lemma -sgml"
+
+TOKENIZER=${CMD}/utf8-tokenize.perl
+MWL=${CMD}/mwl-lookup-greek-utf8.perl
+TAGGER=${BIN}/tree-tagger
+PARFILE=${LIB}/greek-utf8.par
+
+$TOKENIZER $* |
+# recognition of MWLs
+$MWL |
+# tagging
+$TAGGER $OPTIONS $PARFILE
