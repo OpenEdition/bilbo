@@ -2,36 +2,64 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr" dir="ltr">
 	<head>
+		<meta charset="UTF-8">
 		<title>Bilbo - web</title>
 		<style type="text/css">
+			header {height:15%; width:auto; border-bottom:3px solid #CCC; padding: 7px; }
+			#logo, #marge {display: inline-block; width: 20%; vertical-align: middle}
+			h1 {display: inline-block; text-align: center; margin-left: 8%; }
+			h5 {margin-left: 10%}
+			section {width: auto; padding: 10px; }
+			#main {display: inline-block; max-width: 70%; text-align: left; margin-left: 2%;}
+			footer {font-style: italic; border-top: 3px solid #CCC;  padding: 7px;}
+			img {width: 75%; display: inline-block; }
 			listBibl {display:block; margin:1em; cursor:pointer; }
 			bibl {display:block; margin-bottom:0.5em; }
 			bibl *:hover {color:red; }
 			#type {font-weight:bold; }
 			.doi {color:blue; font-family:"DejaVu serif"; vertical-align:super; }
-			textarea {float:left; }
+			textarea {display: block; }
 			#explain {clear:both; }
 			pubplace {font-family:monospace; }
-			titre {font-weight:bold; }
-			author {font-style: italic; }
-		</style>
+			titre {color:green; }
+			publisher {color: purple;}
+			pubplace {color: blue;}
+			date {color: orange;}
+			author {color:red; }
+		</style>		
 	</head>
 	<body>
-		<form method="POST" id='bilbo'>
-<textarea name="texts" rows="25" cols="100" id="texts"></textarea>
-			<label for="doi">DOI</label> : <input id="doi" type="checkbox" value="oui" name="doi" /><br/>
-			<label for="corpus1">Corpus 1 (bibliography)</label> : <input id="corpus1" name="corpus" value="1" type="radio" checked="checked" /> /
-			<label for="corpus2">Corpus 2 (notes)</label> : <input id="corpus2" name="corpus" value="2" type="radio" /><br/><br/>
-			<input type="submit" value="Annotate" id="bls" /> - <input type="reset" value="Reset" />
-		</form>
-		<p><input type="submit" value="Test corpus 1" id="testC1" /> <input type="submit" value="Test corpus 2" id="testC2" /></p>
-		<div id="explain">Type: <span id='type'></span></div>
-		<div id="result"></div>
+		<header>
+			<div id="logo">			
+				<img src="./static/logo_openeditionlab.jpg" alt="OpenEdition Lab">
+				<h5> Open Edition Research & Developement</h5>
+			</div>
+			<h1>BILBO : Automatic reference labeling</h1>
+		</header>
+		<section>
+			<div id="marge"></div>
+			<div id="main">
+				<p>Cut and paste bibliographical reference</p>
+				<form method="POST" id='bilbo'>
+					<textarea name="texts" rows="25" cols="100" id="texts"></textarea>
+					<label for="doi">DOI</label> : <input id="doi" type="checkbox" value="oui" name="doi" /><br/>
+					<label for="corpus1">Corpus 1 (bibliography)</label> : <input id="corpus1" name="corpus" value="1" type="radio" checked="checked" /> /
+					<label for="corpus2">Corpus 2 (notes)</label> : <input id="corpus2" name="corpus" value="2" type="radio" /><br/><br/>
+					<input type="submit" value="Annotate" id="bls" /> - <input type="reset" value="Reset" />
+				</form>
+				<p><input type="submit" value="Test corpus 1" id="testC1" /> <input type="submit" value="Test corpus 2" id="testC2" /></p>
+				<div id="explain">Type: <span id='type'></span></div>
+				<div id="result"></div>
+			</div>
+		</section>
+		<footer>
+			OpenEdition Lab 
+		</footer>
 		<script src="http://code.jquery.com/jquery-1.10.1.js"></script>
 		<script>
 			jQuery(document).ready(function() {
 				jQuery('#bilbo').on('submit', function(e) {
-					e.preventDefault();
+					e.preventDefault()
 					data = jQuery(this).serialize();
 					jQuery.ajax({
 						type: "POST",

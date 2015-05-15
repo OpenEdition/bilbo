@@ -67,6 +67,11 @@ server {
 		uwsgi_cache off;
 		uwsgi_pass unix:/var/run/uwsgi/bilbo.sock;
 	}
+ 	location /static/ {
+        if (-f $request_filename) {
+           rewrite ^/static/(.*)$  /static/$1 break;
+        }
+    }
 }
 
 
