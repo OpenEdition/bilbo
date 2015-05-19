@@ -274,7 +274,6 @@ class File(object):
 						try : parseString(oriRef)
 						except Exception, err:
 							print err, self.nom, oriRef.encode('utf8')
-							#print err, self.nom, oriRef
 							pass
 					
 				#'''
