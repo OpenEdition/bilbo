@@ -26,7 +26,7 @@
 					<input type="submit" value="Annotate" id="bls" /> - <input type="reset" value="Reset" />
 				</form>
 				<p><input type="submit" value="Test corpus 1" id="testC1" /> <input type="submit" value="Test corpus 2" id="testC2" /></p>
-				<div id="explain">Type: <span id='type'></span></div>
+				<h4 id="displayresult"></h4>
 				<div id="result"></div>
 			</div>
 		</section>
@@ -48,6 +48,7 @@
 							res = data[0].replace(/<\?xml version="1.0" encoding="UTF-8"\?>/,'');
 							res = res.replace(/title/g,'titre');
 							res = res.replace(/<idno type="DOI">([^<]*)<\/idno>/g, ' <a class="doi" href="$$1">⤱</a> ');
+							jQuery('#displayresult').text(' Results : ');	
 							jQuery('#result').html(res);
 						},
 						error: function(err, s, e) {
@@ -57,15 +58,11 @@
 					});
 					return false;
 				});
-				var Type = jQuery('#type');
 				jQuery('#result').on('mouseover', function(e) {
-// 					console.log(e.target);
 					var name = e.target.localName;
-// 					console.log(name);
 					if (name !== 'bibl' && name !== 'listbibl') {
-						Type.html(name);
+						jQuery(e.target).attr('title', name);
 					} else {
-						Type.html('');
 					}
 				});
 				jQuery('#testC1').on('click', function(e) {
