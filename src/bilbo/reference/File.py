@@ -273,7 +273,7 @@ class File(object):
 					
 						try : parseString(oriRef)
 						except Exception, err:
-							print err, self.nom, oriRef
+							print err, self.nom, oriRef.encode('utf8')
 							pass
 					
 				#'''
