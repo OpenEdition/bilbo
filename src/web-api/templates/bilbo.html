@@ -19,7 +19,7 @@
 			<div id="main">
 				<p>Cut and paste bibliographical reference</p>
 				<form method="POST" id='bilbo'>
-					<textarea name="texts" rows="25" cols="100" maxlenght="5000" id="texts"></textarea>
+					<textarea name="texts" rows="25" cols="100" maxlength="5000" id="texts"></textarea>
 					<label for="doi">DOI</label> : <input id="doi" type="checkbox" value="oui" name="doi" /><br/>
 					<label for="corpus1">Corpus 1 (bibliography)</label> : <input id="corpus1" name="corpus" value="1" type="radio" checked="checked" /> /
 					<label for="corpus2">Corpus 2 (notes)</label> : <input id="corpus2" name="corpus" value="2" type="radio" /><br/><br/>
@@ -62,7 +62,6 @@
 					var name = e.target.localName;
 					if (name !== 'bibl' && name !== 'listbibl') {
 						jQuery(e.target).attr('title', name);
-					} else {
 					}
 				});
 				jQuery('#testC1').on('click', function(e) {
