@@ -5,6 +5,7 @@ Using python virtualenv and pip.
 Packages dependencies (on debian base distributions):
  - build-essential libxslt1-dev libxml2-dev ; In order to compile python dependencies.
  - uwsgi uwsgi-plugin-python uwsgi-plugin-http ; For the web API and nginx
+ - uwsgi-core instead uwsgi-plugin-http (for debian jessie release) 
  - libapache2-mod-uwsgi ; For the web API and apache
 
 Create a virtualenv
