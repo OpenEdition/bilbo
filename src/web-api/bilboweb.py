@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 """
 Usage: python bilboweb.py 8079 (or another port)
 
@@ -39,12 +40,12 @@ class annotate:
 			fichier.write(text)
 			fichier.close()
 			cpt += 1
-		
+
 		if (cpt>0):
 			annoterCorpus(corpus, i)
 		else:
 			return web.webapi.BadRequest()
-		
+
 		resultat = []
 		while cpt > 0:
 			cpt -= 1
@@ -52,13 +53,13 @@ class annotate:
 			fichier = codecs.open("tmp/out/fichier_" + str(cpt)+".xml", "r", "utf-8")
 			resultat.append(''.join( fichier.readlines()))
 			fichier.close()
-		
+
 		delTmp()
 
 		retour = json.dumps(resultat)
 		if ('callback' in i):
 			retour = i.callback + '(' + retour + ')'
-		
+
 		web.header('Content-Type','application/json;')
 		return retour
 
@@ -69,7 +70,7 @@ class bilboWeb:
 	def GET(self):
 		render = web.template.render('templates/')
 		return render.bilbo()
-	
+
 def annoterCorpus(corpus, request):
 	dirModel = os.path.abspath('../../model/corpus' + str(corpus) + "/revues/") + "/"
 	dir_in = os.path.abspath('tmp/in') + "/"
@@ -77,13 +78,13 @@ def annoterCorpus(corpus, request):
 
 	if corpus == 2: optStr = '-T -t note'
 	else: optStr = '-T -t bibl'
-	
+
 	if hasattr(request, 'doi'):
 		optStr += ' -d'
-	
+
 	parser = defaultOptions()
 	options, args = parser.parse_args(optStr.split())
-	
+
 	bilbo = Bilbo(dir_out, options, "crf_model_simple")
 	bilbo.annotate(dir_in, dirModel, corpus)
 	return
@@ -95,7 +96,7 @@ def mkTmp():
 	try: os.mkdir('tmp/out')
 	except OSError:	pass
 	except:	raise
-	
+
 def delTmp():
 	shutil.rmtree('tmp/in')
 	shutil.rmtree('tmp/out')
