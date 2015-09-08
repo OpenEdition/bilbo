@@ -14,6 +14,7 @@ import os
 import optparse
 import tempfile
 import codecs
+import shutil
 
 """
 Add paths
@@ -55,8 +56,10 @@ def labeling(line, modelname, options):
 	Label input sting. Called by simpleLabeling or detailLabeling
 	"""
 	#tmpDir = rootDir+'/simpletmp'
-	tmpDir = tempfile.mkdtemp(prefix='bilbo_labeling')
-	resDir = os.getcwd() #current working directory
+	#resDir = os.getcwd() #current working directory
+	#It's better to have secure tmp dirs for multiple threads
+	tmpDir = tempfile.mkdtemp(prefix='bilbo_labeling_tmp')
+	resDir = tempfile.mkdtemp(prefix='bilbo_labeling_res_dir')
 
 	dtype = options.t
 	if dtype == "bibl" : typeCorpus = 1
@@ -85,12 +88,12 @@ def labeling(line, modelname, options):
 	#tmp_str = ''.join(open(os.path.join(resDir, 'tmp.xml')).readlines())
 	tmp_str = unicode('')
 	with codecs.open(os.path.join(resDir, 'tmp.xml'), encoding='utf8') as tmp_str_fp:
-	#with open(os.path.join(resDir, 'tmp.xml')) as tmp_str_fp:
 		for line in tmp_str_fp:
 			tmp_str += unicode(line)
 
 	os.unlink(filename)
 	os.rmdir(tmpDir)
+	shutil.rmtree(resDir) #Because this one may not be empty when we delete it
 
 	return tmp_str
 
