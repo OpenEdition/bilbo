@@ -2,37 +2,31 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr" dir="ltr">
 	<head>
-		<meta charset="UTF-8">
 		<title>Bilbo - web</title>
-		<link href="./static/style.css" rel="stylesheet" media="all" type="text/css">
-        </head>
+		<style type="text/css">
+			listBibl {display:block; margin:1em; cursor:pointer; }
+			bibl {display:block; margin-bottom:0.5em; }
+			bibl *:hover {color:red; }
+			#type {font-weight:bold; }
+			.doi {color:blue; font-family:"DejaVu serif"; vertical-align:super; }
+			textarea {float:left; }
+			#explain {clear:both; }
+			pubplace {font-family:monospace; }
+			titre {font-weight:bold; }
+			author {font-style: italic; }
+		</style>
+	</head>
 	<body>
-		<header>
-			<div id="logo">			
-				<img src="./static/logo_openeditionlab.jpg" alt="OpenEdition Lab">
-				<h5> Open Edition Research & Developement</h5>
-			</div>
-			<h1>BILBO : Automatic reference labeling</h1>
-		</header>
-		<section>
-			<div id="marge"></div>
-			<div id="main">
-				<p>Cut and paste bibliographical reference</p>
-				<form method="POST" id='bilbo'>
-					<textarea name="texts" rows="25" cols="100" maxlength="5000" id="texts"></textarea>
-					<label for="doi">DOI</label> : <input id="doi" type="checkbox" value="oui" name="doi" /><br/>
-					<label for="corpus1">Corpus 1 (bibliography)</label> : <input id="corpus1" name="corpus" value="1" type="radio" checked="checked" /> /
-					<label for="corpus2">Corpus 2 (notes)</label> : <input id="corpus2" name="corpus" value="2" type="radio" /><br/><br/>
-					<input type="submit" value="Annotate" id="bls" /> - <input type="reset" value="Reset" />
-				</form>
-				<p><input type="submit" value="Test corpus 1" id="testC1" /> <input type="submit" value="Test corpus 2" id="testC2" /></p>
-				<h4 id="displayresult"></h4>
-				<div id="result"></div>
-			</div>
-		</section>
-		<footer>
-			OpenEdition Lab
-		</footer>
+		<form method="POST" id='bilbo'>
+<textarea name="texts" rows="25" cols="100" id="texts"></textarea>
+			<label for="doi">DOI</label> : <input id="doi" type="checkbox" value="oui" name="doi" /><br/>
+			<label for="corpus1">Corpus 1 (bibliography)</label> : <input id="corpus1" name="corpus" value="1" type="radio" checked="checked" /> /
+			<label for="corpus2">Corpus 2 (notes)</label> : <input id="corpus2" name="corpus" value="2" type="radio" /><br/><br/>
+			<input type="submit" value="Annotate" id="bls" /> - <input type="reset" value="Reset" />
+		</form>
+		<p><input type="submit" value="Test corpus 1" id="testC1" /> <input type="submit" value="Test corpus 2" id="testC2" /></p>
+		<div id="explain">Type: <span id='type'></span></div>
+		<div id="result"></div>
 		<script src="http://code.jquery.com/jquery-1.10.1.js"></script>
 		<script>
 			jQuery(document).ready(function() {
@@ -48,7 +42,6 @@
 							res = data[0].replace(/<\?xml version="1.0" encoding="UTF-8"\?>/,'');
 							res = res.replace(/title/g,'titre');
 							res = res.replace(/<idno type="DOI">([^<]*)<\/idno>/g, ' <a class="doi" href="$$1">⤱</a> ');
-							jQuery('#displayresult').text(' Results : ');	
 							jQuery('#result').html(res);
 						},
 						error: function(err, s, e) {
@@ -58,10 +51,15 @@
 					});
 					return false;
 				});
+				var Type = jQuery('#type');
 				jQuery('#result').on('mouseover', function(e) {
+// 					console.log(e.target);
 					var name = e.target.localName;
+// 					console.log(name);
 					if (name !== 'bibl' && name !== 'listbibl') {
-						jQuery(e.target).attr('title', name);
+						Type.html(name);
+					} else {
+						Type.html('');
 					}
 				});
 				jQuery('#testC1').on('click', function(e) {

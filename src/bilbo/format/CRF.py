@@ -73,10 +73,13 @@ class CRF(object):
 				extractor.extractIndices(self.dirResult+"svm_predictions_training", newListReferences)
 			extractor.extract(typeCorpus, nbRef, self.dirResult+fileRes, newListReferences, tr, extOption)
 			
+		elif typeCorpus == 3 :
+			extractor.extract(typeCorpus, nbRef, self.dirResult+fileRes, newListReferences, tr, extOption)			
+			#extractor.extractJustBibl(typeCorpus, nbRef, self.dirResult+fileRes, newListReferences)	
 		else: # typeCorpus == 1 or (typeCorpus == 2 and isFrstExt == -1)
 			########## SOURCE DATA EXTRACTION FOR SVM OR CORPUS 1 (BUT THESE ARE DIFFERENT !!!)
 			extractor.extract(typeCorpus, nbRef, self.dirResult+fileRes, newListReferences, tr, extOption)
-		
+   		'if corpus type 2 and extOption=1, we use a modified index list' #!!!!!!!!!!
 		return
 
 
@@ -92,6 +95,7 @@ class CRF(object):
 		indiceSvm : int, {0, -1, 2}
 			0 : normal(corpus 1)
 			-1 : data04SVM (corpus2),
+			-3 : corpus3
 			2 : external data => svm isn't called
 		"""
 		listReferences = corpus.getListReferences(typeCorpus)
@@ -105,13 +109,23 @@ class CRF(object):
 		
 		if indiceSvm == -1:
 			extractor.extract(typeCorpus, nbRef, self.dirResult+"data04SVM_ori.txt", ListReferences(listReferencesObj.getReferences(),typeCorpus))
+		
+		if indiceSvm == -2:
+                        extractor.extract(typeCorpus, nbRef, self.dirResult+"data04SVM_ori.txt", ListReferences(listReferencesObj.getReferences(),typeCorpus))
+
 		else:
 			'file for CRF training'
 			if typeCorpus == 2 and indiceSvm != 2 :
 				extractor.extractIndices4new(self.dirResult+"svm_predictions_new", ListReferences(listReferencesObj.getReferences(),typeCorpus))
 			
-			extractor.extract(typeCorpus, nbRef, self.dirResult+"testdatawithlabel_CRF.txt",ListReferences(listReferencesObj.getReferences(),typeCorpus), -1, 1)
-			extractor.extract(typeCorpus, nbRef, self.dirResult+"testdata_CRF.txt",ListReferences(listReferencesObj.getReferences(),typeCorpus), 0, 1)
+				extractor.extract(typeCorpus, nbRef, self.dirResult+"testdatawithlabel_CRF.txt",ListReferences(listReferencesObj.getReferences(),typeCorpus), -1, 1)
+				extractor.extract(typeCorpus, nbRef, self.dirResult+"testdata_CRF.txt",ListReferences(listReferencesObj.getReferences(),typeCorpus), 0, 1)
+                        'file for CRF training'
+                        if typeCorpus == 3  :
+                                #extractor.extractIndices4new(self.dirResult+"svm_predictions_new", ListReferences(listReferencesObj.getReferences(),typeCorpus))
+
+                        	extractor.extract(typeCorpus, nbRef, self.dirResult+"testdatawithlabel_CRF.txt",ListReferences(listReferencesObj.getReferences(),typeCorpus), -1, 1)
+                        	extractor.extract(typeCorpus, nbRef, self.dirResult+"testdata_CRF.txt",ListReferences(listReferencesObj.getReferences(),typeCorpus), 0, 1)
 
 		return ListReferences(listReferencesObj.getReferences(),typeCorpus)
 
@@ -148,6 +162,7 @@ class CRF(object):
 		"""
 		dependencyDir = os.path.join(self.rootDir, 'dependencies')
 		command = dependencyDir+"/wapiti-1.4.0/wapiti label -m "+directory+modelname+" "+self.dirResult+fichier+" "+self.dirResult+"testEstCRF"+addStr+"_Wapiti.txt"
+		print command
 		process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
 		process.wait()
 	

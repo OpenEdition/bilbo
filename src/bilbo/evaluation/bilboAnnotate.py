@@ -23,8 +23,10 @@ class bilboAnnotate():
 		self.bilboOptions = bilboOptions
 		self.bilboOptions.L = True
 		self.bilboOptions.T = False
-		self.bilboOptions.t = 'bibl'
+		#self.bilboOptions.t = 'bibl'
+		self.bilboOptions.t = 'impl'
 		self.bilboOptions.k = 'all'
+		self.bilboOptions.i = 'xml'
 		self.bilboOptions.o = 'simple'
 		#print self.bilboOptions
 		
@@ -39,16 +41,20 @@ class bilboAnnotate():
 			self._setBilboAnnotate()
 			self._del_tmp_file(resultDir)
 			bilbo = Bilbo(resultDir, self.bilboOptions, "crf_model_simple") # To save tmpFiles in resultDir
-			bilbo.annotate(annotateDir, modelDir, 1)
+			#bilbo.annotate(annotateDir, modelDir, 1)
+			bilbo.annotate(annotateDir, modelDir, 3)
 			
 			# train with test data for evaluation
 			self._setBilboTrain()
 			self._del_tmp_file(trainDir)
 			bilbo = Bilbo(trainDir, self.bilboOptions, "crf_model_simple") # To save tmpFiles in trainDir
 			corpus = Corpus(testDir, self.bilboOptions)
-			corpus.extract(1, "bibl")
-			bilbo.crf.prepareTrain(corpus, 1, "evaldata_CRF.txt", 1, 1) #CRF training data extraction
+			#corpus.extract(1, "bibl")
+			#bilbo.crf.prepareTrain(corpus, 1, "evaldata_CRF.txt", 1, 1) #CRF training data extraction
+			corpus.extract(3, "impl")
+                        bilbo.crf.prepareTrain(corpus, 3, "evaldata_CRF.txt", 1, 1) #CRF training data extraction
 
+			
 	def _setBilboAnnotate(self):
 		self.bilboOptions.L = True
 		self.bilboOptions.T = False

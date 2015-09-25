@@ -23,7 +23,9 @@ class bibloTrain():
 		self.bilboOptions = bilboOptions
 		self.bilboOptions.T = True
 		self.bilboOptions.L = False
-		self.bilboOptions.t = 'bibl'
+		#self.bilboOptions.t = 'bibl'
+		self.bilboOptions.t = 'impl'
+		self.bilboOptions.i = 'xml'
 		#self.bilboOptions.k = 'all'
 		#print self.bilboOptions
 		self.partitions = Partition(dirCorpus, testPercentage, numberOfPartition, prefix)
@@ -36,7 +38,8 @@ class bibloTrain():
 			
 			self._del_tmp_file(trainDir) # tmp file of test data are here
 			bilbo = Bilbo(modelDir, self.bilboOptions, "crf_model_simple") # tmpFiles saved in modelDir if -k all
-			bilbo.train(trainDir, modelDir, 1)
+			#bilbo.train(trainDir, modelDir, 1)
+			bilbo.train(trainDir, modelDir, 3)
 
 	def _del_tmp_file(self, resultDir):
 		pattern = os.path.join(resultDir,'tmp*')

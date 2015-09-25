@@ -24,13 +24,15 @@ class simpleEval():
 		self.dirCorpus = dirCorpus
 		self.dirResult = dirResult
 		self.dirModel = os.path.join('model', 'corpus'+str(typeCorpus), bilboOptions.m, '')
-		self.corpusTag = 'bibl'
-		
+		#self.corpusTag = 'bibl'
+		self.corpusTag = 'impl'
+			
 		# define bilbo options
 		self.bilboOptions = bilboOptions
 		self.bilboOptions.T = True
 		self.bilboOptions.L = False
 		self.bilboOptions.t = self.corpusTag
+		self.bilboOptions.i = 'xml'
 		self.bilboOptions.k = 'all'
 		self.bilboOptions.o = 'simple'
 
@@ -61,15 +63,19 @@ class simpleEval():
 		self.bilboOptions.L = False
 		bilbo = Bilbo(self.dirResult, self.bilboOptions, "crf_model_simple") # To save tmpFiles in testDir
 		corpus = Corpus(self.dirCorpus, self.bilboOptions)
-		corpus.extract(1, self.corpusTag)
-		bilbo.crf.prepareTrain(corpus, 1, "evaldata_CRF.txt", 1, 1) #CRF training data extraction
-
+		#corpus.extract(1, self.corpusTag)
+		#bilbo.crf.prepareTrain(corpus, 1, "evaldata_CRF.txt", 1, 1) #CRF training data extraction
+		corpus.extract(3, self.corpusTag)
+                bilbo.crf.prepareTrain(corpus, 3, "evaldata_CRF.txt", 1, 1) #CRF training data extraction
+	
 	# annotation of test data striped tagged
 	def annotate(self):
 		self.bilboOptions.T = False
 		self.bilboOptions.L = True
 		bilbo = Bilbo(self.dirResult, self.bilboOptions, "crf_model_simple")
-		bilbo.annotate(self.dirLabel, self.dirModel, 1)
+		#bilbo.annotate(self.dirLabel, self.dirModel, 1)
+		bilbo.annotate(self.dirLabel, self.dirModel, 3)
+
 
 	# get tmp files, format them, hamonize tokens, eval the results
 	def tokenEval(self):

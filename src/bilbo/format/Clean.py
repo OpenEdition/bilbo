@@ -121,6 +121,7 @@ class Clean(object):
 			for s in st :
 				tokens.append(s)
 		
+		#print "tags", tags
 		#save extracted tokens to the dictionary "words"
 		for j in range(0,len(txts)) :
 			balise = []
@@ -135,9 +136,11 @@ class Clean(object):
 					for tag in tags[j] :
 						balise.extend(tag.split(" "))
 					if not lens > 0 :
+                                                #print "bennnnn", lens
 						balise.append("nonbibl")
 					words.append({"nom":s, "caracteristique":caract, "balise":balise})
-				
+                                        #print "balise", balise, s.encode('utf8')
+
 		return words
 
 

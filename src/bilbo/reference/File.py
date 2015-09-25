@@ -9,6 +9,7 @@ from bs4 import BeautifulSoup, NavigableString
 from bilbo.format.Clean import Clean
 from bilbo.format.CleanCorpus1 import CleanCorpus1
 from bilbo.format.CleanCorpus2 import CleanCorpus2
+from bilbo.format.CleanCorpus3 import CleanCorpus3
 from bilbo.format.Rule import Rule
 from bilbo.reference.ListReferences import ListReferences
 from bilbo.output.identifier import extractDoi, loadTEIRule, toTEI, teiValidate
@@ -62,6 +63,9 @@ class File(object):
 			clean = CleanCorpus1(self.options)
 		elif typeCorpus == 2:
 			clean = CleanCorpus2(self.options)
+
+	        elif typeCorpus == 3:
+			clean = CleanCorpus3(self.options)
 		references = clean.processing(self.nom, tag, external)
 		if len(references) >= 1:
 			self.corpus[typeCorpus] = ListReferences(references, typeCorpus)
@@ -204,7 +208,7 @@ class File(object):
 									tag_end_r = oriRef.find(">",tag_end_l)
 									ptr_end = tag_end_r
 									newtoken = oriRef[ptr_start:tag_start_l]+oriRef[tag_start_r+1:tag_end_l]
-									newtoken = re.sub(' ', ' ', newtoken, flags=re.UNICODE)
+									newtoken = re.sub(' ', ' ', newtoken, flags=re.UNICODE)
 									newtoken = newtoken.lstrip()
 									newtoken = newtoken.rstrip()
 								if newtoken == token or newtoken.find(token) >= 0:
@@ -273,7 +277,7 @@ class File(object):
 					
 						try : parseString(oriRef)
 						except Exception, err:
-							print err, self.nom, oriRef.encode('utf8')
+							print err, self.nom, oriRef
 							pass
 					
 				#'''
@@ -496,7 +500,7 @@ class File(object):
 		"""
 		Check if tmp_str has non-alphanumeric character only. Find also special characters in dict specialPunc.
 		"""
-		new_str = tmp_str.replace(' ', ' ')
+		new_str = tmp_str.replace(' ', ' ')
 		for key in specialPunc.iterkeys(): new_str = new_str.replace(key, ' ')
 		new_str = re.sub('\W', ' ', new_str, flags=re.UNICODE)
 		onlyPunc = False
