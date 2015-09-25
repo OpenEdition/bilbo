@@ -176,8 +176,11 @@ class Word(object):
 		"""
 		Return the tag at the index
 		"""
-		if index < 0: return -1
-		return self.tag[index]
+		try:
+                    value = self.tag[index]
+                except IndexError:
+                    value = -1
+		return value
 
 
 	def getAllFeature(self):
