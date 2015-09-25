@@ -95,8 +95,8 @@ class Partition():
 			FormatEval.copy_files_for_eval(self.dirCorpus, testDir, testCorpus)
 			# files used for evaluation, strip the annotations
 			# they will be labeled by bilbo
-			FormatEval.copy_files_for_eval(self.dirCorpus, annotateDir, testCorpus, 'bibl', strip=True)
-
+			#FormatEval.copy_files_for_eval(self.dirCorpus, annotateDir, testCorpus, 'bibl', strip=True)
+			FormatEval.copy_files_for_eval(self.dirCorpus, annotateDir, testCorpus, 'impl', strip=True)
 	def getDirEvalName(self):
 		return os.path.dirname(self.dirCorpus + os.sep) + self.prefix
 

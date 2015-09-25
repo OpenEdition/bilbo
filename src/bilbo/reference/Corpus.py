@@ -91,6 +91,7 @@ class Corpus(object):
 		for nomFichier in nomFichiers:
 			fichObj = File(self.directory+"/"+nomFichier, self.options)
 			fichObj.extract(type, tag, external)
+				
 			self.fichiers.append(fichObj)
 
 

@@ -11,12 +11,16 @@ initial
 placelist
 numbers
 dash
+journallist
+possmonth
 nonimpcap
+s
 posseditor
 startinitial
 volume_title
 translated_title
 weblink
+comma
 research_programm
 nopunc
 onepunc

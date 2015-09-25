@@ -38,6 +38,7 @@ $ python src/bilbo/Main.py -h 	(help simple ver.)
 
 Usage: python src/bilbo/Main.py [options] <input data folder> <output data folder>
 e.g. training: python src/bilbo/Main.py -T -t bibl Data/train/ Result/train/
+		python src/bilbo/Main.py -i xml -T -t impl TrainRefImplBibl/ Result/train/
      labeling: python src/bilbo/Main.py -L -t bibl -d Data/test/ Result/test/
 Options
 (mode)

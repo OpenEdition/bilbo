@@ -2,10 +2,20 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr" dir="ltr">
 	<head>
-		<meta charset="UTF-8">
 		<title>Bilbo - web</title>
-		<link href="./static/style.css" rel="stylesheet" media="all" type="text/css">
-        </head>
+		<style type="text/css">
+			listBibl {display:block; margin:1em; cursor:pointer; }
+			bibl {display:block; margin-bottom:0.5em; }
+			bibl *:hover {color:red; }
+			#type {font-weight:bold; }
+			.doi {color:blue; font-family:"DejaVu serif"; vertical-align:super; }
+			textarea {float:left; }
+			#explain {clear:both; }
+			pubplace {font-family:monospace; }
+			titre {font-weight:bold; }
+			author {font-style: italic; }
+		</style>
+	</head>
 	<body>
 		<header>
 			<div id="logo">			
@@ -54,7 +64,6 @@
 							res = data[0].replace(/<\?xml version="1.0" encoding="UTF-8"\?>/,'');
 							res = res.replace(/title/g,'titre');
 							res = res.replace(/<idno type="DOI">([^<]*)<\/idno>/g, ' <a class="doi" href="$$1">⤱</a> ');
-							jQuery('#displayresult').text(' Results : ');	
 							jQuery('#result').html(res);
 						},
 						error: function(err, s, e) {
@@ -64,10 +73,15 @@
 					});
 					return false;
 				});
+				var Type = jQuery('#type');
 				jQuery('#result').on('mouseover', function(e) {
+// 					console.log(e.target);
 					var name = e.target.localName;
+// 					console.log(name);
 					if (name !== 'bibl' && name !== 'listbibl') {
-						jQuery(e.target).attr('title', name);
+						Type.html(name);
+					} else {
+						Type.html('');
 					}
 				});
 				jQuery('#testC1').on('click', function(e) {

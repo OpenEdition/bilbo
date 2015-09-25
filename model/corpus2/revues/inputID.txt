@@ -154,7 +154,7 @@ barratt
 g.
 op.
 pp.
-226–232
+226â232
 sÉrieux
 paul
 1888
@@ -254,7 +254,7 @@ e
 siècle
 didier
 mÉhu
-éd
+éd.
 mises
 scène
 mémoire
@@ -436,7 +436,7 @@ xix
 -
 xx
 siècles
-Éd
+Éd.
 buregreg
 rabat
 2005
@@ -467,7 +467,7 @@ octobre
 115-121
 arch
 nat
-c.2278
+2278
 6778
 expertise
 autrui
@@ -592,6 +592,7 @@ ci-dessus
 cf
 distances
 savoirs
+3/2006
 fichez
 campus
 numériques
@@ -884,7 +885,8 @@ association
 australia
 canberra
 29
-june-2
+june
+-2
 july
 bellost
 chasseur
@@ -986,8 +988,7 @@ security
 justice
 union
 brussels
-16054
-04
+16054/04
 559
 portemer
 a.-e.
@@ -1387,7 +1388,7 @@ valérie
 robin-azevedo
 carmen
 salazar-soler
-éds
+éds.
 2009
 rousso
 l’histoire
@@ -1423,6 +1424,7 @@ beaucoup
 avions
 parfois
 peine
+!
 durkheim
 d'un
 connu
@@ -1431,7 +1433,7 @@ thèses
 méconnues
 27
 79
-É
+É.
 poulat
 conception
 sociale
@@ -1476,6 +1478,7 @@ léopold
 bécassines…
 61-63
 70
+É.-g.
 illuminisme
 protestantisme
 formation
@@ -1931,7 +1934,6 @@ caracalla
 même
 panégyrique
 xiv
-!
 cura
 piero
 negro
@@ -2278,8 +2280,7 @@ transposition
 analyses
 structurales
 contributions
-repère
-s
+repères
 compagnonnage
 scientifique
 l’inrp
@@ -2307,7 +2308,7 @@ janvier-février
 adoptée
 production
 justificatif
-c.5634
+5634
 514
 loi
 l'égalité
@@ -2397,7 +2398,7 @@ mai
 p
 chambre
 députés
-c.5453
+5453
 flournoy
 hudson
 225
@@ -2467,7 +2468,7 @@ gratuité
 ailleurs
 quatre
 filets
-5453
+c/5453
 performatifs
 atypiques
 car
@@ -2529,8 +2530,8 @@ tierra
 fuego
 91–93
 alekseev
-i.
 115
+i.
 osvoenie
 russkimi
 lyud’mi
@@ -2621,7 +2622,6 @@ beirut
 270
 49-50
 thibault
-repères
 initiatives
 ministère
 charge
@@ -2779,6 +2779,7 @@ recommandations
 celles
 minerva
 http://www.minervaeurope.org/
+20/11/2006
 stoyanovsky
 mandate
 theory
@@ -2915,7 +2916,7 @@ rak
 330–330
 proposition
 1886
-c.5354
+5354
 l’initiative
 labitte
 broy
@@ -2929,6 +2930,7 @@ syllabus
 verbeeck
 professeur
 l'e
+s
 saint-luc
 liège
 verbeeck-boutin
@@ -3035,7 +3037,6 @@ marseille
 xie
 moitié
 xiie
-d.e.s
 uni­versité
 d’aix-en-provence
 1954
@@ -3448,8 +3449,8 @@ objectif
 192
 récentes
 magdî
-alwân
-uthmân
+calwân
+cuthmân
 tanta
 édifices
 construits
@@ -3459,7 +3460,7 @@ hilmî
 1892-1914
 basse-Égypte
 muhammad
-alî
+calî
 hafîz
 al-azhar
 architectes
@@ -3545,7 +3546,7 @@ pense
 faut
 dire
 gens
-"non
+"
 arrêtez
 pleurnicher
 quelle
@@ -3554,7 +3555,7 @@ responsabilité
 situation-là
 n’accusez
 ça
-l’État"
+l’État
 c'est-à-dire
 voilà
 mélangé
@@ -3569,20 +3570,16 @@ dit
 rires
 laisse
 dis
-"oui
-vrai"
-"c’est
-l’autre"
+oui
+vrai
+l’autre
 vous
 avez
-raison"
 vais
 poser
 arriver
 lui-même
-"ouais
-vrai
-ceci"
+ouais
 référent
 d’ile
 jr.
@@ -3696,7 +3693,6 @@ outils
 appréhender
 épistémologique
 méditerrannée
-–xx
 1-20
 traductions
 19-20
@@ -3752,7 +3748,6 @@ spectaculaire
 meilleurs
 pratiquants
 d'activités
-"nouvelles"
 période
 jours
 différentes
@@ -3840,7 +3835,7 @@ grün
 park
 garten
 gmbh
-03
+22/03/2006
 ajoute
 j’aime
 goût
@@ -3995,7 +3990,7 @@ member
 killed
 wars
 because
-her
+his/her
 actions
 americans
 vietnamese
@@ -4037,7 +4032,7 @@ rennes
 gottmann
 quartiersmanagement
 pankstraβe
-05
+31/05/2005
 champs
 1867
 centaines
@@ -4067,7 +4062,7 @@ essentiellement
 dominées
 d’anthropologie
 portant
-x
+xe
 prodromes
 forcément
 dernière
@@ -4096,7 +4091,6 @@ mécanismes
 règlement
 conflits
 1050-1200
-e.s.c
 1107-1133
 phantoms
 remembrance
@@ -4315,6 +4309,7 @@ algériens
 découverte
 noblesse
 l’Église
+x
 -début
 doctorat
 soutenu
@@ -4355,7 +4350,6 @@ diplomatii
 ssha
 1775–1877
 diplomacy
-u.s.
 150–157
 ff
 pêche
@@ -4745,14 +4739,12 @@ palestina’
 san
 salvador
 observations
-c.p.m
 656
 petitions
 subjects
 now
 dated
 rd
-june
 twelfth
 128-9
 194-5
@@ -4901,6 +4893,7 @@ chabanne
 regard
 élèves
 autrement
+26/27
 inrp
 2002-2003
 123-148
@@ -5021,8 +5014,7 @@ somme
 101-102
 lojewski
 division
-02
-06
+02/06/2005
 villate
 prûgnes
 faisait
@@ -5112,7 +5104,6 @@ fléaux
 dentu
 fau
 rive
-l’autre
 migrations
 détroit
 malacca
@@ -5426,7 +5417,8 @@ less
 eligibility
 serge
 paugam
-c.-j.-b
+-j
+-b
 garron
 bÉviÈre
 réplique
@@ -5645,8 +5637,7 @@ selim
 jaffa
 1935-7
 providentielle
-nrf
-essais
+nrf/essais
 guihaire
 coutumier
 simon
@@ -5904,6 +5895,7 @@ conséquences
 l'oeuvre
 lisible
 ceroart
+3/2009
 §
 url
 http://ceroart.revues.org/index1140.html
@@ -6445,7 +6437,7 @@ celui-ci
 délivré
 copie
 imprimé
-c.5560
+5560
 400
 alberto
 inhabitants
@@ -6460,6 +6452,7 @@ macmillan
 dechandon
 sgap
 déplacements
+20/12/2005
 corbin
 l'harmonie
 plaisirs
@@ -6571,6 +6564,7 @@ pages
 délits
 hassan
 house
+alî
 album
 1805-1952
 Éva
@@ -7072,6 +7066,7 @@ maire
 d’euros
 d’économies
 daté
+14/10/2006
 gabba
 tard
 marin
@@ -7129,8 +7124,10 @@ diplomatic
 claims
 banks
 publishing
+16/s
 syria
 298
+15/s
 lebanon
 dijon
 conjointement
@@ -7314,9 +7311,8 @@ choice
 academy
 657-666
 modalité
-"dérogatoires"
-ids
-sb
+dérogatoires
+ids/me/sb
 08note009
 hauts-de-seine
 vanlande
@@ -7353,9 +7349,9 @@ postnikov
 135–140
 chargés
 dvd
-08
+29/08/2005
 keghouche
-01
+01/02/2006
 j.-fr
 dubosc
 italienne
@@ -7391,6 +7387,8 @@ martigues
 1822
 étang
 patrons
+9/33
+9/46
 tozy
 mahdi
 communautaire
@@ -7439,7 +7437,6 @@ protsesse
 process
 dal’nii
 vostok
-–1867
 200-letiyu
 materialy
 mezhdunarodnoi
@@ -7519,7 +7516,7 @@ preparations
 annual
 mandatory
 powers
-c.553
+553
 335
 arnold
 digest
@@ -7535,9 +7532,9 @@ pigenet
 reportage
 clichés
 10hp
+27/2/22
 sr
-12237
-12252
+12237/12252
 aurell
 porcelet
 aubanel
@@ -7756,7 +7753,6 @@ peurs
 inutiles
 pensons
 qualifié
-l’État
 mouvance
 anarcho-autonome
 arrestation
@@ -8450,14 +8446,13 @@ rerum
 jacqueline
 manessy-guitton
 langues
-l.a.m.a
 241-257
 d’étudier
 présidée
 courcelle
 secrétaire
 mornay
-2853
+c/2853
 portait
 pourront
 retarder
@@ -8498,7 +8493,7 @@ vmf
 224
 304
 palais
-îd
+sacîd
 halîm
 champollion
 reconverti
@@ -8568,7 +8563,7 @@ baillière
 well
 weep
 427
-avril-5
+-5
 marie-laure
 crosnier
 leconte
@@ -8580,6 +8575,7 @@ baudry
 somogy
 hiller
 helmhotzplatz
+25/04/2005
 marienplatz
 mené
 gouverner
@@ -8716,6 +8712,7 @@ composition
 185-206
 benthamiennes
 |
+01
 1978–1979
 jonathan
 cape
@@ -8791,7 +8788,7 @@ sphère
 démocratique
 israélienne
 isf
-734
+734/08
 scharabi
 kairo
 stadt
@@ -8874,7 +8871,6 @@ personal
 preferences
 303-318
 souhaitèrent
-août…
 ouvrir
 l’aude
 marne
@@ -8979,6 +8975,7 @@ photoespana
 fernandez
 commissaire
 ciudad
+05
 exhibition
 madrid
 fabrica
@@ -9141,7 +9138,7 @@ textual
 authority
 jordan
 1834
-3731
+f/10/3731
 jean-michel
 derex
 cartographie
@@ -9214,7 +9211,7 @@ stome
 thomas
 ny
 55-74
-4218
+f/7/4218
 277
 biologie
 fusion
@@ -9243,6 +9240,7 @@ reçu
 diplômés
 278-280
 l’axiologie
+4/2009
 http://ceroart.revues.org/index1298.html
 brandi
 demain
@@ -9381,7 +9379,7 @@ voisin
 traitées
 séparément
 stratégique
-c.3307
+3307
 342
 german
 mariners
@@ -9431,6 +9429,7 @@ biomédical
 gestionnaire
 plateau
 boussard
+éd
 organisationnelles
 partagée
 bâle
@@ -9525,6 +9524,7 @@ lack
 separation
 risks
 among
+2/3
 197–210
 l’extension
 l’inservitude
@@ -9699,8 +9699,7 @@ assal
 somalis
 sudanesein
 norway
-ethnicity
-clan
+ethnicity/clan
 manger
 within
 dynamism
@@ -9709,6 +9708,7 @@ variation
 uppsala
 nordic
 165-196
+inrp/iufm
 créteil
 m.-h.
 leloup
@@ -9734,8 +9734,7 @@ twentieth-century
 musicales
 345
 jacquinot-delaunay
-ruca
-uel
+ruca/uel/c
 @
 mpusciences
 numéros
@@ -9866,9 +9865,9 @@ consultatif
 renforcé
 dotation
 pierce
-russia’s
+russiaâs
 adventure
-1815‑1817
+1815â1817
 kingston
 limestone
 taste
@@ -9975,6 +9974,7 @@ distance
 structurellement
 inscrite
 ‘dépayser’
+repère
 algérienne
 pourrait
 temporelle
@@ -10034,6 +10034,7 @@ chrétien
 1238
 commons
 devolution
+03/83
 pélissié
 rausas
 capitulations
@@ -10234,7 +10235,6 @@ l’interpénétration
 devons
 éclaircissement
 urbanistes
-«la
 rudolf
 schwarz
 passent
@@ -10360,8 +10360,11 @@ mm.
 lexen
 schulz-herrmann
 génie
+28/04/2006
+08/05/2006
 dittrich
 verts
+04/05/2006
 wacquet
 contrebande
 125-158
@@ -10385,7 +10388,7 @@ constituciones
 latinoamericanas
 retoux-bray
 fournit
-c.2853
+2853
 1871
 retirée
 1874
@@ -10501,7 +10504,6 @@ félix
 527
 gorman
 contesting
-»…
 cowdrey
 pope
 1073-1085
@@ -10529,7 +10531,7 @@ opposés
 opérations
 d’assèchement
 nationales
-bb
+bb/19/8
 l’étendue
 brièron
 sautron
@@ -10681,6 +10683,7 @@ l’haussmannisation
 mériadeck
 odyssée
 241-256
+essais
 entrent
 malheureusement
 afaf
@@ -10778,6 +10781,7 @@ rêves
 soleira
 ex
 min
++
 clair
 rencontre
 l’automobile
@@ -10839,6 +10843,7 @@ veneta
 arnaldi
 pastore
 stocchi
+4/ii
 vicenza
 neri
 pozza
@@ -10893,7 +10898,7 @@ d’amnistie
 jaffré
 romian
 déglobalisation
-apprentissage
+l’enseignement/apprentissage
 d’écrits
 3-8
 hee-jin
@@ -10963,6 +10968,7 @@ spirit
 mustafa
 kamil
 mau-soleum
+printemps/été
 85-113
 reynaud
 veyret
@@ -11224,7 +11230,7 @@ adnan
 musallam
 folded
 20th
-wiam
+wiam/palestinian
 resolution
 bethlehem
 37-56
@@ -11275,6 +11281,7 @@ diplomatie
 pittia
 -iii
 av
+-c
 réexamen
 13-25
 d'origine
@@ -11340,6 +11347,7 @@ al-qâdî
 qamûs
 tarîkh
 bûr-sa
+îd
 1188
 but
 d’exclure
@@ -11391,7 +11399,7 @@ prohibés
 plumes
 détention…
 118
-3178
+c/3178
 bonapartistes
 implantation
 mÉnager
@@ -11462,7 +11470,7 @@ confirmée
 1566
 1784
 luis
-awâd
+cawâd
 awrâq
 al-
 umr

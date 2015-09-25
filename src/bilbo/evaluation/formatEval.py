@@ -13,7 +13,9 @@ class FormatEval():
 	@staticmethod
 	# find all bibl in a directory
 	# return a list of [(filename, bibl_index)]
-	def get_list_of_tag_from_dir(dirName, corpusTag='bibl', file_pattern="*xml"):
+	#def get_list_of_tag_from_dir(dirName, corpusTag='bibl', file_pattern="*xml"):
+	def get_list_of_tag_from_dir(dirName, corpusTag='impl', file_pattern="*xml"):
+
 		files = os.path.join(dirName, file_pattern)
 		biblList = []
 		for xmlFile in glob.glob(files):
@@ -30,7 +32,8 @@ class FormatEval():
 	@staticmethod
 	# step one bibl at a time, not counting bibl inside bibl
 	# if keep is a list of corpusTag_index, will keep only those bibl and return resulting text
-	def count_tags_and_process(text, keep=None, corpusTag='bibl'):
+	#def count_tags_and_process(text, keep=None, corpusTag='bibl'):
+	def count_tags_and_process(text, keep=None, corpusTag='impl'):
 		all_bibl = []
 		bibl_counter = -1
 		bibl_inside = 0
@@ -80,7 +83,8 @@ class FormatEval():
 
 	@staticmethod
 	# take a document (string) and strip all tags inside the given tag
-	def strip_tags(text, tagCorpus='bibl'):
+	#def strip_tags(text, tagCorpus='bibl'):
+	def strip_tags(text, tagCorpus='impl'):
 		parsedText = BeautifulSoup(text, 'xml')
 		allBiblTag = parsedText.findAll(tagCorpus)
 		for tag in allBiblTag:
@@ -91,7 +95,8 @@ class FormatEval():
 	@staticmethod
 	# copy files for corpus directory, keeping tags from the given list of index
 	# strip=True will strip all tags in the given corpusTag
-	def copy_files_for_eval(dirCorpus, destDir, file_list, corpusTag='bibl', strip=False):
+	#def copy_files_for_eval(dirCorpus, destDir, file_list, corpusTag='bibl', strip=False):
+	def copy_files_for_eval(dirCorpus, destDir, file_list, corpusTag='impl', strip=False):
 		for filename, tags_to_keep in file_list.items():
 			with open(os.path.join(dirCorpus, filename), 'r', encoding='utf-8') as content_file:
 				content = content_file.read()

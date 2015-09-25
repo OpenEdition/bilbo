@@ -19,7 +19,13 @@ class Extract_crf(Extract):
 	def __init__(self, options={}):
 		Extract.__init__(self, options)
 
-
+	def extractJustBibl(self, typeCorpus, ndocs, fileRes,listRef):
+		listReferences = listRef.getReferences()
+		for reference in listReferences:
+			for mot in reference.getWord():
+				if mot.ignoreWord == 0:
+					for tmp in mot.getAllTag() :
+						print tmp.affiche()	
 	def extract (self, typeCorpus, ndocs, fileRes, listRef, tr=-1, extOption=-1) :
 		"""
 		Extract training and test data
@@ -54,13 +60,15 @@ class Extract_crf(Extract):
 		tmp_nonbiblck = 0
 		
 		for reference in listReferences:
+                        #print "REFERENCE"
 			#reference.affiche()
 			'This is an indicator if the reference has been classified in the negative class by SVM'
 			if reference.train == -1 : # -1 : classified as nonbibl, 1 : normal training data, 0 : normal test data
 				pass
 			
 			for mot in reference.getWord():
-
+				#print mot.affiche()
+				
 				if mot.ignoreWord == 0:
 					if mot.item == 1: self.relatItm = 1
 					
@@ -74,20 +82,35 @@ class Extract_crf(Extract):
 						
 					#nobibl check,
 					tmp_nonbiblck = 0
+					#print mot.getAllTag()
+					#print "début getAll", mot.nom.encode('utf-8')
 					for tmp in mot.getAllTag() :
+						#print tmp.affiche()
+						#if tmp.nom != "nonbibl" :
+                                                #print "balises", tmp.nom, 
 						if tmp.nom == "nonbibl" :
 							tmp_nonbiblck = 1
+                                                        #print "nonbiblck 1 ", 
 						elif tmp.nom == 'c' and typeCorpus == 2 and extOption==-1 :
 							if nonbiblck == 1:
 								tmp_nonbiblck = 1
-									
+                                                                #print "nonbiblck 2 ", 
+						elif tmp.nom == 'c' and typeCorpus == 3 and extOption==-1 :
+                                                        if nonbiblck == 1:
+                                                                tmp_nonbiblck = 1
+                                                                #print "nonbiblck 3 ", 
+                                        #print
 					if tmp_nonbiblck == 1 :
+                                                #for tmp in mot.getAllTag() :
+                                                    #print "trachons tout car tmp_nonbiblck == 1", tmp.nom
 						mot.delAllTag()
 						mot.addTag("nonbibl")
 	
 					if tr == 0 :
+                                                #print "trachons tout car tr == 0"
 						mot.delAllTag() # It is not really necessary because in Printing, we check the 'tr'
 					
+                                        #print "fin getall", tmp_nonbiblck
 					'delete all features out of the "features" list'
 					supp = []
 					
@@ -95,7 +118,10 @@ class Extract_crf(Extract):
 						if typeCorpus == 2 and extOption==-1 : #in case of SVM data, add PUNC feature
 							mot.delAllFeature()
 							mot.addFeature("PUNC")
-					
+						if typeCorpus == 3 and extOption==-1 : #in case of SVM data, add PUNC feature
+                                                        mot.delAllFeature()
+                                                        mot.addFeature("PUNC")
+
 					'detailed punctuation feature <- for experiments, not used for the moment'
 					if mot.getTag('c') != -1 :
 						for carac in mot.getAllFeature():
@@ -125,7 +151,7 @@ class Extract_crf(Extract):
 			else :
 				reference.bibl = 1
 			nonbiblck = 1
-			
+		
 		if tr != -2 :
 			#pass
 			self.nameObj.searchName(listRef, tr)
@@ -157,5 +183,6 @@ class Extract_crf(Extract):
 		
 		if typeCorpus == 2 and extOption==-1 :
 			self._print_parallel(fileRes, listRef)
-				
+		if typeCorpus == 3 and extOption==-1 :
+                        self._print_parallel(fileRes, listRef)
 		return

@@ -12,9 +12,6 @@ It also contains default option setting function, which is called in main.
 import sys
 import os
 import optparse
-import tempfile
-import codecs
-import shutil
 
 """
 Add paths
@@ -55,17 +52,14 @@ def labeling(line, modelname, options):
 	"""
 	Label input sting. Called by simpleLabeling or detailLabeling
 	"""
-	#tmpDir = rootDir+'/simpletmp'
-	#resDir = os.getcwd() #current working directory
-	#It's better to have secure tmp dirs for multiple threads
-	tmpDir = tempfile.mkdtemp(prefix='bilbo_labeling_tmp')
-	resDir = tempfile.mkdtemp(prefix='bilbo_labeling_res_dir')
-
+	tmpDir = rootDir+'/simpletmp'
+	resDir = os.getcwd() #current working directory
+	
 	dtype = options.t
 	if dtype == "bibl" : typeCorpus = 1
 	elif dtype == "note" : typeCorpus = 2
 	dirModel = os.path.join(rootDir, 'model/corpus')+str(typeCorpus)+"/"+options.m+"/"
-
+	
 	bilbo = Bilbo(resDir, options, modelname)
 	if not os.path.exists(tmpDir):
 		os.makedirs(tmpDir)
@@ -76,25 +70,18 @@ def labeling(line, modelname, options):
 	filename = os.path.join(tmpDir, 'tmp.xml')
 	tmpFile = open(filename, "w")
 	tmpFile.write('<list'+dtype.title()+'>\n')
-	tmpFile.write('<'+dtype+'> ')
-	tmpFile.write(line.encode(encoding="utf8"))
-	tmpFile.write(' </'+dtype+'>')
+	tmpFile.write('<'+dtype+'> '+str(line)+' </'+dtype+'>')
 	tmpFile.write('\n</list'+dtype.title()+'>\n')
 	tmpFile.close()
-
+	
 	if options.t == "note" and options.e: bilbo.annotate(tmpDir, dirModel, typeCorpus, 1)
 	else : bilbo.annotate(tmpDir, dirModel, typeCorpus)
-
-	#tmp_str = ''.join(open(os.path.join(resDir, 'tmp.xml')).readlines())
-	tmp_str = unicode('')
-	with codecs.open(os.path.join(resDir, 'tmp.xml'), encoding='utf8') as tmp_str_fp:
-		for line in tmp_str_fp:
-			tmp_str += unicode(line)
-
+	
+	tmp_str = ''.join(open(os.path.join(resDir, 'tmp.xml')).readlines())
+	
 	os.unlink(filename)
 	os.rmdir(tmpDir)
-	shutil.rmtree(resDir) #Because this one may not be empty when we delete it
-
+	
 	return tmp_str
 
 
@@ -131,5 +118,5 @@ def defaultOptions():
 	label_opts.add_option('-d', '--doi', dest="d", default=False, action="store_true", help="DOI extraction via crossref site")
 	label_opts.add_option('-e', '--exterdata', dest="e", default=False, action="store_true", help="Labeling data different from training set")
 	parser.add_option_group(label_opts)
-
+	
 	return parser

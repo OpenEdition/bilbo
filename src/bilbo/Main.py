@@ -108,7 +108,9 @@ if __name__ == '__main__':
 		dtype = options.t
 		if dtype == "bibl" : typeCorpus = 1
 		elif dtype == "note" : typeCorpus = 2
+		elif dtype == "impl" : typeCorpus = 3
 		dirModel = os.path.join(rootDir, 'model/corpus')+str(typeCorpus)+"/"+options.m+"/"
+		
 		if not os.path.exists(dirModel): os.makedirs(dirModel)
 		
 		if options.T : #training
@@ -116,7 +118,7 @@ if __name__ == '__main__':
 		elif options.L : #labeling
 			if dtype == "note" and options.e:
 				bilbo.annotate(str(args[0]), dirModel, typeCorpus, 1)
-			else :
+			if dtype == "impl":
 				bilbo.annotate(str(args[0]), dirModel, typeCorpus)
 		else :
 			print "Please choose training(-T option) or labeling(-L option)"

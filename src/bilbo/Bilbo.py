@@ -94,7 +94,43 @@ class Bilbo(object):
 			self.crf.runTrain(dirModel, "trainingdata_CRF_Wapiti.txt", self.crfmodelname) #CRF model learning
 			#self.crf.runTrain(dirModel, "trainingdata_CRF_nega_Wapiti.txt", "revueswapiti_nega", 0.0000001) #Do not work, too homogeneous
 			print
-		self.deleteTmpFiles()
+                   
+	        elif typeCorpus == 3:
+			print "Extract implied references..."
+
+			corpus.extract(3, "impl")
+			#optsvm = self.options.s
+			
+			#if optsvm == True :
+                                #print "svm source data extraction..."
+                                #self.crf.prepareTrain(corpus, 3, "data04SVM_ori.txt", 1) #Source data extraction for SVM note classification
+				#print "create corpus folder first class"
+				#self.svm.createCorpusFolderFirstClass("model/corpus3/revues/ref_courtes_Bibl.xml")
+    				#print "create corpus folder second class"
+				#self.svm.createCorpusFolderSecondClass("model/corpus3/revues/ref_courtes_NoBibl.xml")
+				#print "svm training data extraction..."
+				#self.svm.prepareTrainC3("model/corpus3/revues/inputID.txt","model/corpus3/revues/impl/","model/corpus3/revues/Noimpl/","model/corpus3/revues/datFiles/") #Training data extraction for SVM note classification
+				
+				#self.svm.readFileC3("model/corpus3/revues/datFiles/")
+				
+				#print "svm training..."
+				#self.svm.runTrainC3("model/corpus3/revues/datFiles/") #SVM model learn
+				#print "crf training data extraction..."
+                        	#self.crf.prepareTrain(corpus, 3, "trainingdata_CRF_Original_Original.txt", 1, 1) #CRF training data extraction
+
+                        	#self.crf.runTrain(dirModel, "trainingdata_CRF_Original_Original_OriginalWapiti.txt", self.crfmodelname) #CRF model learning
+                        	#self.crf.runTrain(dirModel, "trainingdata_CRF_nega_Wapiti.txt", "revueswapiti_nega", 0.0000001) #Do not work, too homogeneous
+                        	#print
+
+			#else:
+							
+			print "crf training data extraction..."
+			self.crf.prepareTrain(corpus, 3, "trainingdata_CRF_Original.txt", 1, 1) #CRF training data extraction
+			
+			self.crf.runTrain(dirModel, "trainingdata_CRF_Original_Wapiti.txt", self.crfmodelname) #CRF model learning
+			print
+           	
+		#self.deleteTmpFiles()
 
 
 	def annotate(self, dirCorpus, dirModel, typeCorpus, external=0):
@@ -120,11 +156,14 @@ class Bilbo(object):
 		for fname in filesTab:
 			if typeCorpus == 1:
 				corpus = self.annotateCorpus1(dirModel, corpus, fname)
-			elif typeCorpus == 2:
+			if typeCorpus == 2:
 				corpus = self.annotateCorpus2(dirModel, corpus, fname, external)
-			corpus.deleteAllFiles()
+                        if typeCorpus == 3:
+                                corpus = self.annotateCorpus3(dirModel, corpus, fname, external)
+				print dirModel
+			#corpus.deleteAllFiles()
 			
-		self.deleteTmpFiles()
+		#self.deleteTmpFiles()
 
 
 	def annotateCorpus1(self, dirModel, corpus, fname):
@@ -199,6 +238,56 @@ class Bilbo(object):
 		return corpus
 
 
+        def annotateCorpus3(self, dirModel, corpus, fname, external=0):
+                """
+                Automatic annotation of reference type 2 (note)
+                
+                Parameters
+                ----------
+                dirModel : string
+                        directory where learned CRF model and SVM model have been saved
+                corpus : Corpus
+                        set of notes that we want to annotate
+                fname : string
+                        name of file to be annotated
+                external : int, {1, 0}
+                        1 : if external data, 0 : if CLEO data
+
+                See also
+                --------
+                Oct. 18, 2012   SVM classification problem is fixed
+                                                Check the classification result of reference (reference.train) in 'addTagReferences' method
+                                                of 'Corpus' class that is called in 'annotateCorpus2' method of 'Bilbo' class.
+                """
+                print "Extract implied reference..."
+                corpus.extract(3, "impl", fname, external)
+                #if external == 0 and self.options.s : #if not external data and svm option is true
+                        #print "svm source data extraction..."
+                        #self.crf.prepareTest(corpus, 3, -2)     #last argument:int, -1:prepare source data for SVM learning, default:0
+			#self.svm.createCorpusFolderTest("DataTest/ref_courtes_p_Clean.xml")                        
+			
+			#print "svm data extraction for labeling..."
+                        #self.svm.prepareTestC3("model/corpus3/revues/inputID.txt", "model/corpus3/new_model/", "model/corpus3/new_model/")
+			#self.svm.runTestC3(dirModel)
+			
+                        #print "crf data extraction for labeling..."
+                        #print self.crfmodelname
+			#newlistReferences = self.crf.prepareTest(corpus, 3)
+                        #self.crf.runTest(dirModel, 'testdata_CRF_Wapiti.txt', self.crfmodelname)
+			
+                        #self.crf.postProcessTest("testEstCRF.txt", "testEstCLNblCRF.txt", newlistReferences.getReferences())
+                        #corpus.addTagReferences(self.dirResult, "testEstCRF.xml", "impl", 3, newlistReferences.getReferences())
+		
+                #else:                                                                           #if external data : external=1, we do not call a SVM model
+		print "crf data extraction for labeling..."
+		self.crf.prepareTest(corpus, 3, -3)              #indiceSvm=2 at prepareTest(self, corpus, typeCorpus, indiceSvm = 0)
+		print "crf run test for labeling..."
+		self.crf.runTest(dirModel, 'testdata_CRF_Wapiti.txt', self.crfmodelname)
+		print "corpus add tag for labeling..."
+		corpus.addTagReferences(self.dirResult, "testEstCRF.xml", "impl", 3)
+			
+                return corpus
+		
 	def deleteTmpFiles(self):
 		dirResultRoot = os.path.abspath(os.path.join(self.dirResult, os.path.pardir))+'/'
 		toKeep = []
@@ -211,7 +300,7 @@ class Bilbo(object):
 						shutil.copyfile(dir_name+f, dirResultRoot+f)
 					os.unlink(os.path.join(dir_name, f))
 			os.rmdir(self.dirResult)
-
+			
 
 	def _list_split(self, flist, size):
 		"""

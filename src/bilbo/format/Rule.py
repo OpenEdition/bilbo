@@ -135,6 +135,7 @@ class Rule(object):
 						endWord = ''
 						
 				for w in wordSet :
+                                        #w.affiche()
 					feat_str = self._featureCheck(w.nom)
 					if w.getTag("c") == -1 : w.addFeature(feat_str.split(" "))
 					reorgWords.append(w)
