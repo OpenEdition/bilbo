@@ -1,13 +1,19 @@
 header	{height:15%; width:auto; border-bottom:3px solid #CCC; padding: 7px; 
 }
 
-#logo, #marge {display: inline-block; width: 20%; vertical-align: middle
+#logo {display: inline-block; width: 20%; vertical-align: middle
+}
+#marge {display: inline-block; width: 20%; vertical-align: top
 }
 
 h1 {display: inline-block; text-align: center; margin-left: 8%; 
 }
 
 h5 {margin-left: 10%
+}
+
+#btnaboutbilbo {
+	opacity: 0; position: relative; left: -100px
 }
 
 section {width: auto; padding: 10px; 

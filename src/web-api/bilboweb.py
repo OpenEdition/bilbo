@@ -22,6 +22,7 @@ urls = (
 	'/', 'bilboWeb',
 	'/bilbo', 'bilboWeb',
 	'/annotate', 'annotate',
+    '/aboutbilbo', 'aboutBilbo',
 )
 
 
@@ -70,6 +71,11 @@ class bilboWeb:
 	def GET(self):
 		render = web.template.render('templates/')
 		return render.bilbo()
+
+class aboutBilbo:
+    def GET(self):
+        render = web.template.render('templates/')
+        return render.aboutbilbo()
 
 def annoterCorpus(corpus, request):
 	dirModel = os.path.abspath('../../model/corpus' + str(corpus) + "/revues/") + "/"
