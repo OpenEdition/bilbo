@@ -18,13 +18,15 @@ Commons Attribution-NonCommercial-ShareAlike 2.5 Generic License (CC BY-NC-SA 2.
 
 Created on April 08, 2012
 
-@author: Young-Min Kim, Jade Tavernier
+@author: Young-Min Kim, Jade Tavernier, Ollagnier Anaïs
 """
+from bilbo.format.MSVM import MSVM
 from bilbo.format.CRF import CRF
 from bilbo.format.SVM import SVM
 from bilbo.reference.Corpus import Corpus
 import os
 import shutil
+import glob
 from tempfile import mkdtemp
 
 class Bilbo(object):
@@ -49,6 +51,7 @@ class Bilbo(object):
 		self.dirResult = mkdtemp(dir = dirResult) + '/'
 		self.crf = CRF(self.dirResult, options)
 		self.svm = SVM(self.dirResult, options)
+		self.msvm = MSVM(self.dirResult, options)
 		self.options = options
 		self.crfmodelname = crfmodelname
 
@@ -96,13 +99,26 @@ class Bilbo(object):
 			print
                    
 	        elif typeCorpus == 3:
-			print "Extract implied references..."
-
-			corpus.extract(3, "impl")
-			#optsvm = self.options.s
 			
-			#if optsvm == True :
-                                #print "svm source data extraction..."
+			optsvm = self.options.s
+			if optsvm == True :
+                                print "msvm training data extraction..."
+				fname = "model/corpus3/"+self.options.m+"/inputID.txt"
+				list_files = glob.glob ('Data/*/')
+				for f in list_files :
+					folderName = os.path.relpath(f,"..")
+					folderName = folderName.split('/')
+					self.msvm.count(fname, f, str(folderName[2])+'.dat')
+				i = 0
+				for f in list_files :
+					i = i + 1
+					folderName = os.path.relpath(f,"..")
+					folderName = folderName.split('/')
+					self.msvm.transform(fname, f, str(folderName[2])+'.dat', str(i))
+				self.msvm.concataneFiles(self.dirResult, "class.train")
+				self.msvm.mixLines("class.train", "class_mix.train", self.dirResult)
+				print "msvm training..."
+				self.msvm.runTrain(dirModel)
                                 #self.crf.prepareTrain(corpus, 3, "data04SVM_ori.txt", 1) #Source data extraction for SVM note classification
 				#print "create corpus folder first class"
 				#self.svm.createCorpusFolderFirstClass("model/corpus3/revues/ref_courtes_Bibl.xml")
@@ -116,7 +132,7 @@ class Bilbo(object):
 				#print "svm training..."
 				#self.svm.runTrainC3("model/corpus3/revues/datFiles/") #SVM model learn
 				#print "crf training data extraction..."
-                        	#self.crf.prepareTrain(corpus, 3, "trainingdata_CRF_Original_Original.txt", 1, 1) #CRF training data extraction
+                        	#self.crf.prepareTrain(corpus, 3, "trainingdata_CRF_Original.txt", 1, 1) #CRF training data extraction
 
                         	#self.crf.runTrain(dirModel, "trainingdata_CRF_Original_Original_OriginalWapiti.txt", self.crfmodelname) #CRF model learning
                         	#self.crf.runTrain(dirModel, "trainingdata_CRF_nega_Wapiti.txt", "revueswapiti_nega", 0.0000001) #Do not work, too homogeneous
@@ -124,10 +140,10 @@ class Bilbo(object):
 
 			#else:
 							
-			print "crf training data extraction..."
-			self.crf.prepareTrain(corpus, 3, "trainingdata_CRF_Original.txt", 1, 1) #CRF training data extraction
+			#print "crf training data extraction..."
+			#self.crf.prepareTrain(corpus, 3, "trainingdata_CRF_Original.txt", 1, 1) #CRF training data extraction
 			
-			self.crf.runTrain(dirModel, "trainingdata_CRF_Original_Wapiti.txt", self.crfmodelname) #CRF model learning
+			#self.crf.runTrain(dirModel, "trainingdata_CRF_Original_Wapiti.txt", self.crfmodelname) #CRF model learning
 			print
            	
 		#self.deleteTmpFiles()

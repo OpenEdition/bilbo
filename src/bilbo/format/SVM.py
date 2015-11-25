@@ -113,7 +113,7 @@ class SVM(object):
                 """
                 nbRef = corpus.nbReference(2) #corpus type = 2
                 extractor = Extract_svm(self.options)
-                extractor.transform(self.dirResult+"data04SVM_ori.txt", nbRef, 1, self.dirResult+"data04SVM_ori.txt", self.dirResult+"trainingdata_SVM.txt")
+                extractor.extract(self.dirResult+"data04SVM_ori.txt", nbRef, 1, self.dirResult+"data04SVM_ori.txt", self.dirResult+"trainingdata_SVM.txt")
 
 
 	def prepareTest(self, corpus):

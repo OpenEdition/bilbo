@@ -63,12 +63,14 @@ class CleanCorpus2(Clean):
 			for nt in soup.findAll ('note') :
 				c = 0
 				for nt_c in nt.contents :
+					#print nt_c.text
 					'verify if the note has a reference'
 					if nt_c == nt_c.string :
 						pass
 					elif nt_c.name == 'bibl' : # bibl or other tag
 						pass
 					elif nt_c.findAll('bibl') : # structure flatten, pull <bibl> to top level for the extraction ###
+						#print nt_c.text
 						nsoup = BeautifulSoup (nt_c.renderContents())
 						nt_c.replace_with( nsoup.contents[0] )
 						nsouplen = len(nsoup.contents)

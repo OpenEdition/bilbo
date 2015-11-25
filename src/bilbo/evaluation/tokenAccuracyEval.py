@@ -88,6 +88,7 @@ class TokenAccuracyEval():
 		for key in excluded.keys() :
 			if cnt_d.has_key(key) :
 				evaluation += '\n- {:s}'.format(key) + "\n"
+				print evaluation
 				#c-acc[key] est le nombre d'étiquette prédite moins le nombre d'étiquette correct prédite pour le label exclu divisé par le nombre d'étiquette moins le nombre d'étiquette exclue
 				apr = float(c - acc[key])/float(j - cnt[key])*100 
 				returnLabels.append('avg Micro Precision');
@@ -164,7 +165,7 @@ class TokenAccuracyEval():
 		returnLabels.append('Macro F-mesure all');
 		returnValues.append(macro_fmesure)
 		evaluation += '(macro F-mesure all elements)    {:f}'.format(macro_fmesure) + "\n\n"
-		
+		'''
 		macro_precision_mainElmt = sum(tab_mainElmt_precision)/len(tab_mainElmt_precision)
 		returnLabels.append('Macro Precision of 3');
 		returnValues.append(macro_precision_mainElmt)
@@ -179,7 +180,7 @@ class TokenAccuracyEval():
 		returnLabels.append('Macro F-mesure of 3');
 		returnValues.append(macro_fmesure_mainElmt)
 		evaluation += '(macro F-mesure three elements)  {:f}'.format(macro_fmesure_mainElmt) + "\n\n"
-
+          '''
 		tes = 0
 		bes = 0
 		ts = 0

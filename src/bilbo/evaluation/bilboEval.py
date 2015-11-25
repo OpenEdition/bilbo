@@ -30,6 +30,8 @@ class bilboEval():
 			#print "dirPartition", dirPartition
 			(annotateDir, testDir, trainDir, modelDir, resultDir) = self.partitions.getDirTestNames(dirPartition)
 			
+			print "label", resultDir, 'testEstCRF_Wapiti.txt'
+			print "desire", trainDir, 'evaldata_CRF_Wapiti.txt'
 			labeledContent = self._getFile(resultDir, 'testEstCRF_Wapiti.txt')
 			desiredContent = self._getFile(trainDir, 'evaldata_CRF_Wapiti.txt') # tmpFiles from training of testDir are saved in trainDir !
 
@@ -56,6 +58,7 @@ class bilboEval():
 		pattern = os.path.join(fileDir,'tmp*', pattern)
 		files = glob.glob(pattern)
 		with open(files[0], 'r', encoding='utf-8') as content_file:
+			print content_file
 			content = content_file.read()
 			return content
 
