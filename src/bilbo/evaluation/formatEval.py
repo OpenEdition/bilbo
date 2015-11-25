@@ -163,7 +163,7 @@ class prepareEval():
 				if partShort == partLong:
 					#print indexShort, partShort.encode('utf8'), indexLong, partLong.encode('utf8'), "RESOLVED"
 					break
-				#print indexShort, partShort.encode('utf8'), len(partShort), indexLong, partLong.encode('utf8'), len(partLong)
+				print indexShort, partShort.encode('utf8'), len(partShort), "|", indexLong, partLong.encode('utf8'), len(partLong)
 				if partShort < partLong:
 					indexShort +=1
 					_, partShortAppend = self._getFeatureAndName(shortList[indexShort])

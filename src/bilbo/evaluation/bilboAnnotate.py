@@ -36,7 +36,7 @@ class bilboAnnotate():
 	def annotate(self):
 		for dirPartition in self.dirPartitions:
 			(annotateDir, testDir, trainDir, modelDir, resultDir) = self.partitions.getDirTestNames(dirPartition)
-			
+			optsvm = self.bilboOptions.s
 			# annotation of test data striped tagged
 			self._setBilboAnnotate()
 			self._del_tmp_file(resultDir)
