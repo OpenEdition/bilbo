@@ -102,9 +102,12 @@ class Bilbo(object):
 			
 			optsvm = self.options.s
 			if optsvm == True :
-                                print "msvm training data extraction..."
+				print "Post process on files"
+                                self.msvm.createFolder(dirCorpus, 'DataMSVM_Corpus/') #create folder by class				
+				self.msvm.delete_Tag('DataMSVM_Corpus/')#delete tags
+				print "Msvm training data extraction..."
 				fname = "model/corpus3/"+self.options.m+"/inputID.txt"
-				list_files = glob.glob ('Data/*/')
+				list_files = glob.glob (self.dirResult+'/*/*/')
 				for f in list_files :
 					folderName = os.path.relpath(f,"..")
 					folderName = folderName.split('/')
@@ -117,8 +120,21 @@ class Bilbo(object):
 					self.msvm.transform(fname, f, str(folderName[2])+'.dat', str(i))
 				self.msvm.concataneFiles(self.dirResult, "class.train")
 				self.msvm.mixLines("class.train", "class_mix.train", self.dirResult)
-				print "msvm training..."
+				print "Msvm training..."
 				self.msvm.runTrain(dirModel)
+			print "Crf training data extraction..."
+			self.crf.createFolder(dirCorpus, 'DataMSVM_CRFCorpus/') #create folder by class for training a CRF by class					
+			list_files = glob.glob ('DataMSVM_CRFCorpus/*/')
+			print "Extract implied references..."
+			j = 0
+			for files in list_files:
+				j = j + 1
+				corpus = Corpus(files, self.options)
+                        	corpus.extract(3, "impl")
+	                	print "Prepare training"
+				self.crf.prepareTrain(corpus, 3, "trainingdata_CRF_class"+str(j)+".txt", 1, 1) #CRF training data extraction
+                       		print "Run crf training"
+				self.crf.runTrain(dirModel, "trainingdata_CRF_class"+str(j)+"_OriginalWapiti.txt", self.crfmodelname+'_class'+str(j)) #CRF model learning
                                 #self.crf.prepareTrain(corpus, 3, "data04SVM_ori.txt", 1) #Source data extraction for SVM note classification
 				#print "create corpus folder first class"
 				#self.svm.createCorpusFolderFirstClass("model/corpus3/revues/ref_courtes_Bibl.xml")

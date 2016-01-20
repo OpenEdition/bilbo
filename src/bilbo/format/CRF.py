@@ -9,6 +9,8 @@ from bilbo.format.Extract_crf import Extract_crf
 from bilbo.reference.ListReferences import ListReferences 
 from bilbo.output.GenerateXml import GenerateXml
 import subprocess, os
+import glob
+import shutil
 from codecs import open
 
 class CRF(object):
@@ -36,6 +38,27 @@ class CRF(object):
 	def setDirModel(self, dirModel):
 		self.dirModel = dirModel
 
+	def createFolder(self, folderInit, folderResult):
+		list_files = glob.glob (folderInit+'*')
+		newpath = folderResult 
+		if os.path.exists(newpath):
+			shutil.rmtree(newpath)	
+		os.makedirs(newpath)
+		j = 0
+		for file in list_files :
+			j = j + 1
+			with open(file, 'r', encoding='utf8') as f:
+				folderPath = 'class_'+str(j)
+				classPath = newpath+folderPath
+				if not os.path.exists(classPath):
+                			os.makedirs(classPath)
+				i=0
+				for line in f:
+					if line.startswith('<impl>'):
+						output = open(classPath+'/'+str(i)+".xml",'w', encoding = 'utf8')
+						output.write(line)
+						output.close()
+					i=i+1
 
 	def prepareTrain(self, corpus, typeCorpus, fileRes, tr=-1, extOption=-1, optsvm=True):
 		"""
@@ -72,16 +95,14 @@ class CRF(object):
 			if optsvm == True : #if not, do not modify
 				extractor.extractIndices(self.dirResult+"svm_predictions_training", newListReferences)
 			extractor.extract(typeCorpus, nbRef, self.dirResult+fileRes, newListReferences, tr, extOption)
+   		if typeCorpus == 3 :
+                        extractor.extract(typeCorpus, nbRef, self.dirResult+fileRes, newListReferences, tr, extOption)
 			
-		elif typeCorpus == 3 :
-			extractor.extract(typeCorpus, nbRef, self.dirResult+fileRes, newListReferences, tr, extOption)			
-			#extractor.extractJustBibl(typeCorpus, nbRef, self.dirResult+fileRes, newListReferences)	
 		else: # typeCorpus == 1 or (typeCorpus == 2 and isFrstExt == -1)
 			########## SOURCE DATA EXTRACTION FOR SVM OR CORPUS 1 (BUT THESE ARE DIFFERENT !!!)
 			extractor.extract(typeCorpus, nbRef, self.dirResult+fileRes, newListReferences, tr, extOption)
    		'if corpus type 2 and extOption=1, we use a modified index list' #!!!!!!!!!!
 		return
-
 
 	def prepareTest(self, corpus, typeCorpus, indiceSvm = 0):
 		"""
