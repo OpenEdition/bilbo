@@ -6,12 +6,14 @@ It provides the segmentation and tagging of input string. It is principally base
 Conditional Random Fields (CRFs), machine learning technique to segment and label
 sequence data.
 
-As external softwares, Wapiti is used for CRF learning and inference
+As external softwares, Wapiti is used for CRF learning and inference (https://wapiti.limsi.fr)
 and SVMlight is used for sequence classification.
 
 ### Contributors
-(C) Copyright 2013 by Young-Min Kim and Jade Tavernier.
-written by Young-Min Kim, modified by Jade Tavernier.
+(C) Copyright 2013 OpenEdition by Young-Min Kim, Jade Tavernier, Patrice Bellot.
+written by Young-Min Kim & Patrice Bellot, 
+modified by Jade Tavernier, Anaïs Ollagnier, Chahinez Benkoussas, Mathieu Orban.
+email : patrice.bellot@openedition.org
 
 ### Installation
 See doc/INSTALL.txt
