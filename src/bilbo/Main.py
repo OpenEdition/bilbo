@@ -19,7 +19,6 @@ rootDir = "/".join(main[:len(main)-3])
 srcDir = os.path.join(rootDir, 'src')
 sys.path.append(srcDir)
 
-
 from bilbo.Bilbo import Bilbo
 from bilbo.utils import *
 
@@ -106,8 +105,10 @@ if __name__ == '__main__':
 			bilbo = Bilbo(str(args[1]), options, "crf_model_detail")
 			
 		dtype = options.t
-		if dtype == "bibl" : typeCorpus = 1
-		elif dtype == "note" : typeCorpus = 2
+		if dtype == "bibl" : 
+			typeCorpus = 1
+		elif dtype == "note" : 
+			typeCorpus = 2
 		dirModel = os.path.join(rootDir, 'model/corpus')+str(typeCorpus)+"/"+options.m+"/"
 		if not os.path.exists(dirModel): os.makedirs(dirModel)
 		

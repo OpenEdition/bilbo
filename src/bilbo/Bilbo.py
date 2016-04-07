@@ -20,9 +20,9 @@ Created on April 08, 2012
 
 @author: Young-Min Kim, Jade Tavernier
 """
-from bilbo.format.CRF import CRF
-from bilbo.format.SVM import SVM
-from bilbo.reference.Corpus import Corpus
+from format.CRF import CRF
+from format.SVM import SVM
+from reference.Corpus import Corpus
 import os
 import shutil
 from tempfile import mkdtemp
@@ -122,9 +122,9 @@ class Bilbo(object):
 				corpus = self.annotateCorpus1(dirModel, corpus, fname)
 			elif typeCorpus == 2:
 				corpus = self.annotateCorpus2(dirModel, corpus, fname, external)
-			corpus.deleteAllFiles()
+			#corpus.deleteAllFiles()
 			
-		self.deleteTmpFiles()
+		#self.deleteTmpFiles()
 
 
 	def annotateCorpus1(self, dirModel, corpus, fname):
@@ -175,6 +175,11 @@ class Bilbo(object):
 		"""
 		print "Extract notes..."
 		corpus.extract(2, "note", fname, external)
+
+		#Amal
+		external = 0 
+		self.options.s = True
+
 		if external == 0 and self.options.s : #if not external data and svm option is true
 			print "svm source data extraction..."
 			self.crf.prepareTest(corpus, 2, -1) 	#last argument:int, -1:prepare source data for SVM learning, default:0
@@ -182,11 +187,11 @@ class Bilbo(object):
 			self.svm.prepareTest(corpus)
 			self.svm.runTest(dirModel)
 		
-			print "crf data extraction for labeling..."
-			newlistReferences = self.crf.prepareTest(corpus, 2)
-			self.crf.runTest(dirModel, 'testdata_CRF_Wapiti.txt', self.crfmodelname)
-			self.crf.postProcessTest("testEstCRF.txt", "testEstCLNblCRF.txt", newlistReferences.getReferences())
-			corpus.addTagReferences(self.dirResult, "testEstCRF.xml", "note", 2, newlistReferences.getReferences())
+			print "crf data extraction for labeling..." #commented in case of detection of zone biblio
+			#newlistReferences = self.crf.prepareTest(corpus, 2)
+			#self.crf.runTest(dirModel, 'testdata_CRF_Wapiti.txt', self.crfmodelname)
+			#self.crf.postProcessTest("testEstCRF.txt", "testEstCLNblCRF.txt", newlistReferences.getReferences())
+			#corpus.addTagReferences(self.dirResult, "testEstCRF.xml", "note", 2, newlistReferences.getReferences())
 			
 		else:										#if external data : external=1, we do not call a SVM model
 			print "crf data extraction for labeling..."
@@ -197,6 +202,8 @@ class Bilbo(object):
 			corpus.addTagReferences(self.dirResult, "testEstCRF.xml", "note", 2)
 
 		return corpus
+           
+
 
 
 	def deleteTmpFiles(self):

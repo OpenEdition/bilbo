@@ -299,7 +299,8 @@ class Extract_svm(Extract):
 		del tokens[:]
 		fname = "model/corpus2/"+self.options.m+"/inputID.txt"
 		for line in open(os.path.join(self.rootDir, fname), 'r') :
-			n = line.split('\n')
+                #line = line.decode('utf-8')
+			n = (line.decode('utf-8')).split('\n')
 			tokens.append(n[0])
 		#load feature id list for new data
 		del features[:]
