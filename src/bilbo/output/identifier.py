@@ -179,9 +179,9 @@ def teiValidate(fname, objfile) :
 def main():
 	if len (sys.argv) != 2 :
 		print 'python identifier.py (xml file name)'
-		sys.exit (1)
-	#input = rfile(str(sys.argv[1]))
-	#extractDoi(input)
+		#sys.exit (1)
+	input = rfile(str(sys.argv[1]))
+	extractDoi(input)
 	tagConvert = {}
 	loadTEIRule(tagConvert)
 	toTEI('test', tagConvert)
