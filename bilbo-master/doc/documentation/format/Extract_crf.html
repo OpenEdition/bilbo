@@ -1,0 +1,122 @@
+
+<!doctype html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module Extract_crf</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>Extract_crf</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/young-minkim/Documents/workspace/bilbo/src/bilbo/format/Extract_crf.py">/Users/young-minkim/Documents/workspace/bilbo/src/bilbo/format/Extract_crf.py</a></font></td></tr></table>
+    <p><tt>Created&nbsp;on&nbsp;June&nbsp;11,&nbsp;2012<br>
+&nbsp;<br>
+@author:&nbsp;Young-Min&nbsp;Kim,&nbsp;Jade&nbsp;Tavernier</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="bilbo.format.Extract.html#Extract">bilbo.format.Extract.Extract</a>(<a href="__builtin__.html#object">__builtin__.object</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="Extract_crf.html#Extract_crf">Extract_crf</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Extract_crf">class <strong>Extract_crf</strong></a>(<a href="bilbo.format.Extract.html#Extract">bilbo.format.Extract.Extract</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;class&nbsp;to&nbsp;extract&nbsp;training&nbsp;and&nbsp;test&nbsp;data&nbsp;for&nbsp;CRF<br>
+Sub&nbsp;class&nbsp;of&nbsp;<a href="bilbo.format.Extract.html#Extract">Extract</a><br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="Extract_crf.html#Extract_crf">Extract_crf</a></dd>
+<dd><a href="bilbo.format.Extract.html#Extract">bilbo.format.Extract.Extract</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Extract_crf-__init__"><strong>__init__</strong></a>(self, options<font color="#909090">={}</font>)</dt></dl>
+
+<dl><dt><a name="Extract_crf-extract"><strong>extract</strong></a>(self, typeCorpus, ndocs, fileRes, listRef, tr<font color="#909090">=-1</font>, extOption<font color="#909090">=-1</font>)</dt><dd><tt><a href="bilbo.format.Extract.html#Extract">Extract</a>&nbsp;training&nbsp;and&nbsp;test&nbsp;data<br>
+&nbsp;<br>
+Parameters<br>
+----------&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+typeCorpus&nbsp;:&nbsp;int,&nbsp;{1,&nbsp;2,&nbsp;3}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;of&nbsp;corpus<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;:&nbsp;corpus&nbsp;1,&nbsp;2&nbsp;:&nbsp;corpus&nbsp;2...<br>
+ndocs&nbsp;:&nbsp;int&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;number&nbsp;of&nbsp;references<br>
+fileRes&nbsp;:&nbsp;string<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;output&nbsp;file&nbsp;name<br>
+listRef&nbsp;:&nbsp;listReferences<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reference&nbsp;list<br>
+tr&nbsp;:&nbsp;int,&nbsp;{1,&nbsp;0,&nbsp;-1,&nbsp;-2}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;check&nbsp;if&nbsp;training&nbsp;or&nbsp;test&nbsp;data<br>
+extOption&nbsp;:&nbsp;int,&nbsp;{-1,&nbsp;1,&nbsp;...}&nbsp;(default&nbsp;-1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extra&nbsp;option&nbsp;for&nbsp;crf&nbsp;training/test&nbsp;data&nbsp;format<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;check&nbsp;if&nbsp;data&nbsp;is&nbsp;internal&nbsp;data,&nbsp;if&nbsp;yes&nbsp;we'll&nbsp;use&nbsp;a&nbsp;modified&nbsp;index&nbsp;for&nbsp;corpus&nbsp;type&nbsp;2<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1&nbsp;:&nbsp;data&nbsp;format&nbsp;for&nbsp;SVM&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;:&nbsp;data&nbsp;format&nbsp;for&nbsp;normal&nbsp;CRF&nbsp;training/test&nbsp;data&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2-5&nbsp;:&nbsp;(not&nbsp;yet&nbsp;provided)</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="bilbo.format.Extract.html#Extract">bilbo.format.Extract.Extract</a>:<br>
+<dl><dt><a name="Extract_crf-convertToUnicode"><strong>convertToUnicode</strong></a>(self, chaine)</dt><dd><tt>Convert&nbsp;a&nbsp;string&nbsp;to&nbsp;unicode</tt></dd></dl>
+
+<dl><dt><a name="Extract_crf-extractIndices"><strong>extractIndices</strong></a>(self, svmprediction_trainfile, listRef)</dt><dd><tt><a href="bilbo.format.Extract.html#Extract">Extract</a>&nbsp;indices&nbsp;for&nbsp;nonbibls&nbsp;from&nbsp;SVM&nbsp;classification&nbsp;result<br>
+then&nbsp;modify&nbsp;'train'&nbsp;attribute&nbsp;of&nbsp;each&nbsp;reference<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+svmprediction_trainfile&nbsp;:&nbsp;string<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SVM&nbsp;classification&nbsp;result&nbsp;for&nbsp;training&nbsp;data<br>
+listRef&nbsp;:&nbsp;list<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reference&nbsp;list</tt></dd></dl>
+
+<dl><dt><a name="Extract_crf-extractIndices4new"><strong>extractIndices4new</strong></a>(self, svmprediction_newfile, listRef)</dt><dd><tt><a href="bilbo.format.Extract.html#Extract">Extract</a>&nbsp;indices&nbsp;for&nbsp;nonbibls&nbsp;from&nbsp;SVM&nbsp;classification&nbsp;result<br>
+then&nbsp;modify&nbsp;'train'&nbsp;attribute&nbsp;of&nbsp;each&nbsp;reference<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+svmprediction_newfile&nbsp;:&nbsp;string<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SVM&nbsp;classification&nbsp;result&nbsp;for&nbsp;test&nbsp;data<br>
+listRef&nbsp;:&nbsp;list<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reference&nbsp;list</tt></dd></dl>
+
+<dl><dt><a name="Extract_crf-loadIndices"><strong>loadIndices</strong></a>(self, fichier)</dt><dd><tt>Load&nbsp;the&nbsp;indices&nbsp;of&nbsp;the&nbsp;File&nbsp;object</tt></dd></dl>
+
+<dl><dt><a name="Extract_crf-randomgen"><strong>randomgen</strong></a>(self, listRef, tr)</dt><dd><tt>Generate&nbsp;indicators&nbsp;for&nbsp;the&nbsp;training&nbsp;and&nbsp;test&nbsp;documents<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+listRef&nbsp;:&nbsp;listReferences<br>
+tr&nbsp;:&nbsp;int,&nbsp;{1,&nbsp;0,&nbsp;-1,&nbsp;-2}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;check&nbsp;if&nbsp;training&nbsp;or&nbsp;test&nbsp;data</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="bilbo.format.Extract.html#Extract">bilbo.format.Extract.Extract</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>chFeat4title</strong> = ['a', 'm', 'j', 's', 'u', 'volume_title', 'translated_title', 'research_programm']<br>
+<strong>chPunc</strong> = {'"': 0, '(': 0, ')': 0, ',': 0, '.': 0, '[': 0, ']': 0, '{': 0, '}': 0, '<font color="#c040c0">\xc2\xab</font>': 0, ...}</td></tr></table>
+</body></html>

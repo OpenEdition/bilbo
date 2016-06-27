@@ -1,0 +1,7 @@
+meeting	booktitle
+pubplace	place
+settlement	place
+country	place
+region	place
+sponsor	publisher
+distributor	publisher

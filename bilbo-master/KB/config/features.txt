@@ -1,0 +1,42 @@
+# features
+initial
+allnumbers
+dash
+numbers
+allcap
+allsmall
+nonimpcap
+firstcap
+weblink
+italic
+posseditor
+posspage
+possmonth
+punc
+point
+comma
+leadingquotes
+endingquotes
+link
+pairedbraces
+# nonLabels
+hi 0
+abbr 1
+lb 0
+pb 0
+ptr 0
+emph 0
+ref 1
+bibl 0
+relateditem 0
+p 0
+body 0
+time 0
+num 0
+# bookindicator
+in
+inÊ
+dans
+dansÊ
+en
+enÊ

@@ -1,0 +1,147 @@
+
+<!doctype html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module Bilbo</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>Bilbo</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/young-minkim/Documents/workspace/bilbo/src/bilbo/Bilbo.py">/Users/young-minkim/Documents/workspace/bilbo/src/bilbo/Bilbo.py</a></font></td></tr></table>
+    <p><tt>-----------------------------------------------------------------------------------------------------------------------<br>
+BILBO&nbsp;:&nbsp;Automatic&nbsp;labeling&nbsp;of&nbsp;bibliographic&nbsp;reference<br>
+&nbsp;<br>
+(C)&nbsp;Copyright&nbsp;2012&nbsp;by&nbsp;Young-Min&nbsp;Kim&nbsp;(youngminn.kim@gmail.com)&nbsp;and&nbsp;Jade&nbsp;Tavernier<br>
+(jade.tavernier@gmail.com).&nbsp;This&nbsp;is&nbsp;initially&nbsp;written&nbsp;by&nbsp;Young-Min&nbsp;Kim&nbsp;for&nbsp;the&nbsp;prototype&nbsp;<br>
+and&nbsp;modified&nbsp;by&nbsp;Jade&nbsp;Tavernier&nbsp;for&nbsp;code&nbsp;reorganization&nbsp;in&nbsp;an&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;oriented&nbsp;design.<br>
+&nbsp;<br>
+BILBO&nbsp;is&nbsp;an&nbsp;open&nbsp;source&nbsp;software&nbsp;for&nbsp;automatic&nbsp;annotation&nbsp;of&nbsp;bibliographic&nbsp;reference.<br>
+It&nbsp;provides&nbsp;the&nbsp;segmentation&nbsp;and&nbsp;tagging&nbsp;of&nbsp;input&nbsp;string.&nbsp;It&nbsp;is&nbsp;principally&nbsp;based&nbsp;on<br>
+Conditional&nbsp;Random&nbsp;Fields&nbsp;(CRFs),&nbsp;machine&nbsp;learning&nbsp;technique&nbsp;to&nbsp;segment&nbsp;and&nbsp;label<br>
+sequence&nbsp;data.&nbsp;As&nbsp;external&nbsp;softwares,&nbsp;Wapiti&nbsp;is&nbsp;used&nbsp;for&nbsp;CRF&nbsp;learning&nbsp;and&nbsp;inference<br>
+and&nbsp;SVMlight&nbsp;is&nbsp;used&nbsp;for&nbsp;sequence&nbsp;classification.&nbsp;BILBO&nbsp;is&nbsp;licensed&nbsp;under&nbsp;a&nbsp;Creative<br>
+Commons&nbsp;Attribution-NonCommercial-ShareAlike&nbsp;2.5&nbsp;Generic&nbsp;License&nbsp;(CC&nbsp;BY-NC-SA&nbsp;2.5).<br>
+---------------------------------------------------------------------------------------------------------------------------<br>
+&nbsp;<br>
+Created&nbsp;on&nbsp;April&nbsp;08,&nbsp;2012<br>
+&nbsp;<br>
+@author:&nbsp;Young-Min&nbsp;Kim,&nbsp;Jade&nbsp;Tavernier</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="os.html">os</a><br>
+</td><td width="25%" valign=top><a href="shutil.html">shutil</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="__builtin__.html#object">__builtin__.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="Bilbo.html#Bilbo">Bilbo</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Bilbo">class <strong>Bilbo</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;machine&nbsp;<a href="#Bilbo">Bilbo</a>&nbsp;that&nbsp;trains&nbsp;a&nbsp;CRF&nbsp;(and&nbsp;a&nbsp;SVM)&nbsp;model&nbsp;and&nbsp;automatically&nbsp;labels&nbsp;new&nbsp;references.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Bilbo-__init__"><strong>__init__</strong></a>(self, dirResult<font color="#909090">=''</font>, options<font color="#909090">={}</font>, crfmodelname<font color="#909090">='crf_model_simple'</font>)</dt><dd><tt>Attributes<br>
+----------<br>
+crf&nbsp;:&nbsp;CRF<br>
+svm&nbsp;:&nbsp;SVM<br>
+dirResult&nbsp;:&nbsp;string<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;directory&nbsp;for&nbsp;output&nbsp;files</tt></dd></dl>
+
+<dl><dt><a name="Bilbo-annotate"><strong>annotate</strong></a>(self, dirCorpus, dirModel, typeCorpus, external<font color="#909090">=0</font>)</dt><dd><tt>Automatic&nbsp;annotation&nbsp;of&nbsp;references&nbsp;<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+dirCorpus&nbsp;:&nbsp;string<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;directory&nbsp;where&nbsp;the&nbsp;references&nbsp;to&nbsp;be&nbsp;annotated&nbsp;are<br>
+dirModel&nbsp;:&nbsp;string<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;directory&nbsp;where&nbsp;the&nbsp;learned&nbsp;CRF&nbsp;model&nbsp;and&nbsp;SVM&nbsp;model&nbsp;have&nbsp;been&nbsp;saved<br>
+typeCorpus&nbsp;:&nbsp;int,&nbsp;{1,&nbsp;2,&nbsp;3}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;:&nbsp;corpus&nbsp;1,&nbsp;2&nbsp;:&nbsp;corpus&nbsp;2...<br>
+external&nbsp;:&nbsp;int,&nbsp;{1,&nbsp;0}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;:&nbsp;if&nbsp;the&nbsp;references&nbsp;are&nbsp;external&nbsp;data&nbsp;except&nbsp;CLEO,&nbsp;0&nbsp;:&nbsp;if&nbsp;that&nbsp;of&nbsp;CLEO<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;it&nbsp;is&nbsp;used&nbsp;to&nbsp;decide&nbsp;whether&nbsp;<a href="#Bilbo">Bilbo</a>&nbsp;learn&nbsp;call&nbsp;a&nbsp;SVM&nbsp;classification&nbsp;or&nbsp;not.</tt></dd></dl>
+
+<dl><dt><a name="Bilbo-annotateCorpus1"><strong>annotateCorpus1</strong></a>(self, dirModel, corpus, fname)</dt><dd><tt>Automatic&nbsp;annotation&nbsp;of&nbsp;reference&nbsp;type&nbsp;1&nbsp;(reference)<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+dirModel&nbsp;:&nbsp;string<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;directory&nbsp;where&nbsp;the&nbsp;learned&nbsp;CRF&nbsp;model&nbsp;has&nbsp;been&nbsp;saved<br>
+corpus&nbsp;:&nbsp;Corpus<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set&nbsp;of&nbsp;references&nbsp;that&nbsp;we&nbsp;want&nbsp;to&nbsp;annotate<br>
+fname&nbsp;:&nbsp;string<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;of&nbsp;file&nbsp;to&nbsp;be&nbsp;annotated</tt></dd></dl>
+
+<dl><dt><a name="Bilbo-annotateCorpus2"><strong>annotateCorpus2</strong></a>(self, dirModel, corpus, fname, external<font color="#909090">=0</font>)</dt><dd><tt>Automatic&nbsp;annotation&nbsp;of&nbsp;reference&nbsp;type&nbsp;2&nbsp;(note)<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+dirModel&nbsp;:&nbsp;string<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;directory&nbsp;where&nbsp;learned&nbsp;CRF&nbsp;model&nbsp;and&nbsp;SVM&nbsp;model&nbsp;have&nbsp;been&nbsp;saved<br>
+corpus&nbsp;:&nbsp;Corpus<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set&nbsp;of&nbsp;notes&nbsp;that&nbsp;we&nbsp;want&nbsp;to&nbsp;annotate<br>
+fname&nbsp;:&nbsp;string<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;of&nbsp;file&nbsp;to&nbsp;be&nbsp;annotated<br>
+external&nbsp;:&nbsp;int,&nbsp;{1,&nbsp;0}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;:&nbsp;if&nbsp;external&nbsp;data,&nbsp;0&nbsp;:&nbsp;if&nbsp;CLEO&nbsp;data<br>
+&nbsp;<br>
+See&nbsp;also<br>
+--------<br>
+Oct.&nbsp;18,&nbsp;2012&nbsp;&nbsp;&nbsp;SVM&nbsp;classification&nbsp;problem&nbsp;is&nbsp;fixed<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Check&nbsp;the&nbsp;classification&nbsp;result&nbsp;of&nbsp;reference&nbsp;(reference.train)&nbsp;in&nbsp;'addTagReferences'&nbsp;method<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;of&nbsp;'Corpus'&nbsp;class&nbsp;that&nbsp;is&nbsp;called&nbsp;in&nbsp;'annotateCorpus2'&nbsp;method&nbsp;of&nbsp;'<a href="#Bilbo">Bilbo</a>'&nbsp;class.</tt></dd></dl>
+
+<dl><dt><a name="Bilbo-deleteTmpFiles"><strong>deleteTmpFiles</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Bilbo-mem"><strong>mem</strong></a>(self, size<font color="#909090">='rss'</font>)</dt><dd><tt>Generalization;&nbsp;memory&nbsp;sizes:&nbsp;rss,&nbsp;rsz,&nbsp;vsz.</tt></dd></dl>
+
+<dl><dt><a name="Bilbo-rss"><strong>rss</strong></a>(self)</dt><dd><tt>Return&nbsp;ps&nbsp;-o&nbsp;rss&nbsp;(resident)&nbsp;memory&nbsp;in&nbsp;kB.</tt></dd></dl>
+
+<dl><dt><a name="Bilbo-rsz"><strong>rsz</strong></a>(self)</dt><dd><tt>Return&nbsp;ps&nbsp;-o&nbsp;rsz&nbsp;(resident&nbsp;+&nbsp;text)&nbsp;memory&nbsp;in&nbsp;kB.</tt></dd></dl>
+
+<dl><dt><a name="Bilbo-train"><strong>train</strong></a>(self, dirCorpus, dirModel, typeCorpus)</dt><dd><tt>CRF&nbsp;model&nbsp;learning&nbsp;(corpus&nbsp;1&nbsp;and&nbsp;2),&nbsp;SVM&nbsp;model&nbsp;learning&nbsp;(corpus&nbsp;2)<br>
+Corpus&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;declaration<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+dirCorpus&nbsp;:&nbsp;string<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;directory&nbsp;where&nbsp;training&nbsp;references&nbsp;(notes)&nbsp;are<br>
+dirModel&nbsp;:&nbsp;string<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;directory&nbsp;where&nbsp;CRF&nbsp;and&nbsp;SVM&nbsp;models&nbsp;are&nbsp;saved<br>
+typeCorpus&nbsp;:&nbsp;int,&nbsp;{1,&nbsp;2,&nbsp;3}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;of&nbsp;corpus<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;:&nbsp;corpus&nbsp;1,&nbsp;2&nbsp;:&nbsp;corpus&nbsp;2...</tt></dd></dl>
+
+<dl><dt><a name="Bilbo-vsz"><strong>vsz</strong></a>(self)</dt><dd><tt>Return&nbsp;ps&nbsp;-o&nbsp;vsz&nbsp;(virtual)&nbsp;memory&nbsp;in&nbsp;kB.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table>
+</body></html>

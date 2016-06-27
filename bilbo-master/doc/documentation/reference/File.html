@@ -1,0 +1,175 @@
+
+<!doctype html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module File</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>File</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/young-minkim/Documents/workspace/bilbo/src/bilbo/reference/File.py">/Users/young-minkim/Documents/workspace/bilbo/src/bilbo/reference/File.py</a></font></td></tr></table>
+    <p><tt>Created&nbsp;on&nbsp;April&nbsp;25,&nbsp;2012<br>
+&nbsp;<br>
+@author:&nbsp;Young-Min&nbsp;Kim,&nbsp;Jade&nbsp;Tavernier</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="copy.html">copy</a><br>
+</td><td width="25%" valign=top><a href="re.html">re</a><br>
+</td><td width="25%" valign=top><a href="sys.html">sys</a><br>
+</td><td width="25%" valign=top><a href="bilbo.reference.tagtool.html">bilbo.reference.tagtool</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="__builtin__.html#object">__builtin__.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="File.html#File">File</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="File">class <strong>File</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;file&nbsp;class&nbsp;containing&nbsp;all&nbsp;references&nbsp;in&nbsp;a&nbsp;file<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="File-__init__"><strong>__init__</strong></a>(self, fname, options)</dt><dd><tt>Attributes<br>
+----------<br>
+nom&nbsp;:&nbsp;string<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;target&nbsp;file&nbsp;name<br>
+corpus&nbsp;:&nbsp;dictionary&nbsp;of&nbsp;reference&nbsp;list<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;references&nbsp;in&nbsp;the&nbsp;file</tt></dd></dl>
+
+<dl><dt><a name="File-arrangeTagsPerToken"><strong>arrangeTagsPerToken</strong></a>(self, includedLabels, oriRef, tagTypeCorpus)</dt><dd><tt>Check&nbsp;if&nbsp;a&nbsp;field&nbsp;of&nbsp;tokens&nbsp;annotated&nbsp;by&nbsp;a&nbsp;label&nbsp;tag&nbsp;has&nbsp;wrapped&nbsp;by&nbsp;other&nbsp;basic&nbsp;tag.<br>
+If&nbsp;yes,&nbsp;change&nbsp;order.&nbsp;It's&nbsp;for&nbsp;prevent&nbsp;the&nbsp;mismatching&nbsp;error&nbsp;of&nbsp;author&nbsp;tag&nbsp;and&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;also&nbsp;find&nbsp;other&nbsp;continuous&nbsp;tags.<br>
+e.g.&nbsp;To&nbsp;prevent&nbsp;the&nbsp;following&nbsp;error&nbsp;(interruption&nbsp;of&nbsp;&lt;author&gt;&nbsp;in&nbsp;&lt;hi&gt;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;hi&nbsp;font-variant="small-caps"&gt;&lt;author&gt;&lt;surname&gt;Alves&lt;/surname&gt;&lt;/hi&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;change&nbsp;order&nbsp;as&nbsp;following&nbsp;before&nbsp;add&nbsp;&lt;author&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;surname&gt;&lt;hi&nbsp;font-variant="small-caps"&gt;Alves&lt;/hi&gt;&lt;/surname&gt;<br>
+e.g.&nbsp;To&nbsp;find&nbsp;undetected&nbsp;continuous&nbsp;tags&nbsp;as&nbsp;follows</tt></dd></dl>
+
+<dl><dt><a name="File-buildReferences"><strong>buildReferences</strong></a>(self, references, tagTypeCorpus, dirResult)</dt><dd><tt>Construct&nbsp;final&nbsp;xml&nbsp;output&nbsp;file,&nbsp;called&nbsp;from&nbsp;Corpus::addTagReferences<br>
+Unlike&nbsp;the&nbsp;first&nbsp;version,&nbsp;compare&nbsp;token&nbsp;by&nbsp;token,&nbsp;replace&nbsp;the&nbsp;token&nbsp;by&nbsp;automatically&nbsp;tagged&nbsp;token.&nbsp;<br>
+That's&nbsp;why&nbsp;we&nbsp;keep&nbsp;perfectly&nbsp;the&nbsp;original&nbsp;data&nbsp;format.<br>
+Don't&nbsp;forget&nbsp;to&nbsp;put&nbsp;the&nbsp;'&amp;amp;'&nbsp;instead&nbsp;of&nbsp;'&amp;'<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+references&nbsp;:&nbsp;list&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;automatically&nbsp;annotated&nbsp;references&nbsp;in&nbsp;the&nbsp;given&nbsp;file<br>
+tagTypeCorpus&nbsp;:&nbsp;string,&nbsp;{"bibl",&nbsp;"note"}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tag&nbsp;name&nbsp;defining&nbsp;reference&nbsp;types<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"bibl"&nbsp;:&nbsp;corpus&nbsp;1,&nbsp;"note"&nbsp;:&nbsp;corpus&nbsp;2<br>
+tagTypeList&nbsp;:&nbsp;string,&nbsp;"listbibl"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tag&nbsp;name&nbsp;wrapping&nbsp;all&nbsp;references<br>
+&nbsp;<br>
+Attributes<br>
+----------</tt></dd></dl>
+
+<dl><dt><a name="File-checkHiTag"><strong>checkHiTag</strong></a>(self, oriRef, includedLabels)</dt><dd><tt>Solve&nbsp;tag&nbsp;encoding&nbsp;problem&nbsp;concerning&nbsp;&lt;hi&gt;&nbsp;tag.&nbsp;As&nbsp;original&nbsp;xml&nbsp;contains&nbsp;a&nbsp;lot&nbsp;of&nbsp;&lt;hi&gt;&nbsp;tags,&nbsp;which&nbsp;are&nbsp;often<br>
+complicate&nbsp;and&nbsp;sometimes&nbsp;not&nbsp;correctly&nbsp;written,&nbsp;we&nbsp;should&nbsp;especially&nbsp;deal&nbsp;with&nbsp;the&nbsp;conflict&nbsp;among&nbsp;&lt;hi&gt;&nbsp;tag<br>
+and&nbsp;annotated&nbsp;tags&nbsp;by&nbsp;Bilbo.&nbsp;The&nbsp;objective&nbsp;is&nbsp;exchanging&nbsp;tags&nbsp;so&nbsp;that&nbsp;&lt;hi&gt;&nbsp;tag&nbsp;includes&nbsp;text&nbsp;only.&nbsp;It&nbsp;is&nbsp;not&nbsp;<br>
+easy&nbsp;because&nbsp;users&nbsp;sometimes&nbsp;do&nbsp;errors&nbsp;when&nbsp;they&nbsp;modify&nbsp;character&nbsp;appearance&nbsp;in&nbsp;their&nbsp;articles&nbsp;(&lt;hi&gt;&nbsp;concerns<br>
+character&nbsp;appearance).&nbsp;Even&nbsp;if&nbsp;this&nbsp;is&nbsp;not&nbsp;very&nbsp;often,&nbsp;it's&nbsp;not&nbsp;easy&nbsp;to&nbsp;add&nbsp;some&nbsp;rules&nbsp;to&nbsp;detect&nbsp;and&nbsp;solve<br>
+this&nbsp;problem&nbsp;because&nbsp;Bilbo&nbsp;also&nbsp;mistakes&nbsp;and&nbsp;it&nbsp;is&nbsp;not&nbsp;easy&nbsp;to&nbsp;automatically&nbsp;detect&nbsp;if&nbsp;the&nbsp;conflict&nbsp;comes&nbsp;<br>
+from&nbsp;user&nbsp;or&nbsp;Bilbo.&nbsp;Anyway&nbsp;we&nbsp;start&nbsp;the&nbsp;correction&nbsp;from&nbsp;the&nbsp;obvious&nbsp;error&nbsp;of&nbsp;Bilbo&nbsp;and&nbsp;try&nbsp;to&nbsp;make&nbsp;some&nbsp;<br>
+detailed&nbsp;rules&nbsp;for&nbsp;every&nbsp;error&nbsp;cases.</tt></dd></dl>
+
+<dl><dt><a name="File-continuousTags"><strong>continuousTags</strong></a>(self, basicTag, includedLabels, oriRef)</dt><dd><tt>Check&nbsp;continuously&nbsp;annotated&nbsp;tags&nbsp;to&nbsp;eliminate&nbsp;tags&nbsp;per&nbsp;each&nbsp;token</tt></dd></dl>
+
+<dl><dt><a name="File-convertToUnicode"><strong>convertToUnicode</strong></a>(self, chaine)</dt><dd><tt>Convert&nbsp;a&nbsp;string&nbsp;to&nbsp;unicode</tt></dd></dl>
+
+<dl><dt><a name="File-correctMissTag"><strong>correctMissTag</strong></a>(self, oriRef, basicTag, addedTag)</dt><dd><tt>Check&nbsp;interrupted&nbsp;tags&nbsp;in&nbsp;newly&nbsp;attached&nbsp;tag&nbsp;(wrapping&nbsp;other&nbsp;tags),&nbsp;then&nbsp;replace&nbsp;them<br>
+This&nbsp;interruption&nbsp;arrives&nbsp;because&nbsp;of&nbsp;originally&nbsp;existing&nbsp;tags&nbsp;(basicTag)&nbsp;in&nbsp;the&nbsp;input&nbsp;file.<br>
+By&nbsp;grouping&nbsp;fields&nbsp;per&nbsp;person,&nbsp;opening&nbsp;and&nbsp;ending&nbsp;tags&nbsp;can&nbsp;be&nbsp;conflicted.<br>
+e.g.&nbsp;case&nbsp;1&nbsp;:&nbsp;&lt;hi&nbsp;rend="bold"&gt;&lt;author&gt;&lt;surname&gt;Lallement&lt;/surname&gt;&nbsp;&lt;forename&gt;E.&lt;/forename&gt;&lt;/hi&gt;&lt;/author&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;2&nbsp;:&nbsp;...&nbsp;&lt;hi&nbsp;rend="bold"&gt;&nbsp;&lt;forename&gt;M.&lt;/forename&gt;&lt;/author&gt;&nbsp;(&lt;abbr&gt;dir&lt;/abbr&gt;.)&lt;/hi&gt;<br>
+By&nbsp;searching&nbsp;from&nbsp;the&nbsp;beginning&nbsp;of&nbsp;the&nbsp;input&nbsp;string,&nbsp;check&nbsp;case&nbsp;1&nbsp;and&nbsp;correct,&nbsp;then&nbsp;check&nbsp;case2&nbsp;and&nbsp;correct<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Algo]&nbsp;&nbsp;1.&nbsp;find&nbsp;the&nbsp;starting&nbsp;and&nbsp;ending&nbsp;of&nbsp;target&nbsp;tag&nbsp;(pointers,&nbsp;ptr1,&nbsp;ptr2)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(case&nbsp;1)&nbsp;find&nbsp;an&nbsp;ending&nbsp;tag&nbsp;in&nbsp;basicTag&nbsp;from&nbsp;ptr1,&nbsp;if&nbsp;no&nbsp;starting&nbsp;tag&nbsp;between&nbsp;ptr1&nbsp;and&nbsp;ptr2<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;find&nbsp;the&nbsp;starting&nbsp;tag&nbsp;by&nbsp;inversely&nbsp;checking&nbsp;the&nbsp;string.&nbsp;Once</tt></dd></dl>
+
+<dl><dt><a name="File-detectBibl"><strong>detectBibl</strong></a>(self, oriRef, includedLabels)</dt><dd><tt>Separate&nbsp;references&nbsp;included&nbsp;in&nbsp;a&nbsp;note</tt></dd></dl>
+
+<dl><dt><a name="File-doiExtraction"><strong>doiExtraction</strong></a>(self, text, reference, tagTypeCorpus)</dt><dd><tt>Call&nbsp;extractDoi&nbsp;from&nbsp;indentifier.py&nbsp;then&nbsp;insert&nbsp;the&nbsp;result</tt></dd></dl>
+
+<dl><dt><a name="File-extract"><strong>extract</strong></a>(self, typeCorpus, tag, external)</dt><dd><tt>Extract&nbsp;references<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+typeCorpus&nbsp;:&nbsp;int,&nbsp;{1,&nbsp;2,&nbsp;3}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;of&nbsp;corpus<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;:&nbsp;corpus&nbsp;1,&nbsp;2&nbsp;:&nbsp;corpus&nbsp;2...<br>
+tag&nbsp;:&nbsp;string,&nbsp;{"bibl",&nbsp;"note"}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tag&nbsp;name&nbsp;defining&nbsp;reference&nbsp;types<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"bibl"&nbsp;:&nbsp;corpus&nbsp;1,&nbsp;"note"&nbsp;:&nbsp;corpus&nbsp;2<br>
+external&nbsp;:&nbsp;int,&nbsp;{1,&nbsp;0}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;:&nbsp;if&nbsp;the&nbsp;references&nbsp;are&nbsp;external&nbsp;data&nbsp;except&nbsp;CLEO,&nbsp;0&nbsp;:&nbsp;if&nbsp;that&nbsp;of&nbsp;CLEO<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;it&nbsp;is&nbsp;used&nbsp;to&nbsp;decide&nbsp;whether&nbsp;Bilbo&nbsp;learn&nbsp;call&nbsp;a&nbsp;SVM&nbsp;classification&nbsp;or&nbsp;not.</tt></dd></dl>
+
+<dl><dt><a name="File-findAuthor"><strong>findAuthor</strong></a>(self, includedLabels, oriRef)</dt><dd><tt>Post-processing&nbsp;RULE&nbsp;about&nbsp;author&nbsp;field<br>
+Separate&nbsp;surname&nbsp;and&nbsp;forename&nbsp;pair&nbsp;per&nbsp;author<br>
+Step&nbsp;1.&nbsp;check&nbsp;group&nbsp;of&nbsp;fields&nbsp;continuously&nbsp;tagged&nbsp;as&nbsp;surname&nbsp;or&nbsp;as&nbsp;forename&nbsp;over&nbsp;whole&nbsp;string<br>
+Step&nbsp;2.&nbsp;per&nbsp;group,&nbsp;verify&nbsp;if&nbsp;there&nbsp;are&nbsp;more&nbsp;than&nbsp;an&nbsp;author&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2-1.&nbsp;Check&nbsp;if&nbsp;there&nbsp;is&nbsp;a&nbsp;comma&nbsp;(or&nbsp;others&nbsp;like&nbsp;&amp;,&nbsp;et,&nbsp;and)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2-2.&nbsp;Check&nbsp;if&nbsp;there&nbsp;are&nbsp;more&nbsp;than&nbsp;three&nbsp;tokens<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;only&nbsp;an&nbsp;author&nbsp;-&gt;&nbsp;wrap&nbsp;the&nbsp;fields&nbsp;with&nbsp;&lt;author&gt;&lt;/author&gt;<br>
+Step&nbsp;3.&nbsp;if&nbsp;more&nbsp;than&nbsp;an&nbsp;author,&nbsp;check&nbsp;the&nbsp;type.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3-1&nbsp;separate&nbsp;tokens&nbsp;by&nbsp;comma&nbsp;(or&nbsp;others),&nbsp;if&nbsp;there&nbsp;are&nbsp;more&nbsp;than&nbsp;a&nbsp;token&nbsp;in&nbsp;a&nbsp;separated&nbsp;group,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;we&nbsp;assume&nbsp;that&nbsp;authors&nbsp;are&nbsp;separated&nbsp;by&nbsp;a&nbsp;comma<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wrap&nbsp;the&nbsp;fields&nbsp;with&nbsp;&lt;author&gt;&lt;/author&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3-2&nbsp;if&nbsp;there&nbsp;is&nbsp;only&nbsp;a&nbsp;token&nbsp;in&nbsp;a&nbsp;separated&nbsp;group,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SURNAME,&nbsp;FORENAME&nbsp;(FORENAME...),&nbsp;SURNAME,&nbsp;FORENAME&nbsp;(FORENAME...),&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;separate&nbsp;them&nbsp;by&nbsp;surname</tt></dd></dl>
+
+<dl><dt><a name="File-getListReferences"><strong>getListReferences</strong></a>(self, typeCorpus)</dt><dd><tt>Return&nbsp;reference&nbsp;list<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+typeCorpus&nbsp;:&nbsp;int,&nbsp;{1,&nbsp;2,&nbsp;3}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;of&nbsp;corpus<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;:&nbsp;corpus&nbsp;1,&nbsp;2&nbsp;:&nbsp;corpus&nbsp;2...</tt></dd></dl>
+
+<dl><dt><a name="File-nbReference"><strong>nbReference</strong></a>(self, typeCorpus)</dt><dd><tt>count&nbsp;the&nbsp;number&nbsp;of&nbsp;references</tt></dd></dl>
+
+<dl><dt><a name="File-schemaValidation"><strong>schemaValidation</strong></a>(self, numReferences, dirResult)</dt><dd><tt>xml&nbsp;schema&nbsp;validation&nbsp;for&nbsp;output&nbsp;file</tt></dd></dl>
+
+<dl><dt><a name="File-writeResultInOriginal"><strong>writeResultInOriginal</strong></a>(self, tmp_str, soup, ref_ori, references, tagTypeCorpus)</dt><dd><tt>Write&nbsp;the&nbsp;labeling&nbsp;result&nbsp;in&nbsp;the&nbsp;original&nbsp;file.&nbsp;All&nbsp;the&nbsp;existing&nbsp;tags&nbsp;in&nbsp;the&nbsp;original&nbsp;file&nbsp;are&nbsp;kept.</tt></dd></dl>
+
+<dl><dt><a name="File-writeResultOnly"><strong>writeResultOnly</strong></a>(self, ref_ori, references, tagTypeCorpus)</dt><dd><tt>Write&nbsp;simply&nbsp;the&nbsp;labeling&nbsp;result&nbsp;without&nbsp;article&nbsp;contents.&nbsp;The&nbsp;existing&nbsp;tags&nbsp;are&nbsp;already&nbsp;eliminated&nbsp;for&nbsp;this&nbsp;simple&nbsp;writing</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>postPtrlimit</strong> = -1<br>
+<strong>prePtrlimit</strong> = -1<br>
+<strong>specialPunc</strong> = {'"': 0, '-': 0, '<font color="#c040c0">\xc2\xab</font>': 0, '<font color="#c040c0">\xc2\xbb</font>': 0, '<font color="#c040c0">\xe2\x80\x93</font>': 0, '<font color="#c040c0">\xe2\x80\x9c</font>': 0, '<font color="#c040c0">\xe2\x80\x9d</font>': 0}</td></tr></table>
+</body></html>

@@ -1,0 +1,147 @@
+
+<!doctype html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module Extract_svm</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>Extract_svm</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/young-minkim/Documents/workspace/bilbo/src/bilbo/format/Extract_svm.py">/Users/young-minkim/Documents/workspace/bilbo/src/bilbo/format/Extract_svm.py</a></font></td></tr></table>
+    <p><tt>Created&nbsp;on&nbsp;June&nbsp;17,&nbsp;2012<br>
+&nbsp;<br>
+@author:&nbsp;Young-Min&nbsp;Kim,&nbsp;Jade&nbsp;Tavernier</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="codecs.html">codecs</a><br>
+</td><td width="25%" valign=top><a href="numpy.html">numpy</a><br>
+</td><td width="25%" valign=top><a href="os.html">os</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="bilbo.format.Extract.html#Extract">bilbo.format.Extract.Extract</a>(<a href="__builtin__.html#object">__builtin__.object</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="Extract_svm.html#Extract_svm">Extract_svm</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Extract_svm">class <strong>Extract_svm</strong></a>(<a href="bilbo.format.Extract.html#Extract">bilbo.format.Extract.Extract</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;class&nbsp;to&nbsp;extract&nbsp;training&nbsp;and&nbsp;test&nbsp;data&nbsp;for&nbsp;SVM<br>
+Sub&nbsp;class&nbsp;of&nbsp;<a href="bilbo.format.Extract.html#Extract">Extract</a><br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="Extract_svm.html#Extract_svm">Extract_svm</a></dd>
+<dd><a href="bilbo.format.Extract.html#Extract">bilbo.format.Extract.Extract</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Extract_svm-__init__"><strong>__init__</strong></a>(self, options<font color="#909090">={}</font>)</dt><dd><tt>Attributes<br>
+----------&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+tokens&nbsp;:&nbsp;List&nbsp;of&nbsp;String<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tokens[k]&nbsp;-&gt;&nbsp;TOKEN&nbsp;STRING&nbsp;with&nbsp;token&nbsp;id&nbsp;'k'<br>
+idf&nbsp;:&nbsp;List&nbsp;of&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;idf[k]&nbsp;-&gt;&nbsp;document&nbsp;frequency&nbsp;of&nbsp;token&nbsp;id&nbsp;'k'<br>
+features&nbsp;:&nbsp;List&nbsp;of&nbsp;String<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;features[k]&nbsp;-&gt;&nbsp;FEATURE&nbsp;STRING&nbsp;with&nbsp;feature&nbsp;id&nbsp;'k'<br>
+doc_tokens&nbsp;:&nbsp;dict<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tmp&nbsp;document&nbsp;represented&nbsp;by&nbsp;token&nbsp;strings&nbsp;and&nbsp;their&nbsp;counts<br>
+doc_features&nbsp;:&nbsp;dict&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tmp&nbsp;document&nbsp;represented&nbsp;by&nbsp;feature&nbsp;strings&nbsp;and&nbsp;their&nbsp;counts<br>
+valid_features&nbsp;:&nbsp;dict<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*IMPORTANT*&nbsp;valid&nbsp;features&nbsp;to&nbsp;be&nbsp;considered&nbsp;for&nbsp;the&nbsp;svm&nbsp;classification</tt></dd></dl>
+
+<dl><dt><a name="Extract_svm-adding_fId"><strong>adding_fId</strong></a>(self, tokens_len, feature_data)</dt><dd><tt>#for&nbsp;the&nbsp;counting&nbsp;of&nbsp;input&nbsp;tokens</tt></dd></dl>
+
+<dl><dt><a name="Extract_svm-extract"><strong>extract</strong></a>(self, filename, ndocs, tr, filename_ori, file_out)</dt><dd><tt><a href="bilbo.format.Extract.html#Extract">Extract</a>&nbsp;training&nbsp;and&nbsp;test&nbsp;data&nbsp;in&nbsp;numerical&nbsp;format&nbsp;from&nbsp;source&nbsp;input&nbsp;file&nbsp;which&nbsp;has&nbsp;been&nbsp;<br>
+extracted&nbsp;from&nbsp;previous&nbsp;process&nbsp;Extract_crf::prepareTest&nbsp;<br>
+&nbsp;<br>
+Parameters<br>
+----------&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+filename&nbsp;:&nbsp;String<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;input&nbsp;file&nbsp;name&nbsp;containing&nbsp;source&nbsp;information&nbsp;of&nbsp;data<br>
+ndocs&nbsp;:&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;number&nbsp;of&nbsp;instances<br>
+tr&nbsp;:&nbsp;int,&nbsp;{1,&nbsp;0}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;check&nbsp;if&nbsp;training&nbsp;(1)&nbsp;or&nbsp;test&nbsp;data&nbsp;(0)<br>
+filename_ori&nbsp;:&nbsp;String<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;original&nbsp;file&nbsp;name&nbsp;keeping&nbsp;the&nbsp;original&nbsp;string&nbsp;of&nbsp;input&nbsp;data<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;it's&nbsp;used&nbsp;to&nbsp;check&nbsp;the&nbsp;classification&nbsp;error.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;the&nbsp;moment&nbsp;it's&nbsp;same&nbsp;as&nbsp;"filename",&nbsp;but&nbsp;can&nbsp;be&nbsp;modified.<br>
+file_out&nbsp;:&nbsp;String<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;output&nbsp;file&nbsp;name.&nbsp;this&nbsp;file&nbsp;will&nbsp;be&nbsp;used&nbsp;as&nbsp;training&nbsp;or&nbsp;test&nbsp;data&nbsp;for&nbsp;SVM&nbsp;light</tt></dd></dl>
+
+<dl><dt><a name="Extract_svm-fill_data"><strong>fill_data</strong></a>(self, line, input, data, tr)</dt><dd><tt>Read&nbsp;data&nbsp;in&nbsp;numerical&nbsp;format</tt></dd></dl>
+
+<dl><dt><a name="Extract_svm-insert_lineFeatures"><strong>insert_lineFeatures</strong></a>(self, feature_data, tr)</dt><dd><tt>Insert&nbsp;new&nbsp;FEATURES&nbsp;related&nbsp;with&nbsp;global&nbsp;character&nbsp;of&nbsp;reference&nbsp;:&nbsp;NOPUNC,&nbsp;ONEPUNC,&nbsp;NONUMBERS,&nbsp;NOINITIAL</tt></dd></dl>
+
+<dl><dt><a name="Extract_svm-load_ID"><strong>load_ID</strong></a>(self, tokens, features)</dt><dd><tt>Load&nbsp;input(token)&nbsp;id&nbsp;list&nbsp;and&nbsp;feature&nbsp;id&nbsp;list&nbsp;for&nbsp;new&nbsp;data</tt></dd></dl>
+
+<dl><dt><a name="Extract_svm-load_original"><strong>load_original</strong></a>(self, filename_ori, indices)</dt><dd><tt>Create&nbsp;files&nbsp;having&nbsp;original&nbsp;text&nbsp;form&nbsp;for&nbsp;the&nbsp;verification</tt></dd></dl>
+
+<dl><dt><a name="Extract_svm-print_output"><strong>print_output</strong></a>(self, token_data, feature_data, bibls, tr, indices, fileOut)</dt><dd><tt>Print&nbsp;final&nbsp;svm&nbsp;data&nbsp;file</tt></dd></dl>
+
+<dl><dt><a name="Extract_svm-save_ID"><strong>save_ID</strong></a>(self, tokens, features)</dt><dd><tt>Save&nbsp;input(token)&nbsp;id&nbsp;list&nbsp;and&nbsp;feature&nbsp;id&nbsp;list&nbsp;for&nbsp;new&nbsp;data</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="bilbo.format.Extract.html#Extract">bilbo.format.Extract.Extract</a>:<br>
+<dl><dt><a name="Extract_svm-convertToUnicode"><strong>convertToUnicode</strong></a>(self, chaine)</dt><dd><tt>Convert&nbsp;a&nbsp;string&nbsp;to&nbsp;unicode</tt></dd></dl>
+
+<dl><dt><a name="Extract_svm-extractIndices"><strong>extractIndices</strong></a>(self, svmprediction_trainfile, listRef)</dt><dd><tt><a href="bilbo.format.Extract.html#Extract">Extract</a>&nbsp;indices&nbsp;for&nbsp;nonbibls&nbsp;from&nbsp;SVM&nbsp;classification&nbsp;result<br>
+then&nbsp;modify&nbsp;'train'&nbsp;attribute&nbsp;of&nbsp;each&nbsp;reference<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+svmprediction_trainfile&nbsp;:&nbsp;string<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SVM&nbsp;classification&nbsp;result&nbsp;for&nbsp;training&nbsp;data<br>
+listRef&nbsp;:&nbsp;list<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reference&nbsp;list</tt></dd></dl>
+
+<dl><dt><a name="Extract_svm-extractIndices4new"><strong>extractIndices4new</strong></a>(self, svmprediction_newfile, listRef)</dt><dd><tt><a href="bilbo.format.Extract.html#Extract">Extract</a>&nbsp;indices&nbsp;for&nbsp;nonbibls&nbsp;from&nbsp;SVM&nbsp;classification&nbsp;result<br>
+then&nbsp;modify&nbsp;'train'&nbsp;attribute&nbsp;of&nbsp;each&nbsp;reference<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+svmprediction_newfile&nbsp;:&nbsp;string<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SVM&nbsp;classification&nbsp;result&nbsp;for&nbsp;test&nbsp;data<br>
+listRef&nbsp;:&nbsp;list<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reference&nbsp;list</tt></dd></dl>
+
+<dl><dt><a name="Extract_svm-loadIndices"><strong>loadIndices</strong></a>(self, fichier)</dt><dd><tt>Load&nbsp;the&nbsp;indices&nbsp;of&nbsp;the&nbsp;File&nbsp;object</tt></dd></dl>
+
+<dl><dt><a name="Extract_svm-randomgen"><strong>randomgen</strong></a>(self, listRef, tr)</dt><dd><tt>Generate&nbsp;indicators&nbsp;for&nbsp;the&nbsp;training&nbsp;and&nbsp;test&nbsp;documents<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+listRef&nbsp;:&nbsp;listReferences<br>
+tr&nbsp;:&nbsp;int,&nbsp;{1,&nbsp;0,&nbsp;-1,&nbsp;-2}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;check&nbsp;if&nbsp;training&nbsp;or&nbsp;test&nbsp;data</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="bilbo.format.Extract.html#Extract">bilbo.format.Extract.Extract</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table>
+</body></html>

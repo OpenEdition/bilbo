@@ -1,0 +1,1719 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.tei-c.org/ns/1.0 Validation/tei_openedition3.xsd">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title type="sup" xml:lang="es" xml:id="otx_4">Sur-titre</title>
+				<title level="a" type="main" xml:id="otx_5">Pratiques du surf des mers chez les
+					Mérovingiens du Pléistocène<note place="foot" n="1"><p rend="footnote">Les
+							Hommes actuels et les Néandertaliens atteindraient donc une capacité
+							endocrânienne adulte à travers des cheminements ontogénétiques
+							différents.</p></note></title>
+				<title type="sub" xml:id="otx_6">D'après les fossiles de surf de la plage
+					d'Hossegor</title>
+				<title type="alt" xml:lang="en" xml:id="otx_18">The Right to Exist: Trafficking and
+					Postcolonial Nausea</title>
+				<title type="alt" xml:lang="es" xml:id="otx_21">Arte y poder episcopal en la
+					Castilla.</title>
+				<title type="alt" xml:lang="it" xml:id="otx_24">Una penombra scintillante :
+					venticinque anni di ricerche sulle grotte artificiali del Rinascimento in
+					Europa.</title>
+				<title type="alt" xml:lang="de" xml:id="otx_26">Glitzernder Halbschatten:
+					Fünfundzwanzig Jahre Forschung über die künstlichen Grotten der Renaissance in
+					Europa.</title>
+				<author><name xml:id="otx_7">Maria Lasso VI</name><affiliation xml:lang="es"
+						xml:id="otx_8"><s>Università La Sapienza.</s></affiliation></author>
+				<author><name xml:lang="es" xml:id="otx_9">Brian Chébran</name><affiliation
+						xml:id="otx_10"><s><hi xml:lang="es">Université de surf de
+								Biarritz.<lb/></hi><hi rend="author-email"
+								>brian.chebran@biarritz-university-of-surf.fr</hi></s></affiliation><email><s>brian.chebran@biarritz-university-of-surf.fr</s></email></author>
+				<editor role="translator"><name xml:id="otx_11">Mª Dolores
+						Barral Rivadulla</name><affiliation xml:id="otx_12"><s><hi
+								rend="author-affiliation">Universidad Complutense de
+							Madrid.</hi></s></affiliation><orgName><s>Universidad Complutense de
+							Madrid.</s></orgName></editor>
+				<editor><name xml:id="otx_13">Vincent Corriol</name><affiliation xml:id="otx_14"
+							><s>Université Paris-XXI.</s></affiliation></editor>
+			</titleStmt>
+			<publicationStmt>
+				<date>
+
+				</date>
+				<date when="" xml:id="otx_36">28 janvier 2008</date>
+				<availability status="free">
+					<p xml:id="otx_34">Article L.111-1 du Code de la propriété intellectuelle.</p>
+				</availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblFull>
+					<titleStmt>
+						<title/>
+						<respStmt>
+							<resp>author</resp>
+							<name>Maria Lasso VI</name>
+						</respStmt>
+						<respStmt>
+							<resp>author</resp>
+							<name>Brian Chébran</name>
+						</respStmt>
+						<respStmt>
+							<resp>translator</resp>
+							<name>Mª Dolores Barral Rivadulla</name>
+						</respStmt>
+					</titleStmt>
+					<publicationStmt>
+						<date when="" xml:id="otx_35">1 décembre 2005</date>
+						<idno type="pp" xml:id="otx_37">7-153</idno>
+					</publicationStmt>
+					<notesStmt>
+						<note type="bibl" xml:id="otx_32">Ce texte a fait l’objet d’une présentation
+							lors du Colloque « À propos du style », 10-12 mars 2007, abbaye de
+							Royaumont.</note>
+					</notesStmt>
+				</biblFull>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<projectDesc>
+				<p>Revues.org -centre for open electronic publishing- is the platform for journals
+					in the humanities and social sciences, open to quality periodicals looking to
+					publish full-text articles online.</p>
+			</projectDesc>
+			<appInfo>
+				<application version="2.32" ident="OTX">
+					<label>Opentext - CLEO / Revues.org</label>
+					<desc><ref target="http://www.tei-c.org/">We use TEI</ref></desc>
+				</application>
+			</appInfo>
+			<tagsDecl>
+				<rendition xml:id="P9" scheme="css">font-style:italic</rendition>
+				<rendition xml:id="P10" scheme="css">font-style:italic</rendition>
+				<rendition xml:id="T2" scheme="css">font-variant:small-caps</rendition>
+				<rendition xml:id="T3" scheme="css"
+					>font-variant:small-caps;font-style:italic</rendition>
+				<rendition xml:id="T4" scheme="css">font-variant:small-caps</rendition>
+				<rendition xml:id="T5" scheme="css">font-style:italic</rendition>
+				<rendition xml:id="T7" scheme="css">font-style:italic</rendition>
+				<rendition xml:id="T8" scheme="css">vertical-align:super</rendition>
+				<rendition xml:id="T9" scheme="css"
+					>vertical-align:super;font-style:italic</rendition>
+				<rendition xml:id="T10" scheme="css">vertical-align:sub</rendition>
+				<rendition xml:id="T11" scheme="css">font-weight:bold</rendition>
+				<rendition xml:id="td1" scheme="css">direction:ltr</rendition>
+				<rendition xml:id="td1a1" scheme="css">border-left:1px solid 0.002cm solid
+					#000000;border-right:none;border-top:1px solid 0.002cm solid
+					#000000;border-bottom:1px solid 0.002cm solid #000000;direction:ltr</rendition>
+				<rendition xml:id="td1f1" scheme="css">border:1px solid 0.002cm solid
+					#000000;direction:ltr</rendition>
+				<rendition xml:id="td2" scheme="css">direction:ltr</rendition>
+				<rendition xml:id="td2a1" scheme="css">border-left:1px solid 0.018cm solid
+					#000000;border-right:none;border-top:1px solid 0.018cm solid
+					#000000;border-bottom:1px solid 0.018cm solid #000000;direction:ltr</rendition>
+				<rendition xml:id="td2c1" scheme="css">border:1px solid 0.018cm solid
+					#000000;direction:ltr</rendition>
+				<rendition xml:id="td2c2" scheme="css">border:1px solid 0.018cm solid
+					#000000;direction:ltr</rendition>
+			</tagsDecl>
+		</encodingDesc>
+		<profileDesc>
+			<langUsage>
+				<language ident="fr" xml:id="otx_15">fr</language>
+			</langUsage>
+			<textClass>
+				<keywords scheme="keyword" xml:lang="fr" xml:id="otx_17">
+					<list>
+						<item>Lucio Mad</item>
+						<item>existentialisme</item>
+						<item>faussaires</item>
+						<item>identités</item>
+						<item>littérature</item>
+						<item>nausée</item>
+						<item>passeport</item>
+					</list>
+				</keywords>
+				<keywords scheme="keyword" xml:lang="en" xml:id="otx_20">
+					<list>
+						<item>fiction</item>
+						<item>nobility</item>
+						<item>ritual</item>
+						<item>shame</item>
+					</list>
+				</keywords>
+				<keywords scheme="keyword" xml:lang="es" xml:id="otx_23">
+					<list>
+						<item>nobleza laica</item>
+						<item>catedrales</item>
+						<item>palacios</item>
+						<item>Castilla</item>
+					</list>
+				</keywords>
+				<keywords scheme="keyword" xml:lang="de" xml:id="otx_28">
+					<list>
+						<item>Gärten</item>
+						<item>Grotten</item>
+						<item>Renaissance</item>
+					</list>
+				</keywords>
+				<keywords scheme="subject" xml:id="otx_29">
+					<list>
+						<item>Stylage</item>
+					</list>
+				</keywords>
+				<keywords scheme="chronological" xml:id="otx_30">
+					<list>
+						<item>Epoque moderne</item>
+						<item>Moyen-Age</item>
+						<item>Pléistocène</item>
+					</list>
+				</keywords>
+				<keywords scheme="geographical" xml:id="otx_31">
+					<list>
+						<item>Hossegor</item>
+						<item>Gondwana</item>
+					</list>
+				</keywords>
+			</textClass>
+		</profileDesc>
+	</teiHeader>
+	<text>
+		<front>
+			<div type="abstract" xml:lang="fr">
+				<p xml:id="otx_16">Dans cet article, on examine la façon dont la musique
+					afro-cubaine fut importée et distribuée au Congo-belge ainsi que la nature de
+					l’emprunt stylistique ayant donné à la musique congolaise une saveur fortement
+					afro-cubaine. Par ailleurs, on s’intéresse à la façon dont la rumba a subi
+					progressivement un processus d’indigénisation qui a en a fait véritablement la
+						<hi rendition="#T5">« musica franca »</hi> de toute l’Afrique noire ainsi
+					qu’un signe distinctif de l’identité nationale congolaise.</p>
+			</div>
+			<div type="abstract" xml:lang="en">
+				<p xml:id="otx_19"><hi xml:lang="en">Since the late 1980s, certain writers have
+						helped radically renew thinking about Africa in fiction, by innovating in
+						literary genres, language, settings and the choice of characters. </hi>Lucio
+					Mad’s <hi rendition="#T5">Les trafiqueurs </hi>exemplifies this trend.</p>
+			</div>
+			<div type="abstract" xml:lang="es">
+				<p xml:id="otx_22">A lo largo de la Edad Media, los obispos ocupan una doble
+					posición preponderante: están en la cumbre tanto de la sociedad, junto con la
+					nobleza laica, como de la jerarquía eclesiástica, cuyo poder se despliega sobre
+					aspectos temporales y espirituales. En relación con el arte, esta dominación
+					quedará patente en sus fortalezas o palacios, en la promoción de obras en sus
+					catedrales, teniendo en cuenta el enriquecimiento de su sede con mobiliario e
+					<!-- <pb/> -->indumentaria litúrgica, imágenes de devoción, obras de orfebrería
+					o libros destinados tanto al culto como a la formación.</p>
+			</div>
+			<div type="abstract" xml:lang="it">
+				<p xml:id="otx_25">Dopo l’accrescersi dell’interesse per i giardini storici intorno
+					al 1980, gli studi sulle grotte artificiali del Rinascimento non hanno avuto la
+					stessa intensità nei diversi paesi. L’Italia, dove le grotte sono testimoniate
+					dal 1520, è stata abbondantemente trattata.</p>
+			</div>
+			<div type="abstract" xml:lang="de">
+				<p xml:id="otx_27">Seit dem in den achtziger Jahren wieder aufkeimenden interesse an
+					den historischen Gärten wurden die arbeiten zu den künstlichen Grotten der
+					Renaissance je nach geografischer Zone mit unterschiedlich großem Eifer
+					behandelt. <hi xml:lang="en">Italien, wo Grotten ab den 1520-er Jahren bekannt
+						sind, wurde bereits ausführlich in verschiedenen Formen bearbeitet.</hi></p>
+			</div>
+			<div type="ack">
+				<p xml:id="otx_42"><!-- <pb/> -->Je remercie mon institution nourricière qui m’a
+					permis de mener cette enquête chez les Primitifs flamands – sans oublier notre
+					chère sncf dont les trains arrivent à l’heure.</p>
+			</div>
+			<div type="dedication">
+				<p xml:id="otx_43">À Harpo Marx.</p>
+			</div>
+			<div type="correction">
+				<p xml:id="otx_39">On ne voit pas l’intérêt d’insérer un <hi rendition="#T5"
+						>erratum</hi> en tête de texte, mieux vaut corriger directement et signaler
+					la correction en historique — puisque de toute façon il faudra recharger le
+					document…</p>
+			</div>
+			<note resp="editor"><p xml:id="otx_40">Les opinions émises ici, notamment la critique de
+					Huysmans, n’engagent que leur auteur et non la Rédaction des <hi rendition="#T5"
+						>Cahiers du Stylage contemporain</hi>.</p></note>
+			<note resp="author"><p xml:id="otx_41">Ceci est une note de l’auteur.</p></note>
+			<div xml:id="otx_33">
+				<p rend="language">it</p>
+			</div>
+			<div xml:id="otx_185">
+				<ab type="head" rend="bibliographie-heading1">Œuvre commentée</ab>
+			</div>
+			<div xml:id="otx_186">
+				<p rend="bibliographie-review-title">Le style « Titre de l’œuvre commentée » définit
+					le titre de l’œuvre dont le document traite.</p>
+			</div>
+			<div xml:id="otx_187">
+				<p rend="bibliographie-review-author">Le style « Auteur de l’œuvre commentée »
+					définit l’auteur ou les auteurs de l’œuvre dont le document traite. Suivre les
+					mêmes recommandations que pour le style « Auteur ».</p>
+			</div>
+			<div xml:id="otx_188">
+				<p rend="bibliographie-review-bibliography">Le style « Notice bibliographique de
+					l’œuvre commentée » définit les éléments bibliographiques de l’œuvre dont le
+					document traite.</p>
+			</div>
+			<div xml:id="otx_189">
+				<p rend="bibliographie-review-date">Le style « Date de publication de l’œuvre
+					commentée » définit la date de publication de l’œuvre dont le document
+					traite.</p>
+			</div>
+		</front>
+		<body>
+			<p rend="numerodudocument" xml:id="otx_38">18</p>
+			<p rend="epigraph" xml:id="otx_44">« S’il n’y a personne à l’arrêt, je ne m’arrête
+					pas.<note place="end" n="8">
+					<bibl xml:id="Kaur2004">
+						<author>
+							<forename>Amarjit</forename>
+							<surname>Kaur</surname>
+						</author>, « <title level="a">Mobility, labour mobilisation and border
+							controls : Indonesian labour migration to Malaysia since 1900</title> »,
+						contribution pour la <meeting>15<hi rend="sup">th</hi> Biennial Conference
+							of the Asian Studies Association of Australia in Canberra
+								<date>29 June</date>-<date>2 July 2004</date>
+						</meeting>. </bibl>
+				</note> C’est pas des bus de la RATP, ça, c’est des autocars. »<lb/>Un chauffeur
+					(<hi rendition="#T5">Libération</hi> Île-de-France, p. <hi rendition="#T2"
+					>viii</hi>.)</p>
+			<p rend="noindent" xml:id="otx_45">Avant les plaisirs sulfureux du satanisme,
+					Huysmans<note place="foot" n="1">
+					<bibl>
+						<author>
+							<surname>Certeau</surname>
+						</author>, <date>2002</date>, <abbr>p.</abbr>
+						<biblScope unit="pp">9</biblScope>
+					</bibl>. </note> offre au lecteur<note>
+					<bibl> Ibidem <link target="Certeau2002"/>, <abbr>p.</abbr>
+						<biblScope type="pp">10</biblScope>
+					</bibl>. </note> de <hi rendition="#T5">Là-bas, </hi>ceux de la dissertation
+				littéraire en trois points. Thèse, antithèse, synthèse, tout y est qui conduit à la
+				nécessité d’un « naturalisme spiritualiste » qui seul pourra régénérer l’art
+					moderne<note place="foot" n="2"><p rend="footnote">Huysmans, J.-K., <hi
+							rendition="#T5">Là-bas, </hi>Paris, Plon, 1908, p. 5.</p></note>.</p>
+			<p>Test, cet ouvrage s'appelle <bibl>
+				<title level="m">Les Mondes Manga</title>
+				<note place="foot" n="1">
+					<author>
+						<forename full="init">H.-M.</forename>
+						<surname>Delpierre</surname>
+					</author>,
+					<author>
+						<forename full="init">J.</forename>
+						<surname>Schmidt</surname>
+					</author>,
+					<pubPlace>Tours</pubPlace>,
+					<publisher>E.p.A</publisher>,
+					<date>2005</date>.
+				</note>
+			</bibl>
+				
+				<bibl>
+					<title level="m">L’Histoire de la poésie des Hébreux</title> de 
+					<author>
+						<surname>Herder</surname>
+					</author>, paru en 
+					<date>1783</date>, est 
+					<edition>traduit en français</edition> en 
+					<date>1845</date>
+				</bibl>.
+				
+				L’ouvrage intitulé 
+				<bibl>
+					<title level="m">Histoire de la poésie des Hébreux</title>
+					<note place="foot" n="1">Johann Gottfried von Herder, <hi rend="italic">Histoire de la poésie des Hébreux</hi>, Paris, Didier, 1845, 575 p.</note> de 
+					<author>
+						<forename>Johann</forename>
+						<surname>Gottfried Herder</surname>
+					</author>, paru en 
+					<date>1783</date>, a été 
+					<edition>traduit en français pour la première fois</edition> en 
+					<date>1844</date>
+				</bibl>.</p>
+			<p xml:id="otx_46">Ce manifeste pour une œuvre à venir ne s’étaie de nul exemple
+				littéraire convenable. Dostoïevsky évoqué est aussi vite récusé pour trop de
+				socialisme. Reste à changer de champ référentiel, à quitter l’écriture pour la
+				peinture, le texte pour l’image constituée comme prophétique de ce qui aurait à
+				advenir. Cette autorité conférée, non sans paradoxe, à la peinture, Huysmans la
+				figure par la <hi rendition="#T5">Crucifixion </hi>de Matthias Grünewald<note
+					place="foot" n="3"><p rend="footnote">Le tableau passa rapidement du musée de
+						Cassel, visité par Huysmans en 1888, à celui de Carlsruhe. Je ne peux tenir
+						compte ici du texte publié en 1905 dans <hi rendition="#T5">Trois primitifs,
+						</hi>qui, à la suite du second voyage de Huysmans en Allemagne, décrit le
+						polyptyque du musée de Colmar. Voir Joris-Karl Huysmans, <hi rendition="#T5"
+							>Les Grünewald du musée de Colmar, </hi>édition critique par P. Brunel,
+						A. Guyaux et C. Heck, Paris, Hermann, 1988.</p></note>. De sorte qu’un
+				Primitif de la peinture aurait à être le primitif d’une écriture dépassant et
+				intégrant la contradiction actuelle du naturalisme sans âme et du spiritualisme sans
+				corps. </p>
+			<p xml:id="otx_47">La plénitude restituée de l’homme, tel que le christianisme le
+				définit, s’est donc jadis figurée, incarnée dans une œuvre appartenant à ce corpus
+				aux limites incertaines qui est celui des Primitifs ou encore des peintres du Moyen
+				Âge.</p>
+			<div type="div1">
+				<head subtype="level1" xml:id="otx_48">Les Primitifs</head>
+				<p rend="noindent" xml:id="otx_49">Découvrir chez les Primitifs médiévaux les
+					exemples accomplis du « naturalisme spiritualiste » n’a rien d’une invention
+					huysmansienne. Il y a belle lurette qu’un Ruskin a développé une telle
+					interprétation et ceci dans une même perspective à la fois critique de la
+					modernité et programmatique d’un avenir meilleur. Belle lurette que le Moyen Âge
+					pictural se trouve constitué comme repoussoir de l’académisme dérivant de la
+					Renaissance, ceci n’étant qu’un aspect du grand dispositif réactionnaire qui
+					oppose un Moyen Âge mythisé à une modernité honnie. </p>
+				<p xml:id="otx_50">Cependant, rappeler Ruskin manifeste aussi le propre de Huysmans.
+					En effet, comme Rio en France naguère, Ruskin ne pense foncièrement qu’à la
+					peinture italienne. C’est-à-dire à des Primitifs qui, selon l’historiographie
+					dominante, par leurs essais balbutiants auraient ouvert la voie au progrès vers
+					le miracle de la Renaissance. Constituer en valeur absolue ces mêmes Primitifs
+					bouleverse à coup sûr le parcours progressiste de la représentation esthétique
+					établie mais maintient la légitimité picturale dans son champ exclusif : l’école
+					italienne. Élire Grünewald, <!-- <pb/> -->c’est s’aventurer sur les marges, qui
+					plus est les marges allemandes, là où le Français entre Wagner et Bismarck
+					hésite.</p>
+				<div type="div2">
+					<head subtype="level2" xml:id="otx_51">Grünewald</head>
+					<p rend="noindent" xml:id="otx_52">Choisir Grünewald comme autorité a la saveur
+						d’une provocation. Loin des moyens âges italien et français, l’Allemand
+						implique une sauvagerie jusqu’alors irrécupérée par les discours
+							canoniques<note place="foot" n="4"><p rend="footnote">Cf. Huysmans, <hi
+									rendition="#T5">Les Grünewald du musée de Colmar, op. cit.,
+								</hi>p. 50 : « Quant à ses personnages, ils ont tous le type germain
+								et il ne dérive pas davantage de l’art italien pour sa façon de
+								déployer les étoffes. » D’autres s’étaient aventurés jusqu’à ces
+								exotismes barbares, mais des Belges : Verhaeren, Jules
+							Destrée.</p></note>. C’est du fond noir de l’oubli et de la hantise que
+						surgit la nouvelle figure tutélaire, médiévale donc catholique, donc
+						naturaliste mystique. Terme de la délibération, ultime marque de l’excès
+						provocateur de la démarche et de la résistance à la future conversion :</p>
+					<q rend="quotation" xml:id="otx_53">Si je suis logique, j’aboutis au
+						catholicisme du Moyen Âge, au naturalisme mystique ; ah non, par exemple, et
+						si pourtant<note place="foot" n="5"><p rend="footnote"><hi rendition="#T5"
+									>Là-bas, </hi>p. 11.</p></note> !</q>
+					<p xml:id="otx_54">L’abandon de l’école italienne, seule exemplaire, ouvre sur
+						« cette Germanie du Moyen Âge avec ses croyances sauvages, ses piétés
+						barbares, ses coutumes mystiques »<note place="foot" n="6"><p
+								rend="footnote">Verhaeren, « Les gothiques allemands », <hi
+									rendition="#T5">L’Art moderne, </hi>15 août 1886. Sur les
+								sources du texte de Huysmans, voir C. Heck, « Grünewald et le culte
+								des Primitifs septentrionaux chez Huysmans », Huysmans, <hi
+									rendition="#T5">Les Grünewald du musée de Colmar,
+								</hi>pp. 67-82, ainsi que pour un plus large contexte :
+								J.-P. Guillerm, <hi rendition="#T5">Les peintures invisibles,
+									L’héritage pictural et les textes en France et en Angleterre,
+									1870-1914, </hi>Lille, ANRT, 1982, pp. 542-579.</p></note>. Du
+						moins demeure-t-on en chrétienté, voire dans l’intensité la plus forte, la
+						plus « primitive » de cette chrétienté, une pureté première exempte de toute
+						corruption latino-bourgeoise. Un Moyen Âge absolu en quelque sorte. Dont il
+						importe bien de dire qu’il n’a rien à voir avec une quelconque chronologie.
+						L’espace sauvage ignore l’histoire et ses découpages. Huysmans sut fort bien
+						que né vers 1450, Grünewald mourut vers 1530, dates données dans <hi
+							rendition="#T5">Trois primitifs. </hi>Qu’il ait survécu à Raphaël
+						n’empêche nullement Huysmans d’écrire alors de son peintre :</p>
+					<q rend="quotation" xml:id="otx_55">Le <hi rendition="#T5">Laus perennis</hi> du
+						Moyen Âge revit en cet office incessant de la peinture que composa
+							Grünewald<note place="foot" n="7"><p rend="footnote">Huysmans, <hi
+									rendition="#T5">Les Grünewald du musée de Colmar,
+								</hi>p. 56.</p></note>.</q>
+					<p xml:id="otx_56">Grünewald est médiéval non historiquement mais
+						essentiellement. Le Moyen Âge des Primitifs est affaire d’âme et non de
+						dates, affaire d’écart supposant l’âme. Cette apparente notion historique
+						indexe moins un temps qu’un espace de marginalité psychique, sociale,
+						culturelle, esthétique constitué en repoussoir d’une modernité fantasmée
+						comme née de la Renaissance et prolongée sans rupture jusqu’au XIX<hi
+							rendition="#T8">e</hi> siècle. Est médiéval tout ou presque qui est posé
+						comme exempt du signe négatif de la Renaissance. Le primitif italien est
+						d’emblée suspect d’être un « précurseur », d’où la fuite nécessaire, hors
+							champ<note place="foot" n="8"><p rend="footnote">En Bourgogne même, à la
+								Chartreuse de Champmol, si le Moïse de Sluter vaut mieux que celui
+								de Michel-Ange, « un colosse redondant et creux », les Prophètes
+								annoncent trop la Renaissance : « gens qui se préoccupent plus de
+								leurs propres affaires que de celles de Dieu. » <hi rendition="#T5"
+									>(L’Oblat, </hi>Paris, Stock, 1903,
+						pp. 327-33.).</p></note>.</p>
+					<p xml:id="otx_57"><!-- <pb/> -->Une dimension sociologique rudimentaire
+						spécifie le Moyen Âge huysmansien tout en contribuant à son extension
+						indéfinie. Le Pauvre est médiéval et avec lui tous les vrais artistes, les
+						isolés, les maudits, les exclus : Rops a une « âme de primitif à
+							rebours »<note place="foot" n="9"><p rend="footnote">Huysmans,
+								« Félicien Rops », <hi rendition="#T5">Certains, </hi>10-18, 1975,
+								p. 343.</p></note>. Le Christ de Grünewald s’oppose au Christ de
+						Saint-Sulpice avatar du Christ de Raphaël :</p>
+					<q rend="quotation" xml:id="otx_58">le Christ des Riches, l’Adonis de Galilée,
+						le bellâtre bien portant, le joli garçon aux mèches rousses, à la barbe
+						divisée, aux traits chevalins et fades, que depuis quatre cents ans les
+						fidèles adorent<note place="foot" n="10"><p rend="footnote">Huysmans, <hi
+									rendition="#T5">Là-bas, </hi>pp. 8-9.</p></note>.</q>
+					<p xml:id="otx_59">Quatre cents ans exactement de domination d’une culture
+						esthétique et religieuse de nantis, de bourgeois fades, à quoi s’oppose ce
+						Christ des Pauvres. De sorte que la marginalité culturelle est aussi une
+						marginalité sociale et que par elle, le Moyen Âge puisse se prolonger
+						jusqu’en plein XIX<hi rendition="#T8">e</hi> siècle comme revers noir d’une
+						histoire des dominants.</p>
+					<div type="div3">
+						<head subtype="level3" xml:id="otx_60">Huysmans et Des Esseintes</head>
+						<p rend="noindent" xml:id="otx_61">L’irritant esthétisme religieux de
+							Huysmans se fonde sur la fascination des exclusions qui déjà constituait
+							l’univers expérimental de Des Esseintes. Une passion perverse pour la
+							déterritorialisation est essentielle à l’acte esthétique huysmansien. Il
+							faut déserter le centre, s’ouvre alors l’espace médiéval. Ce centre,
+							dans la peinture, Raphaël et la Renaissance italienne le présentent en
+							passé toujours actif, toujours organisateur mythique des valeurs,
+							toujours clef de l’idéologie culturelle. Le Moyen Âge est un opérateur
+							critique. Mythisé lui-même, il figure le rejet de ce qu’implique le
+							centre : l’équilibre, l’harmonie, le plaisir aussi. Le Moyen Âge s’ouvre
+							comme espace décentré d’errance et d’excès, de jouissance et de mort. Si
+							le centre suppose le Beau, les marges imposent l’effroyable et
+							l’adorable, l’horreur et l’extase. L’art huysmansien ne saurait être
+							délectation, il est Passion, érotisme avant Bataille. Le Moi s’y perd
+							entre sa décomposition et son exaltation.</p>
+						<p xml:id="otx_62">C’est ce qu’écrit la longue séquence consacrée dans <hi
+								rendition="#T5">Là-bas</hi> à la <hi rendition="#T5">Crucifixion
+							</hi>de Grünewald. Il importe très peu que cette description soit exacte
+							par rapport au tableau<note place="foot" n="11"><p rend="footnote">Cf.
+									C. Heck, art. cit, p. 73 : « Tant la place et la nature même des
+									éléments que les caractères des personnages sont décrits avec
+									exactitude ».</p></note>, d’ailleurs c’est moins le tableau qui
+							est décrit que son apparition lorsque Durtal, les yeux clos, s’abîme
+							dans le souvenir de sa vue à Cassel. Le descripteur est halluciné et
+							cela convient au <hi rendition="#T5">fantastique </hi>voulu du tableau :
+							apparition de la Vie dans le visible de la mort, essence aporétique de
+							l’art religieux médiéval. Mystère d’Incarnation.</p>
+						<p rend="figure-title" xml:id="otx_63">Figure 1. <hi rendition="#T5">Cherche
+							</hi>pour l’année 1376</p>
+						<p xml:id="otx_64"><!-- <pb/> --><figure>
+								<graphic url="Pictures/img-1.jpg"/>
+							</figure></p>
+						<p rend="figure-legend" xml:id="otx_65">Quelques notations dans la marge se
+							réduisent ici à un mot évoquant une mutation dans la destinée du feu.
+							Ainsi sait-on qu’en <hi rendition="#T5">la poissonnerie </hi>jehan
+							fournier est <hi rendition="#T5">misérable </hi>et que jehannote de
+							marcenay s’en est <hi rendition="#T5">allé.</hi></p>
+						<p rend="figure-license" xml:id="otx_66">Archives départementales de la Côte
+							d’Or, série O<hi rendition="#T10">2</hi>, carton 24<hi rendition="#T9"
+								>bis</hi>.</p>
+						<p rend="noindent" xml:id="otx_67">Bref, la construction d’une
+							« métasource » la plus fidèle possible au document original et déjà
+							« tournée » vers l’exploitation statistique à venir nous a finalement
+							conduits à ouvrir 20 rubriques nourries d’informations tantôt codées
+							tantôt textuellement reproduites.</p>
+						<p rend="puces" xml:id="otx_68">1 rubrique d’identification des individus
+								(<hi rendition="#T2">ref.</hi>) par l’attribution d’un numéro
+							d’inventaire ;</p>
+						<p rend="puces" xml:id="otx_69">2 rubriques relatives à leur localisation
+							dans la ville <hi rendition="#T2">(rue, paroisse</hi>) ;</p>
+						<p rend="puces" xml:id="otx_70">4 rubriques relatives à leur désignation
+								(<hi rendition="#T2">forme anthroponymique</hi>, <hi rendition="#T2"
+								>(pre)nom, surnom, type surnom</hi> [cette dernière rubrique
+							distinguant les référents toponymiques certains (tc), incertains (ti),
+							des autres référents (ar)]) ;</p>
+						<p rend="puces" xml:id="otx_71">6 rubriques mentionnant des compléments
+							divers <hi rendition="#T2">(sexe, etat </hi>[distinction entre vivant
+							(v), trépassé (t) et incertain (i)], <hi rendition="#T2">situation
+							</hi>[distinction entre veuf (v), veuf-remarié (vr), abandonné (a),
+							orphelin (o)], <hi rendition="#T2">fonction, particularite, type
+								surcharge </hi>[distinction entre inséré (i), surchargé (s), cité
+							dans une surcharge (es)]) ;</p>
+						<p rend="puces" xml:id="otx_72">3 rubriques relatives à un déplacement
+							éventuel (<hi rendition="#T2">type mobilité</hi> [distinction entre
+							mobilité intra urbaine (miu). migration extra urbaine (meu), migrant
+							nouveau venu (mnv), mobilité indéterminée (mi), autre mobilité (am),
+							mobilité possible (mp)], <hi rendition="#T2">origine,
+							arrivée) </hi>;</p>
+						<p rend="puces" xml:id="otx_73">1 rubrique relative à la composition
+							éventuelle du feu (<hi rendition="#T2">feu</hi>) ;</p>
+						<p rend="puces" xml:id="otx_74">2 rubriques relatives à l’impôt (<hi
+								rendition="#T2">impôt, ex-impôt</hi> pour distinguer les éventuelles
+							mutations de situation) ;</p>
+						<p rend="puces" xml:id="otx_75">1 rubrique « ouverte » relative au
+							commentaire éventuel fait par l’enquêteur (<hi rendition="#T2"
+							>note</hi>).</p>
+						<p xml:id="otx_76">La saisie s’est faite dans l’ordre où les personnages
+							sont apparus dans la source en tenant compte cependant de certaines
+							particularitése naturaliste. Or, avant même <!-- <pb/> -->la conversion
+							du scripteur/personnage, parce que les Primitifs sont essentiellement
+							chrétiens, une lecture théologique convertit l’abjection en gloire et
+							assigne au signifiant naturaliste un signifié mystique à la fois
+							contradictoire et complémentaire dans la dramatique chrétienne du Salut.
+							Coup d’état final du texte contre la peinture : la théologie du Salut
+							par la Mort convertit figures et regard. Durtal voit ce qu’il ne voit
+							pas :</p>
+						<q rend="quotation2" xml:id="otx_77">[12a] à regarder ce Rédempteur de
+							vadrouille, ce Dieu de morgue, cela changeait. De cette tête exulcérée
+							filtrait des lueurs ; une expression surhumaine illuminait
+							l’effervescence des chairs, l’éclampsie des traits.</q>
+						<q rend="quotation2" xml:id="otx_78">[13b] Cette charogne éployée était
+							celle d’un Dieu et, sans auréole, sans nimbe, dans le simple
+							accoutrement de cette couronne ébouriffée, semée de grains rouges par
+							des points de sang, Jésus apparaissait, dans sa céleste
+							superessence…</q>
+						<list xml:id="list2119990210" type="ordered">
+							<item><p rend="puces">Liste à puces bidon, numérotée, pour
+								essayer</p></item>
+							<item><p rend="puces">Liste à puces bidon, numérotée, pour
+								essayer</p></item>
+							<item><p rend="puces">Liste à puces bidon, numérotée, pour
+								essayer</p></item>
+							<item><p rend="puces">Liste à puces bidon, numérotée, pour
+								essayer</p></item>
+						</list>
+						<list xml:id="list290157972" type="unordered">
+							<item><p rend="puces">Liste à puces bidon, non-numérotée, pour
+									essayer</p></item>
+							<item><p rend="puces">Liste à puces bidon, non-numérotée, pour
+									essayer</p></item>
+							<item><p rend="puces">Liste à puces bidon, non-numérotée, pour
+									essayer</p></item>
+							<item><p rend="puces">Liste à puces bidon, non-numérotée, pour
+									essayer</p></item>
+						</list>
+						<div type="div4">
+							<head subtype="level4" xml:id="otx_81">Misère du corps décomposé</head>
+							<p rend="noindent" xml:id="otx_82">Telle est la leçon du symbolisme
+								médiéval : le sadisme comme figure de l’Infigurable. Le Moyen Âge se
+								constituant ainsi comme lieu du dépassement de la représentation
+								mimétique que d’autres cherchent aussi, au même moment, dans le
+								champ du Symbolisme littéraire et pictural. <hi rendition="#T5">La
+									Cathédrale, </hi>ne cite pas par hasard, après Hugues de
+								Saint-Victor et saint Augustin, Mallarmé, même si Huysmans ajoute,
+								avec humour, « rencontre pour le moins bizarre »<note place="foot"
+									n="12"><p rend="footnote">Huysmans, La <hi rendition="#T5"
+											>Cathédrale, </hi>p. 85.</p></note>. L’enjeu esthétique
+								de ce Moyen Âge est bien de manifester que le sens n’est pas dans ce
+								qu’on voit et reconnaît mais au-delà. Et que l’Invisible n’est que
+								le signe nul de l’Indicible.</p>
+							<p xml:id="otx_83">Certes, <hi rendition="#T5">La Cathédrale</hi>
+								donnerait à croire que la conversion n’a guère fait progresser
+								Huysmans sur cette voie. Consacré à la symbolique médiévale, le
+								texte, nouveau monstre littéraire, s’engorge d’un savoir
+								encyclopédique. Excès cuistre, irritant et jubilatoire, d’exotismes
+								nouveaux. Tout, de la cathédrale elle-même, son plan cruciforme et
+								sa flèche semblent transposer la <hi rendition="#T5">Crucifixion
+								</hi>de Cassel, jusqu’au potager se met à signifier. Le Moyen Âge
+								est un livre, le Livre même, un monde où tout visible aurait été
+								signe de l’Invisible. Rien ne peut être profane, là où la Foi
+								ordonne le sens :</p>
+							<q rend="quotation" xml:id="otx_84">le Moyen Âge qui savait que sur
+								cette terre tout est signe, tout est figure, que le visible ne vaut
+								que par ce qu’il recouvre d’invisible, le Moyen Âge qui n’était pas,
+								par conséquent, dupe comme nous le <!-- <pb/> -->sommes, des
+								apparences, étudia de très près cette science et dit d’elle la
+								pourvoyeuse et la servante de la mystique<note place="foot" n="13"
+										><p rend="footnote">Huysmans, <hi rendition="#T5">La
+											Cathédrale, </hi>p. 351.</p></note>.</q>
+							<p xml:id="otx_85">Ni auréole, ni nimbe, les symboles sont naturels,
+								c’est toute la création, représentée au naturel, qui chante la
+								gloire de Dieu. Ruskin n’avait rien dit d’autre et avec des excès
+								qui ne sont pas moindres. À telle fleur, tel animal, telle pierrerie
+								correspondent donc telle vertu ou tel vice. Tout visible est à lire
+								pour qu’advienne au-delà de son identification pratique, sa valeur
+								morale, voire anagogique.</p>
+							<p rend="figure-title" xml:id="otx_86">Figure 2. Mandeville cheminant
+								vers Babylone</p>
+							<p xml:id="otx_87"><figure>
+									<graphic url="Pictures/img-2.jpg"/>
+								</figure></p>
+							<p rend="figure-license" xml:id="otx_88">BNF. ms fr 2810, fol. 153.</p>
+							<p xml:id="otx_89">Les séances d’initiation à la symbolique médiévale de
+								Durtal sont interrompues par un article que celui-ci est censé avoir
+								rédigé à propos du <hi rendition="#T5">Couronnement de la Vierge
+								</hi>de Fra Angelico<note place="foot" n="14"><p rend="footnote">Au
+										Louvre, peint pour un couvent de Fiesole vers 1434. Sur
+										l’Angelico dans le contexte critique de la fin du siècle,
+										cf. J.-P. Guillerm, <hi rendition="#T5">Les peintures
+											invisibles, </hi>pp. 515-42.</p></note>.</p>
+							<p xml:id="otx_90"><!-- <pb/> -->Le collage de l’article dans la fiction
+								narrative ramène donc vers l’Italie, aux bords d’abord exclus de la
+								Renaissance. L’exception, on le verra, a sa raison. S’ensuit un
+								exercice descriptif ouvert sur une nouvelle séquence encyclopédique
+								déployant la symbolique médiévale des couleurs :</p>
+							<q rend="quotation3" xml:id="otx_91">Le blanc, symbole de l’Être
+								supérieur, de la Vérité absolue […]<lb/>Le bleu […] rend la
+								chasteté, l’innocence, la candeur […]<lb/>Le rouge […] traduit la
+								charité, la souffrance et l’amour<note place="foot" n="15"><p
+										rend="footnote"><hi xml:lang="en">Huysmans, </hi><hi
+											rendition="#T7" xml:lang="en">op. cit., </hi><hi
+											xml:lang="en">pp. 132-3.</hi></p></note>…</q>
+							<div type="div5">
+								<head subtype="level5" xml:id="otx_92">Les mouvements de
+									population</head>
+								<p rend="noindent" xml:id="otx_93">Ces exercices mécaniques de
+									« traduction » n’atteignent cependant que le parergonal, cette
+									symbolique est « servante » du mystère central où s’abîment les
+									codes. La mystique advient ici d’une perte radicale, d’une
+									insignifiance. Ce qui est à convertir n’est plus la misère du
+									corps mais celle de la représentation en ce centre traditionnel
+									d’intérêt que constituent les visages :</p>
+								<q rend="quotation" xml:id="otx_94">Ce qui est moins explicable sur
+									ce tableau, par exemple, c’est le choix limité des types de
+									visage qu’il préféra ; car ici, le symbole est inutile.<lb/>[Ses
+									hommes] figurent sur ce tableau une placide colonie de très
+									braves gens […] [Ses femmes] forment un cortège de types un peu
+									gnangnan à cette Vierge au nez long, au crâne d’oiselle,
+									agenouillée aux pieds du Christ<note place="foot" n="16"><p
+											rend="footnote"><hi xml:lang="en">Huysmans, </hi><hi
+												rendition="#T7" xml:lang="en">op. cit. </hi><hi
+												xml:lang="en">p. 134.</hi></p></note>.</q>
+								<p xml:id="otx_95">La déception touche à la fois la forme (la
+									beauté) et l’expression. Le paradis n’a rien de la Beauté ni
+									rien de l’horreur. Le terrain se trouve ainsi dégagé pour le
+									coup de force interprétatif qui de cette déception fait le signe
+									visible de la suréminente valeur mystique de l’œuvre :</p>
+								<q rend="quotation2" xml:id="otx_96">[22] Là, ce n’est plus un
+									travail manuel, même souverain, ce n’est plus un ouvrage
+									spirituel, vraiment religieux, ainsi que Roger Van der Weyden et
+									Quentin Metsys en firent, c’est autre chose. Avec l’Angelico, un
+									inconnu entre en scène, l’âme d’un mystique arrivé à la vie
+									contemplative et l’effusant, ainsi qu’un pur miroir sur une
+									toile […]<lb/>Ses anges, ses saints, il les mène jusqu’à la vie
+									unitive, jusqu’au suprême degré de la mystique […] L’Angelico
+									est le peintre de l’âme immergée en Dieu, le peintre de ses
+									propres aîtres<note place="foot" n="17"><p rend="footnote"><hi
+												xml:lang="en">Huysmans, </hi><hi rendition="#T7"
+												xml:lang="en">op. cil, </hi><hi xml:lang="en"
+												>p. 135.</hi></p></note>.</q>
+								<p xml:id="otx_97">Inutile là encore de se récrier, de consulter
+									l’histoire et les dates. L’Angelico huysmansien n’est pas
+									contemporain des premiers temps de la Renaissance, il est à
+									peine Italien. Il est Moine. S’il est d’un temps, c’est de celui
+									d’Angèle de Foligno, essentiellement médiéval et mystique. Le
+									moine angélique se voit ainsi consacré comme le plus mystique
+									des peintres, celui qui, parce que moine, s’est avancé le
+									<!-- <pb/> -->plus loin dans le « chemin de perfection ». Il
+									peint la vie unitive et dépasse les laïcs Flamands et le laïc
+									Grünewald qui apparaît, rétrospectivement, comme demeuré au
+									premier stade mystique, celui de la vie purgative.</p>
+								<p rend="figure-title" xml:id="otx_98">Figure 3. Autoroute de l’«
+									Internationale insurgée »</p>
+								<p xml:id="otx_99"><figure>
+										<graphic url="Pictures/img-3.jpg"/>
+									</figure></p>
+								<p rend="figure-license" xml:id="otx_100">© Philippe Rekacewicz. Le
+									Monde diplomatique, novembre 2007.</p>
+								<p xml:id="otx_101">Au progrès de la peinture qui réglait
+									l’historiographie commune se substitue le progrès mystique,
+									redistribuant l’histoire, brouillant les écoles et les dates,
+									établissant de nouvelles hiérarchies. Le Moine explique tout et
+									d’abord l’annulation des signes mondains, l’indifférence sereine
+									aux affects et aux corps. La banalité des figures se retourne de
+									faiblesse en force, l’insignifiance en hyper-significance :</p>
+								<q rend="quotation" xml:id="otx_102">J’ai avancé que [ses saintes]
+									avaient l’air insignifiant, et c’est vrai ; mais c’est que leurs
+									traits, à elles aussi, se transforment et s’effacent sous
+									l’épreinte divine ! elles vivent noyées d’adoration, s’élancent,
+									immobiles, vers le céleste Époux […] Elle [la Vierge] est plus
+									incomparable encore. Ici, les vocables de l’adulation
+									défaillent, l’invisible apparaît sous les espèces des couleurs
+									et des lignes […] Elle est sans âge ; ce n’est pas une femme et
+									ce n’est déjà plus une enfant Et l’on ne sait même pas si Elle
+									est adolescente, à peine nubile, une fillette, tant elle est
+									sublimée, au-dessus de l’humanité, hors le monde, exquise de
+									pureté, à jamais chaste<note place="foot" n="18"><p
+											rend="footnote">Huysmans, <hi rendition="#T5">op. cit.,
+											</hi>p. 137-8. De même dans <hi rendition="#T5">En
+												mute </hi>: « personne ne pourrait reconnaître en
+											ces Trappistes des êtres prédestinés vivant hors la
+											société moderne, en plein Moyen Âge, dans la fiance
+											absolue d’un Dieu. S’ils ont des âmes qui ne ressemblent
+											pas à celles des autres, ils ont, en somme, le visage et
+											le corps des premiers venus. » (<hi rendition="#T5">En
+												route, </hi>Paris, Plon, 1961, p. 335). Croisant
+											cette « insignifiance » avec la violence
+											expressionniste, le porcher de la Trappe est, dans le
+											même texte, « un être angélique […] il vit la vie
+											unitive, l’âme ensevelie, noyée dans l’océan de la
+											divine essence » <hi rendition="#T5">(En mute,
+											</hi>p. 279).</p></note> !</q>
+								<p xml:id="otx_103"><!-- <pb/> -->Vers l’invisible par
+										l’insignifiance<note place="foot" n="19"><p rend="footnote"
+											>On est tout près de la « dissemblance » que
+											G. Didi-Huberman analyse dans la peinture de l’Angelico
+											et ses fondements théologiques, cf. G. Didi-Huberman,
+												<hi rendition="#T5">Fra Angelico. Dissemblance et
+												figuration, </hi>Paris, Flammarion,
+									1990.</p></note>, c’est-à-dire par la perte des « vocables » et
+									de leurs icônes. La représentation est creusée par un silence
+									fondateur, de sorte que dans cet espace, tout signe codé est
+									« péché ». Sainte Catherine d’Alexandrie, les « yeux pâmés »,
+									n’est « ni simple, ni candide ». Elle fait tache, fait revenir
+									la femme dans la sainte, raphaélite déjà, non médiévale à coup
+									sûr.</p>
+								<div type="div6">
+									<head subtype="level6" xml:id="otx_104">Entretien avec Geert
+										Lovink, né en 1959, <lb/>néerlandais, théoricien des
+										médias</head>
+									<p rend="question" xml:id="otx_105">L’engouement autour du Web
+										2.0 diffère-t-il de la période dotcom de la fin des années
+										90?</p>
+									<p rend="answer" xml:id="otx_106">La plus grande différence est
+										l’absence relative de capital-risque et de financement
+										d’entreprise. Le Web 2.0 est très à la mode depuis un an,
+										mais ce n’est rien comparé à la folie de la fin des années
+										90. A l’époque, il n’était question que de portails vides et
+										d’e-commerce défunt. En ce moment, la mode se concentre sur
+										les profils d’utilisateurs qui sont revendus aux
+										publicitaires. </p>
+									<p rend="question" xml:id="otx_107">Vous n’avez pas l’air d’y
+										adhérer ?</p>
+									<p rend="answer" xml:id="otx_108">En effet, et je ne me rends
+										pas très populaire en questionnant ouvertement la mentalité
+										bienveillante de gens comme Richard Stallman (militant du
+										logiciel libre, ndlr)et les adeptes des Creative Commons
+										(alternative aux droits d’auteurs, ndlr). On ne peut pas
+										exiger que les producteurs culturels donnent leur produit,
+										fut-ce du code, de la recherche ou de la musique, pour rien,
+										sans leur proposer un modèle économique alternatif. La
+										résistance contre le logiciel propriétaire est justifiée.
+										Mais ce qui fonctionne pour le logiciel ne fonctionne pas
+										forcémement pour la musique. Ce qui ne veut certainement pas
+										dire que nous devons retourner à l’ancien régime de la
+										propriété intellectuelle.</p>
+									<p rend="question" xml:id="otx_109">Vous ne semblez pas partager
+										l’euphorie des promoteurs du Web 2.0, vous évoquez un
+										«assombrissement du Web»…</p>
+									<p rend="answer" xml:id="otx_110">Je ne suis pas un prophète de
+										l’Apocalypse. Toutefois, le contrôle des entreprises et de
+										l’Etat sur Internet a augmenté comme jamais. Fin novembre,
+										les données de 25 millions d’individus au Royaume-Uni se
+										sont perdues dans le courrier, à cause du service postal
+										privé TNT. Ces données concernent les noms, les adresses,
+										les dates de naissance, les numéros d’assurances et les
+										détails des comptes bancaires des bénéficiaires des
+										allocations familiales. Elles étaient stockées sur deux CD
+										protégés par deux mots de passe mais non cryptés. Le paquet
+										n’est jamais arrivé à destination. Cet incident nous dit
+										quelque chose sur l’état de rêve collectif dans lequel nous
+										sommes (d’autres appellent ça de la stupidité
+										organisée).</p>
+									<p rend="answer" xml:id="otx_111">La quantité de données privées
+										qu’une compagnie comme Google collecte sur nous est sans
+										précédent. La situation va empirer à un point tel que la
+										seule option qui restera sera de «nationaliser» ou de
+										«socialiser» Google. Sa rentabilité va dépendre de la
+										collecte de profils d’utilisateurs de plus en plus
+										précis.</p>
+									<p rend="answer" xml:id="otx_112"><!-- <pb/> -->Internet est un
+										domaine numérique public dans lequel nos données sont
+										stockées. Elles ne devraient être ni la propriété des Etats,
+										ni celles des entreprises. Ce n’est pas si utopique que ça
+										en a l’air. Ceci aurait pu déjà être mis en oeuvre par des
+										organismes internationaux comme l’Unesco. Malheureusement,
+										ces organisations ont perdu le contact avec la société et
+										sont devenues des bureaucraties désuètes, comme nous l’avons
+										constaté lors du sommet mondial de la société de
+										l’information, en 2003 et 2005. Ce dont nous avons besoin,
+										c’est d’une alternative européenne, forte et ouverte, à
+										Google, une structure de savoir décentralisée, à la manière
+										de Wikipédia, qui oeuvre pour le bien public.</p>
+									<p rend="answer" xml:id="otx_113">Un autre aspect de cet
+										«obscurcissement du Net» est la chasse des utilisateurs des
+										réseaux peer to peer. La nouvelle loi Sarkozy va utiliser
+										les capacités de surveillance d’une manière tellement
+										paternaliste : l’usager est un vilain gosse qu’on punit en
+										l’excluant du Net. A propos de la liste nettime, Alex Foti
+										(économiste italien, membre du réseau Chainworkers contre la
+										précarité, ndlr) a écrit que c’était l’équivalent numérique
+										de couper la main aux supposés voleurs. Sarkozy ne
+										comprend-il pas que l’éducation ne peut simplement plus se
+										faire sans le Net ?</p>
+									<p rend="question" xml:id="otx_114">Votre dernier livre
+										s’intitule « Zero Comment» . Pourquoi ce titre qui fait
+										référence à l’univers des blogs ?</p>
+									<p rend="answer" xml:id="otx_115">Zero Comment, c’est ce qu’on
+										trouve sous la plupart des posts dans les blogs. Pour moi,
+										ce n’est pas un signe de désespoir. Je ne dis pas que le
+										fait de bloguer est un produit de notre «solitude
+										électronique». C’est souvent une activité très sociale, où
+										l’on se répond et l’on s’échange des liens. Nous devons
+										traiter l’Internet comme un gigantesque bloc-notes, un
+										système de notations distribuées auquel on peut accéder de
+										partout. Nous devrions apprécier ces possibilités au lieu de
+										toujours nous plaindre de notre propre futilité. Par
+										ailleurs, j’aime les titres négatifs. Je pense qu’il devrait
+										être possible d’établir une tradition de l’essai à la Walter
+										Benjamin ou à la Susan Sontag qui n’est pas seulement
+										critique mais aussi technologiquement informé. La plupart de
+										la littérature sur les technologies de l’information est de
+										l’autocélébration d’entreprises, sans aucune investigation
+										critique.</p>
+									<p rend="question" xml:id="otx_116">Vous diagnostiquez une
+										impulsion nihiliste du blogging quand d’autres vantent son
+										potentiel émancipateur…</p>
+									<p rend="answer" xml:id="otx_117">Nous devrions être plus
+										détendus dans notre rapport avec les blogs. Bloguer, ce
+										n’est rien d’autre que des gens ordinaires qui entament un
+										dialogue avec les médias. C’est une étape révolutionnaire.
+										Mais du point de vue du contenu, ça s’est avéré une blague
+										tragique. Ne séparons pas le blogging d’autres tendances
+										dans la société ! Si vous n’êtes pas prêts pour les
+										futilités du quotidien, alors évitez les blogs !
+										Miraculeusement, le logiciel de blog invite les utilisateurs
+										à se confesser. Grâce à Michel Foucault, nous savons que, de
+										nos jours, les gens croient que leur libération exige d’eux
+										qu’ils «disent la vérité», qu’ils se confessent à quelqu’un,
+										un prêtre, un psychanalyste ou un blog et le fait de dire
+										cette vérité va les libérer.</p>
+									<p rend="question" xml:id="otx_118">Dans cette société
+										transparente, on rêvera peut-être un jour d’avoir un quart
+										d’heure d’anonymat ?</p>
+									<p rend="answer" xml:id="otx_119">L’anonymat est un rêve
+										bourgeois, provenant d’un âge où les gens prétendaient
+										qu’ils «avaient le droit qu’on les laisse tranquilles».
+										Littéralement, ceci signifie ne <!-- <pb/> -->pas avoir de
+										nom, mais ces jours-ci, ça veut plutôt dire ne pas avoir de
+										visage, ne pas laisser de traces digitales. Avec les
+										systèmes actuels de surveillance, l’anonymat n’est plus
+										qu’une notion nostalgique. Les hackers ont raison quand ils
+										disent que la vie privée n’existe plus. C’est une pensée
+										déprimante qui me révolte. L’anonymat n’est plus une valeur
+										absolue, et n’a jamais été un droit de l’homme.</p>
+									<p rend="code" xml:id="otx_120">La définition de ce style
+										« Code » est tellement obscure que j’en ignore totalement
+										l’usage : permet d’indiquer des éléments de code HTML au
+										sein du texte &lt;a
+										href="http://socio-anthropologie.revues.org"&gt; sans qu’ils
+										soient interprétés. Soit !</p>
+									<p rend="figure-title" xml:id="otx_121"><hi rendition="#T5"
+											>Tableau 3.</hi> Enfants baptisés dans les paroisses du
+										Sagrario (1615-1692) et de Santa Ana
+										(1641-1695)<lb/>Registres des Espagnols et des
+										« castes »</p>
+									<table rend="frame" rendition="#td1" xml:id="Table1">
+										<row>
+											<cell rendition="#td1a1" rows="3"><s rendition="#P10"
+												>Années</s></cell>
+											<cell rendition="#td1a1" cols="4"><s rendition="#P10"
+												>Paroisse du Sagrario</s></cell>
+											<cell rendition="#td1f1" cols="2"><s><hi rendition="#T5"
+												>Paroisse de Santa Ana</hi></s></cell>
+										</row>
+										<row>
+											<cell rendition="#td1a1" cols="2"><s><hi rendition="#T5"
+												>Livre des Espagnols</hi><hi rendition="#T9"
+												>a</hi></s></cell>
+											<cell rendition="#td1a1" cols="2"><s><hi rendition="#T5"
+												>Livre des « castes »</hi><hi rendition="#T9"
+												>b</hi></s><s rendition="#P9"/></cell>
+											<cell rendition="#td1f1" cols="2"><s><hi rendition="#T5"
+												>Livre commun des Espagnols et des
+												« castes »</hi></s><s><hi rendition="#T5"
+												>(fragments)</hi><hi rendition="#T9"
+												>c</hi></s></cell>
+										</row>
+										<row>
+											<cell rendition="#td1a1"><s rendition="#P10">Total
+												baptêmes/an</s></cell>
+											<cell rendition="#td1a1"><s rendition="#P10">dont
+												illégitimes</s></cell>
+											<cell rendition="#td1a1"><s rendition="#P10">Total</s><s
+												rendition="#P9">baptêmes/an</s></cell>
+											<cell rendition="#td1a1"><s rendition="#P10">dont
+												illégitimes</s></cell>
+											<cell rendition="#td1a1"><s rendition="#P10">Total
+												baptêmes/an</s></cell>
+											<cell rendition="#td1f1"><s rendition="#P10">dont
+												illégitimes</s></cell>
+										</row>
+										<row>
+											<cell rendition="#td1a1"><s>1615</s></cell>
+											<cell rendition="#td1a1"><s>21</s></cell>
+											<cell rendition="#td1a1"><s>2</s></cell>
+											<cell rendition="#td1f1" cols="4" rows="18"
+												><s/><s/><s/><s/><s/><table rend="frame"
+												rendition="#td2" xml:id="Table2">
+												<row>
+												<cell rendition="#td2a1" cols="2"><s
+												rendition="#P10">A1</s></cell>
+												<cell rendition="#td2c1" rows="2"><s
+												rendition="#P10">A3</s></cell>
+												</row>
+												<row>
+												<cell rendition="#td2a1" rows="3"><s
+												rendition="#P10">B1</s></cell>
+												<cell rendition="#td2a1"><s rendition="#P10"
+												>B2</s></cell>
+												</row>
+												<row>
+												<cell rendition="#td2c2" cols="2"><s
+												rendition="#P10">C2</s></cell>
+												</row>
+												<row>
+												<cell rendition="#td2c2" cols="2" rows="2"><s
+												rendition="#P10">D2</s></cell>
+												</row>
+												<row>
+												<cell rendition="#td2a1"><s rendition="#P10"
+												>E1</s></cell>
+												</row>
+												</table><s/></cell>
+										</row>
+										<row>
+											<cell rendition="#td1a1"><s>1616</s></cell>
+											<cell rendition="#td1a1"><s>59</s></cell>
+											<cell rendition="#td1a1"><s>16</s></cell>
+										</row>
+										<row>
+											<cell rendition="#td1a1"><s>1617</s></cell>
+											<cell rendition="#td1a1"><s>47</s></cell>
+											<cell rendition="#td1a1"><s>13</s></cell>
+										</row>
+										<row>
+											<cell rendition="#td1a1"><s>1618</s></cell>
+											<cell rendition="#td1a1"><s>38</s></cell>
+											<cell rendition="#td1a1"><s>10</s></cell>
+										</row>
+										<row>
+											<cell rendition="#td1a1"><s>1619</s></cell>
+											<cell rendition="#td1a1"><s>72</s></cell>
+											<cell rendition="#td1a1"><s>16</s></cell>
+										</row>
+										<row>
+											<cell rendition="#td1a1"><s>1620</s></cell>
+											<cell rendition="#td1a1"><s>48</s></cell>
+											<cell rendition="#td1a1"><s>10</s></cell>
+										</row>
+										<row>
+											<cell rendition="#td1a1"><s>1621</s></cell>
+											<cell rendition="#td1a1"><s>84</s></cell>
+											<cell rendition="#td1a1"><s>30</s></cell>
+										</row>
+										<row>
+											<cell rendition="#td1a1"><s>1622</s></cell>
+											<cell rendition="#td1a1"><s>45</s></cell>
+											<cell rendition="#td1a1"><s>16</s></cell>
+										</row>
+										<row>
+											<cell rendition="#td1a1"><s>1623</s></cell>
+											<cell rendition="#td1a1"><s>49</s></cell>
+											<cell rendition="#td1a1"><s>12</s></cell>
+										</row>
+										<row>
+											<cell rendition="#td1a1"><s>1624</s></cell>
+											<cell rendition="#td1a1"><s>122</s></cell>
+											<cell rendition="#td1a1"><s>48</s></cell>
+										</row>
+										<row>
+											<cell rendition="#td1a1"><s>1625</s></cell>
+											<cell rendition="#td1a1"><s>66</s></cell>
+											<cell rendition="#td1a1"><s>17</s></cell>
+										</row>
+										<row>
+											<cell rendition="#td1a1"><s>1626</s></cell>
+											<cell rendition="#td1a1"><s>86</s></cell>
+											<cell rendition="#td1a1"><s>38</s></cell>
+										</row>
+										<row>
+											<cell rendition="#td1a1"><s>1627</s></cell>
+											<cell rendition="#td1a1"><s>69</s></cell>
+											<cell rendition="#td1a1"><s>16</s></cell>
+										</row>
+										<row>
+											<cell rendition="#td1a1"><s>1628</s></cell>
+											<cell rendition="#td1a1"><s>75</s></cell>
+											<cell rendition="#td1a1"><s>19</s></cell>
+										</row>
+										<row>
+											<cell rendition="#td1a1"><s>1629</s></cell>
+											<cell rendition="#td1a1"><s>80</s></cell>
+											<cell rendition="#td1a1"><s>16</s></cell>
+										</row>
+										<row>
+											<cell rendition="#td1a1"><s>1630</s></cell>
+											<cell rendition="#td1a1"><s>109</s></cell>
+											<cell rendition="#td1a1"><s>26</s></cell>
+										</row>
+										<row>
+											<cell rendition="#td1a1"><s>1631</s></cell>
+											<cell rendition="#td1a1"><s>82</s></cell>
+											<cell rendition="#td1a1"><s>16</s></cell>
+										</row>
+										<row>
+											<cell rendition="#td1a1"><s>1632</s></cell>
+											<cell rendition="#td1a1"><s>50</s></cell>
+											<cell rendition="#td1a1"><s>15</s></cell>
+										</row>
+										<row>
+											<cell rendition="#td1a1"><s>1633</s></cell>
+											<cell rendition="#td1a1"><s>31<hi rendition="#T8"
+												>d</hi></s></cell>
+											<cell rendition="#td1a1"><s>4</s></cell>
+											<cell rendition="#td1a1"><s>79<hi rendition="#T8"
+												>e</hi></s></cell>
+											<cell rendition="#td1a1"><s>15</s></cell>
+											<cell rendition="#td1f1" cols="2" rows="8"><s/></cell>
+										</row>
+										<row>
+											<cell rendition="#td1a1"><s>1634</s></cell>
+											<cell rendition="#td1a1"><s>42</s></cell>
+											<cell rendition="#td1a1"><s>14</s></cell>
+											<cell rendition="#td1a1"><s>136</s></cell>
+											<cell rendition="#td1a1"><s>51</s></cell>
+										</row>
+										<row>
+											<cell rendition="#td1a1"><s>1635</s></cell>
+											<cell rendition="#td1a1"><s>51</s></cell>
+											<cell rendition="#td1a1"><s>17</s></cell>
+											<cell rendition="#td1a1"><s>94</s></cell>
+											<cell rendition="#td1a1"><s>39</s></cell>
+										</row>
+										<row>
+											<cell rendition="#td1a1"><s>1636</s></cell>
+											<cell rendition="#td1a1"><s>52</s></cell>
+											<cell rendition="#td1a1"><s>13</s></cell>
+											<cell rendition="#td1a1"><s>84</s></cell>
+											<cell rendition="#td1a1"><s>31</s></cell>
+										</row>
+										<row>
+											<cell rendition="#td1a1"><s>1637</s></cell>
+											<cell rendition="#td1a1"><s>53</s></cell>
+											<cell rendition="#td1a1"><s>17</s></cell>
+											<cell rendition="#td1a1"><s>67</s></cell>
+											<cell rendition="#td1a1"><s>21</s></cell>
+										</row>
+										<row>
+											<cell rendition="#td1a1"><s>1638</s></cell>
+											<cell rendition="#td1a1"><s>33<hi rendition="#T8"
+												>f</hi></s></cell>
+											<cell rendition="#td1a1"><s>3</s></cell>
+											<cell rendition="#td1a1"><s>49</s></cell>
+											<cell rendition="#td1a1"><s>14</s></cell>
+										</row>
+										<row>
+											<cell rendition="#td1a1"><s>1639</s></cell>
+											<cell rendition="#td1a1"><s>28<hi rendition="#T8"
+												>g</hi></s></cell>
+											<cell rendition="#td1a1"><s>3</s></cell>
+											<cell rendition="#td1a1"><s>42</s></cell>
+											<cell rendition="#td1a1"><s>13</s></cell>
+										</row>
+										<row>
+											<cell rendition="#td1a1"><s>1640</s></cell>
+											<cell rendition="#td1a1"><s>11<hi rendition="#T8"
+												>h</hi></s></cell>
+											<cell rendition="#td1a1"><s>2</s></cell>
+											<cell rendition="#td1a1"><s>72</s></cell>
+											<cell rendition="#td1a1"><s>24</s></cell>
+										</row>
+										<row>
+											<cell rendition="#td1a1"><s>1641</s></cell>
+											<cell rendition="#td1a1"><s>8<hi rendition="#T8"
+												>i</hi></s></cell>
+											<cell rendition="#td1a1"><s>1</s></cell>
+											<cell rendition="#td1a1"><s>114</s></cell>
+											<cell rendition="#td1a1"><s>40</s></cell>
+											<cell rendition="#td1a1"><s>9</s></cell>
+											<cell rendition="#td1f1"><s>5</s></cell>
+										</row>
+										<row>
+											<cell rendition="#td1a1"><s>1642</s></cell>
+											<cell rendition="#td1a1"><s>10<hi rendition="#T8"
+												>j</hi></s></cell>
+											<cell rendition="#td1a1"><s>3</s></cell>
+											<cell rendition="#td1a1"><s>89</s></cell>
+											<cell rendition="#td1a1"><s>22</s></cell>
+											<cell rendition="#td1a1"><s>60</s></cell>
+											<cell rendition="#td1f1"><s>24</s></cell>
+										</row>
+										<row>
+											<cell rendition="#td1a1"><s>1643</s></cell>
+											<cell rendition="#td1a1"><s>34</s></cell>
+											<cell rendition="#td1a1"><s>12</s></cell>
+											<cell rendition="#td1a1"><s>129</s></cell>
+											<cell rendition="#td1a1"><s>36</s></cell>
+											<cell rendition="#td1a1"><s>42</s></cell>
+											<cell rendition="#td1f1"><s>8</s></cell>
+										</row>
+										<row>
+											<cell rendition="#td1a1"><s>1644</s></cell>
+											<cell rendition="#td1a1"><s>74</s></cell>
+											<cell rendition="#td1a1"><s>14</s></cell>
+											<cell rendition="#td1a1"><s>147</s></cell>
+											<cell rendition="#td1a1"><s>40</s></cell>
+											<cell rendition="#td1a1"><s>34</s></cell>
+											<cell rendition="#td1f1"><s>15</s></cell>
+										</row>
+										<row>
+											<cell rendition="#td1a1"><s>1645</s></cell>
+											<cell rendition="#td1a1"><s>60</s></cell>
+											<cell rendition="#td1a1"><s>18</s></cell>
+											<cell rendition="#td1a1"><s>141</s></cell>
+											<cell rendition="#td1a1"><s>44</s></cell>
+											<cell rendition="#td1a1"><s>16</s></cell>
+											<cell rendition="#td1f1"><s>6</s></cell>
+										</row>
+										<row>
+											<cell rendition="#td1a1"><s>1646</s></cell>
+											<cell rendition="#td1a1"><s>62</s></cell>
+											<cell rendition="#td1a1"><s>14</s></cell>
+											<cell rendition="#td1a1"><s>120</s></cell>
+											<cell rendition="#td1a1"><s>46</s></cell>
+											<cell rendition="#td1a1"><s>–</s></cell>
+											<cell rendition="#td1f1"><s/></cell>
+										</row>
+										<row>
+											<cell rendition="#td1a1"><s>1647</s></cell>
+											<cell rendition="#td1a1"><s>30</s></cell>
+											<cell rendition="#td1a1"><s>11</s></cell>
+											<cell rendition="#td1a1"><s>98</s></cell>
+											<cell rendition="#td1a1"><s>35</s></cell>
+											<cell rendition="#td1a1"><s>17</s></cell>
+											<cell rendition="#td1f1"><s>5</s></cell>
+										</row>
+										<row>
+											<cell rendition="#td1a1"><s>1648</s></cell>
+											<cell rendition="#td1a1"><s>61</s></cell>
+											<cell rendition="#td1a1"><s>14</s></cell>
+											<cell rendition="#td1a1"><s>158</s></cell>
+											<cell rendition="#td1a1"><s>52</s></cell>
+											<cell rendition="#td1a1"><s>40</s></cell>
+											<cell rendition="#td1f1"><s>15</s></cell>
+										</row>
+										<row>
+											<cell rendition="#td1a1"><s>1649</s></cell>
+											<cell rendition="#td1a1"><s>50</s></cell>
+											<cell rendition="#td1a1"><s>12</s></cell>
+											<cell rendition="#td1a1"><s>156</s></cell>
+											<cell rendition="#td1a1"><s>49</s></cell>
+											<cell rendition="#td1a1"><s>35</s></cell>
+											<cell rendition="#td1f1"><s>19</s></cell>
+										</row>
+										<row>
+											<cell rendition="#td1a1"><s>1650</s></cell>
+											<cell rendition="#td1a1"><s>32</s></cell>
+											<cell rendition="#td1a1"><s>4</s></cell>
+											<cell rendition="#td1a1"><s>67</s></cell>
+											<cell rendition="#td1a1"><s>24</s></cell>
+											<cell rendition="#td1a1"><s>13</s></cell>
+											<cell rendition="#td1f1"><s>2</s></cell>
+										</row>
+									</table>
+									<p rend="figure-legend" xml:id="otx_123">Les enchaîner par des
+										sauts de ligne ou en §§ distincts ? <lb/>a. Livres n° 3, 4,
+										7 et 9, 1615-1692.<lb/>b. Livres n° 5 et 6,
+										1633-1663.<lb/>c. Fragments des livres n° 1, 2 et 3,
+										(1641-1672).</p>
+									<p rend="figure-legend" xml:id="otx_124">d. Manquent six mois
+										(janvier-juin).</p>
+									<p rend="figure-legend" xml:id="otx_125">e. Manquent six mois
+										(janvier-juin).</p>
+									<p rend="figure-legend" xml:id="otx_126">f. Manquent trois mois
+										(octobre-décembre).</p>
+									<p rend="figure-legend" xml:id="otx_127">g. Manquent trois mois
+										(février, juin, juillet).</p>
+									<p rend="figure-legend" xml:id="otx_128">h. Fragments.</p>
+									<p rend="figure-legend" xml:id="otx_129">i. Fragments.</p>
+									<p rend="figure-legend" xml:id="otx_130">j. Fragments.</p>
+									<p rend="figure-legend" xml:id="otx_131">k. Fragments des mois
+										de juillet, août et septembre.</p>
+									<p xml:id="otx_132">À moins qu’elle ne rappelle ces péchés du
+										Moyen Âge qui, au vrai, ne manquent pas. Là où la grâce
+										surabonde… Huysmans poursuit d’une haine féroce les peintres
+										de Cologne :</p>
+									<q rend="quotation" xml:id="otx_133">Alors, c’était ça, les
+										Madones en fil de harpe, les vierges sublimées de Cologne !
+										celle-là était bouffie, redondante, mafflue ; elle avait un
+										cou de génisse et des chairs de crème, en tôt-fait qui
+										tremble quand on y touche […] une œuvre méticuleuse et
+										brillante, adroite, mais nullement religieuse ; il sentait
+										la décadence, le travail fignolé, le compliqué et non le
+											Primitif<hi rendition="#T8"><note place="foot" n="20"><p
+												rend="footnote">Huysmans, <hi rendition="#T5">La
+												Cathédrale, </hi>p. 266-269.</p></note></hi>.</q>
+									<p xml:id="otx_134">Il faut donc discerner, ne pas succomber
+										comme les autres au Dombild et à « l’apothéose du roublard
+										et du bouffi », chercher plus loin, en Franconie, en Souabe,
+										les sauvages de génie, Grünewald, Zeitblom<note place="foot"
+											n="21"><p rend="footnote">Encore que dans le polyptyque
+												de Colmar, Huysmans ne supporte pas l’<hi
+												rendition="#T5">Annonciation…</hi></p></note>…
+										Effet de snobisme, dégoût des femmes grasses, prurit
+										anti-allemand faisant retour, mais surtout marque claire que
+										la conversion des signes relève bien du diktat critique. Est
+										religieux, mystique, primitif, médiéval, ce que Huysmans
+										déclare tel. Leçon inquiétante, à méditer, n’est
+										« mystique » que ce que l’on proclame tel. La visée de
+										l’indicible va de pair avec la tyrannie du dire
+										critique.</p>
+									<div type="div7">
+										<head subtype="level7" xml:id="otx_135"><!-- <pb/> -->Moyen
+											Âge pictural<note place="foot" n="22"><p rend="footnote"
+												>Huysmans, <hi rendition="#T5">op. cit.</hi>,
+												p. 356.</p></note></head>
+										<p rend="noindent" xml:id="otx_136">Le Moyen Âge pictural
+											serait ainsi l’espace où la peinture s’imagine
+											affranchie du culte humaniste de la « figure », de sa
+											beauté, de son expression, pour trouver dans l’homme
+											quelconque, dans le neutre figural, le support adéquat à
+											l’épiphanie de l’Invisible. </p>
+										<div type="div8">
+											<head subtype="level8" xml:id="otx_137">Excès
+												expressionniste</head>
+											<p rend="noindent" xml:id="otx_138">On oscille entre
+												l’excès expressionniste de la misère charnelle et la
+												neutralité sémiotique de la vie unitive, sans jamais
+												s’arrêter au point juste de l’Homme qui serait celui
+												de la Renaissance. L’horreur et la banalité
+												appellent, symétriquement, le coup d’état dénégateur
+												de l’interprète. Le Moyen Âge huysmansien est
+												l’espace constitué pour et par sa violence
+												pulsionnelle, un champ ouvert pour la jouissance
+												quasi terroriste de l’autorité du verbe. Ne pas
+												ressusciter le passé, le créer selon son verbe :
+												tâche d’écrivain, non d’historien, c’est clair. Et
+												d’écrivain qui n’écrit que pour briser la loi de la
+												représentation mimétique, sous l’effet de ce
+												forcènement du sens imposé au visible.</p>
+											<div type="div9">
+												<head subtype="level9" xml:id="otx_139">Aporie de
+												l’écriture</head>
+												<p rend="noindent" xml:id="otx_140">Le discours sur
+												la peinture médiévale renvoie d’ailleurs très
+												exactement à celui que Huysmans peut tenir sur la
+												littérature mystique comme aporie de
+												l’écriture :</p>
+												<q rend="quotation" xml:id="otx_141">Nous en sommes
+												réduits, pour qualifier ce mystérieux amour, à
+												chercher nos comparaisons dans les actes humains,
+												à infliger au Seigneur la honte de nos mots. Il
+												nous faut recourir aux termes d’union, de mariage,
+												de noces, à des vocables qui puent le suint ! mais
+												aussi comment énoncer l’inexprimable, comment,
+												dans la bassesse d’une langue, désigner
+												l’ineffable immersion d’une âme en Dieu<note
+												place="foot" n="23"><p rend="footnote">Huysmans,
+												<hi rendition="#T5">En route,
+												</hi>p. 93.</p></note>.</q>
+												<p xml:id="otx_142">Humilité nécessaire de
+												l’écriture mystique : le désir de Dieu est
+												« épreinte », il l’écrit sans vergogne. Humilité
+												peut-être de toute écriture en tant qu’elle ne
+												viserait que l’inexprimable. En contrepoint de
+												cette bassesse, Hildegarde de Bingen indique un
+												autre bord, l’hermétisme :</p>
+												<q rend="quotation" xml:id="otx_143">Son style
+												apocalyptique a quelque chose de rétractile : il
+												semble qu’il se recule et se referme davantage
+												lorsqu’on veut l’ouvrir.</q>
+												<p xml:id="otx_144">La mystique ouvre sur
+												l’inadéquation des signes linguistiques ou
+												iconiques, sur l’« intraduisible ». En
+												conséquence, le déploiement encyclopédique des
+												codes symboliques médiévaux est profusion
+												ornementale autour de l’irreprésentable central et
+												fondateur du Sens. Le Moyen Âge huysmansien est
+												bien, à cet égard, le laboratoire d’une
+												« poétique » moderne.</p>
+												<p xml:id="otx_145">À l’Homme idéal de la
+												Renaissance moderniste s’oppose l’Homme médiéval,
+												le « Moine ». Fra Angelico est l’homme neutralisé
+												par l’infini de son essence en l’Autre. Cette
+												« incarnation » a son espace propre, soustrait au
+												monde dans le monde même. Le Moyen Âge est à la
+												fois errance et clôture, deux antagoniques de
+												l’homme urbain de la Renaissance. Le Moyen Âge est
+												le temps de l’homme retranché comme
+												<!-- <pb/> -->modèle d’accomplissement du destin
+												terrestre. C’est-à-dire d’une vie pour la mort. La
+												vocation médiévale est à la mort seule, anticipée
+												en pleine vie recluse :</p>
+												<q rend="quotation" xml:id="otx_146">la seule fin
+												qu’il était nécessaire, ici bas, d’atteindre,
+												c’était d’entrer en relation directe avec le ciel
+												et de devancer la mort<note place="foot" n="24"><p
+												rend="footnote">Huysmans, <hi rendition="#T5">op.
+												cit.</hi>, p. 351.</p></note>. (<hi
+												rendition="#T5">Cathédrale,</hi> p. 351.)</q>
+												<p rend="noindent" xml:id="otx_147">C’est de cette
+												anticipation dont témoigne l’art des Primitifs
+												« vraie preuve du catholicisme » :</p>
+												<q rend="quotation" xml:id="otx_148">Alors, dans cet
+												admirable Moyen Âge, où l’art, allaité par
+												l’Église, anticipa sur la mort, s’avança jusqu’au
+												seuil de l’éternité, jusqu’à Dieu, le concept
+												divin et la forme céleste furent devinés,
+												entr’aperçus, pour la première et peut-être la
+												dernière fois, par l’homme<note place="foot"
+												n="25"><p rend="footnote">Huysmans, <hi
+												rendition="#T5">op. cit,
+												</hi>p. 8.</p></note>.</q>
+												<p rend="noindent" xml:id="otx_149">Une mort
+												annoncée dont l’expérience vive serait
+												« bonheur » :</p>
+												<q rend="quotation" xml:id="otx_150">le bonheur
+												consiste, certainement, à être interné dans un
+												lieu très fermé, dans une prison bien close, où
+												une chapelle est toujours ouverte<note
+												place="foot" n="26"><p rend="footnote">Huysmans,
+												<hi rendition="#T5">op. cit.,
+												</hi>p. 284.</p></note>.</q>
+												<p xml:id="otx_151">Tels sont les lieux et le temps
+												de l’Art, écriture et peinture également mystiques
+												qui ne peuvent être produites et reçues qu’au
+												cloître. Ou dans ses approximations, car tel est
+												l’horizon de conversion du retranchement esthète
+												de Des Esseintes. Son musée imaginaire s’ouvrait
+												déjà sur la cellule monastique, la chambre
+												où :</p>
+												<q rend="quotation" xml:id="otx_152">il se figurait
+												aisément alors qu’il vivait à cent lieues de
+												Paris, loin du monde, dans le fin fond d’un
+												cloître<note place="foot" n="27"><p
+												rend="footnote">Huysmans, <hi rendition="#T5">À
+												rebours, </hi>Paris, Charpentier-Fasquelle, 1918,
+												p. 84, p. 89.</p></note>.</q>
+												<p xml:id="otx_153">L’expérience forcenée d’écriture
+												que constitue <hi rendition="#T5">À Rebours
+												</hi>programme les auto-fictions ultérieures
+												constituées, livre après livre, comme conversion
+												organisée de ses potentialités. La réclusion
+												esthète de Des Esseintes prendra sens lorsqu’enfin
+												Huysmans écrira la vie de sainte Lydwine de
+												Schiedam. Non pas une moniale mais une laïque
+												recluse dont la vie connue par quelques
+												hagiographes obscurs se distribue en séquences
+												disjointes où alternent l’horreur d’un corps
+												vivant, sa décomposition et la naïveté de visions
+												paradisiaques. La substitution, dans <hi
+												rendition="#T5">À Rebours, </hi>de la diégèse
+												narrative à l’accumulation encyclopédique informe
+												les écrits ultérieurs qui font de la compilation
+												érudite le véritable moteur de l’écriture jusqu’à
+												cette biographie compilée elle-même à partir de
+												textes qui ne sont pas des « biographies » au sens
+												où s’y déploierait le continu progressif d’une vie
+												mais des kaléidoscopes a-chronologiques. Les vies
+												écrites des mystiques médiévaux consignent moins
+												l’histoire vécue que l’imprévisible des merveilles
+												de Dieu, Angèle de Foligno et son « livre des
+												visions » suffiraient à le manifester. La
+												biographie se perd entre les excès alternés de la
+												décomposition corporelle et de l’union en Dieu,
+												entre la misère et la gloire. Les images fixes de
+												la Crucifixion et du Couronnement s’animent et se
+												déploient en séquences difficilement agençables
+												qui disent la mort vive de Lydwine. En une telle
+												indication que les figures rationalisées du
+												progrès mystique s’y perdent :</p>
+												<q rend="quotation" xml:id="otx_154">Cette division
+												des trois étapes de l’ascension mystique, si
+												distincte chez les théologiens s’embrouille chez
+												elle. Il n’est plus question de la halte du
+												milieu, du relais illuminatif, mais des deux
+												extrêmes, de la <!-- <pb/> -->première et de la
+												dernière étape dans lesquelles elle semble, à une
+												certaine époque, s’être également tenue<note
+												place="foot" n="28"><p rend="footnote">Huysmans,
+												<hi rendition="#T5">Sainte Lydwine de Schiedam,
+												</hi>Paris, Plon, 1901, p. 211.</p></note>.</q>
+												<p xml:id="otx_155">Ceci est un paragraphe normal.
+												Rien de particulier, blabla tout ça…</p>
+												<p rend="box" xml:id="otx_156">Le biographe à la
+												fois organise un récit et subvertit cette forme
+												par l’excès jouissif sadique des souffrances
+												alternant avec les chromos pieux des visions
+												paradisiaques. Une feinte naïveté accueille les
+												merveilles alternées de l’horreur et de la
+												béatitude qui mettent en images l’anticipation de
+												la mort Les fleurs des saints se substituent à la
+												botanique malade d’<hi rendition="#T5">À rebours.
+												</hi>Humble d’esprit, orgueilleux de style,
+												l’écrivain néo-médiéval se soumet au folklore
+												hagiographique pour ses écarts, sa différence par
+												rapport au biographique humaniste. Le Moyen Âge
+												est encore ce qui permet de pénétrer la diégèse
+												biographique de la puissance du symbole, de mettre
+												à mort le récit bio-naturaliste pour y imposer les
+												disjonctions de la mort. Entre l’excès
+												expressionniste et le naïf de la vision
+												paradisiaque, <hi rendition="#T5">Sainte Lydwine
+												de Schiedam </hi>recueille la leçon esthétique des
+												Primitifs.</p>
+												<p xml:id="otx_157">Cependant, le corpus huysmansien
+												des Primitifs médiévaux ne cesse de communiquer
+												avec un ensemble encore plus flou et totalement
+												indénommé que nous appellerions « baroque ». Le
+												musée imaginaire de Des Esseintes, là encore,
+												remplit son office programmatique : gravures
+												féroces de Van Luyken mais aussi toile du Greco
+												qui, dans la chambre-cellule, préfigure
+												l’hallucination du Crucifié :</p>
+												<q rend="quotation" xml:id="otx_158">une ébauche
+												désordonnée […], un Christ aux teintes
+												singulières, d’un dessin exagéré, d’une couleur
+												féroce, d’une énergie détraquée[…]son Théocopuli
+												(sic) dont l’atroce couleur rabrouait un peu le
+												sourire de l’étoffe jaune et la rappelait à un ton
+												plus grave<note place="foot" n="29"><p
+												rend="footnote">Huysmans, <hi rendition="#T5">op.
+												cit.</hi>, p. 89.</p></note>…</q>
+												<p xml:id="otx_159"><hi rendition="#T5">La
+												Cathédrale, </hi>sans hasard, insère dans son
+												espace médiévaliste, la « remémoration » d’une
+												autre œuvre baroque espagnole, le <hi
+												rendition="#T5">Saint François d’Assise </hi>peint
+												par Zurbaran :</p>
+												<q rend="quotation" xml:id="otx_160">Le visage
+												paraissait modelé, creusé dans la cendre et la
+												bouche béait, livide, sous des yeux en extase,
+												blancs, comme crevés. L’on se demandait comment ce
+												cadavre qui n’avait que les os tenait debout et
+												l’effroi venait, en songeant aux exorbitantes
+												macérations, aux épouvantables pénitences qui
+												avaient exténué ce corps et labouré les traits
+												douloureux et ravis de cette face<note
+												place="foot" n="30"><p rend="footnote">Huysmans,
+												<hi rendition="#T5">La Cathédrale, </hi>p. 85. Il
+												s’agit d’une toile du musée de Lyon, peinte vers
+												1645 ; depuis les pillages napoléoniens et
+												Théophile Gautier, Zurbaran était connu comme
+												peintre mystique des couvents
+												espagnols.</p></note>.</q>
+												<p xml:id="otx_161">Dans l’espace nocturne de la
+												mémoire, le corps abîmé du mort-vif aux yeux
+												d’aveugle érige l’évidence de la Gloire. C’est
+												l’intime du rêveur qui à la fois suscite et
+												éprouve la vérité dans l’invisible de la toile
+												vue. Or cet écart entre le visible et le sens
+												renvoie en peinture à ce qui serait l’inadéquation
+												radicale du langage à l’expérience unitive. De
+												rares peintures baroques renvoient à de bien plus
+												nombreuses citations d’écrits mystiques des XVI<hi
+												rendition="#T8">e</hi> et XVII<hi rendition="#T8"
+												>e</hi> siècles mais ce corpus baroque, peintures
+												et textes, n’est lui-même qu’un effet de
+												déplacement de l’investigation médiévale. Le lieu
+												médiéval huysmansien capte ce que nous
+												désignerions comme baroque et qui est encore très
+												largement indénommable au temps où écrit
+												Huysmans.</p>
+												<p xml:id="otx_162"><!-- <pb/> -->La lutte engagée
+												contre la trivialité naturaliste atteint en fait
+												et non sans raison le Beau même par rapport à quoi
+												le naturalisme instaure son scandale. Ce que
+												Huysmans tend à défaire est l’immanence du sens à
+												la représentation, telle serait la véritable
+												bassesse de l’Art humaniste. Ce qui se construit
+												dans les textes huysmansiens, que leur objet soit
+												posé, souvent à tort, comme médiéval ou qu’il
+												émerge de l’oubli méprisant de ce que nous
+												appelons le baroque, c’est, indifféremment, la
+												subversion de la coïncidence. Médiéval ou baroque,
+												il importe que le texte puisse creuser le dit ou
+												le vu d’un espace d’au-delà qui est celui des
+												épiphanies intimes de l’Invisible et de
+												l’Indicible. Ce qui est donné dans l’expérience
+												sensible doit appeler sa dénégation et ce n’est
+												qu’un dérèglement de la représentation humaniste
+												qui peut faire signe de l’au-delà, Tout et Rien,
+												Dieu dans le langage du croyant.</p>
+												<p rend="break" xml:id="otx_163">***</p>
+												<p xml:id="otx_164">La réhabilitation esthétique des
+												Primitifs n’est qu’un aspect de l’élargissement
+												considérable du corpus pictural canonique qui
+												caractérise le XIX<hi rendition="#T8"
+												>e</hi> siècle mais des Allemands du Moyen Âge aux
+												Espagnols du Siècle d’or, ce qui marque les textes
+												de Huysmans, c’est bien que cette extension
+												s’intègre, à la fin du siècle, aux recherches
+												symbolistes. La peinture et les textes mystiques
+												sont des modèles d’interrogation de la
+												représentation qui ouvrent sur les poétiques
+												para-mystiques de notre temps. C’est Blanchot qui
+												écrit que « l’écrivain est celui qui tient son
+												pouvoir d’écrire d’une relation anticipée à la
+												mort »<note place="foot" n="31"><p rend="footnote"
+												>Maurice Blanchot, <hi rendition="#T5">De Kafka à
+												Kafka, </hi>Paris, Gallimard, Idées, 1981,
+												p. 136.</p></note>. Huysmans n’a rien dit d’autre
+												de l’œuvre mystique. Mais en même temps, Huysmans
+												ouvre sur les investigations amorcées du baroque.
+												De Wölfflin à Severo Sarduy, le modèle de
+												l’ellipse constitue un effet de corpus
+												transsémiotique et largement diachronique où se
+												cherche l’effondrement du cercle comme modèle de
+												perfection. Une figure à deux pôles se substitue à
+												l’autre si ancienne au pôle unique afin que le
+												pôle visible ne puisse se concevoir sans un autre
+												pôle obscur qu’on identifiera comme lieu de
+												révélation du Sens même.</p>
+												<p xml:id="otx_165">L’errance médiévale dérive
+												jusqu’au baroque historique et bien au delà,
+												encore fallait-il passer par les marginalités
+												médiévales pour mettre à mal la tyrannie
+												naturaliste, au sens le plus large du terme. En
+												cela, la <hi rendition="#T5">Crucifixion </hi>de
+												Grünewald, excédant la conscience critique de
+												Huysmans lui-même, ouvre bien sur une poétique
+												moderniste.</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</body>
+		<back>
+			<div type="bibliography">
+				<listBibl>
+					<bibl>A<hi rendition="#T2">malric</hi> Jean-Pierre, « Les migrations françaises
+						en Espagne à l’époque moderne, <hi rendition="#T2">xvi</hi><hi
+							rendition="#T8">e</hi>-<hi rendition="#T2">xviii</hi><hi rendition="#T8"
+							>e</hi> siècle », <hi rendition="#T5">Actes de la I</hi><hi
+							rendition="#T9">re</hi><hi rendition="#T5"> Conférence européenne de la
+							Commission internationale de démographie historique,</hi>
+						Saint-Jacques-de-Compostelle, Xunta de Galicia/Commission internationale de
+						démographie historique, 1993, p. 327-346.</bibl>
+					<bibl>A<hi rendition="#T2">munátegui</hi> Miguel Luis, <hi rendition="#T5"
+							>Descubrimiento i conquista de Chile,</hi> Santiago, Imprenta Barcelona,
+						1913, 552 p.<lb/>–  <hi rendition="#T5">Las primeras representaciones
+							dramáticas en Chile,</hi> Santiago, Impr. nacional, 1888,
+							398 p.<lb/>–  <hi rendition="#T5">El cabildo de Santiago desde 1573
+							hasta 1581,</hi> Santiago, Impr. nacional, 1890-1891, 3 vol.</bibl>
+					<bibl>A<hi rendition="#T2">munátegui</hi> Solar Domingo, <hi rendition="#T5"
+							>Historia social de Chile,</hi> Santiago, Nascimento, 1932,
+							346 p.<lb/>–  <hi rendition="#T5">La sociedad de Santiago en el
+							siglo </hi><hi rendition="#T3">xvii</hi><hi rendition="#T5">,</hi>
+						Santiago, Dirección general de prisiones Impr., 1937, 310 p.<lb/>–  <hi
+							rendition="#T5">Las encomiendas de indíjenas en Chile,</hi> Santiago,
+						Impr. Cervantes, 1909, 476 p.</bibl>
+					<bibl><hi xml:lang="en">A</hi><hi rendition="#T4" xml:lang="en">ndrien</hi><hi
+							xml:lang="en"> Kenneth J., </hi><hi rendition="#T7" xml:lang="en">Crisis
+							and decline. The viceroyalty of Peru in the seventeenth century,</hi><hi
+							xml:lang="en"> Albuquerque, University of New Mexico Press, 1985, 287
+							p.</hi></bibl>
+					<bibl>A<hi rendition="#T2">raneda</hi> Fidel, <hi rendition="#T5">Historia de la
+							Iglesia en Chile,</hi> Santiago, Ed. Paulinas, 1986, 812 p.</bibl>
+					<bibl>A<hi rendition="#T2">rciniegas</hi> German, <hi rendition="#T5">Los
+							Alemanes en la conquista de América,</hi> Buenos Aires, Ed. <hi
+							xml:lang="en">Losada, 1941, 268 p.</hi></bibl>
+					<bibl><hi xml:lang="en">E</hi><hi rendition="#T4" xml:lang="en"
+							>isenstadt</hi><hi xml:lang="en"> S. N., Roniger Louis, « Patron-client
+							relation as a model of structuring social exchange », </hi><hi
+							rendition="#T7" xml:lang="en">Comparative Studies in Society and
+							History,</hi><hi xml:lang="en"> 22, 1980, p. 42-77.</hi></bibl>
+					<bibl><!-- <pb/> -->M<hi rendition="#T2">enéndez Pidal</hi> Gonzalo, <hi
+							rendition="#T5">Los caminos en la historia de España,</hi> Madrid,
+						Ediciones de cultura hispánica, 1951, 139 p.</bibl>
+					<bibl>M<hi rendition="#T2">enéndez Pidal</hi> Ramón, <hi rendition="#T5">Los
+							romances de América y otros estudios,</hi> Buenos Aires, Espasa-Calpe
+						argentina, 1945, 188 p. (1<hi rendition="#T8">re</hi> éd. 1939).</bibl>
+					<bibl>M<hi rendition="#T2">eza Villalobos</hi> Néstor, <hi rendition="#T5"
+							>Política indígena en los orígenes de la sociedad chilena,</hi>
+						Santiago, Editorial Universitaria, 1951, 109 p.</bibl>
+
+
+					<!-- 
+							Marx Karl, 1968, Fondements de la critique de l’économie politique, trad. R. Dangeville, Paris, 10/18.
+							– 1993, Le Capital, l. 1, Le procès de production du capital, trad. et éd. J.‑P. Lefebvre, Paris, PUF.
+							-->
+					<bibl>
+						<author ></author>
+						<author xml:id="Marx_Karl">
+							<surname>Marx</surname>
+							<forename>Karl</forename>
+						</author>, <edition><date>1968</date></edition>, <title level="m">Fondements
+							de la critique de l’économie politique</title>, <abbr>trad.</abbr>
+						<editor role="translator">R. Dangeville</editor>,
+						<pubPlace>Paris</pubPlace>, <publisher>10/18</publisher>. </bibl>
+					<bibl>
+						<link target="Marx_Karl"/>– <date>1993</date>, <title level="m" type="main"
+							>Le Capital</title>, <abbr>l.</abbr>
+						<biblScope type="vol">1</biblScope>, <title level="m" type="sub">Le procès
+							de production du capital</title>, <abbr>trad.</abbr> et <abbr>éd.</abbr>
+						<editor role="translator">J.‑P. Lefebvre</editor>,
+							<pubPlace>Paris</pubPlace>, <publisher>PUF</publisher>. </bibl>
+
+					<!--
+							Popelka (R.S.), Glascock (M.D.), Robertshaw (P.) et Wood (M.), 2005. Laser Ablation ICP-MS of
+							African Glass Trade Beads, in Speakman (R. J.) et H. Neff (eds), Laser Ablation ICP-MS in Archaeological Research, 
+							Albuquerque, University of New Mexico Press, p. 84-93.
+							-->
+					<bibl type="article">
+						<author></author>
+						<author>
+							<surname>Popelka</surname> (<forename full="init">R. S.</forename>)
+						</author>, <author>
+							<surname>Glascock</surname> (<forename full="init">M. D.</forename>)
+						</author>, <author>
+							<surname>Robertshaw</surname> (<forename full="init">P.</forename>)
+						</author> et <author>
+							<surname>Wood</surname> (<forename full="init">M.</forename>) </author>, <edition>
+							<date>2005</date>
+						</edition>. <title level="a">Laser Ablation ICP-MS of African Glass Trade
+							Beads</title>, in <relatedItem type="in">
+							<bibl type="book">
+								<author>
+									<surname>Speakman</surname> (<forename full="init"
+										>R. J.</forename>) </author> et <author>
+									<forename full="init">H.</forename>
+									<surname>Neff</surname>
+								</author> (<abbr>eds</abbr>), <title level="m">Laser Ablation ICP-MS
+									in Archaeological Research</title>,
+									<pubPlace>Albuquerque</pubPlace>, <publisher>University of New
+									Mexico Press</publisher>, <abbr>p.</abbr>
+								<biblScope type="pp">84-93</biblScope></bibl>
+						</relatedItem>
+					</bibl>
+
+
+					<!--
+							Direcção-Geral dos Serviços Hidráulicos, O melhoramento dos portos continentais e insulares
+							de Portugal, Lisboa, 1945.
+							-->
+					<bibl>
+						<author>
+							<orgName>Direcção-Geral dos Serviços Hidráulicos</orgName>
+						</author>, <title level="m">O melhoramento dos portos continentais e
+							insulares de Portugal</title> , <pubPlace>Lisboa</pubPlace>,
+							<date>1945</date>. </bibl>
+					<bibl xml:id="Certeau2002">CERTEAU Michel de, 2002 : L’Écriture de l’histoire,
+						Paris : Gallimard (1re éd. 1975, Paris : Gallimard).
+					</bibl>
+				</listBibl>
+			</div>
+			<div type="appendix">
+				<ab type="head" rend="appendix" xml:id="otx_166" subtype="level1">Glossaire / Titre
+					1 d'annexe</ab>
+				<p rend="appendix" xml:id="otx_167"><hi rendition="#T5">Almojarifazgo.</hi> – Impôt
+					royal sur les douanes maritimes, perçu sur tous les produits transitant par les
+					ports, à l’exportation comme à l’importation.</p>
+				<p rend="appendix" xml:id="otx_168"><hi rendition="#T11">Araucans.</hi> – Nom donné
+					par les Espagnols aux Indiens de la région d’Arauco d’abord, puis à l’ensemble
+					des Indiens rebelles au Sud du Bio-Bio. Ce terme générique est remplacé au <hi
+						rendition="#T2">xviii</hi><hi rendition="#T8">e</hi> siècle par le mot
+					mapuche (« gens de la terre ») qui se voulait plus précis et plus authentique.
+					Aucune de ces deux désignations n’étaient utilisée par les Indiens du Chili
+					eux-mêmes.</p>
+				<ab type="head" rend="appendix" xml:id="otx_169" subtype="level2"
+					><!-- <pb/> -->Titre 2 d'annexe</ab>
+				<ab type="head" rend="appendix" xml:id="otx_170" subtype="level3">Titre 3
+					d'annexe</ab>
+				<p rend="appendix" xml:id="otx_171"><hi rendition="#T5">Arbitristas.</hi> – Auteurs
+						d’<hi rendition="#T5">arbitrios</hi> (avis, manières de procéder), projets
+					de réforme dans les domaines économique, fiscal ou politique. La littérature <hi
+						rendition="#T5">arbitrista</hi> voit le jour après la défaite de
+					l’invincible armada en 1588 et connaît son apogée dans les années 1640. Ses
+					exposants les plus célèbres sont, entre autres, Martín González de Cellórigo,
+					Pedro Fernández de Navarrete, Sancho de Moncada, Miguel Caxa de Leruela.</p>
+				<ab type="head" rend="appendix" xml:id="otx_172" subtype="level3">Titre 3
+					d'annexe</ab>
+				<p rend="appendix" xml:id="otx_173"><hi rendition="#T5">Audiencia.</hi> – Tribunal
+					royal, chargé de l'administration de la justice pour l'ensemble du territoire du
+					Chili colonial. Ce terme désigne également les régions sur lesquelles s’étendait
+					la juridiction de cette haute cour de justice. Les <hi rendition="#T5"
+						>audiencias</hi> étaient la plus haute instance judiciaire aux Indes et
+					jouissaient de fonctions exécutives et législatives. Elles assumaient le
+					gouvernement en l’absence du chef de l’exécutif (gouverneur, vice-roi). Chaque
+						<hi rendition="#T5">audiencia</hi> comprenait un président, des juges <hi
+						rendition="#T5">(oidores)</hi> et au moins un procureur <hi rendition="#T5"
+						>(fiscal)</hi> représentant la couronne. L'armée du Chili échappait au
+					contrôle de cette cour de justice.</p>
+				<p rend="appendix" xml:id="otx_174"><hi rendition="#T11">Beliche.</hi> – v.
+					Huilliche.</p>
+			</div>
+		</back>
+	</text>
+</TEI>
