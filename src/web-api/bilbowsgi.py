@@ -5,7 +5,7 @@ abspath = os.path.dirname(__file__)
 sys.path.append(abspath)
 os.chdir(abspath)
 
-from bilboweb import bilboWeb, annotate, urls
+from bilboweb import bilboWeb, annotate, aboutBilbo, urls
 import web
 app = web.application(urls, globals(), autoreload=False)
 application = app.wsgifunc()
