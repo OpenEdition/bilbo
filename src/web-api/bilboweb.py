@@ -12,6 +12,7 @@ import shutil
 import codecs
 import json
 from pprint import pprint
+import detectBiblZone
 
 #Import bilbo
 sys.path.append('..')
@@ -42,7 +43,8 @@ class annotate:
 			cpt += 1
 
 		if (cpt>0):
-			annoterCorpus(corpus, i)
+			#annoterCorpus(corpus, i)
+			annoterCorpus(cpt-1)
 		else:
 			return web.webapi.BadRequest()
 
@@ -54,7 +56,7 @@ class annotate:
 			resultat.append(''.join( fichier.readlines()))
 			fichier.close()
 
-		delTmp()
+		#delTmp()
 
 		retour = json.dumps(resultat)
 		if ('callback' in i):
@@ -69,9 +71,14 @@ class annotate:
 class bilboWeb:
 	def GET(self):
 		render = web.template.render('templates/')
+
 		return render.bilbo()
 
-def annoterCorpus(corpus, request):
+def annoterCorpus(cpt):
+	detectBiblZone.fileProcessing("tmp/in","fichier_" + str(cpt)+".xml")
+
+
+def annoterCorpus2(corpus, request):
 	dirModel = os.path.abspath('../../model/corpus' + str(corpus) + "/revues/") + "/"
 	dir_in = os.path.abspath('tmp/in') + "/"
 	dir_out = os.path.abspath('tmp/out') + "/"

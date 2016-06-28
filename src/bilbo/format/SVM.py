@@ -96,14 +96,14 @@ class SVM(object):
 		"""
 		dependencyDir = os.path.join(self.rootDir, 'dependencies')
 		command = dependencyDir+'/svm_light/svm_classify '+self.dirResult+'newdata.txt '+directoryModel+'svm_model '+self.dirResult+'svm_predictions_new'
-		process = subprocess.Popen(command , shell=True, stdout=subprocess.PIPE)
+		process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
 		process.wait()
 
 		#pour But la detection des zones bibliographiques
 		svm_predictions=open(self.dirResult+'svm_predictions_new','r')
 		svm_predictions_2=open(self.dirResult+'svm_predictions_new','r').readlines()
-		svm_predictions_all=open('bilbo/bilbo-master/Result/test/svm_predictions_all','a')
-		svm_predictions_all_2=open('bilbo/bilbo-master/Result/test/svm_predictions_all2','a')
+		svm_predictions_all=open('/home/amal/Bureau/lrec_2016/demoLrec2016/bilbo/bilbo-master/Result/test/svm_predictions_all','a')
+		svm_predictions_all_2=open('/home/amal/Bureau/lrec_2016/demoLrec2016/bilbo/bilbo-master/Result/test/svm_predictions_all2','a')
 
 		if svm_predictions.read(1) == "-":
 			svm_predictions_all.write("0 \n")
@@ -112,4 +112,3 @@ class SVM(object):
 
 
 		svm_predictions_all_2.write(str(svm_predictions_2))
-			
