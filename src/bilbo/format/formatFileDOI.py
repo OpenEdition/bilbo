@@ -13,6 +13,7 @@ import pycurl
 from StringIO import StringIO
 import mysettings as s
 crossref_url = 'http://doi.crossref.org/servlet/query?'
+doi_resolver = 'http://dx.doi.org/'
 
 def formatFileDOI(soup):
     #post process to question Crossref
@@ -37,24 +38,24 @@ def formatFileDOI(soup):
 
 def searchDOI(references):
     for ref in references:
-        doi = None
+        doi = (None,)
         if ref['title']:
             query = constructCrossrefQuery(ref['title'], ref['surname'])
             cr_resp = askCrossref(query)
         if cr_resp:
             xml_rep = BeautifulSoup(cr_resp)
-            doi_rep = xml_rep.find('doi_record')
-            if doi_rep:
-                doi = (doi_rep.find('doi_data').find('doi').name if xml_rep.find('doi_record').find('doi') else None)
-        ref['doi'] = doi
+            doi_resp = xml_rep.find('doi_record')
+            if doi_resp:
+                doi = (doi_resp.find('doi_data').find('doi').string if xml_rep.find('doi_record').find('doi') else None,)
+        ref['doi'] = doi[0]
     return references
 
 
 
 def constructCrossrefQuery(title, name = None):
-    qtitle = '<article_title match="fuzzy">%s</article_title>' % urllib2.quote(title.encode('utf-8'))
+    qtitle = '<article_title match="fuzzy">%s</article_title>' % title.encode('utf-8')
     if name:
-        qname = '<author search-all-authors="false">%s</author>' % urllib2.quote(name.encode('utf-8'))
+        qname = '<author search-all-authors="false">%s</author>' % name.encode('utf-8')
     else:
         qname = None
     xml = '<?xml version = "1.0" encoding="UTF-8"?>\
@@ -75,20 +76,44 @@ def askCrossref(query):
     c.setopt(c.VERBOSE, False)
     c.perform()
     body = buffer.getvalue()
-    status = c.RESPONSE_CODE
+    status = c.getinfo(c.RESPONSE_CODE)
     c.close()
     buffer.close()
+    if status == 200:
+        return body
+    else:
+        print status, get
+        return False
     # print status, get
-    return body
+
+def searchJson(doi):
+    url = doi_resolver + doi
+    c = pycurl.Curl()
+    buffer = StringIO()
+    c.setopt(c.WRITEDATA, buffer)
+    c.setopt(c.URL, url)
+    c.setopt(c.HTTPHEADER, ('Accept: application/citeproc+json'))
+    c.setopt(c.FOLLOWLOCATION, True)
+    c.setopt(c.MAXREDIRS, 3)
+    c.perform()
+    body = buffer.getvalue()
+    status = c.getinfo(c.RESPONSE_CODE)
+    c.close()
+    buffer.close()
+    if status == 200:
+        return body
+    else:
+        print status, get
+        return False
 
 if __name__ == '__main__':
     soup = BeautifulSoup(open(sys.argv[1]))
     references = formatFileDOI(soup)
     doi_references = searchDOI(references)
     for doi in doi_references:
-#        if doi['doi'] != None:
- #           searchJson(doi['doi']
-        print 'Le RESULTAT', doi
+        print doi
+        if doi['doi'] != None:
+           print searchJson(doi['doi'])
 
 
 
