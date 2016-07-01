@@ -8,6 +8,11 @@ import sys
 from bs4 import BeautifulSoup
 from codecs import open
 import urllib2
+import urllib
+import pycurl
+from StringIO import StringIO
+import mysettings as s
+crossref_url = 'http://doi.crossref.org/servlet/query?'
 
 def formatFileDOI(soup):
     #post process to question Crossref
@@ -35,8 +40,9 @@ def searchDOI(blist):
         doi = None
         if b['title']:
             print b['title'], b['surname']
-            q = constructCrossrefQuery(b['title'], b['surname'])
-            print q
+            query = constructCrossrefQuery(b['title'], b['surname'])
+            print query
+        print askCrossref(query)
 
 
 def constructCrossrefQuery(title, name = None):
@@ -53,7 +59,25 @@ def constructCrossrefQuery(title, name = None):
     </query></body></query_batch>' % (qtitle, qname) 
     return xml
 
+def askCrossref(query):
+    get = {'usr': s.crossref_login, 'pwd': s.crossref_pwd, 'format':'unixref', 'qdata': query}
+    get = urllib.urlencode(get)
+    c = pycurl.Curl()
+    buffer = StringIO()
+    c.setopt(c.WRITEDATA, buffer)
+    c.setopt(c.URL, crossref_url + get)
+    c.setopt(c.VERBOSE, True)
+    c.perform()
+    body = buffer.getvalue()
+    status = c.getinfo(c.RESPONSE_CODE)
+    c.close()
+    if status == 200:
+        return body
+    else:
+        print status, get
+        return False
+
 if __name__ == '__main__':
     soup = BeautifulSoup(open(sys.argv[1]))
     references = formatFileDOI(soup)
-    print searchDOI(references)
+    searchDOI(references)
