@@ -35,14 +35,20 @@ def formatFileDOI(soup):
             pass
     return book_list
 
-def searchDOI(blist):
-    for b in blist:
+def searchDOI(references):
+    for ref in references:
         doi = None
-        if b['title']:
-            print b['title'], b['surname']
-            query = constructCrossrefQuery(b['title'], b['surname'])
-            print query
-        print askCrossref(query)
+        if ref['title']:
+            query = constructCrossrefQuery(ref['title'], ref['surname'])
+            cr_resp = askCrossref(query)
+        if cr_resp:
+            xml_rep = BeautifulSoup(cr_resp)
+            doi_rep = xml_rep.find('doi_record')
+            if doi_rep:
+                doi = (doi_rep.find('doi_data').find('doi').name if xml_rep.find('doi_record').find('doi') else None)
+        ref['doi'] = doi
+    return references
+
 
 
 def constructCrossrefQuery(title, name = None):
@@ -66,18 +72,32 @@ def askCrossref(query):
     buffer = StringIO()
     c.setopt(c.WRITEDATA, buffer)
     c.setopt(c.URL, crossref_url + get)
-    c.setopt(c.VERBOSE, True)
+    c.setopt(c.VERBOSE, False)
     c.perform()
     body = buffer.getvalue()
-    status = c.getinfo(c.RESPONSE_CODE)
+    status = c.RESPONSE_CODE
     c.close()
-    if status == 200:
-        return body
-    else:
-        print status, get
-        return False
+    buffer.close()
+    # print status, get
+    return body
 
 if __name__ == '__main__':
     soup = BeautifulSoup(open(sys.argv[1]))
     references = formatFileDOI(soup)
-    searchDOI(references)
+    doi_references = searchDOI(references)
+    for doi in doi_references:
+#        if doi['doi'] != None:
+ #           searchJson(doi['doi']
+        print 'Le RESULTAT', doi
+
+
+
+
+
+
+
+
+
+
+
+
