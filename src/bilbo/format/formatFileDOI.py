@@ -11,7 +11,6 @@ import urllib2
 import urllib
 import pycurl
 from StringIO import StringIO
-import mysettings as s
 import json
 from slugify import slugify
 import Levenshtein
@@ -77,11 +76,10 @@ def constructCrossrefQuery(title, name = None):
     <body><query list-components="false" expanded-results="true" key="key">\
     %s %s\
     </query></body></query_batch>' % (qtitle, qname if name else '') 
-    print xml
     return xml
 
 def askCrossref(query):
-    get  = {'usr': s.crossref_login, 'pwd': s.crossref_pwd, 'format':'unixref', 'qdata': query}
+    get  = {'pid': 'lab@openedition.org', 'format':'unixref', 'qdata': query}
     get = urllib.urlencode(get)
     c = pycurl.Curl()
     buffer = StringIO()
@@ -125,9 +123,7 @@ def searchJson(doi):
 def titleCheck(title1, title2):
     title1 = slugify(title1)[0:255]
     title2 = slugify(title2)[0:255]
-    print title1, title2
     ratio = Levenshtein.ratio(title1, title2)
-    print ratio
     if ratio > 0.7:
         return True
     else:
@@ -139,10 +135,13 @@ if __name__ == '__main__':
     doi_references = searchDOI(references)
     for doi in doi_references:
         if doi['doi']:
-           cr_ref = json.loads(searchJson(doi['doi']))
-           title_input = doi['title'] if doi['title'] is not None else doi['booktitle']
-           if not (titleCheck(cr_ref['title'], title_input)):
-               doi['mis_match_doi'] = "Probably"
+            cr_ref = json.loads(searchJson(doi['doi']))
+            title_input = doi['title'] if doi['title'] is not None else doi['booktitle']
+            if not (titleCheck(cr_ref['title'], title_input)):
+                doi['mis_match_doi'] = "Probably"
+                print ''.join(('MISMATCHED Doi found: ', doi['doi'], ' ; Title: ', title_input))  
+            else:
+                print ''.join(('CHECKED Doi found: ', doi['doi'], ' ; Title: ', title_input))  
 
 
 
