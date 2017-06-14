@@ -12,8 +12,6 @@ import shutil
 import codecs
 import json
 from pprint import pprint
-import cgi
-
 
 #Import bilbo
 sys.path.append('..')
@@ -58,9 +56,7 @@ class annotate:
 			fichier.close()
 
 		delTmp()
-                resultat_html = cgi.escape(resultat[0].encode('utf-8'))
-                res = resultat_html.replace('encoding="UTF-8"?&gt;', 'encoding="UTF-8"?&gt;<br>').replace('&lt;listBibl&gt;','&lt;listBibl&gt;<br>').replace('&lt;bibl&gt;','&lt;bibl&gt;<br>').replace('&lt;/bibl&gt;','<br>&lt;/bibl&gt;<br>').replace('&lt;\listBibl&gt;','&lt;\listBibl&gt;<br>')
-                resultat.append(res)
+
 		retour = json.dumps(resultat)
 		if ('callback' in i):
 			retour = i.callback + '(' + retour + ')'
@@ -85,11 +81,16 @@ def annoterCorpus(corpus, request):
 	dirModel = os.path.abspath('../../model/corpus' + str(corpus) + "/revues/") + "/"
 	dir_in = os.path.abspath('tmp/in') + "/"
 	dir_out = os.path.abspath('tmp/out') + "/"
+
 	if corpus == 2: optStr = '-T -t note'
 	else: optStr = '-T -t bibl'
 
+	if hasattr(request, 'doi'):
+		optStr += ' -d'
+
 	parser = defaultOptions()
 	options, args = parser.parse_args(optStr.split())
+
 	bilbo = Bilbo(dir_out, options, "crf_model_simple")
 	bilbo.annotate(dir_in, dirModel, corpus)
 	return

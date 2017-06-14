@@ -42,7 +42,7 @@ class CleanCorpus1(Clean):
 			tmp_str = ''
 
 			for line in open (fname, 'r', encoding='utf8', errors='replace') :
-				line = re.sub(' ', ' ', line)  # !!! eliminate this character representing a kind of SPACE but not a WHITESPACE
+				line = re.sub(' ', ' ', line)  # !!! eliminate this character representing a kind of SPACE but not a WHITESPACE
 				line = line.replace('<!-- <pb/> -->', '')
 				line = line.replace('“', '“ ') # !!! sparate the special characters '“', '”'
 				line = line.replace('”', ' ”') # !!! sparate the special characters '“', '”'
@@ -54,7 +54,7 @@ class CleanCorpus1(Clean):
 			tmp_str = self._elimination (tmp_str)
 				
 			tmp_str = self._xmlEntitiesDecode(tmp_str)
-			soup = BeautifulSoup (tmp_str)
+			soup = BeautifulSoup (tmp_str, "lxml")
 
 			i = 0
 			s = soup.findAll (nameTagCorpus)
@@ -89,6 +89,7 @@ class CleanCorpus1(Clean):
 						i += 1
 
 				references.append(Reference(words,i))
+                        
 				i += 1
 						
 		except IOError:

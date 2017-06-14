@@ -12,7 +12,7 @@ import sys, os
 import re
 from codecs import open
 
-class Extract(object):
+class Extract_Clean(object):
 	"""
 	A class to extract training and test data according to a set of predefined criteria
 	Base class of Extract_crf and Extract_svm
@@ -140,7 +140,6 @@ class Extract(object):
 		Print training or test data for Mallet CRF
 		"""
 		fich = open(fichier, "w", encoding="utf-8")
-		#print "tient je vais écrire dans", fichier
 		for reference in listRef.getReferences():
 			if (not (opt=="deleteNegatives" and reference.train == -1)) and (not (opt=="deletePositives" and reference.train != -1)) :
 			
@@ -152,18 +151,14 @@ class Extract(object):
 						if nbCarac > 0:
 							caracteristique = mot.getFeatureIndice(nbCarac-1)
 							fich.write(" "+caracteristique.nom.upper())
-							#print(caracteristique.nom.upper())
 						
 							while cpt < nbCarac-1:
 								caracteristique = mot.getFeatureIndice(cpt)
 								fich.write(" "+caracteristique.nom.upper())
 								cpt += 1
 						if tr != 0:
-							balise = mot.getTagIndice(0)
-							if balise == -1:
-								pass
-							else:
-								fich.write(" "+balise.nom)
+							balise = mot.getLastTag()
+							fich.write(" "+balise.nom)
 						fich.write("\n")
 				fich.write("\n")
 			#--------
@@ -192,7 +187,6 @@ class Extract(object):
 		if self.options.u : features.append(['PUNC', 'COMMA', 'POINT', 'LEADINGQUOTES', 'ENDINGQUOTES', 'LINK','PAIREDBRACES'])
 
 		fich = open(fichier, "w", encoding="utf-8")
-		#print "tient je vais wapiter dans", fichier
 		for reference in listRef.getReferences():
 			if (not (opt=="deleteNegatives" and reference.train == -1)) and (not (opt=="deletePositives" and reference.train != -1)):
 			
@@ -233,11 +227,7 @@ class Extract(object):
 							
 						if tr != 0:
 							balise = mot.getLastTag()
-							if balise == -1:
-                                                            #fich.write(" THE FUCKING MOT HAS NO TAG")
-                                                            pass
-                                                        else:
-                                                            fich.write(" "+balise.nom)
+							fich.write(" "+balise.nom)
 						fich.write("\n")
 				fich.write("\n")
 			#--------
@@ -605,12 +595,9 @@ class Extract(object):
 			reference list
 		"""
 		i = 0
-		#print "svmprediction_newfile" , svmprediction_newfile
-		#print "nb de ref", listRef.nbReference()
+		
 		for line in open (svmprediction_newfile, 'r', encoding='utf8') :
 			line = line.split()
-			#print('*****',i)
-			#print(listRef.getReferencesIndice(i).affiche())
 			if float(line[0]) > 0 :
 				listRef.getReferencesIndice(i).train = 0
 			else :

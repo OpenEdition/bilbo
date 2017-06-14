@@ -58,7 +58,7 @@ class CleanCorpus2(Clean):
 
 			tmp_str = self._xmlEntitiesDecode(tmp_str)
 			tmp_str = tmp_str.replace("\n", "")
-			soup = BeautifulSoup (tmp_str)
+			soup = BeautifulSoup (tmp_str, "lxml")
 
 			for nt in soup.findAll ('note') :
 				c = 0
@@ -69,7 +69,7 @@ class CleanCorpus2(Clean):
 					elif nt_c.name == 'bibl' : # bibl or other tag
 						pass
 					elif nt_c.findAll('bibl') : # structure flatten, pull <bibl> to top level for the extraction ###
-						nsoup = BeautifulSoup (nt_c.renderContents())
+						nsoup = BeautifulSoup (nt_c.renderContents(), "lxml")
 						nt_c.replace_with( nsoup.contents[0] )
 						nsouplen = len(nsoup.contents)
 						if (nsouplen > 0) :

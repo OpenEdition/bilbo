@@ -26,6 +26,7 @@
 				<p>Cut and paste bibliographical reference</p>
 				<form method="POST" id='bilbo'>
 					<textarea name="texts" rows="25" cols="100" maxlength="5000" id="texts"></textarea>
+					<label for="doi">DOI</label> : <input id="doi" type="checkbox" value="oui" name="doi" /><br/>
 					<label for="corpus1">Corpus 1 (bibliography)</label> : <input id="corpus1" name="corpus" value="1" type="radio" checked="checked" /> /
 					<label for="corpus2">Corpus 2 (notes)</label> : <input id="corpus2" name="corpus" value="2" type="radio" /><br/><br/>
 					<input type="submit" value="Annotate" id="bls" /> - <input type="reset" value="Reset" />
@@ -33,8 +34,6 @@
 				<p><input type="submit" value="Test corpus 1" id="testC1" /> <input type="submit" value="Test corpus 2" id="testC2" /></p>
 				<h4 id="displayresult"></h4>
 				<div id="result"></div>
-				<h4 id="display_xml"></h4>
-				<div id="xml"></div>
 			</div>
 		</section>
 		<footer>
@@ -52,13 +51,11 @@
 						data: data,
 						dataType: 'json',
 						success: function(data) {
-							xml = data[1];
 							res = data[0].replace(/<\?xml version="1.0" encoding="UTF-8"\?>/,'');
 							res = res.replace(/title/g,'titre');
+							res = res.replace(/<idno type="DOI">([^<]*)<\/idno>/g, ' <a class="doi" href="$$1">⤱</a> ');
 							jQuery('#displayresult').text(' Results : ');	
-							jQuery('#display_xml').text(' XML Output : ');	
 							jQuery('#result').html(res);
-							jQuery('#xml').html(xml);
 						},
 						error: function(err, s, e) {
 							console.log('error', err, s, e);
@@ -66,9 +63,6 @@
 						}
 					});
 					return false;
-				});
-
-				jQuery(document).ready(function() {
 				});
 				jQuery('#result').on('mouseover', function(e) {
 					var name = e.target.localName;

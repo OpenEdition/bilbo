@@ -27,7 +27,7 @@ def extractDoi(input_str, tagTypeCorpus) :
 	config = ConfigParser.ConfigParser()
 	config.read(os.path.join(rootDir, 'KB/config/config.txt'))
 	usrname = unicode(config.get("crossref", "usrname"))
-	soup = BeautifulSoup(input_str)
+	soup = BeautifulSoup(input_str, "lxml")
 	count = 0
 	for s in soup.findAll("bibl") :
 		title = ''
@@ -83,7 +83,7 @@ def extractDoi(input_str, tagTypeCorpus) :
 		qry = q1+title2+q2+sname2+q3 # no str + unicode error !
 		xml = urllib2.urlopen(qry).read()
 		xml = xml.decode('utf8')
-		doi = BeautifulSoup(xml).find('doi')
+		doi = BeautifulSoup(xml, "lxml").find('doi')
 		doistring = ''
 		if doi :
 			print refString
@@ -95,7 +95,7 @@ def extractDoi(input_str, tagTypeCorpus) :
 		else :
 			qry = q1+title2+q2+fname2+q3
 			xml = urllib2.urlopen(qry).read()
-			doi = BeautifulSoup(xml).find('doi')
+			doi = BeautifulSoup(xml, "lxml").find('doi')
 			if doi :
 				print refString
 				print 'First author : ', fname, '	Start of title : ', title
@@ -104,7 +104,7 @@ def extractDoi(input_str, tagTypeCorpus) :
 				print
 				count += 1
 			else :
-				print 'No DOI'
+				print('No DOI')
 	
 	return doistring
 
@@ -159,9 +159,9 @@ def teiValidate(fname, objfile) :
 		valide = xmlschema.validate(doc)
 		numErr = len(xmlschema.error_log)
 		
-		print '\n*xml validation* '+fname
-		if len(xmlschema.error_log) > 0 : print xmlschema.error_log
-		print 'number of errors :', len(xmlschema.error_log)
+		print('\n*xml validation* '+fname)
+		if len(xmlschema.error_log) > 0 : print(xmlschema.error_log)
+		print('number of errors :', len(xmlschema.error_log))
 		
 	else :
 		dtdfile = os.path.join(rootDir, 'KB/validation/input/tei_all.dtd')
@@ -170,15 +170,15 @@ def teiValidate(fname, objfile) :
 		valide = dtd.validate(doc)
 		numErr = len(dtd.error_log)
 		if not valide :
-			print dtd.validate(doc), fname
-			print 'excluded : non valid xml file with TEI guidelines'
+			print(dtd.validate(doc), fname)
+			print('excluded : non valid xml file with TEI guidelines')
 		
 	return valide, numErr
 
 
 def main():
 	if len (sys.argv) != 2 :
-		print 'python identifier.py (xml file name)'
+		print('python identifier.py (xml file name)')
 		sys.exit (1)
 	#input = rfile(str(sys.argv[1]))
 	#extractDoi(input)

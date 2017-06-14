@@ -104,7 +104,7 @@ def _isName(tmpRef, centre, found, includedLabels, a):
 	#2-1 first label
 	if not isName :
 		isName = True
-		bs = BeautifulSoup(tmpRef[:a])
+		bs = BeautifulSoup(tmpRef[:a], "lxml")
 		for b in bs.find_all() :
 			if b.name in includedLabels : isName = False
 	#2-2 first label after ";"
@@ -112,7 +112,7 @@ def _isName(tmpRef, centre, found, includedLabels, a):
 		ptr_semi = (tmpRef[a::-1]).find(";", 0)
 		if ptr_semi > 0 :
 			isName = True
-			bs = BeautifulSoup(tmpRef[a-ptr_semi:a])
+			bs = BeautifulSoup(tmpRef[a-ptr_semi:a], "lxml")
 			for b in bs.find_all() :
 				if b.name in includedLabels : isName = False
 	#final check, include ':' it's not a name
@@ -129,7 +129,7 @@ def _hasTitleAfterSemi(tmpRef, a, d):
 	hasTitle = True
 	ptr_semi = (tmpRef[a::-1]).find(";", 0)
 	if ptr_semi > 0 :
-		bs = BeautifulSoup(tmpRef[a-ptr_semi:d])
+		bs = BeautifulSoup(tmpRef[a-ptr_semi:d], "lxml")
 		if len(bs.find_all("^title")) == 0 :
 			hasTitle = False
 
@@ -239,7 +239,7 @@ def _totallyWrapped(oriRef):
 	limitst2 = -1
 	limited2 = -1
 		
-	s = BeautifulSoup(oriRef)
+	s = BeautifulSoup(oriRef, "lxml")
 		
 	tagName = "NOTAG"
 	if s.find("bibl") : tagName="bibl"

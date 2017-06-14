@@ -33,10 +33,10 @@ class Reference(object):
 
 
 	def affiche(self):
-		print "reference number : ",self.num,
+		print ("reference number : "),self.num,
 		for key in self.words:
 			key.affiche()
-		print "\n"
+		print ("\n")
 
 
 	def nbWord(self):
