@@ -26,10 +26,13 @@ class bilboEval():
 
 	def eval(self):
 		allValues = []
+                allDetailedValues = []
+                getLabels = ['publisher', 'surname', 'title', 'edition', 'place', 'abbr', 'forename', 'date']
+                
 		for dirPartition in self.dirPartitions:
-			#print "dirPartition", dirPartition
+			print("dirPartition", dirPartition)
 			(annotateDir, testDir, trainDir, modelDir, resultDir) = self.partitions.getDirTestNames(dirPartition)
-			
+			#print(resultDir, trainDir)
 			labeledContent = self._getFile(resultDir, 'testEstCRF_Wapiti.txt')
 			desiredContent = self._getFile(trainDir, 'evaldata_CRF_Wapiti.txt') # tmpFiles from training of testDir are saved in trainDir !
 
@@ -39,18 +42,27 @@ class bilboEval():
 			self._saveFile(labeledContentHarmonized, resultDir, 'annotatedEval.txt')
 			self._saveFile(desiredContentHarmonized, resultDir, 'desiredEval.txt')
 			
-			evalText, labels, values = TokenAccuracyEval.evaluate(labeledContentHarmonized, desiredContentHarmonized)
+			evalText, labels, values, dicLabels = TokenAccuracyEval.evaluate(labeledContentHarmonized, desiredContentHarmonized)
+			#print(dicLabels, type(dicLabels))
+			dValues = []
+			for key in dicLabels:
+                            for lab in getLabels:
+                                if key == lab :
+                                    dValues.append(dicLabels[key])
 			allValues.append(values)
+			allDetailedValues.append(dValues)
 			self._saveFile(evalText, dirPartition, 'evaluation.txt')
 		
-		# calculate average of results for all partitions
-		average = [float(sum(col))/len(col) for col in zip(*allValues)]
-		allValues.append(average)
 		
 		# print all results and average on the last line
 		finalEval = "\t".join(labels) + "\n"
 		finalEval += "\n".join(["\t".join(['{:f}'.format(v) for v in values]) for values in allValues])
 		self._saveFile(finalEval, self.partitions.getDirPercentName(), 'evaluation.tsv')
+		
+                # print all detailed results of each label and average on the last line
+                finalEval = "\t".join(getLabels) + "\n"
+                finalEval += "\n".join(["\t".join(['{:f}'.format(v) for v in detailedValues]) for detailedValues in allDetailedValues])
+                self._saveFile(finalEval, self.partitions.getDirPercentName(), 'evaluationDetailed.tsv')
 
 	def _getFile(self, fileDir, pattern):
 		pattern = os.path.join(fileDir,'tmp*', pattern)
@@ -62,6 +74,7 @@ class bilboEval():
 	def _saveFile(self, content, dirName, fileName):
 		fileName = os.path.join(dirName, fileName)
 		with open(fileName, 'w', encoding='utf-8') as content_file:
+                        #print(content_file)
 			content_file.write(content)
 
 

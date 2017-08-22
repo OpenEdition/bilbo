@@ -24,8 +24,21 @@ class FormatEval():
 				filename = os.path.basename(xmlFile)
 				bibls = [(filename, index) for index in bibls]
 				biblList += bibls
-
 		return biblList
+
+	@staticmethod
+	def get_note_list(dirName, corpusTag='note', file_pattern="*xml"):
+		files = os.path.join(dirName, file_pattern)
+		noteList = []
+		for xmlFile in glob.glob(files):
+			with open(xmlFile, 'r', encoding='utf-8') as content_file:
+				content = content_file.read()
+				#print(xmlFile)
+				bibls = FormatEval.count_tags_and_process(content, corpusTag=corpusTag)
+				filename = os.path.basename(xmlFile)
+				bibls = [(filename, index) for index in bibls]
+				noteList += bibls
+		return noteList
 
 	@staticmethod
 	# step one bibl at a time, not counting bibl inside bibl
@@ -54,6 +67,33 @@ class FormatEval():
 		return all_bibl
 
 	@staticmethod
+	# step one bibl at a time, not counting bibl inside bibl
+	# if keep is a list of corpusTag_index, will keep only those bibl and return resulting text
+	def count_Notetags_and_process(text, keep=None, corpusTag='note'):
+		all_note = []
+		note_counter = -1
+		bibl_inside = 0
+
+		parsedText = BeautifulSoup(text, 'xml')
+		allNoteTag = parsedText.findAll(corpusTag)
+		for note in allNoteTag:
+			if bibl_inside > 0: # do not count <bibl> inside <bibl>
+				bibl_inside -= 1
+				#print note_counter
+				continue
+			bibl_inside = len(note.findAll(corpusTag))
+			note_counter +=1
+			if keep and not (note_counter in keep):
+				note.replace_with('')
+			else:
+				all_note.append(note_counter)
+
+		if keep:
+			return (all_note, unicode(parsedText))
+		return all_note
+
+
+	@staticmethod
 	# myList : list of tupple to shuffle [(filename, corpusTag_index)]
 	# testPercentage : percentage of length of the first list
 	def getShuffledCorpus(myList, testPercentage):
@@ -75,7 +115,7 @@ class FormatEval():
 			else:
 				trainCorpus[filename] = [index]
 
-		#print cut, len(testCorpus), len(trainCorpus), testPercentage
+		#print(cut, len(testCorpus), len(trainCorpus), testPercentage)
 		return testCorpus, trainCorpus
 
 	@staticmethod
@@ -97,6 +137,20 @@ class FormatEval():
 				content = content_file.read()
 				tags_kept, text = FormatEval.count_tags_and_process(content, tags_to_keep, corpusTag)
 				#print filename, tags_to_keep, tags_kept
+			if strip:
+				text = FormatEval.strip_tags(text, corpusTag)
+			with open(os.path.join(destDir, filename), 'w', encoding='utf-8') as content_file:
+				content_file.write(text)
+
+	@staticmethod
+	# copy files for corpus directory, keeping tags from the given list of index
+	# strip=True will strip all tags in the given corpusTag
+	def copy_files_for_evalNote(dirCorpus, destDir, file_list, corpusTag='note', strip=False):
+		for filename, tags_to_keep in file_list.items():
+			with open(os.path.join(dirCorpus, filename), 'r', encoding='utf-8') as content_file:
+				content = content_file.read()
+				tags_kept, text = FormatEval.count_Notetags_and_process(content, tags_to_keep, corpusTag)
+				#print(filename, tags_to_keep, tags_kept)
 			if strip:
 				text = FormatEval.strip_tags(text, corpusTag)
 			with open(os.path.join(destDir, filename), 'w', encoding='utf-8') as content_file:
@@ -126,7 +180,7 @@ class prepareEval():
 		formated = []
 		for line in content.split("\n"):
 			words = line.split(" ")
-			#print words
+			#print(words)
 			if len(words)>1:
 				formated.append(words[-1].strip() + "\t" + words[0].strip())
 				#formated.append(words[0])
@@ -158,10 +212,11 @@ class prepareEval():
 				if partShort == partLong:
 					#print indexShort, partShort.encode('utf8'), indexLong, partLong.encode('utf8'), "RESOLVED"
 					break
-				#print indexShort, partShort.encode('utf8'), len(partShort), indexLong, partLong.encode('utf8'), len(partLong)
+				#print(indexShort, partShort.encode('utf8'), len(partShort), indexLong, partLong.encode('utf8'), len(partLong))
 				if partShort < partLong:
 					indexShort +=1
 					_, partShortAppend = self._getFeatureAndName(shortList[indexShort])
+					print(indexShort, partShort.encode('utf8'), '*****',len(partShort), indexLong, partLong.encode('utf8'), '------', len(partLong))
 					partShort += partShortAppend
 				else:
 					indexLong +=1

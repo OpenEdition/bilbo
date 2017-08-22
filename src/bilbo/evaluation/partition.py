@@ -41,6 +41,7 @@ import os
 from codecs import open
 from bilbo.Bilbo import Bilbo
 from formatEval import FormatEval
+from sys import argv
 
 class Partition():
 	# dirName of directory containing the corpus
@@ -49,22 +50,27 @@ class Partition():
 		create "directory-evaluation"
 		create "directory-evaluation/10%/" and 01 to 10 folder in it
 	"""
-	def __init__(self, dirCorpus, testPercentage, numberOfPartition=10, prefix=''):
+	def __init__(self, dirCorpus, testPercentage, numberOfPartition=10, prefix='', corpusType=''):
 		if not os.path.isdir(dirCorpus):
 			raise IOError("corpus directory '" + dirCorpus + "' does not exist")
 		self.dirCorpus = dirCorpus
 		self.prefix = "-eval" + ("-" + prefix if prefix else "")
 		self.testPercentage = testPercentage
 		self.numberOfPartition = int(numberOfPartition)
+		self.corpusType = corpusType
 
 	def partition(self):
 		self.createPartitionFolders(self.dirCorpus, self.testPercentage, self.numberOfPartition)
-		bibl_list = FormatEval.get_list_of_tag_from_dir(self.dirCorpus)
-		# faire une liste de toutes les bibl dans les fichiers [(nom_fichier, bibl_index)]
-		# shuffle de cette liste label/train
-		# sort la liste par fichier
-		# pour chaque fichier effacer les bibl qui ne font pas partie de l'index
-		self.createEvaluationfiles(self.dirCorpus, self.testPercentage, self.numberOfPartition, bibl_list)
+		if self.corpusType == 'bibl':
+			print('Bibl list construction...')
+			bibl_list = FormatEval.get_list_of_tag_from_dir(self.dirCorpus)
+			self.createEvaluationfiles(self.dirCorpus, self.testPercentage, self.numberOfPartition, bibl_list)
+		elif self.corpusType == 'note':
+			print('Note list construction...')
+			note_list = FormatEval.get_note_list(self.dirCorpus)
+			self.createEvaluationfiles(self.dirCorpus, self.testPercentage, self.numberOfPartition, note_list)
+		else:
+			print('Evaluation not provides')
 		
 
 	def createPartitionFolders(self, dirCorpus, testPercentage, numberOfPartition = 10):
@@ -81,21 +87,26 @@ class Partition():
 				self.createFolder(testDir)
 
 	# prepare files for labeling, training and evaluation in each partition folder
-	def createEvaluationfiles(self, dirCorpus, testPercentage, numberOfPartition, bibl_list):
+	def createEvaluationfiles(self, dirCorpus, testPercentage, numberOfPartition, type_list):
 		dirPartitions = self.getDirPartitionNames()
 		for dirPartition in dirPartitions:
 			(annotateDir, testDir, trainDir, modelDir, _) = self.getDirTestNames(dirPartition)
-			testCorpus, trainCorpus = FormatEval.getShuffledCorpus(bibl_list, testPercentage)
-			#print testCorpus
-			#print trainCorpus
-			
-			# files used for training (100 - testPercentage % of the corpus)
-			FormatEval.copy_files_for_eval(self.dirCorpus, trainDir, trainCorpus)
-			# files used for evaluation keeping annotations (testPercentage % of the corpus)
-			FormatEval.copy_files_for_eval(self.dirCorpus, testDir, testCorpus)
-			# files used for evaluation, strip the annotations
-			# they will be labeled by bilbo
-			FormatEval.copy_files_for_eval(self.dirCorpus, annotateDir, testCorpus, 'bibl', strip=True)
+			if self.corpusType == 'bibl':
+				testCorpus, trainCorpus = FormatEval.getShuffledCorpus(type_list, testPercentage)
+				# files used for training (100 - testPercentage % of the corpus)
+				FormatEval.copy_files_for_eval(self.dirCorpus, trainDir, trainCorpus)
+				# files used for evaluation keeping annotations (testPercentage % of the corpus)
+				FormatEval.copy_files_for_eval(self.dirCorpus, testDir, testCorpus)
+				# files used for evaluation, strip the annotations
+				# they will be labeled by bilbo
+				FormatEval.copy_files_for_eval(self.dirCorpus, annotateDir, testCorpus, 'bibl', strip=True)
+			elif self.corpusType == 'note':
+				testCorpus, trainCorpus = FormatEval.getShuffledCorpus(type_list, testPercentage)
+				#print("test:",testCorpus)
+				#print("train:",trainCorpus)			
+				FormatEval.copy_files_for_evalNote(self.dirCorpus, trainDir, trainCorpus)
+				FormatEval.copy_files_for_evalNote(self.dirCorpus, testDir, testCorpus)
+				FormatEval.copy_files_for_evalNote(self.dirCorpus, annotateDir, testCorpus, 'note', strip=True)
 
 	def getDirEvalName(self):
 		return os.path.dirname(self.dirCorpus + os.sep) + self.prefix
@@ -131,10 +142,10 @@ class Partition():
 
 if __name__ == '__main__':
 	if len(sys.argv) < 3:
-		print "usage python src/bilbo/evaluation/partition.py dirCorpus testPercentage(int) [numberOfPartition = 10] [prefix='']"
+		print "usage python src/bilbo/evaluation/partition.py dirCorpus testPercentage(int) [numberOfPartition = 10] [prefix=''] [corpusType= 'bibl' or ''note]"
 		sys.exit()
 
-	numberOfPartition = int(sys.argv[3]) if len(sys.argv)>=4 else 10
+	numberOfPartition = int(sys.argv[3]) if len(sys.argv)>=5 else 10
 	prefix = sys.argv[4] if len(sys.argv)>=5 else ''
-	p = Partition(str(sys.argv[1]), str(sys.argv[2]), numberOfPartition, prefix)
+	p = Partition(str(sys.argv[1]), str(sys.argv[2]), numberOfPartition, prefix, str(sys.argv[5]))
 	p.partition()

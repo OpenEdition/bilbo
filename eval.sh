@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# utilisation : ./eval.sh dirCorpus numberOfpartition prefix percentOfTest [percentOfTest…] -- bilbo options
-# exemple     : ./eval.sh Corpus 10 huhu 10 20 30 40 50 -- -u
+# utilisation : ./eval.sh dirCorpus numberOfpartition prefix corpusType optsvm[True/False] percentOfTest[percentOfTest…] -- bilbo options
+# exemple     : ./eval.sh Corpus 10 huhu bibl/note True/False 10 20 30 40 50 -- -u
 # it will
 #  train on Corpus folder
 #  do 10 partitions
@@ -15,6 +15,10 @@ numberOfpartition=$1
 shift
 prefix=$1
 shift
+corpusType=$1
+shift
+optsvm=$1
+shift
 dirEval=${dirCorpus}-eval-${prefix}
 
 args="$@"
@@ -27,14 +31,17 @@ fi
 for percentOfTest in $percents; do
 	echo "Evaluation for ${percentOfTest}% of test data with $numberOfpartition partition"
 	echo "Bilbo options : $bilboOptions"
+	echo "dirCorpus : $dirCorpus"
+	echo "corpusType : $corpusType"
 	echo "  partitionning…"
-	python src/bilbo/evaluation/partition.py ${dirCorpus} $percentOfTest $numberOfpartition $prefix;
+	python src/bilbo/evaluation/partition.py ${dirCorpus} $percentOfTest $numberOfpartition $prefix $corpusType;	
 	echo "  training…"
-	python src/bilbo/evaluation/bilboTrain.py $bilboOptions ${dirCorpus} $percentOfTest $numberOfpartition $prefix;
+	python src/bilbo/evaluation/bilboTrain.py $bilboOptions ${dirCorpus} $percentOfTest $numberOfpartition $prefix $corpusType $optsvm;
 	echo "  annotating…"
-	python src/bilbo/evaluation/bilboAnnotate.py $bilboOptions ${dirCorpus} $percentOfTest $numberOfpartition $prefix;
+	python src/bilbo/evaluation/bilboAnnotate.py $bilboOptions ${dirCorpus} $percentOfTest $numberOfpartition $prefix $corpusType $optsvm;
 	echo "  evaluating…"
 	python src/bilbo/evaluation/bilboEval.py ${dirCorpus} $percentOfTest $numberOfpartition $prefix;
+	
 done;
 
 # Création du fichier global de l'évaluation
@@ -45,4 +52,13 @@ allPercents=`find ${dirEval} -iwholename '*%/evaluation.tsv'|sort|sed -e 's/.*\(
 for percentOfTest in $allPercents; do
  	tail -n 1 ${dirEval}/${percentOfTest}%/evaluation.tsv | sed "s/^/${percentOfTest}%\t/" >> $globalEvalFile
  	echo >> $globalEvalFile
+done;
+
+# Création du fichier global de l'évaluation des labels
+globalEvalFile2=${dirEval}/evaluationDetailed.tsv
+head -n 1 ${dirEval}/${percents%% *}%/evaluationDetailed.tsv | sed "s/^/% of test data\t/" > $globalEvalFile2
+allPercents=`find ${dirEval} -iwholename '*%/evaluationDetailed.tsv'|sort|sed -e 's/.*\([0-9][0-9]\)%.*/\1/'`
+for percentOfTest in $allPercents; do
+ 	tail -n 1 ${dirEval}/${percentOfTest}%/evaluationDetailed.tsv | sed "s/^/${percentOfTest}%\t/" >> $globalEvalFile2
+ 	echo >> $globalEvalFile2
 done;

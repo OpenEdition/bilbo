@@ -23,10 +23,14 @@ class TokenAccuracyEval():
 	
 	@staticmethod
 	def evaluate(srcfile, dsrfile):
+                detailedLabel_dic = {}
 		returnLabels = []
 		returnValues = []
+		returnDetailedLabels = []
+		returnDetailedValues = []
 		
 		excluded = {'nonbibl': 0, 'c':0} #label exclue sauf pour le calcul de la micro
+                excludedDetailed = {'nonbibl': 0, 'c':0, 'nolabel':0, 'w':0, 'extent':0, 'orgname':0, 'namelink':0, 'rolename':0, 'genname':0, 'name':0, 'author':0,} #label exclue pour le calcul détaille des labels
 		cnt = {'0000': 0, 'c':0}# nombre de token étiqueté par label dans le test (ce que l'on souhaite avoir)
 		acc = {'0000': 0, 'c':0} # nombre d'étiquette correct par label
 		cnt_d = {'0000': 0, 'c':0}# nombre de token étiqueté par label dans la référence (ce qu'il faut avoir)
@@ -87,13 +91,14 @@ class TokenAccuracyEval():
 		
 		for key in excluded.keys() :
 			if cnt_d.has_key(key) :
+                            try:
 				evaluation += '\n- {:s}'.format(key) + "\n"
 				#c-acc[key] est le nombre d'étiquette prédite moins le nombre d'étiquette correct prédite pour le label exclu divisé par le nombre d'étiquette moins le nombre d'étiquette exclue
 				apr = float(c - acc[key])/float(j - cnt[key])*100 
 				returnLabels.append('avg Micro Precision');
 				returnValues.append(apr)
 				evaluation += '(Averaged micro Precision) exclu {:s} {:f} {: >4d} {: >4d}'.format(key, apr, (c - acc[key]), (j - cnt[key]))  + "\n"
-
+                            
 				are = float(c - acc[key])/float(j - cnt_d[key])*100
 				returnLabels.append('avg Micro Recall')
 				returnValues.append(are)
@@ -103,41 +108,54 @@ class TokenAccuracyEval():
 				returnLabels.append('micro F-measure')
 				returnValues.append(mfm)
 				evaluation += '(micro F-measure) exclu          {:s} {:f}'.format(key, mfm) + "\n"
-
-		evaluation += '\n***** Precision *****\n'
+                            except ZeroDivisionError:
+                                print("No division by 0")
+                
+		evaluation += '\n***** Precision, Recall, F-Mesure*****\n'
 		
 		for key, value in sorted(cnt_d.iteritems(), key=lambda (k,v): (v,k), reverse=True):
 			if acc.has_key(key) and cnt[key]>0 :
-				result_key = float(acc[key])/float(cnt[key])*100
-				tab_precision.append(result_key)
-				evaluation += "{: <15s} {: >3d} {: >3d} {: >10f}".format(key, acc[key], cnt[key], result_key) + "\n"
+                            result_key = float(acc[key])/float(cnt[key])*100
+                            recall = float(acc[key])/float(value)*100
+                            if result_key != 0 and recall != 0 :
+                                mfm = 2*result_key*recall/(result_key+recall)
+                                tab_precision.append(result_key)
+                                detailedLabel_dic[key] = mfm
+                                evaluation += "{: <15s} {: >10f} {: >10f} {: >10f}".format(key, result_key, recall, mfm) + "\n"
+                        else :
+                            evaluation += "{: <15s} {: >10f} {: >10f} {: >10f}".format(key, 0, cnt_d[key], 0.0) + "\n"
+                        '''
 			if key == 'title':
 				tab_mainElmt_precision.append(float(acc[key])/float(cnt[key])*100)
 			if key == 'surname':
 				tab_mainElmt_precision.append(float(acc[key])/float(cnt[key])*100)
 			if key == 'forename':
 				tab_mainElmt_precision.append(float(acc[key])/float(cnt[key])*100)
-			
+                                '''
 		
 		#print '\n***** Precision *****'
 		#for k in acc.keys() :
 		#	print k, acc[k], cnt[k], float(acc[k])/float(cnt[k])*100
 		
-		evaluation += '\n***** Recall *****\n'
+		#evaluation += '\n***** Recall *****\n'
 		for key, value in sorted(cnt_d.iteritems(), key=lambda (k,v): (v,k), reverse=True):
 			if acc.has_key(key) and cnt[key]>0 :
 				result_key = float(acc[key])/float(value)*100
 				tab_recall.append(result_key)
-				evaluation += "{: <15s} {: >3d} {: >3d} {: >10f}".format(key, acc[key], value, result_key) + "\n"
-			else :
-				evaluation += "{: <15s} {: >3d} {: >3d} {: >10f}".format(key, 0, cnt_d[key], 0.0) + "\n"
+				#returnDetailedLabels.append(key)
+				#returnDetailedValues.append(result_key)
+				#evaluation += "{: <15s} {: >3d} {: >3d} {: >10f}".format(key, acc[key], value, result_key) + "\n"
+			#else :
+				#evaluation += "{: <15s} {: >3d} {: >3d} {: >10f}".format(key, 0, cnt_d[key], 0.0) + "\n"
+				
+                        '''
 			if key == 'title':
 				tab_mainElmt_recall.append(float(acc[key])/float(value)*100)
 			if key == 'surname':
 				tab_mainElmt_recall.append(float(acc[key])/float(value)*100)
 			if key == 'forename':
 				tab_mainElmt_recall.append(float(acc[key])/float(value)*100)
-			
+                                '''
 		evaluation += "\n"
 		
 		#print '\n***** Recall *****'
@@ -164,7 +182,7 @@ class TokenAccuracyEval():
 		returnLabels.append('Macro F-mesure all');
 		returnValues.append(macro_fmesure)
 		evaluation += '(macro F-mesure all elements)    {:f}'.format(macro_fmesure) + "\n\n"
-		
+		'''
 		macro_precision_mainElmt = sum(tab_mainElmt_precision)/len(tab_mainElmt_precision)
 		returnLabels.append('Macro Precision of 3');
 		returnValues.append(macro_precision_mainElmt)
@@ -179,7 +197,7 @@ class TokenAccuracyEval():
 		returnLabels.append('Macro F-mesure of 3');
 		returnValues.append(macro_fmesure_mainElmt)
 		evaluation += '(macro F-mesure three elements)  {:f}'.format(macro_fmesure_mainElmt) + "\n\n"
-
+                '''
 		tes = 0
 		bes = 0
 		ts = 0
@@ -210,8 +228,7 @@ class TokenAccuracyEval():
 				evaluation += "\n" 
 		evaluation += '*Total obvious errors : title: {: >3d} - biblscope: {: >3d}\n'.format(tes, bes)
 		evaluation += '*Total errors         : title: {: >3d} - biblscope: {: >3d}\n'.format(ts, bs)
-		
-		return evaluation, returnLabels, returnValues
+		return evaluation, returnLabels, returnValues, detailedLabel_dic
 
 
 if __name__ == '__main__':
