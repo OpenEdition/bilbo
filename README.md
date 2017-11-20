@@ -21,5 +21,8 @@ See doc/INSTALL.txt
 ### Usage
 See doc/README_EN.txt
 
+### Demonstration 
+See online: http://bilbo.openeditionlab.org/
+
 ### License 
 BILBO is released under the terms of the GPL version 2.
