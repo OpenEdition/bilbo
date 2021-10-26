@@ -1,5 +1,11 @@
 # BILBO : Automatic reference labeling
 
+
+WARNING: This repository is no longer maintained. 
+This repository will not be updated. The repository will be kept available in read-only mode. 
+A new version has been rewritten from scratch:
+https://github.com/OpenEdition/bilbo2
+
 BILBO is an open source software for automatic annotation of bibliographic reference.
 
 It provides the segmentation and tagging of input string. It is principally based on
