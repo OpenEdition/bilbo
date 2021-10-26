@@ -1,7 +1,7 @@
 # BILBO : Automatic reference labeling
 
 
-WARNING: This repository is no longer maintained. 
+### WARNING: This repository is no longer maintained. 
 This repository will not be updated. The repository will be kept available in read-only mode. 
 A new version has been rewritten from scratch:
 https://github.com/OpenEdition/bilbo2
